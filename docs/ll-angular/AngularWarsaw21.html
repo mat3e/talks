@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="description" content="Presentation">
+    <meta name="keywords" content="presentation">
+    <meta name="author" content="mat3e">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/blood.css">
+    <link rel="stylesheet" href="css/idea.css">
+    <link rel="stylesheet" href="css/fontawesome.css">
+    <style>
+        #header {
+            text-align: left;
+            font-size: .7em;
+        }
+
+        #header-logo {
+            width: 375px;
+            height: 80px;
+            background-image: url('img/twitter.png');
+            background-size: contain;
+
+            top: -4em;
+            right: 0;
+            position: absolute;
+        }
+
+        #header h1 {
+            line-height: 1;
+        }
+
+        code[contenteditable="true"] {
+            border: 0;
+            outline: 0;
+        }
+
+        .slides section pre {
+            margin-bottom: 0;
+        }
+
+        .slides section pre+button {
+            cursor: pointer;
+
+            font-size: .65em;
+            font-weight: 100;
+            -webkit-font-smoothing: antialiased;
+
+            color: white;
+            background: #a23;
+
+            padding: 0 3px 3px;
+            border: transparent;
+            border-radius: 4px;
+        }
+
+        #perspective a {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            width: 45%;
+            margin: 0 auto;
+        }
+
+        #perspective a img {
+            border: 0;
+            margin: 0;
+            box-shadow: none;
+        }
+
+        .reveal .slides>section,
+        .reveal .slides>section>section.storyline {
+            padding-bottom: 0;
+        }
+
+        .reveal section.storyline img {
+            border: 0;
+            margin: 0;
+            box-shadow: none;
+        }
+
+        .reveal .slides section .fragment.expand {
+            width: 0;
+        }
+
+        .reveal .slides section .fragment.visible.expand {
+            width: 240px;
+        }
+
+        .reveal .slides section .fragment.zoom-out {
+            transition: none;
+        }
+
+        .reveal .slides section .fragment.visible.zoom-out {
+            -webkit-animation-duration: 1s;
+            animation-duration: 1s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+            -webkit-animation-delay: 3s;
+            animation-delay: 3s;
+            -webkit-animation-name: zoomOutDown;
+            animation-name: zoomOutDown;
+        }
+
+        .reveal .slides section .fragment.replace {
+            transition: none;
+        }
+
+        .reveal .slides section .fragment.fade-out.visible.replace {
+            position: absolute;
+        }
+
+        .reveal .slides section .fragment.fade-in.replace {
+            position: absolute;
+        }
+
+        .reveal .slides section .fragment.fade-in.visible.replace {
+            position: relative;
+        }
+
+        #about-me {
+            list-style-type: none;
+            margin-left: 12.5%;
+            float: left;
+        }
+
+        #about-me a {
+            color: white;
+        }
+
+        #about-me ul a:hover {
+            color: #dd5566;
+        }
+
+        .img-li-centered {
+            list-style-type: none;
+            text-align: center;
+        }
+
+        .reveal section img.pure-img {
+            background: rgba(255, 255, 255, 0);
+            border: none;
+            box-shadow: none;
+        }
+
+        @-webkit-keyframes zoomOutDown {
+            40% {
+                opacity: 1;
+                -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(0, -60px, 0);
+                transform: scale3d(0.475, 0.475, 0.475) translate3d(0, -60px, 0);
+                -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+                animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+            }
+
+            to {
+                opacity: 0;
+                -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(0, 1000px, 0);
+                transform: scale3d(0.1, 0.1, 0.1) translate3d(0, 1000px, 0);
+                -webkit-transform-origin: center bottom;
+                transform-origin: center bottom;
+                -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+                animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+            }
+        }
+
+        @keyframes zoomOutDown {
+            40% {
+                opacity: 1;
+                -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(0, -60px, 0);
+                transform: scale3d(0.475, 0.475, 0.475) translate3d(0, -60px, 0);
+                -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+                animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+            }
+
+            to {
+                opacity: 0;
+                -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(0, 1000px, 0);
+                transform: scale3d(0.1, 0.1, 0.1) translate3d(0, 1000px, 0);
+                -webkit-transform-origin: center bottom;
+                transform-origin: center bottom;
+                -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+                animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+            }
+        }
+    </style>
+    <script>
+        let link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section>
+                <section id="header">
+                    <h1 style="font-size: 3.25em; margin-bottom: 0">Lessons from writing my own</h1>
+                    <h2>Angular utility lib</h2>
+                    <div id="header-logo"></div>
+                </section>
+                <section>
+                    <h2 style="font-size: 1.8em">
+                        <span>Context</span><span class="fragment" data-fragment-index="1"> is important</span>
+                    </h2>
+                    <a class="fragment" data-fragment-index="1" href="https://www.reddit.com/r/ProgrammerHumor/comments/8lt4gg/sometimes_i_wonder_if_nontech_friends_wonder/">
+                        <img src="img/search.png" style="border: 0; box-shadow: none">
+                    </a>
+                </section>
+                <section data-background-image="img/bg-hd.jpg" data-background-transition="zoom" data-background-size="75%">
+                    <ul id="about-me">
+                        <li>
+                            <a href="https://www.linkedin.com/in/mateusz-chrzonstowski/">
+                                <i class="fab fa-linkedin" style="color: #0077B5; background-color: #FFF; line-height: .75em"></i>
+                                /mateusz-chrzonstowski
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://twitter.com/_mat3e_">
+                                <i class="fab fa-twitter-square" style="background-color: #1DA1F2; line-height: .75em"></i>
+                                /_mat3e_
+                            </a>
+                        </li>
+                        <!-- <li>
+                            <a href="https://www.reddit.com/user/_mat3e_">
+                                <i class="fab fa-reddit-square" style="background-color: #FF4500; line-height: .75em"></i> /_mat3e_
+                            </a>
+                        </li> -->
+                        <li>
+                            <a href="https://github.com/mat3e/">
+                                <i class="fab fa-github-square" style="color: #24292E; background-color: #FFF; line-height: .75em"></i>
+                                /mat3e
+                            </a>
+                            <ul class="fragment" style="list-style-type: none; line-height: .5">
+                                <li>
+                                    <a style="font-size: .5em" href="https://mat3e.github.io/talks/ll-angular/AngularWarsaw21.html">
+                                        mat3e.github.io/talks/<br><span style="padding-left: 1em">ll-angular/AngularWarsaw21.html</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>&nbsp;</li>
+                        <li class="fragment">🎓</li>
+                        <li class="fragment" data-autoslide="950">🖥️
+                            <span class="fragment" data-autoslide="1200">💰</span>
+                            <span class="fragment"> (2013)</span>
+                        </li>
+                        <li class="fragment" data-autoslide="2000">👔
+                            <span class="fragment" data-autoslide="750">⇒</span>
+                            <span class="fragment">🏪</span>
+                        </li>
+                        <li class="fragment">👪</li>
+                    </ul>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>
+                        <span>Table of Contents</span>
+                    </h2>
+                    <ol>
+                        <li class="fragment highlight-red">Why did I start?</li>
+                        <li>DORF - Domain Object Reactive Forms</li>
+                        <li>Lessons - Angular</li>
+                        <li>Lessons - npm, webpack, other tools</li>
+                        <li>"Marketing" and results</li>
+                    </ol>
+                </section>
+                <section>
+                    <h2>
+                        <span>More context</span>
+                    </h2>
+                </section>
+                <section class="storyline">
+                    <h2>
+                        <span>2014</span>
+                    </h2>
+                    <div class="fragment" data-fragment-index="1" style="background-color: #fff; display: flex; justify-content: center; width: 70%; margin: 0 auto; min-height: 270px;">
+                        <div style="display: flex; flex-direction: column; align-items: flex-end; justify-content: space-evenly; margin-right: 1em;">
+                            <img class="fragment" data-fragment-index="2" src="img/ext.png" style="width: 128px">
+                            <img class="fragment" data-fragment-index="3" src="img/v4.5_logo.png" style="width: 160px">
+                        </div>
+                        <div style="display: flex; flex-direction: column; justify-content: center">
+                            <img class="fragment fade-out replace" data-fragment-index="8" src="img/happy_smile.jpg" style="width: 240px">
+                            <img class="fragment fade-in replace" data-fragment-index="8" src="img/epic_win.jpg" style="width: 240px">
+                        </div>
+                        <div style="display: flex; flex-direction: column; align-items: center; justify-content: space-around">
+                            <img class="fragment" data-fragment-index="4" src="img/AngulaJS.png" style="width: 160px">
+                            <img class="fragment" data-fragment-index="5" src="img/ts.png" style="width: 160px">
+                            <img class="fragment" data-fragment-index="6" src="img/java.png" style="width: 48px">
+                        </div>
+                        <img class="fragment expand" data-fragment-index="7" src="img/grass.png" style="height: 96px; position: absolute; bottom: 0; margin-left: 240px">
+                    </div>
+                </section>
+                <section class="storyline">
+                    <h2>
+                        <span>2015</span>
+                    </h2>
+                    <div class="fragment" data-fragment-index="1" style="background-color: #fff; display: flex; justify-content: center; width: 70%; margin: 0 auto; min-height: 270px;">
+                        <div style="display: flex; flex-direction: column; justify-content: center;">
+                            <img class="fragment" data-fragment-index="2" src="img/plural.png" style="width: 160px">
+                            <code style="color: black;" class="fragment" data-fragment-index="3">lvl++</code>
+                        </div>
+                        <div style="display: flex; flex-direction: column; justify-content: center">
+                            <img class="fragment fade-out replace" data-fragment-index="4" src="img/epic_win.jpg" style="width: 240px">
+                            <img class="fragment fade-in replace" data-fragment-index="4" src="img/fuck_yeah_clean.jpg" style="width: 240px">
+                        </div>
+                        <div style="display: flex; flex-direction: column; align-items: center; justify-content: space-around">
+                            <img class="fragment" data-fragment-index="5" src="img/codepot.png" style="width: 80px">
+                            <img class="fragment" data-fragment-index="6" src="img/lsf.png" style="width: 100px">
+                        </div>
+                    </div>
+                </section>
+                <section class="storyline">
+                    <h2>
+                        <span>2015/2016</span>
+                    </h2>
+                    <img class="fragment zoom-out" data-fragment-index="2" src="img/whyyy.jpg" style="width: 240px; position: absolute; top: 0; left: calc(50% - 120px)">
+                    <div class="fragment" data-fragment-index="1" style="display: flex; justify-content: center; align-items: center; background-color: #fff; width: 70%; margin: 0 auto;">
+                        <div class="fragment" data-fragment-index="4">
+                            <img src="img/integration.png" style="width: 120px;">
+                        </div>
+                        <div>
+                            <img src="img/ger.png">
+                            <img class="fragment" data-fragment-index="3" src="img/okay_clean.jpg" style="width: 80px; position: absolute; left: calc(50% - 50px); top: 50%">
+                        </div>
+                        <div style="display: flex; flex-direction: column">
+                            <img class="fragment" data-fragment-index="5" src="img/gosu.png" style="width: 120px;">
+                            <img class="fragment" data-fragment-index="6" src="img/odata.png" style="width: 120px;">
+                        </div>
+                    </div>
+                </section>
+                <section class="storyline">
+                    <h2>
+                        <span>The end of 2016</span>
+                    </h2>
+                    <div class="fragment" data-fragment-index="1" style="background-color: #fff; display: flex; justify-content: center; width: 70%; margin: 0 auto; min-height: 270px;">
+
+                        <div style="display: flex; flex-direction: column; align-items: center; justify-content: space-evenly;">
+                            <img class="fragment" data-fragment-index="2" src="img/AngulaJS.png" style="width: 100px">
+                            <img class="fragment" data-fragment-index="3" src="img/ui.png" style="width: 64px">
+                        </div>
+                        <div style="display: flex; flex-direction: column; justify-content: center" class="fragment fade-out replace" data-fragment-index="9">
+                            <img class="fragment fade-out replace" data-fragment-index="4" src="img/serious.jpg" style="width: 240px">
+                            <img class="fragment fade-in replace" data-fragment-index="4" src="img/bitch.jpeg" style="width: 240px">
+                        </div>
+                        <div style="display: flex; flex-direction: column; justify-content: center" class="fragment fade-in replace" data-fragment-index="9">
+                            <img class="fragment fade-out replace" data-fragment-index="11" src="img/mother_of.jpg" style="width: 240px">
+                            <img class="fragment fade-in replace" data-fragment-index="11" src="img/work.jpg" style="width: 240px">
+                        </div>
+                        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                            <img class="fragment" data-fragment-index="5" src="img/angular.png" style="width: 80px">
+                            <span style="color: black;" class="fragment" data-fragment-index="6">2.0.0-rc.4</span>
+                            <img class="fragment" data-fragment-index="7" src="img/plural.png" style="width: 100px">
+                            <span style="color: black;" class="fragment" data-fragment-index="8">2.0.0-rc.5</span>
+                            <img class="fragment" data-fragment-index="10" src="img/plural.png" style="width: 100px">
+                        </div>
+                    </div>
+                    <ul>
+                        <li class="fragment" data-fragment-index="12">
+                            <a href="https://hackernoon.com/how-it-feels-to-learn-javascript-in-2016-d3a717dd577f">How it
+                                feels to learn JavaScript in 2016</a>
+                        </li>
+                        <li class="fragment" data-fragment-index="13">
+                            <a href="https://angular.io/guide/dynamic-form">Dynamic Forms</a> <span class="fragment">-> <a
+                                    href="https://github.com/mat3e/dorf">DORF</a></span>
+                        </li>
+                    </ul>
+                    <aside class="notes">
+                        Angular's official docs were then written with AngularJS and it started as a styleguide from John Papa.
+                    </aside>
+                </section>
+                <section class="storyline">
+                    <h2>
+                        <span class="fragment fade-out replace" data-fragment-index="4">April 2017</span>
+                        <span class="fragment fade-in replace" data-fragment-index="4">2018</span>
+                    </h2>
+                    <div class="fragment" data-fragment-index="1" style="background-color: #fff; display: flex; justify-content: center; width: 70%; margin: 0 auto; min-height: 270px;">
+                        <div style="width:80px"></div>
+                        <div style="display: flex; flex-direction: column; justify-content: center" class="fragment fade-out replace" data-fragment-index="3">
+                            <img class="fragment fade-out replace" data-fragment-index="2" src="img/baby_troll.jpg" style="width: 120px">
+                            <img class="fragment fade-in replace" data-fragment-index="2" src="img/troll_dad_dance.jpg" style="height: 270px">
+                        </div>
+                        <div style="display: flex; flex-direction: column; justify-content: center" class="fragment fade-in replace" data-fragment-index="3">
+                            <img src="img/troll_dad_dancing.gif" style="height: 270px">
+                        </div>
+                        <div style="display: flex; flex-direction: column; align-items: center; justify-content: space-around">
+                            <img class="fragment" data-fragment-index="5" src="img/js.png" style="width: 80px">
+                        </div>
+                    </div>
+                    <!--
+                        And then, the middle of 2017 and - suddenly - this happened.
+                        I mean, this happened before, it is some kind of a process, but when it comes to a day of birth, that was the end of April, 2017
+
+                        And therefore, I had no other choice but becoming a troll dad and stop supporting my library
+                        And you can ask: how about now? Coming to today,
+                        I changed my workplace, but if I work with JavaScript it is either Vanilla JS, pure Javascript
+                            or the library, I should not mention by name during the Angular meetup
+                     -->
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>
+                        <span>Table of Contents</span>
+                    </h2>
+                    <ol>
+                        <li>Why did I start?</li>
+                        <li class="fragment highlight-red">DORF - Domain Object Reactive Forms</li>
+                        <li>Lessons - Angular</li>
+                        <li>Lessons - npm, webpack, other tools</li>
+                        <li>"Marketing" and results</li>
+                    </ol>
+                </section>
+                <section>
+                    <h2>
+                        <span>Ideas & motivation</span>
+                    </h2>
+                    <ul>
+                        <li class="fragment">
+                            <a href="https://angular.io/guide/dynamic-form">Dynamic Forms</a>
+                            <ul>
+                                <li class="fragment">Simplifying</li>
+                                <li class="fragment">Reducing the boilerplate</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">No direct connection with any CSS framework</li>
+                        <li class="fragment">A high level of abstraction</li>
+                        <li class="fragment">
+                            Motivation
+                            <ol>
+                                <li class="fragment">
+                                    Outer: <i>To make dynamic forms easy for my colleague (involved in the side-project),
+                                        without much professional experience</i>
+                                </li>
+                                <li class="fragment">Inner: <i>To have an open-source project</i></li>
+                            </ol>
+                        </li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>
+                        <span>Shock!</span>
+                    </h2>
+                    <ul>
+                        <li class="fragment">An ordinary day at work vs. creativity
+                            <ul>
+                                <li class="fragment">Come up with the name of the project</li>
+                                <li class="fragment">Come up with the slogan</li>
+                                <li class="fragment">Description, how-to examples</li>
+                                <li class="fragment">No pointless meetings :)</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Documentation?
+                            <ul>
+                                <li class="fragment">API</li>
+                                <li class="fragment">License</li>
+                                <li class="fragment">Changelog</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <aside class="notes">
+                        <ul>
+                            <li>It's said that the hardest thing in programming is to have a proper variable name; guess
+                                what: lib name is harder</li>
+                            <li>Catchy name is just the beginning... slogan, description</li>
+                            <li>Fortunately I already participated in conferences, events, I knew how to write a description
+                                somehow
+                            </li>
+                            <li>API - doc generator</li>
+                            <li>License - I usually just take something from GitHub, but there are a different licenses I
+                                started thinking of after having my own lib</li>
+                        </ul>
+                    </aside>
+                </section>
+                <section>
+                    <h2>
+                        <span>The name (1/2)</span>
+                    </h2>
+                    <ul>
+                        <li class="fragment"><span class="fragment highlight-red">Reactive</span>/model-driven/dynamic forms</li>
+                        <li class="fragment">DDD (Domain-Driven Design) - a great approach to software development, focus
+                            on <span class="fragment highlight-red">Domains</span></li>
+                        <li class="fragment img-li-centered">
+                            <a href="https://makeagif.com/gif/ppappen-pineapple-apple-pen-officialpikotaro-QZfrOE">
+                                <img style="border: none; box-shadow: none" src="img/ppap.gif">
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>
+                        <span>The name (2/2)</span>
+                    </h2>
+                    <ul>
+                        <li class="fragment">DORF <span class="fragment">(German: village)</span></li>
+                        <li class="fragment img-li-centered">
+                            <a href="https://www.pupamilano.com/home"><img src="img/pupa.png" style="width: 25%" class="pure-img"></a>
+                        </li>
+                        <li class="fragment"><img style="height: .7em; margin: 0" src="img/translator.png" class="pure-img">                            Test</li>
+                        <li class="fragment img-li-centered">
+                            <img src="img/osram.png" style="width: 45%; margin: 0" class="pure-img">
+                        </li>
+                    </ul>
+                    <div class="fragment">
+                        <img src="img/ugly name.png" class="pure-img">
+                    </div>
+                </section>
+                <section>
+                    <h2 style="font-size: 1.8em; margin-bottom: 0">
+                        <span>Open Source vs. Agile</span>
+                    </h2>
+                    <div style="margin-bottom: 20px">
+                        Andy Oram,
+                        <i>Getting Started with InnerSource</i> (O’Reilly)
+                    </div>
+                    <ul style="font-size: .85em; font-style: italic">
+                        <li class="fragment">The latter development methods were explicitly designed for teams working in
+                            a single office, communicating face-to-face
+                        </li>
+                        <li class="fragment">Open source developers have turned quality control into a science</li>
+                        <li class="fragment">Another tenet of open source development (...) is full documentation
+                            <ul style="font-style: normal">
+                                <li class="fragment">Agile?
+                                    <i class="fragment">"working software over documentation"</i>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="fragment">English has become the lingua franca practiced by all programmers</li>
+                        <li class="fragment">Most open source projects involve end users in relatively old-fashioned ways,
+                            such as through alpha and beta releases</li>
+                    </ul>
+                    <aside class="notes">
+                        At some point in time I downloaded plenty of free ebooks from O'Reilly. This is from 20-page report, which described PayPal
+                        transformation (among others).
+                        <ul>
+                            <li>Documentation - it is because of distributed teams</li>
+                            <li>English - the same, geographical distribution</li>
+                            <li>Who would use Angular without its documentation? And now, sersiously, without lying?</li>
+                        </ul>
+                    </aside>
+                </section>
+                <section>
+                    <h3 style="margin-bottom: 0">
+                        <span>Building a lib? <span class="fragment">SOLID!</span></span>
+                    </h3>
+                    <ul style="font-size: .85em">
+                        <li class="fragment">SRP = "do one thing and do it well"</li>
+                        <li class="fragment">OCP (Open/Closed Principle) = open for extension (configuration), closed for
+                            modification
+                            <pre class="fragment" style="margin: 0; width: 100%; font-size: .45em"><code class="typescript" data-trim>
+                                class StarRatingDefinition extends DorfFieldDefinition&lt;number> { /*...*/ }
+                                class StarRatingMetadata extends DorfFieldMetadata&lt;number, StarRatingDefinition> { /*...*/ }
+                                class StarRatingComponent extends AbstractDorfFieldComponent&lt;number, StarRatingMetadata> { /*...*/ }
+                            </code></pre>
+                        </li>
+                        <li class="fragment">LSP (Liskov Substitution) = easy to switch from a class to its subclass
+                            <ul>
+                                <li class="fragment">DORF - easy to switch between CSS frameworks :)</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">ISP (Interface Segregation)
+                            <ul>
+                                <li class="fragment">DORF field = definition, metadata, component...</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">DIP (Dependency Inversion) = pluggability, loose coupling</li>
+                    </ul>
+                    <img src="img/modules.png" style="width: 55%; display: block; margin: 0 auto" class="fragment pure-img">
+                    <aside class="notes">
+                        I didn't have SOLID in mind when starting, but I found it accurate afterwards. I used my practical knowledge and experience
+                        when creating the lib. E.g. switching between CSS frameworks was my core idea.
+                    </aside>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>
+                        <span>Table of Contents</span>
+                    </h2>
+                    <ol>
+                        <li>Why did I start?</li>
+                        <li>DORF - Domain Object Reactive Forms</li>
+                        <li class="fragment highlight-red">Lessons - Angular</li>
+                        <li>Lessons - npm, webpack, other tools</li>
+                        <li>"Marketing" and results</li>
+                    </ol>
+                </section>
+                <section>
+                    <h3>
+                        <span>A game: <span class="fragment" data-fragment-index="1">3 associations</span></span>
+                    </h3>
+                    <div style="display: flex; width: 70%; margin: 0 auto; justify-content: center;">
+                        <div style="display: flex; flex-direction: column; justify-content: space-between;">
+                            <div class="fragment" data-fragment-index="2" style="font-size: 2em">@</div>
+                            <img class="pure-img fragment" data-fragment-index="4" src="img/webc.png" style="height: 2em;" title="Web Components logo">
+                        </div>
+                        <div class="fragment" data-fragment-index="1">
+                            <img src="img/angular.png" class="pure-img">
+                        </div>
+                        <div style="display: flex; align-items: center" class="fragment" data-fragment-index="3">
+                            <img src="img/ts-small.png" style="height: 2em" class="pure-img">
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <h2 style="margin-bottom: 0">
+                        <span>Decorators</span>
+                    </h2>
+                    <ul>
+                        <li class="fragment">Decorators are just specific functions
+                            <ul>
+                                <li class="fragment">Well... what else in JS?</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">
+                            <pre style="margin: 0"><code class="typescript" style="font-size: .85em" data-trim contenteditable="true">
+                                // @DorfForm()
+                            </code><code class="typescript fragment" style="font-size: .85em" data-trim contenteditable="true">
+                                export function DorfForm(options?: IDorfFormOptions) {
+                                  return function &lt;D extends Function>(targetConstructor: D) {
+                                    Object
+                                     .defineProperties(targetConstructor.prototype, { /* props */ });
+                                  }
+                                }
+                            </code></pre>
+                        </li>
+                        <li class="fragment">
+                            <pre style="margin: 0;"><code class="typescript" style="font-size: .85em" data-trim contenteditable="true">
+                                import { Input } from '@angular/core';
+                            </code><code class="typescript fragment" style="font-size: .85em" data-trim contenteditable="true">
+                                export function DorfObjectInput() {
+                                  return function (targetProto: any, propName: string) {
+                                    Input()(targetProto, propName);
+                                    targetProto.dorfObjectInForm = propName;
+                                  };
+                                }
+                            </code></pre>
+                        </li>
+                        <li class="fragment">Angular used to have <code>@View</code> and <code>@Component</code></li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>
+                        <span>Components</span>
+                    </h2>
+                    <ul>
+                        <li class="fragment">Focus on building blocks</li>
+                        <li class="fragment">Abstract component classes, with decorators?
+                            <ul class="fragment">
+                                <li>Yes, we can!</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">
+                            <pre style="margin: 0; width: 100%"><code class="typescript" data-trim contenteditable="true">
+                                // @Component on the subclass
+                                export abstract class AbstractDorfFieldComponent&lt;T, 
+                                  M extends DorfFieldMetadata&lt;T, IDorfFieldDefinition&lt;T>>> {
+                                    @Input()
+                                    metadata: M;
+                                    /* ... */
+                                }
+                            </code></pre>
+                        </li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>
+                        <span>TypeScript</span>
+                    </h2>
+                    <ul>
+                        <li class="fragment">API (understood as fields and methods)</li>
+                        <li class="fragment">
+                            <pre style="margin: 0; width: 100%"><code class="typescript" data-trim contenteditable="true">
+                                export type InputType = 'color' | 'date' | 'datetime' | 'email' | /* ... */;
+                                
+                                export interface IDorfInputDefinition&lt;T> extends IDorfFieldDefinition&lt;T> {
+                                    type: InputType;
+                                }
+                            </code></pre>
+                        </li>
+                        <li class="fragment">
+                            <pre style="margin: 0; width: 100%"><code class="typescript" data-trim contenteditable="true">
+                                setDomainObjValue: (val: DomObj[keyof DomObj]) => { obj[propertyName] = val; }
+                            </code></pre>
+                        </li>
+                        <li class="fragment">AoT compilation
+                            <pre style="margin: 0; width: 100%"><code class="typescript" data-trim contenteditable="true">
+                                // order is defined as order?: number;
+                                get order(): number | undefined { return this.definition.order; }
+                            </code></pre>
+                        </li>
+                        <li class="fragment">
+                            <a href="http://typedoc.org/">TypeDoc - documentation generator</a>
+                        </li>
+                    </ul>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>
+                        <span>Table of Contents</span>
+                    </h2>
+                    <ol>
+                        <li>Why did I start?</li>
+                        <li>DORF - Domain Object Reactive Forms</li>
+                        <li>Lessons - Angular</li>
+                        <li class="fragment highlight-red">Lessons - npm, webpack, other tools</li>
+                        <li>"Marketing" and results</li>
+                    </ol>
+                </section>
+                <section>
+                    <h2>
+                        <span>Webpack, karma</span>
+                    </h2>
+                    <ul>
+                        <li class="fragment">Angular CLI hides a lot</li>
+                        <li class="fragment">My idea:
+                            <code>dorf/config</code>
+                            <ul>
+                                <li class="fragment"><code>karma</code></li>
+                                <li class="fragment"><code>ts</code></li>
+                                <li class="fragment"><code>webpack</code></li>
+                            </ul>
+                        </li>
+                        <li class="fragment">
+                            package.json
+                            <pre style="width: 100%; margin-top: 0"><code class="json" data-trim>
+                                "test": "karma start config/karma/conf.js"
+                            </code></pre>
+                        </li>
+                        <li class="fragment">
+                            config/karma/conf.js
+                            <pre style="width: 100%; margin-top: 0"><code class="javascript" data-trim>
+                                webpackConfig = require('../webpack/tests')
+                            </code></pre>
+                        </li>
+                    </ul>
+                </section>
+                <section>
+                    <h2 style="margin-bottom: 0">
+                        <span>GitHub</span>
+                    </h2>
+                    <ul>
+                        <li>CI? <span class="fragment"> <img src="img/travis build.svg" class="pure-img" style="margin: 0"></span>
+                            <span class="fragment">- <a href="https://travis-ci.org/">Travis</a>!</span>
+                            <ul>
+                                <li class="fragment">Signing in with GitHub</li>
+                                <li class="fragment">Adding a predefined build script</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Badge? <span class="fragment"><a href="https://shields.io/#/">Shields.io</a></span><span
+                                class="fragment"> + markdown</span></li>
+                        <li class="fragment">A webpage? <span class="fragment">E.g. master branch + <i>docs</i> folder</span></li>
+                        <li class="fragment">README
+                            <ul>
+                                <li class="fragment">Badges at the top</li>
+                                <li class="fragment">A quick win/a short example</li>
+                                <li class="fragment">Examples, examples, examples (the online ones)</li>
+                                <li class="fragment">Links to the documentation, articles</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>
+                        <span>Node, npm</span>
+                    </h2>
+                    <ul>
+                        <li class="fragment">README - different display than on GitHub</li>
+                        <li class="fragment"><i>.npmignore</i> (by default equal to <i>.gitignore</i>)
+                            <ul>
+                                <li class="fragment"><i>dist</i> and <i>.d.ts</i> files shouldn't be ignored</li>
+                                <li class="fragment"><i>.ts</i> files should be</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Many downloads right after publishing a new version</li>
+                        <li class="fragment">Frequent updates = better position in search results</li>
+                        <li class="fragment">Semantic versioning (Major.Minor.Patch)
+                            <ul class="fragment">
+                                <li>Backward compatibility <span class="fragment">(e.g. <i>DorfModule</i>, <i>DorfCoreModule</i>)</span></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>
+                        <span>Table of Contents</span>
+                    </h2>
+                    <ol>
+                        <li>Why did I start?</li>
+                        <li>DORF - Domain Object Reactive Forms</li>
+                        <li>Lessons - Angular</li>
+                        <li>Lessons - npm, webpack, other tools</li>
+                        <li class="fragment highlight-red">"Marketing" and results</li>
+                    </ol>
+                </section>
+                <section>
+                    <h2>
+                        <span>Promotion</span>
+                    </h2>
+                    <ul>
+                        <li class="fragment">Twitter, proper hashtags (max. 2 per post)</li>
+                        <li class="fragment">Medium - articles demonstrating a library</li>
+                        <li class="fragment">Pluralsight - comments under the video about Reactive Forms in Angular</li>
+                        <li class="fragment">StackOverflow - answering under Angular reactive/model-driven/dynamic forms
+                            questions
+                        </li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>
+                        <span>Getting a user/user needs</span>
+                    </h3>
+                    <table class="fragment" style="font-size: .9em">
+                        <thead>
+                            <tr>
+                                <th>Prio</th>
+                                <th>What</th>
+                                <th>How</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td class="fragment">Visibility at <a href="https://www.npmjs.com/">npmjs.com</a></td>
+                                <td class="fragment">Frequent updates (maintenance)</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td class="fragment">Nice README</td>
+                                <td class="fragment">Quick win + online examples</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td class="fragment">Documentation</td>
+                                <td class="fragment">Existing and visible <i class="fragment">just in case</i></td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td class="fragment">Downloadable examples</td>
+                                <td class="fragment">Inside the repo</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td class="fragment">Clean source code</td>
+                                <td class="fragment">The less important part, but e.g. the documentation is a consequence
+                                    of the code</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+                <section>
+                    <h2>
+                        <span>Results</span>
+                    </h2>
+                    <ul>
+                        <li class="fragment">7 GitHub stars <span class="fragment">(my first stars ever)</span></li>
+                        <li class="fragment">+1000 downloads in a single day (29.08.2017)</li>
+                        <li class="fragment">300-400 downloads a month (before Angular 5)</li>
+                        <li class="fragment">+100 downloads a month currently</li>
+                        <li class="fragment">Huge knowledge/awareness growth
+                            <ul>
+                                <li class="fragment">The authors of a library/framework are the software developers, not
+                                    superheroes
+                                </li>
+                                <li class="fragment">New approach, different priorities</li>
+                                <li class="fragment">Great understanding of the framework <span class="fragment">(especially
+                                        of its narrow part)</span></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+            </section>
+            <section>
+                <h2 class="fragment" data-fragment-index="5" style="margin-bottom: 0">
+                    <span>Thank you</span>
+                </h2>
+                <a href="https://www.reddit.com/r/ProgrammerHumor/comments/8ja84m/quora_is_truly_a_magnificient_place">
+                    <img src="img/hiring.jpg">
+                </a>
+                <ol>
+                    <li class="fragment" data-fragment-index="1">Open source takes your skills to the next level
+                        <ul>
+                            <li class="fragment" data-fragment-index="2">Even a simple contributing (e.g. updating the documentation)</li>
+                        </ul>
+                    </li>
+                    <li class="fragment" data-fragment-index="3">GitHub, Twitter, Medium, StackOverflow
+                        <ul>
+                            <li class="fragment" data-fragment-index="4">Even a simple upvoting takes you to the elite</li>
+                        </ul>
+                    </li>
+                </ol>
+                <aside class="notes">
+                    <ul>
+                        <li>At some point in time there was a popular ebook on AngularJS. To learn this framework, you had
+                            to write your own, lightweight version it
+                        </li>
+                        <li>You don't have to rewrite the whole framework, you can focus on a narrow part and improve it</li>
+                        <li>It is important to build your space in the Internet</li>
+                        <li>You can start with following and connecting with me :)</li>
+                        <li>Problem solver (~Sobótka), product engineer (~Seliga)</li>
+                    </ul>
+                </aside>
+            </section>
+        </div>
+    </div>
+    <script src="js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script>
+        let controls = (function () {
+            Reveal.initialize({
+                history: true,
+                // - null: Media will only autoplay if data-autoplay is present
+                autoPlayMedia: null,
+                transition: 'slide', // none/fade/slide/convex/concave/zoom
+                transitionSpeed: 'default', // default/fast/slow
+                backgroundTransition: 'slide', // none/fade/slide/convex/concave/zoom
+                dependencies: [
+                    { src: 'js/classList.js', condition: function () { return !document.body.classList; } },
+
+                    { src: 'js/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                    { src: 'js/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+
+                    // Syntax highlight for <code> elements
+                    { src: 'js/highlight.js', callback: function () { hljs.initHighlightingOnLoad(); } },
+
+                    // Zoom in and out with Alt+click
+                    { src: 'js/zoom.js' },
+
+                    { src: 'notes/notes.js' },
+
+                    { src: 'js/math.js' }
+                ]
+            });
+
+            document.querySelectorAll('.reveal .slides > section:not(:first-child)').forEach((s) => {
+                s.setAttribute('data-background-image', 'img/twitter.png');
+                s.setAttribute('data-background-size', '240px');
+                s.setAttribute('data-background-position', 'top left');
+            });
+
+            return {
+                copyCode: function (btn, fullCode) {
+                    let ta = document.createElement('textarea');
+                    ta.style.position = 'absolute';
+                    ta.style.opacity = '0';
+                    document.body.appendChild(ta);
+
+                    let text = btn.previousElementSibling.innerText;
+                    if (!fullCode) {
+                        // we have just the content of the main function, we should add some code around
+                        text = `import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+public class Main {
+    public static void main(String[] args) {
+${formatCodePiece(text, fullCode)}    }
+}`;
+                    }
+                    ta.textContent = text;
+                    ta.select();
+                    document.execCommand('copy');
+                    ta.remove();
+                }
+            }
+
+            function formatCodePiece(t, fullCode) {
+                let result = '';
+                let arr = t.split('\n');
+                if (fullCode) arr = arr.slice(0, arr.length - 1);
+                arr.forEach(element => {
+                    result += `        ${element}\n`;
+                });
+
+                return result;
+            }
+        })();
+    </script>
+</body>
+
+</html>
