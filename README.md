@@ -1,3 +1,4 @@
+* Meet IT Toruń 22 [12.09.2018]: _Co wyciągnąłem, pisząc własną biblioteczkę angularową?_ [🔗](https://mat3e.github.io/talks/ll-angular/MeetIT22.html)
 * Angular Warsaw 21 [22.08.2018]: _Lessons from writing my own Angular utility lib_ [🔗](https://mat3e.github.io/talks/ll-angular/AngularWarsaw21.html) [📽️](https://www.youtube.com/watch?v=AKZ_GShIg48)
 * Discussion Panel [16.11.2017]: _Front-end vs. Back-end, jaki język programowania wybrać?_ [📽️](https://web.facebook.com/infoshareacademy/videos/868483633316364/)
 * Targi Kariera IT [30.09.17]: _JHipster – zróbmy sobie apkę, bez kodzenia (prawie)_ [🔗](https://mat3e.github.io/taskr/) [📷](https://photos.google.com/share/AF1QipOotvynJoiYb76rbInZdqkgJpG4lZflhhnyskL6lnm1nWg-sr6lFvKD2Rc1L_5YiQ/photo/AF1QipN7lZ-E5HGV4IGI6kZNA9QDx84xdRxWA6Qpk9vN?key=RzFaRDZvT0ctdjFwRi1jTkt4djNoSkRkVzNyT2tB)
