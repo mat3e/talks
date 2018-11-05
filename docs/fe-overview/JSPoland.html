@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="description" content="Presentation">
+    <meta name="keywords" content="presentation">
+    <meta name="author" content="mat3e">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/blood.css">
+    <link rel="stylesheet" href="css/idea.css">
+    <link rel="stylesheet" href="css/fontawesome.css">
+    <style>
+        #header {
+            text-align: left;
+            font-size: .7em;
+        }
+
+        #header-logo {
+            width: 375px;
+            height: 80px;
+            background-image: url('img/twitter.png');
+            background-size: contain;
+
+            top: -4em;
+            right: 0;
+            position: absolute;
+        }
+
+        #header h1 {
+            line-height: 1;
+        }
+
+        code[contenteditable="true"] {
+            border: 0;
+            outline: 0;
+        }
+
+        .slides section pre {
+            margin-bottom: 0;
+        }
+
+        .slides section pre+button {
+            cursor: pointer;
+
+            font-size: .65em;
+            font-weight: 100;
+            -webkit-font-smoothing: antialiased;
+
+            color: white;
+            background: #a23;
+
+            padding: 0 3px 3px;
+            border: transparent;
+            border-radius: 4px;
+        }
+
+        #perspective a {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            width: 45%;
+            margin: 0 auto;
+        }
+
+        #perspective a img {
+            border: 0;
+            margin: 0;
+            box-shadow: none;
+        }
+
+        #about-me {
+            list-style-type: none;
+            margin-left: 12.5%;
+            float: left;
+        }
+
+        #about-me ul {
+            list-style-type: none;
+            margin-left: 0;
+            float: left;
+        }
+
+        #about-me a {
+            color: white;
+        }
+
+        #about-me a:hover {
+            color: #dd5566;
+        }
+
+        .reveal section img.pure-img {
+            background: rgba(255, 255, 255, 0);
+            border: none;
+            box-shadow: none;
+            margin: 0;
+        }
+
+        .reveal .slides section .fragment.replace {
+            transition: none;
+            display: inline-block;
+        }
+
+        .reveal .slides section .fragment.fade-out.visible.replace {
+            display: none;
+        }
+
+        .reveal .slides section .fragment.fade-in.replace {
+            display: none;
+        }
+
+        .reveal .slides section .fragment.fade-in.visible.replace {
+            display: inline-block;
+        }
+
+        .reveal section img.text-logo {
+            vertical-align: middle;
+            background: none;
+            box-shadow: none;
+            border: none;
+            height: 1em;
+            margin: 0;
+        }
+
+        .reveal .slides section td.long-text-cell {
+            font-size: .5em;
+            vertical-align: middle;
+        }
+
+        .reveal .slides section table.summary {
+            table-layout: fixed;
+            width: 100%;
+        }
+
+        .reveal .slides section table.summary tbody td {
+            width: 27%;
+        }
+
+        .reveal .slides section table.summary tbody td:first-child {
+            width: 19%;
+        }
+    </style>
+    <script>
+        let link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section>
+                <section id="header">
+                    <h1>My personal</h1>
+                    <h2>front-end overview <span class="fragment">(2018)</span></h2>
+                    <div id="header-logo"></div>
+                </section>
+                <section id="perspective">
+                    <h5>
+                        <span>Perspective...</span>
+                        <span class="fragment" data-fragment-index="1"> matters</span>
+                        <span class="fragment" data-fragment-index="3"> :)</span>
+                    </h5>
+                    <a href="https://mistrzowie.org/717022">
+                        <img src="img/perspektywa-1.jpg">
+                        <img src="img/perspektywa-2.jpg" class="fragment" data-fragment-index="1">
+                        <img src="img/perspektywa-3.jpg" class="fragment" data-fragment-index="2" data-autoslide="2000">
+                    </a>
+                </section>
+                <section data-background-image="img/bg-hd.jpg" data-background-transition="zoom" data-background-size="75%">
+                    <ul id="about-me">
+                        <li>
+                            <ul>
+                                <li>
+                                    <a href="https://www.linkedin.com/in/mateusz-chrzonstowski/">
+                                        <i class="fab fa-linkedin" style="color: #0077B5; background-color: #FFF; line-height: .75em"></i>
+                                        /mateusz-chrzonstowski
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://twitter.com/_mat3e_">
+                                        <i class="fab fa-twitter-square" style="background-color: #1DA1F2; color: #FFF; line-height: .75em"></i>
+                                        /_mat3e_
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/mat3e/">
+                                        <i class="fab fa-github-square" style="color: #24292E; background-color: #FFF; line-height: .75em"></i>
+                                        /mat3e
+                                    </a>
+                                </li>
+                                <li style="line-height: 1">&nbsp;</li>
+                                <li class="fragment" style="line-height: .75">
+                                    <a style="font-weight: bold; font-size: .75em" href="https://mat3e.github.io/talks/fe-overview/JSPoland.html">
+                                        mat3e.github.io/talks/<br><span style="padding-left: 1em">fe-overview/JSPoland.html</span>
+                                    </a>
+                                </li>
+                                <li style="line-height: 1">&nbsp;</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="fragment" style="background: white; text-align: center; padding: .1em; line-height: 1">
+                                <li>
+                                    <a href="https://www.udemy.com/fajny-javascript/?couponCode=OPENALL">
+                                        <img src="img/udemy.svg" class="pure-img" style="height: 1.5em;">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://allegro.tech/">
+                                        <img src="img/allegro-tech.svg" class="pure-img" style="height: 1.5em;">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://infoshareacademy.com/">
+                                        <img src="img/isa.png" class="pure-img" style="height: 1.5em;">
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+            </section>
+            </section>
+            <section>
+                <div class="fragment fade-out replace" data-fragment-index="2">
+                    <a href="https://www.reddit.com/r/ProgrammerHumor/comments/8cfkf6/jquery_strikes_again/" class="fragment fade-out replace"
+                        data-fragment-index="1">
+                        <img style="width: 70%" src="img/reddit0.jpg">
+                    </a>
+                    <a href="https://www.reddit.com/r/ProgrammerHumor/comments/8cfkf6/jquery_strikes_again/" class="fragment fade-in replace"
+                        data-fragment-index="1">
+                        <img style="width: 70%" src="img/reddit1.jpg">
+                    </a>
+                </div>
+                <div class="fragment fade-in replace" data-fragment-index="2">
+                    <a href="https://www.reddit.com/r/ProgrammerHumor/comments/8cfkf6/jquery_strikes_again/" class="fragment fade-out replace"
+                        data-fragment-index="3">
+                        <img style="width: 70%" src="img/reddit2.jpg">
+                    </a>
+                    <a href="https://www.reddit.com/r/ProgrammerHumor/comments/8cfkf6/jquery_strikes_again/" class="fragment fade-in replace"
+                        data-fragment-index="3">
+                        <img style="width: 70%" src="img/reddit3.jpg">
+                    </a>
+                </div>
+            </section>
+            <section>
+                <h4>
+                    <span>
+                        <a style="color: white" href="https://www.quora.com/What-is-the-future-of-jQuery-for-2017-and-later">
+                            <img class="text-logo" src="img/quora.svg">/What-is-the-future-of-jQuery-for-2017-and-later
+                        </a>
+                    </span>
+                </h4>
+                <table class="fragment" data-fragment-index="1">
+                    <thead>
+                        <tr>
+                            <td style="text-align: center">HTML-first</td>
+                            <td style="text-align: center">JS-first</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="width: 50%">
+                                <div style="display: flex; flex-direction: column; align-items: center">
+                                    <a href="https://jquery.com/"><img src="img/jquery.svg" class="text-logo fragment"
+                                            data-fragment-index="2"></a>
+                                    <div style="display: flex; justify-content: space-between">
+                                        <a href="https://angularjs.org/"><img src="img/angularjsw.svg" class="text-logo fragment"
+                                                style="height: 1.7em" data-fragment-index="2"></a>
+                                        <a href="https://angular.io/"><img src="img/angular.svg" class="text-logo fragment"
+                                                style="height: 2em" data-fragment-index="2"></a>
+                                    </div>
+                                    <a href="https://vuejs.org/"><img src="img/vue.svg" class="text-logo fragment"
+                                            style="height: 1.4em" data-fragment-index="5"></a>
+                                </div>
+                            </td>
+                            <td style="width: 50%">
+                                <div style="display: flex; flex-direction: column; align-items: center">
+                                    <a href="https://reactjs.org/"><img src="img/react.svg" class="text-logo fragment"
+                                            style="height: 1.5em" data-fragment-index="3"></a>
+                                    <a href="https://preactjs.com/"><img src="img/preact.png" class="text-logo fragment"
+                                            style="height: 2em" data-fragment-index="3"></a>
+                                    <a href="https://github.com/jorgebucaran/hyperapp"><img src="img/hyperapp.svg"
+                                            class="text-logo fragment" style="height: 1.4em" data-fragment-index="3"></a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="https://engineering.hexacta.com/jsx-can-do-that-1b2666c23a32" style="position: absolute; top: 15%; left: calc(50% - 200px)"
+                    class="fragment" data-fragment-index="4">
+                    <img src="img/html-coding.jpg" style="width: 400px" class="fragment fade-out replace" data-fragment-index="5">
+                </a>
+            </section>
+            <section>
+                <h2 class="fragment" data-fragment-index="1">
+                    <span>GitHub stars?</span>
+                </h2>
+                <div>
+                    <a href="https://i.redd.it/zlee3sbw80x01.png" class="fragment fade-out replace" data-fragment-index="2">
+                        <img style="width: 70%" src="img/all3small.png">
+                    </a>
+                    <img style="width: 80%;" src="img/all3big.png" class="fragment fade-in replace" data-fragment-index="2">
+                </div>
+            </section>
+            <section>
+                <table class="summary">
+                    <thead>
+                        <tr>
+                            <td></td>
+                            <td style="text-align: center">
+                                <a href="https://angular.io/"><img src="img/angular.svg" class="text-logo" style="height: 2em"
+                                        data-fragment-index="4"></a>
+                            </td>
+                            <td style="text-align: center">
+                                <a href="https://reactjs.org/"><img src="img/react.svg" class="text-logo" style="height: 1.65em"
+                                        data-fragment-index="5"></a>
+                            </td>
+                            <td style="text-align: center">
+                                <a href="https://vuejs.org/"><img src="img/vue.svg" class="text-logo" style="height: 1.3em"
+                                        data-fragment-index="8"></a>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="fragment">
+                            <td><strong>Who?</strong></td>
+                            <td>Google</td>
+                            <td>Facebook</td>
+                            <td style="font-size: .65em; vertical-align: middle">ex-Google guy</td>
+                        </tr>
+                        <tr class="fragment">
+                            <td><strong>Remark</strong></td>
+                            <td class="long-text-cell fragment">Philosophy change (2-way vs. 1-way binding)</td>
+                            <td class="long-text-cell fragment">Promoting 1-way binding, license change</td>
+                            <td class="long-text-cell fragment">Better Angular before the better Angular (2+)</td>
+                        </tr>
+                        <tr class="fragment">
+                            <td><strong>npm/week</strong></td>
+                            <td>~1.5M</td>
+                            <td>~3M</td>
+                            <td>~0.5M</td>
+                        </tr>
+                        <tr class="fragment">
+                            <td><strong>As hater</strong></td>
+                            <td class="long-text-cell fragment">The next Ember</td>
+                            <td class="long-text-cell fragment">I used to mix HTML with PHP and then it was a&nbsp;"bad practice"</td>
+                            <td class="long-text-cell fragment">How can it have so many stars and no job offers?</td>
+                        </tr>
+                        <tr class="fragment">
+                            <td><strong>As fanboy</strong></td>
+                            <td class="long-text-cell fragment">Everything you need, has all the ingredients</td>
+                            <td class="long-text-cell fragment">Done by Facebook, must be great</td>
+                            <td class="long-text-cell fragment">Light, fast &amp; powerful</td>
+                        </tr>
+                        <tr class="fragment">
+                            <td><strong>As me</strong></td>
+                            <td class="long-text-cell fragment">Enterprise framework</td>
+                            <td class="long-text-cell fragment">A safe bet</td>
+                            <td class="long-text-cell fragment">People love it, but don't use it (at&nbsp;work)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section>
+                <h2 class="fragment" data-fragment-index="4" style="margin-bottom: 0">
+                    <span>Thanks!</span>
+                </h2>
+                <a href="https://www.commitstrip.com/en/2018/08/03/the-most-exciting-game/">
+                    <img src="img/vvr.jpg" style="width: 50%" class="pure-img">
+                </a>
+                <ul>
+                    <li class="fragment" data-fragment-index="1"><a href="https://hasvuepassedreactyet.surge.sh/">hasvuepassedreactyet.surge.sh</a></li>
+                    <li class="fragment" data-fragment-index="2">My choice? <span class="fragment" data-fragment-index="3">Web Components, Vue/Hyperapp</span></li>
+                </ul>
+            </section>
+        </div>
+    </div>
+    <script src="js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script>
+        (function () {
+            Reveal.initialize({
+                history: true,
+                // - null: Media will only autoplay if data-autoplay is present
+                autoPlayMedia: null,
+                transition: 'slide', // none/fade/slide/convex/concave/zoom
+                transitionSpeed: 'default', // default/fast/slow
+                backgroundTransition: 'slide', // none/fade/slide/convex/concave/zoom
+                dependencies: [
+                    { src: 'js/classList.js', condition: function () { return !document.body.classList; } },
+
+                    { src: 'js/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                    { src: 'js/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+
+                    // Syntax highlight for <code> elements
+                    { src: 'js/highlight.js', callback: function () { hljs.initHighlightingOnLoad(); } },
+
+                    // Zoom in and out with Alt+click
+                    { src: 'js/zoom.js' },
+
+                    { src: 'notes/notes.js' },
+
+                    { src: 'js/math.js' }
+                ]
+            });
+
+            document.querySelectorAll('.reveal .slides > section:not(:first-child)').forEach((s) => {
+                s.setAttribute('data-background-image', 'img/twitter.png');
+                s.setAttribute('data-background-size', '240px');
+                s.setAttribute('data-background-position', '.5em .5em');
+            });
+        })();
+    </script>
+</body>
+
+</html>
