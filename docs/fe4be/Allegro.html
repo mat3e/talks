@@ -1,0 +1,2787 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="description" content="Presentation">
+    <meta name="keywords" content="presentation">
+    <meta name="author" content="mat3e">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/blood.css">
+    <link rel="stylesheet" href="css/idea.css">
+    <link rel="stylesheet" href="css/fontawesome.css">
+    <link rel="stylesheet" href="css/ts-style.css">
+    <style>
+        #header {
+            text-align: left;
+            font-size: .7em;
+        }
+
+        #header-logo {
+            width: 300px;
+            height: 100px;
+            background: url('img/allegro-tech.svg') no-repeat;
+
+            top: -4em;
+            right: 0;
+            position: absolute;
+        }
+
+        #header h1 {
+            line-height: 1;
+        }
+
+        code[contenteditable="true"] {
+            border: 0;
+            outline: 0;
+        }
+
+        .slides section pre {
+            margin-bottom: 0;
+        }
+
+        .slides section pre+button {
+            cursor: pointer;
+
+            font-size: .65em;
+            font-weight: 100;
+            -webkit-font-smoothing: antialiased;
+
+            color: white;
+            background: #a23;
+
+            padding: 0 3px 3px;
+            border: transparent;
+            border-radius: 4px;
+        }
+
+        #perspective a {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            width: 45%;
+            margin: 0 auto;
+        }
+
+        #perspective a img {
+            border: 0;
+            margin: 0;
+            box-shadow: none;
+        }
+
+        #about-me {
+            list-style-type: none;
+            margin-left: 12.5%;
+            float: left;
+        }
+
+        #about-me a:not(:hover) {
+            color: white;
+        }
+
+        .reveal section img.text-logo {
+            background: none;
+            box-shadow: none;
+            border: none;
+            height: 1em;
+        }
+
+        .slides section img.pure-img {
+            border: none;
+            box-shadow: none;
+            background: none;
+        }
+
+        .reveal section img.bordered-hover:hover {
+            background-color: #fff;
+        }
+
+        .reveal .slides section .fragment.fade-out.crossed.visible {
+            opacity: 1;
+            visibility: visible;
+            text-decoration-line: line-through;
+        }
+
+        .reveal .slides section .fragment.replace {
+            transition: none;
+            display: inherit;
+        }
+
+        .reveal .slides section .fragment.fade-out.visible.replace {
+            display: none;
+        }
+
+        .reveal .slides section .fragment.fade-in.replace {
+            display: none;
+        }
+
+        .reveal .slides section .fragment.fade-in.visible.replace {
+            display: inherit;
+        }
+
+        .reveal section .highlight-1 {
+            color: yellow;
+            font-weight: bold;
+        }
+
+        .reveal section .highlight-2 {
+            background-color: greenyellow;
+        }
+    </style>
+    <script>
+        let link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section>
+                <section id="header" data-background-image>
+                    <h1>Front-end</h1>
+                    <h3>dla back-endowców (Java)</h3>
+                    <div id="header-logo"></div>
+                </section>
+                <section data-background-image="img/bg-hd.jpg" data-background-transition="zoom" data-background-size="75%">
+                    <ul id="about-me">
+                        <li>
+                            <a href="https://www.linkedin.com/in/mateusz-chrzonstowski/">
+                                <i class="fab fa-linkedin" style="color: #0077B5; background-color: #fff; line-height: .75em"></i>
+                                /mateusz-chrzonstowski
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://twitter.com/_mat3e_">
+                                <i class="fab fa-twitter-square" style="background-color: #1DA1F2; color: #fff; line-height: .75em"></i>
+                                /_mat3e_
+                            </a>
+                        </li>
+                        <!-- <li>
+                            <a href="https://www.reddit.com/user/_mat3e_">
+                                <i class="fab fa-reddit-square" style="background-color: #FF4500; line-height: .75em"></i> /_mat3e_
+                            </a>
+                        </li> -->
+                        <li>
+                            <a href="https://github.com/mat3e/">
+                                <i class="fab fa-github-square" style="color: #24292E; background-color: #fff; line-height: .75em"></i>
+                                /mat3e
+                            </a>
+                            <ul class="fragment" style="list-style-type: none; line-height: .5">
+                                <li>
+                                    <a style="font-size: .5em; font-weight: bold" href="https://mat3e.github.io/talks/fe4be/Allegro.html">
+                                        mat3e.github.io/talks/fe4be/Allegro.html
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>&nbsp;</li>
+                        <li class="fragment">🎓</li>
+                        <li class="fragment" data-autoslide="950">🖥️
+                            <span class="fragment" data-autoslide="1200">💰</span>
+                            <span class="fragment"> (2013)</span>
+                        </li>
+                        <li class="fragment">
+                            <img src="img/opbox.png" class="text-logo" style="margin: 0">
+                        </li>
+                        <li class="fragment">
+                            <a href="https://www.udemy.com/fajny-javascript/?couponCode=OPENALL">
+                                <img src="img/udemy.svg" class="text-logo bordered-hover" style="margin: 0">
+                            </a>
+                        </li>
+                    </ul>
+                    <aside class="notes">
+                        Każdy o sobie:
+                        <ul>
+                            <li>Imię, nazwisko</li>
+                            <li>2 słowa o pracy</li>
+                            <li>Ile do czynienia z JS-em</li>
+                            <li>Ulubiony alkohol</li>
+                            <li>Oczekiwania do szkolenia (np. ogląd sytuacji, ogarnięcie Reacta)</li>
+                        </ul>
+                        Te pytania mieć spisane, a oczekiwania spisać jako mapę myśli przy nich :)
+                        <br>
+                        Lista obecności
+                    </aside>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>
+                        <span>Warsztaty</span>
+                    </h2>
+                    <ol>
+                        <li class="fragment highlight-red">Narzędzia</li>
+                        <li>Język</li>
+                        <li>Stylowanie</li>
+                        <li>Frameworki</li>
+                    </ol>
+                </section>
+                <section>
+                    <h2>
+                        <span>Warsztaty</span>
+                    </h2>
+                    <ol>
+                        <li>Narzędzia
+                            <ol>
+                                <li class="fragment highlight-red">Node, npm</li>
+                                <li>ESLint</li>
+                                <li>Modularyzacja</li>
+                                <li>Testy jednostkowe</li>
+                            </ol>
+                        </li>
+                        <li>Język</li>
+                        <li>Stylowanie</li>
+                        <li>Frameworki</li>
+                    </ol>
+                </section>
+                <section>
+                    <h2 style="margin-bottom: 0">
+                        <img src="img/node.svg" class="text-logo">
+                    </h2>
+                    <ul>
+                        <li class="fragment">Środowisko uruchomieniowe JavaScriptu; taki JVM
+                            <ul>
+                                <li class="fragment"><i>Server-side</i> JavaScript</li>
+                                <li class="fragment">Umożliwia dostęp do plików na dysku itd.</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Jak?
+                            <ul>
+                                <li class="fragment">Silnik interpretujący JS, wyjęty z Chrome'a (V8)</li>
+                                <li class="fragment"><i>Asynchronous</i>, <i>event-driven</i>, inne fajne słowa*</li>
+                                <li class="fragment">*w sumie w JS-ie nie można inaczej niż <i>asynchronous</i>,
+                                    <i>event-driven</i> (~jednowątkowość)</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <aside class="notes">
+                        Spisywać wszystkie analogie ze świata Javy: lewo - Java, prawo - JS
+                    </aside>
+                </section>
+                <section>
+                    <h2>
+                        <img src="img/npm.png" class="text-logo">
+                    </h2>
+                    <ul>
+                        <li class="fragment"><i>Node Package Manager</i></li>
+                        <li class="fragment">Zarządca pakietów, instalowany razem z Nodem</li>
+                        <li class="fragment">
+                            <a href="https://www.npmjs.com/">Największe na świecie repozytorium bibliotek</a>
+                        </li>
+                        <li class="fragment"><i>Semantic versioning</i></li>
+                        <li class="fragment">Taki Maven/Gradle + Maven Central
+                            <ul>
+                                <li class="fragment">package.json ~ taki pom.xml</li>
+                                <li class="fragment">Tylko Maven Central wymaga sprawdzenia, jakiś <i>ticket</i> na
+                                    JIRA-rze itd.</li>
+                                <li class="fragment">A NPM?
+                                    <a href="https://www.npmjs.com/package/is-odd">No cóż...</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <aside class="notes">
+                        <ul>
+                            <li>Pokazać którąś z bibliotek, np. lodash - ile ściągnięć itd.</li>
+                            <li>Dowód, że wszyscy mogą publikować wszystko, a - co gorsza - wiele osób tego potem używa</li>
+                        </ul>
+                    </aside>
+                </section>
+                <section>
+                    <h3>
+                        <span>No cóż... ciąg dalszy</span>
+                    </h3>
+                    <a href="https://www.theregister.co.uk/2016/03/23/npm_left_pad_chaos/" class="fragment">
+                        <img src="img/unpublish.png">
+                    </a>
+                    <aside class="notes">Nie tylko wrzucić, ale i usunąć wolno; Maven - nie da się usunąć</aside>
+                </section>
+                <section>
+                    <h2>
+                        <span>Inne problemy</span>
+                    </h2>
+                    <a href="https://www.reddit.com/r/ProgrammerHumor/comments/6s0wov/heaviest_objects_in_the_universe/"
+                        class="fragment">
+                        <img src="img/node_heavy.png" style="width: 70%">
+                    </a>
+                </section>
+                <section>
+                    <a href="https://www.deviantart.com/americandreaming/art/Churchill-on-Democracy-639945570">
+                        <img src="img/churchill.jpeg" style="width: 90%">
+                    </a>
+                </section>
+                <section>
+                    <a href="http://www.modulecounts.com/">
+                        <img src="img/modulecounts.png">
+                    </a>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>
+                        <span>Ćwiczenie 1</span>
+                    </h2>
+                    <ol>
+                        <li class="fragment">Ściągnąć i zainstalować Node'a
+                            <ul>
+                                <li class="fragment"><a href="https://nodejs.org/en/">nodejs.org</a> lub <code>brew install node</code></li>
+                            </ul>
+                        </li>
+                        <li class="fragment">
+                            Przy pomocy poleceń <code>node -v</code> oraz <code>npm -v</code>, upewnić się, że obie
+                            rzeczy
+                            zostały zainstalowane
+                        </li>
+                        <li class="fragment">Rozpocząć nowy projekt przy pomocy <code>npm init</code>
+                            <ul>
+                                <li class="fragment">Wybrać domyślne opcje, całość nazwać <i>fe-workshop</i></li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Otworzyć wszystko w IntelliJ, przyjrzeć się plikowi package.json</li>
+                        <li class="fragment">Spróbować odpalić polecenie <i>test</i></li>
+                    </ol>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>
+                        <span>Warsztaty</span>
+                    </h2>
+                    <ol>
+                        <li>Narzędzia
+                            <ol>
+                                <li>Node, npm</li>
+                                <li class="fragment highlight-red">ESLint</li>
+                                <li>Modularyzacja</li>
+                                <li>Testy jednostkowe</li>
+                            </ol>
+                        </li>
+                        <li>Język</li>
+                        <li>Stylowanie</li>
+                        <li>Frameworki</li>
+                    </ol>
+                </section>
+                <section>
+                    <h2>
+                        <img src="img/eslint.svg" class="text-logo">
+                    </h2>
+                    <ul>
+                        <li class="fragment">Taki Checkstyle z Javy</li>
+                        <li class="fragment">Zautomatyzowana statyczna analiza kodu</li>
+                        <li class="fragment"><a href="https://medium.freecodecamp.org/google-publishes-a-javascript-style-guide-here-are-some-key-lessons-1810b8ad050b">Analiza
+                                google'owego
+                                <i>style guide</i></a>
+                        </li>
+                    </ul>
+                    <pre class="fragment" style="max-height: 40em; line-height: 1.1; font-size: .5em"><code class="javascript" data-trim>
+                        module.exports = {
+                            "extends": "eslint:recommended",
+                            "rules": {
+                                // enable additional rules
+                                "indent": ["error", 4], // warn
+                                "linebreak-style": ["error", "unix"],
+                        
+                                // override default options for rules from base configurations
+                                "no-cond-assign": ["error", "always"],
+                        
+                                // disable rules from base configurations
+                                "no-console": "off",
+                            }
+                        }                                        
+                    </code></pre>
+                    <aside class="notes">Przykłady - używać lambdy, preferować stałą nad zmienną</aside>
+                </section>
+                <section data-background-image="img/eslint-install.png" data-background-size="contain"
+                    data-background-transition="zoom">
+                    <h2>
+                        <span>
+                            <a href="https://eslint.org/docs/user-guide/getting-started#installation-and-usage">Oficjalny
+                                tutorial</a>
+                        </span>
+                    </h2>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2 style="margin-bottom: 0">
+                        <span>Ćwiczenie 2 (1/2)</span>
+                    </h2>
+                    <ol>
+                        <li class="fragment">Zamiast <code>npm install eslint --save-dev</code>,
+                            wystarczy <code>npm i eslint -D</code>
+                            <ul>
+                                <li class="fragment"><strong>UWAGA:</strong> na razie olewamy opcję <code>-D</code></li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Jak aktualnie wygląda package.json? Co pojawiło się w node_modules?</li>
+                        <li class="fragment">Wykorzystać pobranego ESLinta: <code>./node_modules/.bin/eslint --init</code></li>
+                        <li class="fragment">Zaaplikować reguły, zgodne z popularnym standardem od
+                            <i>airbnb</i>
+                            <ul>
+                                <li class="fragment">Brak Reacta, plik JSON</li>
+                                <li class="fragment">Pójść za sugestiami narzędzia inicjalizującego</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <aside class="notes">Omówić
+                        <ul>
+                            <li>semantic versioning; ^, ~</li>
+                            <li>dependencies i devDependencies</li>
+                            <li>node_modules, folder .bin</li>
+                        </ul>
+                    </aside>
+                </section>
+                <section>
+                    <h2>
+                        <span>Ćwiczenie 2 (2/2)</span>
+                    </h2>
+                    <ol>
+                        <li class="fragment">Przejrzeć package.json i node_modules. Gdzie trafił ESLint? Gdzie jego
+                            plik konfiguracyjny?</li>
+                        <li class="fragment">Upewnić się, że ESLint jest włączony w IntelliJ (Preferences, ESLint)</li>
+                        <li class="fragment">
+                            Utworzyć user.js (zgodny z aktualnymi regułami):
+                            <pre style="margin: 0"><code class="javascript" data-trim>
+                            const user = {
+                                avatar_url: 'https://picsum.photos/300',
+                                bio: 'Test bio',
+                            };
+                            </code></pre>
+                        </li>
+                        <li class="fragment">Skonfigurować ESLinta (reguła
+                            <code>comma-dangle</code>), żeby zgłaszał
+                            <i>"Unexpected trailing comma"</i> wewnątrz user.js
+                        </li>
+                    </ol>
+                    <aside class="notes">Nadpisujemy reguły airbnb</aside>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <img class="pure-img" src="img/think.jpg">
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>
+                        <span>Warsztaty</span>
+                    </h2>
+                    <ol>
+                        <li>Narzędzia
+                            <ol>
+                                <li>Node, npm</li>
+                                <li>ESLint</li>
+                                <li class="fragment highlight-red">Modularyzacja</li>
+                                <li>Testy jednostkowe</li>
+                            </ol>
+                        </li>
+                        <li>Język</li>
+                        <li>Stylowanie</li>
+                        <li>Frameworki</li>
+                    </ol>
+                </section>
+                <section>
+                    <h2><span>Modularyzacja</span></h2>
+                    <ul>
+                        <li class="fragment" data-fragment-index="1">
+                            <code class="fragment fade-out crossed" data-fragment-index="2">&lt;script src=""></code>
+                            <span class="fragment" data-fragment-index="2">no more</span>
+                        </li>
+                        <li class="fragment">Podział aplikacji JS na mniejsze, reużywalne kawałki</li>
+                        <li class="fragment">"Moduł" z <i>node_modules</i> to jedno</li>
+                        <li class="fragment">Moduł w stylu Node'a to drugie</li>
+                        <li class="fragment">Moduł w stylu ES6 - trzecie</li>
+                        <li class="fragment">Moduły z <i>node_modules</i> = biblioteki/frameworki, mogące się składać z
+                            wielu modułów Node'a lub ES6 <span class="fragment">(~dociągnięte zależności mavenowe)</span>
+                        </li>
+                    </ul>
+                    <aside class="notes">
+                        node_modules, to tak naprawdę "pakiety"
+                    </aside>
+                </section>
+                <section>
+                    <h2>
+                        <span>Unpkg</span>
+                    </h2>
+                    <ul>
+                        <li class="fragment"><a href="https://unpkg.com/">unpkg.com</a></li>
+                        <li class="fragment">"Odwrotność" npm, CDN</li>
+                        <li class="fragment">Dobre do prototypowania, podpięcia jakiejś biblioteki "na próbę"</li>
+                        <li class="fragment"><code>&lt;script src="unpkg.com/:package@:version/:file"></code></li>
+                    </ul>
+                </section>
+                <section>
+                    <h2><span>Moduły - node</span></h2>
+                    <ul>
+                        <li class="fragment">Node.js (jako środowisko uruchomieniowe) umożliwiło nowe instrukcje</li>
+                        <li class="fragment"><code class="javascript">module.exports</code> = możliwość podania rzeczy
+                            dostępnych "na zewnątrz" pliku
+                        </li>
+                        <li class="fragment"><code class="javascript">require</code> = odwołanie się do rzeczy z innego
+                            pliku
+                        </li>
+                        <li class="fragment">Wszystko, czego potrzebujemy, jeśli mamy backend w Node.js</li>
+                    </ul>
+                    <aside class="notes">Moduły w JS = public + import (pakiety) z Javy
+                        <br>
+                        To umożliwiło lepsze wsparcie w IDE
+                    </aside>
+                </section>
+                <section>
+                    <h2><span>Przykład</span></h2>
+                    <pre><code class="javascript" data-trim contenteditable="true">
+                        // constants.js
+                        const ENG = 'Hello';
+                        const PL = 'Siemanko';
+                        module.exports = {
+                            eng: ENG,
+                            pl: PL
+                        }
+                    </code><code class="javascript fragment" data-trim contenteditable="true">
+                        // index.js
+                        const greetings = require('./constants.js');
+                        console.log(greetings.pl);
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2 style="margin-bottom: 0">
+                        <span>Ćwiczenie 3</span>
+                    </h2>
+                    <ol>
+                        <li class="fragment">Wyeksportować obiekt z pliku user.js</li>
+                        <li class="fragment">Utworzyć index.js i zaimportować do niego user.js</li>
+                        <li class="fragment">Zalogować w konsoli (instrukcja <code>console.log</code>) tekst przypisany
+                            do pola <code>avatar_url</code></li>
+                        <li class="fragment">W package.json zdefiniować skrypt <code>start</code> jako <code>node index.js</code></li>
+                        <li class="fragment">Uruchomić program komendą <code>npm start</code></li>
+                    </ol>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2 style="margin-bottom: 0">
+                        <span>Moduły - es6</span>
+                    </h2>
+                    <ul>
+                        <li class="fragment">JavaScriptowe podejście do modularyzacji</li>
+                        <li class="fragment"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export"><code>export</code></a>
+                            = wystawianie funkcji/obiektów
+                            <ul>
+                                <li class="fragment">Często umieszczane wprost przy deklaracji, np. <code>export class Test {/*...*/}</code></li>
+                                <li class="fragment">Jedna rzecz na plik może być wyeksportowana domyślnie</li>
+                            </ul>
+                        </li>
+                        <li class="fragment"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import"><code>import</code></a>
+                            = wciągnięcie
+                            <ul>
+                                <li class="fragment">Wymaga podania nazw importowanych rzeczy (w nawiasach klamrowych)</li>
+                                <li class="fragment">Import domyślnego eksportu = podanie dowolnej nazwy, brak nawiasów
+                                    klamrowych</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2 style="margin-bottom: 0">
+                        <span>Ćwiczenie 4</span>
+                    </h2>
+                    <ol>
+                        <li class="fragment">
+                            Podmienić <code>module.exports</code> oraz <code>require</code> na <code>export</code>
+                            oraz <code>import</code>
+                        </li>
+                        <li class="fragment">
+                            Uruchomić program. Co się dzieje?
+                        </li>
+                    </ol>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2 style="margin-bottom: 0">
+                        <img src="img/webpack.png" class="text-logo">
+                    </h2>
+                    <ul>
+                        <li class="fragment"><a href="https://webpack.js.org/"><i>Static module bundler</i></a></li>
+                        <li class="fragment">Pozwala połączyć różne pliki JS, CSS, obrazkowe w jeden/kilka plików
+                            wynikowych</li>
+                        <li class="fragment">Idealny do zmiany plików JS, używających importów i exportów w 1 plik</li>
+                        <li class="fragment">Taki <i>Maven Assembly Plugin</i></li>
+                        <li class="fragment">#0CJS</li>
+                    </ul>
+                    <aside class="notes">
+                        Do pewnego stopnia webpack to nie tyle plugin Mavena, co sam Maven i pluginy (ta część
+                        uruchomieniowa Mavena)
+                    </aside>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2 style="margin-bottom: 0">
+                        <span>Ćwiczenie 5</span>
+                    </h2>
+                    <ol>
+                        <li class="fragment">
+                            Instrukcją <code>npm i -D webpack webpack-cli</code> pobrać webpacka i jego <i>Command Line
+                                Interface</i>
+                            <ul>
+                                <li class="fragment">Zobaczyć jak zmienił się package.json</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Zdefiniować skrypt npm <code>"build": "webpack"</code> i odpalić go
+                            poleceniem <code>npm run build</code></li>
+                        <li class="fragment">Zwrócić uwagę na błąd i na ostrzeżenie</li>
+                        <li class="fragment">Przenieść pliki JS do nowego folderu - src</li>
+                        <li class="fragment">Do budowania dodać opcję <code>--mode production</code></li>
+                        <li class="fragment">Odpalić budowanie. Co powstało? Jak wygląda?</li>
+                        <li class="fragment">Porównać z <code>--mode development</code></li>
+                        <li class="fragment">Uruchomić aplikację: <code>node dist/main.js</code></li>
+                    </ol>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3>
+                        <span>Siła webpacka - pluginy</span>
+                    </h3>
+                    <ul>
+                        <li class="fragment">Webpack sam z siebie "ogarnia" javascripty</li>
+                        <li class="fragment">Analizuje importy/exporty i tworzy odpowiedni plik wynikowy</li>
+                        <li class="fragment">Jednak już "tryb produkcji" robi coś ponad to - minifikacja, maglowanie
+                            itp.</li>
+                        <li class="fragment">Webpack "pod spodem" używa pluginów</li>
+                        <li class="fragment">Ogarnianie HTML-i? CSS-ów?<span class="fragment"> Kolejne pluginy!</span></li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>
+                        <span>Dociąganie pluginów</span>
+                    </h3>
+                    <ol>
+                        <li class="fragment">Znalezienie odpowiedniego plugina
+                            <ul>
+                                <li class="fragment">Często po prostu szukajka na <a href="https://webpack.js.org/">webpack.js.org</a></li>
+                            </ul>
+                        </li>
+                        <li class="fragment"><code>npm i -D znaleziony_plugin</code></li>
+                        <li class="fragment">Dodanie plugina do konfiguracji webpacka
+                            <ul>
+                                <li class="fragment">A co z #0CJS?
+                                    <div class="fragment"><img src="img/dontcare.gif" class="pure-img"></div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ol>
+                </section>
+                <section>
+                    <h2 style="margin-bottom: 0;">
+                        <span>webpack.config.js</span>
+                    </h2>
+                    <pre style="margin-top: 0;"><code class="javascript" data-trim contenteditable="true" style="max-height: 40em; font-size: .8em; line-height: 1">
+                        const CleanWebpackPlugin = require('clean-webpack-plugin');
+                        const HtmlWebpackPlugin = require('html-webpack-plugin');
+                        
+                        const path = require('path');
+                        
+                        module.exports = {
+                            mode: 'production',
+                            plugins: [
+                                new CleanWebpackPlugin(['dist']),
+                                new HtmlWebpackPlugin({
+                                    template: 'src/index.html'
+                                })
+                            ],
+                            module: {
+                                rules: [{
+                                    test: /\.css$/,
+                                    use: ['style-loader', 'css-loader?modules']
+                                }]
+                            },
+                            optimization: {
+                                runtimeChunk: 'single',
+                                splitChunks: {
+                                    cacheGroups: {
+                                        vendor: {
+                                            test: /node_modules/,
+                                            name: 'vendors',
+                                            chunks: 'all'
+                                        }
+                                    }
+                                }
+                            }
+                        };
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>
+                        <span>Konfiguracja</span>
+                    </h2>
+                    <ul>
+                        <li class="fragment">Webpack domyślnie szuka pliku "webpack.config.js"</li>
+                        <li class="fragment">Uruchamiając, można podać ścieżkę do konfiguracji
+                            <ul>
+                                <li class="fragment">
+                                    Np. <code>webpack --config webpack.test.js</code>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Dobrym pomysłem jest tworzenie konfiguracji dla deva, testa i proda</li>
+                    </ul>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>
+                        <span>Ćwiczenie 6</span>
+                    </h2>
+                    <ol>
+                        <li class="fragment">W index.js podmienić <code>console.log</code> na <code>alert</code></li>
+                        <li class="fragment">Utworzyć plik index.html w folderze głównym</li>
+                        <li class="fragment">Fajnie by było mieć coś, co automagicznie połączy HTML-a z JS-em, nie?
+                            <span class="fragment"><code>HtmlWebpackPlugin</code>!</span></li>
+                        <li class="fragment">Utworzyć plik konfiguracyjny webpack.config.js</li>
+                        <li class="fragment">Dociągnąć <code>clean-webpack-plugin</code> oraz <code>html-webpack-plugin</code>
+                            <ul>
+                                <li class="fragment">Użyć ich w pliku konfiguracyjnym</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Zaktualizować skrypt <code>npm build</code> i go odpalić</li>
+                        <li class="fragment">Otworzyć plik dist/index.html w przeglądarce</li>
+                    </ol>
+                </section>
+                <section>
+                    <h2 style="margin-bottom: 0">
+                        <span>Ćwiczenie 7</span>
+                    </h2>
+                    <ol>
+                        <li class="fragment">Podmienić <code>alert</code> z powrotem na <code>console.log</code></li>
+                        <li class="fragment">Co po odświeżeniu pliku dist/index.html w przeglądarce?</li>
+                        <li class="fragment">
+                            Pobrać <code>webpack-dev-server</code> - lokalny serwer webpacka (taki Jetty)
+                        </li>
+                        <li class="fragment">Nadpisać skrypt "start": <code>webpack-dev-server --mode development --open</code></li>
+                        <li class="fragment">Uruchomić aplikację, spojrzeć w konsolę przeglądarki, zostawić</li>
+                        <li class="fragment">W pliku user.js zmienić adres na https://placekitten.com/300/300. Co się
+                            stało?</li>
+                    </ol>
+                    <aside class="notes">Hot reload w Javie?.. Jakiś biednie działający <a href="https://github.com/dcevm/dcevm">DCEVM</a>?</aside>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>
+                        <span>Warsztaty</span>
+                    </h2>
+                    <ol>
+                        <li>Narzędzia
+                            <ol>
+                                <li>Node, npm</li>
+                                <li>ESLint</li>
+                                <li>Modularyzacja</li>
+                                <li class="fragment highlight-red">Testy jednostkowe</li>
+                            </ol>
+                        </li>
+                        <li>Język</li>
+                        <li>Stylowanie</li>
+                        <li>Frameworki</li>
+                    </ol>
+                </section>
+                <section>
+                    <h2>
+                        <span>Testy?</span>
+                    </h2>
+                    <ul>
+                        <li class="fragment">Tak, są :)</li>
+                        <li class="fragment">Więcej klocków do złożenia niż w Javie
+                            <ul>
+                                <li class="fragment"><i>Test runner</i><span class="fragment"> - coś na Node'a</span></li>
+                                <li class="fragment">"Konsolowa" przeglądarka<span class="fragment"> - coś do testów
+                                        e2e</span></li>
+                                <li class="fragment">Framework do pisania testów<span class="fragment"> - ramy na <i>test
+                                            case'y</i></span></li>
+                                <li class="fragment">Biblioteka do asercji<span class="fragment"> - nie zawsze
+                                        wbudowana</span></li>
+                                <li class="fragment">Mockowanie (spy)<span class="fragment"> - nie zawsze wbudowane</span></li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Różne rozwiązania oferują różne rzeczy z powyższych</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>
+                        <span>Mocha</span>
+                    </h2>
+                    <ul>
+                        <li class="fragment"><a href="https://mochajs.org/">mochajs.org</a></li>
+                        <li class="fragment">W praktyce najpopularniejsze rozwiązanie</li>
+                        <li class="fragment">Pozostałe opcje
+                            <ul>
+                                <li class="fragment"><a href="https://jasmine.github.io/">Jasmine</a></li>
+                                <li class="fragment"><a href="https://jestjs.io/">Jest</a></li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Runner + framework</li>
+                        <li class="fragment">Brak wsparcia do asercji
+                            <ul>
+                                <li class="fragment">Popularna opcja: <a href="https://www.chaijs.com/">Chai</a></li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Brak wsparcia do szpiegowania
+                            <ul>
+                                <li class="fragment">Popularna opcja: <a href="https://sinonjs.org/">Sinon</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>
+                        <span>Przykład</span>
+                    </h2>
+                    <pre><code class="javascript" style="max-height: 40em;" data-trim contenteditable="true">
+                            const assert = require('assert'); // assert from Node
+
+                            describe('Array', () => {
+                              describe('#indexOf()', () => {
+                                it('should return -1 when the value is not present', () => {
+                                  // given
+                                  const arr = [1, 2, 3];
+                                    
+                                  // when
+                                  const result = arr.indexOf(100);
+                                    
+                                  // then
+                                  assert.equal(result, -1);
+                                });
+                              });
+                            });                            
+                    </code></pre>
+                </section>
+                <section>
+                    <h2 style="margin-bottom: 0;">
+                        <span>Wykonanie</span>
+                    </h2>
+                    <img src="img/test-result.png" class="pure-img">
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2 style="margin-bottom: 0">
+                        <span>Ćwiczenie 8</span>
+                    </h2>
+                    <ol style="font-size: .9em; line-height: 1.15">
+                        <li class="fragment">Dociągnąć Mocha'ę, <code>mocha-webpack</code> (wersja <code>2.0.0-beta.0</code>)
+                            oraz <code>webpack-node-externals</code></li>
+                        <li class="fragment">Utworzyć webpack.test.js:
+                            <pre style="margin: 0"><code class="javascript" data-trim>
+                            module.exports = {
+                                target: 'node',
+                                externals: [require('webpack-node-externals')()],
+                                mode: 'development'
+                            };
+                            </code></pre>
+                        </li>
+                        <li class="fragment">Ustawić skrypt testowania aplikacji na
+                            <pre style="margin: 0; width: 100%"><code>mocha-webpack --webpack-config webpack.test.js \"src/**/*.spec.js\"</code></pre>
+                        </li>
+                        <li class="fragment">Utworzyć moduł map.js z zawartością
+                            <pre style="margin: 0"><code class="javascript">export map = () => {};</code></pre>
+                        </li>
+                        <li class="fragment">Napisać failujący test map.spec.js: obiekt jak w user.js przekazany do
+                            zaimportowanej
+                            funkcji <code>map</code> i asercja
+                            <pre style="margin: 0"><code class="javascript">assert.equal(result, { img: givenUrl, bio: givenBio });</code></pre>
+                        </li>
+                        <li class="fragment">Bonus: dociągnąć i użyć Chaia do asercji</li>
+                    </ol>
+                    <aside class="notes">Opowiedzieć tutaj 2 słowa o lambdzie i jak to się ma do funkcji</aside>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <a href="https://kahoot.it/">
+                        <img src="img/kahoot.svg" class="pure-img">
+                    </a>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>
+                        <span>Warsztaty</span>
+                    </h2>
+                    <ol>
+                        <li>Narzędzia</li>
+                        <li class="fragment highlight-red">Język</li>
+                        <li>Stylowanie</li>
+                        <li>Frameworki</li>
+                    </ol>
+                </section>
+                <section>
+                    <h2>
+                        <span>Warsztaty</span>
+                    </h2>
+                    <ol>
+                        <li>Narzędzia</li>
+                        <li>Język
+                            <ol>
+                                <li class="fragment highlight-red">ES6+</li>
+                                <li>TypeScript</li>
+                            </ol>
+                        </li>
+                        <li>Stylowanie</li>
+                        <li>Frameworki</li>
+                    </ol>
+                </section>
+                <section>
+                    <h1>Wstęp</h1>
+                </section>
+                <section>
+                    <h2>
+                        <span>ES6</span>
+                    </h2>
+                    <ul>
+                        <li class="fragment">A.k.a. ES2015 (weszło w 2015 roku)</li>
+                        <li class="fragment">Ogrmony skok JS-a, 4 lata od ES5.1
+                            <ul>
+                                <li class="fragment">klasy, generatory, moduły, lambdy, <code>Promise</code>,</li>
+                                <li class="fragment">domyślne parametry, <i>spread</i>, destrukturyzacja,</li>
+                                <li class="fragment">nowe deklarowanie zmiennych, <code>Map</code>, <code>Set</code>,</li>
+                                <li class="fragment"> ...</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Taka Java 8, może nawet 8 + 9 jednocześnie</li>
+                        <li class="fragment">ES6 + Node.js = rewolucja JS</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>
+                        <span>ES6+/ES.Next</span>
+                    </h2>
+                    <ul>
+                        <li class="fragment">Lepsza nowa (mała) wersja co roku niż wielki wybuch raz na jakiś czas
+                            <ul>
+                                <li class="fragment">Brzmi znajomo, Java 9+?</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Raczej ES2016, ES2017 itd. niż ES7, ES8</li>
+                        <li class="fragment">ES2016: <code>Array.includes</code>, <code>**</code></li>
+                        <li class="fragment">ES2017: <code>async</code>/<code>await</code></li>
+                        <li class="fragment">ES2018: <code>for-await-of</code>, więcej <code>spread</code></li>
+                        <li class="fragment"><a href="https://caniuse.com/">caniuse.com</a></li>
+                    </ul>
+                    <aside class="notes">Pokazać tabelkę na caniuse</aside>
+                </section>
+                <section>
+                    <h2>Destrukturyzacja (destructuring)</h2>
+                </section>
+                <section>
+                    <h2>
+                        <span>destructuring</span>
+                    </h2>
+                    <pre><code class="javascript" data-trim contentEditable="true" style="max-height: 40em">
+                        let a = 1;
+                        let b = 2;
+
+                        // magic
+                    </code><code class="javascript fade-out replace fragment" data-fragment-index="1" data-trim contentEditable="true">&nbsp;</code><code class="javascript fade-in replace fragment" data-fragment-index="1" data-trim contentEditable="true">[a, b] = [b, a];</code><code class="javascript" data-trim contentEditable="true">
+                        alert(a === 2 && b === 1);
+                    </code></pre>
+                    <button onclick="controls.evalCode(this)" style="font-weight: bold">eval</button>
+                    <aside class="notes">
+                        === vs. ==
+                    </aside>
+                </section>
+                <section>
+                    <h2 style="margin-top: -1em;">
+                        <span>destrukturyzacja</span>
+                    </h2>
+                    <pre><code class="javascript" data-trim contentEditable="true" style="max-height: 40em">
+                        const [a, b, c] = [1, 2, 3, 4, 5];
+                    </code><code class="javascript fade-out replace fragment" data-fragment-index="1" data-trim contentEditable="true">&nbsp;</code><code class="javascript fade-in replace fragment" data-trim contentEditable="true" data-fragment-index="1">
+                        &nbsp;
+                        const arr = [1, 2, 3, 4, 5];
+                        let spreadArr = [];
+                        [a,,b, ...spreadArr] = arr;
+                        &nbsp;
+                    </code><code class="javascript" data-trim contentEditable="true">
+                        alert(b);
+                    </code><code class="javascript fragment" data-trim contentEditable="true" data-fragment-index="1">
+                        &nbsp;
+                        alert(spreadArr);
+                    </code></pre>
+                    <button onclick="controls.evalCode(this)" style="font-weight: bold">eval</button>
+                    <aside class="notes">
+                        destrukturyzacja tablic, spread, let, const, błąd w konsoli przglądarki
+                    </aside>
+                </section>
+                <section>
+                    <h2 style="margin-bottom: 0">
+                        <span>destrukturyzacja</span>
+                    </h2>
+                    <pre style="margin-top: 0"><code class="javascript" data-trim contentEditable="true" style="max-height: 40em">
+                            const book = {
+                                name: 'Wiedźmin',
+                                author: 'Sapkowski'
+                            };
+
+                            const city = {
+                                name: 'Lublin',
+                                country: 'Poland'
+                            }
+
+                            introduce(book);
+                            introduce(city);
+
+                            function introduce(obj) {
+                                if(obj && obj.name) {
+                                    alert(`To jest ${obj.name} i jest bardzo fajny.`);
+                                }
+                            }
+                    </code></pre>
+                    <button onclick="controls.evalCode(this)" style="font-weight: bold">eval</button>
+                    <aside class="notes">
+                        <ul>
+                            <li>stringi ', ", `</li>
+                            <li>Opowiedzieć o tym && - że to też potem w React'cie</li>
+                            <li>Domyślne wartości</li>
+                            <li>Duck typing</li>
+                            <li>Template literal</li>
+                            <li>Aliasy, domyślne wartości, undefined, null</li>
+                        </ul>
+                    </aside>
+                </section>
+                <section>
+                    <h2 style="margin-bottom: 0">
+                        <span><code>null</code> vs. <code>undefined</code></span>
+                    </h2>
+                    <a href="https://josjong.com/2017/10/16/null-vs-empty-strings-why-oracle-was-right-and-apple-is-not/">
+                        <img src="img/toilet-rolls.jpg" style="margin-top: 0">
+                    </a>
+                </section>
+                <section>
+                    <h2>
+                        <span>Bonus</span>
+                    </h2>
+                    <pre><code class="javascript" data-trim contentEditable="true" style="padding: 1em 0">
+                        alert([...'👨‍👩‍👧‍👦']);
+                    </code></pre>
+                    <button onclick="controls.evalCode(this)" style="font-weight: bold">eval</button>
+                    <aside class="notes">
+                        ...'abc' też zadziała
+                        <br>
+                        [1, 2, 3] i w ogóle jest wołany toString na tablicy
+                    </aside>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>
+                        <span>Ćwiczenie 9</span>
+                    </h2>
+                    <ol>
+                        <li class="fragment">Zaimplementować <code>map</code>, żeby test przechodził</li>
+                        <li class="fragment">Użyć destrukturyzacji bezpośrednio na parametrze wejściowym funkcji</li>
+                        <li class="fragment">Nadać nowe nazwy destrukturyzowanym polom</li>
+                        <li class="fragment">Wyszukać czym jest <i>shorthand property</i> i wykorzystać w połączeniu z
+                            nowymi nazwami</li>
+                        <li class="fragment">Zdefiniować domyślne wartości w funkcji</li>
+                    </ol>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Deklarowanie zmiennych</h2>
+                </section>
+                <section>
+                    <h2>
+                        <span>
+                            <code>var</code>,
+                            <code>const</code>,
+                            <code>let</code>
+                        </span>
+                    </h2>
+                    <pre><code class="javascript" data-trim contentEditable="true" style="max-height: 40em">
+                        alert(test);
+                        if(true) {
+                            var test = 'foo';
+                        }
+                        alert(test);
+                    </code></pre>
+                    <button onclick="controls.evalCode(this)" style="font-weight: bold">eval</button>
+                    <aside class="notes">
+                        Przy okazji <code>undefined</code> - hoisting
+                    </aside>
+                </section>
+                <section>
+                    <h2>
+                        <span>
+                            <code>var</code>,
+                            <code>const</code>,
+                            <code>let</code>
+                        </span>
+                    </h2>
+                    <pre><code class="javascript" data-trim contentEditable="true" style="max-height: 40em">
+                        var arr = [1, 2, 3, 4];
+                        for (var i = 0; i < arr.length; ++i) {
+                            setTimeout(function() {
+                                alert(i + ': ' + arr[i]);
+                            }, (i+1) * 1000);
+                        }
+                    </code></pre>
+                    <button onclick="controls.evalCode(this)" style="font-weight: bold">eval</button>
+                </section>
+                <section>
+                    <h2>
+                        <span>Reguła kciuka</span>
+                    </h2>
+                    <div class="fragment">"Na start" zawsze <code>const</code>, <code>let</code> - w razie potrzeby.</div>
+                    <div class="fragment">Zapomnieć, że istnieje <code>var</code>.</div>
+                </section>
+                <section>
+                    <h1>"this", klasy</h1>
+                </section>
+                <section>
+                    <h2>
+                        <span>
+                            50 shades of <code>this</code>
+                        </span>
+                    </h2>
+                    <pre><code class="javascript" data-trim contentEditable="true" style="max-height: 40em">
+                        function testThis() {
+                            alert(this);
+                            return {
+                                testThisInternal() {
+                                    alert(this);
+                                }
+                            }
+                        }
+
+                        testThis();
+                    </code></pre>
+                    <button onclick="controls.evalCode(this)" style="font-weight: bold">eval</button>
+                    <p>&nbsp;</p>
+                    <aside class="notes">
+                        Pokazać z new i z <code>"use strict";</code> pokazać w konsoli, że obiekt ma pole, które jest
+                        funkcją - wyjaśnić jak to działa, np. testThisInternal: function(){} i function foo() i że
+                        tylko shorthand tutaj; i foo można nawet wynieść obok zupełnie <code>function foo() { alert(this); };</code>
+                        pokazać, że lambda ratuje, ale <code>const testThisInternal = () => { alert(this); }</code> i
+                        odniesienie się do tego (shorthandem) już nie
+                        <br>
+                        Wołanie funkcji inaczej niż wprost - call/apply
+                        <br>
+                        Zamienić na <code>console.log</code> i pokazać, że jest kiepsko, bo pole, które jest funkcją =
+                        kopia, a powinno być na prototypie; i przy okazji prototypów - klasy
+                        <br>
+                        <code>this</code> zależy od tego jak wołamy funkcję, a nie od tego w jakim kontekście (ważne
+                        przy React)
+                    </aside>
+                </section>
+                <section>
+                    <h2 style="margin-bottom: 0">
+                        <span>Class</span>
+                    </h2>
+                    <pre class="fragment fade-out replace" data-fragment-index="1" style="margin-top: 0"><code style="max-height: 40em; line-height: 1" class="javascript" data-trim contenteditable="true">
+                        function Person(name, surname) {
+                            this.name = name;
+                            this.surname = surname;
+                        } 
+
+                        Person.from = function (fullName) {
+                            return new Person(...fullName.split(' '));
+                        }
+
+                        Person.prototype.sayHello = function () {
+                            alert(`Hi, I'm ${this.fullName}!`);
+                        }
+
+                        Object.defineProperty(Person.prototype, 'fullName', {
+                            get() {
+                                return `${this.name} ${this.surname}`;
+                            }
+                        });
+
+                        Person.from('Adam Małysz').sayHello();
+                    </code></pre>
+                    <pre class="fragment fade-in replace" data-fragment-index="1" style="margin-top: 0"><code style="max-height: 40em; line-height: 1" class="javascript" data-trim contenteditable="true">
+                        class Person {
+                            static from(fullName) {
+                                return new Person(...fullName.split(' '));
+                            }
+
+                            constructor(name, surname) {
+                                this.name = name;
+                                this.surname = surname;
+                            }
+
+                            sayHello() {
+                                alert(`Hi, I'm ${this.fullName}!`);
+                            }
+
+                            get fullName() {
+                                return `${this.name} ${this.surname}`;
+                            }
+                        }
+
+                        Person.from('Adam Małysz').sayHello();
+                    </code></pre>
+                    <button onclick="controls.evalCode(this)" style="font-weight: bold">eval</button>
+                    <aside class="notes">
+                        Wszystko prototypowe; object-based, a nie object-oriented
+                        <br>
+                        Brak enkapsulacji - alert(Person.from('Adam Małysz').name); - jak zasymulować prywatne pola?
+                        <br>
+                        Hoisting - nie do końca działa (prototypy i inne); a dla klas - w ogóle
+                    </aside>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2 style="margin-bottom: 0">
+                        <span>Ćwiczenie 10</span>
+                    </h2>
+                    <ol>
+                        <li class="fragment">Przerobić funkcję <code>map</code> na konstruktor klasy <code>GitHubUser</code>
+                            <ul>
+                                <li class="fragment">Zmienić nazwę modułu na model.js</li>
+                                <li class="fragment">W konstruktorze ustawić pola <code>img</code> oraz <code>bio</code></li>
+                                <li class="fragment">Dodać metodę <code>toString</code>, zwracająca biografię</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Poprawić istniejące testy i dorobić test dla <code>toString</code> (np.
+                            zawołać w asercji <code>'' + result</code> albo jeszcze lepiej - <code>`${result}`</code>)
+                        </li>
+                        <li class="fragment">Bonus: ukryć pola w zmiennych i wystawić gettery (np.
+                            <code>get name() { return _name; }</code>)
+                        </li>
+                    </ol>
+                    <aside class="notes">
+                        "_" to dżentlemeńska umowa, że prywatne
+                    </aside>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Dziedziczenie</h2>
+                </section>
+                <section>
+                    <a href="https://javascript.info/native-prototypes">
+                        <img src="img/native-prototypes-classes.png" class="pure-img">
+                    </a>
+                </section>
+                <section>
+                    <pre style="line-height: 1"><code style="max-height: 40em" class="javascript" data-trim contentEditable="true">
+                        class Figure {
+                            constructor(sidesNum) { this.sidesNum = sidesNum; }
+                            alertSides() { alert(`Liczba boków: ${this.sidesNum}`); }
+                            calculateArea() { return NaN; }
+                        }
+                        
+                        class Rectangle extends Figure {
+                            constructor(a, b) {
+                                super(2);
+                                this.a = a;
+                                this.b = b;
+                            }
+                            calculateArea() { return this.a * this.b; }
+                        }
+                        
+                        class Square extends Rectangle {
+                            constructor(a) { super(a, a); }
+                        }
+                        
+                        const rect = new Rectangle(2, 4);
+                        rect.alertSides();
+                        alert(`Pole prostokąta: ${rect.calculateArea()}`);
+                        
+                        alert(rect instanceof Figure);
+                        alert(rect instanceof Object);
+                        alert(rect instanceof Square);
+                    </code></pre>
+                    <button onclick="controls.evalCode(this)">eval</button>
+                    <aside class="notes">
+                        Powiedzieć o tym __proto__ i o Object.getPrototypeOf
+                        <br>
+                        [].__proto__
+                        <br>
+                        Object.getPrototypeOf(4)
+                    </aside>
+                </section>
+                <section>
+                    <h2>Kompozycja (mixin)</h2>
+                </section>
+                <section>
+                    <pre><code class="javascript" data-trim contentEditable="true">
+                        const FlyMixin = (superclass) => class extends superclass {
+                            fly() {
+                                alert('flying!');
+                            }
+                        };
+                    </code><code class="javascript fragment" data-trim contentEditable="true">
+                        class Mammal { /* mammal stuff */ }
+                        class Dog extends Mammal{}
+                        class Bat extends FlyMixin(Mammal) {}
+                    </code><code class="javascript fragment" data-trim contentEditable="true">
+                        new Bat().fly();
+                        console.log(Bat);
+                    </code></pre>
+                    <button onclick="controls.evalCode(this)" style="font-weight: bold">eval</button>
+                    <div>
+                        <a class="fragment" href="http://justinfagnani.com/2015/12/21/real-mixins-with-javascript-classes/">Follow-up</a>
+                    </div>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2 style="margin-bottom: 0">
+                        <span>Ćwiczenie 11</span>
+                    </h2>
+                    <ol style="font-size: .9em; line-height: 1.15">
+                        <li class="fragment">Przenieść model.js i testy do folderu src/github</li>
+                        <li class="fragment">Przenieść user.js do src/about-me i utworzyć tam pliki component.js oraz
+                            index.js</li>
+                        <li class="fragment">
+                            W component.js stworzyć klasę <code>AboutMe</code>, rozszerzającą <code>HTMLElement</code>
+                            (znany przeglądarkom)
+                            <ul>
+                                <li class="fragment">Zawołać konstruktor klasy bazowej</li>
+                                <li class="fragment">Zaimportować user.js i dodać w konstruktorze:
+                                    <pre style="width: 100%; margin-top: 0"><code class="javascript" data-trim style="font-size: .75em; line-height: 1">
+                                        this.innerHTML = `
+                                            <img src="${user.avatar_url}">
+                                            <p>${user.bio}</p>
+                                        `;
+                                    </code></pre>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="fragment">
+                            W about-me/index.js dodać funkcję (i zaimportować ją i&nbsp;zawołać w głównym index.js):
+                            <pre style="width: 100%; margin-top: 0"><code class="javascript" data-trim>export default () => customElements.define('about-me', AboutMe);</code></pre>
+                        </li>
+                        <li class="fragment">W index.html dodać:
+                            <pre style="width: 100%; margin-top: 0"><code class="html" style="font-size: .75em; line-height: 1" data-trim>
+                            &lt;main>
+                                &lt;about-me>&lt;/about-me>
+                            &lt;/main>
+                            </code></pre>
+                        </li>
+                    </ol>
+                    <aside class="notes">
+                        Krótko o manipulowaniu DOM, że innerHTML i inne pobierania, createElement w ogóle, ale można w
+                        tym naszym customElemencie mieć atrybuty
+                        <br>
+                        Możemy rozszerzać też bardziej szczegółowe, np. HTMLParagraphElement
+                    </aside>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h1>DOM</h1>
+                </section>
+                <section>
+                    <h2>
+                        <span id="demoHeader1">Demo 1</span>
+                    </h2>
+                    <pre><code class="javascript" data-trim contentEditable="true">
+                        const span = document.querySelector('#demoHeader1');
+                        span.classList.add('highlight-2');
+                    </code><code class="javascript fragment" data-trim contentEditable="true">
+                        const div = document.createElement('div');
+                        div.classList.add('highlight-1');
+                        div.innerText = 'dynamiczny div';
+                        span.parentElement.after(div);
+                    </code><code class="javascript fragment" data-trim contentEditable="true">
+                        const div2 = document.createElement('div');
+                        div2.innerHTML = `
+                            <span class="highlight-2">dynamiczny span w divie</span>
+                        `;
+                        span.parentElement.after(div2);
+                    </code></pre>
+                    <button onclick="controls.evalCode(this)">eval</button>
+                    <div>
+                        <a class="fragment" href="https://css-tricks.com/now-ever-might-not-need-jquery/">(Now More
+                            Than Ever) You Might Not Need jQuery</a>
+                    </div>
+                </section>
+                <section>
+                    <h1>API: <code>fetch</code></h1>
+                </section>
+                <section>
+                    <h2 style="margin-bottom: 0">
+                        <span><code>fetch</code></span>
+                    </h2>
+                    <pre style="margin-top: 0"><code class="javascript" data-trim contenteditable="true">
+                        console.log(
+                            fetch('https://geocode.xyz', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/x-www-form-urlencoded',
+                                },
+                                body: new URLSearchParams({
+                                    geoit: 'JSON',
+                                    locate: '52.21667,21.03333'
+                                })
+                            })
+                        </code><code class="javascript fade-out replace fragment" data-fragment-index="1" data-trim contentEditable="true">&nbsp;</code><code class="javascript fade-in replace fragment" data-fragment-index="1" contentEditable="true">    .then(response => response.json())</code><code class="javascript" data-trim contentEditable="true">
+                        );
+                    </code></pre>
+                    <button onclick="controls.evalCode(this)">eval</button>
+                    <ul>
+                        <li class="fragment">Klient HTTP, nowe API przeglądarek do odpytywania</li>
+                        <li class="fragment">Działa z <code>Promise</code></li>
+                    </ul>
+                    <aside class="notes">
+                        Po kolei promise na response
+                        <br>
+                        w konsoli - pending
+                        <br>
+                        otwarcie i zamknięcie konsoli = fulfiled
+                    </aside>
+                </section>
+                <section>
+                    <h1>API: <code>Promise</code></h1>
+                </section>
+                <section>
+                    <h2>
+                        <span><code>Promise</code></span>
+                    </h2>
+                    <ul>
+                        <li class="fragment">Taki <code>CompletableFuture</code> z Javy</li>
+                        <li class="fragment">Następstwo callbacków</li>
+                        <li class="fragment">Podejście stosowane od dłuższego czasu w bibliotekach, od ES6 natywnie w
+                            JS-ie</li>
+                        <li class="fragment"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">MDN
+                                web docs</a></li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>
+                        <span>Przykład</span>
+                    </h2>
+                    <pre><code class="javascript" data-trim contentEditable="true">
+                        Promise.all([
+                            Promise.resolve(3),
+                            new Promise((resolve, reject) => {
+                                alert('action!');
+                                resolve(4);
+                            }),
+                            new Promise((resolve, reject) => {
+                                setTimeout(resolve, 100, '555');
+                            })
+                        ]).then(r => alert(r));
+                    </code></pre>
+                    <button onclick="controls.evalCode(this)">eval</button>
+                    <aside class="notes">
+                        <ul>
+                            <li>resolve, reject</li>
+                            <li>dodać np. Promise.reject('fail')</li>
+                            <li>then, catch, finally</li>
+                            <li>trochę o event loop i jak działa async w JS</li>
+                        </ul>
+                    </aside>
+                </section>
+                <section>
+                    <a href="https://makeagif.com/gif/ppappen-pineapple-apple-pen-officialpikotaro-QZfrOE">
+                        <img class="pure-img" src="img/ppap.gif" style="width: 65%">
+                    </a>
+                </section>
+                <section>
+                    <h2 style="margin-bottom: 0">
+                        <span><code>fetch</code> + <code>Promise</code></span>
+                    </h2>
+                    <pre style="margin-top: 0"><code style="max-height: 40em" class="javascript" data-trim contenteditable="true">
+                        fetch('https://geocode.xyz', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded',
+                            },
+                            body: new URLSearchParams({
+                                geoit: 'JSON',
+                                locate: '52.21667,21.03333'
+                            })
+                        })
+                        .then((response) => {
+                            if(!response.ok) {
+                                throw new Error('Response status not 200');
+                            }
+                            return response.json();
+                        })
+                        .then(obj => console.log(obj))
+                        // just for the demo purposes
+                        .catch(err => console.warn(err));
+                    </code></pre>
+                    <button onclick="controls.evalCode(this)">eval</button>
+                </section>
+                <section>
+                    <h1>
+                        <code>async</code>, <code>await</code>
+                    </h1>
+                </section>
+                <section>
+                    <h2 style="margin-bottom: 0">
+                        <span><code>async</code>, <code>await</code></span>
+                    </h2>
+                    <pre style="margin-top: 0; line-height: 1.1"><code style="max-height: 40em; font-size: .9em" class="javascript" data-trim contenteditable="true">
+                        console.log(getGeo());
+
+                        async function getGeo() {
+                            const response = await fetch('https://geocode.xyz', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded',
+                            },
+                            body: new URLSearchParams({
+                                geoit: 'JSON',
+                                locate: '52.21667,21.03333'
+                            })
+                            });
+                                
+                            if(!response.ok) {
+                            throw new Error('Response status not 200');
+                            }
+                            
+                            return await response.json();
+                        }
+                    </code></pre>
+                    <button onclick="controls.evalCode(this)">eval</button>
+                    <aside class="notes">
+                        Że taki ala synchroniczny kod, musiałby obsługiwać wyjątki try-catch
+                        <br>
+                        await tak naprawdę nie musi wystąpić, ale jest pomocny, jak chcemy pobrać coś z promise'a
+                        <br>
+                        zwracany jest promise
+                    </aside>
+                </section>
+                <section>
+                    <a href="https://twitter.com/pranaygp/status/1007755817435553792">
+                        <img src="img/signature2.png" style="width: 50%">
+                    </a>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2 style="margin-bottom: 0">
+                        <span>Ćwiczenie 12</span>
+                    </h2>
+                    <ol style="line-height: 1.15">
+                        <li class="fragment">Utworzyć service.js w src/github
+                            <ul>
+                                <li class="fragment">Napisać funkcję, zwracającą <code>GitHubUser</code> z <a href="https://api.github.com/users/mat3e">https://api.github.com/users/${nazwa}</a>
+                                </li>
+                                <li class="fragment">Pamiętać o obsłudze błędów</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Zmodyfikować <code>AboutMe</code>
+                            <ul>
+                                <li class="fragment">Dodać asynchroniczną metodę <code>render</code>, która wykorzysta
+                                    funkcję z src/github/service.js
+                                </li>
+                                <li class="fragment">Wykorzystać <code>observedAttributes</code> oraz <code>attributeChangedCallback</code>,
+                                    żeby pobierać atrybut i odpalać <code>render</code> tylko na jego zmiany
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Dodać atrybut w miejscu wykorzystania elementu <code>about-me</code></li>
+                    </ol>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h1>
+                        <span>kolekcje</span>
+                    </h1>
+                    <aside class="notes">No bo jak już dociągamy z API, to kolekcje się mogą przydać</aside>
+                </section>
+                <section>
+                    <h2 style="margin-bottom: 0">
+                        <span>Obiekty jako mapy</span>
+                    </h2>
+                    <pre style="margin-top: 0"><code style="max-height: 40em" class="javascript" data-trim contenteditable="true">
+                        const objMap = {
+                            'foo': 123,
+                            bar: 'abc',
+                            baz: null
+                        };
+                        for(const key in objMap) {
+                            alert(`${key}: ${objMap[key]}`);
+                        }
+                        alert(objMap['bar']);
+                        alert(objMap.foo);
+                    </code></pre>
+                    <button onclick="controls.evalCode(this)">eval</button>
+                    <ul>
+                        <li class="fragment">Kluczami są zawsze stringi (ewetnualnie symbole)</li>
+                        <li class="fragment">Kolejność kluczy pod znakiem zapytania</li>
+                        <li class="fragment">Brak łatwego dostępu do rozmiaru "mapy"</li>
+                        <li class="fragment"><code>objMap is not iterable</code></li>
+                        <li class="fragment">Uwaga na prototyp!</li>
+                    </ul>
+                    <aside class="notes">
+                        for(const val of objMap) => TypeError: objMap is not iterable
+                        <br>
+                        Prototyp może mieć jakieś swoje klucze
+                    </aside>
+                </section>
+                <section>
+                    <h2 style="margin-bottom: 0">
+                        <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Mapy
+                                ES6</a></span>
+                    </h2>
+                    <pre style="margin-top: 0"><code style="max-height: 40em" class="javascript" data-trim contenteditable="true">
+                        const realMap = new Map([
+                            [1, 'abc'],
+                            ['foo', 'xyz']
+                        ]);
+                        realMap.set('bar', null);
+                        alert(realMap.size);
+                        alert(realMap.has('bar'));
+                        for(const [key, val] of realMap) {
+                            alert(`${key}: ${val}`);
+                        }
+                        realMap.forEach((val, key) => alert(`${key}: ${val}`));
+                    </code></pre>
+                    <button onclick="controls.evalCode(this)">eval</button>
+                    <ul>
+                        <li class="fragment">Kluczami mogą być funkcje, obiekty, typy proste</li>
+                        <li class="fragment">Podczas iterowania kolejność jak przy wstawianiu</li>
+                        <li class="fragment">Pole <code>size</code>, mapy to <i>iterable</i></li>
+                        <li class="fragment">Zoptymalizowane do wstawiania i usuwania par</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>
+                        <span>
+                            <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set">Zbiór</a>
+                        </span>
+                    </h2>
+                    <pre style="margin-top: 0"><code style="max-height: 40em" class="javascript" data-trim contenteditable="true">
+                        const arr = [1, 2, 'foo', null, 2, null];
+                        alert(arr.length);
+
+                        const set = new Set(arr);
+                        alert(set.size);
+
+                        set.add(1).add(7).add('bar');
+                        alert(set.size);
+
+                        set.forEach(val => alert(val));
+                    </code></pre>
+                    <button onclick="controls.evalCode(this)">eval</button>
+                    <div>
+                        <ul>
+                            <li class="fragment">Unikalne wartości</li>
+                            <li class="fragment">Kolejność iterowania jak przy wstawianiu</li>
+                            <li class="fragment">API spójne z mapami (np. <code>entries</code>, <code>keys</code>)</li>
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h2>
+                        <span>Porównywanie obiektów</span>
+                    </h2>
+                    <pre style="margin-top: 0"><code style="max-height: 40em" class="javascript" data-trim contenteditable="true">
+                        alert(1 == '1');
+                        alert(1 === '1');
+                    </code><code class="javascript fragment" data-trim contenteditable="true">
+                        const obj = {
+                            test: 'passed'
+                        }
+                        const set = new Set([{}, 'foo', obj]);
+                    </code><code class="javascript fragment" data-trim contenteditable="true">
+                        alert(set.has(obj));
+                        alert(set.has({}));
+                    </code></pre>
+                    <button onclick="controls.evalCode(this)">eval</button>
+                    <div>
+                        <ul>
+                            <li class="fragment">Brak metod jak <code>equals</code> lub <code>hashCode</code></li>
+                            <li class="fragment"><i>shallow</i></li>
+                        </ul>
+                    </div>
+                    <aside class="notes">
+                        Dla czystości sumienia :) jak działa to porównywanie w kolekcjach
+                        <br>
+                        obiekty, tablice, regex - mają swoje skrótowe sposoby tworzenia
+                        <br>
+                        string != String; trochę inaczej te wrappery działają niż w Javie; (1).toString() ok, (1)
+                        instanceof Number - false
+                    </aside>
+                </section>
+                <section>
+                    <img src="img/shallow.jpg" class="pure-img">
+                </section>
+                <section>
+                    <h2>
+                        <span>Przetwarzanie</span>
+                    </h2>
+                    <pre style="margin-top: 0"><code style="max-height: 40em" class="javascript" data-trim contenteditable="true">
+                        const result = [
+                            1, 2, 'foo', null, 5, null, 0.99
+                        ].filter(Number.isInteger) // e => Number.isInteger(e)
+                         .map(e => e ** 2)
+                         .reverse()
+                         .reduce((acc, cur) => acc + cur, 0);
+
+                        alert(result);
+                    </code></pre>
+                    <button onclick="controls.evalCode(this)">eval</button>
+                    <div>
+                        <ul>
+                            <li class="fragment">Na tablicach</li>
+                            <li class="fragment">A np. <code>Set</code>?
+                                <pre style="margin-top: 0; width: 100%"><code class="javascript">new Set([...set1].filter(x => set2.has(x)))</code></pre>
+                            </li>
+                            <li class="fragment">Uwaga! <code>push</code>, <code>splice</code> i inne <code>pop</code>y
+                                mutują tablicę, zamiast zwracać nową!</li>
+                        </ul>
+                    </div>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <a href="https://kahoot.it/">
+                        <img src="img/kahoot.svg" class="pure-img">
+                    </a>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>
+                        <span>Warsztaty</span>
+                    </h2>
+                    <ol>
+                        <li>Narzędzia</li>
+                        <li>Język
+                            <ol>
+                                <li>ES6+</li>
+                                <li class="fragment highlight-red">TypeScript</li>
+                            </ol>
+                        </li>
+                        <li>Stylowanie</li>
+                        <li>Frameworki</li>
+                    </ol>
+                </section>
+                <section>
+                    <h2 style="margin-bottom: 0">
+                        <img src="img/ts.svg" class="text-logo" style="margin: 0">
+                    </h2>
+                    <ul style="font-size: .9em">
+                        <li class="fragment">Język będący nadzbiorem JavaScripta
+                            <ul>
+                                <li class="fragment">Taki Groovy, tylko Groovy dodaje Javie dynamiczne typowanie</li>
+                                <li class="fragment">TypeScript dodaje statyczne typowanie JS-owi :)</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Oprócz typów i <i>feature</i>ów z nimi związanych, TS dodaje instrukcje z
+                            przyszłych standardów ES
+                            <ul>
+                                <li class="fragment">Przykładowo dekoratory</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">TS to również zbiór definicji (typowań) większości znanych bibliotek
+                            <ul>
+                                <li class="fragment">Nowoczesne IDE korzystają z tych definicji</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Kompilowanie TS-a do JS-a wychwytuje sporo błędów (JS - dopiero w
+                            przeglądarce)</li>
+                    </ul>
+                    <aside class="notes">Możemy przetłumaczyć async, await i inne dziedziczenia nawet do ES3</aside>
+                </section>
+                <section>
+                    <h2>
+                        <span>Pierwsze kroki</span>
+                    </h2>
+                    <ul>
+                        <li class="fragment"><code>npm i -D typescript</code></li>
+                        <li class="fragment">Podmiana rozszerzenia pliku z .js na .ts</li>
+                        <li class="fragment">TypeScript już działa!</li>
+                        <li class="fragment">Naniesienie poprawek, sugerowanych przez IDE</li>
+                        <li class="fragment">Ręczna kompilacja pliku:
+                            <pre style="margin: 0; width: 100%"><code class="bash">node_modules/typescript/bin/tsc ./plik.ts</code></pre>
+                        </li>
+                        <li class="fragment">Możliwa też kompilacja przy pomocy IDE</li>
+                        <li class="fragment">Docelowo? Skrypt npm lub loader webpacka</li>
+                    </ul>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2 style="margin: 0">
+                        <span>Ćwiczenie 13</span>
+                    </h2>
+                    <ol>
+                        <li class="fragment">Zainstalować TS jako zależność deweloperską</li>
+                        <li class="fragment">Zmienić src/github/model.js na TS!</li>
+                        <li class="fragment">Nanieść zasugerowane poprawki; na razie wersja "light" TypeScripta</li>
+                        <li class="fragment">Czytelniej, prawda? :)</li>
+                        <li class="fragment">Usunąć ignorowanie ESLinta. Czy ESLint działa?</li>
+                        <li class="fragment">Spróbować uruchomić aplikację</li>
+                        <li class="fragment">Skompilować np. z terminala w src/github:
+                            <pre style="margin: 0; width: 100%"><code class="bash">../../node_modules/typescript/bin/tsc ./model.ts</code></pre>
+                        </li>
+                        <li class="fragment">Co jest nie tak z plikiem wynikowym?</li>
+                    </ol>
+                    <aside class="notes">
+                        <code>eslint-disable</code> mogli nie mieć, więc tylko zwrócić uwagę, czy to dalej działa
+                    </aside>
+                </section>
+                <section>
+                    <h3 style="margin: 0">
+                        <span>Ćwiczenie 14: ESLint!</span>
+                    </h3>
+                    <ol style="font-size: .95em">
+                        <li class="fragment">Doinstalować <code>typescript-eslint-parser</code> oraz <code>eslint-plugin-tslint</code></li>
+                        <li class="fragment">Do konfiguracji ESLinta dodać opcje <code>"parser"</code> oraz <code>"plugin"</code>,
+                            wskazujące powyższe zależności
+                            <ul>
+                                <li class="fragment">Upewnić się o wszystkim w dokumentacji plugina</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Dodać też <code>"parserOptions"</code> i wskazać ES2018</li>
+                        <li class="fragment">Dostosować reguły i formatowanie plików TS do swoich potrzeb</li>
+                        <li class="fragment">Bonus: poczytać o TSLint</li>
+                    </ol>
+                </section>
+                <section>
+                    <h3>
+                        <span>Ćwiczenie 15: wynikowy ES6+</span>
+                    </h3>
+                    <ol>
+                        <li class="fragment">Dla odmiany - JSON :)
+                            <ul>
+                                <li class="fragment">W głównej ścieżce utworzyć tsconfig.json</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Ustawić opcje <code>"module"</code> oraz <code>"target"</code> na <code>"esnext"</code>
+                            <ul>
+                                <li class="fragment">Co ciekawe, możemy ustawić nawet ES3 (sic!)</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Ustawić <code>"alwaysStrict"</code></li>
+                        <li class="fragment">Ignorować node_modules</li>
+                        <li class="fragment">Dodać <code>"src/**/*"</code> w <code>"include"</code></li>
+                        <li class="fragment">Odpalić <code>tsc</code> w folderze głównym</li>
+                    </ol>
+                </section>
+                <section>
+                    <h3>
+                        <span>Ćwiczenie 16: webpack</span>
+                    </h3>
+                    <ol>
+                        <li class="fragment">Dociągnąć <code>awesome-typescript-loader</code> jako zależność
+                            developerską
+                        </li>
+                        <li class="fragment">Zmodyfikować obie konfiguracje webpacka, w oparciu o dokumentację <i>loader</i>a</li>
+                        <li class="fragment">Usunąć plik model.js i odpalić testy. Czy działają?</li>
+                        <li class="fragment">Sprawdzić też instrukcje start oraz build</li>
+                    </ol>
+                </section>
+            </section>
+            <section>
+                <section id="ts-editor">
+                    <h2>
+                        <span>Deklarowanie</span>
+                    </h2>
+                    <ul>
+                        <li class="fragment">Składnia "kotlinowa": <code>let zmienna: typ</code></li>
+                        <li class="fragment">Zmienna raz zdefiniowana jako <code>string</code> nie może przyjąć niczego
+                            innego</li>
+                        <li class="fragment">Wyjątek? <span class="fragment">Typ <code>any</code></span></li>
+                        <li class="fragment">Działa <i>type inference</i></li>
+                        <li class="fragment">Jeśli tylko zadeklarujemy zmienną (nie podamy wartości), dostaniemy typ
+                            <code>any</code></li>
+                        <li class="fragment"><a href="ts-editor.html" target="_blank">Demo time!</a>
+                            <ul>
+                                <li class="fragment">Odpalić przykłady 1 i 2 i zobaczyć, o czym tu mowa :)</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <aside class="notes">
+                        <code>any</code> to tak jakbyśmy mieli "czysty" JS
+                        <br>
+                        Warto wspomnieć jakie opcje kompilatora są ustawione i że one są fajne, bo jeszcze silniej nas
+                        wspierają
+                        <br>
+                        BTW w JS-ie nie ma rozróżnienia na całkowite i zmiennoprzecinkowe - jest tylko typ <code>number</code>
+                    </aside>
+                </section>
+                <section>
+                    <h2 style="margin: 0">
+                        <span>Interfejsy</span>
+                    </h2>
+                    <ul style="font-size: .9em">
+                        <li class="fragment">Informacja o typach, wyłącznie w TypeScript'cie
+                            <ul>
+                                <li class="fragment">Zupełnie ignorowane w kodzie wynikowym</li>
+                                <li class="fragment">Pomocne dla IDE i dla programistów :)</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Współpracują z <code>import</code>ami i <code>export</code>ami</li>
+                        <li class="fragment">Zalecenia TS: nazwę rozpoczynać od <code>I</code></li>
+                        <li class="fragment">Ciekawostka: mogą zawierać nie tylko metody, ale i pola, wymagające
+                            "implementacji"
+                            <ul>
+                                <li class="fragment">Dużo sensu w przypadku istniejących bibliotek</li>
+                                <li class="fragment">Pomocne w getterach i setterach</li>
+                                <li class="fragment"><i>Duck typing</i> się kłania</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Pozostałe kwestie - podobnie jak w Javie 7</li>
+                        <li class="fragment">Zobaczyć w przykładzie 3</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2 style="margin: 0">
+                        <span>Dodatki</span>
+                    </h2>
+                    <ul style="font-size: .95em; line-height: 1.2">
+                        <li class="fragment">
+                            Tak jak <code>interface</code> istnieje tylko w TS, tak też
+                            <ul>
+                                <li class="fragment">
+                                    <code>[key: string]: any</code> - oznaczenie, że w obiekcie będą "dynamiczne"
+                                    składowe
+                                </li>
+                                <li class="fragment"><code>pole?</code> - pole niewymagane (opcjonalna implementacja,
+                                    ale typy muszą się zgadzać!)
+                                </li>
+                                <li class="fragment">
+                                    <code>readonly</code> - pole tylko do odczytu (jak <code>const</code> dla zmiennych
+                                    lokalnych)
+                                </li>
+                                <li class="fragment"><code>private</code>, <code>public</code> - różny dostęp do
+                                    składowych
+                                    <ul>
+                                        <li class="fragment">Można jak w Kotlinie - definiować dostępy od razu w
+                                            konstruktorze</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Zobaczyć przykłady 4 i 5</li>
+                    </ul>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2 style="margin: 0">
+                        <span>Ćwiczenie 17</span>
+                    </h2>
+                    <ol>
+                        <li class="fragment">W module github/model.ts, dodać interfejs, reprezentujący odpowiedź z API
+                            GitHuba
+                            <ul>
+                                <li class="fragment">Wyeksportować go</li>
+                                <li class="fragment">Usunąć nieaktualne obejście reguł ESLinta</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Przerobić test na plik TS i użyć tam interfejsu</li>
+                        <li class="fragment">Pójść za sugestiami i zainstalować <code>@types/node</code> oraz <code>@types/mocha</code></li>
+                        <!-- <li class="fragment">W tsconfig.json dodać opcję
+                            <pre style="width: 100%; margin: 0"><code class="json">"types": [ "node", "mocha" ]</code></pre>
+                        </li> -->
+                        <li class="fragment">Odpalić testy</li>
+                        <li class="fragment">Usunąć nieużywany plik about-me/user.js</li>
+                    </ol>
+                    <aside class="notes">@types są od razu znane TypeScriptowi</aside>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2 style="margin: 0">
+                        <span>Typowanie</span>
+                    </h2>
+                    <ul style="font-size: .9em">
+                        <li class="fragment"><a href="https://github.com/DefinitelyTyped/DefinitelyTyped"><code>@types</code></a>
+                            to zarezerwowana grupa pakietów npm
+                            <ul>
+                                <li class="fragment"><code>@somescope/somepackagename</code> = <i>scoped package</i></li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Dodawane są tam definicje typów dla istniejących, nie-TS-owych bibliotek</li>
+                        <li class="fragment">TypeScript rozpoznaje dociągnięte @types</li>
+                        <li class="fragment">Dla istniejących źródeł .ts, wygenerowanie to ustawienie w tsconfig flagi
+                            <code>"declaration": true</code>
+                            <ul>
+                                <li class="fragment">Powstają pliki .d.ts (jak <i>declaration</i>)</li>
+                                <li class="fragment">W repo powinniśmy trzymać <strong>tylko</strong> pliki .ts, a np.
+                                    do npm wrzucać wygenerowane .js oraz .d.ts</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">TypeScript zna też typy dla rzeczy istniejących w JS-ie</li>
+                    </ul>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>
+                        <span>Ćwiczenie 18</span>
+                    </h2>
+                    <ol>
+                        <li class="fragment">Zamienić pozostałe pliki na TypeScripta</li>
+                        <li class="fragment">Dodać <code>"declaration"</code> żeby budowanie tworzyło pliki .d.ts</li>
+                        <li class="fragment">Poczytać jak działa opcja tsconfiga - <code>"lib"</code></li>
+                        <li class="fragment">Pousuwać nieaktualne eslintowe komentarze</li>
+                        <li class="fragment">Ciekawostka: używając odpowiednich opcji, moglibyśmy działać TypeScriptem
+                            na plikach .js</li>
+                    </ol>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>
+                        <span>Zaawansowane typowanie</span>
+                    </h2>
+                </section>
+                <section>
+                    <h2>
+                        <span>Generyki</span>
+                    </h2>
+                    <ul>
+                        <li class="fragment">Ciekawy przykład z definicji DOM:
+                            <pre style="margin: 0; width: 100%"><code class="typescript" style="font-size: .7em">querySelector&lt;K extends keyof HTMLElementTagNameMap>(selectors: K): HTMLElementTagNameMap[K] | null;</code></pre>
+                        </li>
+                        <li class="fragment">Odpalenie <code>querySelector</code>a np. z argumentem <code>'h1'</code>
+                            zwróci <code>HTMLHeadingElement</code></li>
+                        <li class="fragment">Informacja o typach jest oczywiście wymazywana</li>
+                        <li class="fragment">Ciekawostka - <i>mapped types</i>
+                            <pre style="margin: 0; width: 100%"><code class="typescript" data-trim>
+                                type Readonly&lt;T> = {
+                                    readonly [P in keyof T]: T[P]
+                                };
+                            </code></pre>
+                            <ul>
+                                <li class="fragment">Istnieją już predefiniowane opcje</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Rzucić okiem na przykłady 6 i 7</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>
+                        <span>Unie</span>
+                    </h2>
+                    <ul>
+                        <li class="fragment">Możliwe przypisanie jednego z wielu typów</li>
+                        <li class="fragment">Specyficzne przypadki:
+                            <ul>
+                                <li><code>type | null</code></li>
+                                <li><code>type | undefined</code></li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Tak jak w Kotlinie - upewnienie się o typie, udostępnia wszystkie jego
+                            metody</li>
+                        <li class="fragment">Można pisać własne "upewniacze"</li>
+                        <li class="fragment">Przykłady 8 i 9</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>
+                        <a href="https://www.typescriptlang.org/docs/handbook/advanced-types.html">Jeszcze więcej,
+                            jeszcze mocniej</a>
+                    </h2>
+                    <aside class="notes">Rzutowanie typów - przy pomocy "as typ"; można też nawiasami kątowymi (C++?)</aside>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <a href="https://kahoot.it/">
+                        <img src="img/kahoot.svg" class="pure-img">
+                    </a>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>
+                        <span>Warsztaty</span>
+                    </h2>
+                    <ol>
+                        <li>Narzędzia</li>
+                        <li>Język</li>
+                        <li class="fragment highlight-red">Stylowanie</li>
+                        <li>Frameworki</li>
+                    </ol>
+                </section>
+                <section>
+                    <h2>
+                        <span>CSS</span>
+                    </h2>
+                    <ul>
+                        <li class="fragment">Czasami po prostu trzeba</li>
+                        <li class="fragment">CSS też ewoluuje
+                            <ul>
+                                <li class="fragment">
+                                    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_variables">Ma
+                                        już np. zmienne</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Do tego Sass i inne są dla CSS-a czymś, czym TS jest dla JS-a</li>
+                    </ul>
+                    <aside class="notes">
+                        80-90% przypadków, gdy potrzebujemy CSS-a. Reszta? Jakieś frameworki albo zestawy komponentów
+                    </aside>
+                </section>
+                <section>
+                    <h2>
+                        <span>Reguła kciuka</span>
+                    </h2>
+                    <div class="fragment">Znaleźć jakiś styl, który nam odpowiada (gdzieś, na jakiejś stronie) i go
+                        podrąbać.
+                    </div>
+                    <div class="fragment">I poznać <a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">flexa</a>.
+                        <span class="fragment">I środkowanie diva.</span></div>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2 style="margin: 0">
+                        <span>Ćwiczenie 19: live</span>
+                    </h2>
+                    <ol>
+                        <li class="fragment">Wejść na <a href="https://twitter.com/_mat3e_">twitter.com</a> i podejrzeć
+                            w inspektorze przeglądarki, jak ostylowane są zdjęcia profilowe</li>
+                        <li class="fragment">Otworzyć naszą stronę i w inspektorze bawić się ze stylami, dopóki nie
+                            uzyskamy efektu twittera
+                        </li>
+                        <li class="fragment">Poczytać o <a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">flexboxie</a></li>
+                        <li class="fragment">Ostylować zdjęcie i biografię
+                            <ul>
+                                <li class="fragment">Oba na środku strony</li>
+                                <li class="fragment">Tekst "na środku" obrazka w pionie</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Skopiować style na stałe, może być bezpośrednio do index.html (znacznik
+                            <code>&lt;style></code>)
+                        </li>
+                    </ol>
+                    <aside class="notes">
+                        Pokazać, że twitter ma pogrubienie, a zdjęcie tam 400px; wysokość i szerokość to to samo dla
+                        obrazka, a widać też na twitterze różne selektory
+                    </aside>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2 style="margin: 0">
+                        <span>A bootstrap?</span>
+                    </h2>
+                    <ul>
+                        <li class="fragment">Problem jest taki, że go nie lubię
+                            <ul>
+                                <li class="fragment">Narzuca dużo w HTML-u. Styl? Ok, ale tylko, gdy input w divie, w
+                                    formularzu, w fieldset'cie itd.
+                                </li>
+                                <li class="fragment">Część bootstrapowych rzeczy wymaga JS-a, w tym jQuery (sic!)</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Warto korzystać z komponentów, np. pod Reacta, które z Bootstrapa biorą
+                            tylko styl</li>
+                        <li class="fragment">Fajna, prosta i lżejsza alternatywa: <a href="https://purecss.io/">Pure.css</a>
+                            <ul>
+                                <li class="fragment"><a href="https://purecss.io/layouts/">Przykłady do kopiowania</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2 style="margin: 0">
+                        <span>Ćwiczenie 20</span>
+                    </h2>
+                    <ol style="font-size: .95em; line-height: 1.15">
+                        <li class="fragment">Podsumujmy wszystko!</li>
+                        <li class="fragment">Przemianować <code>IGitHubResponse</code> na <code>IGitHubUserResponse</code></li>
+                        <li class="fragment">Dodać <code>IGitHubRepoResponse</code>
+                            <ul>
+                                <li class="fragment"><code>name: string</code>, <code>stargazers_count: number</code>,
+                                    <code>fork: boolean</code>, <code>html_url: string</code>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Dodać klasę <code>GitHubRepo</code>
+                            <ul>
+                                <li class="fragment">Pola <code>name</code>, <code>stars</code> oraz <code>url</code>
+                                    tworzone z <code>IGitHubRepoResponse</code></li>
+                            </ul>
+                        </li>
+                        <li class="fragment">W github/service dodać metodę pobierającą repozytoria z <a href="https://api.github.com/users/mat3e/repos">GitHub
+                                API</a>
+                            <ul>
+                                <li class="fragment">Odfiltrować forki</li>
+                                <li class="fragment">Zmapować odpowiedź na tablicę <code>GitHubRepo</code></li>
+                            </ul>
+                        </li>
+                    </ol>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>
+                        <span>Warsztaty</span>
+                    </h2>
+                    <ol>
+                        <li>Narzędzia</li>
+                        <li>Język</li>
+                        <li>Stylowanie</li>
+                        <li class="fragment highlight-red">Frameworki</li>
+                    </ol>
+                </section>
+                <section>
+                    <h2>
+                        <span>Warsztaty</span>
+                    </h2>
+                    <ol>
+                        <li>Narzędzia</li>
+                        <li>Język</li>
+                        <li>Stylowanie</li>
+                        <li>Frameworki
+                            <ol>
+                                <li class="fragment highlight-red">Przegląd</li>
+                                <li>React</li>
+                            </ol>
+                        </li>
+                    </ol>
+                </section>
+                <section>
+                    <h2>
+                        <span>Czy dużo i chaos?</span>
+                    </h2>
+                </section>
+                <section>
+                    <h3>
+                        <span>Eksperyment myślowy</span>
+                    </h3>
+                    <h4 class="fragment">Szablony w Javie?</h4>
+                    <img class="fragment" style="width: 40%" src="img/templates.png">
+                    <aside class="notes">
+                        To tylko ze start.spring.io; i tak nikt (chyba) nie używa, ale tak
+                        samo z reaktywną Javą, mockowaniem (EasyMock, Mockito, JMockit, PowerMock, Spock), klientami
+                        HTTP itd.
+                        <br> w świecie serwerów - tak samo: Tomcat, Jetty, NIO: Netty, Undertow; to w JS jest tylko
+                        wspomniany Node, a konkurencyjne rozwiązania są w niego wchłaniane
+                    </aside>
+                </section>
+                <section>
+                    <h2>
+                        <span>Czyli co?</span>
+                    </h2>
+                    <a href="https://drive.google.com/open?id=16z3WD8UgiRGgm3zGE6Fe6-ze-XeiC3G9">
+                        <img class="fragment" src="img/frameworks.png">
+                    </a>
+                </section>
+                <section>
+                    <h2>
+                        <span>Czego <span class="fragment highlight-red">NIE</span> używać?</span>
+                    </h2>
+                    <ul>
+                        <li class="fragment">jQuery<span class="fragment"> ⇒ (nowe) DOM API, poważne frameworki</span></li>
+                        <li class="fragment">lodash<span class="fragment"> (50%)</span><span class="fragment"> ⇒ ES6+</span></li>
+                        <li class="fragment">Grunt, Gulp<span class="fragment"> ⇒ webpack</span></li>
+                        <li class="fragment">Bower<span class="fragment"> ⇒ npm</span></li>
+                        <li class="fragment">AngularJS<span class="fragment"> ⇒ Angular</span></li>
+                    </ul>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>
+                        <span>Warsztaty</span>
+                    </h2>
+                    <ol>
+                        <li>Narzędzia</li>
+                        <li>Język</li>
+                        <li>Stylowanie</li>
+                        <li>Frameworki
+                            <ol>
+                                <li>Przegląd</li>
+                                <li class="fragment highlight-red">React</li>
+                            </ol>
+                        </li>
+                    </ol>
+                </section>
+                <section>
+                    <h2 style="margin-bottom: 0">
+                        <img src="img/react.svg" class="text-logo" style="margin: 0">
+                    </h2>
+                    <ul>
+                        <li class="fragment">Stworzona i używana przez Facebooka biblioteka do renderowania widoków</li>
+                        <li class="fragment">Promuje jednokierunkowy przepływ danych</li>
+                        <li class="fragment">Virtual DOM
+                            <ul>
+                                <li class="fragment">Renderowanie DOM-a jest kosztowne</li>
+                                <li class="fragment">Elementy trzymane i wyliczane w pamięci</li>
+                                <li class="fragment">Zmiana? <span class="fragment">Szukanie najmniejszej delty i
+                                        renderowanie tylko tego</span></li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Deklaratywny - mówimy jak widok ma wyglądać, a nie jak go zrobić</li>
+                    </ul>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2 style="margin: 0">
+                        <span>Ćwiczenie 21 (1/2)</span>
+                    </h2>
+                    <ul style="font-size: .9em; line-height: 1.15">
+                        <li class="fragment">Zainstalować <a href="https://www.npmjs.com/package/react">Reacta</a> jako
+                            zależność (nie-dev!)
+                            <ul>
+                                <li class="fragment">Dociągnąć też <code>react-dom</code></li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Dociągnąć (dev) <code>@types/react-dom</code> i <code>@types/react</code></li>
+                        <li class="fragment">Dodać do tsconfig.json opcje <code>"jsx": "react"</code> oraz <code>"skipLibCheck": true</code></li>
+                        <li class="fragment">Dodać <code>&lt;section id="repos">&lt;/section></code> na dole index.html</li>
+                        <li class="fragment">Zmienić index.ts na index.tsx i dodać:
+                            <pre style="margin: 0; width: 100%"><code class="javascript" data-trim>
+                                ReactDOM.render(
+                                    <h1>Hello, world!</h1>,
+                                    document.getElementById('repos')
+                                );
+                            </code></pre>
+                            oraz
+                            <pre style="margin: 0; width: 100%"><code class="javascript" data-trim>
+                                import * as React from 'react';
+                                import * as ReactDOM from 'react-dom';
+                            </code></pre>
+                        </li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>
+                        <span>Ćwiczenie 21 (2/2)</span>
+                    </h2>
+                    <ul>
+                        <li class="fragment">Utworzyć dedykowany webpack.dev.js (można inspirować się oryginalnym)
+                            <ul>
+                                <li class="fragment">Dać <code>mode: 'development'</code>, <code>devtool: 'inline-source-map'</code></li>
+                                <li class="fragment">Wywalić opcję <code>optimization</code></li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Uwzględnić zmianę w skrypcie npm start:
+                            <pre style="margin: 0; width: 100%"><code class="bash">webpack-dev-server --config webpack.dev.js --open</code></pre>
+                        </li>
+                        <li class="fragment">Uruchomić aplikację i zweryfikować jej działanie</li>
+                    </ul>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2 style="margin: 0">
+                        <span>Komponenty</span>
+                    </h2>
+                    <ul style="font-size: .95em; line-height: 1.15">
+                        <li class="fragment">Warto skojarzyć je z funkcjami w JS
+                            <ul>
+                                <li class="fragment">Budują UI z reużywalnych kawałków</li>
+                                <li class="fragment">Wkładem (~argumentami wejściowymi funkcji) są tzw. <code>props</code>y</li>
+                                <li class="fragment"><code>props</code>y są tylko do odczytu (~<i>pure function</i>)</li>
+                                <li class="fragment">Komponenty zwracają reactowe <strong>elementy</strong>, opisujące
+                                    widok (~Virtual DOM)</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Do ich tworzenia używa się JSX-a:
+                            <pre style="width: 100%; margin: 0"><code class="javascript">const element = <h1>Hello, world!</h1>;</code></pre>
+                            <ul>
+                                <li class="fragment">Ni to <code>string</code>, ni to HTML</li>
+                                <li class="fragment">To jest właśnie element, napisany JSX-em</li>
+                                <li class="fragment">JSX = rozszerzenie JavaScripta</li>
+                                <li class="fragment">Do używania JSX-a potrzebny TypeScript/Babel</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>
+                        <span>JSX - dalej</span>
+                    </h2>
+                    <pre><code class="javascript fragment replace fade-out" data-trim data-fragment-index="1">
+                        const element = (
+                            <h1 className="greeting">
+                                Hello, world!
+                            </h1>
+                        );
+                    </code><code class="javascript fragment replace fade-in" data-trim data-fragment-index="1">
+                        const element = React.createElement(
+                            'h1',
+                            {className: 'greeting'},
+                            'Hello, world!'
+                        );
+                    </code></pre>
+                    <p>
+                        <ul>
+                            <li class="fragment">Bliżej JS-a niż HTML-a</li>
+                            <li class="fragment">Przykładowo definiujemy <code>className</code>, <code>onClick</code></li>
+                            <li class="fragment">Ma to sens, tak łatwiej tworzyć elementy z kodu JS</li>
+                        </ul>
+                    </p>
+                </section>
+                <section>
+                    <h3 style="margin: 0">
+                        <span>To może komponencik?</span>
+                    </h3>
+                    <pre class="fragment" style="margin: 0; width: 100%"><code class="javascript" data-trim>
+                        class Welcome extends React.Component {
+                            render() {
+                                return <h1>Hello, {this.props.name}</h1>;
+                            }
+                        }
+                    </code></pre>
+                    <div class="fragment" style="font-size: .95em; line-height: 1.15">Dla tak prostych, można prościej:</div>
+                    <pre class="fragment" style="margin: 0; width: 100%"><code class="javascript" data-trim>
+                        function Welcome(props) {
+                            return <h1>Hello, {props.name}</h1>;
+                        }
+                    </code></pre>
+                    <div class="fragment" style="font-size: .95em; line-height: 1.15">I dalej (użycie):</div>
+                    <pre class="fragment" style="margin: 0; width: 100%"><code class="javascript" data-trim>
+                        ReactDOM.render(
+                            &lt;Welcome name="Zbigniew" />,
+                            document.getElementById('root')
+                        );
+                    </code></pre>
+                    <ul style="font-size: .95em; line-height: 1.15">
+                        <li class="fragment">Duża litera = React traktuje to jako funkcję/klasę i przekazuje argumenty
+                            jako <code>props</code></li>
+                        <li class="fragment">No i się jedzie: zagnieżdżenia i przekazywanie <code>props</code>ów "w
+                            dół"</li>
+                    </ul>
+                    <aside class="notes">
+                        Osadzanie JS-a w JSX = {}
+                    </aside>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2 style="margin: 0">
+                        <span>Ćwiczenie 22</span>
+                    </h2>
+                    <ol style="font-size: .95em; line-height: 1.15">
+                        <li class="fragment">Utworzyć github/react-component.tsx</li>
+                        <li class="fragment">Stworzyć "funkcyjny" komponent <code>RepoTableRow</code>, zwracający
+                            wiersz tabeli</li>
+                        <li class="fragment">Komponent powinien oczekiwać <code>props</code>ów: <code>name</code>,
+                            <code>stars</code>, <code>url</code>
+                            <ul>
+                                <li class="fragment">Można używać destrukturyzacji!</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Rezultat dla dodatniej liczby gwiazdek (podejrzeć <i>output</i> w
+                            inspektorze i olać <code>table</code> oraz stylowanie):
+                            <table>
+                                <tr>
+                                    <td>brains</td>
+                                    <td>35 ⭐</td>
+                                    <td><a href="https://github.com/mat3e/brains">🔗</a></td>
+                                </tr>
+                            </table>
+                        </li>
+                        <li class="fragment">0 gwiazdek:
+                            <table>
+                                <tr>
+                                    <td>embedded-tomcat</td>
+                                    <td>-</td>
+                                    <td><a href="https://github.com/mat3e/embedded-tomcat">🔗</a></td>
+                                </tr>
+                            </table>
+                        </li>
+                    </ol>
+                </section>
+                <section>
+                    <h2>
+                        <span>Ćwiczenie 23 (1/2)</span>
+                    </h2>
+                    <ol>
+                        <li class="fragment">Dociągnąć (dev)
+                            <ul>
+                                <li class="fragment"><code>enzyme</code></li>
+                                <li class="fragment"><code>enzyme-adapter-react-16</code></li>
+                                <li class="fragment">Ich <code>@types</code></li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Przygotować common/test-setup.ts:
+                            <pre style="width: 100%; margin: 0"><code class="javascript" data-trim>
+                                    import * as Enzyme from 'enzyme';
+                                    import * as Adapter from 'enzyme-adapter-react-16';
+                                    
+                                    Enzyme.configure({ adapter: new Adapter() });
+                            </code></pre>
+                        </li>
+                        <li class="fragment">Zaktualizować npm test:
+                            <pre style="width: 100%; margin: 0"><code style="font-size: .7em" class="bash">mocha-webpack --webpack-config webpack.test.js src/common/test-setup.ts \"src/**/*.spec.ts*\"</code></pre>
+                        </li>
+                    </ol>
+                </section>
+                <section>
+                    <h2 style="margin: 0">
+                        <span>Ćwiczenie 23 (2/2)</span>
+                    </h2>
+                    <ul>
+                        <li class="fragment">Stworzyć i poprawić react-component.spec.tsx:
+                            <pre style="width: 100%; margin: 0"><code style="max-height: 40em; font-size: .8em; line-height: 1.1" class="javascript" data-trim>
+                                    import * as React from 'react';
+                                    import { shallow } from 'enzyme';
+                                    import { RepoTableRow } from './react-component';
+                                    
+                                    const assert = require('assert');
+                                    
+                                    describe('&lt;RepoTableRow />', () => {
+                                      it('creates table cells for name, stars and url', () => {
+                                        // given
+                                        const [name, stars, url] = ['repo', 7, 'url'];
+                                        const props = { name, stars, url };
+                                    
+                                        // when
+                                        const result = shallow(&lt;RepoTableRow {...props} />);
+                                    
+                                        // then
+                                        assert.ok(result.contains(&lt;td>{name}&lt;/td>));
+                                        assert.ok(result.contains(&lt;td>{stars} ⭐&lt;/td>));
+                                        assert.ok(result.contains(&lt;td>&lt;a href={url}>🔗&lt;/a>&lt;/td>));
+                                      });
+                                    
+                                      it('ignores 0 stars', () => {
+                                        assert.fail();
+                                      })
+                                    });
+                            </code></pre>
+                        </li>
+                    </ul>
+                    <aside class="notes">Sztuczka na przekazywanie propsów do komponentu ...</aside>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2 style="margin: 0">
+                        <span>A jak coś zmieniać?</span>
+                    </h2>
+                    <ul style="font-size: .95em; line-height: 1.15">
+                        <li class="fragment">Stan komponentu - <code>state</code>!</li>
+                        <li class="fragment">Łatwe w komponentach-klasach
+                            <ul>
+                                <li class="fragment">Komponenty-funkcje mogą używać stanu od niedawna (i wciąż
+                                    nieoficjalnie) - <code>hook</code>i</li>
+                                <li class="fragment">Utarł się podział
+                                    <ol>
+                                        <li class="fragment"><i>Presentation Component</i> - funkcja, lekkie</li>
+                                        <li class="fragment"><i>Container Component</i> - klasa, "rozdzielacz" stanu</li>
+                                    </ol>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="fragment"><code>this.state</code> inicjalizujemy na start (np. w konstruktorze)
+                            <ul>
+                                <li class="fragment">Pamiętać: konstruktor (gdy jest) pobiera i przekazuje <code>props</code>y
+                                    do <code>super()</code></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <aside class="notes">Hooki są experimental, w planach na 16.7.0</aside>
+                </section>
+                <section>
+                    <h2 style="margin: 0">
+                        <span>Ogarnianie stanu</span>
+                    </h2>
+                    <ul>
+                        <li class="fragment">Konstruktor odpowiada za stworzenie "przepisu na renderowanie"</li>
+                        <li class="fragment">Czasami chcemy reagować później - dopiero na wyrenderowanie</li>
+                        <li class="fragment">Odpowiedź?<span class="fragment"> <i>Lifecycle Methods</i></span>
+                            <ul>
+                                <li class="fragment"><code>componentDidMount</code> - metoda odpalana po osadzeniu
+                                    DOM-a wyliczonego z komponentu</li>
+                                <li class="fragment"><code>componentWillUnmount</code> - wymazujemy DOM</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Poprawna zmiana stanu (=> przerenderowanie):
+                            <pre style="width: 100%; margin: 0"><code>this.setState({comment: 'Hello'});</code></pre>
+                        </li>
+                    </ul>
+                    <aside class="notes">componentDidMount - pierwsze osadzenie
+                        <br>
+                        <pre><code class="javascript" data-trim>
+                                this.setState((state, props) => ({
+                                    counter: state.counter + props.increment
+                                  }));
+                        </code></pre>
+                    </aside>
+                </section>
+                <section>
+                    <h2 style="margin: 0">
+                        <span>Tips & tricks</span>
+                    </h2>
+                    <ul style="font-size: .95em; line-height: 1.15">
+                        <li class="fragment">
+                            Legendarny <code>this</code>:
+                            <pre style="width: 100%; margin: 0"><code class="javascript" data-trim contenteditable="true">
+                                class LoggingButton extends React.Component {
+                                    // albo normalnie, a w JSX: (e) => this.handleClick(e)
+                                    handleClick = () => console.log('this is:', this);
+                                    render() {
+                                        return &lt;button onClick={this.handleClick}>Click me&lt;/button>; 
+                                    }
+                                }
+                            </code></pre>
+                        </li>
+                        <li class="fragment">
+                            <pre style="width: 100%; margin: 0"><code class="javascript">&lt;ul>{condition && list.map((item, i) => &lt;Comp prop={item} key={i} />)}&lt;/ul></code></pre>
+                        </li>
+                        <li class="fragment"><code>props</code> przekazany do dziecka to może być funkcja, zmieniająca
+                            stan rodzica
+                        </li>
+                        <li class="fragment"><code>render</code> powinien zwracać raczej pojedynczy element. Ale można
+                            użyć <code>&lt;>&lt;/></code></li>
+                        <li class="fragment">W TS jest fajne typowanie
+                            <pre style="width: 100%; margin: 0"><code class="javascript">React.Component&lt;PropsType, StateType></code></li>
+                    </ul>
+                    <aside class="notes">listItems to już jest tablica elementów JSX</aside>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2 style="margin: 0">
+                        <span>Ćwiczenie 24</span>
+                    </h2>
+                    <ol style="font-size: .9em; line-height: 1.15">
+                        <li class="fragment">W index.html dodać:
+                            <pre style="margin: 0; width: 100%"><code style="font-size: .7em" class="html">&lt;link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/tables-min.css"></code></pre>
+                        </li>
+                        <li class="fragment">Dodać "funkcyjny" komponent <code>RepoTable</code>
+                            <ul>
+                                <li class="fragment">Tabela z klasami
+                                    <pre style="margin: 0; display: inline; vertical-align: middle"><code style="display: inline">"pure-table pure-table-bordered"</code></pre>
+                                </li>
+                                <li class="fragment">Oczekiwany <code>props</code> - <code>repos: IGitHubRepo[]</code></li>
+                                <li class="fragment">Dziećmi tabeli powinny być <code>RepoTableRow</code>, stworzone z
+                                    kolejnych <code>GitHubRepo</code>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Dodać komponent <code>Repos</code>, dociągający repozytoria w <code>componentDidMount</code>
+                            i renderujący <code>RepoTable</code>
+                        </li>
+                        <li class="fragment">Wyczyścić znacznik HTML <code>main</code> i nadać mu <code>id="app"</code></li>
+                        <li class="fragment">W index.tsx zdefiniować komponent <code>App</code> renderujący w znaczniku
+                            <code>main</code> zarówno <code>about-me</code> jak i <code>Repos</code>
+                            <ul>
+                                <li class="fragment">
+                                    <pre style="margin: 0; width: 100%"><code style="font-size: .7em" class="javascript">declare global { namespace JSX { interface IntrinsicElements { 'about-me': { me: string } } } }</code></pre>
+                                </li>
+                            </ul>
+                        </li>
+                        </ol>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>
+                        <span>Gdzie dalej z Reactem?</span>
+                    </h2>
+                    <ul>
+                        <li class="fragment">Narzędzia deweloperskie do przeglądarek: <a href="https://github.com/facebook/react-devtools">link</a></li>
+                        <li class="fragment"><a href="https://github.com/facebook/create-react-app">create-react-app</a> - starter projektów</li>
+                        <li class="fragment"><a href="https://github.com/ReactTraining/react-router">react-router</a></li>
+                        <li class="fragment"><a href="https://redux.js.org/introduction">Redux</a></li>
+                    </ul>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <a href="https://kahoot.it/">
+                        <img src="img/kahoot.svg" class="pure-img">
+                    </a>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2 class="fragment" data-fragment-index="4" style="margin: 0">
+                        <span>Dziękuję</span>
+                    </h2>
+                    <div>Naj­pierw cię ig­no­rują. Po­tem śmieją się z ciebie. Później z tobą wal­czą. Później
+                        wyg­ry­wasz. ~Gandhi</div>
+                    <img src="img/redhat-small.jpeg" class="fragment" data-fragment-index="1" style="margin: 0; width: 25%">
+                    <div class="fragment" data-fragment-index="2">Stan na dziś: poważny, zaawansowany język</div>
+                    <div class="fragment" data-fragment-index="3">Jednocześnie trudniej się wypalić zawodowo, bo od
+                        razu dużo widać na ekranie :)</div>
+                    <aside class="notes">
+                        Follow-upy
+                        <ul>
+                            <li>NaN (https://twitter.com/angebassa/status/845388736372330506 + pierwszy koment: +0.0
+                                and
+                                -0.0 are identical empty rolls, but before they were empty they hung in opposite
+                                directions.)</li>
+                            <li>Różne rzeczy jako boolean (wziąć z iSA)</li>
+                            <li>Redux</li>
+                            <li>sideEffects, tree-shaking</li>
+                            <li>overloading (arguments)</li>
+                            <li>testy e2e z headless-chrome; enzyme do reacta ewentualnie
+                                (https://github.com/airbnb/enzyme/blob/master/docs/api/mount.md)</li>
+                            <li>scss</li>
+                            <li>dekoratory</li>
+                        </ul>
+                    </aside>
+                </section>
+            </section>
+        </div>
+    </div>
+    <script src="js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script>
+        let controls = (function () {
+            Reveal.initialize({
+                history: true,
+                // - null: Media will only autoplay if data-autoplay is present
+                autoPlayMedia: null,
+                transition: 'slide', // none/fade/slide/convex/concave/zoom
+                transitionSpeed: 'default', // default/fast/slow
+                backgroundTransition: 'slide', // none/fade/slide/convex/concave/zoom
+                dependencies: [
+                    { src: 'js/classList.js', condition: function () { return !document.body.classList; } },
+
+                    { src: 'js/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                    { src: 'js/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+
+                    // Syntax highlight for <code> elements
+                    { src: 'js/highlight.js', callback: function () { hljs.initHighlightingOnLoad(); } },
+
+                    // Zoom in and out with Alt+click
+                    { src: 'js/zoom.js' },
+
+                    { src: 'notes/notes.js' },
+
+                    { src: 'js/math.js' }
+                ]
+            });
+
+            document.querySelectorAll('.reveal .slides > section section:not([data-background-image])').forEach((s) => {
+                s.setAttribute('data-background-image', 'img/allegro-tech.svg');
+                s.setAttribute('data-background-size', '240px');
+                s.setAttribute('data-background-position', '.5em .5em');
+            });
+
+            return {
+                evalCode(btn) {
+                    let codeElem = btn.previousElementSibling;
+                    if (getComputedStyle(codeElem).display === 'none') {
+                        codeElem = codeElem.previousElementSibling;
+                    }
+                    eval(codeElem.innerText);
+                }
+            }
+        })();
+    </script>
+</body>
+
+</html>

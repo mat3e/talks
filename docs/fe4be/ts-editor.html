@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>TypeScript playground</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+
+    <link rel="stylesheet" href="css/ts-style.css">
+</head>
+
+<body>
+    <script src="js/env.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/url-search-params/0.10.0/url-search-params.js"></script>
+    <script src="https://unpkg.com/clipboard-polyfill@2.4.7/build/clipboard-polyfill.js"></script>
+    <script src="https://unpkg.com/monaco-editor@0.12.0/min/vs/loader.js"></script>
+    <script>
+        const params = new URLSearchParams(location.search);
+        const path = location.pathname.endsWith('.html') ? location.pathname.substring(0, location.pathname.lastIndexOf('/') + 1) : location.pathname;
+        window.CONFIG = {
+            availableTSVersions: Object.assign({}, window.localTSVersion || {}, {
+                // https://unpkg.com/monaco-editor/
+                '3.0.1': { monaco: '0.14.3' }
+            }, {}),
+            extraLibs: params.has('lib') ? params.get('lib').split(',') : [],
+            baseUrl: location.protocol + '//' + location.host + path,
+            getLatestVersion() {
+                return Object.keys(this.availableTSVersions).sort().pop();
+            },
+            useTSVersion(version) {
+                if (this.availableTSVersions[version]) {
+                    this.TSVersion = version;
+                } else {
+                    alert(`Version '${version}' is not available, using ${this.TSVersion}`);
+                }
+            },
+            getMonacoVersion() {
+                return this.availableTSVersions[this.TSVersion].monaco;
+            },
+            getAdditionalPaths() {
+                const lib = this.availableTSVersions[this.TSVersion].lib;
+                return lib ?
+                    {
+                        'vs/language/typescript': `${this.baseUrl}${lib}`
+                    } : {};
+            }
+        }
+        window.CONFIG.TSVersion = window.CONFIG.getLatestVersion();
+        console.log('window.CONFIG', window.CONFIG);
+        if (params.has('ts')) {
+            window.CONFIG.useTSVersion(params.get('ts'));
+        }
+        require.config({
+            paths: Object.assign({
+                vs: `https://unpkg.com/monaco-editor@${window.CONFIG.getMonacoVersion()}/min/vs`,
+            }, window.CONFIG.getAdditionalPaths()),
+            ignoreDuplicateModules: ["vs/editor/editor.main"],
+        });
+    </script>
+    <div id="app">
+        <div class="flash flash--hidden">
+            <span class="flash__message"></span>
+        </div>
+
+        <header>
+
+            <div class="header-item" style="display: flex; flex-direction: row; align-items: center;">
+                <div class="spinner" style="margin-left: -0.5em; margin-right: 0.5em;"></div>
+                <p>TypeScript</p>
+            </div>
+
+            <div style="opacity: 0;" id="version">
+                <p class="popup-header" id="version-current">?</p>
+                <div class="popup" id="version-popup" style="font-size: 100%;">
+                    Loading...
+                </div>
+            </div>
+
+            <div style="margin-left: 1em;" class="header-item header-item--extra-padding popup-on-hover" id="examples">
+                <p class="popup-header">Przykłady</p>
+                <div class="popup" style="min-width: 20em;">
+                    <ul>
+                        <li class="button" data-example="declaring-variables">
+                            1. Deklarowanie zmiennych
+                        </li>
+                        <li class="button" data-example="type-inference">
+                            2. Type inference + zakaz zmiany typu
+                        </li>
+                        <li class="button" data-example="interfaces">
+                            3. Interfejsy - wstęp
+                        </li>
+                        <li class="button" data-example="interfaces-optional">
+                            4. Interfejsy - pola niewymagane
+                        </li>
+                        <li class="button" data-example="interfaces-readonly">
+                            5. Interfejsy - readonly
+                        </li>
+                        <li class="button" data-example="generics">
+                            6. Generyki
+                        </li>
+                        <li class="button" data-example="mapped-types">
+                            7. Predefiniowane <i>mapped types</i>
+                        </li>
+                        <li class="button" data-example="unions">
+                            8. Unie
+                        </li>
+                        <li class="button" data-example="type-guards">
+                            9. Własne <i>type guards</i>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <script>
+                document.querySelector("#examples").addEventListener("click", event => {
+                    if (event.target.matches("[data-example]")) {
+                        const exampleName = event.target.dataset.example;
+                        UI.selectExample(exampleName);
+                    }
+                });
+            </script>
+
+            <div class="header-item header-item--extra-padding popup-on-hover" id="settings">
+                <p class="popup-header">Opcje</p>
+                <div class="popup" id="settings-popup" style="min-width: 20em;">
+                    Loading...
+                </div>
+            </div>
+
+            <div class="header-item header-item--extra-padding popup-on-hover" id="run">
+                <p class="popup-header" id="rruunn">Run</p>
+                <div class="popup" id="run-popup" style="min-width: 20em;">
+                    <script>
+                        const isMac = navigator.userAgent.indexOf('Mac OS X') != -1;
+                        const CMDCtrl = isMac ? '⌘' : 'Ctrl';
+                        const OptionAlt = isMac ? '⌥' : 'Alt';
+
+                        document.write(`
+							<div><kbd>Use ${CMDCtrl} + Enter</kbd> to run compiled JavaScript in the browser console.</div>
+						`);
+
+                        document.write(`
+							<div style="margin-top: 2em;"><kbd>Use ${OptionAlt} + Shift + F</kbd> to run Prettier.</div>
+						`);
+                    </script>
+                </div>
+            </div>
+
+            <p class="header-item header-item--extra-padding popup-on-hover" style="margin-left: auto; margin-right: 1em;">
+                <a class="popup-header" style="border: none;" target="_blank" href="Allegro.html#/ts-editor">Powrót</a>
+            </p>
+        </header>
+        <main id="playground">
+            <section id="input"></section>
+            <section id="output"></section>
+        </main>
+    </div>
+
+    <script src="https://unpkg.com/lz-string@1.4.4/libs/lz-string.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        require(["vs/editor/editor.main"], main);
+    </script>
+</body>
+
+</html>
