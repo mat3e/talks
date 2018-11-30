@@ -5,9 +5,9 @@
     <meta name="description" content="Presentation">
     <meta name="keywords" content="presentation">
     <meta name="author" content="mat3e">
-    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-    <meta content="utf-8" http-equiv="encoding">
-    <title>FRONT-END DLA BACK-ENDOWCÓW (JAVA)</title>
+    <meta charset="utf-8">
+
+    <title>Front-end dla back-endowców (Java)</title>
 
     <link rel="stylesheet" href="css/reveal.css">
     <link rel="stylesheet" href="css/blood.css">
@@ -387,14 +387,14 @@
                                 // enable additional rules
                                 "indent": ["error", 4], // warn
                                 "linebreak-style": ["error", "unix"],
-                        
+
                                 // override default options for rules from base configurations
                                 "no-cond-assign": ["error", "always"],
-                        
+
                                 // disable rules from base configurations
                                 "no-console": "off",
                             }
-                        }                                        
+                        }
                     </code></pre>
                     <aside class="notes">Przykłady - używać lambdy, preferować stałą nad zmienną</aside>
                 </section>
@@ -691,9 +691,9 @@
                     <pre style="margin-top: 0;"><code class="javascript" data-trim contenteditable="true" style="max-height: 40em; font-size: .8em; line-height: 1">
                         const CleanWebpackPlugin = require('clean-webpack-plugin');
                         const HtmlWebpackPlugin = require('html-webpack-plugin');
-                        
+
                         const path = require('path');
-                        
+
                         module.exports = {
                             mode: 'production',
                             plugins: [
@@ -856,15 +856,15 @@
                                 it('should return -1 when the value is not present', () => {
                                   // given
                                   const arr = [1, 2, 3];
-                                    
+
                                   // when
                                   const result = arr.indexOf(100);
-                                    
+
                                   // then
                                   assert.equal(result, -1);
                                 });
                               });
-                            });                            
+                            });
                     </code></pre>
                 </section>
                 <section>
@@ -895,12 +895,12 @@
                             <pre style="margin: 0; width: 100%"><code>mocha-webpack --webpack-config webpack.test.js \"src/**/*.spec.js\"</code></pre>
                         </li>
                         <li class="fragment">Utworzyć moduł map.js z zawartością
-                            <pre style="margin: 0"><code class="javascript">export map = () => {};</code></pre>
+                            <pre style="margin: 0"><code class="javascript">export const map = () => {};</code></pre>
                         </li>
                         <li class="fragment">Napisać failujący test map.spec.js: obiekt jak w user.js przekazany do
                             zaimportowanej
                             funkcji <code>map</code> i asercja
-                            <pre style="margin: 0"><code class="javascript">assert.equal(result, { img: givenUrl, bio: givenBio });</code></pre>
+                            <pre style="margin: 0"><code class="javascript">assert.deepEqual(result, { img: givenUrl, bio: givenBio });</code></pre>
                         </li>
                         <li class="fragment">Bonus: dociągnąć i użyć Chaia do asercji</li>
                     </ol>
@@ -1194,7 +1194,7 @@
                         function Person(name, surname) {
                             this.name = name;
                             this.surname = surname;
-                        } 
+                        }
 
                         Person.from = function (fullName) {
                             return new Person(...fullName.split(' '));
@@ -1285,24 +1285,24 @@
                             alertSides() { alert(`Liczba boków: ${this.sidesNum}`); }
                             calculateArea() { return NaN; }
                         }
-                        
+
                         class Rectangle extends Figure {
                             constructor(a, b) {
-                                super(2);
+                                super(4);
                                 this.a = a;
                                 this.b = b;
                             }
                             calculateArea() { return this.a * this.b; }
                         }
-                        
+
                         class Square extends Rectangle {
                             constructor(a) { super(a, a); }
                         }
-                        
+
                         const rect = new Rectangle(2, 4);
                         rect.alertSides();
                         alert(`Pole prostokąta: ${rect.calculateArea()}`);
-                        
+
                         alert(rect instanceof Figure);
                         alert(rect instanceof Object);
                         alert(rect instanceof Square);
@@ -1545,11 +1545,11 @@
                                 locate: '52.21667,21.03333'
                             })
                             });
-                                
+
                             if(!response.ok) {
                             throw new Error('Response status not 200');
                             }
-                            
+
                             return await response.json();
                         }
                     </code></pre>
@@ -2411,9 +2411,9 @@
                     </h2>
                     <pre><code class="javascript fragment replace fade-out" data-trim data-fragment-index="1">
                         const element = (
-                            <h1 className="greeting">
+                            &lt;h1 className="greeting">
                                 Hello, world!
-                            </h1>
+                            &lt;/h1>
                         );
                     </code><code class="javascript fragment replace fade-in" data-trim data-fragment-index="1">
                         const element = React.createElement(
@@ -2517,7 +2517,7 @@
                             <pre style="width: 100%; margin: 0"><code class="javascript" data-trim>
                                     import * as Enzyme from 'enzyme';
                                     import * as Adapter from 'enzyme-adapter-react-16';
-                                    
+
                                     Enzyme.configure({ adapter: new Adapter() });
                             </code></pre>
                         </li>
@@ -2536,24 +2536,24 @@
                                     import * as React from 'react';
                                     import { shallow } from 'enzyme';
                                     import { RepoTableRow } from './react-component';
-                                    
+
                                     const assert = require('assert');
-                                    
+
                                     describe('&lt;RepoTableRow />', () => {
                                       it('creates table cells for name, stars and url', () => {
                                         // given
                                         const [name, stars, url] = ['repo', 7, 'url'];
                                         const props = { name, stars, url };
-                                    
+
                                         // when
                                         const result = shallow(&lt;RepoTableRow {...props} />);
-                                    
+
                                         // then
                                         assert.ok(result.contains(&lt;td>{name}&lt;/td>));
                                         assert.ok(result.contains(&lt;td>{stars} ⭐&lt;/td>));
                                         assert.ok(result.contains(&lt;td>&lt;a href={url}>🔗&lt;/a>&lt;/td>));
                                       });
-                                    
+
                                       it('ignores 0 stars', () => {
                                         assert.fail();
                                       })
@@ -2631,7 +2631,7 @@
                                     // albo normalnie, a w JSX: (e) => this.handleClick(e)
                                     handleClick = () => console.log('this is:', this);
                                     render() {
-                                        return &lt;button onClick={this.handleClick}>Click me&lt;/button>; 
+                                        return &lt;button onClick={this.handleClick}>Click me&lt;/button>;
                                     }
                                 }
                             </code></pre>
@@ -2747,7 +2747,7 @@
                 autoPlayMedia: null,
                 transition: 'slide', // none/fade/slide/convex/concave/zoom
                 transitionSpeed: 'default', // default/fast/slow
-                backgroundTransition: 'slide', // none/fade/slide/convex/concave/zoom
+                backgroundTransition: 'none', // none/fade/slide/convex/concave/zoom
                 dependencies: [
                     { src: 'js/classList.js', condition: function () { return !document.body.classList; } },
 
