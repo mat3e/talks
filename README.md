@@ -1,4 +1,4 @@
-* IT akademiaj-labs [13.12.2018]: _Subiektywny przegląd front-endów (2018)_
+* IT akademia j-labs [13.12.2018]: _Subiektywny przegląd front-endów (2018)_ [🔗](https://mat3e.github.io/talks/fe-overview/j-labs.html)
 * JS Poland 2018 [16.11.2018]: _My personal front-end overview (2018)_ [🔗](https://mat3e.github.io/talks/fe-overview/JSPoland.html) [📷](https://twitter.com/msuskadev84/status/1063440217183580161) [📷](https://twitter.com/msuskadev84/status/1063439159254241290) [📷](https://www.facebook.com/jsPolandConference/photos/a.2253643808201100/2253657468199734/?type=3&theater)
 * Otwarte warsztaty infoShare Academy [02.10.2018]: _Zacznij programować! Zbuduj pierwszą aplikację w Java_
 * Meet IT Toruń 22 [12.09.2018]: _Co wyciągnąłem, pisząc własną biblioteczkę angularową?_ [🔗](https://mat3e.github.io/talks/ll-angular/MeetIT22.html)
