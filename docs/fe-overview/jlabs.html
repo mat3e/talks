@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="description" content="Presentation">
+    <meta name="keywords" content="presentation">
+    <meta name="author" content="mat3e">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/blood.css">
+    <link rel="stylesheet" href="css/idea.css">
+    <link rel="stylesheet" href="css/fontawesome.css">
+    <style>
+        #header {
+            text-align: left;
+            font-size: .7em;
+        }
+
+        #header-logo {
+            width: 375px;
+            height: 80px;
+            background-image: url('img/twitter.png');
+            background-size: contain;
+
+            top: -4em;
+            right: 0;
+            position: absolute;
+        }
+
+        #header h1 {
+            line-height: 1;
+        }
+
+        code[contenteditable="true"] {
+            border: 0;
+            outline: 0;
+        }
+
+        .slides section pre {
+            margin-bottom: 0;
+        }
+
+        .slides section pre+button {
+            cursor: pointer;
+
+            font-size: .65em;
+            font-weight: 100;
+            -webkit-font-smoothing: antialiased;
+
+            color: white;
+            background: #a23;
+
+            padding: 0 3px 3px;
+            border: transparent;
+            border-radius: 4px;
+        }
+
+        #perspective a {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            width: 45%;
+            margin: 0 auto;
+        }
+
+        #perspective a img {
+            border: 0;
+            margin: 0;
+            box-shadow: none;
+        }
+
+        #about-me {
+            list-style-type: none;
+            margin-left: 12.5%;
+            float: left;
+        }
+
+        #about-me ul {
+            list-style-type: none;
+            margin-left: 0;
+            float: left;
+        }
+
+        #about-me a {
+            color: white;
+        }
+
+        #about-me a:hover {
+            color: #dd5566;
+        }
+
+        .reveal section img.pure-img {
+            background: rgba(255, 255, 255, 0);
+            border: none;
+            box-shadow: none;
+            margin: 0;
+        }
+
+        .reveal .slides section .fragment.replace {
+            transition: none;
+            display: inline-block;
+        }
+
+        .reveal .slides section .fragment.fade-out.visible.replace {
+            display: none;
+        }
+
+        .reveal .slides section .fragment.fade-in.replace {
+            display: none;
+        }
+
+        .reveal .slides section .fragment.fade-in.visible.replace {
+            display: inline-block;
+        }
+
+        .reveal .slides section .fragment.fade-out.crossed.visible {
+            opacity: 1;
+            visibility: visible;
+            text-decoration-line: line-through;
+        }
+
+        .reveal section img.text-logo {
+            vertical-align: middle;
+            background: none;
+            box-shadow: none;
+            border: none;
+            height: 1em;
+            margin: 0;
+        }
+
+        .reveal .slides section td.long-text-cell {
+            font-size: .5em;
+            vertical-align: middle;
+        }
+
+        .reveal .slides section table.summary {
+            table-layout: fixed;
+            width: 100%;
+        }
+
+        .reveal .slides section table.summary tbody td {
+            width: 27%;
+        }
+
+        .reveal .slides section table.summary tbody td:first-child {
+            width: 19%;
+        }
+
+        .reveal .slides section .arrows-container {
+            display: flex;
+            align-items: end;
+            color: black;
+        }
+
+        .reveal .slides section .arrows-container>div {
+            flex-grow: 1;
+            flex-shrink: 0;
+            flex-basis: 0;
+        }
+
+        .reveal .slides section .arrows-container div .arrow {
+            background-image: url('img/arrow.svg');
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            text-align: left;
+            padding: .5em 0 .5em .5em;
+            color: white;
+        }
+
+        .reveal .slides section .arrows-container div .timeline-elem {
+            transform: rotate(-45deg);
+            margin-bottom: 1em;
+        }
+
+        .reveal .slides section h3 a:hover {
+            text-shadow: inherit;
+        }
+
+        .reveal .slides section a.wh-link {
+            color: white;
+        }
+
+        .reveal .slides section a.wh-link:hover {
+            color: #dd5566;
+        }
+    </style>
+    <script>
+        let link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section>
+                <section id="header" data-background-image="">
+                    <h1 style="margin-bottom: 0"><span>Subiektywny</span></h1>
+                    <h2>przegląd front-endów <span class="fragment">(2018)</span></h2>
+                    <div id="header-logo"></div>
+                    <aside class="notes">
+                        Wartość - przegląd co jest obecnie warte uwagi i jak rozwijać apki. Według mnie
+                    </aside>
+                </section>
+                <section id="perspective" data-background-image="">
+                    <h5>
+                        <span>Perspektywa...</span>
+                        <span class="fragment" data-fragment-index="1"> ma znaczenie</span>
+                        <span class="fragment" data-fragment-index="3"> :)</span>
+                    </h5>
+                    <a href="https://mistrzowie.org/717022">
+                        <img src="img/perspektywa-1.jpg">
+                        <img src="img/perspektywa-2.jpg" class="fragment" data-fragment-index="1">
+                        <img src="img/perspektywa-3.jpg" class="fragment" data-fragment-index="2" data-autoslide="2000">
+                    </a>
+                </section>
+                <section data-background-image="img/bg-hd.jpg" data-background-transition="zoom" data-background-size="75%">
+                    <ul id="about-me">
+                        <li>
+                            <ul>
+                                <li>
+                                    <a href="https://www.linkedin.com/in/mateusz-chrzonstowski/">
+                                        <i class="fab fa-linkedin" style="color: #0077B5; background-color: #FFF; line-height: .75em"></i>
+                                        /mateusz-chrzonstowski
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://twitter.com/_mat3e_">
+                                        <i class="fab fa-twitter-square" style="background-color: #1DA1F2; color: #FFF; line-height: .75em"></i>
+                                        /_mat3e_
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/mat3e/">
+                                        <i class="fab fa-github-square" style="color: #24292E; background-color: #FFF; line-height: .75em"></i>
+                                        /mat3e
+                                    </a>
+                                </li>
+                                <li style="line-height: 1">&nbsp;</li>
+                                <li class="fragment" style="line-height: .75">
+                                    <a style="font-weight: bold; font-size: .75em" href="https://mat3e.github.io/talks/fe-overview/j-labs.html">
+                                        mat3e.github.io/talks/<br><span style="padding-left: 1em">fe-overview/j-labs.html</span>
+                                    </a>
+                                </li>
+                                <li style="line-height: 1">&nbsp;</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="fragment" style="background: white; text-align: center; padding: .1em; line-height: 1">
+                                <li>
+                                    <a href="https://www.udemy.com/fajny-javascript/?couponCode=OPENALL">
+                                        <img src="img/udemy.svg" class="pure-img" style="height: 1.5em;">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://allegro.tech/">
+                                        <img src="img/allegro-tech.svg" class="pure-img" style="height: 1.5em;">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://infoshareacademy.com/">
+                                        <img src="img/isa.png" class="pure-img" style="height: 1.5em;">
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <div class="fragment fade-out replace" data-fragment-index="2">
+                        <a href="https://www.reddit.com/r/ProgrammerHumor/comments/8cfkf6/jquery_strikes_again/" class="fragment fade-out replace"
+                            data-fragment-index="1">
+                            <img style="width: 70%" src="img/reddit0.jpg">
+                        </a>
+                        <a href="https://www.reddit.com/r/ProgrammerHumor/comments/8cfkf6/jquery_strikes_again/" class="fragment fade-in replace"
+                            data-fragment-index="1">
+                            <img style="width: 70%" src="img/reddit1.jpg">
+                        </a>
+                    </div>
+                    <div class="fragment fade-in replace" data-fragment-index="2">
+                        <a href="https://www.reddit.com/r/ProgrammerHumor/comments/8cfkf6/jquery_strikes_again/" class="fragment fade-out replace"
+                            data-fragment-index="3">
+                            <img style="width: 70%" src="img/reddit2.jpg">
+                        </a>
+                        <a href="https://www.reddit.com/r/ProgrammerHumor/comments/8cfkf6/jquery_strikes_again/" class="fragment fade-in replace"
+                            data-fragment-index="3">
+                            <img style="width: 70%" src="img/reddit3.jpg">
+                        </a>
+                    </div>
+                    <img style="position: absolute; left: -1em; top: 3em; width: 360px" src="img/comment1.png" class="fragment pure-img"
+                        data-fragment-index="3">
+                    <img style="position: absolute; top: 5em; left: 0; transform: rotate(-10deg)" src="img/comment2.png"
+                        class="fragment pure-img" data-fragment-index="4">
+                    <img style="position: absolute; top: 3em; right: 0; transform: rotate(15deg)" src="img/comment3.png"
+                        class="fragment pure-img" data-fragment-index="5">
+                    <img style="position: absolute; top: 7.5em; left: calc(50% - 450px); width: 900px" src="img/comment4.png"
+                        class="fragment pure-img" data-fragment-index="6">
+                    <img style="position: absolute; top: 5em; left: calc(50% - 400px); width: 800px" src="img/comment5.png"
+                        class="fragment pure-img" data-fragment-index="7">
+                    <img style="position: absolute; bottom: 1em; right: 0" src="img/comment7.png" class="fragment pure-img"
+                        data-fragment-index="8">
+                    <img style="position: absolute; top: 9em; right: 0" src="img/comment6.png" class="fragment pure-img"
+                        data-fragment-index="8">
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h4>
+                        <span>
+                            <a style="color: white" href="https://www.quora.com/What-is-the-future-of-jQuery-for-2017-and-later">
+                                <img class="text-logo" src="img/quora.svg">/What-is-the-future-of-jQuery-for-2017-and-later
+                            </a>
+                        </span>
+                    </h4>
+                    <table class="fragment" data-fragment-index="1">
+                        <thead>
+                            <tr>
+                                <td style="text-align: center">HTML-first</td>
+                                <td style="text-align: center">JS-first</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="width: 50%">
+                                    <div style="display: flex; flex-direction: column; align-items: center">
+                                        <a href="https://jquery.com/"><img src="img/jquery.svg" class="text-logo fragment"
+                                                data-fragment-index="2"></a>
+                                        <div style="display: flex; justify-content: space-between">
+                                            <a href="https://angularjs.org/"><img src="img/angularjsw.svg" class="text-logo fragment"
+                                                    style="height: 1.7em" data-fragment-index="3"></a>
+                                            <a href="https://angular.io/"><img src="img/angular.svg" class="text-logo fragment"
+                                                    style="height: 2em" data-fragment-index="4"></a>
+                                        </div>
+                                        <a href="https://vuejs.org/"><img src="img/vue.svg" class="text-logo fragment"
+                                                style="height: 1.4em" data-fragment-index="11"></a>
+                                    </div>
+                                </td>
+                                <td style="width: 50%">
+                                    <div style="display: flex; flex-direction: column; align-items: center">
+                                        <a href="https://reactjs.org/"><img src="img/react.svg" class="text-logo fragment"
+                                                style="height: 1.5em" data-fragment-index="5"></a>
+                                        <a href="https://preactjs.com/"><img src="img/preact.png" class="text-logo fragment"
+                                                style="height: 2em" data-fragment-index="6"></a>
+                                        <a href="https://github.com/jorgebucaran/hyperapp"><img src="img/hyperapp.svg"
+                                                class="text-logo fragment" style="height: 1.4em" data-fragment-index="12"></a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="fragment" data-fragment-index="7" style="position: absolute; top: 15%; left: calc(50% - 225px)">
+                        <div class="fragment fade-out replace" data-fragment-index="11">
+                            <div class="fragment fade-out replace" data-fragment-index="9">
+                                <a class="fragment fade-out replace" data-fragment-index="8" href="https://medium.com/@shakyShane/hello-world-with-preact-jsx-typescript-6d70cf2ebf01">
+                                    <img src="img/preactftw.jpg" style="width: 450px">
+                                </a>
+                                <a class="fragment fade-in replace" data-fragment-index="8" href="https://youtu.be/dLVUcVgt_68">
+                                    <img src="img/html.jpg" style="width: 450px">
+                                </a>
+                            </div>
+                            <div class="fragment fade-in replace" data-fragment-index="9">
+                                <a class="fragment fade-out replace" data-fragment-index="10" href="https://engineering.hexacta.com/jsx-can-do-that-1b2666c23a32">
+                                    <img src="img/html-coding.jpg" style="width: 450px">
+                                </a>
+                                <a class="fragment fade-in replace" data-fragment-index="10" href="https://engineering.hexacta.com/jsx-can-do-that-1b2666c23a32">
+                                    <img src="img/comments.jpg" style="width: 450px">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        virtual DOM
+                    </aside>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2 class="fragment" data-fragment-index="1">
+                        <span>Gwiazdki na <i class="fab fa-github"></i>?</span>
+                    </h2>
+                    <div class="fragment fade-out replace" data-fragment-index="3">
+                        <a href="https://i.redd.it/zlee3sbw80x01.png" class="fragment fade-out replace"
+                            data-fragment-index="2">
+                            <img style="width: 70%" src="img/all3small.jpg">
+                        </a>
+                        <img style="width: 80%;" src="img/all3big.png" class="fragment fade-in replace"
+                            data-fragment-index="2">
+                    </div>
+                    <div class="fragment fade-in replace" data-fragment-index="3">
+                        <img style="width: 80%;" src="img/all3real.png" class="fragment fade-out replace"
+                            data-fragment-index="4">
+                        <img style="width: 80%;" src="img/all3react.png" class="fragment fade-in replace"
+                            data-fragment-index="4">
+                    </div>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <a href="http://www.timqian.com/star-history/#facebook/react&angular/angular.js&vuejs/vue&angular/angular">
+                        <img src="img/stars.png" style="width: 75%">
+                    </a>
+                </section>
+            </section>
+            <section>
+                <section data-background-image="img/prehistory.jpg" data-background-size="cover">
+                    <h2 style="margin-bottom: 1em; line-height: 1">
+                        <span style="color: #000; background-color: rgba(255, 255, 255, .7)">Prehistoria, starożytność</span>
+                    </h2>
+                    <div class="arrows-container" style="font-size: .75em">
+                        <div>
+                            <div class="timeline-elem fragment" data-fragment-index="2" style="margin-left: 3em">
+                                <a href="https://angularjs.org/">
+                                    <img src="img/angular.svg" class="text-logo" style="height: 1em">
+                                </a>
+                                <a href="https://github.com/angular/angular.js/releases?after=v0.9.4" style="background-color: rgba(255, 255, 255, .7)">
+                                    v0.9.0
+                                </a>
+                            </div>
+                            <div class="arrow fragment" data-fragment-index="1">2010</div>
+                        </div>
+                        <div>
+                            <div class="arrow fragment" data-fragment-index="1">2011</div>
+                        </div>
+                        <div>
+                            <div class="timeline-elem fragment" data-fragment-index="3" style="margin-left: 1.5em">
+                                <a href="https://angularjs.org/">
+                                    <img src="img/angular.svg" class="text-logo" style="height: 1em">
+                                </a>
+                                <span style="background-color: rgba(255, 255, 255, .7)">
+                                    v1.0.0
+                                </span>
+                            </div>
+                            <div class="arrow fragment" data-fragment-index="1">2012</div>
+                        </div>
+                        <div>
+                            <div class="timeline-elem fragment" data-fragment-index="4" style="margin-left: 1em">
+                                <a href="https://reactjs.org/">
+                                    <img src="img/react.svg" class="text-logo" style="height: 1em">
+                                </a>
+                                <span>
+                                    <a href="https://youtu.be/GW0rj4sNH2w" style="background-color: rgba(255, 255, 255, .7)">OSS</a>
+                                </span>
+                            </div>
+                            <div class="arrow fragment" data-fragment-index="1">2013</div>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        <ul>
+                            <li>21.10.2010</li>
+                            <li>14.06.2012</li>
+                            <li>29.05.2013
+                                <ul>
+                                    <li>unidirectional data flow</li>
+                                    <li>vdom</li>
+                                    <li>Apache 2.0</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </aside>
+                </section>
+            </section>
+            <section>
+                <section data-background-image="img/baroque.jpg" data-background-size="cover">
+                    <h2 style="margin-bottom: 1em; line-height: 1">
+                        <span style="color: #000; background-color: rgba(255, 255, 255, .7)">Średniowiecze, nowożytność</span>
+                    </h2>
+                    <div class="arrows-container" style="font-size: .75em">
+                        <div>
+                            <div class="timeline-elem fragment" data-fragment-index="2" style="display: inline-block;">
+                                <a href="https://vuejs.org/">
+                                    <img src="img/vue.svg" class="text-logo" style="height: 1em">
+                                </a>
+                                <span>
+                                    <a href="http://blog.evanyou.me/2014/02/11/first-week-of-launching-an-oss-project/"
+                                        style="background-color: rgba(255, 255, 255, .7)">start</a>
+                                </span>
+                            </div>
+                            <div class="timeline-elem fragment" data-fragment-index="3" style="display: inline-block; margin-left: .5em">
+                                <a href="https://reactjs.org/">
+                                    <img src="img/react.svg" class="text-logo" style="height: 1em">
+                                </a>
+                                <span style="background-color: rgba(255, 255, 255, .7)">BSD</span>
+                            </div>
+                            <div class="timeline-elem fragment" data-fragment-index="4" style="display: inline-block; margin-left: -1.75em">
+                                <a href="https://angularjs.org/">
+                                    <img src="img/angular.svg" class="text-logo" style="height: 1em">
+                                </a>
+                                <del style="background-color: rgba(255, 255, 255, .7)">IE8</del>
+                            </div>
+                            <div class="arrow fragment" data-fragment-index="1">2014</div>
+                        </div>
+                        <div>
+                            <div class="timeline-elem fragment" data-fragment-index="5" style="display: inline-block; margin-left: -3em">
+                                <a href="https://angular.io/">
+                                    <img src="img/angular.svg" class="text-logo" style="height: 1em">
+                                </a>
+                                <div style="font-size: .75em; background-color: rgba(255, 255, 255, .7)">
+                                    2.0.0-alpha.13
+                                </div>
+                            </div>
+                            <div class="timeline-elem fragment" data-fragment-index="6" style="display: inline-block; margin-left: -2.75em">
+                                <a href="https://reactjs.org/">
+                                    <img src="img/react.svg" class="text-logo" style="height: 1em">
+                                </a>
+                                <span style="background-color: rgba(255, 255, 255, .7)">
+                                    Native
+                                </span>
+                            </div>
+                            <div class="arrow fragment" data-fragment-index="1">2015</div>
+                        </div>
+                        <div>
+                            <div class="timeline-elem fragment" data-fragment-index="9" style="display: inline-block; margin-left: 4em">
+                                <a href="https://vuejs.org/">
+                                    <img src="img/vue.svg" class="text-logo" style="height: 1em">
+                                </a>
+                                <span style="background-color: rgba(255, 255, 255, .7)">
+                                    v2.0.0
+                                </span>
+                            </div>
+                            <div class="timeline-elem fragment" data-fragment-index="7" style="display: inline-block; margin-left: -2.5em">
+                                <a href="https://angular.io/">
+                                    <img src="img/angular.svg" class="text-logo" style="height: 1em">
+                                </a>
+                                <span style="background-color: rgba(255, 255, 255, .7)">
+                                    v2.0.0
+                                </span>
+                            </div>
+                            <div class="arrow fragment" data-fragment-index="1">2016</div>
+                        </div>
+                    </div>
+                    <div class="fragment" data-fragment-index="8" style="position: absolute; top: 15%; left: calc(50% - 225px)">
+                        <a class="fragment fade-out replace" data-fragment-index="9" href="https://www.blasty.pl/55407/niby-czlowiek-wiedziol">
+                            <img src="img/wiedziol.jpg" style="width: 450px" class="pure-img">
+                        </a>
+                    </div>
+                    <aside class="notes">
+                        <ul>
+                            <li>02.02.2014</li>
+                            <li>React 10.2014: v0.12.0 - 3-clause BSD license (wcześniej Apache 2.0)</li>
+                            <li>Angular 10.2014: v1.3.x - porzucenie IE8</li>
+                            <li>14.03.2015 - A2</li>
+                            <li>27.03.2015</li>
+                            <li>Vue 15.09.2016</li>
+                            <li>Angular 30.09.2016</li>
+                        </ul>
+                    </aside>
+                </section>
+            </section>
+            <section>
+                <section data-background-image="img/now.jpg" data-background-size="cover">
+                    <h2 style="margin-bottom: 1em; line-height: 1">
+                        <span style="color: #000; background-color: rgba(255, 255, 255, .7)">Nowoczesność</span>
+                    </h2>
+                    <div class="arrows-container" style="font-size: .75em;">
+                        <div>
+                            <div class="timeline-elem fragment" data-fragment-index="2" style="display: inline-block; margin-left: 3em">
+                                <a href="https://reactjs.org/">
+                                    <img src="img/react.svg" class="text-logo" style="height: 1em">
+                                </a>
+                                <span style="background-color: rgba(255, 255, 255, .7)">MIT</span>
+                            </div>
+                            <div class="arrow fragment" data-fragment-index="1">2017</div>
+                        </div>
+                        <div style="flex-grow: 2">
+                            <div class="timeline-elem fragment" data-fragment-index="3" style="display: inline-block; margin-left: 7.5em">
+                                <a href="https://vuejs.org/">
+                                    <img src="img/vue.svg" class="text-logo" style="height: 1em">
+                                </a>
+                                <a href="https://medium.com/the-vue-point/plans-for-the-next-iteration-of-vue-js-777ffea6fabf"
+                                    style="background-color: rgba(255, 255, 255, .7)">
+                                    v3???
+                                </a>
+                            </div>
+                            <div class="timeline-elem fragment" data-fragment-index="5" style="display: inline-block; margin-left: -1.5em">
+                                <a href="https://angular.io/">
+                                    <img src="img/angular.svg" class="text-logo" style="height: 1em">
+                                </a>
+                                <span style="background-color: rgba(255, 255, 255, .7)">
+                                    v7.0.0
+                                </span>
+                            </div>
+                            <div class="timeline-elem fragment" data-fragment-index="6" style="display: inline-block; margin-left: -2.75em">
+                                <a href="https://reactjs.org/">
+                                    <img src="img/react.svg" class="text-logo" style="height: 1em">
+                                </a>
+                                <span style="background-color: rgba(255, 255, 255, .7)">
+                                    Hooks
+                                </span>
+                            </div>
+                            <div class="arrow fragment" data-fragment-index="1">2018</div>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        <ul>
+                            <li>26.09.2017</li>
+                            <li>v3: 30.09.2017
+                                <ul>
+                                    <li>TS, ES6+</li>
+                                    <li>tree-shaking, optymalizacje AOT</li>
+                                </ul>
+                            </li>
+                            <li>v7: 18.10.2018
+                                <ul>
+                                    <li>v1.7 LTS na 3 lata</li>
+                                </ul>
+                            </li>
+                            <li>hooks: 10.2018
+                                <ul>
+                                    <li>więcej burzy niż o context</li>
+                                    <li>create-react-app wspiera TS</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </aside>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <table class="summary">
+                        <thead>
+                            <tr>
+                                <td></td>
+                                <td style="text-align: center">
+                                    <a href="https://angular.io/"><img src="img/angular.svg" class="text-logo" style="height: 2em"></a>
+                                </td>
+                                <td style="text-align: center">
+                                    <a href="https://reactjs.org/"><img src="img/react.svg" class="text-logo" style="height: 1.65em"></a>
+                                </td>
+                                <td style="text-align: center">
+                                    <a href="https://vuejs.org/"><img src="img/vue.svg" class="text-logo" style="height: 1.3em"></a>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="fragment" data-fragment-index="1"><strong>Kto?</strong></td>
+                                <td class="fragment" data-fragment-index="2">Google</td>
+                                <td class="fragment" data-fragment-index="2">Facebook</td>
+                                <td class="fragment" data-fragment-index="2" style="font-size: .65em; vertical-align: middle">gość
+                                    po Google'u</td>
+                            </tr>
+                            <tr class="fragment" data-fragment-index="3">
+                                <td><strong>Uwagi</strong></td>
+                                <td class="long-text-cell fragment" data-fragment-index="4">Zmiana filozofii (2-way vs.
+                                    1-way binding)</td>
+                                <td class="long-text-cell fragment" data-fragment-index="5">Promowanie 1-way bindingu,
+                                    zmiana licencji</td>
+                                <td class="long-text-cell fragment" data-fragment-index="6">Lepszy Angular przed
+                                    lepszym
+                                    Angularem (2+)</td>
+                            </tr>
+                            <tr>
+                                <td class="fragment" data-fragment-index="7"><strong>Slogan</strong></td>
+                                <td class="long-text-cell fragment" data-fragment-index="8">One <span class="fragment highlight-red"
+                                        data-fragment-index="9">framework</span>.
+                                    Mobile & desktop.</td>
+                                <td class="long-text-cell fragment" data-fragment-index="8">A JavaScript <span class="fragment highlight-red"
+                                        data-fragment-index="9">library</span> for building user
+                                    interfaces</td>
+                                <td class="long-text-cell fragment" data-fragment-index="8">The Progressive
+                                    JavaScript <span class="fragment highlight-red" data-fragment-index="9">Framework</span></td>
+                            </tr>
+                            <tr>
+                                <td class="fragment" data-fragment-index="10"><strong>kB?</strong></td>
+                                <td class="fragment" data-fragment-index="11">~140</td>
+                                <td class="fragment" data-fragment-index="11">~40</td>
+                                <td class="fragment" data-fragment-index="11">~20</td>
+                            </tr>
+                            <tr>
+                                <td class="fragment" data-fragment-index="12"><strong>npm/tydz.</strong></td>
+                                <td class="fragment" data-fragment-index="13">~1.5M</td>
+                                <td class="fragment" data-fragment-index="13">~3M</td>
+                                <td class="fragment" data-fragment-index="13">~0.5M</td>
+                            </tr>
+                            <tr class="fragment">
+                                <td><strong>Hejter</strong></td>
+                                <td class="long-text-cell fragment">Następny Ember</td>
+                                <td class="long-text-cell fragment">Mieszałem HTML z PHP i to była&nbsp;"zła praktyka"</td>
+                                <td class="long-text-cell fragment">Tyle gwiazdek i brak ofert pracy?</td>
+                            </tr>
+                            <tr class="fragment">
+                                <td><strong>Fanboj</strong></td>
+                                <td class="long-text-cell fragment">Ma już wszystko podpięte</td>
+                                <td class="long-text-cell fragment">Facebook, musi być świetne</td>
+                                <td class="long-text-cell fragment">Lekkie, szybkie, pełne możliwości</td>
+                            </tr>
+                            <tr class="fragment">
+                                <td><strong>Tak serio</strong></td>
+                                <td class="long-text-cell fragment">Framework "enterprise"</td>
+                                <td class="long-text-cell fragment">Pewniak</td>
+                                <td class="long-text-cell fragment">Uwielbiane, ale raczej nieużywane w pracy</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <a href="https://www.commitstrip.com/en/2018/08/03/the-most-exciting-game/">
+                        <img src="img/vvr.jpg" style="width: 50%" class="pure-img">
+                    </a>
+                    <a href="https://hasvuepassedreactyet.surge.sh/" class="fragment">hasvuepassedreactyet.surge.sh</a>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3 style="margin: 0">
+                        <span>Mój wybór?</span>
+                    </h3>
+                    <h4 style="margin-top: 0" class="fragment" data-fragment-index="1">(nowy projekt)</h4>
+                    <ol>
+                        <li class="fragment" data-fragment-index="2">Czysty JS (Web Components)</li>
+                        <li class="fragment" data-fragment-index="3">Zależnie od humoru
+                            <ul>
+                                <li class="fragment" data-fragment-index="4">JS-first?
+                                    <a href="https://github.com/jorgebucaran/hyperapp" class="fragment"
+                                        data-fragment-index="5">
+                                        <img src="img/hyperapp.svg" class="text-logo">
+                                    </a>
+                                </li>
+                                <li class="fragment" data-fragment-index="4">HTML-first?
+                                    <a href="https://vuejs.org/" class="fragment" data-fragment-index="6">
+                                        <img src="img/vue.svg" class="text-logo">
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <p>
+                        <img src="img/web-components.jpg" class="fragment pure-img" style="width: 70%">
+                    </p>
+                </section>
+            </section>
+            <section>
+                <h2>
+                    <span>Web C<img src="img/wc-logo.png" class="text-logo" style="margin-top: -.2em">mponents</span>
+                </h2>
+                <ol class="fragment" data-fragment-index="2">
+                    <li>Custom Elements</li>
+                    <li>HTML templates</li>
+                    <li>Shadow DOM</li>
+                    <li class="fragment fade-out crossed">HTML Imports</li>
+                </ol>
+                <div class="fragment">
+                    <a href="https://www.webcomponents.org/">
+                        <img src="img/wc-tech.png" style="width: 80%">
+                    </a>
+                </div>
+                <img src="img/quickc.png" class="fragment pure-img" data-fragment-index="1" style="position: absolute; top: 5%; right: 0; transform: rotate(-15deg); width: 30%">
+                <aside class="notes">
+                    <ul>
+                        <li>Co roku mówiło się, że to bedzie rok Web Componentów</li>
+                        <li>2018 - adopcja skoczyła</li>
+                        <li>1 przeglądarka się opóźnia</li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <h4 style="margin-top: -2em">
+                    <span>Custom Elements<span class="fragment"> - tworzenie własnych znaczników</span></span>
+                </h4>
+                <div class="fragment">
+                    <pre><code class="javascript" data-trim contentEditable="true" style="max-height: 40em">
+                        customElements.define('demo-time', class extends HTMLElement {
+                          constructor() {
+                            super();
+                            this.innerHTML = `
+                              <p style="background: yellow">
+                                DEMO TIME!
+                                <br>
+                                <a href="https://github.com/mat3e/">check thizzz</a>
+                              </p>
+                            `;
+                          }
+                        });
+                    </code></pre>
+                    <button onclick="controls.evalCode(this)" style="font-weight: bold">eval</button>
+                </div>
+                <demo-time></demo-time>
+            </section>
+            <section>
+                <h4 style="margin-top: -5em">
+                    <span>HTML templates<span class="fragment"> - tworzenie HTML-a</span></span>
+                </h4>
+                <div class="fragment" id="this-slide">
+                    <pre><code class="javascript" data-trim contentEditable="true" style="max-height: 40em">
+                        const template = document.getElementById('h4-template');
+                        const node = template.content.cloneNode(true);
+
+                        document.getElementById('this-slide').appendChild(node);
+                    </code></pre>
+                    <button onclick="controls.evalCode(this)" style="font-weight: bold">eval</button>
+                </div>
+                <template id="h4-template">
+                    <style>
+                        h4 {
+                            color: red !important;
+                        }
+                    </style>
+                    <h4>superancki template: <code>style</code> + <code>h4</code></h4>
+                </template>
+                <aside class="notes">
+                    HTML-a najlepiej tworzyć w HTML-u :P i klonować
+                </aside>
+            </section>
+            <section data-background-image="img/ppap.gif"></section>
+            <section>
+                <h4 style="margin-top: -2em">
+                    <span>Shadow DOM<span class="fragment"> - ukrywanie "implementacji"</span></span>
+                </h4>
+                <div class="fragment" id="slide2">
+                    <pre><code class="javascript" data-trim contentEditable="true" style="max-height: 40em">
+                        customElements.define('full-webc', class extends HTMLElement {
+                          constructor() {
+                            super();
+                            const template = document.getElementById('h4-template');
+                            const content = template.content.cloneNode(true);
+                            this.attachShadow({mode: 'closed'}).appendChild(content);
+                          }
+                        });
+                    </code></pre>
+                    <button onclick="controls.evalCode(this)" style="font-weight: bold">eval</button>
+                </div>
+                <full-webc></full-webc>
+                <aside class="notes">
+                    Własny element z shadow DOM-em i tempaletem = WC
+                    <br>
+                    <ul>
+                        <li>Naprawdę jest wsparcie</li>
+                        <li>Z bibliotek da się tworzyć WC</li>
+                        <li>WC zrozumiałe w każdej bibliotece</li>
+                        <li>Już dzisiaj firmy korzystają z WC - część wspólna dla front-endowców</li>
+                        <li>Wierzę, że niedługo tylko to</li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <section data-background-image="img/future.jpg" data-background-size="cover">
+                    <h2 style="margin-bottom: .1em; line-height: 1">
+                        <span style="color: #000; background-color: rgba(255, 255, 255, .7)">Przyszłość</span>
+                    </h2>
+                    <h3 class="fragment" style="line-height: 1">
+                        <a href="https://blog.npmjs.org/post/180868064080/this-year-in-javascript-2018-in-review-and-npms"
+                            style="background-color: rgba(255, 255, 255, .7)">
+                            2018 in review and <img src="img/npm.svg" class="text-logo">’s predictions for 2019
+                        </a>
+                    </h3>
+                    <div class="fragment">
+                        <img src="img/popularity.png" class="pure-img">
+                    </div>
+                    <ul>
+                        <li class="fragment">TypeScript</li>
+                        <li class="fragment">GraphQL</li>
+                    </ul>
+                    <aside class="notes">
+                        React spowolnił wzrost, Vue rośnie, Angular stabilnie/lekko spada, Ember "odbił się", zobaczymy
+                        w 2019, TS i GraphQL strasznie rosnąć
+                    </aside>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2 style="margin: 0">
+                        <span>A sam <img src="img/npm.svg" class="text-logo">?</span>
+                    </h2>
+                    <ol>
+                        <li class="fragment" data-fragment-index="1">Web
+                            <ul>
+                                <li class="fragment" data-fragment-index="2"><i>97% of the code in a modern web
+                                        application
+                                        comes from npm</i></li>
+                                <li class="fragment" data-fragment-index="3">Np. <i>package locking by default</i></li>
+                            </ul>
+                        </li>
+                        <li class="fragment" data-fragment-index="4">Bezpieczeństwo
+                            <ul>
+                                <li class="fragment" data-fragment-index="5"><i>Node Security Platform</i></li>
+                                <li class="fragment" data-fragment-index="6">Np. <i>security audits</i></li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <p style="display: flex; align-items: center; justify-content: center;">
+                        <img src="img/pacman.png" class="fragment pure-img" data-fragment-index="8" style="height: 3em;">
+                        <img src="img/yarn.jpg" class="fragment pure-img" data-fragment-index="7" style="border-radius: 50%; border: rgba(0, 0, 0, 1); height: 1em">
+                    </p>
+                    <div class="fragment">
+                        <a href="https://blog.npmjs.org/post/178027064160/next-generation-package-management">tink</a>
+                    </div>
+                    <aside class="notes">
+                        <ul>
+                            <li>npm was invented to serve the needs of server-side app developers, and the needs of web
+                                developers are different</li>
+                            <li>postawili mocno na poprawkę bezpieczeństwa i weba; lockowanie by default</li>
+                            <li>funkcjonalności yarna zaadoptowane</li>
+                            <li>tink od września</li>
+                        </ul>
+                    </aside>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2 style="margin: 0">
+                        <span>Bezpieczeństwo?</span>
+                    </h2>
+                    <div class="fragment">
+                        <a href="https://www.npmjs.com/package/is-odd">
+                            <img src="img/odd.png" class="pure-img" width="90%">
+                        </a>
+                    </div>
+                    <div class="fragment">
+                        <a href="https://www.npmjs.com/package/is-number">
+                            <img src="img/num.png" class="pure-img" width="90%">
+                        </a>
+                    </div>
+                    <aside class="notes">
+                        <ul>
+                            <li>A czemu to bezpieczeństwo jest ważne?</li>
+                            <li>Nie wystarczy, żeby programiści rozsądnie używali pakietów?</li>
+                            <li>No nie, 97%, setki zależności</li>
+                        </ul>
+                    </aside>
+                </section>
+                <section>
+                    <a href="https://azer.bike/journal/i-ve-just-liberated-my-modules/">
+                        <img src="img/unpublish.png">
+                    </a>
+                    <div class="fragment">Problematyczna zależność? <code class="fragment">left-pad</code></div>
+                    <aside class="notes">
+                        <ul>
+                            <li>left-pad uzupełniał stringa spacjami lub zerami, od lewej</li>
+                            <li>~padStart</li>
+                            <li>Zmieniła się polityka dla "unpublish" (24/72 godziny)</li>
+                            <li>Dojrzałość Javy i Mavena (backward-compatibility)</li>
+                        </ul>
+                    </aside>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>
+                        <span>Trendy</span>
+                    </h2>
+                    <ul>
+                        <li class="fragment">Uproszczenia!
+                            <ul>
+                                <li class="fragment"><img src="img/babel.svg" class="pure-img text-logo"> (v7) rozumie
+                                    <img src="img/ts.svg" class="pure-img text-logo" style="height: .75em">a
+                                </li>
+                                <li class="fragment"><img src="img/grunt.svg" class="pure-img text-logo">/<img src="img/gulp.svg"
+                                        class="pure-img text-logo"> => <img src="img/webpack.png" class="pure-img text-logo">
+                                </li>
+                                <li class="fragment">#0cjs</li>
+                                <li class="fragment">CLI</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Micro-frameworki
+                            <span class="fragment"> ~<a href="https://preactjs.com/"><img src="img/preact.png" class="text-logo pure-img"></a></span>
+                        </li>
+                        <li class="fragment">Server-side rendering</li>
+                        <li class="fragment"><img src="img/vscode.png" class="pure-img text-logo"></li>
+                    </ul>
+                    <aside class="notes">
+                        <ul>
+                            <li>TS już wcześniej zostawiał trochę Babelowi, np. JSX-a mógł</li>
+                            <li>Na blogu TS-a pochwały dla Babela</li>
+                            <li>Babel nie rozumie typów, ale tłumaczy</li>
+                            <li>Zerżnięcie z Parcela, trend narzędzia z pluginami</li>
+                            <li>CLI, startery => Java, Spring Boot, Maven (convention over config) zamiast Anta</li>
+                            <li>NIE chodzi o is-number</li>
+                        </ul>
+                    </aside>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <div class="fragment" data-fragment-index="4" style="margin-bottom: 0; margin-top: -.5em;">
+                        <a style="font-weight: bold" class="wh-link" href="https://mat3e.github.io/talks/fe-overview/j-labs.html">
+                            mat3e.github.io/talks/fe-overview/j-labs.html
+                        </a>
+                    </div>
+                    <div class="fragment" data-fragment-index="4" style="font-size: .5em; margin-bottom: 1.5em">
+                        <a href="https://www.udemy.com/fajny-javascript/?couponCode=OPENALL">Mój kurs o JS na <img src="img/udemy.svg"
+                                class="text-logo pure-img">
+                        </a>
+                    </div>
+                    <div style="text-align: center" class="fragment fade-out replace" data-fragment-index="1">
+                        <a href="http://funthingstodowhenbored.com/quote/first-they-ignore-you-mahatma-gandhi-quotes">
+                            <img src="img/ghandi.png" class="pure-img">
+                        </a>
+                    </div>
+                    <img src="img/redhat-small.jpeg" class="fragment fade-in replace pure-img" data-fragment-index="1"
+                        style="margin: 0; width: 30%">
+                    <p class="fragment" data-fragment-index="2">
+                        JavaScript i front-endy (2018)<span class="fragment" data-fragment-index="3">:
+                            <strong style="display: block">Poważny, rozwinięty i zaawansowany ekosystem</strong></span>
+                    </p>
+                    <aside class="notes">JS to nie jest język do walidowania formularzy i dodawania śniegu na stronie</aside>
+                </section>
+            </section>
+            <!-- <section>
+                <a href="https://kahoot.it/">
+                    <img src="img/kahoot.svg" class="pure-img">
+                </a>
+            </section> -->
+        </div>
+    </div>
+    <script src="js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script>
+        const controls = (function () {
+            Reveal.initialize({
+                history: true,
+                // - null: Media will only autoplay if data-autoplay is present
+                autoPlayMedia: null,
+                transition: 'slide', // none/fade/slide/convex/concave/zoom
+                transitionSpeed: 'default', // default/fast/slow
+                backgroundTransition: 'slide', // none/fade/slide/convex/concave/zoom
+                dependencies: [
+                    { src: 'js/classList.js', condition: function () { return !document.body.classList; } },
+
+                    { src: 'js/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                    { src: 'js/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+
+                    // Syntax highlight for <code> elements
+                    { src: 'js/highlight.js', callback: function () { hljs.initHighlightingOnLoad(); } },
+
+                    // Zoom in and out with Alt+click
+                    { src: 'js/zoom.js' },
+
+                    { src: 'notes/notes.js' },
+
+                    { src: 'js/math.js' }
+                ]
+            });
+
+            document.querySelectorAll('.reveal .slides > section section:not([data-background-image])').forEach((s) => {
+                s.setAttribute('data-background-image', 'img/twitter.png');
+                s.setAttribute('data-background-size', '240px');
+                s.setAttribute('data-background-position', '.5em .5em');
+            });
+
+            return {
+                evalCode(btn) {
+                    let codeElem = btn.previousElementSibling;
+                    if (getComputedStyle(codeElem).display === 'none') {
+                        codeElem = codeElem.previousElementSibling;
+                    }
+                    eval(codeElem.innerText);
+                }
+            }
+        })();
+    </script>
+</body>
+
+</html>
