@@ -398,72 +398,6 @@
                     </code></pre>
                     <aside class="notes">Przykłady - używać lambdy, preferować stałą nad zmienną</aside>
                 </section>
-                <section data-background-image="img/eslint-install.png" data-background-size="contain"
-                    data-background-transition="zoom">
-                    <h2>
-                        <span>
-                            <a href="https://eslint.org/docs/user-guide/getting-started#installation-and-usage">Oficjalny
-                                tutorial</a>
-                        </span>
-                    </h2>
-                </section>
-            </section>
-            <section>
-                <section>
-                    <h2 style="margin-bottom: 0">
-                        <span>Ćwiczenie 2 (1/2)</span>
-                    </h2>
-                    <ol>
-                        <li class="fragment">Zamiast <code>npm install eslint --save-dev</code>,
-                            wystarczy <code>npm i eslint -D</code>
-                            <ul>
-                                <li class="fragment"><strong>UWAGA:</strong> na razie olewamy opcję <code>-D</code></li>
-                            </ul>
-                        </li>
-                        <li class="fragment">Jak aktualnie wygląda package.json? Co pojawiło się w node_modules?</li>
-                        <li class="fragment">Wykorzystać pobranego ESLinta: <code>./node_modules/.bin/eslint --init</code></li>
-                        <li class="fragment">Zaaplikować reguły, zgodne z popularnym standardem od
-                            <i>airbnb</i>
-                            <ul>
-                                <li class="fragment">Brak Reacta, plik JSON</li>
-                                <li class="fragment">Pójść za sugestiami narzędzia inicjalizującego</li>
-                            </ul>
-                        </li>
-                    </ol>
-                    <aside class="notes">Omówić
-                        <ul>
-                            <li>semantic versioning; ^, ~</li>
-                            <li>dependencies i devDependencies</li>
-                            <li>node_modules, folder .bin</li>
-                        </ul>
-                    </aside>
-                </section>
-                <section>
-                    <h2>
-                        <span>Ćwiczenie 2 (2/2)</span>
-                    </h2>
-                    <ol>
-                        <li class="fragment">Przejrzeć package.json i node_modules. Gdzie trafił ESLint? Gdzie jego
-                            plik konfiguracyjny?</li>
-                        <li class="fragment">Upewnić się, że ESLint jest włączony w IntelliJ (Preferences, ESLint)</li>
-                        <li class="fragment">
-                            Utworzyć user.js (zgodny z aktualnymi regułami):
-                            <pre style="margin: 0"><code class="javascript" data-trim>
-                            const user = {
-                                avatar_url: 'https://picsum.photos/300',
-                                bio: 'Test bio',
-                            };
-                            </code></pre>
-                        </li>
-                        <li class="fragment">Skonfigurować ESLinta (reguła
-                            <code>comma-dangle</code>), żeby zgłaszał
-                            <i>"Unexpected trailing comma"</i> wewnątrz user.js
-                        </li>
-                    </ol>
-                    <aside class="notes">Nadpisujemy reguły airbnb</aside>
-                </section>
-            </section>
-            <section>
                 <section>
                     <img class="pure-img" src="img/think.jpg">
                 </section>
@@ -554,10 +488,17 @@
             <section>
                 <section>
                     <h2 style="margin-bottom: 0">
-                        <span>Ćwiczenie 3</span>
+                        <span>Ćwiczenie 2</span>
                     </h2>
                     <ol>
-                        <li class="fragment">Wyeksportować obiekt z pliku user.js</li>
+                        <li class="fragment">Utworzyć user.js i wyeksportować z niego stałą
+                            <pre style="margin: 0; width: 100%"><code class="javascript" data-trim>
+                                const user = {
+                                    avatar_url: 'https://picsum.photos/300',
+                                    bio: 'Test bio'
+                                };
+                            </code></pre>
+                        </li>
                         <li class="fragment">Utworzyć index.js i zaimportować do niego user.js</li>
                         <li class="fragment">Zalogować w konsoli (instrukcja <code>console.log</code>) tekst przypisany
                             do pola <code>avatar_url</code></li>
@@ -594,7 +535,7 @@
             <section>
                 <section>
                     <h2 style="margin-bottom: 0">
-                        <span>Ćwiczenie 4</span>
+                        <span>Ćwiczenie 3</span>
                     </h2>
                     <ol>
                         <li class="fragment">
@@ -629,7 +570,7 @@
             <section>
                 <section>
                     <h2 style="margin-bottom: 0">
-                        <span>Ćwiczenie 5</span>
+                        <span>Ćwiczenie 4</span>
                     </h2>
                     <ol>
                         <li class="fragment">
@@ -743,7 +684,7 @@
             <section>
                 <section>
                     <h2>
-                        <span>Ćwiczenie 6</span>
+                        <span>Ćwiczenie 5</span>
                     </h2>
                     <ol>
                         <li class="fragment">W index.js podmienić <code>console.log</code> na <code>alert</code></li>
@@ -762,7 +703,7 @@
                 </section>
                 <section>
                     <h2 style="margin-bottom: 0">
-                        <span>Ćwiczenie 7</span>
+                        <span>Ćwiczenie 6</span>
                     </h2>
                     <ol>
                         <li class="fragment">Podmienić <code>alert</code> z powrotem na <code>console.log</code></li>
@@ -877,7 +818,7 @@
             <section>
                 <section>
                     <h2 style="margin-bottom: 0">
-                        <span>Ćwiczenie 8</span>
+                        <span>Ćwiczenie 7</span>
                     </h2>
                     <ol style="font-size: .9em; line-height: 1.15">
                         <li class="fragment">Dociągnąć Mocha'ę, <code>mocha-webpack</code> (wersja <code>2.0.0-beta.0</code>)
@@ -1086,7 +1027,7 @@
             <section>
                 <section>
                     <h2>
-                        <span>Ćwiczenie 9</span>
+                        <span>Ćwiczenie 8</span>
                     </h2>
                     <ol>
                         <li class="fragment">Zaimplementować <code>map</code>, żeby test przechodził</li>
@@ -1247,7 +1188,7 @@
             <section>
                 <section>
                     <h2 style="margin-bottom: 0">
-                        <span>Ćwiczenie 10</span>
+                        <span>Ćwiczenie 9</span>
                     </h2>
                     <ol>
                         <li class="fragment">Przerobić funkcję <code>map</code> na konstruktor klasy <code>GitHubUser</code>
@@ -1343,7 +1284,7 @@
             <section>
                 <section>
                     <h2 style="margin-bottom: 0">
-                        <span>Ćwiczenie 11</span>
+                        <span>Ćwiczenie 10</span>
                     </h2>
                     <ol style="font-size: .9em; line-height: 1.15">
                         <li class="fragment">Przenieść model.js i testy do folderu src/github</li>
@@ -1571,7 +1512,7 @@
             <section>
                 <section>
                     <h2 style="margin-bottom: 0">
-                        <span>Ćwiczenie 12</span>
+                        <span>Ćwiczenie 11</span>
                     </h2>
                     <ol style="line-height: 1.15">
                         <li class="fragment">Utworzyć service.js w src/github
@@ -1818,44 +1759,23 @@
             <section>
                 <section>
                     <h2 style="margin: 0">
-                        <span>Ćwiczenie 13</span>
+                        <span>Ćwiczenie 12</span>
                     </h2>
                     <ol>
                         <li class="fragment">Zainstalować TS jako zależność deweloperską</li>
                         <li class="fragment">Zmienić src/github/model.js na TS!</li>
                         <li class="fragment">Nanieść zasugerowane poprawki; na razie wersja "light" TypeScripta</li>
                         <li class="fragment">Czytelniej, prawda? :)</li>
-                        <li class="fragment">Usunąć ignorowanie ESLinta. Czy ESLint działa?</li>
                         <li class="fragment">Spróbować uruchomić aplikację</li>
                         <li class="fragment">Skompilować np. z terminala w src/github:
                             <pre style="margin: 0; width: 100%"><code class="bash">../../node_modules/typescript/bin/tsc ./model.ts</code></pre>
                         </li>
                         <li class="fragment">Co jest nie tak z plikiem wynikowym?</li>
                     </ol>
-                    <aside class="notes">
-                        <code>eslint-disable</code> mogli nie mieć, więc tylko zwrócić uwagę, czy to dalej działa
-                    </aside>
-                </section>
-                <section>
-                    <h3 style="margin: 0">
-                        <span>Ćwiczenie 14: ESLint!</span>
-                    </h3>
-                    <ol style="font-size: .95em">
-                        <li class="fragment">Doinstalować <code>typescript-eslint-parser</code> oraz <code>eslint-plugin-tslint</code></li>
-                        <li class="fragment">Do konfiguracji ESLinta dodać opcje <code>"parser"</code> oraz <code>"plugin"</code>,
-                            wskazujące powyższe zależności
-                            <ul>
-                                <li class="fragment">Upewnić się o wszystkim w dokumentacji plugina</li>
-                            </ul>
-                        </li>
-                        <li class="fragment">Dodać też <code>"parserOptions"</code> i wskazać ES2018</li>
-                        <li class="fragment">Dostosować reguły i formatowanie plików TS do swoich potrzeb</li>
-                        <li class="fragment">Bonus: poczytać o TSLint</li>
-                    </ol>
                 </section>
                 <section>
                     <h3>
-                        <span>Ćwiczenie 15: wynikowy ES6+</span>
+                        <span>Ćwiczenie 13: wynikowy ES6+</span>
                     </h3>
                     <ol>
                         <li class="fragment">Dla odmiany - JSON :)
@@ -1876,7 +1796,7 @@
                 </section>
                 <section>
                     <h3>
-                        <span>Ćwiczenie 16: webpack</span>
+                        <span>Ćwiczenie 14: webpack</span>
                     </h3>
                     <ol>
                         <li class="fragment">Dociągnąć <code>awesome-typescript-loader</code> jako zależność
@@ -1908,6 +1828,8 @@
                         </li>
                     </ul>
                     <aside class="notes">
+                        <code>string</code> vs. <code>String</code> - że pod spodem i tak są konwersje to prymitywów ile się da; zamieszanie ze sprawdzaniem typeof (Object vs string)
+                        <br>
                         <code>any</code> to tak jakbyśmy mieli "czysty" JS
                         <br>
                         Warto wspomnieć jakie opcje kompilatora są ustawione i że one są fajne, bo jeszcze silniej nas
@@ -1976,14 +1898,13 @@
             <section>
                 <section>
                     <h2 style="margin: 0">
-                        <span>Ćwiczenie 17</span>
+                        <span>Ćwiczenie 15</span>
                     </h2>
                     <ol>
                         <li class="fragment">W module github/model.ts, dodać interfejs, reprezentujący odpowiedź z API
                             GitHuba
                             <ul>
                                 <li class="fragment">Wyeksportować go</li>
-                                <li class="fragment">Usunąć nieaktualne obejście reguł ESLinta</li>
                             </ul>
                         </li>
                         <li class="fragment">Przerobić test na plik TS i użyć tam interfejsu</li>
@@ -2026,13 +1947,12 @@
             <section>
                 <section>
                     <h2>
-                        <span>Ćwiczenie 18</span>
+                        <span>Ćwiczenie 16</span>
                     </h2>
                     <ol>
                         <li class="fragment">Zamienić pozostałe pliki na TypeScripta</li>
                         <li class="fragment">Dodać <code>"declaration"</code> żeby budowanie tworzyło pliki .d.ts</li>
                         <li class="fragment">Poczytać jak działa opcja tsconfiga - <code>"lib"</code></li>
-                        <li class="fragment">Pousuwać nieaktualne eslintowe komentarze</li>
                         <li class="fragment">Ciekawostka: używając odpowiednich opcji, moglibyśmy działać TypeScriptem
                             na plikach .js</li>
                     </ol>
@@ -2147,7 +2067,7 @@
             <section>
                 <section>
                     <h2 style="margin: 0">
-                        <span>Ćwiczenie 19: live</span>
+                        <span>Ćwiczenie 17: live</span>
                     </h2>
                     <ol>
                         <li class="fragment">Wejść na <a href="https://twitter.com/_mat3e_">twitter.com</a> i podejrzeć
@@ -2199,7 +2119,7 @@
             <section>
                 <section>
                     <h2 style="margin: 0">
-                        <span>Ćwiczenie 20</span>
+                        <span>Ćwiczenie 18</span>
                     </h2>
                     <ol style="font-size: .95em; line-height: 1.15">
                         <li class="fragment">Podsumujmy wszystko!</li>
@@ -2334,7 +2254,7 @@
             <section>
                 <section>
                     <h2 style="margin: 0">
-                        <span>Ćwiczenie 21 (1/2)</span>
+                        <span>Ćwiczenie 19</span>
                     </h2>
                     <ul style="font-size: .9em; line-height: 1.15">
                         <li class="fragment">Zainstalować <a href="https://www.npmjs.com/package/react">Reacta</a> jako
@@ -2358,22 +2278,6 @@
                                 import * as React from 'react';
                                 import * as ReactDOM from 'react-dom';
                             </code></pre>
-                        </li>
-                    </ul>
-                </section>
-                <section>
-                    <h2>
-                        <span>Ćwiczenie 21 (2/2)</span>
-                    </h2>
-                    <ul>
-                        <li class="fragment">Utworzyć dedykowany webpack.dev.js (można inspirować się oryginalnym)
-                            <ul>
-                                <li class="fragment">Dać <code>mode: 'development'</code>, <code>devtool: 'inline-source-map'</code></li>
-                                <li class="fragment">Wywalić opcję <code>optimization</code></li>
-                            </ul>
-                        </li>
-                        <li class="fragment">Uwzględnić zmianę w skrypcie npm start:
-                            <pre style="margin: 0; width: 100%"><code class="bash">webpack-dev-server --config webpack.dev.js --open</code></pre>
                         </li>
                         <li class="fragment">Uruchomić aplikację i zweryfikować jej działanie</li>
                     </ul>
@@ -2468,7 +2372,7 @@
             <section>
                 <section>
                     <h2 style="margin: 0">
-                        <span>Ćwiczenie 22</span>
+                        <span>Ćwiczenie 20</span>
                     </h2>
                     <ol style="font-size: .95em; line-height: 1.15">
                         <li class="fragment">Utworzyć github/react-component.tsx</li>
@@ -2503,7 +2407,7 @@
                 </section>
                 <section>
                     <h2>
-                        <span>Ćwiczenie 23 (1/2)</span>
+                        <span>Ćwiczenie 21* (1/2)</span>
                     </h2>
                     <ol>
                         <li class="fragment">Dociągnąć (dev)
@@ -2528,7 +2432,7 @@
                 </section>
                 <section>
                     <h2 style="margin: 0">
-                        <span>Ćwiczenie 23 (2/2)</span>
+                        <span>Ćwiczenie 21* (2/2)</span>
                     </h2>
                     <ul>
                         <li class="fragment">Stworzyć i poprawić react-component.spec.tsx:
@@ -2653,7 +2557,7 @@
             <section>
                 <section>
                     <h2 style="margin: 0">
-                        <span>Ćwiczenie 24</span>
+                        <span>Ćwiczenie 22</span>
                     </h2>
                     <ol style="font-size: .9em; line-height: 1.15">
                         <li class="fragment">W index.html dodać:
@@ -2711,7 +2615,7 @@
                         <span>Dziękuję</span>
                     </h2>
                     <div>Naj­pierw cię ig­no­rują. Po­tem śmieją się z ciebie. Później z tobą wal­czą. Później
-                        wyg­ry­wasz. ~Gandhi</div>
+                        wyg­ry­wasz ~Gandhi</div>
                     <img src="img/redhat-small.jpeg" class="fragment" data-fragment-index="1" style="margin: 0; width: 25%">
                     <div class="fragment" data-fragment-index="2">Stan na dziś: poważny, zaawansowany język</div>
                     <div class="fragment" data-fragment-index="3">Jednocześnie trudniej się wypalić zawodowo, bo od
