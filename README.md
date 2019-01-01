@@ -3,7 +3,7 @@
 * Otwarte warsztaty infoShare Academy [02.10.2018]: _Zacznij programować! Zbuduj pierwszą aplikację w Java_
 * Meet IT Toruń 22 [12.09.2018]: _Co wyciągnąłem, pisząc własną biblioteczkę angularową?_ [🔗](https://mat3e.github.io/talks/ll-angular/MeetIT22.html)
 * Angular Warsaw 21 [22.08.2018]: _Lessons from writing my own Angular utility lib_ [🔗](https://mat3e.github.io/talks/ll-angular/AngularWarsaw21.html) [📽️](https://www.youtube.com/watch?v=AKZ_GShIg48)
-* Discussion Panel [16.11.2017]: _Front-end vs. Back-end, jaki język programowania wybrać?_ [📽️](https://web.facebook.com/infoshareacademy/videos/868483633316364/)
+* Panel dyskusyjny [16.11.2017]: _Front-end vs. Back-end, jaki język programowania wybrać?_ [📽️](https://web.facebook.com/infoshareacademy/videos/868483633316364/)
 * Targi Kariera IT [30.09.17]: _JHipster – zróbmy sobie apkę, bez kodzenia (prawie)_ [🔗](https://mat3e.github.io/taskr/) 
 * Confitura [01.07.17]: _OData w Javie: wprowadzenie do Apache Olingo_ [🔗](https://github.com/sollersconsulting/confitura2017) [📽️](https://www.youtube.com/watch?v=sSLXUOaOmkk)
 * Sollers Consulting Open Day Warsaw [25.05.17]: _Gdzie Java nie może, tam Gosu pośle. Alternatywne języki JVM_ [🔗](https://github.com/sollersconsulting/openDayWaw)
