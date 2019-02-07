@@ -1,4 +1,5 @@
 ## 2019
+* Targi Kariera IT [16.03]: _Co ona ma, czego nie mam ja? React i jego klony_
 * meet.js Poznań 41 [12.02]: _Subiektywny przegląd sytuacji na froncie (start 2019)_
 
 ## 2018
