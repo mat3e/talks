@@ -1,6 +1,6 @@
 ## 2019
 * Targi Kariera IT [16.03]: _Co ona ma, czego nie mam ja? React i jego klony_
-* meet.js Poznań 41 [12.02]: _Subiektywny przegląd sytuacji na froncie (początek 2019)_
+* meet.js Poznań 41 [12.02]: _Subiektywny przegląd sytuacji na froncie (początek 2019)_ [🔗](https://mat3e.github.io/talks/fe-overview/meetjs-pzn.html)
 
 ## 2018
 * IT akademia j-labs 49 [13.12]: _Subiektywny przegląd front-endów (2018)_ [🔗](https://mat3e.github.io/talks/fe-overview/j-labs.html) [📽️](https://www.youtube.com/watch?v=KDTP9Dfkh1Q)
