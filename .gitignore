@@ -133,3 +133,6 @@ Desktop.ini
 # ESLint
 ######################
 .eslintcache
+Udemy*
+*-en*
+what-is-what*
