@@ -196,6 +196,12 @@
             animation-fill-mode: both;
         }
 
+        .reveal .slides .warn {
+            animation-name: redify;
+            animation-duration: 1s;
+            animation-iteration-count: infinite;
+        }
+
         @keyframes roll {
             0% {
                 opacity: 0;
@@ -210,6 +216,20 @@
             100% {
                 opacity: 0;
                 transform: translate3d(200%, 0, 0) rotate3d(0, 0, 1, 120deg);
+            }
+        }
+
+        @keyframes redify {
+            0% {
+                color: white;
+            }
+
+            50% {
+                color: red;
+            }
+
+            100% {
+                color: white;
             }
         }
     </style>
@@ -237,7 +257,7 @@
                 <section id="perspective" data-background-image="">
                     <h5>
                         <span>Perspektywa...</span>
-                        <span class="fragment" data-fragment-index="1" data-autoslide="3000"> ma znaczenie</span>
+                        <span class="fragment" data-fragment-index="1"> ma znaczenie</span>
                         <span class="fragment" data-fragment-index="2"> :)</span>
                     </h5>
                     <a href="https://mistrzowie.org/717022">
@@ -359,14 +379,14 @@
                             <img src="img/vvr.jpg" class="pure-img" style="width: 600px">
                         </a>
                     </div>
-                    <div class="fragment" style="position: absolute; top: 0; left: calc(50% - 300px)"
+                    <div class="fragment" style="position: absolute; top: 1em; left: calc(50% - 300px)"
                         data-fragment-index="7">
                         <a href="https://bestofjs.org/tags/framework/trending/last-12-months"
                             class="fragment fade-out replace" data-fragment-index="10">
                             <img src="img/increment.png" class="pure-img" style="width: 600px">
                         </a>
                     </div>
-                    <div class="fragment" style="position: absolute; top: 0; left: calc(50% - 300px)"
+                    <div class="fragment" style="position: absolute; top: 2em; left: calc(50% - 300px)"
                         data-fragment-index="10">
                         <a href="https://blog.npmjs.org/post/180868064080/this-year-in-javascript-2018-in-review-and-npms"
                             class="fragment fade-out replace" data-fragment-index="11">
@@ -409,6 +429,7 @@
                             <li>React 5,5M</li>
                             <li>Vue 800k</li>
                             <li>Hyperapp 4k</li>
+                            <li>Ember 120k</li>
                         </ol>
                     </aside>
                 </section>
@@ -470,7 +491,7 @@
             <section>
                 <section>
                     <h2 style="margin: 0">
-                        <span>WARNING</span>
+                        <span class="warn">WARNING</span>
                     </h2>
                     <ul>
                         <li class="fragment">
