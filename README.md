@@ -1,11 +1,10 @@
 ## 2019
 * Targi Kariera IT [16.03]: _Co ona ma, czego nie mam ja? React i jego klony_
-* meet.js Poznań 41 [12.02]: _Subiektywny przegląd sytuacji na froncie (start 2019)_
+* meet.js Poznań 41 [12.02]: _Subiektywny przegląd sytuacji na froncie (początek 2019)_ [🔗](https://mat3e.github.io/talks/fe-overview/meetjs-pzn.html) [📽️](https://youtu.be/Aybh_2pIi2I)
 
 ## 2018
 * IT akademia j-labs 49 [13.12]: _Subiektywny przegląd front-endów (2018)_ [🔗](https://mat3e.github.io/talks/fe-overview/j-labs.html) [📽️](https://www.youtube.com/watch?v=KDTP9Dfkh1Q)
 * JS Poland [16.11]: _My personal front-end overview (2018)_ [🔗](https://mat3e.github.io/talks/fe-overview/JSPoland.html) [📷](https://twitter.com/msuskadev84/status/1063440217183580161) [📷](https://twitter.com/msuskadev84/status/1063439159254241290) [📷](https://www.facebook.com/jsPolandConference/photos/a.2253643808201100/2253657468199734/?type=3&theater)
-* Otwarte warsztaty infoShare Academy [02.10]: _Zacznij programować! Zbuduj pierwszą aplikację w Java_
 * Meet IT Toruń 22 [12.09]: _Co wyciągnąłem, pisząc własną biblioteczkę angularową?_ [🔗](https://mat3e.github.io/talks/ll-angular/MeetIT22.html)
 * Angular Warsaw 21 [22.08]: _Lessons from writing my own Angular utility lib_ [🔗](https://mat3e.github.io/talks/ll-angular/AngularWarsaw21.html) [📽️](https://www.youtube.com/watch?v=AKZ_GShIg48)
 
