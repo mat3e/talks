@@ -1,4 +1,4 @@
-/// 5. Interfejsy - readonly \\\
+/// 5. \\\
 
 interface IPoint {
     readonly x: number;
@@ -6,10 +6,10 @@ interface IPoint {
 }
 
 class Point implements IPoint {
-    // dla x jawnie readonly, bo odczyt i zapis razem spełniają kontrakt odczytu
+    // explicit readonly
     constructor(private _y: number, readonly x: number) {}
 
-    // nie musimy deklarować zwracanego typu (inference)
+    // a return type can be interferred
     get y(): number {
         return this._y;
     }

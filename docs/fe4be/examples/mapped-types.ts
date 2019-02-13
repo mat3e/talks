@@ -1,4 +1,4 @@
-/// 7. Predefiniowane mapped types \\\
+/// 7. \\\
 
 interface State {
   text: string;

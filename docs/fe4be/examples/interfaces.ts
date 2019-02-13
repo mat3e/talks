@@ -1,4 +1,4 @@
-/// 3. Interfejsy - wstęp \\\
+/// 3. \\\
 
 interface IFullName {
     name: string;
@@ -27,8 +27,8 @@ class FullName implements IFullName {
 class Person implements IPerson {
     fullName: FullName;
 
-    // 1. duck typing = dowolny {name: string, surname: string} spełnia kontrakt IFullName
-    // 2. [key: string]: any = fallback (będą jeszcze inne klucze-stringi z dowolnymi wartościami)
+    // 1. duck typing = any {name: string, surname: string} matches IFullName
+    // 2. [key: string]: any = fallback (other string keys with any values)
     constructor(fullName: { name: string, surname: string/*, [key: string]: any*/}) {
         this.fullName = new FullName(fullName);
     }

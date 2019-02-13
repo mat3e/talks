@@ -1,4 +1,4 @@
-/// 2. Type inference + zakaz zmiany typu \\\
+/// 2. \\\
 
 let num = 7;
 num = 'abc';

@@ -1,4 +1,4 @@
-/// 4. Interfejsy - pola niewymagane \\\
+/// 4. \\\
 
 interface IPerson {
     name: string;
@@ -14,6 +14,6 @@ class Person implements IPerson {
 const obj: IPerson = {
     name: 'Test',
     surname: 'Testowy',
-    // jak już jest, to musi być number!
+    // if you want this, then only number!
     age: 'abc'
 }

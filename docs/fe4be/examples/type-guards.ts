@@ -1,4 +1,4 @@
-/// 9. Własne type guards \\\
+/// 9. \\\
 
 interface Bird {
     fly(): void;
@@ -10,7 +10,7 @@ interface Fish {
     layEggs(): void;
 }
 
-// załóżmy, że nie znamy implementacji
+// we can imagine this implementation is hidden for us
 function getSmallPet(): Fish | Bird {
     return { swim: () => alert('swimming'), layEggs: () => alert('laying') }
 }
@@ -27,7 +27,7 @@ pet.swim();
 function isFish(pet: Fish | Bird): pet is Fish {
     return (pet as Fish).swim !== undefined;
 }
-// użycie
+// use
 if(isFish(pet)) {
     pet.swim();
 } else {

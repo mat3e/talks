@@ -1,10 +1,10 @@
-/// 8. Unie \\\
+/// 8. \\\
 
-// alias, dla lepszej czytelności
+// alias, a better readabiity
 type NameOrNameArray = string | string[];
 
 function createName(name: NameOrNameArray) {
-  // obence i w tablicy i w stringu
+  // length is in both a string and an array
   alert(name.length);
   if (typeof name === 'string') {
     return name;

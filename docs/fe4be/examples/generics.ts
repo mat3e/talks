@@ -1,4 +1,4 @@
-/// 6. Generyki \\\
+/// 6. \\\
 
 function logFoo<T extends { foo: string }>(obj: T): T {
   console.log(obj.foo);

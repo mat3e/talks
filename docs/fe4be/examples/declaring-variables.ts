@@ -1,4 +1,4 @@
-/// 1. Deklarowanie zmiennych \\\
+/// 1. \\\
 
 const final: string = 'FINAL VALUE';
 
