@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="description" content="Presentation">
+    <meta name="keywords" content="presentation">
+    <meta name="author" content="mat3e">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/blood.css">
+    <link rel="stylesheet" href="css/idea.css">
+    <link rel="stylesheet" href="css/fontawesome.css">
+    <style>
+        #header {
+            text-align: left;
+            line-height: .85;
+
+            padding-left: .1em;
+
+            border-left: solid .1em white;
+        }
+
+        #header-logo {
+            width: 290px;
+            height: 105px;
+            background: url('img/allegro-tech-w.svg') no-repeat;
+
+            top: -4em;
+            right: 0;
+            position: absolute;
+        }
+
+        #about-me {
+            background: rgba(255, 255, 255, .75);
+            margin-top: -5em;
+            list-style-type: none;
+            float: left;
+            padding-left: .5em;
+            padding-right: .5em;
+        }
+
+        .slides section img.pure-img {
+            border: none;
+            box-shadow: none;
+            background: none;
+        }
+
+        code[contenteditable="true"] {
+            border: 0;
+            outline: 0;
+        }
+
+        .slides section pre {
+            margin-bottom: 0;
+        }
+
+        .slides section pre+button {
+            cursor: pointer;
+
+            font-size: .65em;
+            font-weight: 100;
+            -webkit-font-smoothing: antialiased;
+
+            color: white;
+            background: rgb(175, 30, 35);
+
+            padding: 0 3px;
+            border: transparent;
+            border-radius: 4px;
+        }
+
+        .slides section a .stripped-img {
+            border: none;
+            margin: 0;
+            box-shadow: none;
+            background-color: rgba(255, 255, 255, 0);
+        }
+
+        .slides section a .stripped-img:hover {
+            border: none;
+            margin: 0;
+            box-shadow: none;
+            background-color: rgba(255, 255, 255, 0);
+        }
+
+        .slides section .comment {
+            margin-top: -20px;
+            margin-bottom: 20px;
+            color: gray;
+        }
+
+        .reveal .slides section .fragment.replace {
+            transition: none;
+            display: inline-block;
+        }
+
+        .reveal .slides section .fragment.fade-out.visible.replace {
+            display: none;
+        }
+
+        .reveal .slides section .fragment.fade-in.replace {
+            display: none;
+        }
+
+        .reveal .slides section .fragment.fade-in.visible.replace {
+            display: inline-block;
+        }
+    </style>
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section data-background-image>
+                <section data-background-image>
+                    <h1 id="header">IoT - start
+                        <div style="font-size: .5em">inteligentny dom v0.1</div>
+                    </h1>
+                    <div id="header-logo"></div>
+                </section>
+                <section data-background-image="img/bg-hd.jpg" data-background-transition="zoom">
+                    <ul id="about-me">
+                        <li>
+                            <a href="https://www.linkedin.com/in/mateusz-chrzonstowski/">
+                                <i class="fab fa-linkedin"
+                                    style="color: #0077B5; background-color: #FFF; line-height: .75em"></i>
+                                /mateusz-chrzonstowski
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://twitter.com/_mat3e_">
+                                <i class="fab fa-twitter-square"
+                                    style="background-color: #1DA1F2; color: #FFF; line-height: .75em"></i>
+                                /_mat3e_
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.reddit.com/user/_mat3e_">
+                                <i class="fab fa-reddit-square"
+                                    style="background-color: #FF4500; color: #FFF; line-height: .75em"></i>
+                                /_mat3e_
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/mat3e/">
+                                <i class="fab fa-github-square"
+                                    style="color: #24292E; background-color: #FFF; line-height: .75em"></i>
+                                /mat3e
+                            </a>
+                            <ul class="fragment" style="list-style-type: none; line-height: .5">
+                                <li style="margin-bottom: .5em;">
+                                    <a style="font-size: .5em; font-weight: bold;"
+                                        href="https://mat3e.github.io/talks/iot/opbox.html">
+                                        mat3e.github.io/talks/iot/opbox.html
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+            </section>
+            <section>
+                <h2 style="margin: 0">
+                    <span>Zespoły, zadania</span>
+                </h2>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                📻
+                                <ul style="font-size: .5em">
+                                    <li class="fragment">Centralny sterownik</li>
+                                    <li class="fragment">Apka do obsługi pinów</li>
+                                    <li class="fragment">Nadawanie sygnałów pozostałym zespołom</li>
+                                    <li class="fragment">Uspójnienie protokołu komunikacji pomiędzy zespołami</li>
+                                    <li class="fragment">Dalej: wystawienie serwisów, apka mobilna</li>
+                                </ul>
+                            </td>
+                            <td>
+                                💡
+                                <ul style="font-size: .5em">
+                                    <li class="fragment">Zintegrowanie diody i czujnika ruchu - zapalanie na ruch,
+                                        gaszenie po 30 sekundach bezruchu</li>
+                                    <li class="fragment">Odbiornik radiowy</li>
+                                    <li class="fragment">Wymyślenie komunikacji - przesyłanie on, off, identyfikatora
+                                        urządzenia
+                                    </li>
+                                    <li class="fragment">Zapalanie światła na sygnał, gaszenie po 30 sekundach bezruchu
+                                    </li>
+                                    <li class="fragment">Dalej: dioda 3-kolorowa</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                🔌
+                                <ul style="font-size: .5em">
+                                    <li class="fragment">Zintegrowanie z istniejącymi gniazdkami/żarówką</li>
+                                    <li class="fragment">Nadajnik i odbiornik radiowy</li>
+                                    <li class="fragment">Wymyślenie komunikacji - przesyłanie on, off, identyfikatora
+                                        urządzenia
+                                    </li>
+                                    <li class="fragment">Zdekodowanie sygnału z pilota, wysyłanie go przy pomocy Arduino
+                                    </li>
+                                    <li class="fragment">Dalej: żarówka</li>
+                                </ul>
+                            </td>
+                            <td>
+                                🔓
+                                <ul style="font-size: .5em">
+                                    <li class="fragment">Security</li>
+                                    <li class="fragment">Nasłuchiwanie na sygnały i przeszkadzanie zespołom</li>
+                                    <li class="fragment">Pomoc w wymyślaniu protokołu komunikacji</li>
+                                    <li class="fragment">Dalej: pomoc w zabezpieczeniu komunikacji z gniazdkami</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <aside class="notes">
+                    <ol>
+                        <li>BG, PZ</li>
+                        <li>PP, WG</li>
+                        <li>KB, KK</li>
+                    </ol>
+                </aside>
+            </section>
+            <section>
+                <h2>
+                    <span>Płytka</span>
+                </h2>
+                <img src="img/plytka.jpg" class="pure-img">
+            </section>
+            <section>
+                <h1>Demo</h1>
+                <h2>Płytka + zasilanie</h2>
+            </section>
+            <section>
+                <h2 style="margin: 0">
+                    <span>Arduino</span>
+                </h2>
+                <img src="img/promininano.png" class="pure-img" style="width: 50%">
+                <div>
+                    <ul>
+                        <li class="fragment">Pro mini</li>
+                        <li class="fragment">Nano</li>
+                    </ul>
+                </div>
+            </section>
+            <section>
+                <img src="img/ide.png" class="pure-img" style="width: 30%; margin: 0">
+                <div class="fragment">
+                    <ol>
+                        <li class="fragment">
+                            <a href="https://www.arduino.cc/en/Main/Software">arduino.cc</a>
+                        </li>
+                        <li class="fragment">Tools > Board, Tools > Port, Tools > Processor</li>
+                        <li class="fragment">File > Examples > 01.Basics > Blink</li>
+                        <li class="fragment">Upload!</li>
+                        <li class="fragment">Sketch > Include Library</li>
+                    </ol>
+                </div>
+            </section>
+            <section>
+                <img src="img/rpi.svg" class="pure-img" style="width: 2em">
+                <div>
+                    <ul>
+                        <li class="fragment">
+                            <a href="https://www.raspberrypi.org/">raspberrypi.org</a>
+                        </li>
+                        <li class="fragment">
+                            Można postawić serwer, można spróbować istniejącego rozwiązania, np. <a
+                                href="https://domoticz.com/">Domoticz</a>
+                            <ul>
+                                <li class="fragment">
+                                    <a href="https://www.domoticz.com/wiki/Raspberry_Pi">Domoticz - instrukcja</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <section>
+                <h2>
+                    <span>Nadajnik radiowy</span>
+                </h2>
+                <img class="pure-img fragment" src="img/nadajnik.png" style="width: 60%">
+            </section>
+            <section>
+                <h2>
+                    <span>Odbiornik</span>
+                </h2>
+                <img class="pure-img fragment" src="img/odbiornik-1.png" style="width: 60%">
+                <img class="pure-img fragment" src="img/odbiornik-2.png" style="width: 60%">
+            </section>
+            <section>
+                <h2>
+                    <span>Gniazdka na pilota</span>
+                </h2>
+                <img src="img/gniazdko.png" class="pure-img fragment" style="width: 40%">
+                <div>
+                    <img src="img/pilot-1.png" class="pure-img fragment" style="height: 150px">
+                    <img src="img/pilot-2.png" class="pure-img fragment" style="height: 150px">
+                </div>
+            </section>
+            <section>
+                <h2>
+                    <span>Biblioteki radiowe</span>
+                </h2>
+                <ul>
+                    <li class="fragment"><a href="https://github.com/sui77/rc-switch">rc-switch</a></li>
+                    <li class="fragment"><a href="https://github.com/milaq/rpi-rf">rpi-rf</a></li>
+                </ul>
+            </section>
+            <section>
+                <img src="img/ruch.jpg" class="pure-img">
+                <div>
+                    <ul>
+                        <li class="fragment">
+                            <a
+                                href="https://botland.com.pl/pl/czujniki-ruchu/1655-czujnik-ruchu-pir-hc-sr501-zielony.html?search_query=czujnik+ruchu&results=783">Botland</a>
+                        </li>
+                        <li class="fragment">Ruch? <span class="fragment">Stan wysoki!</span></li>
+                        <li class="fragment">Jak? <span class="fragment">Mapa w podczerwieni, te sprawy</span></li>
+                    </ul>
+                </div>
+            </section>
+            <section>
+                <h2>
+                    <span>LED</span>
+                </h2>
+                <a href="https://learn.adafruit.com/adafruit-arduino-lesson-2-leds/blinking-the-led">
+                    <img src="img/led.jpg" class="pure-img fragment" style="width: 30%">
+                </a>
+            </section>
+            <section data-background-image="img/ppap.gif"></section>
+        </div>
+    </div>
+    <script src="js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script>
+        const controls = (function () {
+            Reveal.initialize({
+                history: true,
+                // - null: Media will only autoplay if data-autoplay is present
+                autoPlayMedia: null,
+                transition: 'slide', // none/fade/slide/convex/concave/zoom
+                transitionSpeed: 'default', // default/fast/slow
+                backgroundTransition: 'slide', // none/fade/slide/convex/concave/zoom
+                dependencies: [
+                    { src: 'js/classList.js', condition: function () { return !document.body.classList; } },
+
+                    { src: 'js/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                    { src: 'js/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+
+                    // Syntax highlight for <code> elements
+                    { src: 'js/highlight.js', callback: function () { hljs.initHighlightingOnLoad(); } },
+
+                    // Zoom in and out with Alt+click
+                    { src: 'js/zoom.js' },
+
+                    { src: 'notes/notes.js' },
+
+                    { src: 'js/math.js' }
+                ]
+            });
+
+            document.querySelectorAll('.reveal .slides > section:not([data-background-image])').forEach(s => {
+                s.setAttribute('data-background-image', 'img/logo.png');
+                s.setAttribute('data-background-size', '240px');
+                s.setAttribute('data-background-position', '20px 20px');
+            });
+
+            return {
+                evalCode: function (btn) {
+                    eval(btn.previousElementSibling.innerText);
+                }
+            }
+        })();
+    </script>
+</body>
+
+</html>
