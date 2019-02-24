@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="description" content="Presentation">
+    <meta name="keywords" content="presentation">
+    <meta name="author" content="mat3e">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/blood.css">
+    <link rel="stylesheet" href="css/idea.css">
+    <link rel="stylesheet" href="css/fontawesome.css">
+    <style>
+        #header-margin {
+            text-align: left;
+            border-left: solid .25em white;
+            line-height: .85;
+            padding-left: .25em;
+        }
+
+        #header-logo {
+            width: 200px;
+            height: 200px;
+            background: url('img/warsawjs.svg') no-repeat;
+
+            top: -4em;
+            right: 0;
+            position: absolute;
+            background-size: contain;
+        }
+
+        #about-me {
+            background: rgba(255, 255, 255, .75);
+            margin-top: -5em;
+            list-style-type: none;
+            float: left;
+            padding-left: .5em;
+            padding-right: .5em;
+        }
+
+        .slides section img.pure-img {
+            border: none;
+            box-shadow: none;
+            background: none;
+            margin: 0;
+        }
+
+        code[contenteditable="true"] {
+            border: 0;
+            outline: 0;
+        }
+
+        .slides section pre {
+            margin-bottom: 0;
+        }
+
+        .slides section pre+button {
+            cursor: pointer;
+
+            font-size: .65em;
+            font-weight: 100;
+            -webkit-font-smoothing: antialiased;
+
+            color: white;
+            background: rgb(175, 30, 35);
+
+            padding: 0 3px;
+            border: transparent;
+            border-radius: 4px;
+        }
+
+        .slides section a .stripped-img {
+            border: none;
+            margin: 0;
+            box-shadow: none;
+            background-color: rgba(255, 255, 255, 0);
+        }
+
+        .slides section a .stripped-img:hover {
+            border: none;
+            margin: 0;
+            box-shadow: none;
+            background-color: rgba(255, 255, 255, 0);
+        }
+
+        .slides section .comment {
+            margin-top: -20px;
+            margin-bottom: 20px;
+            color: gray;
+        }
+
+        .reveal .slides section .fragment.replace {
+            transition: none;
+            display: inline-block;
+        }
+
+        .reveal .slides section .fragment.fade-out.visible.replace {
+            display: none;
+        }
+
+        .reveal .slides section .fragment.fade-in.replace {
+            display: none;
+        }
+
+        .reveal .slides section .fragment.fade-in.visible.replace {
+            display: inline-block;
+        }
+
+        .reveal .slides section .fragment.highlight-red.visible {
+            color: #dd5566;
+        }
+    </style>
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section data-background-image>
+                <section data-background-image>
+                    <div id="header-margin">
+                        <h1 style="margin: 0">Angular</h1>
+                        <h3 style="margin: 0">nowoczesny framework</h3>
+                    </div>
+                    <div id="header-logo"></div>
+                </section>
+                <section data-background-image="img/bg-hd.jpg" data-background-transition="zoom">
+                    <ul id="about-me">
+                        <li>
+                            <a href="https://www.linkedin.com/in/mateusz-chrzonstowski/">
+                                <i class="fab fa-linkedin"
+                                    style="color: #0077B5; background-color: #FFF; line-height: .75em"></i>
+                                /mateusz-chrzonstowski
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://twitter.com/_mat3e_">
+                                <i class="fab fa-twitter-square"
+                                    style="background-color: #1DA1F2; color: #FFF; line-height: .75em"></i>
+                                /_mat3e_
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.reddit.com/user/_mat3e_">
+                                <i class="fab fa-reddit-square"
+                                    style="background-color: #FF4500; color: #FFF; line-height: .75em"></i>
+                                /_mat3e_
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/mat3e/">
+                                <i class="fab fa-github-square"
+                                    style="color: #24292E; background-color: #FFF; line-height: .75em"></i>
+                                /mat3e
+                            </a>
+                            <ul class="fragment" style="list-style-type: none; line-height: 1">
+                                <li>
+                                    <a style="font-size: .5em; font-weight: bold;"
+                                        href="https://mat3e.github.io/talks/angular-workshop/WarsawJS.html">
+                                        mat3e.github.io/talks
+                                        <div style="padding-left: 1em; margin-bottom: 1em;">
+                                            /angular-workshop/WarsawJS.html</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+                <section data-background-image="img/meet.jpg" data-background-color="#fff"
+                    data-background-size="contain">
+                    <h2 style="margin-top: -3em">Poznajmy się</h2>
+                    <aside class="notes">
+                        <ul>
+                            <li>nazwiska</li>
+                            <li>kto w czym programował</li>
+                        </ul>
+                        <b>UWAGA</b> ktoś z grupy będzie prezentował swoje dzieło
+                        <br>
+                        workshop-29-1
+                    </aside>
+                </section>
+            </section>
+            <section>
+                <h2>
+                    <span>0. Zanim zaczniemy</span>
+                </h2>
+                <div class="fragment">
+                    <img src="img/matrix.png" class="pure-img">
+                </div>
+                <ul>
+                    <li class="fragment">Sprawdzenie, czy posiadamy <a href="https://nodejs.org/en/">Node.js</a>:
+                        <pre style="margin: 0; width: 100%;"><code class="bash">node -v</code></pre>
+                    </li>
+                    <li class="fragment">Sprawdzenie, czy posiadamy <a href="https://www.npmjs.com/">npm</a>:
+                        <pre style="margin: 0; width: 100%;"><code class="bash">npm -v</code></pre>
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <img src="img/node-npm.jpg" class="pure-img">
+                <ul>
+                    <li class="fragment">Node.js<span class="fragment"> - środowisko uruchomieniowe JS-a; uruchomienie
+                            JS-a poza przeglądarką</span></li>
+                    <li class="fragment">npm<span class="fragment"> - Node Package Manager; narzędzie do pobierania
+                            zależności z <a href="https://www.npmjs.com/">npmjs.com</a></span></li>
+                </ul>
+            </section>
+            <section>
+                <div>
+                    <img src="img/angularjs.jpg" style="width: 45%">
+                </div>
+                <div class="fragment"><img src="img/angularjsw.svg" class="pure-img" style="height: 1.5em"></div>
+                <div class="fragment"><img src="img/angular.svg" class="pure-img" style="height: 2em"></div>
+
+                <aside class="notes">
+                    Utrzymywane przez Google'a
+                    <br>
+                    A2 dodał zmiany, zmiany, zmiany i jeszcze raz poprawki
+                </aside>
+            </section>
+            <section>
+                <h2>
+                    <span>1. Start!</span>
+                </h2>
+                <ol>
+                    <li class="fragment">
+                        Globalna instalacja narzędzia:
+                        <pre style="margin: 0; width: 100%;"><code class="bash">npm i -g @angular/cli</code></pre>
+                    </li>
+                    <li class="fragment">
+                        Użycie:
+                        <pre
+                            style="margin: 0; width: 100%;"><code class="bash">ng new warsawjs-workshop-29-movies</code></pre>
+                        <ul>
+                            <li class="fragment">Wybieramy domyślne opcje (enter, enter)</li>
+                        </ul>
+                    </li>
+                </ol>
+                <aside class="notes">Tłumaczyć krok po kroku - co dzieje się w instrukcji</aside>
+            </section>
+            <section>
+                <h2>
+                    <span>Kilka wyjaśnień</span>
+                </h2>
+                <ul>
+                    <li class="fragment">CLI = Command Line Interface</li>
+                    <li class="fragment">Generator aplikacji
+                        <ul>
+                            <li class="fragment">Dociąga wiele narzędzi</li>
+                            <li class="fragment">Konfiguruje jak trzeba</li>
+                            <li class="fragment">Opakowuje w prostsze mechanizmy</li>
+                            <li class="fragment">Tworzy zgodnie z najlepszymi praktykami i zaleceniami</li>
+                        </ul>
+                    </li>
+                    <li class="fragment">Workspace, projekty</li>
+                </ul>
+                <aside class="notes">Angular nam zdejmuje z głowy wiele narzędzi (wyborów), a CLI jeszcze więcej</aside>
+            </section>
+            <section data-background-image="img/vscode.png" data-background-size="contain">
+                <aside class="notes">
+                    Otworzyć wszystko w VS Code; opowiedzieć o @types np.
+                    <br>
+                    <a href="https://angular.io/guide/file-structure">angular.io/guide/file-structure</a>
+                </aside>
+            </section>
+            <section>
+                <h2>
+                    <span>2. Uruchomienie!</span>
+                </h2>
+                <ol>
+                    <li class="fragment">Możemy odpalać używając poleceń <code>ng</code>, np.
+                        <pre style="margin: 0; width: 100%;"><code class="bash">ng serve</code></pre>
+                    </li>
+                    <li class="fragment">Możemy odpalać skryptami z package.json</li>
+                    <li class="fragment">Zmodyfikować skrypt <code>start</code> z package.json - dopisać opcję
+                        <code>--open</code></li>
+                    <li class="fragment">Uruchomić aplikację z konsoli:
+                        <pre style="margin: 0; width: 100%;"><code class="bash">npm start</code></pre>
+                    </li>
+                </ol>
+                <aside class="notes">Tłumaczyć krok po kroku - co dzieje się w instrukcji</aside>
+            </section>
+            <section>
+                <h2>
+                    <span>Kilka wyjaśnień</span>
+                </h2>
+                <ul>
+                    <li class="fragment">CLI używa narzędzi webpack oraz TypeScript</li>
+                    <li class="fragment">Webpack analizuje wszystkie pliki i buduje z nich pliki wynikowe
+                        <ul>
+                            <li class="fragment">Możliwe do uruchomienia w przeglądarce</li>
+                        </ul>
+                    </li>
+                    <li class="fragment">Narzędzie <code>webpack-dev-server</code> uruchamia apkę i reaguje na zmiany w
+                        kodzie</li>
+                    <li class="fragment">Analiza plików .ts? <span class="fragment">Użycie TypeScripta!</span></li>
+                </ul>
+            </section>
+            <section>
+                <a href="https://kahoot.it/">
+                    <img src="img/kahoot.svg" class="pure-img">
+                </a>
+                <aside class="notes">
+                    node, npm, cli, struktura
+                </aside>
+            </section>
+            <section>
+                <h2>
+                    <span>3. Komponent!</span>
+                </h2>
+                <ol>
+                    <li class="fragment">W pliku app.component.html podmienić "Welcome to" na "Witaj w"</li>
+                    <li class="fragment">Zobaczyć przeglądarkę</li>
+                    <li class="fragment">W pliku app.component.ts zmienić wartość pola <code>title</code> na
+                        "WarsawJS-Movies"
+                    </li>
+                    <li class="fragment">Co się zmieniło w przeglądarce?</li>
+                </ol>
+            </section>
+            <section>
+                <h2>
+                    <span>Kilka wyjaśnień</span>
+                </h2>
+                <ul>
+                    <li class="fragment">Komponenty budują naszą aplikację</li>
+                    <li class="fragment">Łączą kawałek HTML-a z JavaScriptem i CSS-em
+                        <ul>
+                            <li class="fragment">Widzisz to połączenie?</li>
+                        </ul>
+                    </li>
+                    <li class="fragment">To, co jest w <code>AppComponent</code> (plik app.component.ts),
+                        można "osadzić" w HTML-u (app.component.html)</li>
+                </ul>
+            </section>
+            <section>
+                <h2 style="margin: 0">
+                    <span>4. Więcej!</span>
+                </h2>
+                <ol>
+                    <li class="fragment">W app.component.ts dopisać pod linijką z <code>title</code>:
+                        <pre style="margin: 0; width: 100%;"><code class="typescript">test = 'nowości';</code></pre>
+                    </li>
+                    <li class="fragment">Czy coś się zmieniło w przeglądarce?</li>
+                    <li class="fragment">W pliku app.component.html dodać <code>{{test}}</code> np. zamiast linijki z
+                        img</li>
+                    <li class="fragment">Co się zmieniło w przeglądarce?</li>
+                    <li class="fragment">W app.component.ts dopisać:
+                        <pre
+                            style="margin: 0; width: 100%;"><code class="typescript">onClick() { alert('Klik, klik!'); }</code></pre>
+                    </li>
+                    <li class="fragment">W app.component.html zmodyfikować <code>&lt;h1></code>:
+                        <pre style="margin: 0; width: 100%;"><code class="html">&lt;h1 (click)="onClick()"></code></pre>
+                    </li>
+                    <li class="fragment">Bonus: w app.component.css dodać:
+                        <pre style="margin: 0; width: 100%;"><code class="css">h1 { cursor: pointer; }</code></pre>
+                    </li>
+                </ol>
+            </section>
+            <section>
+                <a href="https://kahoot.it/">
+                    <img src="img/kahoot.svg" class="pure-img">
+                </a>
+                <aside class="notes">komponent</aside>
+            </section>
+            <section>
+                <h2>
+                    <span>TypeScript</span>
+                </h2>
+                <ul>
+                    <li class="fragment">"Nadzbiór" języka JavaScript</li>
+                    <li class="fragment">Dodaje statyczne typowanie do JavaScripta</li>
+                    <li class="fragment">Pozwala używać nowych instrukcji JS i zamieniać je na starszy kod, np. dla
+                        starych przeglądarek
+                        <ul>
+                            <li class="fragment">Zamienia również "przyszłe" instrukcje, np. dekoratory</li>
+                        </ul>
+                    </li>
+                    <li class="fragment">Jak? <span class="fragment">Dodatkowy krok - kompilacja ("tłumaczenie" z TS na
+                            JS)</span>
+                        <ul>
+                            <li class="fragment">Wykonywane sprawdzenia/konwersje</li>
+                        </ul>
+                    </li>
+                </ul>
+                <aside class="notes">
+                    <ul>
+                        <li>Poprawny kod JS jest poprawnym TS</li>
+                        <li>Statyczne typowanie = typ raz zdefiniowany ma być utrzymany; let a = 7; // to ma być number
+                            i już i można to podkreślić nawet bardziej</li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <h2>
+                    <span>5. Klasa (TypeScript)</span>
+                </h2>
+
+                <ol>
+                    <li class="fragment">Utworzyć folder "movie" w folderze "app"</li>
+                    <li class="fragment">Dodać tam plik "movie.ts"</li>
+                    <li class="fragment">
+                        Utworzyć tam nową klasę:
+                        <pre style="margin: 0; width: 100%;"><code data-trim contenteditable="true" class="typescript">
+                            export class Movie {
+                                id: number;
+                                title: string;
+                                description: string;
+                                url: string;
+                            }
+                        </code></pre>
+                    </li>
+                </ol>
+                <aside class="notes">
+                    Opowiedzieć co za rzeczy są w klasie, na czym to polega - definicja dla obiektu; człowiek i
+                    konkretna instancja człowieka
+                    <br>
+                    Taka definicja klasy jest możliwa w TS - mamy typy i pola
+                </aside>
+            </section>
+            <section>
+                <h2>
+                    <span>Dekoratory</span>
+                </h2>
+                <pre class="fragment"><code data-trim contenteditable="true" class="typescript">
+                    import { Component, NgModule } from '@angular/core';
+
+                    @NgModule({ /* opcje */ })
+                    export class AppModule { }
+
+                    @Component({ /* opcje */ })
+                    export class AppComponent {
+                        /* ... */
+                    }
+                </code></pre>
+                <ul>
+                    <li class="fragment">Dodają nowe właściwości do istniejących klas</li>
+                    <li class="fragment">Angularowy sposób na konfigurację</li>
+                </ul>
+                <aside class="notes">Wejść w apkę i pokazać opcje - co zostało podane w NgModule i co w Component
+                </aside>
+            </section>
+            <section>
+                <h2 style="margin: 0">
+                    <span>6. Nowy!</span>
+                </h2>
+                <ol>
+                    <li class="fragment">Dodać nowy komponent:
+                        <pre
+                            style="margin: 0; width: 100%;"><code data-trim contenteditable="true" class="typescript">ng g component movie</code></pre>
+                    </li>
+                    <li class="fragment">Co zostało dodane? Które istniejące pliki się zmieniły?</li>
+                    <li class="fragment">Zmodyfikować app.component.html:
+                        <pre style="margin: 0; width: 100%;"><code data-trim contenteditable="true" class="html">
+                            &lt;div style="text-align:center">
+                                &lt;h1 (click)="onClick()">
+                                    Witaj w {{ title }}!
+                                &lt;/h1>
+                                {{test}}
+                            &lt;/div>
+                            &lt;app-movie>&lt;/app-movie>
+                        </code></pre>
+                    </li>
+                    <li class="fragment">Co widać w przeglądarce? Dlaczego?</li>
+                    <li class="fragment">Bonus: zmienić komponent, żeby używać go jako <code>&lt;wjs-movie></code>
+                        zamiast <code>&lt;app-movie></code></li>
+                </ol>
+            </section>
+            <section>
+                <a href="https://kahoot.it/">
+                    <img src="img/kahoot.svg" class="pure-img">
+                </a>
+                <aside class="notes">
+                    typescript, dekoratory, nowy komponent
+                </aside>
+            </section>
+            <section data-background-image="img/ppap.gif" data-background-size="cover"></section>
+            <section>
+                <h2 style="margin: 0">
+                    <span>7. Łączenie</span>
+                </h2>
+                <ol>
+                    <li class="fragment">W <code>MovieComponent</code> dodać:
+                        <pre style="margin: 0; width: 100%;"><code data-trim contenteditable="true" class="typescript">
+                            movie: Movie = {
+                              id: 1,
+                              title: 'Subiektywny przegląd sytuacji na froncie - meet.js Poznań',
+                              description: '"Nowy dzień, nowy framework". Jak żyć?',
+                              url: 'https://www.youtube.com/embed/Aybh_2pIi2I'
+                            }
+                        </code></pre>
+                    </li>
+                    <li class="fragment">Na górze w movie.component.ts dodać jeszcze:
+                        <pre style="margin: 0; width: 100%;"><code data-trim contenteditable="true" class="typescript">
+                            import { Movie } from './movie';
+                        </code></pre>
+                        <ul>
+                            <li class="fragment">Pokazujemy, skąd pochodzi klasa <code>Movie</code></li>
+                        </ul>
+                    </li>
+                    <li class="fragment">Zmodyfikować movie.component.html:
+                        <pre style="margin: 0; width: 100%"><code data-trim contenteditable="true" class="html" style="font-size: .75em; line-height: 1.1">
+                            &lt;h1>{{movie.title}}&lt;/h1>
+                            &lt;iframe width="560" height="315" src="{{movie.url}}" frameborder="0" 
+                              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                            &lt;/iframe>
+                            &lt;p>{{movie.description}}&lt;/p>
+                        </code></pre>
+                    </li>
+                    <li class="fragment">Co widać w przeglądarce? Co w konsoli przeglądarki?</li>
+                </ol>
+                <aside class="notes">Po kolei - co oznacza która linijka HTML-a
+                    <br>
+                    Fajniej by było mieć obrazki, a filmik dopiero później, po kliknięciu
+                </aside>
+            </section>
+            <section>
+                <h2>
+                    <span>Building Blocks</span>
+                </h2>
+                <ul>
+                    <li class="fragment" data-fragment-index="1"><span class="fragment highlight-red"
+                            data-fragment-index="6">Moduły</span></li>
+                    <li class="fragment" data-fragment-index="2"><span class="fragment highlight-red"
+                            data-fragment-index="6">Komponenty</span></li>
+                    <li class="fragment" data-fragment-index="3">Dyrektywy</li>
+                    <li class="fragment" data-fragment-index="4"><span class="fragment highlight-red"
+                            data-fragment-index="6">Serwisy</span></li>
+                    <li class="fragment" data-fragment-index="5">Pipe'y</li>
+                </ul>
+            </section>
+            <section>
+                <h2>
+                    <span>Zależności</span>
+                </h2>
+                <ul>
+                    <li class="fragment">Moduł zbiera w sobie komponenty, serwisy</li>
+                    <li class="fragment">Komponenty mogą używać serwisów</li>
+                    <li class="fragment">Angular umie "wstrzykiwać" serwisy i rzeczy, które ma zebrane w modułach</li>
+                </ul>
+            </section>
+            <section>
+                <h2 style="margin: 0">
+                    <span>8. zabezpieczenie</span>
+                </h2>
+                <ol>
+                    <li class="fragment">Do pliku movie.component.ts dołożyć
+                        <pre style="margin: 0; width: 100%;"><code data-trim contenteditable="true" class="typescript">
+                            import { DomSanitizer } from '@angular/platform-browser';
+                        </code></pre>
+                    </li>
+                    <li class="fragment">Zmodyfikować dalszą część:
+                        <pre style="margin: 0; width: 100%;"><code data-trim contenteditable="true" class="typescript">
+                            private sanitizer: DomSanitizer;
+
+                            constructor(sanitizer: DomSanitizer) {
+                                this.sanitizer = sanitizer;
+                            }
+                        </code></pre>
+                    </li>
+                    <li class="fragment">Dodać też funkcję <code>getWrappedMovieUrl</code>:
+                        <pre style="margin: 0; width: 100%;"><code data-trim contenteditable="true" class="typescript">
+                        getWrappedMovieUrl() {
+                            return this.sanitizer.bypassSecurityTrustResourceUrl(this.movie.url);
+                        }
+                        </code></pre>
+                    </li>
+                    <li class="fragment">
+                        W movie.component.html zmienić src:
+                        <pre style="margin: 0; width: 100%;"><code data-trim contenteditable="true" class="html">
+                        [src]="getWrappedMovieUrl()"
+                        </code></pre>
+                    </li>
+                </ol>
+                <aside class="notes">
+                    UWAGA! HARDKOR!
+                    <br>
+                    Pole prywatne = używane tylko w klasie
+                    <br>
+                    Wstrzykiwanie zależności - serwis jest dodany przez Angulara
+                    <br>
+                    [src] bo nie-string; teraz mamy obiekt, który mówi, że url bezpieczny
+                </aside>
+            </section>
+            <section>
+                <h2 style="margin: 0">
+                    <span>Bonusy</span>
+                </h2>
+                <ol>
+                    <li class="fragment">Zamiast pisać:
+                        <pre style="margin: 0; width: 100%;"><code data-trim contenteditable="true" class="typescript">
+                            private sanitizer: DomSanitizer;
+
+                            constructor(sanitizer: DomSanitizer) {
+                                this.sanitizer = sanitizer;
+                            }
+                        </code></pre>
+                        można:
+                        <pre style="margin: 0; width: 100%;"><code data-trim contenteditable="true" class="typescript">
+                            constructor(private sanitizer: DomSanitizer) {}
+                        </code></pre>
+                    </li>
+                    <li style="margin-top: .5em" class="fragment">Podobnie <code>get</code> jest częstym tematem i
+                        zamiast:
+                        <pre style="margin: 0; width: 100%;"><code data-trim contenteditable="true" class="typescript">
+                        getWrappedMovieUrl() { /* ... */ }
+                        </code></pre>
+                        można:
+                        <pre style="margin: 0; width: 100%;"><code data-trim contenteditable="true" class="typescript">
+                        get wrappedMovieUrl() { /* ... */ }
+                        </code></pre>
+                        <div class="fragment">
+                            i później:
+                            <pre style="margin: 0; width: 100%;"><code data-trim contenteditable="true" class="html">
+                        [src]="wrappedMovieUrl"
+                        </code></pre>
+                        </div>
+                    </li>
+                </ol>
+            </section>
+            <section>
+                <a href="https://kahoot.it/">
+                    <img src="img/kahoot.svg" class="pure-img">
+                </a>
+                <aside class="notes">
+                    service, component, module
+                </aside>
+            </section>
+            <section data-background-image="img/beard.png" data-background-size="contain">
+                <aside class="notes">Wiadomo, że liczy sie to, co w środku, ale wygląd apki też nie może odstraszać;
+                    UPIĘKSZYMY</aside>
+            </section>
+            <section>
+                <h2 style="margin: 0">
+                    <span>9. Material (1/2)</span>
+                </h2>
+                <ol>
+                    <li class="fragment">
+                        Dodać bibliotekę Angular Material:
+                        <pre style="margin: 0; width: 100%;"><code data-trim contenteditable="true" class="bash">
+                            ng add @angular/material
+                        </code></pre>
+                        <ul>
+                            <li class="fragment">HammerJS? No</li>
+                            <li class="fragment">Animations? Yes</li>
+                        </ul>
+                    </li>
+                    <li class="fragment">Co się zmieniło i gdzie?</li>
+                    <li class="fragment">Dodać do styles.css:
+                        <pre style="margin: 0; width: 100%;"><code data-trim contenteditable="true" class="css">
+                        @import "@angular/material/prebuilt-themes/pink-bluegrey.css";
+                        </code></pre>
+                    </li>
+                    <li class="fragment">Dopisać <code>class="mat-app-background"</code> do znacznika
+                        <code>&lt;body></code> w index.html</li>
+                    <li class="fragment">Zmodyfikować app.module.ts, dodać moduły:
+                        <pre style="margin: 0; width: 100%;"><code data-trim contenteditable="true" class="typescript" style="font-size: .75em; line-height: 1.1">
+                            import { MatCardModule } from '@angular/material/card';
+                            import { MatButtonModule } from '@angular/material/button';
+                        </code></pre>
+                        i użyć ich w opcji <code>imports</code>
+                    </li>
+                </ol>
+            </section>
+            <section>
+                <h2>
+                    <span>9. Material (2/2)</span>
+                </h2>
+                <ol>
+                    <li class="fragment">Zmodyfikować movie.component.html:
+                        <pre style="margin: 0; width: 100%;"><code data-trim contenteditable="true" class="html" style="font-size: .75em; line-height: 1.1">
+                                &lt;mat-card>
+                                  &lt;mat-card-header>
+                                    &lt;mat-card-title>{{movie.title}}&lt;/mat-card-title>
+                                  &lt;/mat-card-header>
+                                  &lt;iframe mat-card-image height="315" [src]="wrappedMovieUrl" frameborder="0"
+                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                  &lt;/iframe>
+                                  &lt;mat-card-content>
+                                    &lt;p>{{movie.description}}&lt;/p>
+                                  &lt;/mat-card-content>
+                                  &lt;mat-card-actions>
+                                    &lt;button mat-button>LIKE&lt;/button>
+                                  &lt;/mat-card-actions>
+                                &lt;/mat-card>
+                        </code></pre>
+                    </li>
+                    <li class="fragment">W movie.component.css dodać:
+                        <pre style="margin: 0; width: 100%;"><code data-trim contenteditable="true" class="css">
+                            mat-card { width: 560px; }
+                        </code></pre>
+                    </li>
+                </ol>
+                <aside class="notes">Że card raczej dla obrazków i tu mamy problem</aside>
+            </section>
+            <section>
+                <h2>
+                    <span>Angular Material</span>
+                </h2>
+                <ul>
+                    <li class="fragment">
+                        <a href="https://material.angular.io/">material.angular.io</a>
+                    </li>
+                    <li class="fragment">Zapewnienie ładnego wyglądu na stronie, zgodnego z Material Design od Google'a
+                    </li>
+                    <li class="fragment">Zestaw komponentów przygotowanych pod Angulara</li>
+                </ul>
+            </section>
+            <section>
+                <h2 style="margin: 0">
+                    <span>10. Rozbudowa (1/2)</span>
+                </h2>
+                <ol>
+                    <li class="fragment">Dodać kolejny <code>&lt;app-movie></code> (lub <code>wjs-movie</code>) do
+                        app.component.html</li>
+                    <li class="fragment">Co się wydarzyło?</li>
+                    <li class="fragment">Utworzyć nowy komponent <code>movies</code>:
+                        <pre
+                            style="margin: 0; width: 100%;"><code data-trim contenteditable="true" class="bash">ng g component movies</code></pre>
+                    </li>
+                    <li class="fragment">Użyć <code>Movie</code> w nowym komponencie:
+                        <pre style="margin: 0; width: 100%;"><code data-trim contenteditable="true" class="typescript" style="font-size: .5em; line-height: 1.05">
+                        import { Component, OnInit } from '@angular/core';
+                        import { Movie } from '../movie/movie';
+                        
+                        @Component({
+                          selector: 'wjs-movies',
+                          templateUrl: './movies.component.html',
+                          styleUrls: ['./movies.component.css']
+                        })
+                        export class MoviesComponent implements OnInit {
+                          movies: Movie[] = [{
+                            id: 1,
+                            title: 'Subiektywny przegląd sytuacji na froncie - meet.js Poznań',
+                            description: '"Nowy dzień, nowy framework". Jak żyć?',
+                            url: 'https://www.youtube.com/embed/Aybh_2pIi2I'
+                          }, {
+                            id: 2,
+                            title: 'Mateusz Chrzonstowski - Subiektywny przegląd front-endów |#49 IT Akademia j-labs',
+                            description: `"Nowy dzień, nowy framework". Słyszeliście o tym? 
+                                Mateusz jest jedną z osób śledzących front-endy i chce podzielić się z Wami swoimi obserwacjami.`,
+                            url: 'https://www.youtube.com/embed/KDTP9Dfkh1Q'
+                          }]
+                          constructor() {}
+                          ngOnInit() {}
+                        }
+                        </code></pre>
+                    </li>
+                </ol>
+            </section>
+            <section>
+                <h2 style="margin: 0">
+                    <span>10. Rozbudowa (2/2)</span>
+                </h2>
+                <ol>
+                    <li class="fragment">W movie.component.ts dodać do importów dodatkowo <code>Input</code> z
+                        <code>'@angular/core'</code></li>
+                    <li class="fragment">Zmienić pole <code>movie</code> (usunąć stare przypisanie):
+                        <pre
+                            style="margin: 0; width: 100%;"><code data-trim contenteditable="true" class="typescript">@Input() movie: Movie;</code></pre>
+                    </li>
+                    <li class="fragment">Wpisać do movies.component.html:
+                        <pre
+                            style="margin: 0; width: 100%;"><code class="html">&lt;wjs-movie *ngFor="let m of movies" [movie]="m">&lt;/wjs-movie></code></pre>
+                    </li>
+                    <li class="fragment">W app.component.html użyć nowego komponentu zamiast 2 użyć starego</li>
+                    <li class="fragment">Zobaczyć efekt w przeglądarce</li>
+                    <li class="fragment">Dodać do movies.component.css:
+                        <pre style="margin: 0; width: 100%;"><code class="css" data-trim contenteditable="true" style="font-size: .75em; line-height: 1.1">
+                        :host {
+                            display: flex;
+                            justify-content: space-around;
+                        }
+                        </code></pre>
+                    </li>
+                </ol>
+            </section>
+            <section>
+                <h2>
+                    <span>Kilka wyjaśnień</span>
+                </h2>
+                <ul>
+                    <li class="fragment"><code>movies</code> używa w swoim HTML-u komponentu <code>movie</code>, więc
+                        musi wstawić mu coś w <code>@Input</code>
+                        <pre
+                            style="margin: 0; width: 100%;"><code class="html">&lt;wjs-movie [movie]="currentMovie">&lt;/wjs-movie></code></pre>
+                    </li>
+                    <li class="fragment"><code>:host</code> pozwala nadać styl komponentowi, bezpośrednio</li>
+                </ul>
+                <aside class="notes">Pokazać to w inspektorze</aside>
+            </section>
+            <section>
+                <a href="https://kahoot.it/">
+                    <img src="img/kahoot.svg" class="pure-img">
+                </a>
+                <aside class="notes">
+                    angular material, propsy
+                </aside>
+            </section>
+            <section>
+                <h2 style="margin: 0">
+                    <span>11. Sprzątanie (1/2)</span>
+                </h2>
+                <ol>
+                    <li class="fragment">Stwórzmy serwis, który będzie udostępniał dane:
+                        <pre style="margin: 0; width: 100%;"><code data-trim contenteditable="true" class="bash">
+                        ng g service movies --flat=false
+                        </code></pre>
+                    </li>
+                    <li class="fragment">Co i gdzie powstało?</li>
+                    <li class="fragment">Przenieść filmy do serwisu, dodać nowy:
+                        <pre style="margin: 0; width: 100%;"><code class="typescript" data-trim contenteditable="true" style="font-size: .75em; line-height: 1.1">
+                            import { Injectable } from '@angular/core';
+                            import { Movie } from '../movie/movie';
+                            
+                            @Injectable({
+                              providedIn: 'root'
+                            })
+                            export class MoviesService {
+                            
+                              constructor() { }
+                            
+                              readMovies(): Promise&lt;Movie[]> {
+                                return Promise.resolve([{/* 1 */}, {/* 2 */}, {
+                                  id: 3,
+                                  title: 'Lessons from writing my own Angular utility lib',
+                                  description: `I had a dream. 
+                                    I wanted to create a popular open-source solution on top of Angular 2+`,
+                                  url: 'https://www.youtube.com/embed/AKZ_GShIg48'
+                                }])
+                              }
+                            }
+                        </code></pre>
+                    </li>
+                </ol>
+                <aside class="notes">Powiedzieć, co ten flat, Promise</aside>
+            </section>
+            <section>
+                <h2>
+                    <span>11. Sprzatanie (2/2)</span>
+                </h2>
+                <ol>
+                    <li class="fragment">W movies.component.ts zaimportować:
+                        <pre style="margin: 0; width: 100%;"><code data-trim contenteditable="typescript" class="typescript">
+                            import { MoviesService } from './movies.service';
+                        </code></pre>
+                    </li>
+                    <li class="fragment">Dodać <code>MoviesService</code> do <code>MoviesComponent</code> (tak jak
+                        <code>DomSanitizer</code> w <code>MovieComponent</code>)
+                    </li>
+                    <li class="fragment">Zmienić funkcję <code>ngOnInit</code>:
+                        <pre style="margin: 0; width: 100%;"><code data-trim contenteditable="typescript" class="typescript">
+                        async ngOnInit() {
+                          this.movies = await this.service.readMovies();
+                        }
+                        </code></pre>
+                    </li>
+                    <li class="fragment">Dodać <code>flex-wrap: wrap;</code> do stylu <code>:host</code>a w
+                        <code>movies.component.css</code></li>
+                </ol>
+            </section>
+            <section>
+                <h2>
+                    <span>Kilka wyjaśnień</span>
+                </h2>
+                <ul>
+                    <li class="fragment"><code>ngOnInit</code> - odpala się po konstruktorze, gdy <code>Input</code>y
+                        już znane; wołana raz</li>
+                    <li class="fragment"><code>Promise</code> - obietnica zwrócenia jakichś danych</li>
+                    <li class="fragment"><code>async</code>, <code>await</code> - czekanie aż obietnica będzie zawierać
+                        dane</li>
+                </ul>
+            </section>
+            <section>
+                <h2>
+                    <span>12. Dalej! (1/2)</span>
+                </h2>
+                <ol>
+                    <li class="fragment">Stworzyć plik movies.json w folderze "assets" i przenieść tam wszystkie filmy
+                    </li>
+                    <li class="fragment">Uwaga - trzeba trochę pozmieniać, np:
+                        <pre style="margin: 0; width: 100%;"><code data-trim contenteditable="typescript" class="json" style="font-size: .75em; line-height: 1.1">
+                          {
+                            "id": 1,
+                            "title": "Subiektywny przegląd sytuacji na froncie - meet.js Poznań",
+                            "description": "\"Nowy dzień, nowy framework\". Jak żyć?",
+                            "url": "https://www.youtube.com/embed/Aybh_2pIi2I"
+                          }
+                        </code></pre>
+                    </li>
+                    <li class="fragment">Dopisać do plików z folderu "environments":
+                        <pre style="margin: 0; width: 100%;"><code data-trim contenteditable="typescript" class="typescript">
+                            moviesUrl: 'http://localhost:4200/assets/movies.json'
+                        </code></pre>
+                    </li>
+                    <li class="fragment">Dodać do app.module.ts:
+                        <pre style="margin: 0; width: 100%;"><code data-trim contenteditable="typescript" class="typescript">
+                        import { HttpClientModule } from '@angular/common/http';
+                        </code></pre>
+                    </li>
+                    <li class="fragment">Dodać <code>HttpClientModule</code> do <code>imports</code></li>
+                </ol>
+            </section>
+            <section>
+                <h2>
+                    <span>12. Dalej! (2/2)</span>
+                </h2>
+                <ol>
+                    <li class="fragment">W movies.service.ts dodać importy:
+                        <pre style="margin: 0; width: 100%;"><code data-trim contenteditable="typescript" class="typescript">
+                            import { HttpClient } from '@angular/common/http';
+                            import { environment } from '../../environments/environment';
+                        </code></pre>
+                    </li>
+                    <li class="fragment">Użyć <code>HttpClient</code> w konstruktorze <code>MoviesService</code> (tak
+                        jak
+                        <code>DomSanitizer</code> w <code>MovieComponent</code>)
+                    </li>
+                    <li class="fragment">Zmienić funkcję <code>readMovies</code> na:
+                        <pre style="margin: 0; width: 100%;"><code data-trim contenteditable="typescript" class="typescript">
+                        return this.http.get&lt;Movie[]>(environment.moviesUrl).toPromise();
+                        </code></pre>
+                    </li>
+                </ol>
+            </section>
+            <section>
+                <a href="https://kahoot.it/">
+                    <img src="img/kahoot.svg" class="pure-img">
+                </a>
+                <aside class="notes">
+                    json, http, env
+                </aside>
+            </section>
+            <section>
+                <h2>
+                    <span>13. Szukajka (1/2)</span>
+                </h2>
+                <ol>
+                    <li class="fragment">
+                        Dodać do app.module.ts:
+                        <pre style="margin: 0; width: 100%;"><code data-trim contenteditable="typescript" class="typescript">
+                        import { FormsModule } from '@angular/forms';
+                        import { MatButtonModule } from '@angular/material/button';
+                        </code></pre>
+                    </li>
+                    <li class="fragment">Zmienić <code>movies</code> w movies.component.ts:
+                        <pre style="margin: 0; width: 100%;"><code data-trim contenteditable="typescript" class="typescript">
+                            private movies: Movie[] = [];
+                        </code></pre>
+                    </li>
+                    <li class="fragment">Dodać tam nową właściwość:
+                        <pre style="margin: 0; width: 100%;"><code data-trim contenteditable="typescript" class="typescript">
+                            get filteredMovies() {
+                                return this.movies
+                                  .filter(m => m.title.toLowerCase()
+                                    .includes(this.searchTitle.toLowerCase()));
+                            }
+                        </code></pre>
+                    </li>
+                </ol>
+            </section>
+            <section>
+                <h2>
+                    <span>13. Szukajka (2/2)</span>
+                </h2>
+                <ol>
+
+                    <li class="fragment">Zmodyfikować movies.component.html:
+                        <pre style="margin: 0; width: 100%;"><code data-trim contenteditable="typescript" class="html" style="font-size: .75em; line-height: 1">
+                            &lt;mat-form-field class="example-form-field">
+                                &lt;input matInput type="search" placeholder="Szukaj" [(ngModel)]="searchTitle">
+                            &lt;/mat-form-field>
+                            &lt;main>
+                                &lt;wjs-movie *ngFor="let m of filteredMovies" [movie]="m">&lt;/wjs-movie>
+                            &lt;/main>
+                        </code></pre>
+                    </li>
+                    <li class="fragment">
+                        I movies.component.css:
+                        <pre style="margin: 0; width: 100%;"><code data-trim contenteditable="typescript" class="css" style="font-size: .75em; line-height: 1">
+                        mat-form-field {
+                            display: block;
+                            width: 20em;
+                            margin: 0 auto;
+                        }
+                        
+                        main {
+                            display: flex;
+                            flex-wrap: wrap;
+                            justify-content: space-around;
+                        }
+                        </code></pre>
+                    </li>
+                </ol>
+            </section>
+            <section>
+                <h2>
+                    <span>Rozwój?</span>
+                </h2>
+                <ul>
+                    <li class="fragment">Dodać filmom nową właściwość - adres obrazka</li>
+                    <li class="fragment">Wyświetlać tylko obrazki, a film dopiero po kliknięciu w obrazek/przycisk</li>
+                    <li class="fragment">Użyć np. <a
+                            href="https://angular.io/guide/displaying-data#conditional-display-with-ngif"><code>*ngIf</code></a>
+                    </li>
+                </ul>
+                <aside class="notes">Jakiś switch, który daje obrazek lub film</aside>
+            </section>
+            <section>
+                <p>
+                    <a style="font-weight: bold;"
+                        href="http://bit.ly/warsawjs-workshop-29-ankieta">http://bit.ly/warsawjs-workshop-29-ankieta</a>
+                </p>
+                <p class="fragment">
+                    <a href="https://mat3e.github.io/talks/angular-workshop/WarsawJS.html">
+                        mat3e.github.io/talks/angular-workshop/WarsawJS.html
+                    </a>
+                </p>
+                <ul class="fragment">
+                    <li>
+                        <a href="https://www.linkedin.com/in/mateusz-chrzonstowski/">
+                            <i class="fab fa-linkedin"
+                                style="color: #0077B5; background-color: #FFF; line-height: .75em"></i>
+                            /mateusz-chrzonstowski
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/_mat3e_">
+                            <i class="fab fa-twitter-square"
+                                style="background-color: #1DA1F2; color: #FFF; line-height: .75em"></i>
+                            /_mat3e_
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.reddit.com/user/_mat3e_">
+                            <i class="fab fa-reddit-square"
+                                style="background-color: #FF4500; color: #FFF; line-height: .75em"></i>
+                            /_mat3e_
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/mat3e/">
+                            <i class="fab fa-github-square"
+                                style="color: #24292E; background-color: #FFF; line-height: .75em"></i>
+                            /mat3e
+                        </a>
+                    </li>
+                </ul>
+            </section>
+        </div>
+    </div>
+    <script src="js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script>
+        const controls = (function () {
+            Reveal.initialize({
+                history: true,
+                // - null: Media will only autoplay if data-autoplay is present
+                autoPlayMedia: null,
+                transition: 'slide', // none/fade/slide/convex/concave/zoom
+                transitionSpeed: 'default', // default/fast/slow
+                backgroundTransition: 'slide', // none/fade/slide/convex/concave/zoom
+                dependencies: [
+                    { src: 'js/classList.js', condition: function () { return !document.body.classList; } },
+
+                    { src: 'js/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                    { src: 'js/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+
+                    // Syntax highlight for <code> elements
+                    { src: 'js/highlight.js', callback: function () { hljs.initHighlightingOnLoad(); } },
+
+                    // Zoom in and out with Alt+click
+                    { src: 'js/zoom.js' },
+
+                    { src: 'notes/notes.js' },
+
+                    { src: 'js/math.js' }
+                ]
+            });
+
+            document.querySelectorAll('.reveal .slides > section:not([data-background-image])').forEach(s => {
+                s.setAttribute('data-background-image', 'img/twitter.png');
+                s.setAttribute('data-background-size', '240px');
+                s.setAttribute('data-background-position', '20px 20px');
+            });
+
+            return {
+                evalCode: function (btn) {
+                    eval(btn.previousElementSibling.innerText);
+                }
+            }
+        })();
+    </script>
+</body>
+
+</html>
