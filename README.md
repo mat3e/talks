@@ -1,5 +1,7 @@
 ## 2019
-* Targi Kariera IT [16.03]: _Co ona ma, czego nie mam ja? React i jego klony_
+* > IT Career Summit [26.09]: _A ty jak wystawiasz swoje dane? GraphQL, OData i inne WSDL-e_
+* > WarsawJS Meetup #56 [10.04]: _Czwarty framework_
+* > Targi Kariera IT [16.03]: _Co ona ma, czego nie mam ja? React i jego klony_
 * meet.js Poznań 41 [12.02]: _Subiektywny przegląd sytuacji na froncie (początek 2019)_ [🔗](https://mat3e.github.io/talks/fe-overview/meetjs-pzn.html) [📽️](https://youtu.be/Aybh_2pIi2I)
 
 ## 2018
