@@ -402,12 +402,12 @@
                                     /** @jsx hyperapp.h */
                                     const Stars = ({repo}) => ({stars}, {init}) => {
                                         const url 
-                                        = `https://github.com/${repo}`;
+                                          = `https://github.com/${repo}`;
                                         return (
-                                        <a href={url} class="stars"
+                                          <a href={url} class="stars"
                                             oncreate={() => init(repo)}>
                                             {stars} ⭐
-                                        </a>
+                                          </a>
                                         );
                                     }
 
