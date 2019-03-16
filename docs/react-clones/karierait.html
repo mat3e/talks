@@ -414,10 +414,10 @@
                                     hyperapp.app(
                                         {stars: 0}, // state
                                         {
-                                        init: repo => async (s, {setStars}) => {
+                                          init: repo => async (s, {setStars}) => {
                                             setStars(await service.getStars(repo));
-                                        },
-                                        setStars: stars => state => ({stars})
+                                          },
+                                          setStars: stars => state => ({stars})
                                         }, // actions
                                         () => <Stars repo="jorgebucaran/hyperapp" />,
                                         document.getElementById('render3')
