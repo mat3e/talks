@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="description" content="Presentation">
+    <meta name="keywords" content="presentation">
+    <meta name="author" content="mat3e">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/blood.css">
+    <link rel="stylesheet" href="css/idea.css">
+    <link rel="stylesheet" href="css/fontawesome.css">
+    <style>
+        #header {
+            text-align: left;
+            font-size: .7em;
+        }
+
+        #header-logo {
+            width: 375px;
+            height: 80px;
+            background-image: url('img/twitter.png');
+            background-size: contain;
+
+            top: -4em;
+            right: 0;
+            position: absolute;
+        }
+
+        #header h1 {
+            line-height: 1;
+        }
+
+        code[contenteditable="true"] {
+            border: 0;
+            outline: 0;
+        }
+
+        .slides section pre {
+            margin-bottom: 0;
+        }
+
+        .slides section pre+button {
+            cursor: pointer;
+
+            font-size: .65em;
+            font-weight: 100;
+            -webkit-font-smoothing: antialiased;
+
+            color: white;
+            background: #a23;
+
+            padding: 0 3px 3px;
+            border: transparent;
+            border-radius: 4px;
+        }
+
+        #perspective a {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            width: 45%;
+            margin: 0 auto;
+        }
+
+        #perspective a img {
+            border: 0;
+            margin: 0;
+            box-shadow: none;
+        }
+
+        #about-me {
+            padding: 1em;
+            background-color: rgba(255, 255, 255, .75);
+            list-style-type: none;
+            margin-left: 0;
+            float: left;
+        }
+
+        #about-me ul {
+            list-style-type: none;
+            float: left;
+            margin-left: 0;
+        }
+
+        #about-me a {
+            color: #a23;
+        }
+
+        #about-me a:hover {
+            color: #dd5566;
+        }
+
+        .reveal section img.pure-img {
+            background: rgba(255, 255, 255, 0);
+            border: none;
+            box-shadow: none;
+            margin: 0;
+        }
+
+        .reveal .slides section .fragment.replace {
+            transition: none;
+            display: inline-block;
+        }
+
+        .reveal .slides section .fragment.fade-out.visible.replace {
+            display: none;
+        }
+
+        .reveal .slides section .fragment.fade-in.replace {
+            display: none;
+        }
+
+        .reveal .slides section .fragment.fade-in.visible.replace {
+            display: inline-block;
+        }
+
+        .reveal .slides section .fragment.fade-out.crossed.visible {
+            opacity: 1;
+            visibility: visible;
+            text-decoration-line: line-through;
+        }
+
+        .reveal section img.text-logo {
+            vertical-align: middle;
+            background: none;
+            box-shadow: none;
+            border: none;
+            height: 1em;
+            margin: 0;
+        }
+
+        .reveal .slides section td.long-text-cell {
+            font-size: .5em;
+            vertical-align: middle;
+        }
+
+        .reveal .slides section table.summary {
+            table-layout: fixed;
+            width: 100%;
+        }
+
+        .reveal .slides section table.summary tbody td {
+            width: 27%;
+        }
+
+        .reveal .slides section table.summary tbody td:first-child {
+            width: 19%;
+        }
+
+        .reveal .slides section .arrows-container {
+            display: flex;
+            align-items: end;
+            color: black;
+        }
+
+        .reveal .slides section .arrows-container>div {
+            flex-grow: 1;
+            flex-shrink: 0;
+            flex-basis: 0;
+        }
+
+        .reveal .slides section .arrows-container div .arrow {
+            background-image: url('img/arrow.svg');
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            text-align: left;
+            padding: .5em 0 .5em .5em;
+            color: white;
+        }
+
+        .reveal .slides section .arrows-container div .timeline-elem {
+            transform: rotate(-45deg);
+            margin-bottom: 1em;
+        }
+
+        .reveal .slides section h3 a:hover {
+            text-shadow: inherit;
+        }
+
+        .reveal .slides section a.wh-link {
+            color: white;
+        }
+
+        .reveal .slides section a.wh-link:hover {
+            color: #dd5566;
+        }
+
+        .reveal .slides section .fragment.visible.roll {
+            animation-name: roll;
+            animation-duration: 3s;
+            animation-fill-mode: both;
+        }
+
+        .reveal .slides .warn {
+            animation-name: redify;
+            animation-duration: 1s;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes roll {
+            0% {
+                opacity: 0;
+                transform: translate3d(-200%, 0, 0) rotate3d(0, 0, 1, -120deg);
+            }
+
+            50% {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate3d(200%, 0, 0) rotate3d(0, 0, 1, 120deg);
+            }
+        }
+
+        @keyframes redify {
+            0% {
+                color: white;
+            }
+
+            50% {
+                color: red;
+            }
+
+            100% {
+                color: white;
+            }
+        }
+    </style>
+    <script>
+        let link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section>
+                <section id="header" data-background-image="">
+                    <h1 style="margin-bottom: 0"><span style="font-size: .65em">Subiektywny przegląd</span></h1>
+                    <h2>sytuacji na froncie <span class="fragment">(początek 2019)</span></h2>
+                    <div id="header-logo"></div>
+                    <aside class="notes">
+                        Wartość - przegląd co jest obecnie warte uwagi i jak rozwijać apki. Według mnie
+                    </aside>
+                </section>
+                <section id="perspective" data-background-image="">
+                    <h5>
+                        <span>Perspektywa...</span>
+                        <span class="fragment" data-fragment-index="1"> ma znaczenie</span>
+                        <span class="fragment" data-fragment-index="2"> :)</span>
+                    </h5>
+                    <a href="https://mistrzowie.org/717022">
+                        <img src="img/perspektywa-1.jpg">
+                        <img src="img/perspektywa-2.jpg" class="fragment" data-fragment-index="1">
+                        <img src="img/perspektywa-3.jpg" class="fragment" data-fragment-index="2">
+                    </a>
+                </section>
+                <section data-background-image="img/bg-hd-new.jpg" data-background-transition="zoom">
+                    <ul id="about-me">
+                        <li>
+                            <ul>
+                                <li>
+                                    <a href="https://www.linkedin.com/in/mateusz-chrzonstowski/">
+                                        <i class="fab fa-linkedin"
+                                            style="color: #0077B5; background-color: #FFF; line-height: .75em"></i>
+                                        /mateusz-chrzonstowski
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://twitter.com/_mat3e_">
+                                        <i class="fab fa-twitter-square"
+                                            style="background-color: #1DA1F2; color: #FFF; line-height: .75em"></i>
+                                        /_mat3e_
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/mat3e/">
+                                        <i class="fab fa-github-square"
+                                            style="color: #24292E; background-color: #FFF; line-height: .75em"></i>
+                                        /mat3e
+                                    </a>
+                                </li>
+                                <li style="line-height: 1">&nbsp;</li>
+                                <li class="fragment" style="line-height: .75">
+                                    <a style="font-weight: bold; font-size: .75em"
+                                        href="https://mat3e.github.io/talks/fe-overview/ship-it.html">
+                                        mat3e.github.io/talks/<br><span
+                                            style="padding-left: 1em">fe-overview/ship-it.html</span>
+                                    </a>
+                                </li>
+                                <li style="line-height: 1">&nbsp;</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="fragment" style="padding: .1em; line-height: 1">
+                                <li>
+                                    <a href="https://www.udemy.com/fajny-javascript/?couponCode=OPENALL">
+                                        <img src="img/udemy.svg" class="pure-img" style="height: 1.5em;">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://allegro.tech/">
+                                        <img src="img/allegro-tech.svg" class="pure-img" style="height: 1.5em;">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://infoshareacademy.com/">
+                                        <img src="img/isa.png" class="pure-img" style="height: 1.5em;">
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <a href="https://i.redd.it/zlee3sbw80x01.png" data-fragment-index="3x"
+                        style="position: absolute; right: calc(50% - 257px); bottom: -40vh"
+                        class="fragment fade-out replace">
+                        <img src="img/all3small.jpg" class="pure-img">
+                    </a>
+                    <div style="position: absolute; right: calc(50% - 257px); bottom: -40vh"
+                        class="fragment fade-in replace" data-fragment-index="3">
+                        <div class="fragment fade-out replace" data-fragment-index="6">
+                            <a href="https://i.redd.it/zlee3sbw80x01.png" class="fragment fade-out replace"
+                                data-fragment-index="4">
+                                <img src="img/all3-2.png" class="pure-img">
+                            </a>
+                            <a href="https://i.redd.it/zlee3sbw80x01.png" class="fragment fade-in replace"
+                                data-fragment-index="4">
+                                <img src="img/all3-3.png" class="pure-img">
+                            </a>
+                        </div>
+                        <div class="fragment fade-in replace" data-fragment-index="10">
+                            <img src="img/all3small.jpg" class="pure-img fragment fade-out replace"
+                                data-fragment-index="11">
+                        </div>
+                    </div>
+                    <div class="fragment roll" data-fragment-index="1" data-autoslide="3000"
+                        style="position: absolute; top: 4em; z-index: 10; margin-left: -3em; color: lawngreen">
+                        <i class="fab fa-github fa-3x"></i>
+                        <i class="fas fa-star fa-3x"></i>
+                    </div>
+                    <div class="fragment roll" data-fragment-index="5" data-autoslide="3000"
+                        style="position: absolute; top: 4em; z-index: 10; margin-left: -3em; color: lawngreen">
+                        <i class="fab fa-github fa-3x"></i>
+                        <i class="fas fa-level-up-alt fa-3x"></i>
+                    </div>
+                    <div class="fragment roll" data-fragment-index="8" data-autoslide="3000"
+                        style="position: absolute; top: 4em; z-index: 10; margin-left: -3em; color: lawngreen">
+                        <i class="fab fa-npm fa-3x"></i>
+                        <i class="fas fa-download fa-3x"></i>
+                    </div>
+                    <div class="fragment" style="position: absolute; top: 0; left: calc(50% - 300px)"
+                        data-fragment-index="2">
+                        <a href="https://www.commitstrip.com/en/2018/08/03/the-most-exciting-game/"
+                            class="fragment fade-out replace" data-fragment-index="3">
+                            <img src="img/vvr.jpg" class="pure-img" style="width: 600px">
+                        </a>
+                    </div>
+                    <div class="fragment" style="position: absolute; top: 1em; left: calc(50% - 300px)"
+                        data-fragment-index="6">
+                        <a href="https://bestofjs.org/tags/framework/trending/last-12-months"
+                            class="fragment fade-out replace" data-fragment-index="9">
+                            <img src="img/increment-new.png" class="pure-img" style="width: 600px">
+                        </a>
+                    </div>
+                    <div class="fragment" style="position: absolute; top: 3em; left: calc(50% - 400px)"
+                        data-fragment-index="9">
+                        <a href="https://npm-stat.com/charts.html?package=vue&package=react&package=%40angular%2Fcore&from=2018-01-01&to=2019-03-12"
+                            class="fragment fade-out replace" data-fragment-index="10">
+                            <img src="img/npm-downloads.png" class="pure-img" style="width: 800px">
+                        </a>
+                    </div>
+                    <div class="fragment" style="position: absolute; top: 0; left: calc(50% - 300px); z-index: 100"
+                        data-fragment-index="11">
+                        <img src="img/hisbest.jpg" class="pure-img fragment fade-out replace" style="width: 600px"
+                            data-fragment-index="12">
+                    </div>
+                    <div class="fragment" style="position: absolute; top: 2em; left: calc(50% - 300px)"
+                        data-fragment-index="11">
+                        <img src="img/fire.gif" class="pure-img" style="width: 600px">
+                    </div>
+                    <div class="fragment" style="position: fixed; bottom: 0; right: 0" data-fragment-index="7">
+                        <img src="img/pikachu.png" class="pure-img fragment fade-out replace"
+                            style="width: 190px; height: 154px" data-fragment-index="9">
+                    </div>
+                    <aside class="notes">
+                        I można by się było pokusić o stwierdzenie, że sytuacja we front-endach wygląda tak
+                        (3 pokemony) i powiedziałbym tak, gdybym się nie przygotował do tej prelekcji, ale...
+                        <ul>
+                            <li>Liczba gwiazdek, https://hasvuepassedreactyet.surge.sh/ itd. -> Venozaur, w ogóle roar
+                            </li>
+                            <li>Ale gwiazdki to nie wszystko - angularjs ma więcej niż angular</li>
+                            <li>I nagle tak jak w Pokemonach - Hyperapp (Pikachu); mały, niepozorny, ale działa</li>
+                            <li>Jednak to wciąż za mało - wszyscy mieli uciekać z GH, coś tam się nie udało, ale dalej
+                                bym na tym nie polegał</li>
+                            <li>Jest też Preact; i że trochę zabiera Reactowi</li>
+                            <li>Ember > Vue (Bulbazaur)</li>
+                            <li>I ten mem - what tf bulbazaur is doing - his best; wspomnieć o v3 i TS itd.</li>
+                            <li>TS everywhere - create-react-app, Angular, Vue</li>
+                            <li>No i też fajne, bo wiemy jak Angularowi wyszła ewolucja i coś podobnego było w anime
+                            </li>
+                        </ul>
+                        <ol>
+                            <li>Preact 110k</li>
+                            <li>Angular 2M + 400k</li>
+                            <li>React 5,5M</li>
+                            <li>Vue 800k</li>
+                            <li>Hyperapp 4k</li>
+                            <li>Ember 120k</li>
+                        </ol>
+                    </aside>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3 style="margin-top: 0">
+                        <span>Mój wybór?</span>
+                    </h3>
+                    <ol>
+                        <li class="fragment" data-fragment-index="2">Czysty JS (Web Components)</li>
+                        <li class="fragment" data-fragment-index="3">Zależnie od humoru
+                            <ul>
+                                <li class="fragment" data-fragment-index="4">
+                                    <img src="img/hyperapp.svg" class="text-logo">
+                                    <span class="fragment" data-fragment-index="6">// micro-frameworki</span>
+                                </li>
+                                <li class="fragment" data-fragment-index="4">
+                                    <img src="img/vue.svg" class="text-logo">
+                                </li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <p>
+                        <img src="img/web-components.jpg" class="fragment pure-img" style="width: 70%"
+                            data-fragment-index="5">
+                    </p>
+                    <aside class="notes">
+                        O WC za chwilę, ale najpierw jeszcze jedna rzecz się tu pojawiła, już po raz kolejny dotykamy
+                        micro-frameworków, więc rozwiejmy
+                    </aside>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2 style="margin: 0">
+                        <span>Micro-frameworki</span>
+                    </h2>
+                    <div class="fragment">
+                        <a
+                            href="https://blog.npmjs.org/post/180868064080/this-year-in-javascript-2018-in-review-and-npms">Trend
+                            w JS</a>
+                    </div>
+                    <div class="fragment">
+                        <a href="https://www.npmjs.com/package/is-odd">
+                            <img src="img/odd.png" class="pure-img" width="80%" style="border-bottom: solid 3px white">
+                        </a>
+                    </div>
+                    <div class="fragment">
+                        <a href="https://www.npmjs.com/package/is-number">
+                            <img src="img/num.png" class="pure-img" width="80%">
+                        </a>
+                    </div>
+                    <aside class="notes">
+                        +400 pakietów dziennie do npm, Java: +100
+                    </aside>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2 style="margin: 0">
+                        <span class="warn">WARNING</span>
+                    </h2>
+                    <ul>
+                        <li class="fragment">
+                            <a href="https://azer.bike/journal/i-ve-just-liberated-my-modules/"><code>left-pad</code> w
+                                2016?</a>
+                        </li>
+                        <li class="fragment">Security++ (nie tylko npm, ale i GitHub)</li>
+                    </ul>
+                    <img src="img/gh-security.png" class="fragment pure-img" style="width: 32%">
+                    <aside class="notes">
+                        Node Security Platform, security audits
+                        <br>
+                        No to temat jest jasny, są frameworki, a teraz o glue code dla frameworków
+                    </aside>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2 style="margin-top: -1em;">
+                        <span>Web C<img src="img/wc-logo.png" class="text-logo"
+                                style="margin-top: -.2em">mponents</span>
+                    </h2>
+                    <div class="fragment" id="slide2">
+                        <pre><code class="javascript" data-trim contentEditable="true">
+                        class FullWebComp extends HTMLElement {
+                            constructor() {
+                                super();
+                                this.attachShadow({mode: 'closed'})
+                                    .appendChild(document
+                                                    .getElementById('h2-template')
+                                                    .content
+                                                    .cloneNode(true));
+                            }
+                        }
+                        customElements.define('full-web-comp', FullWebComp);
+                        </code></pre>
+                        <button onclick="controls.evalCode(this)" style="font-weight: bold">eval</button>
+                    </div>
+                    <full-web-comp></full-web-comp>
+                    <template id="h2-template">
+                        <style>
+                            h2 {
+                                color: red !important;
+                            }
+                        </style>
+                        <h2>superancki template: <code>style</code> + <code>h2</code></h2>
+                    </template>
+                    <aside class="notes">
+                        Shadow DOM = Vegas - co dzieje się w Shadow DOM, zostaje w Shadow DOM
+                        <br>
+                        Ogólnie w dłuższych prezkach to tutaj będzie o integrowaniu WC z istniejącymi frameworkami
+                        <br>
+                        W React'cie da się użyć naszego elementu; gorzej wypluwać WC z Reacta, ale o tym zrobię kiedyś
+                        osobne prezki
+                    </aside>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>
+                        <span>CanIUse?</span>
+                    </h2>
+                    <a href="https://www.webcomponents.org/">
+                        <img src="img/wc-tech.png" style="width: 80%">
+                    </a>
+                </section>
+            </section>
+            <section>
+                <section data-background-image="img/new-logo.png" data-background-size="contain"
+                    data-background-transition="zoom"></section>
+            </section>
+            <section>
+                <section>
+                    <h2 style="margin: 0">
+                        <span>Chromium?</span>
+                    </h2>
+                    <ul>
+                        <li class="fragment">Plotki o psuciu Edge'a - div na youtube</li>
+                        <li class="fragment">Chichot historii?</li>
+                    </ul>
+                    <img src="img/skype-new.png" class="fragment pure-img" style="width: 45%">
+                    <aside class="notes">
+                        MS kiedyś robił różne świństewka, że trzeba było używać IE, żeby odpalić jakąś jego stronę czy
+                        coś
+                        <br>
+                        Gdzie 2 się bije, tam trzeci dostaje
+                    </aside>
+                </section>
+            </section>
+            <section>
+                <section data-background-image="img/ff-why.png" data-background-size="contain"
+                    data-background-transition="zoom"></section>
+            </section>
+            <section>
+                <section data-background-image="img/game.jpg" data-background-size="cover"></section>
+            </section>
+            </section>
+            <section>
+                <section>
+                    <h1 style="margin: 0">95%</h1>
+                    <a href="https://read.acloud.guru/serverless-the-future-of-software-architecture-d4473ffed864"
+                        class="fragment">kodu to front przy podejściu serverless</a>
+                    <div class="fragment">FaaS + JS = ❤️</div>
+                    <aside class="notes">Te 5% na backendzie to może być JS</aside>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h1 style="margin: 0">46%</h1>
+                    <a href="https://blog.npmjs.org/post/180868064080/this-year-in-javascript-2018-in-review-and-npms"
+                        class="fragment">adopcji TS-a</a>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2 style="margin: 0">A co jeszcze słynie z typowania?</h2>
+                    <div class="fragment">GraphQL</div>
+                    <p class="fragment">
+                        <a href="https://hasura.io/">Hasura</a> - stawiamy GraphQL-a bezpośrednio na Postgresie i
+                        jedziemy
+                    </p>
+                    <p class="fragment">Backendless</p>
+                </section>
+            </section>
+            <section>
+                <section data-background-image="img/whynot.gif" data-background-size="cover"></section>
+            </section>
+            <section>
+                <section>
+                    <h2 style="margin: 0 auto">
+                        <a href="https://3factor.app/">3factor app</a>
+                    </h2>
+                    <img src="img/3factor.png">
+                    <div class="fragment">A w czym jest napisana <a
+                            href="https://github.com/hasura/3factor-example/">referencyjna apka</a>?
+                    </div>
+                    <aside class="notes">Ale to już pytanie retoryczne, bo jesteśmy na meet.js, więc wiadomo</aside>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h1 style="margin: 0">97%</h1>
+                    <a href="https://blog.npmjs.org/post/180868064080/this-year-in-javascript-2018-in-review-and-npms"
+                        class="fragment">kodu nowoczesnych aplikacji pochodzi z npm
+                    </a>
+                    <aside class="notes">Ale żeby nie było za różowo</aside>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2 class="fragment" data-fragment-index="3">Dziękuję</h2>
+                    <img src="img/redhat-small.jpeg" class="pure-img" style="width: 30%">
+                    <ul>
+                        <li class="fragment" data-fragment-index="1">
+                            Lista 10 trendów JS:
+                            <a href="https://mat3e.github.io/trendy">
+                                mat3e.github.io/trendy
+                            </a>
+                        </li>
+                        <li class="fragment" data-fragment-index="2">
+                            <a href="https://mat3e.github.io/talks/fe-overview/meetjs-pzn.html">
+                                mat3e.github.io/talks/fe-overview/meetjs-pzn.html
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+            </section>
+        </div>
+    </div>
+    <script src="js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script>
+        const controls = (function () {
+            Reveal.initialize({
+                history: true,
+                // - null: Media will only autoplay if data-autoplay is present
+                autoPlayMedia: null,
+                transition: 'slide', // none/fade/slide/convex/concave/zoom
+                transitionSpeed: 'default', // default/fast/slow
+                backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
+                dependencies: [
+                    { src: 'js/classList.js', condition: function () { return !document.body.classList; } },
+
+                    { src: 'js/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                    { src: 'js/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+
+                    // Syntax highlight for <code> elements
+                    { src: 'js/highlight.js', callback: function () { hljs.initHighlightingOnLoad(); } },
+
+                    // Zoom in and out with Alt+click
+                    { src: 'js/zoom.js' },
+
+                    { src: 'notes/notes.js' },
+
+                    { src: 'js/math.js' }
+                ]
+            });
+
+            document.querySelectorAll('.reveal .slides > section section:not([data-background-image])').forEach((s) => {
+                s.setAttribute('data-background-image', 'img/twitter.png');
+                s.setAttribute('data-background-size', '240px');
+                s.setAttribute('data-background-position', '.5em .5em');
+            });
+
+            return {
+                evalCode(btn) {
+                    let codeElem = btn.previousElementSibling;
+                    if (getComputedStyle(codeElem).display === 'none') {
+                        codeElem = codeElem.previousElementSibling;
+                    }
+                    eval(codeElem.innerText);
+                }
+            }
+        })();
+    </script>
+</body>
+
+</html>
