@@ -1,5 +1,6 @@
 ## 2019
 * > IT Career Summit [26.09]: _A ty jak wystawiasz swoje dane? GraphQL, OData i inne WSDL-e_
+* > infoShare [8-9.05]: _My personal front-end overview (2019)_
 * > WarsawJS Meetup 56 [10.04]: _Czwarty framework_
 * ship.it 3 [21.03]: _Subiektywny przegląd sytuacji na froncie (początek 2019)_ [📽️](https://www.facebook.com/ship.it.meetup/videos/vb.2128867470776026/256414715266689)
 * Targi Kariera IT [16.03]: _Co ona ma, czego nie mam ja? Biblioteka React i jej klony_
