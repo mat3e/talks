@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="description" content="Presentation">
+    <meta name="keywords" content="presentation">
+    <meta name="author" content="mat3e">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/blood.css">
+    <link rel="stylesheet" href="css/idea.css">
+    <link rel="stylesheet" href="css/fontawesome.css">
+    <style>
+        #header-margin {
+            text-align: left;
+            border-left: solid .25em white;
+            line-height: .85;
+            padding-left: .25em;
+        }
+
+        #header-logo {
+            width: 200px;
+            height: 200px;
+            background: url('img/warsawjs.svg') no-repeat;
+
+            top: -4em;
+            right: 0;
+            position: absolute;
+            background-size: contain;
+        }
+
+        #about-me {
+            padding: 1em;
+            background-color: rgba(255, 255, 255, .75);
+            list-style-type: none;
+            margin-left: 0;
+            float: left;
+        }
+
+        #about-me ul {
+            list-style-type: none;
+            float: left;
+            margin-left: 0;
+        }
+
+        #about-me a {
+            color: #a23;
+        }
+
+        #about-me a:hover {
+            color: #dd5566;
+        }
+
+        #perspective a {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            width: 45%;
+            margin: 0 auto;
+        }
+
+        #perspective a img {
+            border: 0;
+            margin: 0;
+            box-shadow: none;
+        }
+
+        .slides section img.pure-img {
+            border: none;
+            box-shadow: none;
+            background: none;
+            margin: 0;
+        }
+
+        code[contenteditable="true"] {
+            border: 0;
+            outline: 0;
+        }
+
+        .slides section pre {
+            margin-bottom: 0;
+        }
+
+        .slides section pre+button {
+            cursor: pointer;
+
+            font-size: .65em;
+            font-weight: 100;
+            -webkit-font-smoothing: antialiased;
+
+            color: white;
+            background: rgb(175, 30, 35);
+
+            padding: 0 3px;
+            border: transparent;
+            border-radius: 4px;
+        }
+
+        .slides section a .stripped-img {
+            border: none;
+            margin: 0;
+            box-shadow: none;
+            background-color: rgba(255, 255, 255, 0);
+        }
+
+        .slides section a .stripped-img:hover {
+            border: none;
+            margin: 0;
+            box-shadow: none;
+            background-color: rgba(255, 255, 255, 0);
+        }
+
+        .slides section .comment {
+            margin-top: -20px;
+            margin-bottom: 20px;
+            color: gray;
+        }
+
+        .reveal .slides section .fragment.replace {
+            transition: none;
+            display: inline-block;
+        }
+
+        .reveal .slides section .fragment.fade-out.visible.replace {
+            display: none;
+        }
+
+        .reveal .slides section .fragment.fade-in.replace {
+            display: none;
+        }
+
+        .reveal .slides section .fragment.fade-in.visible.replace {
+            display: inline-block;
+        }
+
+        .reveal .slides section .fragment.highlight-red.visible {
+            color: #dd5566;
+        }
+
+        .reveal .slides section table.summary {
+            table-layout: fixed;
+            width: 100%;
+        }
+
+        .reveal .slides section table.summary th {
+            text-align: center;
+        }
+
+        .reveal .slides section table.summary tbody td,
+        .reveal .slides section table.summary th {
+            width: 45%;
+        }
+
+        .reveal .slides section table.summary tbody td:nth-child(2),
+        .reveal .slides section table.summary th:nth-child(2) {
+            width: 9%;
+            vertical-align: middle;
+            text-align: center;
+            border-left: 1px solid;
+            border-right: 1px solid;
+        }
+
+        .reveal .slides section table.summary tbody td:not(:nth-child(2)) {
+            vertical-align: middle;
+            font-size: .5em;
+        }
+    </style>
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section data-background-image>
+                <section data-background-image>
+                    <div id="header-margin">
+                        <h1 style="margin: 0; font-size: 2.5em">Czwarty framework</h1>
+                    </div>
+                    <div id="header-logo"></div>
+                </section>
+                <section id="perspective" data-background-image="">
+                    <h5>
+                        <span>Perspektywa...</span>
+                        <span class="fragment" data-fragment-index="1"> ma znaczenie</span>
+                        <span class="fragment" data-fragment-index="2"> :)</span>
+                    </h5>
+                    <a href="https://mistrzowie.org/717022">
+                        <img src="img/perspektywa-1.jpg">
+                        <img src="img/perspektywa-2.jpg" class="fragment" data-fragment-index="1">
+                        <img src="img/perspektywa-3.jpg" class="fragment" data-fragment-index="2">
+                    </a>
+                </section>
+                <section data-background-image="img/bg-hd.jpg" data-background-transition="zoom">
+                    <ul id="about-me">
+                        <li>
+                            <ul>
+                                <li>
+                                    <a href="https://www.linkedin.com/in/mateusz-chrzonstowski/">
+                                        <i class="fab fa-linkedin"
+                                            style="color: #0077B5; background-color: #FFF; line-height: .75em"></i>
+                                        /mateusz-chrzonstowski
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://twitter.com/_mat3e_">
+                                        <i class="fab fa-twitter-square"
+                                            style="background-color: #1DA1F2; color: #FFF; line-height: .75em"></i>
+                                        /_mat3e_
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.reddit.com/user/_mat3e_">
+                                        <i class="fab fa-reddit-square"
+                                            style="background-color: #FF4500; color: #FFF; line-height: .75em"></i>
+                                        /_mat3e_
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/mat3e/">
+                                        <i class="fab fa-github-square"
+                                            style="color: #24292E; background-color: #FFF; line-height: .75em"></i>
+                                        /mat3e
+                                    </a>
+                                </li>
+                                <li style="line-height: 1">&nbsp;</li>
+                                <li class="fragment" style="line-height: .75">
+                                    <a style="font-weight: bold; font-size: .75em"
+                                        href="https://mat3e.github.io/talks/ha/WarsawJS.html">
+                                        mat3e.github.io/talks/ha/WarsawJS.html
+                                    </a>
+                                </li>
+                                <li style="line-height: 1">&nbsp;</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="fragment" style="padding: .1em; line-height: 1">
+                                <li>
+                                    <a href="https://www.udemy.com/fajny-javascript/?couponCode=OPENALL">
+                                        <img src="img/udemy.svg" class="pure-img" style="height: 1.5em;">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://allegro.tech/">
+                                        <img src="img/allegro-tech.svg" class="pure-img" style="height: 1.5em;">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://infoshareacademy.com/">
+                                        <img src="img/isa.png" class="pure-img" style="height: 1.5em;">
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+            </section>
+            <section>
+                <img src="img/all3small.jpg" class="pure-img">
+                <div class="fragment" style="position: fixed; bottom: 0; right: 0" data-fragment-index="1">
+                    <img src="img/pikachu.png" class="pure-img" style="width: 190px; height: 154px">
+                </div>
+                <aside class="notes">Czego tu brakuje?</aside>
+            </section>
+            <section>
+                <img src="img/preact.svg" class="pure-img">
+                <div style="position: absolute; top: 0; left: calc(50% - 325px)">
+                    <a class="fragment"
+                        href="https://medium.com/@shakyShane/hello-world-with-preact-jsx-typescript-6d70cf2ebf01">
+                        <img src="img/preactftw.jpg" style="width: 650px">
+                    </a>
+                </div>
+                <aside class="notes">
+                    <ul>
+                        <li>Co to?</li>
+                        <li>Kto używa?</li>
+                        <li>Gdyby nie ostatnie zdanie w opisie, można by było pomyśleć, że to o tym będzie</li>
+                        <li>Dlaczego? >40 alternative</li>
+                        <li>Słaby bo jest kopią reacta; nie ma co gadać i zawsze będzie gonił pierwowzór</li>
+                        <li>NoSQL vs. SQL</li>
+                    </ul>
+                    Ale nie będę mówił o Preact'cie, bo jest dosyć znanym tematem. A pokażę coś, co go zawstydzi jeśli
+                    chodzi o rozmiar. I w kwestiach rozmiaru:
+                </aside>
+            </section>
+            <section data-background-image="img/weight.jpg" data-background-transition="zoom">
+                <h3 style="color: #a23">React?</h3>
+                <h3 class="fragment" data-fragment-index="1" style="color: #a23">4,7 kB</span><span class="fragment"
+                        data-fragment-index="2">*</h3>
+                <br>
+                <h3 class="fragment" style="color: #a23">Preact 3,4 kB</h3>
+                <hr class="fragment" data-fragment-index="2">
+                <h4 class="fragment" data-fragment-index="2" style="color: #a23; text-align: left">*React-DOM 34 kB</h4>
+            </section>
+            <section>
+                <h2>Numer 4?</h2>
+                <h2 class="fragment">
+                    <i class="fab fa-github"></i>
+                    <i class="fas fa-star"></i>?
+                </h2>
+                <ol class="fragment">
+                    <li><img src="img/vue.svg" class="pure-img" style="height: .9em"></li>
+                    <li><img src="img/react.svg" class="pure-img" style="height: 1em"></li>
+                    <li><img src="img/angularjsw.svg" class="pure-img" style="height: 1em"></li>
+                    <li><img src="img/angular.svg" class="pure-img" style="height: 1.2em"></li>
+                </ol>
+                <div class="fragment">Backbone, Preact, Ember, Polymer, Hyperapp, ...</div>
+            </section>
+            <section>
+                <h2>
+                    <i class="fab fa-npm"></i>
+                    <i class="fas fa-download"></i>?
+                </h2>
+                <div class="fragment">
+                    <ol>
+                        <li><img src="img/react.svg" class="pure-img" style="height: 1em"></li>
+                        <li><img src="img/angular.svg" class="pure-img" style="height: 1.2em"></li>
+                        <li><img src="img/vue.svg" class="pure-img" style="height: .9em"></li>
+                        <li><img src="img/angularjsw.svg" class="pure-img" style="height: 1em"></li>
+                    </ol>
+                </div>
+                <aside class="notes">
+                    Tylko się zamieniają miejscami w tej pierwszej czwórce;
+                </aside>
+            </section>
+            <section data-background-image="img/boring.jpg" data-background-transition="zoom">
+                <aside class="notes">
+                    A wiemy, że AngularJS to martwy framework
+                </aside>
+            </section>
+            <section>
+                <h2>
+                    <i class="fab fa-github"></i>
+                    <i class="fas fa-level-up-alt"></i>!
+                </h2>
+                <div>
+                    <a class="fragment" href="https://bestofjs.org/tags/framework/trending/last-12-months"
+                        data-fragment-index="1">
+                        <img src="img/increment.png" style="width: 600px" class="fragment replace fade-out"
+                            data-fragment-index="2">
+                        <img src="img/increment2.png" style="width: 600px" class="fragment replace fade-in"
+                            data-fragment-index="2">
+                    </a>
+                </div>
+                <div class="fragment">
+                    dva, Preact, Svelte, Mithril
+                </div>
+                <aside class="notes">I to jest numer 4 od dawna w tym rankingu; wiem przynajmniej od września 2018:
+                    https://twitter.com/JorgeBucaran/status/1041130992424038400</aside>
+            </section>
+            <section>
+                <h2>1 kB <span class="fragment highlight-red">framework</span>?</h2>
+                <div>
+                    <img src="img/confused.png" class="pure-img">
+                </div>
+                <div class="fragment">React ~
+                    <a href="https://reactjs.org/">
+                        A JavaScript <span class="fragment highlight-blue">library</span> for building user interfaces
+                    </a>
+                </div>
+                <aside class="notes">
+                    <ul>
+                        <li>Szczegóły i filozoficzne dyskusje</li>
+                        <li>Framework = ramy na nasz kod</li>
+                        <li>React - wpasowuje się do naszej apki, Reduxa, MobX czy czego tam; biblioteka = SRP</li>
+                    </ul>
+                    A. Krzywda "biblioteka, co myślą że framework"; spoko, bo ma dobre reguły wypracowane i ludzie
+                    ładnie robią w tym
+                </aside>
+            </section>
+            <section data-background-image="img/hollywood.jpg" data-background-transition="zoom">
+                <h3><span style="color: #ccc">Don't call us, we'll call you</span></h3>
+                <img src="img/nosacz.jpg" class="pure-img fragment"
+                    style="position: absolute; top: 0; max-height: 375px; max-width: 522px; left: calc(50% - 261px)">
+                <aside class="notes">
+                    Polska wersja, taka z rozmów rekrutacyjnych: oddzwonimy do pana. Ale ja nie mam telefonu
+                    <br>I takie Reduxy to już trochę to
+                </aside>
+            </section>
+            <section>
+                <h2>Czyli?</h2>
+                <table class="summary">
+                    <thead>
+                        <tr>
+                            <th style="vertical-align: bottom">
+                                <img src="img/react.svg" class="pure-img" style="height: 1em">
+                            </th>
+                            <th>⚡</th>
+                            <th style="vertical-align: middle">
+                                <img src="img/hyperapp.svg" class="pure-img" style="height: .9em">
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="long-text-cell">
+                                <ul>
+                                    <li class="fragment" data-fragment-index="2">Facebook</li>
+                                    <li class="fragment" data-fragment-index="3">Społeczność</li>
+                                    <li class="fragment" data-fragment-index="4">Użycie</li>
+                                    <li class="fragment" data-fragment-index="5">Przełomowy, rozwijany</li>
+                                </ul>
+                            </td>
+                            <td class="fragment" data-fragment-index="1">👍🏻</td>
+                            <td class="long-text-cell">
+                                <ul>
+                                    <li class="fragment" data-fragment-index="6">Inspiracje: React, elm</li>
+                                    <li class="fragment" data-fragment-index="7">Własna droga, pragmatyzm</li>
+                                    <li class="fragment" data-fragment-index="8">Malutki rozmiar</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="long-text-cell">
+                                <ul>
+                                    <li class="fragment" data-fragment-index="10">Facebook</li>
+                                    <li class="fragment" data-fragment-index="11">Co jakiś czas coś "wywraca"</li>
+                                </ul>
+                            </td>
+                            <td class="fragment" data-fragment-index="9">👎🏻</td>
+                            <td class="long-text-cell">
+                                <ul>
+                                    <li class="fragment" data-fragment-index="12">Brak masy krytycznej (narzędzia,
+                                        biblioteki)</li>
+                                    <li class="fragment" data-fragment-index="13">Inne podejście</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="long-text-cell">
+                                <ul>
+                                    <li class="fragment" data-fragment-index="15">124k ⭐</li>
+                                    <li class="fragment" data-fragment-index="16">6M <i class="fas fa-download"></i>
+                                    </li>
+                                    <li class="fragment" data-fragment-index="17">38,7 kB 🏋🏻‍</li>
+                                </ul>
+                            </td>
+                            <td class="fragment" data-fragment-index="14">👀</td>
+                            <td class="long-text-cell">
+                                <ul>
+                                    <li class="fragment" data-fragment-index="15">16,4k ⭐</li>
+                                    <li class="fragment" data-fragment-index="16">4k <i class="fas fa-download"></i>
+                                    </li>
+                                    <li class="fragment" data-fragment-index="17">1,66 kB 🏋🏻‍</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="long-text-cell fragment" data-fragment-index="19">Pewniak, przyszłość</td>
+                            <td class="fragment" data-fragment-index="18">🤔</td>
+                            <td class="long-text-cell fragment">Mocno kibicuję, czekam na v2</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <aside class="notes">
+                    <ul>
+                        <li>HA ma globalny stan od razu wbudowany ~elm</li>
+                        <li>Z tym 1kB to oszukują, bo 1,66 i nie mają średników</li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <script>
+                    var service = {
+                        async getStars(repo) {
+                            const ghResp = await fetch(`https://api.github.com/repos/${repo}`);
+                            return (await ghResp.json()).stargazers_count;
+                        }
+                    }
+                </script>
+                <style>
+                    .reveal .slides section s {
+                        font-style: italic;
+                    }
+                </style>
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="text-align: center">
+                                <img src="img/react.svg" class="pure-img" style="height: 1em">
+                            </th>
+                            <th style="text-align: center">
+                                <img src="img/hyperapp.svg" class="pure-img" style="height: .9em">
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="fragment" data-fragment-index="1"
+                                style="width: 50%; padding-left: 0; padding-right: 0; vertical-align: bottom;">
+                                <pre style="width: 100%; margin: 0; box-shadow: none"><code style="max-height: 40em; font-size: .7em;  line-height: 1" class="javascript" data-trim contenteditable="true" id="react-target">
+                                    alert('hello world');
+                                </code></pre>
+                                <script type="text/babel" id="react-src">
+                                    const Stars = ({repo}) => {
+                                      const url = `https://github.com/${repo}`;
+                                      const stars = useGhStars(repo);
+                                      return (
+                                        <a href={url} className="stars">
+                                          {stars} ⭐
+                                        </a>
+                                      );
+                                    }
+
+                                    function useGhStars(repo) {
+                                      const [stars, setStars] = React.useState(0);
+                                      React.useEffect(() => {
+                                        async function fetchStars() {
+                                          setStars(await service.getStars(repo));
+                                        }
+                                        fetchStars();
+                                      }, [repo]);
+                                      return stars;
+                                    }
+
+                                    ReactDOM.render(
+                                      <Stars repo="facebook/react" />,  
+                                      document.getElementById('render-react')
+                                    );
+                                </script>
+                                <script>
+                                    srcToTarget('react');
+                                    function srcToTarget(id) {
+                                        document.getElementById(`${id}-target`).innerHTML = document.getElementById(`${id}-src`).innerHTML.replace(/</g, '&lt;');
+                                    }
+                                </script>
+                            </td>
+                            <td class="fragment" data-fragment-index="3"
+                                style="width: 50%; padding-left: 0; padding-right: 0; vertical-align: bottom;">
+                                <pre style="width: 100%; margin: 0; box-shadow: none"><code style="max-height: 40em; font-size: .7em;  line-height: 1" class="javascript" data-trim contenteditable="true" id="ha-target">
+                                    alert('hello world');
+                                </code></pre>
+                                <script type="text/babel" id="ha-src">
+                                    /** @jsx hyperapp.h */
+                                    const Stars = ({repo}) => ({stars}, {init}) => {
+                                        const url = `https://github.com/${repo}`;
+                                        return (
+                                          <a href={url} class="stars"
+                                            oncreate={() => init(repo)}>
+                                            {stars} ⭐
+                                          </a>
+                                        );
+                                    }
+
+                                    hyperapp.app(
+                                        {stars: 0}, // state
+                                        {
+                                          init: repo => async (s, {setStars}) => {
+                                            setStars(await service.getStars(repo));
+                                          },
+                                          setStars: stars => state => ({stars})
+                                        }, // actions
+
+
+
+
+                                        () => <Stars repo="jorgebucaran/hyperapp" />,
+                                        document.getElementById('render-ha')
+                                    );
+                                </script>
+                                <script>
+                                    srcToTarget('ha');
+                                </script>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="render-react" style="text-align: center"></td>
+                            <td id="render-ha" style="text-align: center"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <aside class="notes">
+                    view w ha (przedostatni parametr) też pobiera state i view tak naprawdę
+                    <br>
+                    i tak, wiem, że można effecty; ale większość apek raczej tego jeszcze nie ma
+                </aside>
+            </section>
+            <section>
+                <h2>Założenia <img src="img/hyperapp.svg" class="pure-img" style="height: 1em"></h2>
+                <ul>
+                    <li class="fragment">Stan i akcje przekazywane do większości funkcji
+                        <ul>
+                            <li class="fragment">~Redux/elm</li>
+                        </ul>
+                    </li>
+                    <li class="fragment">Brak komponentów klasowych</li>
+                    <li class="fragment">Prosty JSX, np. brak <code>className</code>, <code>onclick</code></li>
+                    <li class="fragment">Akcje z <i>side effectami</i>, asynchroniczne</li>
+                    <li class="fragment"><i>Merge'owanie</i> stanu</li>
+                    <li class="fragment">Specjalne <i>lifecycle events</i>, np. <code>oncreate</code></li>
+                    <li class="fragment">HOA<span class="fragment"> - Higher Order App :)</span></li>
+                </ul>
+            </section>
+            <section>
+                <h2 style="margin: 0">Społeczność</h2>
+                <ul>
+                    <li class="fragment">
+                        <a href="https://github.com/hyperapp/awesome-hyperapp">awesome-hyperapp</a>
+                    </li>
+                    <li class="fragment">
+                        <a href="https://github.com/jorgebucaran/hyperapp-router">hyperapp-router</a>
+                    </li>
+                    <li class="fragment">
+                        <a href="https://github.com/okwolf/hyperapp-fx">hyperapp-fx</a> - efekty
+                    </li>
+                    <li class="fragment">
+                        <a href="https://github.com/zaceno/hyperapp-context">hyperapp-context</a>
+                    </li>
+                    <li class="fragment">
+                        <a href="https://github.com/hyperstart/hyperapp-devtools">hyperapp-devtools</a>, <a
+                            href="https://hyperstart.io/">hyperstart.io</a>
+                    </li>
+                    <li class="fragment">
+                        <a href="https://github.com/andyrj/hyperapp-redux-devtools">hyperapp-redux-devtools</a>
+                    </li>
+                </ul>
+                <div class="fragment">
+                    <a href="https://blog.daftcode.pl/hyperapp-parcel-71823bd93f1c"><img src="img/tinyrick.jpeg"
+                            style="width: 300px"></a>
+                </div>
+            </section>
+            <section data-background-image="img/fire.jpg" data-background-transition="zoom">
+                <h2 style="color: #a23">Nowy dzień, nowy framework</h2>
+                <div class="fragment">
+                    <a href="https://github.com/jorgebucaran/hyperapp/pull/726">
+                        <img src="img/v2.png">
+                    </a>
+                </div>
+                <div class="fragment" style="text-shadow: -1px 0 #a23, 0 1px #a23, 1px 0 #a23, 0 -1px #a23;">
+                    Linii kodu: 476 (vs. 403)!
+                </div>
+                <aside class="notes">Liczba commitów wydaje się nieduża, ale zmiany są drastyczne - 70 linii kodu więcej
+                </aside>
+            </section>
+            <section>
+                <h2 style="margin: 0">TL;DR</h2>
+                <ul>
+                    <li class="fragment">Actions API
+                        <pre style="width: 100%; margin: 0" class="fragment"><code data-trim class="javascript">
+                            const IncBy = (state, { number }) => ({ ...state, val: state.val + number });
+                            &lt;button onClick={[IncBy, { number: 5 }]}>Add 5&lt;/button>
+                        </code></pre>
+                    </li>
+                    <li class="fragment">Effects API
+                        <ul>
+                            <li class="fragment">Async (HTTP, routing, opóźnianie)</li>
+                        </ul>
+                    </li>
+                    <li class="fragment">Subscriptions API
+                        <ul>
+                            <li class="fragment">Globalne zdarzenia (np. od <i>window</i>)</li>
+                        </ul>
+                    </li>
+                    <li class="fragment">Lazy Lists/components
+                        <ul>
+                            <li class="fragment">Render tylko na zmianę konkretnej rzeczy w stanie</li>
+                            <li class="fragment">
+                                <pre
+                                    style="width: 100%; margin: 0"><code data-trim class="javascript">&lt;Lazy render={ListView} list={state.list} /></code></pre>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="fragment">Middleware/DevTools</li>
+                </ul>
+                <aside class="notes">
+                    <ul>
+                        <li>Akcje w v2 są deklaratywne, nie mówimy kiedy, tylko gdzie (wcześniej i kiedy i gdzie)</li>
+                        <li>Czyste akcje, sami mergujemy stan</li>
+                        <li>Akcja zwraca nowy, globalny stan i efekt</li>
+                        <li>Brak "globalnych" akcji - są gdzie trzeba</li>
+                        <li>Efekty = komendy z Elma (commands)</li>
+                        <li>Efekt = obiekt reprezentujący side effect</li>
+                        <li>Lazy ~ takie trochę memo z Reacta</li>
+                        <li>Middleware - nie tak jak Redux, tylko dev toolsy</li>
+                        <li>Tryb dev = wincyj logów, time-travel, warningi</li>
+                    </ul>
+                </aside>
+            </section>
+            <section data-background-image>
+                <pre style="width: 100%; margin: 0; box-shadow: none; margin-bottom: .5em"><code style="max-height: 40em; font-size: .85em; line-height: 1.05" class="javascript" data-trim contenteditable="true" id="v2-target">
+                    alert('hello world');
+                </code></pre>
+                <script type="text/babel" id="v2-src">
+                    /** @jsx hyperapp2.h */
+                    const SuccessResponse = (state, { value: { joke: message } }) => ({
+                        ...state,
+                        message
+                    });
+                    const ErrorResponse = (state) => ({
+                        ...state,
+                        message: 'Nie udało się...'
+                    });
+                    const GetJoke = (state) => [
+                        { ...state, message: '...' },
+                        hyperappFx.Http({
+                            url: state.url,
+                            response: 'json',
+                            action: SuccessResponse,
+                            error: ErrorResponse
+                        })
+                    ];
+
+                    hyperapp2.app({
+                        container: document.getElementById('render-v2'),
+                        subscribe: console.log,
+                        init: {
+                            message: 'Dej mie kawała',
+                            url: 'http://api.icndb.com/jokes/random?limitTo=[nerdy]'
+                        },
+                        view: ({ message }) => (
+                            <small style={{ cursor: 'pointer' }} onClick={GetJoke}>{message}</small>
+                        )
+                    });
+                </script>
+                <script>
+                    srcToTarget('v2');
+                </script>
+                <div id="render-v2"></div>
+            </section>
+            <section>
+                <h2 class="fragment" data-fragment-index="5">Dzięki!</h2>
+                <div style="display: flex; flex-direction: column; align-items: center">
+                    <img src="img/end1.png" class="pure-img" style="width: 400px">
+                    <img src="img/end2.png" class="pure-img fragment" style="width: 400px" data-fragment-index="1">
+                    <img src="img/end3.png" class="pure-img fragment" style="width: 400px" data-fragment-index="2">
+                </div>
+                <ul>
+                    <li class="fragment" data-fragment-index="3">
+                        <a href="https://mat3e.github.io/talks/ha/WarsawJS.html">
+                            mat3e.github.io/talks/ha/WarsawJS.html
+                        </a>
+                    </li>
+                    <li class="fragment" data-fragment-index="4">
+                        Lista 10 trendów JS:
+                        <a href="https://mat3e.github.io/trendy">
+                            mat3e.github.io/trendy
+                        </a>
+                    </li>
+                </ul>
+                <aside class="notes">klamrą spinamy tę prezkę - pikachu na koniec</aside>
+            </section>
+        </div>
+    </div>
+    <script src="js/babel.js"></script>
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <script src="js/hyperapp.js"></script>
+    <script src="js/v2.js"></script>
+    <script src="js/fx.js"></script>
+    <script src="js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script>
+        const controls = (function () {
+            Reveal.initialize({
+                history: true,
+                // - null: Media will only autoplay if data-autoplay is present
+                autoPlayMedia: null,
+                transition: 'slide', // none/fade/slide/convex/concave/zoom
+                transitionSpeed: 'default', // default/fast/slow
+                backgroundTransition: 'slide', // none/fade/slide/convex/concave/zoom
+                dependencies: [
+                    { src: 'js/classList.js', condition: function () { return !document.body.classList; } },
+
+                    { src: 'js/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                    { src: 'js/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+
+                    // Syntax highlight for <code> elements
+                    { src: 'js/highlight.js', callback: function () { hljs.initHighlightingOnLoad(); } },
+
+                    // Zoom in and out with Alt+click
+                    { src: 'js/zoom.js' },
+
+                    { src: 'notes/notes.js' },
+
+                    { src: 'js/math.js' }
+                ]
+            });
+
+            document.querySelectorAll('.reveal .slides > section:not([data-background-image])').forEach(s => {
+                s.setAttribute('data-background-image', 'img/twitter.png');
+                s.setAttribute('data-background-size', '240px');
+                s.setAttribute('data-background-position', '20px 20px');
+            });
+
+            return {
+                evalCode: function (btn) {
+                    eval(btn.previousElementSibling.innerText);
+                }
+            }
+        })();
+    </script>
+</body>
+
+</html>
