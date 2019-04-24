@@ -1,7 +1,7 @@
 Łącznie przeprowadziłem ponad 180 godzin warsztatów.
 
 ## 2019
-> * Allegro (Poznań) [12.06]: _Front-end dla back-endowców (Java)_ [8h]
+* > Allegro (Poznań) [12.06]: _Front-end dla back-endowców (Java)_ [8h]
 * Kurs infoShare Academy Java (Warszawa)
 * Kurs infoShare Academy front-end (Warszawa)
 * WarsawJS Workshop 29 [24.02]: _Angular jako nowoczesny framework_ [8h] [🔗](https://mat3e.github.io/talks/angular-workshop/WarsawJS.html#/) [🔗](https://www.meetup.com/pl-PL/WarsawJS/events/258369144/)
