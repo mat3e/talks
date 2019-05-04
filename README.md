@@ -16,7 +16,7 @@
 
 ## 2017
 * Panel dyskusyjny [16.11]: _Front-end vs. Back-end, jaki język programowania wybrać?_ [📽️](https://web.facebook.com/infoshareacademy/videos/868483633316364/)
-* Targi Kariera IT [30.09]: _JHipster – zróbmy sobie apkę, bez kodzenia (prawie)_ [🔗](https://mat3e.github.io/taskr/) 
+* Targi Kariera IT [30.09]: _JHipster – zróbmy sobie apkę, bez kodzenia (prawie)_ [🔗](https://mat3e.github.io/taskr/) [🔗](https://careercon.pl/konferencja/kariera-it-warszawa-30-09-2017) 
 * Confitura [01.07]: _OData w Javie: wprowadzenie do Apache Olingo_ [🔗](https://github.com/sollersconsulting/confitura2017) [📽️](https://www.youtube.com/watch?v=sSLXUOaOmkk)
 * Sollers Consulting Open Day Warsaw [25.05]: _Gdzie Java nie może, tam Gosu pośle. Alternatywne języki JVM_ [🔗](https://github.com/sollersconsulting/openDayWaw)
 * Warsaw IT Days [28.03]: _Gdzie Java nie może, tam Gosu pośle. Alternatywne języki JVM_ [🔗](https://github.com/sollersconsulting/wdi2017) [📷](https://zmateusz.wordpress.com/2017/04/09/wdi-2017-small-report/)
