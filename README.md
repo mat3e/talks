@@ -1,5 +1,6 @@
 ## 2019
 * > IT Career Summit [26.09]: _A ty jak wystawiasz swoje dane? GraphQL, OData i inne WSDL-e_
+* > dynamIT 2019 [17.08]: _Web Componenty jako lingua franca front-endu_
 * > meet.js Toruń [23.05]: _Co ona ma, czego nie mam ja? Biblioteka React i jej klony_
 * infoShare [8-9.05]: _My personal front-end overview (2019)_
 * ITDay UMK [11.04]: _Subiektywny przegląd sytuacji na froncie (front-endzie)_ [🔗](https://mat3e.github.io/talks/fe-overview/UMK.html)
