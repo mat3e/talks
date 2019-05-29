@@ -2,9 +2,9 @@
 * > IT Career Summit [26.09]: _A ty jak wystawiasz swoje dane? GraphQL, OData i inne WSDL-e_
 * > dynamIT 2019 [17.08]: _Web Componenty jako lingua franca front-endu_
 * meet.js Toruń 5 [23.05]: _Co ona ma, czego nie mam ja? Biblioteka React i jej klony_ [🔗](https://mat3e.github.io/talks/react-clones/meetjs.html)
-* infoShare [8-9.05]: _My personal front-end overview (2019)_ [🔗](https://mat3e.github.io/talks/fe-overview/infoShare.html)
+* infoShare [8-9.05]: _My personal front-end overview (2019)_ [🔗](https://mat3e.github.io/talks/fe-overview/infoShare.html) [📷](https://scontent-frx5-1.xx.fbcdn.net/v/t1.0-9/61542626_1234046896760034_4922568060688138240_o.jpg?_nc_cat=108&_nc_ht=scontent-frx5-1.xx&oh=4a2c60342bc36e55a1110ef142da439b&oe=5D8F2253)
 * ITDay UMK [11.04]: _Subiektywny przegląd sytuacji na froncie (front-endzie)_ [🔗](https://mat3e.github.io/talks/fe-overview/UMK.html)
-* WarsawJS Meetup 56 [10.04]: _Czwarty framework_ [🔗](https://mat3e.github.io/talks/ha/WarsawJS.html) [📽️](https://youtu.be/wD9OX2Mxc80)
+* WarsawJS Meetup 56 [10.04]: _Czwarty framework_ [🔗](https://mat3e.github.io/talks/ha/WarsawJS.html) [📽️](https://youtu.be/wD9OX2Mxc80) [📷](https://scontent-frx5-1.xx.fbcdn.net/v/t1.0-9/59457744_2631483763744617_3371621242292404224_o.jpg?_nc_cat=109&_nc_ht=scontent-frx5-1.xx&oh=5fee2d21e4e2ed17e502a0ecc08ab354&oe=5D8B0E6C)
 * ship.it 3 [21.03]: _Subiektywny przegląd sytuacji na froncie (początek 2019)_ [🔗](https://mat3e.github.io/talks/fe-overview/ship-it.html) [📽️](https://www.facebook.com/ship.it.meetup/videos/vb.2128867470776026/256414715266689) [📷](https://scontent.fpoz1-1.fna.fbcdn.net/v/t1.0-9/54728544_2212922972370475_5580565322542350336_o.jpg?_nc_cat=111&_nc_ht=scontent.fpoz1-1.fna&oh=48e5f26b6731c75ac3676e3b7e98d104&oe=5D02FAD8) [📷](https://scontent.fwaw3-2.fna.fbcdn.net/v/t1.0-9/55506895_2212922785703827_7722769850145177600_o.jpg?_nc_cat=107&_nc_ht=scontent.fwaw3-2.fna&oh=98deea0a7866594290c26f2ce5f60f26&oe=5D0BEB37)
 * Targi Kariera IT [16.03]: _Co ona ma, czego nie mam ja? Biblioteka React i jej klony_ [🔗](https://mat3e.github.io/talks/react-clones/karierait.html)
 * meet.js Poznań 41 [12.02]: _Subiektywny przegląd sytuacji na froncie (początek 2019)_ [🔗](https://mat3e.github.io/talks/fe-overview/meetjs-pzn.html) [📽️](https://youtu.be/Aybh_2pIi2I)
