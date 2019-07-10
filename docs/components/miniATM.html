@@ -74,6 +74,10 @@
 			border-radius: 4px;
 		}
 
+		.slides section pre+button:disabled {
+			background-color: grey;
+		}
+
 		#perspective a {
 			display: flex;
 			flex-direction: column;
@@ -721,7 +725,7 @@
 					  template: '&lt;vue-counter :initial="10" />'
 					})
 					</code></pre>
-					<button onclick="controls.evalCode(this)">eval</button>
+					<button onclick="controls.evalCode(this, true)">eval</button>
 					<fieldset style="border: solid 1px black;">
 						<legend style="font-size: .5em">#vue-app</legend>
 						<div id="vue-app" style="height: 1.5em"></div>
@@ -764,7 +768,7 @@
 						</code><code class="javascript" data-trim contentEditable="true">
 						customElements.define('full-web-comp', FullWebComp);
 						</code></pre>
-						<button onclick="controls.evalCode(this)" style="font-weight: bold">eval</button>
+						<button onclick="controls.evalCode(this, true)" style="font-weight: bold">eval</button>
 					</div>
 					<template id="h2-template">
 						<style>
@@ -817,7 +821,7 @@
 						  isTrue(attr) { return this.hasAttribute(attr) && this.getAttribute(attr) !== 'false'; }
 						});
 						</code></pre>
-						<button onclick="controls.evalCode(this)" style="font-weight: bold">eval</button>
+						<button onclick="controls.evalCode(this, true)" style="font-weight: bold">eval</button>
 					</div>
 					<template id="style-template">
 						<style>
@@ -1126,7 +1130,7 @@
 					}
 					platformBrowserDynamic().bootstrapModule(AppModule);
 					</code></pre>
-					<button onclick="controls.evalTsCode(this)">eval</button>
+					<button onclick="controls.evalTsCode(this, true)">eval</button>
 					<div style="position: absolute; bottom: 1vh; right: 1em">
 						<img src="img/show-a.png" class="pure-img" style="height: 22vh">
 						<img src="img/show.png" class="pure-img" style="height: 20vh">
@@ -1219,7 +1223,7 @@
 					  template: '&lt;vue-demo :initial="true" />'
 					})
 					</code></pre>
-					<button onclick="controls.evalCode(this)">eval</button>
+					<button onclick="controls.evalCode(this, true)">eval</button>
 					<fieldset style="border: solid 1px black;">
 						<legend style="font-size: .5em">#vue-wc-app</legend>
 						<div id="vue-wc-app" style="height: 1.5em"></div>
@@ -1245,7 +1249,7 @@
 					const CustomElement = wrap(Vue, VueWebComponent);
 					customElements.define('m3-hello', CustomElement);
 					</code></pre>
-					<button onclick="controls.evalCode(this)">eval</button>
+					<button onclick="controls.evalCode(this, true)">eval</button>
 					<pre><code class="javascript" data-trim contentEditable="true" data-line-numbers="0" 
 						style="max-height: 40em; line-height: 1.05; font-size: .75em;">
 					document.getElementById('js-wc-app').innerHTML = `
@@ -1385,7 +1389,7 @@
 			// reflect polyfill has a strange name
 			window.coreJs = window['__core-js_shared__'];
 			return {
-				evalCode(btn) {
+				evalCode(btn, once) {
 					const input = btn.previousElementSibling.innerText;
 					const output = Babel.transform(input, {
 						presets: ['react'],
@@ -1409,8 +1413,11 @@
 						]
 					}).code;
 					eval.call(window, output);
+					if (once) {
+						btn.disabled = true;
+					}
 				},
-				evalTsCode(btn) {
+				evalTsCode(btn, once) {
 					const input = btn.previousElementSibling.innerText;
 					const output = Babel.transform(input, {
 						plugins: [
@@ -1436,6 +1443,9 @@
 						]
 					}).code;
 					eval.call(window, output);
+					if (once) {
+						btn.disabled = true;
+					}
 				}
 			}
 		})();
