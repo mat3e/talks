@@ -6,7 +6,7 @@ In this talk I want to share my thoughts on Web Components, show some examples a
 
 Everything in the entertaining form.
 
-# Web Components jako Lingua franca front-endu
+# Web Components jako Lingua franca front-endu
 
 Temat Web Componentów przewija się już od jakiegoś czasu. Google starało się go forsować, ale bez większych sukcesów. Aż do 2018 roku, kiedy to Firefox dodał wsparcie dla odpowiednich technologii, a Microsoft zadeklarował, że Edge również takowe doda (czy tam przejdzie na Chromium, nieważne). 
 
