@@ -1,4 +1,4 @@
-# How many AWS services did I use to host a static webpage?
+# How many AWS services did I use to host a static webpage?
 
 Is hosting a static webpage using AWS services an example of "overengineering"? Well, I'd say so…
 
