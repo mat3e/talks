@@ -530,6 +530,7 @@
 					</div>
 					<img src="img/mac2.png" style="position: absolute; width: 5em; left: 0; top: 3.5em; z-index: 10;"
 						class="pure-img fragment left-to-right" data-fragment-index="2" data-autoslide="1500">
+					<aside class="notes">DI, RxJS, TypeScript, framework</aside>
 				</section>
 				<section data-transition="fade">
 					<img src="img/question.png" class="pure-img">
@@ -599,9 +600,6 @@
 					<h1 style="margin-bottom: 0">Web Componenty</h1>
 					<h2>jako lingua franca front-endu</h2>
 					<div id="header-logo"></div>
-					<aside class="notes">
-						Przejść raz przez prezentację, żeby obrazki były ładnie załadowane
-					</aside>
 				</section>
 			</section>
 			<section>
@@ -760,9 +758,9 @@
 						    super();
 						</code><code class="javascript fragment" contentEditable="true">    this.attachShadow({mode: 'closed'})
       .appendChild(document</code><code class="javascript fragment" data-trim contentEditable="true">
-      .getElementById('h2-template')
-      .content
-      .cloneNode(true));
+        .getElementById('h2-template')
+        .content
+        .cloneNode(true));
   }
 }
 						</code><code class="javascript" data-trim contentEditable="true">
@@ -934,7 +932,7 @@
 							</ul>
 						</li>
 						<li class="fragment">SEO
-							<pre class="fragment" style="margin: 0; margin-top: .1em"><code class="html" data-trim style="width: 100%; font-size: .75em; line-height: 1">
+							<pre class="fragment" style="width: 100%; margin: 0; margin-top: .1em"><code class="html" data-trim style="font-size: .75em; line-height: 1">
 								&lt;bad-component>&lt;/bad-component>
 								&lt;better-component>hello world&lt;/better-component> 
 							</code></pre>
@@ -944,12 +942,11 @@
 								href="https://gist.github.com/WebReflection/71aed0c811e2e88e3cd3c647213f0e6c#1-progressive-enhancement">
 								Progressive enhancement
 							</a>
-							<pre class="fragment" style="margin: 0; margin-top: .1em"><code class="html" data-trim style="width: 100%; font-size: .75em; line-height: 1">
+							<pre class="fragment" style="width: 100%; margin: 0; margin-top: .1em"><code class="html" data-trim style="font-size: .75em; line-height: 1">
 								&lt;a is="twitter-share"
 								  text="A Twitter share button with progressive enhancement"
 								  url="https://codepen.io/WebReflection/pen/LKWyLB?editors=0010"
-								  via="webreflection"
-								/>
+								  via="webreflection" />
 							</code></pre>
 						</li>
 						<li class="fragment">SSR</li>

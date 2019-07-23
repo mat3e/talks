@@ -1,0 +1,392 @@
+@font-face {
+    font-family: 'pokemon';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../webfonts/pokemon.woff2') format('woff2');
+}
+
+:root {
+    --map-item-small: 2.5em;
+    --map-item-big: 4em;
+}
+
+#header {
+    text-align: left;
+    font-size: .7em;
+}
+
+#header-logo {
+    width: 375px;
+    height: 80px;
+    background-image: url('../img/twitter.png');
+    background-size: contain;
+    top: -4em;
+    right: 0;
+    position: absolute;
+}
+
+#header h1 {
+    line-height: 1;
+}
+
+code[contenteditable="true"] {
+    border: 0;
+    outline: 0;
+}
+
+.slides section pre {
+    margin-bottom: 0;
+}
+
+.slides section pre+button {
+    cursor: pointer;
+    font-size: .65em;
+    font-weight: 100;
+    -webkit-font-smoothing: antialiased;
+    color: white;
+    background: #a23;
+    padding: 0 3px 3px;
+    border: transparent;
+    border-radius: 4px;
+}
+
+#perspective a {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 45%;
+    margin: 0 auto;
+}
+
+#perspective a img {
+    border: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+#about-me {
+    padding: 1em;
+    background-color: rgba(255, 255, 255, .75);
+    list-style-type: none;
+    margin-left: 0;
+    float: left;
+}
+
+#about-me ul {
+    list-style-type: none;
+    float: left;
+    margin-left: 0;
+}
+
+#about-me a {
+    color: #a23;
+}
+
+#about-me a:hover {
+    color: #dd5566;
+}
+
+.reveal section .pokemon {
+    width: 100%;
+    min-height: 2.5em;
+    padding: .25em;
+    padding-top: .75em;
+    background-image: url('../img/battle-bar.png');
+    background-size: 100% 100%;
+    color: black;
+    font-family: 'pokemon', 'Courier New', Courier, monospace !important;
+    display: flex;
+    align-items: center;
+    text-align: left;
+}
+
+.reveal section img.pure-img {
+    background: rgba(255, 255, 255, 0);
+    border: none;
+    box-shadow: none;
+    margin: 0;
+}
+
+.reveal .slides section .fragment.replace {
+    transition: none;
+    display: inline-block;
+}
+
+.reveal .slides section .fragment.fade-out.visible.replace {
+    display: none;
+}
+
+.reveal .slides section .fragment.fade-in.replace {
+    display: none;
+}
+
+.reveal .slides section .fragment.fade-in.visible.replace {
+    display: inline-block;
+}
+
+.reveal .slides section .fragment.fade-out.crossed.visible {
+    opacity: 1;
+    visibility: visible;
+    text-decoration-line: line-through;
+}
+
+.reveal section img.text-logo {
+    vertical-align: middle;
+    background: none;
+    box-shadow: none;
+    border: none;
+    height: 1em;
+    margin: 0;
+}
+
+.reveal .slides section td.long-text-cell {
+    font-size: .5em;
+    vertical-align: middle;
+}
+
+.reveal .slides section table.summary {
+    table-layout: fixed;
+    width: 100%;
+}
+
+.reveal .slides section table.summary tbody td {
+    width: 27%;
+}
+
+.reveal .slides section table.summary tbody td:first-child {
+    width: 19%;
+}
+
+.reveal .slides section .arrows-container div .timeline-elem {
+    transform: rotate(-45deg);
+    margin-bottom: 1em;
+}
+
+.reveal .slides section h3 a:hover {
+    text-shadow: inherit;
+}
+
+.reveal .slides section a.wh-link {
+    color: white;
+}
+
+.reveal .slides section a.wh-link:hover {
+    color: #dd5566;
+}
+
+.reveal .slides section .fragment.visible.from-left {
+    animation-name: from-left;
+    animation-duration: 3s;
+    animation-fill-mode: both;
+    animation-timing-function: linear;
+}
+
+@keyframes from-left {
+    0% {
+        transform: translate3d(-400%, 0, 0);
+    }
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes from-left-plus {
+    0% {
+        transform: translate3d(-500%, 0, 0);
+    }
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes from-right-plus {
+    0% {
+        transform: translate3d(500%, 0, 0);
+    }
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.reveal .slides section .fragment.visible.from-left-fast {
+    animation-name: from-left-plus;
+    animation-duration: 2s;
+    animation-fill-mode: both;
+    animation-timing-function: linear;
+}
+
+.reveal .slides section .fragment.visible.from-right-fast {
+    animation-name: from-right-plus;
+    animation-duration: 2s;
+    animation-fill-mode: both;
+    animation-timing-function: linear;
+}
+
+@keyframes tada {
+    from {
+        transform: scale3d(1, 1, 1);
+    }
+    10%, 20% {
+        transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg);
+    }
+    30%, 50%, 70%, 90% {
+        transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+    }
+    40%, 60%, 80% {
+        transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+    }
+    to {
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+.reveal .slides section .fragment.visible.tada {
+    animation-name: tada;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+.reveal .slides section .fragment.tada {
+    opacity: 1;
+    visibility: inherit;
+}
+
+@keyframes pulse {
+    from {
+        transform: scale3d(1, 1, 1);
+    }
+    50% {
+        transform: scale3d(1.3, 1.3, 1.3);
+    }
+    to {
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+.reveal .slides section .fragment.pulse {
+    opacity: 1;
+    visibility: inherit;
+}
+
+.reveal .slides section .fragment.visible.pulse {
+    animation-name: pulse;
+    animation-duration: 3s;
+    animation-fill-mode: both;
+}
+
+@keyframes heartBeat {
+    0% {
+        transform: scale(1);
+    }
+    14% {
+        transform: scale(1.3);
+    }
+    28% {
+        transform: scale(1);
+    }
+    42% {
+        transform: scale(1.3);
+    }
+    70% {
+        transform: scale(1);
+    }
+}
+
+.reveal .slides section .fragment.heartBeat {
+    opacity: 1;
+    visibility: inherit;
+}
+
+.reveal .slides section .fragment.visible.heartBeat {
+    animation-name: heartBeat;
+    animation-duration: 2.6s;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes shake {
+    from, to {
+        transform: translate3d(0, 0, 0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: translate3d(-10px, 0, 0);
+    }
+    20%, 40%, 60%, 80% {
+        transform: translate3d(10px, 0, 0);
+    }
+}
+
+.reveal .slides section .fragment.shake {
+    opacity: 1;
+    visibility: inherit;
+}
+
+.reveal .slides section .fragment.visible.shake {
+    animation-name: shake;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+@keyframes zoomOutDown {
+    40% {
+        opacity: 1;
+        transform: scale3d(0.475, 0.475, 0.475) translate3d(0, -60px, 0);
+        animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+    to {
+        opacity: 0;
+        transform: scale3d(0.1, 0.1, 0.1) translate3d(0, 2000px, 0);
+        transform-origin: center bottom;
+        animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+    }
+}
+
+.reveal .slides section .fragment.zoomOutDown {
+    opacity: 1;
+    visibility: inherit;
+}
+
+.reveal .slides section .fragment.visible.zoomOutDown {
+    animation-name: zoomOutDown;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+@keyframes flash {
+    from, 50%, to {
+        opacity: 1;
+    }
+    25%, 75% {
+        opacity: 0;
+    }
+}
+
+.reveal .slides section .fragment.flash {
+    opacity: 1;
+    visibility: inherit;
+}
+
+.reveal .slides section .fragment.visible.flash {
+    animation-name: flash;
+    animation-duration: 3s;
+    animation-fill-mode: both;
+}
+
+@keyframes reverse-flash {
+    from, 50%, 99% {
+        opacity: 0;
+    }
+    25%, 75%, to {
+        opacity: 1;
+    }
+}
+
+.reveal .slides section .fragment.reverse-flash {
+    opacity: 0;
+    visibility: inherit;
+}
+
+.reveal .slides section .fragment.visible.reverse-flash {
+    animation-name: reverse-flash;
+    animation-duration: 3s;
+    animation-fill-mode: both;
+}
