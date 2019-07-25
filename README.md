@@ -1,7 +1,7 @@
 ## 2019
 * > IT Career Summit [26.09]: _A ty jak wystawiasz swoje dane? GraphQL, OData i inne WSDL-e_
 * > dynamIT 2019 [17.08]: _Web Componenty jako lingua franca front-endu_
-* > ship.it 5 [25.07] _Dlaczego czasem warto założyć gacie przez głowę? Statyczna strona internetowa na AWS-ie_
+* ship.it 5 [25.07] _Dlaczego czasem warto założyć gacie przez głowę? Statyczna strona internetowa na AWS-ie_ [🔗](https://mat3e.github.io/talks/aws-www/ship-it#/)
 * meet.js Toruń 5 [23.05]: _Co ona ma, czego nie mam ja? Biblioteka React i jej klony_ [🔗](https://mat3e.github.io/talks/react-clones/meetjs.html) [📽️](https://youtu.be/l75vRjETr1s)
 * infoShare [8-9.05]: _My personal front-end overview (2019)_ [🔗](https://mat3e.github.io/talks/fe-overview/infoShare.html) [📷](https://scontent-frx5-1.xx.fbcdn.net/v/t1.0-9/61542626_1234046896760034_4922568060688138240_o.jpg?_nc_cat=108&_nc_ht=scontent-frx5-1.xx&oh=4a2c60342bc36e55a1110ef142da439b&oe=5D8F2253)
 * ITDay UMK [11.04]: _Subiektywny przegląd sytuacji na froncie (front-endzie)_ [🔗](https://mat3e.github.io/talks/fe-overview/UMK.html)
