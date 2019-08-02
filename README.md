@@ -1,4 +1,5 @@
 ## 2019
+* > Targi Kariera IT [05.10]: _Dlaczego czasem warto założyć gacie przez głowę? Statyczna strona internetowa na AWS_
 * > IT Career Summit [26.09]: _A ty jak wystawiasz swoje dane? GraphQL, OData i inne WSDL-e_
 * > dynamIT 2019 [17.08]: _Web Componenty jako lingua franca front-endu_
 * ship.it 5 [25.07] _Dlaczego czasem warto założyć gacie przez głowę? Statyczna strona internetowa na AWS-ie_ [🔗](https://mat3e.github.io/talks/aws-www/ship-it#/)
