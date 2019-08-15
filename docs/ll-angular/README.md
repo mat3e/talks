@@ -6,6 +6,8 @@ Do you remember a translation pipe from AngularJS? It had an author name directl
 
 My plan didn't work and I've stopped working on my library since my son was born. But I still learnt a lot. And this presentation is to share my lessons learnt with all of you.
 
+___
+
 # Co wyciągnąłem, pisząc własną biblioteczkę angularową?
 
 Miałem sen. Chciałem stworzyć biblioteczkę, wznieść się wysoko na fali popularności Angulara 2+ i pokazać się w świecie Open Source.
