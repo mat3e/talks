@@ -8,6 +8,8 @@ Static files? No problem, S3 is your way to go.
 But what if you want your own fancy domain? And what with SSL? How about a distribution using CDN? And yes, each such thing is handled by a separate AWS service. Adding a visitors counter with JS back-end and we end up with like 9 AWS services.
 Yes, including AWS Lambda.
 
+___
+
 # Dlaczego czasem warto założyć gacie przez głowę? Statyczna strona internetowa na AWS-ie
 
 Sławek Sobótka tłumaczy "overengineering" jako "zakładanie gaci przez głowę". Hostowanie statycznej strony internetowej przy pomocy chmury Amazona i dostępnych tam usług brzmi jak podręcznikowy przykład takiego działania.
