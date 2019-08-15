@@ -520,7 +520,7 @@
 						data-fragment-index="2"
 						style="width: 4.75em; position: absolute; top: -4.75em; margin-left: 1em; z-index: 10;">
 				</section>
-				<section>
+				<section data-transition="zoom-out">
 					<div class="fragment replace fade-out" data-fragment-index="3" style="width: 100%">
 						<div style="display: flex; justify-content: space-evenly; align-items: center;">
 							<div style="display: flex; align-items: center; justify-content: center">
@@ -568,8 +568,8 @@
 					<img src="img/question.png" class="pure-img">
 				</section>
 			</section>
-			<section>
-				<section>
+			<section data-transition="fade-out">
+				<section data-transition="slide-in fade-out">
 					<div style="display: flex; justify-content: space-evenly;">
 						<div style="display: flex; align-items: center; justify-content: center">
 							<img src="img/react.svg" class="pure-img fragment" style="width: 35px"
@@ -639,7 +639,7 @@
 					<h1 style="margin-top: 20vh">Komponent?</h1>
 					<img src="img/look.png" class="pure-img" style="height: 50vh;">
 				</section>
-				<section>
+				<section data-transition="fade">
 					<pre><code class="javascript" data-trim contentEditable="true" data-line-numbers="4-17,20" 
 						style="max-height: 40em; line-height: 1.1; font-size: .8em;">
 					import React from 'react';
@@ -673,7 +673,7 @@
 					<img src="img/show-r.png" class="pure-img"
 						style="position: absolute; bottom: 1vh; right: 1em; height: 30vh">
 				</section>
-				<section>
+				<section data-transition="fade">
 					<pre><code class="typescript" data-trim contentEditable="true" data-line-numbers="6-26,28,32" 
 						style="max-height: 40em; line-height: 1.05; font-size: .55em;">
 					import 'zone.js'; import 'core-js/es/reflect'; import 'core-js/features/reflect';
@@ -724,7 +724,7 @@
 					<img src="img/show-a.png" class="pure-img"
 						style="position: absolute; bottom: 1vh; right: 1em; height: 30vh">
 				</section>
-				<section>
+				<section data-transition="fade">
 					<pre><code class="javascript" data-trim contentEditable="true" data-line-numbers="3-21,25,26" 
 						style="max-height: 40em; line-height: 1.05; font-size: .75em;">
 					import Vue from 'vue';
@@ -763,7 +763,7 @@
 					<img src="img/show-v.png" class="pure-img"
 						style="position: absolute; bottom: 1vh; right: 1em; height: 30vh">
 				</section>
-				<section>
+				<section data-transition="zoom">
 					<div>Fajne to pojęcie, takie nie za konkretne</div>
 					<img src="img/confused.png" class="pure-img fragment fade-out replace" style="height: 30vh"
 						data-fragment-index="1">
@@ -773,7 +773,7 @@
 				</section>
 			</section>
 			<section>
-				<section>
+				<section data-transition="slide-in fade-out">
 					<h2>Web Components</h2>
 					<a href="https://www.webcomponents.org/" class="fragment">
 						<img src="img/webcomponents.png" class="pure-img">
@@ -781,7 +781,7 @@
 					<img src="img/look3.png" class="pure-img fragment"
 						style="position: absolute; width: 3em; right: 20%; bottom: 0">
 				</section>
-				<section>
+				<section data-transition="fade">
 					<h2>Jak?</h2>
 					<div>
 						<pre><code class="javascript" data-trim contentEditable="true">
@@ -813,9 +813,9 @@ customElements.define('full-web-comp', FullWebComp);
 					<img src="img/proud1.png" class="pure-img fragment"
 						style="position: absolute; bottom: 0; right: 0; height: 30vh">
 				</section>
-				<section>
-					<h3>Attribute vs. property</h3>
-					<fieldset style="border: solid 1px black; height: 2.5em" class="fragment">
+				<section data-transition="zoom-in fade-out">
+					<h3 class="fragment" data-fragment-index="1">Attribute vs. property</h3>
+					<fieldset style="border: solid 1px black; height: 2.5em" class="fragment" data-fragment-index="2">
 						<legend style="font-size: .5em">&lt;input type="checkbox" checked=""></legend>
 						<label>
 							<input type="checkbox" style="width: 3em; height: 3em" checked />
@@ -831,7 +831,7 @@ customElements.define('full-web-comp', FullWebComp);
 							`;
 						}
 					</script>
-					<div class="fragment">
+					<div class="fragment" data-fragment-index="3">
 						<pre><code class="javascript" data-trim contentEditable="true" data-line-numbers="1,3,4" 
 							style="max-height: 40em; font-size: .8em; line-height: 1">
 							const input = document.querySelector('[type="checkbox"]');
@@ -847,14 +847,14 @@ customElements.define('full-web-comp', FullWebComp);
 							eval
 						</button>
 					</div>
-					<div id="verify"
+					<div id="verify" class="fragment" data-fragment-index="3"
 						style="background-image: url('img/talk2.png'); background-size: contain; background-repeat: no-repeat; width: 9em; height: 5em; font-size: .5em; padding: 2em; padding-top: 3em; margin: 0 auto">
 					</div>
 					<img src="img/confused.png" class="pure-img"
 						style="position: absolute; bottom: 1em; left: 65%; height: 30vh">
 					<aside class="notes">Web Componenty polegają na atrybutach!</aside>
 				</section>
-				<section>
+				<section data-transition="fade">
 					<h3>Baza</h3>
 					<pre style="width: 100%"><code class="javascript" data-trim contentEditable="true" style="font-size: .8em">
 						class CheckboxWrapper extends HTMLElement {
@@ -892,7 +892,7 @@ customElements.define('full-web-comp', FullWebComp);
 						}
 					</script>
 				</section>
-				<section>
+				<section data-transition="fade-in slide-out">
 					<h3 style="margin: 0">lvl2</h3>
 					<pre
 						style="margin-top: 0"><style style="display: inline-block; font-size: .9em; line-height: 1.1" contentEditable="true">:root { /*--m3-switch-color: #1da1f2;*/ }</style></pre>
@@ -989,7 +989,7 @@ customElements.define('full-web-comp', FullWebComp);
 				</section>
 			</section>
 			<section>
-				<section>
+				<section data-transition="slide-in fade-out">
 					<h2><img src="img/y.png" class="pure-img" style="height: 1em">Dobre do</h2>
 					<div>
 						<img src="img/components.png" class="pure-img" style="height: 20vh">
@@ -1018,7 +1018,7 @@ customElements.define('full-web-comp', FullWebComp);
 						SAP i IBM też eksperymentują z UI w WC.
 					</aside>
 				</section>
-				<section>
+				<section data-transition="fade-in slide-out">
 					<h2 style="margin: 0"><img src="img/n.png" class="pure-img" style="height: 1em"> Wyzwania</h2>
 					<div>
 						<img src="img/components.png" class="pure-img" style="height: 18vh">
@@ -1070,7 +1070,7 @@ customElements.define('full-web-comp', FullWebComp);
 					<img src="img/proud3.png" class="pure-img" style="position: absolute; left: 0;">
 					<img src="img/proud-r.png" class="pure-img" style="position: absolute; right: 0;">
 				</section>
-				<section>
+				<section data-transition="fade">
 					<h2 style="margin: 0">in</h2>
 					<pre style="margin: 0"><code class="javascript" data-trim contentEditable="true" data-line-numbers="6-10,13,14"
 									style="max-height: 40em; line-height: 1.1; font-size: .8em;">
@@ -1107,7 +1107,7 @@ customElements.define('full-web-comp', FullWebComp);
 						<img src="img/show-r.png" class="pure-img">
 					</div>
 				</section>
-				<section>
+				<section data-transition="fade">
 					<h2 style="margin: 0">out?</h2>
 					<img src="img/dunno-r.png" class="pure-img fragment" data-fragment-index="1"
 						style="height: 30vh; position: absolute; bottom: -15vh; left: 5vw;">
@@ -1118,7 +1118,7 @@ customElements.define('full-web-comp', FullWebComp);
 					</small>
 					<aside class="notes">Przypadek WC z zaszytym Preactem (~3,6 kB)</aside>
 				</section>
-				<section>
+				<section data-transition="fade">
 					<h2><a href="https://custom-elements-everywhere.com/">custom-elements-everywhere.com</a></h2>
 					<a href="https://custom-elements-everywhere.com/libraries/react/results/results.html">
 						<img src="img/cee-r.png" class="pure-img fragment">
@@ -1126,7 +1126,7 @@ customElements.define('full-web-comp', FullWebComp);
 					<aside class="notes">przekazywanie tablic i obiektów oraz deklaratywne słuchanie na eventy kuleje
 					</aside>
 				</section>
-				<section>
+				<section data-transition="fade-in slide-out">
 					Zespół Roberta czasem napisze Web Component, ale raczej skupi się na konsumowaniu.
 					<div class="fragment">
 						<img src="img/thumb3.png" class="pure-img" style="height: 30vh">
@@ -1142,7 +1142,7 @@ customElements.define('full-web-comp', FullWebComp);
 					<img src="img/proud3.png" class="pure-img" style="position: absolute; left: 0;">
 					<img src="img/thumb-a.png" class="pure-img" style="position: absolute; right: 0;">
 				</section>
-				<section>
+				<section data-transition="fade">
 					<h2 style="margin: 0">in</h2>
 					<pre style="margin: 0"><code class="typescript" data-trim contentEditable="true" data-line-numbers="4,8-11,14-18,25" 
 						style="max-height: 40em; line-height: 1.1; font-size: .6em;">
@@ -1188,7 +1188,7 @@ customElements.define('full-web-comp', FullWebComp);
 						<img src="img/show.png" class="pure-img" style="height: 30vh">
 					</div>
 				</section>
-				<section>
+				<section data-transition="fade">
 					<h2 style="margin: 0">out 1/2</h2>
 					<pre style="margin: 0"><code class="typescript" data-trim contentEditable="true" data-line-numbers="2,5-7,9-13,15,16,18,23,24,26,28-32" 
 						style="max-height: 40em; line-height: 1.1; font-size: .6em;">
@@ -1234,7 +1234,7 @@ customElements.define('full-web-comp', FullWebComp);
 					</div>
 					<aside class="notes">Uwaga na polyfille do Web Componentów (@angular/elements dodaje)</aside>
 				</section>
-				<section>
+				<section data-transition="fade">
 					<h2 style="margin: 0">out 2/2</h2>
 					<pre style="margin: 0"><code class="javascript" data-trim contentEditable="true" data-line-numbers="7-10,13,14"
 										style="max-height: 40em; line-height: 1.1; font-size: .8em;">
@@ -1272,13 +1272,13 @@ customElements.define('full-web-comp', FullWebComp);
 						<img src="img/show-r.png" class="pure-img" style="height: 20vh">
 					</div>
 				</section>
-				<section>
+				<section data-transition="fade">
 					<h2><a href="https://custom-elements-everywhere.com/">custom-elements-everywhere.com</a></h2>
 					<a href="https://custom-elements-everywhere.com/libraries/angular/results/results.html">
 						<img src="img/cee-a.png" class="pure-img fragment">
 					</a>
 				</section>
-				<section>
+				<section data-transition="fade-in slide-out">
 					Agnieszka z zespołem ochoczo zaadoptowała Web Componenty!
 					<div class="fragment">
 						<img src="img/thumb3.png" class="pure-img" style="height: 30vh">
@@ -1292,7 +1292,7 @@ customElements.define('full-web-comp', FullWebComp);
 					<img src="img/proud3.png" class="pure-img" style="position: absolute; left: 0;">
 					<img src="img/proud-v.png" class="pure-img" style="position: absolute; right: 0;">
 				</section>
-				<section>
+				<section data-transition="fade">
 					<h2>in</h2>
 					<pre><code class="javascript" data-trim contentEditable="true" data-line-numbers="3-17,22" 
 						style="max-height: 40em; line-height: 1.05; font-size: .75em;">
@@ -1331,7 +1331,7 @@ customElements.define('full-web-comp', FullWebComp);
 					</div>
 					<aside class="notes">Jakby mieć :checked.prop="checked" byłoby jak w Angularze</aside>
 				</section>
-				<section>
+				<section data-transition="fade">
 					<h2>out</h2>
 					<pre><code class="javascript" data-trim contentEditable="true" data-line-numbers="2,4-7,9-10" 
 						style="max-height: 40em; line-height: 1.05; font-size: .75em;">
@@ -1363,13 +1363,13 @@ customElements.define('full-web-comp', FullWebComp);
 						<img src="img/show-v.png" class="pure-img">
 					</div>
 				</section>
-				<section>
+				<section data-transition="fade">
 					<h2><a href="https://custom-elements-everywhere.com/">custom-elements-everywhere.com</a></h2>
 					<a href="https://custom-elements-everywhere.com/libraries/vue/results/results.html">
 						<img src="img/cee-v.png" class="pure-img fragment">
 					</a>
 				</section>
-				<section>
+				<section data-transition="fade-in slide-out">
 					Vitaliy też jest OK z Web Componentami!
 					<div class="fragment">
 						<img src="img/thumb3.png" class="pure-img" style="height: 30vh">
