@@ -36,12 +36,12 @@
 			font-family: 'Gloria Hallelujah' !important;
 		}
 
-		#header {
+		.header {
 			text-align: left;
 			font-size: .7em;
 		}
 
-		#header-logo {
+		.header-logo {
 			width: 329px;
 			height: 85px;
 			background-image: url('img/twitter.png');
@@ -52,7 +52,7 @@
 			position: absolute;
 		}
 
-		#header h1 {
+		.header h1 {
 			line-height: 1;
 		}
 
@@ -303,6 +303,11 @@
 			align-items: center;
 			justify-content: center;
 		}
+
+		#vue-wc-fieldset m3-button {
+			display: flex;
+			justify-content: center;
+		}
 	</style>
 	<script>
 		const link = document.createElement('link');
@@ -317,6 +322,11 @@
 	<div class="reveal">
 		<div class="slides">
 			<section>
+				<section class="header">
+					<h1 style="margin-bottom: 0">Web Componenty</h1>
+					<h2>jako lingua franca front-endu</h2>
+					<div class="header-logo"></div>
+				</section>
 				<section>
 					<p style="display: flex; justify-content: center">
 						<img src="img/small.png" class="pure-img" style="width: 120px">
@@ -628,10 +638,10 @@
 				</section>
 			</section>
 			<section data-background-image data-transition="zoom">
-				<section id="header">
+				<section class="header">
 					<h1 style="margin-bottom: 0">Web Componenty</h1>
 					<h2>jako lingua franca front-endu</h2>
-					<div id="header-logo"></div>
+					<div class="header-logo"></div>
 				</section>
 			</section>
 			<section>
@@ -1072,7 +1082,7 @@ customElements.define('full-web-comp', FullWebComp);
 				</section>
 				<section data-transition="fade">
 					<h2 style="margin: 0">in</h2>
-					<pre style="margin: 0"><code class="javascript" data-trim contentEditable="true" data-line-numbers="6-10,13,14"
+					<pre style="margin: 0"><code class="javascript" data-trim contentEditable="true" data-line-numbers="6-10,13,14,20"
 									style="max-height: 40em; line-height: 1.1; font-size: .8em;">
 						import React, { useState, useEffect } from 'react';
 						import ReactDOM from 'react-dom';
@@ -1236,7 +1246,7 @@ customElements.define('full-web-comp', FullWebComp);
 				</section>
 				<section data-transition="fade">
 					<h2 style="margin: 0">out 2/2</h2>
-					<pre style="margin: 0"><code class="javascript" data-trim contentEditable="true" data-line-numbers="7-10,13,14"
+					<pre style="margin: 0"><code class="javascript" data-trim contentEditable="true" data-line-numbers="7-10,13,14,20"
 										style="max-height: 40em; line-height: 1.1; font-size: .8em;">
 							import React, { useState, useEffect } from 'react';
 							import ReactDOM from 'react-dom';
@@ -1293,22 +1303,25 @@ customElements.define('full-web-comp', FullWebComp);
 					<img src="img/proud-v.png" class="pure-img" style="position: absolute; right: 0;">
 				</section>
 				<section data-transition="fade">
-					<h2>in</h2>
-					<pre><code class="javascript" data-trim contentEditable="true" data-line-numbers="3-17,22" 
-						style="max-height: 40em; line-height: 1.05; font-size: .75em;">
+					<h2 style="margin: 0">in</h2>
+					<pre style="margin: 0"><code class="javascript" data-trim contentEditable="true" data-line-numbers="5-7,9-13,15-16,18-19,25" 
+						style="max-height: 40em; line-height: 1; font-size: .7em;">
 					import Vue from 'vue';
 
 					const Demo = Vue.component('vue-demo', {
 					  template: `&lt;div>
-					    &lt;m3-switch :checked="checked" @change="handleChange">&lt;/m3-switch>
-					    {{checked}}
+					    &lt;m3-switch :checked="checked" @change="handleChange">&lt;/m3-switch> {{checked}}
+					    &lt;br>
+					    &lt;m3-button :label="label" @action="handleClick">&lt;/m3-button>
 					  &lt;/div>`,
 					  methods: {
-					    handleChange: function(e) { this.checked = e.target.checked; }
+					    handleChange: function(e) { this.checked = e.target.checked; },
+					    handleClick: function(e) { this.label = e.detail }
 					  },
 					  data: function() {
 					    return {
-					      checked: this.initial
+					      checked: this.initial,
+					      label: 0
 					    }
 					  },
 					  props: { initial: Boolean }
@@ -1321,9 +1334,9 @@ customElements.define('full-web-comp', FullWebComp);
 					})
 					</code></pre>
 					<button onclick="controls.evalCode(this, true)">eval</button>
-					<fieldset style="border: solid 1px black;">
+					<fieldset style="border: solid 1px black;" id="vue-wc-fieldset">
 						<legend style="font-size: .5em">#vue-wc-app</legend>
-						<div id="vue-wc-app" style="height: 1.5em"></div>
+						<div id="vue-wc-app" style="height: 2em"></div>
 					</fieldset>
 					<div style="position: absolute; bottom: 1vh; right: 1em; height: 30vh">
 						<img src="img/show.png" class="pure-img">
