@@ -1,7 +1,7 @@
 Łącznie przeprowadziłem ponad 190 godzin warsztatów.
 
 ## 2019
-* Szkolenie-webinar infoShare Academy [29.08, 03.09]: _Testy jednostkowe (JUnit, Mockito, AssertJ, TDD) w Springu_ [10h]
+* Dedykowane szkolenie-webinar infoShare Academy [29.08, 03.09]: _Testy jednostkowe (JUnit, Mockito, AssertJ, TDD) w Springu_ [10h]
 * Allegro (Poznań) [12.06]: _Front-end dla back-endowców (Java)_ [8h]
 * Kurs infoShare Academy Java (Warszawa)
 * Kurs infoShare Academy front-end (Warszawa)
