@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="description" content="Presentation">
+    <meta name="keywords" content="presentation">
+    <meta name="author" content="mat3e">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/blood.css">
+    <link rel="stylesheet" href="css/idea.css">
+    <link rel="stylesheet" href="css/fontawesome.css">
+    <style>
+        #header-margin {
+            text-align: left;
+            border-left: solid .25em white;
+            line-height: .85;
+            padding-left: .25em;
+        }
+
+        #header-logo {
+            width: 300px;
+            height: 169px;
+            background: url('img/wts-logo.jpeg') no-repeat;
+            top: -4.5em;
+            right: 0;
+            position: absolute;
+            background-size: contain;
+        }
+
+        #about-me {
+            padding: 1em;
+            background-color: rgba(255, 255, 255, .75);
+            list-style-type: none;
+            margin-left: 0;
+            float: left;
+        }
+
+        #about-me ul {
+            list-style-type: none;
+            float: left;
+            margin-left: 0;
+        }
+
+        #about-me a {
+            color: #a23;
+        }
+
+        #about-me a:hover {
+            color: #dd5566;
+        }
+
+        .slides section img.pure-img {
+            border: none;
+            box-shadow: none;
+            background: none;
+            margin: 0;
+        }
+
+        code[contenteditable="true"] {
+            border: 0;
+            outline: 0;
+        }
+
+        #perspective a {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            width: 45%;
+            margin: 0 auto;
+        }
+
+        #perspective a img {
+            border: 0;
+            margin: 0;
+            box-shadow: none;
+        }
+
+        .slides section pre {
+            margin-bottom: 0;
+        }
+
+        .slides section pre+button {
+            cursor: pointer;
+
+            font-size: .65em;
+            font-weight: 100;
+            -webkit-font-smoothing: antialiased;
+
+            color: white;
+            background: rgb(175, 30, 35);
+
+            padding: 0 3px 3px 3px;
+            border: transparent;
+            border-radius: 4px;
+
+            display: block;
+            margin: 0 auto;
+        }
+
+        .slides section pre+button:disabled {
+            background-color: grey;
+        }
+
+        .slides section a .stripped-img {
+            border: none;
+            margin: 0;
+            box-shadow: none;
+            background-color: rgba(255, 255, 255, 0);
+        }
+
+        .slides section a .stripped-img:hover {
+            border: none;
+            margin: 0;
+            box-shadow: none;
+            background-color: rgba(255, 255, 255, 0);
+        }
+
+        .slides section .comment {
+            margin-top: -20px;
+            margin-bottom: 20px;
+            color: gray;
+        }
+
+        .reveal .slides section .fragment.replace {
+            transition: none;
+            display: inline-block;
+        }
+
+        .reveal .slides section .fragment.fade-out.visible.replace {
+            display: none;
+        }
+
+        .reveal .slides section .fragment.fade-in.replace {
+            display: none;
+        }
+
+        .reveal .slides section .fragment.fade-in.visible.replace {
+            display: inline-block;
+        }
+
+        .reveal .slides section .fragment.highlight-red.visible {
+            color: #dd5566;
+        }
+
+        #hook-here button {
+            padding: 1em;
+            border-radius: 0;
+            background-color: white;
+            border: 1px solid black;
+        }
+
+        .reveal .slides section td.long-text-cell {
+            font-size: .5em;
+            vertical-align: middle;
+        }
+
+        .reveal .slides section table.summary {
+            table-layout: fixed;
+            width: 100%;
+        }
+
+        .reveal .slides section table.summary th {
+            text-align: center;
+        }
+
+        .reveal .slides section table.summary tbody td,
+        .reveal .slides section table.summary th {
+            width: 33%;
+        }
+
+        .reveal .slides section table.summary tbody td:first-child,
+        .reveal .slides section table.summary th:first-child {
+            width: 7%;
+            vertical-align: middle;
+            text-align: center
+        }
+
+        .reveal .slides section .fragment.no-highlight.visible {
+            color: #eee;
+        }
+
+        .reveal .slides section .fragment.no-highlight {
+            opacity: 1;
+            visibility: inherit;
+        }
+    </style>
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section data-background-image>
+                <section data-background-image>
+                    <div id="header-margin">
+                        <h1 style="margin: 0; font-size: 2.25em">What are these decorators?</h1>
+                    </div>
+                    <div id="header-logo"></div>
+                </section>
+                <section id="perspective" data-background-image="">
+                    <h5>
+                        <span>Perspective...</span>
+                        <span class="fragment" data-fragment-index="1"> matters</span>
+                        <span class="fragment" data-fragment-index="2"> :)</span>
+                    </h5>
+                    <a href="https://mistrzowie.org/717022">
+                        <img src="img/perspektywa-1.jpg">
+                        <img src="img/perspektywa-2.jpg" class="fragment" data-fragment-index="1">
+                        <img src="img/perspektywa-3.jpg" class="fragment" data-fragment-index="2">
+                    </a>
+                </section>
+                <section data-background-image="img/bg-hd.jpg" data-background-transition="zoom">
+                    <ul id="about-me">
+                        <li>
+                            <ul>
+                                <li>
+                                    <a href="https://www.linkedin.com/in/mateusz-chrzonstowski/">
+                                        <i class="fab fa-linkedin"
+                                            style="color: #0077B5; background-color: #FFF; line-height: .75em"></i>
+                                        /mateusz-chrzonstowski
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://twitter.com/_mat3e_">
+                                        <i class="fab fa-twitter-square"
+                                            style="background-color: #1DA1F2; color: #FFF; line-height: .75em"></i>
+                                        /_mat3e_
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.reddit.com/user/_mat3e_">
+                                        <i class="fab fa-reddit-square"
+                                            style="background-color: #FF4500; color: #FFF; line-height: .75em"></i>
+                                        /_mat3e_
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/mat3e/">
+                                        <i class="fab fa-github-square"
+                                            style="color: #24292E; background-color: #FFF; line-height: .75em"></i>
+                                        /mat3e
+                                    </a>
+                                </li>
+                                <li style="line-height: 1">&nbsp;</li>
+                                <li class="fragment" style="line-height: .75">
+                                    <a style="font-size: .75em; font-weight: bold;"
+                                        href="https://mat3e.github.io/talks/decorators/wts.html">
+                                        mat3e.github.io/talks
+                                        <div style="padding-left: 5em;">
+                                            /decorators/wts</div>
+                                    </a>
+                                </li>
+                                <li style="line-height: 1">&nbsp;</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="fragment" style="padding: .1em; line-height: 1">
+                                <li>
+                                    <a href="https://www.udemy.com/fajny-javascript/?couponCode=OPENALL">
+                                        <img src="img/udemy.svg" class="pure-img" style="height: 1.5em;">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://allegro.tech/">
+                                        <img src="img/allegro-tech.svg" class="pure-img" style="height: 1.5em;">
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+            </section>
+            <section data-background-image="" data-background-transition="zoom">
+                <section data-background-image="img/3000y.jpg" data-background-transition="none"
+                    data-background-size="contain">
+                    <aside class="notes">
+                        I know it's not the best idea to start with the history, but it will give us a better context
+                        here.
+                    </aside>
+                </section>
+                <section data-background-image="img/3000y-red.jpg" data-background-transition="none"
+                    data-background-size="contain">
+                    <aside class="notes">
+                        I know it's not the best idea to start with the history, but it will give us a better context
+                        here.
+                    </aside>
+                </section>
+                <section data-transition="slide" data-background-transition="fade">
+                    <div class="fragment fade-out replace" data-fragment-index="4">
+                        <div class="fragment fade-out replace" data-fragment-index="2">
+                            <img src="img/at/1-es5.png" class="pure-img fragment fade-out replace"
+                                data-fragment-index="1">
+                            <img src="img/at/2-es6.png" class="pure-img fragment fade-in replace"
+                                data-fragment-index="1">
+                        </div>
+                        <div class="fragment fade-in replace" data-fragment-index="2">
+                            <img src="img/at/3-ts.png" class="pure-img fragment fade-out replace"
+                                data-fragment-index="3">
+                            <img src="img/at/4-ts-reality.png" class="pure-img fragment fade-in replace"
+                                data-fragment-index="3">
+                        </div>
+                    </div>
+                    <div class="fragment fade-in replace" data-fragment-index="4">
+                        <img src="img/at/5-ts.png" class="pure-img fragment fade-out replace" data-fragment-index="5"
+                            data-autoslide="1500">
+                        <img src="img/at/6-all.png" class="pure-img fragment fade-in replace" data-fragment-index="5">
+                    </div>
+                    <img src="img/at/autistic.png" class="pure-img fragment"
+                        style="position: absolute; bottom: 3em; right: 0; width: 10vw">
+                    <img src="img/at/autistic-ie.png" class="pure-img fragment"
+                        style="position: absolute; left: 0; top: 4em; width: 15vw">
+                </section>
+                <section data-transition="fade" data-background-transition="fade">
+                    <div style="max-width: 400px; margin: 0 auto">
+                        <div style="display: flex">
+                            <img src="img/merge/1.png" class="pure-img" style="width: 50%">
+                            <img src="img/merge/2.png" class="pure-img fragment" style="width: 50%">
+                        </div>
+                        <div style="display: flex" class="fragment">
+                            <img src="img/merge/3.png" class="pure-img" style="width: 50%">
+                            <img src="img/merge/4.png" class="pure-img" style="width: 50%">
+                        </div>
+                        <div style="display: flex;">
+                            <img src="img/merge/5.png" class="pure-img fragment" style="max-width: 100%;">
+                        </div>
+                    </div>
+                    <a href="https://medium.com/google-developers/exploring-es7-decorators-76ecb65fb841"
+                        class="fragment"
+                        style="position: absolute; transform: rotate(-15deg); top: 1em; left: 0; width: 50%">
+                        <img src="img/merge/2016.png" class="pure-img">
+                    </a>
+                    <a href="https://github.com/microsoft/TypeScript/issues/14587" class="fragment"
+                        style="position: absolute; width: 60%; left: 20%; top: 40%; transform: rotate(5deg)">
+                        <img src="img/merge/2017.png" class="pure-img">
+                    </a>
+                    <img src="img/merge/2015.png" class="pure-img fragment"
+                        style="width: 20%; position: absolute; right: 20%; top: 60%">
+                    <aside class="notes">Google did proposal and then year by year...</aside>
+                </section>
+                <section data-background-image="img/nd/free-start.gif" data-background-size="contain"
+                    data-transition="none" data-background-transition="none">
+                </section>
+            </section>
+            <section data-background-image="">
+                <section>
+                    <div style="display: flex; flex-direction: column; max-width: 500px; margin: 0 auto">
+                        <img src="img/showme-1.jpg" class="pure-img">
+                        <img src="img/showme-2.jpg" class="pure-img fragment">
+                    </div>
+                </section>
+                <section>
+                    <pre class="fragment fade-out replace" style="background: white" data-fragment-index="6"><code class="javascript" data-trim contenteditable="true">
+                        function Person(name, surname) {
+                          this.name = name;
+                          this.surname = surname;
+                        }
+                    </code><code class="javascript fragment" data-trim contenteditable="true" data-fragment-index="5">
+                        Person.clone = function (other) {
+                          if(!(other instanceof Person)) { 
+                            throw new Error('Not Person!'); 
+                          }
+                          return new Person(other.name, other.surname);
+                        }
+                    </code><code class="javascript fragment" data-trim contenteditable="true" data-fragment-index="3">
+                        Object.defineProperty(Person.prototype, 'fullName', {
+                          get() {
+                            return `${this.name} ${this.surname}`;
+                          }
+                        });
+                    </code><code class="javascript fragment" data-trim contenteditable="true" data-fragment-index="2">
+                        Person.prototype.sayHello = function () {
+                          alert(`Hi, I'm ${this.fullName}!`);
+                        }
+                    </code><code class="javascript fragment" data-trim contenteditable="true" data-fragment-index="1">
+                        const person = new Person('Adam', 'Małysz');
+                    </code><code class="javascript fragment" data-trim contenteditable="true" data-fragment-index="4">
+                        person.sayHello();
+                    </code></pre>
+                    <pre class="fragment fade-in replace" data-fragment-index="6"><code class="javascript" data-trim contenteditable="true">
+                        class Person {
+                          constructor(name, surname) {
+                            this.name = name;
+                            this.surname = surname;
+                          }
+                        </code><code class="javascript" contenteditable="true">  static clone(other) {
+    if(!(other instanceof Person)) {
+      throw new Error('Not Person!'); 
+    }
+    return new Person(other.name, other.surname);
+  }</code><code class="javascript" contenteditable="true">  get fullName() {
+    return `${this.name} ${this.surname}`;
+  }</code><code class="javascript" data-trim contenteditable="true">
+                          sayHello() {
+                            alert(`Hi, I'm ${this.fullName}!`);
+                          }
+                        }
+                        </code><code class="javascript" data-trim contenteditable="true">
+                        const person = new Person('Adam', 'Małysz');
+                        </code><code class="javascript" data-trim contenteditable="true">
+                        person.sayHello();
+                    </code></pre>
+                    <button onclick="controls.evalCode(this)" style="font-weight: bold">eval</button>
+                    <aside class="notes">
+                        Reminder how classes are implemented under the hood, in TS or JS
+                        <br>
+                        console.log(Person) // show how it looks in the console
+                        <br>
+                        prototype &lt;-> constructor &lt;-> prototype
+                    </aside>
+                </section>
+                <section>
+                    <img src="img/showme-3.jpg" class="pure-img" style="max-width: 300px" data-fragment-index="1">
+                    <div class="fragment" data-fragment-index="2">
+                        <code>--experimentalDecorators</code>
+                    </div>
+                    <pre class="fragment" style="margin: 0 auto;" data-fragment-index="3"><code class="json" style="font-size: .65em; line-height: 1.05" data-trim>
+                        {
+                          "plugins": [
+                            "@babel/plugin-transform-typescript",
+                            ["@babel/plugin-proposal-decorators", { "legacy": true }],
+                            ["@babel/plugin-proposal-class-properties", { "loose": true }]
+                          ]
+                        }
+                    </code></pre>
+                    <div class="fragment" data-fragment-index="4">
+                        <pre style="margin-bottom: .5em; background: white"><code class="typescript fragment fade-in replace" data-trim contenteditable="true" data-fragment-index="6">
+                            @frozen class Test {}
+                        </code><code class="typescript fragment fade-out replace" data-trim contenteditable="true" data-fragment-index="6">
+                            class Test {}
+                        </code><code class="typescript fragment" data-trim contenteditable="true" data-fragment-index="5">
+                            Test.prototype.injectedFn = () => alert('injected!');
+                            new Test().injectedFn();
+                        </code></pre>
+                        <button onclick="controls.evalTsCode(this)" style="font-weight: bold">eval</button>
+                    </div>
+                    <div class="fragment" data-fragment-index="7">
+                        <pre style="margin-bottom: .5em;"><code class="typescript" data-trim contenteditable="true">
+                            function frozen(constructor: Function) {
+                              Object.freeze(constructor);
+                              Object.freeze(constructor.prototype);
+                            }
+                        </code></pre>
+                        <button onclick="controls.evalTsCode(this, true)" style="font-weight: bold">eval</button>
+                    </div>
+                    <aside class="notes">
+                        Finally, decorators.
+                        <br>
+                        In case of babel (for some reason, like here in browser).
+                        <br>
+                        A library or something modifying our lovely class, no matter how it's defined.
+                    </aside>
+                </section>
+                <section id="thisSlide">
+                    <h3 style="margin-bottom: 0">Parametrizing?</h3>
+                    <div class="fragment" data-fragment-index="1">
+                        <pre style="margin-bottom: .5em; background:white"><code class="typescript" data-trim contenteditable="true" style="font-size: .85em; line-height: 1.05">
+                            interface Options {
+                              selector: string;
+                            }
+                        </code><code class="typescript fragment" data-trim contenteditable="true" style="font-size: .85em; line-height: 1.05" data-fragment-index="3">
+                            // decorator factory
+                            function WebComponent(options: Options) {
+                        </code><code class="typescript fragment" contenteditable="true" style="font-size: .85em; line-height: 1.05" data-fragment-index="2">  return function&lt;C extends Function>(constructor: C) {
+    customElements.define(options.selector, constructor);
+  }</code><code class="typescript fragment" data-trim contenteditable="true" style="font-size: .85em; line-height: 1.05" data-fragment-index="3">
+                            }
+                        </code></pre>
+                        <button onclick="controls.evalTsCode(this, true)" style="font-weight: bold" class="fragment"
+                            data-fragment-index="3">eval</button>
+                    </div>
+                    <div class="fragment" data-fragment-index="4">
+                        <pre style="margin-bottom: .5em; background: white"><code class="typescript" data-trim contenteditable="true" style="font-size: .85em; line-height: 1.05">
+                            @WebComponent({ selector: 'm3-siema' })
+                            class UberComponent extends HTMLElement {
+                              connectedCallback() {
+                                this.innerHTML = 'siema!';
+                              }
+                            }
+                        </code><code class="typescript fragment" data-trim contenteditable="true" style="font-size: .85em; line-height: 1.05" data-fragment-index="5">
+                            const component = document.createElement('m3-siema');
+                            document.getElementById('thisSlide').prepend(component);
+                        </code></pre>
+                        <button onclick="controls.evalTsCode(this, true)" style="font-weight: bold" class="fragment"
+                            data-fragment-index="5">eval</button>
+                    </div>
+                    <aside class="notes">
+                        Simple options; I'm a fan of web components in case you don't know me
+                        <br>
+                        got you! it's not a simple decorator, it's decorator factory!
+                    </aside>
+                </section>
+                <section>
+                    <h3 style="margin: 0">Other decorators</h3>
+                    <ul>
+                        <li class="fragment" data-fragment-index="1">on methods</li>
+                        <li class="fragment" data-fragment-index="2">on properties/accessors</li>
+                        <li class="fragment" data-fragment-index="3">on fields</li>
+                        <li class="fragment" data-fragment-index="4">on method parameters</li>
+                        <li class="fragment" data-fragment-index="5">including static</li>
+                    </ul>
+                    <h3 class="fragment" data-fragment-index="5">?</h3>
+                    <div>
+                        <img src="img/wecan.jpg" class="pure-img fragment" style="width: 30%">
+                    </div>
+                </section>
+                <section>
+                    <pre style="margin-bottom: .5em; background: white; width: 100%"><code class="typescript" style="font-size: .85em; line-height: 1.05" data-trim contenteditable="true">
+                        type Mappable&lt;T> = T & { mapFromDecorators(): object; }</code><code class="typescript fragment" contenteditable="true" style="font-size: .85em; line-height: 1.05;" data-trim data-fragment-index="1">
+                        function mappable&lt;C extends Function>(constructor: C) {
+                          constructor.prototype.mapFromDecorators = function() {
+                    </code><code class="typescript fragment" contenteditable="true" style="font-size: .85em; line-height: 1.05;" data-fragment-index="2">    return (constructor as any).fieldsToMap.reduce((result, fieldName: string) => {
+      result[fieldName] = this[fieldName];
+      return result;
+    }, {});</code><code class="typescript fragment" contenteditable="true" style="font-size: .85em; line-height: 1.05;" data-trim data-fragment-index="1">
+                          }
+                        }
+                    </code></pre>
+                    <button class="fragment" onclick="controls.evalTsCode(this, true)" style="font-weight: bold" data-fragment-index="2">eval</button>
+                    <div class="fragment">
+                        <pre style="margin-bottom: .5em; background: white; width: 100%"><code class="typescript" style="line-height: 1.05" data-trim contenteditable="true">
+                            function map(targetPrototype: any, fieldName: string) {
+                              if (!targetPrototype.constructor.fieldsToMap) {
+                                targetPrototype.constructor.fieldsToMap = [];
+                              }
+                              targetPrototype.constructor.fieldsToMap.push(fieldName);
+                            }
+                        </code></pre>
+                        <button onclick="controls.evalTsCode(this, true)" style="font-weight: bold">eval</button>
+                    </div>
+                    <aside class="notes">
+                        Prototype for instance, constructor for static fields. But we can get constructor from
+                        prototype.
+                    </aside>
+                </section>
+                <section>
+                    <pre style="margin-bottom: .5em; background: white; width: 100%"><code class="typescript" style="line-height: 1.05" data-trim contenteditable="true">
+                            @mappable
+                            class User {
+                              @map private name: string;
+                              @map private mail: string;
+                              private pass: string;
+                            
+                              constructor(name: string, pass: string, mail: string) {
+                                [this.name, this.pass, this.mail] = [name, pass, mail];
+                              }
+                            }
+                    </code><code class="typescript fragment" data-fragment-index="1" contenteditable="true" style="line-height: 1.05" data-trim>
+                            const person = (
+                                new User("Adi", "pass", "adi@mail.com") as Mappable&lt;User>
+                            ).mapFromDecorators();
+                            console.log(person);
+                    </code></pre>
+                    <button class="fragment" data-fragment-index="1" onclick="controls.evalTsCode(this)" style="font-weight: bold">eval</button>
+                </section>
+                <section>
+                    <pre style="margin-bottom: .5em; background: white; width: 100%"><code class="typescript fragment" style="font-size: .9em; line-height: 1.05" data-trim contenteditable="true" data-fragment-index="1">
+                        function first() {
+                          alert('1st decorator assigned');
+                    </code><code class="typescript" contenteditable="true" style="font-size: .9em; line-height: 1.05;">  return function(proto, methodName: string, descriptor: PropertyDescriptor) {
+    alert('1st decorator executed');
+  }</code><code class="typescript fragment" contenteditable="true" style="font-size: .9em; line-height: 1.05;" data-trim data-fragment-index="1">
+                            }</code><code class="typescript fragment" contenteditable="true" style="font-size: .9em; line-height: 1.05;" data-trim data-fragment-index="2">
+                            function second() {
+                              alert('2nd decorator assigned');
+                              return function(proto, methodName: string, descriptor: PropertyDescriptor) {
+                                alert('2nd decorator executed');
+                              }
+                            }
+                            function clazz() {
+                              alert('class decorator assigned');
+                              return function(constructor: Function) {
+                                alert('class decorator executed');
+                              }
+                            }
+                        </code></pre>
+                    <button class="fragment" onclick="controls.evalTsCode(this, true)" style="font-weight: bold" data-fragment-index="2">eval</button>
+                    <div class="fragment">
+                        <pre style="margin-bottom: .5em; background: white; width: 100%"><code class="typescript" style="font-size: .9em; line-height: 1.05" data-trim contenteditable="true">
+                            @clazz()
+                            class TestOrder {
+                              @first() @second() method() {
+                                /* ... */
+                              }
+                            }
+                        </code></pre>
+                        <button onclick="controls.evalTsCode(this)" style="font-weight: bold">eval</button>
+                    </div>
+                    <aside class="notes">can be used to observe, modify, or replace a method definition</aside>
+                </section>
+                <section data-background-image="img/nd/free.gif" data-background-size="contain" data-transition="none"
+                    data-background-transition="none">
+                </section>
+            </section>
+            <section data-background-image="">
+                <section>
+                    <a href="https://www.typescriptlang.org/docs/handbook/decorators.html">
+                        <img src="img/tsdoc.png" class="pure-img" style="width: 100%">
+                    </a>
+                    <div class="fragment" data-fragment-index="1">
+                        <img src="img/strawperson.png" class="pure-img" style="height: 2em">
+                        <img src="img/arrow.png" class="pure-img fragment" style="height: 1em; padding-bottom: .5em"
+                            data-fragment-index="2">
+                        <img src="img/proposal.png" class="pure-img fragment" style="height: 2em"
+                            data-fragment-index="2">
+                        <img src="img/arrow.png" class="pure-img fragment" style="height: 1em; padding-bottom: .5em"
+                            data-fragment-index="3">
+                        <img src="img/draft.png" class="pure-img fragment" style="height: 2em" data-fragment-index="3">
+                        <img src="img/arrow.png" class="pure-img fragment" style="height: 1em; padding-bottom: .5em"
+                            data-fragment-index="4">
+                        <img src="img/candidate.png" class="pure-img fragment" style="height: 2em"
+                            data-fragment-index="4">
+                        <img src="img/arrow.png" class="pure-img fragment" style="height: 1em; padding-bottom: .5em"
+                            data-fragment-index="5">
+                        <img src="img/finished.png" class="pure-img fragment" style="height: 2em"
+                            data-fragment-index="5">
+                    </div>
+                    <a href="https://tc39.es/process-document/" class="fragment">more</a>
+                    <div class="fragment">current stage 2 proposal decorators != decorators we know</div>
+                    <aside class="notes">
+                        <ul>
+                            <li>strawperson - strawman</li>
+                            <li>proposal - not that proposal, but close enough</li>
+                            <li>draft - draugh beer = beer from keg, not bottle nor can</li>
+                            <li>candidate</li>
+                            <li>finished</li>
+                        </ul>
+                        fun fact = something new
+                    </aside>
+                </section>
+                <section id="here">
+                    <a href="https://github.com/babel/babel/issues/9822">
+                        <img src="img/decorators.png" class="pure-img">
+                    </a>
+                    <div class="fragment">
+                        <pre style="margin-bottom: .5em; background: white"><code class="typescript" data-trim contenteditable="true" style="line-height: 1.05">
+                                @WebComponent('m3-siema')
+                                class UberComponent extends HTMLElement {
+                                  connectedCallback() {
+                                    this.innerHTML = 'siema!!!';
+                                  }
+                                }
+                        </code></pre>
+                    </div>
+                    <div class="fragment">
+                        <pre style="margin-bottom: .5em;"><code class="typescript" data-trim contenteditable="true">
+                            decorator @WebComponent(selector) {
+                              @register(clazz => customElements.define(selector, clazz))
+                            }
+                        </code></pre>
+                    </div>
+                    <aside class="notes">@ is a part of the decorator; we have a keyword as well</aside>
+                </section>
+                <section style="font-size: .9em">
+                    <h3>Building blocks</h3>
+                    <ul>
+                        <li class="fragment">
+                            <code>@wrap</code>
+                            <span class="fragment"> = method instead of a decorated method/class</span>
+                        </li>
+                        <li class="fragment">
+                            <code>@register</code>
+                            <span class="fragment"> = callback after creating a decorated class</span>
+                        </li>
+                        <li class="fragment">
+                            <code>@expose</code>
+                            <span class="fragment"> = sharing private data (#)</span>
+                        </li>
+                        <li class="fragment">
+                            <code>@initialize</code>
+                            <span class="fragment"> = callback after creating an instance of a decorated class</span>
+                        </li>
+                    </ul>
+                    <aside class="notes">
+                        <ul>
+                            <li>@wrap = replace a method or the entire class with the return value</li>
+                            <li>@register = callback after the class is created</li>
+                            <li>@expose = callback to access private fields or methods after the creation</li>
+                            <li>@initialize = callback when creating an instance of the class</li>
+                        </ul>
+                    </aside>
+                </section>
+                <section>
+                    <h3>Is this worth the effort?</h3>
+                    <ul>
+                        <li class="fragment">
+                            <img src="img/angular.svg" style="height: 1em" class="pure-img"> - metadata, <code>Reflect</code>
+                        </li>
+                        <li class="fragment">
+                            Informative: <code>@Override</code>, <code>@Deprecated</code>
+                        </li>
+                        <li class="fragment">
+                            Language features: <code>@Delegate</code>
+                        </li>
+                        <li class="fragment">
+                            Managing: <code>@RestController</code>, <code>@Service</code>, <code>@Entity</code>
+                        </li>
+                        <li class="fragment">
+                            Additional method logic: <code>@Transactional</code>
+                        </li>
+                        <li class="fragment">
+                            Special treatment: <code>@Test</code>, <code>@Column</code>
+                        </li>
+                    </ul>
+                    <aside class="notes">But be careful with the overoptimistic adoption to avoid another traps</aside>
+                </section>
+                <section data-background-image="img/nd/free2.gif" data-background-size="contain" data-transition="none"
+                    data-background-transition="none">
+                </section>
+            </section>
+            <section>
+                <div class="fragment" data-fragment-index="2">
+                    <img src="img/thanks.gif" style="width: 70%">
+                </div>
+                <ul>
+                    <li>
+                        10 JS trends:
+                        <a href="https://mat3e.github.io/trends">
+                            mat3e.github.io/trends
+                        </a>
+                    </li>
+                    <li class="fragment" data-fragment-index="1">
+                        <a href="https://mat3e.github.io/talks/decorators/wts.html">
+                            mat3e.github.io/talks/decorators/wts
+                        </a>
+                    </li>
+                </ul>
+            </section>
+        </div>
+    </div>
+    <script src="js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script src="js/babel.min.js"></script>
+    <script>
+        const controls = (function () {
+            Reveal.initialize({
+                history: true,
+                // - null: Media will only autoplay if data-autoplay is present
+                autoPlayMedia: null,
+                transition: 'slide', // none/fade/slide/convex/concave/zoom
+                transitionSpeed: 'default', // default/fast/slow
+                backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
+                dependencies: [
+                    { src: 'js/classList.js', condition: function () { return !document.body.classList; } },
+
+                    { src: 'js/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                    { src: 'js/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+
+                    // Syntax highlight for <code> elements
+                    { src: 'js/highlight.js', callback: function () { hljs.initHighlightingOnLoad(); } },
+
+                    // Zoom in and out with Alt+click
+                    { src: 'js/zoom.js' },
+
+                    { src: 'notes/notes.js' },
+
+                    { src: 'js/math.js' }
+                ]
+            });
+
+            document.querySelectorAll('.reveal .slides section:not([data-background-image])').forEach(s => {
+                s.setAttribute('data-background-image', 'img/twitter.png');
+                s.setAttribute('data-background-size', '240px');
+                s.setAttribute('data-background-position', '20px 20px');
+            });
+
+            return {
+                evalCode(btn) {
+                    eval(extractCodeFromBefore(btn));
+                },
+                evalTsCode(btn, once) {
+                    const input = extractCodeFromBefore(btn);
+                    const output = Babel.transform(input, {
+                        plugins: [
+                            'transform-typescript',
+                            ['proposal-decorators', { legacy: true }],
+                            ['proposal-class-properties', { loose: true }]
+                        ]
+                    }).code;
+                    eval.call(window, output);
+                    if (once) {
+                        btn.disabled = true;
+                    }
+                }
+            }
+
+            function extractCodeFromBefore(btn) {
+                return [...btn.parentElement.querySelectorAll('pre')].filter(e => getComputedStyle(e).display !== 'none')[0].innerText;
+            }
+        })();
+    </script>
+</body>
+
+</html>
