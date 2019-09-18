@@ -1,8 +1,6 @@
-# Co ona ma, czego nie mam ja? Biblioteka React i jej klony
-React z przytupem wszedł do świata front-endu i jeszcze długo nie zejdzie z pozycji lidera (wystarczy spojrzeć na raport npm-a za 2018 rok).
-Coraz więcej i coraz częściej pojawiają się jednak uproszczone i odchudzone wersje tej biblioteki.
-Dodatkowo, wychodzą narzędzia używające Reacta, ale np. wykonujące Server-Side Rendering lub generujące statyczne strony WWW.
-Sam React również wymyśla nowe rzeczy i tak oto dostaliśmy Context, Hooki i inne tego typu kwestie.
+# What are these decorators?
+I think every front-end developer has seen code written in Angular. This framework has certainly introduced decorators to the mainstream, but it is not their only use. We write things that begin with "@" also in MobX, "react-redux" and there are examples from Vue and Stencil.
 
-Podczas wystąpienia postaram się przybliżyć temat Reacta i "reactopodobnych". Tak, żeby każdy mógł zastanowić się nad tym, co najlepiej sprawdzi się w jego specyficznej sytuacji, na jego specyficznym projekcie :)
+I want to show what the first version of decorators was about and how to build them. Moreover, I will provide the overview of the current decorators proposal.
+
 
