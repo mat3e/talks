@@ -1,0 +1,1577 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta name="description" content="Presentation">
+	<meta name="keywords" content="presentation">
+	<meta name="author" content="mat3e">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Web Componenty</title>
+
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/white.css">
+
+	<link rel="stylesheet" href="css/idea.css">
+	<link rel="stylesheet" href="css/fontawesome.css">
+
+	<style>
+		@font-face {
+			font-family: 'Gloria Hallelujah';
+			font-style: normal;
+			font-weight: 400;
+			src: url('webfonts/gloria.woff2') format('woff2');
+		}
+
+		.reveal,
+		.reveal h1,
+		.reveal h2,
+		.reveal h3,
+		.reveal h4,
+		.reveal h5,
+		.reveal h6,
+		.reveal button {
+			font-family: 'Gloria Hallelujah' !important;
+		}
+
+		.header {
+			text-align: left;
+			font-size: .7em;
+		}
+
+		.header-logo {
+			width: 329px;
+			height: 85px;
+			background-image: url('img/twitter.png');
+			background-size: contain;
+
+			top: -4em;
+			right: 0;
+			position: absolute;
+		}
+
+		.header h1 {
+			line-height: 1;
+		}
+
+		code[contenteditable="true"] {
+			border: 0;
+			outline: 0;
+		}
+
+		.slides section pre {
+			margin-bottom: 0;
+		}
+
+		.slides section pre+button,
+		.slides section .btn {
+			cursor: pointer;
+			font-size: .5em;
+			background-color: orange;
+			border: 1px solid black;
+			border-radius: 4px;
+		}
+
+		.slides section pre+button:disabled {
+			background-color: grey;
+		}
+
+		#perspective a {
+			display: flex;
+			flex-direction: column;
+			align-items: stretch;
+			width: 45%;
+			margin: 0 auto;
+		}
+
+		#perspective a img {
+			border: 0;
+			margin: 0;
+			box-shadow: none;
+		}
+
+		.reveal .slides section .about-me {
+			padding: 1em;
+			background-color: rgba(255, 255, 255, .75);
+			list-style-type: none;
+			margin-left: 0;
+			float: left;
+		}
+
+		.reveal .slides section .about-me ul {
+			list-style-type: none;
+			float: left;
+			margin-left: 0;
+		}
+
+		.reveal .slides section .about-me a {
+			color: #a23;
+		}
+
+		.reveal .slides section .about-me a:hover {
+			color: #dd5566;
+		}
+
+		.reveal section img.pure-img {
+			background: rgba(255, 255, 255, 0);
+			border: none;
+			box-shadow: none;
+			margin: 0;
+		}
+
+		.reveal .slides section .fragment.replace {
+			transition: none;
+			display: inline-block;
+		}
+
+		.reveal .slides section .fragment.fade-out.visible.replace {
+			display: none;
+		}
+
+		.reveal .slides section .fragment.fade-in.replace {
+			display: none;
+		}
+
+		.reveal .slides section .fragment.fade-in.visible.replace {
+			display: inline-block;
+		}
+
+		.reveal section img.text-logo {
+			vertical-align: middle;
+			background: none;
+			box-shadow: none;
+			border: none;
+			height: 1em;
+			margin: 0;
+		}
+
+		.reveal .slides section td.long-text-cell {
+			font-size: .5em;
+			vertical-align: middle;
+		}
+
+		.reveal .slides section table.summary {
+			table-layout: fixed;
+			width: 100%;
+		}
+
+		.reveal .slides section table.summary tbody td {
+			width: 27%;
+		}
+
+		.reveal .slides section table.summary tbody td:first-child {
+			width: 19%;
+		}
+
+		.reveal .slides>section[data-transition~=zoom-out].past {
+			visibility: hidden;
+			-webkit-transform: scale(.2);
+			transform: scale(.2);
+		}
+
+		.reveal .slides>section>section[data-transition~=zoom-out].past {
+			-webkit-transform: scale(.2);
+			transform: scale(.2);
+		}
+
+		.reveal .slides section .planets {
+			display: grid;
+			grid-template-columns: repeat(7, 1fr);
+			grid-template-rows: repeat(5, 1fr);
+			grid-gap: 15px;
+		}
+
+		.reveal .slides section .planets img {
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
+		}
+
+		.reveal .slides section .frameworks {
+			display: grid;
+			grid-template-columns: 1fr 1fr 1fr;
+			grid-template-rows: 1fr 1fr 1fr 1fr;
+			grid-template-areas:
+				'a . b'
+				'a c b'
+				'd c e'
+				'd . e';
+		}
+
+		.reveal .slides section .frameworks div {
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
+		}
+
+		@keyframes ufo-roll {
+			from {
+				opacity: 0;
+				transform: translate3d(-300%, 100%, 0) rotate3d(0, 0, 1, -60deg);
+			}
+
+			50% {
+				opacity: 1;
+				transform: translate3d(0, 0, 0);
+			}
+
+			to {
+				opacity: 0;
+				transform: translate3d(300%, -100%, 0) rotate3d(0, 0, 1, 60deg);
+			}
+		}
+
+		.reveal .slides section .fragment.visible.ufo-roll {
+			animation-name: ufo-roll;
+			animation-duration: 3s;
+			animation-fill-mode: both;
+		}
+
+		@keyframes shoe-roll {
+			from {
+				opacity: 0;
+				transform: translate3d(0, 0, 0);
+			}
+
+			50% {
+				opacity: 1;
+				transform: translate3d(250%, 450%, 0);
+			}
+
+			to {
+				opacity: 0;
+				transform: translate3d(700%, 700%, 0);
+			}
+		}
+
+		.reveal .slides section .fragment.visible.shoe-roll {
+			animation-name: shoe-roll;
+			animation-duration: 2.5s;
+			animation-fill-mode: both;
+			animation-timing-function: linear;
+			animation-delay: 1s;
+		}
+
+		@keyframes mac-roll {
+			from {
+				opacity: 1;
+				transform: translate3d(0, 0, 0);
+			}
+
+			40% {
+				opacity: 1;
+				transform: translate3d(-50%, 100%, 0);
+			}
+
+			to {
+				opacity: 0;
+				transform: translate3d(-50%, 100%, 0);
+			}
+		}
+
+		.reveal .slides section .fragment.fade-in.visible.replace.mac-roll {
+			display: inline-block;
+			animation-name: mac-roll;
+			animation-duration: 2.5s;
+			animation-fill-mode: both;
+			animation-timing-function: ease-in-out;
+		}
+
+		@keyframes left-to-right {
+			from {
+				opacity: 1;
+				transform: translate3d(0, 0, 0);
+			}
+
+			to {
+				opacity: 0;
+				transform: translate3d(400%, 0, 0);
+			}
+		}
+
+		.reveal .slides section .fragment.visible.left-to-right {
+			animation-name: left-to-right;
+			animation-duration: 2s;
+			animation-fill-mode: both;
+			animation-timing-function: linear;
+		}
+
+		.reveal .slides section .centered {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		#vue-wc-fieldset m3-button {
+			display: flex;
+			justify-content: center;
+		}
+	</style>
+	<script>
+		const link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<section class="header">
+					<h1 style="margin-bottom: 0">Web Componenty</h1>
+					<h2>jako lingua franca front-endu</h2>
+					<div class="header-logo"></div>
+				</section>
+				<section>
+					<p style="display: flex; justify-content: center">
+						<img src="img/small.png" class="pure-img" style="width: 120px">
+						<img src="img/small.png" class="pure-img" style="width: 120px">
+						<img src="img/small.png" class="pure-img" style="width: 120px">
+					</p>
+					<ul>
+						<li class="fragment">Pesymista widzi tunel</li>
+						<li class="fragment">Optymista widzi światło w tunelu</li>
+						<li class="fragment">Realista widzi pociąg</li>
+						<li class="fragment">Maszynista widzi 3 kretynów na torach</li>
+					</ul>
+					<h5 style="margin-top: 1em" class="fragment">Perspektywa ma znaczenie!</h5>
+				</section>
+				<section data-background-image="img/bg-hd.jpg" data-background-transition="zoom"
+					data-transition="zoom-in fade-out">
+					<ul class="about-me">
+						<li>
+							<ul>
+								<li>
+									<a href="https://www.linkedin.com/in/mateusz-chrzonstowski/">
+										<i class="fab fa-linkedin"
+											style="color: #0077B5; background-color: #FFF; line-height: .75em"></i>
+										/mateusz-chrzonstowski
+									</a>
+								</li>
+								<li>
+									<a href="https://twitter.com/_mat3e_">
+										<i class="fab fa-twitter-square"
+											style="background-color: #1DA1F2; color: #FFF; line-height: .75em"></i>
+										/_mat3e_
+									</a>
+								</li>
+								<li>
+									<a href="https://www.reddit.com/user/_mat3e_">
+										<i class="fab fa-reddit-square"
+											style="background-color: #FF4500; color: #FFF; line-height: .75em"></i>
+										/_mat3e_
+									</a>
+								</li>
+								<li>
+									<a href="https://github.com/mat3e/">
+										<i class="fab fa-github-square"
+											style="color: #24292E; background-color: #FFF; line-height: .75em"></i>
+										/mat3e
+									</a>
+								</li>
+								<li style="line-height: 1">&nbsp;</li>
+								<li class="fragment" style="line-height: 1">
+									<a style="font-size: .75em; font-weight: bold;"
+										href="https://mat3e.github.io/talks/components/devjs.html">
+										mat3e.github.io/talks
+										<div style="padding-left: 1em;">
+											/components/devjs</div>
+									</a>
+								</li>
+								<li style="line-height: 1">&nbsp;</li>
+							</ul>
+						</li>
+						<li>
+							<ul class="fragment" style="padding: .1em; line-height: 1">
+								<li>
+									<a href="https://www.udemy.com/java-ambitny-start/?couponCode=OPENALL">
+										<img src="img/udemy.svg" class="pure-img" style="height: 1.5em;">
+									</a>
+								</li>
+								<li>
+									<a href="https://allegro.tech/">
+										<img src="img/allegro-tech.svg" class="pure-img" style="height: 1.5em;">
+									</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+				<section data-background-image="img/bg-hd-fixed.jpeg" data-transition="fade"
+					data-background-transition="zoom">
+					<ul class="about-me">
+						<li>
+							<ul>
+								<li>
+									<a href="https://www.linkedin.com/in/mateusz-chrzonstowski/">
+										<i class="fab fa-linkedin"
+											style="color: #0077B5; background-color: #FFF; line-height: .75em"></i>
+										/mateusz-chrzonstowski
+									</a>
+								</li>
+								<li>
+									<a href="https://twitter.com/_mat3e_">
+										<i class="fab fa-twitter-square"
+											style="background-color: #1DA1F2; color: #FFF; line-height: .75em"></i>
+										/_mat3e_
+									</a>
+								</li>
+								<li>
+									<a href="https://www.reddit.com/user/_mat3e_">
+										<i class="fab fa-reddit-square"
+											style="background-color: #FF4500; color: #FFF; line-height: .75em"></i>
+										/_mat3e_
+									</a>
+								</li>
+								<li>
+									<a href="https://github.com/mat3e/">
+										<i class="fab fa-github-square"
+											style="color: #24292E; background-color: #FFF; line-height: .75em"></i>
+										/mat3e
+									</a>
+								</li>
+								<li style="line-height: 1">&nbsp;</li>
+								<li style="line-height: 1">
+									<a style="font-size: .75em; font-weight: bold;"
+										href="https://mat3e.github.io/talks/components/devjs.html">
+										mat3e.github.io/talks
+										<div style="padding-left: 1em;">
+											/components/devjs</div>
+									</a>
+								</li>
+								<li style="line-height: 1">&nbsp;</li>
+							</ul>
+						</li>
+						<li>
+							<ul style="padding: .1em; line-height: 1">
+								<li>
+									<a href="https://www.udemy.com/java-ambitny-start/?couponCode=OPENALL">
+										<img src="img/udemy.svg" class="pure-img" style="height: 1.5em;">
+									</a>
+								</li>
+								<li>
+									<a href="https://allegro.tech/">
+										<img src="img/allegro-tech.svg" class="pure-img" style="height: 1.5em;">
+									</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section>
+				<section data-transition="fade-in zoom-out">
+					<div style="display: flex; align-items: center; justify-content: center">
+						<img src="img/react.svg" class="fragment pure-img" style="width: 65px">
+						<img src="img/jbean.png" class="pure-img" style="height: 45vh">
+					</div>
+					<div style="font-family: 'Gloria Hallelujah' !important">Janek śnieg</div>
+					<aside class="notes">
+						John Snow
+					</aside>
+				</section>
+				<section data-transition="zoom-out">
+					<img src="img/small-stand.png" class="pure-img" style="height: 25vh">
+				</section>
+				<section data-transition="zoom-out">
+					<img src="img/earth.png" class="pure-img" style="height: 25vh">
+				</section>
+				<section data-transition="zoom-out">
+					<div class="planets">
+						<img src="img/pl3.png" class="pure-img fragment" data-fragment-index="1"
+							style="grid-column-start: 2; grid-column-end: 4; grid-row-start: 1; grid-row-end: 3;">
+						<img src="img/star2.png" class="pure-img fragment" data-fragment-index="6"
+							style="grid-column-start: 5; grid-column-end: 6; grid-row-start: 1; grid-row-end: 2;">
+						<img src="img/star3.png" class="pure-img fragment" data-fragment-index="6"
+							style="grid-column-start: 3; grid-column-end: 4; grid-row-start: 2; grid-row-end: 4;">
+						<img src="img/pl6.png" class="pure-img fragment" data-fragment-index="5"
+							style="grid-column-start: 5; grid-column-end: 7; grid-row-start: 2; grid-row-end: 4;">
+						<img src="img/pl5.png" class="pure-img fragment" data-fragment-index="3" data-autoslide="500"
+							style="grid-column-start: 1; grid-column-end: 3; grid-row-start: 3; grid-row-end: 5;">
+						<img src="img/earth-small.png" class="pure-img"
+							style="grid-column-start: 4; grid-column-end: 5; grid-row-start: 3; grid-row-end: 4;">
+						<img src="img/pl1.png" class="pure-img fragment" data-fragment-index="2" data-autoslide="500"
+							style="grid-column-start: 5; grid-column-end: 6; grid-row-start: 3; grid-row-end: 4;">
+						<img src="img/star1.png" class="pure-img fragment" data-fragment-index="6"
+							style="grid-column-start: 6; grid-column-end: 7; grid-row-start: 3; grid-row-end: 4;">
+						<img src="img/pl2.png" class="pure-img fragment" data-fragment-index="4" data-autoslide="500"
+							style="grid-column-start: 5; grid-column-end: 6; grid-row-start: 4; grid-row-end: 5;">
+						<img src="img/pl4.png" class="pure-img fragment" data-fragment-index="5"
+							style="grid-column-start: 3; grid-column-end: 4; grid-row-start: 3; grid-row-end: 5;">
+					</div>
+					<img class="pure-img fragment ufo-roll" src="img/ufo.png" data-fragment-index="7"
+						style="width: 4em; margin-left: -2em; position: absolute; top: 3em; z-index: 10;">
+					<img class="pure-img fragment shoe-roll" src="img/shoe.png" data-fragment-index="7"
+						style="width: 2em; position: absolute; top: 0; left: 2em; z-index: 10;">
+				</section>
+				<section data-transition="zoom-out" data-autoslide="2000">
+					<img src="img/uni1.png" class="pure-img" style="height: 50vh">
+				</section>
+				<section data-transition="zoom-out">
+					<div style="display: flex; justify-content: space-evenly; align-items: center;">
+						<img src="img/uni2.png" class="pure-img fragment fade-out replace" style="height: 25vh"
+							data-fragment-index="3">
+						<img src="img/uni2.png" class="pure-img fragment fade-in replace" style="height: 25vh"
+							data-fragment-index="3">
+						<img src="img/uni2.png" class="pure-img fragment fade-in replace" style="height: 25vh"
+							data-fragment-index="3">
+					</div>
+					<span class="fragment" data-fragment-index="1"
+						style="width: 3em; position: absolute; top: -3em; margin-left: 1em; z-index: 10;">
+						<img class="pure-img fragment fade-out replace" src="img/mac-err.png" data-fragment-index="2"
+							data-autoslide="1500">
+					</span>
+					<img class="pure-img fragment fade-in replace mac-roll" src="img/mac-err-fly.png"
+						data-fragment-index="2"
+						style="width: 4.75em; position: absolute; top: -4.75em; margin-left: 1em; z-index: 10;">
+				</section>
+				<section data-transition="zoom-out">
+					<div class="fragment replace fade-out" data-fragment-index="3" style="width: 100%">
+						<div style="display: flex; justify-content: space-evenly; align-items: center;">
+							<div style="display: flex; align-items: center; justify-content: center">
+								<img src="img/react.svg" class="pure-img" style="width: 60px">
+								<img src="img/thumb1.png" class="pure-img" style="height: 40vh">
+							</div>
+							<div style="display: flex; align-items: center; justify-content: center">
+								<img src="img/angular.svg" class="pure-img fragment" style="width: 65px"
+									data-fragment-index="1">
+								<img src="img/thumb1.png" class="pure-img" style="height: 40vh">
+							</div>
+						</div>
+					</div>
+					<div class="fragment replace fade-in" data-fragment-index="3" style="width: 100%; margin-top: -5%">
+						<div class="frameworks">
+							<div style="display: flex; align-items: center; justify-content: center; grid-area: a">
+								<img src="img/react.svg" class="pure-img" style="width: 35px">
+								<img src="img/thumb1.png" class="pure-img" style="height: 25vh">
+							</div>
+							<div style="display: flex; align-items: center; justify-content: center; grid-area: b;">
+								<img src="img/angular.svg" class="pure-img" style="width: 40px">
+								<img src="img/thumb1.png" class="pure-img" style="height: 25vh">
+							</div>
+							<div style="display: flex; align-items: center; justify-content: center; grid-area: d;">
+								<img src="img/vue.svg" class="pure-img" style="width: 35px">
+								<img src="img/thumb1.png" class="pure-img" style="height: 25vh">
+							</div>
+							<div style="display: flex; align-items: center; justify-content: center; grid-area: e;">
+								<img src="img/ember.png" class="pure-img fragment" style="width: 45px"
+									data-fragment-index="4">
+								<img src="img/strange.png" class="pure-img" style="height: 20vh">
+							</div>
+							<div style="display: flex; align-items: center; justify-content: center; grid-area: c;"
+								class="fragment" data-fragment-index="5">
+								<img src="img/js.png" class="pure-img" style="width: 30px">
+								<img src="img/thumb1.png" class="pure-img" style="height: 25vh">
+							</div>
+						</div>
+					</div>
+					<img src="img/mac2.png" style="position: absolute; width: 5em; left: 0; top: 3.5em; z-index: 10;"
+						class="pure-img fragment left-to-right" data-fragment-index="2" data-autoslide="1500">
+					<aside class="notes">DI, RxJS, TypeScript, framework</aside>
+				</section>
+				<section data-transition="fade">
+					<img src="img/question.png" class="pure-img">
+				</section>
+			</section>
+			<section data-transition="fade-out">
+				<section data-transition="slide-in fade-out">
+					<div style="display: flex; justify-content: space-evenly;">
+						<div style="display: flex; align-items: center; justify-content: center">
+							<img src="img/react.svg" class="pure-img fragment" style="width: 35px"
+								data-fragment-index="1">
+							<div data-fragment-index="6" class="fragment fade-out replace">
+								<img src="img/thumb2.png" class="pure-img fragment" style="height: 20vh"
+									data-fragment-index="1">
+							</div>
+							<img src="img/no2.png" class="pure-img fragment fade-in replace" style="height: 20vh"
+								data-fragment-index="6">
+						</div>
+						<div style="display: flex; align-items: center; justify-content: center">
+							<img src="img/angular.svg" class="pure-img fragment" style="width: 40px"
+								data-fragment-index="2">
+							<div data-fragment-index="6" class="fragment fade-out replace">
+								<img src="img/thumb4.png" class="pure-img fragment" style="height: 20vh"
+									data-fragment-index="2">
+							</div>
+							<img src="img/no1.png" class="pure-img fragment fade-in replace" style="height: 20vh"
+								data-fragment-index="6">
+						</div>
+					</div>
+					<div style="display: flex; justify-content: space-evenly;">
+						<span class="fragment" data-fragment-index="1">Robert</span>
+						<span class="fragment" data-fragment-index="2">Agnieszka</span>
+					</div>
+					<div style="display: flex; justify-content: space-evenly;">
+						<div style="display: flex; align-items: center; justify-content: center">
+							<img src="img/vue.svg" class="pure-img fragment" style="width: 35px"
+								data-fragment-index="3">
+							<div data-fragment-index="6" class="fragment fade-out replace">
+								<img src="img/victory1.png" class="pure-img fragment" style="height: 23vh"
+									data-fragment-index="3">
+							</div>
+							<img src="img/no4.png" class="pure-img fragment fade-in replace"
+								style="height: 20vh; margin-top: 3vh" data-fragment-index="6">
+						</div>
+						<div style="display: flex; align-items: center; justify-content: center">
+							<img src="img/js.png" class="pure-img fragment" style="width: 30px" data-fragment-index="4">
+							<div data-fragment-index="6" class="fragment fade-out replace">
+								<img src="img/thumb1.png" class="pure-img" style="height: 20vh; margin-top: 3vh">
+							</div>
+							<img src="img/dunno.png" class="pure-img fragment fade-in replace"
+								style="height: 20vh; margin-top: 3vh" data-fragment-index="6">
+						</div>
+					</div>
+					<div style="display: flex; justify-content: space-evenly;">
+						<span class="fragment" data-fragment-index="3">Vitaliy</span>
+						<span class="fragment" data-fragment-index="4">Janek</span>
+					</div>
+					<div class="fragment replace fade-in" data-fragment-index="5"
+						style="position: absolute; top: 3.5em; left: calc(50% - 250px); width: 500px;">
+						<img src="img/boyz.jpg" class="pure-img fragment replace fade-out" data-fragment-index="6"
+							style="border: solid 1px black;">
+					</div>
+				</section>
+			</section>
+			<section data-background-image data-transition="zoom">
+				<section class="header">
+					<h1 style="margin-bottom: 0">Web Componenty</h1>
+					<h2>jako lingua franca front-endu</h2>
+					<div class="header-logo"></div>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h1 style="margin-top: 20vh">Komponent?</h1>
+					<img src="img/look.png" class="pure-img" style="height: 50vh;">
+				</section>
+				<section data-transition="fade">
+					<pre><code class="javascript" data-trim contentEditable="true" data-line-numbers="4-17,20" 
+						style="max-height: 40em; line-height: 1.1; font-size: .8em;">
+					import React from 'react';
+					import ReactDOM from 'react-dom';
+
+					const Counter = ({initial}) => {
+					  const [count, setCount] = React.useState(initial);
+					  return (
+					    &lt;div className="centered">
+					      &lt;button onClick={() => setCount(count - 1)}>
+					    	-
+					      &lt;/button>
+					      &lt;span>{count}&lt;/span>
+					      &lt;button onClick={() => setCount(count + 1)}>
+					        +
+					      &lt;/button>
+					    &lt;/div>
+					  );
+					}
+
+					ReactDOM.render(
+					  &lt;Counter initial={10} />,  
+					  document.getElementById('react-app')
+					);
+					</code></pre>
+					<button onclick="controls.evalCode(this)">eval</button>
+					<fieldset style="border: solid 1px black;">
+						<legend style="font-size: .5em">#react-app</legend>
+						<div id="react-app" style="height: 1.5em"></div>
+					</fieldset>
+					<img src="img/show-r.png" class="pure-img"
+						style="position: absolute; bottom: 1vh; right: 1em; height: 30vh">
+				</section>
+				<section data-transition="fade">
+					<pre><code class="typescript" data-trim contentEditable="true" data-line-numbers="6-26,28,32" 
+						style="max-height: 40em; line-height: 1.05; font-size: .55em;">
+					import 'zone.js'; import 'core-js/es/reflect'; import 'core-js/features/reflect';
+					import { BrowserModule } from '@angular/platform-browser';
+					import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+					import { NgModule, Component, Input } from '@angular/core';
+
+					@Component({
+					  selector: 'angular-counter',
+					  template: `
+					    &lt;div class="centered">
+					      &lt;button (click)="setCount(count - 1)">
+					        -
+					      &lt;/button>
+					      &lt;span>{{count}}&lt;/span>
+					      &lt;button (click)="setCount(count + 1)">
+					        +
+					      &lt;/button>
+					    &lt;/div>
+					  `
+					})
+					class Counter {
+					  @Input() count: number;
+
+					  setCount(count: number) {
+					    this.count = count;
+					  }
+					}
+
+					@Component({ selector: 'angular-app', template: '&lt;angular-counter [count]="10">' }) class App { }
+
+					@NgModule({
+					  imports: [ BrowserModule ],
+					  declarations: [ App, Counter ],
+					  bootstrap: [ App ]
+					})
+					class AppModule { }
+
+					platformBrowserDynamic().bootstrapModule(AppModule);
+					</code></pre>
+					<button onclick="controls.evalTsCode(this)">eval</button>
+					<fieldset style="border: solid 1px black;">
+						<legend style="font-size: .5em">&lt;angular-app></legend>
+						<div style="height: 1.5em">
+							<angular-app></angular-app>
+						</div>
+					</fieldset>
+					<img src="img/show-a.png" class="pure-img"
+						style="position: absolute; bottom: 1vh; right: 1em; height: 30vh">
+				</section>
+				<section data-transition="fade">
+					<pre><code class="javascript" data-trim contentEditable="true" data-line-numbers="3-21,25,26" 
+						style="max-height: 40em; line-height: 1.05; font-size: .75em;">
+					import Vue from 'vue';
+
+					const Counter = Vue.component('vue-counter', {
+					  props: { initial: Number },
+					  data: function() {
+					    return {
+					      count: this.initial
+					    }
+					  },
+					  template: `
+					    &lt;div class="centered">
+					      &lt;button @click="--count">
+					        -
+					      &lt;/button>
+					      &lt;span>{{count}}&lt;/span>
+					      &lt;button @click="++count">
+					        +
+					      &lt;/button>
+					    &lt;/div>
+					  `
+					});
+
+					new Vue({
+					  el: '#vue-app',
+					  components: { Counter },
+					  template: '&lt;vue-counter :initial="10" />'
+					})
+					</code></pre>
+					<button onclick="controls.evalCode(this, true)">eval</button>
+					<fieldset style="border: solid 1px black;">
+						<legend style="font-size: .5em">#vue-app</legend>
+						<div id="vue-app" style="height: 1.5em"></div>
+					</fieldset>
+					<img src="img/show-v.png" class="pure-img"
+						style="position: absolute; bottom: 1vh; right: 1em; height: 30vh">
+				</section>
+				<section data-transition="zoom">
+					<div>Fajne to pojęcie, takie nie za konkretne</div>
+					<img src="img/confused.png" class="pure-img fragment fade-out replace" style="height: 30vh"
+						data-fragment-index="1">
+					<img src="img/thumb3.png" class="pure-img fragment fade-in replace" style="height: 30vh"
+						data-fragment-index="1">
+					<div class="fragment" data-fragment-index="1">Reużywalne powiązanie HTML-a z JS-em</div>
+				</section>
+			</section>
+			<section>
+				<section data-transition="slide-in fade-out">
+					<h2>Web Components</h2>
+					<a href="https://www.webcomponents.org/" class="fragment">
+						<img src="img/webcomponents.png" class="pure-img">
+					</a>
+					<img src="img/look3.png" class="pure-img fragment"
+						style="position: absolute; width: 3em; right: 20%; bottom: 0">
+				</section>
+				<section data-transition="fade">
+					<h2>Jak?</h2>
+					<div>
+						<pre><code class="javascript" data-trim contentEditable="true">
+						class FullWebComp extends HTMLElement {
+						  constructor() {
+						    super();
+						</code><code class="javascript fragment" contentEditable="true">    this.attachShadow({mode: 'closed'})
+      .appendChild(document</code><code class="javascript fragment" contentEditable="true">        .getElementById('h2-template')
+          .content
+          .cloneNode(true));</code><code class="javascript" data-trim contentEditable="true">  }
+}
+customElements.define('full-web-comp', FullWebComp);
+						</code></pre>
+						<button onclick="controls.evalCode(this, true)" style="font-weight: bold">eval</button>
+					</div>
+					<template id="h2-template">
+						<style>
+							h2 {
+								color: magenta !important;
+								margin: 0;
+							}
+						</style>
+						<h2>perfect template &amp; <code>style</code></h2>
+					</template>
+					<fieldset style="border: solid 1px black; height: 3em;">
+						<legend style="font-size: .5em">&lt;full-web-comp>&lt;/full-web-comp></legend>
+						<full-web-comp></full-web-comp>
+					</fieldset>
+					<img src="img/proud1.png" class="pure-img fragment"
+						style="position: absolute; bottom: 0; right: 0; height: 30vh">
+				</section>
+				<section data-transition="zoom-in fade-out">
+					<h3 class="fragment" data-fragment-index="1">Attribute vs. property</h3>
+					<fieldset style="border: solid 1px black; height: 2.5em" class="fragment" data-fragment-index="2">
+						<legend style="font-size: .5em">&lt;input type="checkbox" checked=""></legend>
+						<label>
+							<input type="checkbox" style="width: 3em; height: 3em" checked />
+							checkbox
+						</label>
+					</fieldset>
+					<script>
+						function verify(attr, prop) {
+							document.getElementById('verify').innerHTML = `
+								Attr: ${attr} (${typeof attr})
+								<br>
+								Prop: ${prop} (${typeof prop})
+							`;
+						}
+					</script>
+					<div class="fragment" data-fragment-index="3">
+						<pre><code class="javascript" data-trim contentEditable="true" data-line-numbers="1,3,4" 
+							style="max-height: 40em; font-size: .8em; line-height: 1">
+							const input = document.querySelector('[type="checkbox"]');
+							const [attr, prop] = [
+								input.getAttribute('checked'), 
+								input.checked
+							];
+							verify(attr, prop);
+						</code></pre>
+						<button
+							onclick="(() => {controls.evalCode(this); const cb = document.querySelector(`[type='checkbox']`); cb.parentNode.previousElementSibling.innerText = cb.outerHTML.replace(/style=.+checked=/, 'checked='); })()"
+							style="font-weight: bold">
+							eval
+						</button>
+					</div>
+					<div id="verify" class="fragment" data-fragment-index="3"
+						style="background-image: url('img/talk2.png'); background-size: contain; background-repeat: no-repeat; width: 9em; height: 5em; font-size: .5em; padding: 2em; padding-top: 3em; margin: 0 auto">
+					</div>
+					<img src="img/confused.png" class="pure-img"
+						style="position: absolute; bottom: 1em; left: 65%; height: 30vh">
+					<aside class="notes">Web Componenty polegają na atrybutach!</aside>
+				</section>
+				<section data-transition="fade">
+					<h3>Baza</h3>
+					<pre style="width: 100%"><code class="javascript" data-trim contentEditable="true" style="font-size: .8em">
+						class CheckboxWrapper extends HTMLElement {
+						  constructor() {
+						    super();
+						    this.input = document.createElement('input');
+						    this.input.type = 'checkbox';
+						  }</code><code class="javascript fragment" style="font-size: .8em" contentEditable="true" data-fragment-index="2">  get checked() { return this.isTrue('checked'); }</code><code class="javascript fragment" style="font-size: .8em" contentEditable="true" data-fragment-index="3">  set checked(value) {
+    const bool = !!value;
+    if (bool === this.checked) return;</code><code class="javascript fragment" style="font-size: .8em" contentEditable="true" data-fragment-index="4">    this.input.checked = bool;</code><code class="javascript fragment" style="font-size: .8em" contentEditable="true" data-fragment-index="5">    bool ? this.setAttribute('checked', '') : this.removeAttribute('checked');</code><code class="javascript fragment" style="font-size: .8em" contentEditable="true" data-fragment-index="6">    this.dispatchEvent(new Event('change', { bubbles: true }));</code><code class="javascript fragment" style="font-size: .8em" contentEditable="true" data-fragment-index="3">  }</code><code class="javascript fragment" style="font-size: .8em" contentEditable="true" data-fragment-index="1">  isTrue(attr) {
+    return this.hasAttribute(attr) && this.getAttribute(attr) !== 'false';
+  }</code><code class="javascript" style="font-size: .8em" data-trim contentEditable="true">
+						}
+					</code></pre>
+					<img src="img/thumb3.png" class="pure-img"
+						style="position: absolute; bottom: 0; right: 0; height: 30vh">
+					<aside class="notes">Alternatywa - data attributes. Od razu dostępne w this.dataset</aside>
+					<!-- <button onclick="controls.evalCode(this, true)" style="font-weight: bold">eval</button> -->
+					<script>
+						class CheckboxWrapper extends HTMLElement {
+							constructor() {
+								super();
+								this.input = document.createElement('input');
+								this.input.type = 'checkbox';
+							}
+							get checked() { return this.isTrue('checked'); }
+							set checked(value) {
+								const bool = !!value;
+								if (bool === this.checked) return;
+								this.input.checked = bool;
+								bool ? this.setAttribute('checked', '') : this.removeAttribute('checked');
+								this.dispatchEvent(new Event('change', { bubbles: true }));
+							}
+							isTrue(attr) { return this.hasAttribute(attr) && this.getAttribute(attr) !== 'false'; }
+						}
+					</script>
+				</section>
+				<section data-transition="fade-in slide-out">
+					<h3 style="margin: 0">lvl2</h3>
+					<pre
+						style="margin-top: 0"><style style="display: inline-block; font-size: .9em; line-height: 1.1" contentEditable="true">:root { /*--m3-switch-color: #1da1f2;*/ }</style></pre>
+					<div>
+						<pre style="margin-top: 0"><code class="javascript" data-trim contentEditable="true" style="max-height: 40em; line-height: 1.1; font-size: .8em" data-line-numbers="1,4,6-7,11-12,15-18">
+						customElements.define('m3-switch', class extends CheckboxWrapper {
+						  constructor() {
+						    super();
+						    this.attachShadow({ mode: 'open' });
+						  }
+						  connectedCallback() {
+						    this.input.checked = this.checked;
+						    this.shadowRoot.innerHTML = `
+						      <div class="slider${this.round ? ' round' : ''}"></div>
+						    `;
+						    this.shadowRoot.prepend(this.input);
+						    this.shadowRoot.appendChild(document.getElementById('style-template')
+						      .content
+						      .cloneNode(true));
+						    this.onclick = (e) => {
+						      e.preventDefault();
+						      this.checked = !this.checked;
+						    }
+						  }
+						  get round() { return this.isTrue('round'); }
+						});
+						</code></pre>
+						<button onclick="controls.evalCode(this, true)" style="font-weight: bold">eval</button>
+					</div>
+					<template id="style-template">
+						<style>
+							:host {
+								position: relative;
+								display: inline-block;
+								width: 2em;
+								height: 1em;
+							}
+
+							input {
+								display: none;
+							}
+
+							.slider {
+								position: absolute;
+								cursor: pointer;
+								top: 0;
+								left: 0;
+								right: 0;
+								bottom: 0;
+								background-color: #333333;
+								transition: 0.4s;
+							}
+
+							.slider::before {
+								position: absolute;
+								content: "";
+								height: calc(1em - 4px);
+								width: calc(1em - 4px);
+								left: 2px;
+								bottom: 2px;
+								background-color: white;
+								transition: 0.4s;
+							}
+
+							input:checked+.slider {
+								background-color: var(--m3-switch-color, #4fd69c);
+							}
+
+							input:focus+.slider {
+								box-shadow: 0 0 1px var(--m3-switch-color, #4fd69c);
+							}
+
+							input:checked+.slider::before {
+								transform: translateX(1em);
+							}
+
+							.slider.round {
+								border-radius: 34px;
+							}
+
+							.slider.round::before {
+								border-radius: 50%;
+							}
+						</style>
+					</template>
+					<fieldset style="border: solid 1px black; height: 2em;">
+						<legend style="font-size: .5em">&lt;m3-switch round checked />&lt;m3-switch />
+						</legend>
+						<m3-switch round checked></m3-switch>
+						<m3-switch></m3-switch>
+					</fieldset>
+					<img src="img/victory1.png" class="pure-img"
+						style="position: absolute; bottom: 1vh; right: 1em; height: 30vh">
+				</section>
+			</section>
+			<section>
+				<section data-transition="slide-in fade-out">
+					<h2><img src="img/y.png" class="pure-img" style="height: 1em">Dobre do</h2>
+					<div>
+						<img src="img/components.png" class="pure-img" style="height: 20vh">
+					</div>
+					<ul>
+						<li class="fragment" data-fragment-index="1">Komponentów UI (design system)
+							<ul>
+								<li class="fragment" data-fragment-index="2">Np. <a
+										href="https://developer.salesforce.com/docs/component-library/documentation/lwc/lwc.get_started_introduction">Salesforce</a>
+								</li>
+							</ul>
+						</li>
+						<li class="fragment" data-fragment-index="3"><span class="fragment highlight-red"
+								data-fragment-index="7">Reużycia pomiędzy apkami</span>
+							<ul>
+								<li class="fragment" data-fragment-index="4">+3rd party Web Components</li>
+							</ul>
+						</li>
+						<li class="fragment" data-fragment-index="5">"Liści" w drzewie DOM
+							<ul>
+								<li class="fragment" data-fragment-index="6">Zagnieżdżenie? Kiepsko</li>
+							</ul>
+						</li>
+					</ul>
+					<aside class="notes">
+						SAP i IBM też eksperymentują z UI w WC.
+					</aside>
+				</section>
+				<section data-transition="fade-in slide-out">
+					<h2 style="margin: 0"><img src="img/n.png" class="pure-img" style="height: 1em"> Wyzwania</h2>
+					<div>
+						<img src="img/components.png" class="pure-img" style="height: 18vh">
+					</div>
+					<ul style="margin: 0">
+						<li class="fragment">Accessibility
+							<ul>
+								<li class="fragment"><a
+										href="https://github.com/webcomponents/gold-standard/wiki/Web-Component-Limitations"><code>aria</code>
+										- gdzie i kiedy?</a></li>
+							</ul>
+						</li>
+						<li class="fragment">SEO
+							<pre class="fragment" style="width: 100%; margin: 0; margin-top: .1em"><code class="html" data-trim style="font-size: .75em; line-height: 1">
+								&lt;bad-component>&lt;/bad-component>
+								&lt;better-component>hello world&lt;/better-component> 
+							</code></pre>
+						</li>
+						<li class="fragment">
+							<a
+								href="https://gist.github.com/WebReflection/71aed0c811e2e88e3cd3c647213f0e6c#1-progressive-enhancement">
+								Progressive enhancement
+							</a>
+							<pre class="fragment" style="width: 100%; margin: 0; margin-top: .1em"><code class="html" data-trim style="font-size: .75em; line-height: 1">
+								&lt;a is="twitter-share"
+								  text="A Twitter share button with progressive enhancement"
+								  url="https://codepen.io/WebReflection/pen/LKWyLB?editors=0010"
+								  via="webreflection" />
+							</code></pre>
+						</li>
+						<li class="fragment">SSR</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>attr vs. prop</li>
+							<li>Stylowanie</li>
+						</ul>
+						<br>
+						Niektórzy walczą z SSR, mogę podrzucić linki
+						<br>
+						Gotowe rozwiązanie https://github.com/philnash/web-share-wrapper - share wrappujący linka
+					</aside>
+				</section>
+			</section>
+			<section data-background-image="img/ppap.gif" data-background-size="cover"></section>
+			<section>
+				<section>
+					<h1>Web Components + React</h1>
+					<img src="img/proud3.png" class="pure-img" style="position: absolute; left: 0;">
+					<img src="img/proud-r.png" class="pure-img" style="position: absolute; right: 0;">
+				</section>
+				<section data-transition="fade">
+					<h2 style="margin: 0">in</h2>
+					<pre style="margin: 0"><code class="javascript" data-trim contentEditable="true" data-line-numbers="6-10,13,14,20"
+									style="max-height: 40em; line-height: 1.1; font-size: .8em;">
+						import React, { useState, useEffect } from 'react';
+						import ReactDOM from 'react-dom';
+	
+						const Demo = ({initial}) => {
+						  const [checked, setChecked] = React.useState(initial);
+						  const refWc = React.createRef();
+						  const handleChange = (e) => setChecked(e.target.checked);
+						  useEffect(() => {
+						    refWc.current.onchange = handleChange;
+						  });
+						  return (
+						    &lt;label>
+						      &lt;m3-switch checked={checked} ref={refWc}>&lt;/m3-switch>
+						      {`${checked}`}
+						    &lt;/label>
+						  );
+						}
+	
+						ReactDOM.render(
+						  &lt;Demo initial={true} />,  
+						  document.getElementById('react-wc-app')
+						);
+					</code></pre>
+					<button onclick="controls.evalCode(this)">eval</button>
+					<fieldset style="border: solid 1px black;">
+						<legend style="font-size: .5em">#react-wc-app</legend>
+						<div id="react-wc-app" style="height: 1.5em"></div>
+					</fieldset>
+					<div style="position: absolute; bottom: 1vh; right: 1em; height: 30vh">
+						<img src="img/show.png" class="pure-img">
+						<img src="img/show-r.png" class="pure-img">
+					</div>
+				</section>
+				<section data-transition="fade">
+					<h2 style="margin: 0">out?</h2>
+					<img src="img/dunno-r.png" class="pure-img fragment" data-fragment-index="1"
+						style="height: 30vh; position: absolute; bottom: -15vh; left: 5vw;">
+					<div><img src="img/talk1.png" class="pure-img fragment" data-fragment-index="1"
+							style="height: 50vh"></div>
+					<small class="fragment" style="position: absolute; bottom: 0; right: 0">
+						<a href="https://reactjs.org/docs/web-components.html">reactjs.org/docs/web-components.html</a>
+					</small>
+					<aside class="notes">Przypadek WC z zaszytym Preactem (~3,6 kB)</aside>
+				</section>
+				<section data-transition="fade">
+					<h2><a href="https://custom-elements-everywhere.com/">custom-elements-everywhere.com</a></h2>
+					<a href="https://custom-elements-everywhere.com/libraries/react/results/results.html">
+						<img src="img/cee-r.png" class="pure-img fragment">
+					</a>
+					<aside class="notes">przekazywanie tablic i obiektów oraz deklaratywne słuchanie na eventy kuleje
+					</aside>
+				</section>
+				<section data-transition="fade-in slide-out">
+					Zespół Roberta czasem napisze Web Component, ale raczej skupi się na konsumowaniu.
+					<div class="fragment">
+						<img src="img/thumb3.png" class="pure-img" style="height: 30vh">
+						<img src="img/thumb-r.png" class="pure-img" style="height: 30vh">
+					</div>
+					<aside class="notes">Są różne narzędzia (np. rawact), może jest coś i do Web Componentów, ale nie ma
+						co.</aside>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h1>Web Components + Angular</h1>
+					<img src="img/proud3.png" class="pure-img" style="position: absolute; left: 0;">
+					<img src="img/thumb-a.png" class="pure-img" style="position: absolute; right: 0;">
+				</section>
+				<section data-transition="fade">
+					<h2 style="margin: 0">in</h2>
+					<pre style="margin: 0"><code class="typescript" data-trim contentEditable="true" data-line-numbers="4,8-11,14-18,25" 
+						style="max-height: 40em; line-height: 1.1; font-size: .6em;">
+					import 'zone.js'; import 'core-js/es/reflect'; import 'core-js/features/reflect';
+					import { BrowserModule } from '@angular/platform-browser';
+					import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+					import { NgModule, Component, Input, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
+					@Component({
+					  selector: 'angular-wc-app',
+					  template: `
+					    &lt;m3-switch [checked]="checked" (change)="handleChange($event)">&lt;/m3-switch>
+					    {{checked}}
+					  `
+					})
+					class Demo {
+					  checked = true;
+
+					  handleChange(event: Event) {
+					    this.checked = event.target.checked;
+					  }
+					}
+
+					@NgModule({
+					  imports: [ BrowserModule ],
+					  declarations: [ Demo ],
+					  bootstrap: [ Demo ],
+					  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+					})
+					class AppModule { }
+
+					platformBrowserDynamic().bootstrapModule(AppModule);
+					</code></pre>
+					<button onclick="controls.evalTsCode(this)">eval</button>
+					<fieldset style="border: solid 1px black;">
+						<legend style="font-size: .5em">&lt;angular-wc-app></legend>
+						<div style="height: 1.5em">
+							<angular-wc-app></angular-wc-app>
+						</div>
+					</fieldset>
+					<div style="position: absolute; bottom: 1vh; right: 1em">
+						<img src="img/show-a.png" class="pure-img" style="height: 33vh">
+						<img src="img/show.png" class="pure-img" style="height: 30vh">
+					</div>
+				</section>
+				<section data-transition="fade">
+					<h2 style="margin: 0">out 1/2</h2>
+					<pre style="margin: 0"><code class="typescript" data-trim contentEditable="true" data-line-numbers="2,5-7,9-13,15,16,18,23,24,26,28-32" 
+						style="max-height: 40em; line-height: 1.1; font-size: .6em;">
+					import 'zone.js'; import 'core-js/es/reflect'; import 'core-js/features/reflect';
+					import { createCustomElement } from '@angular/elements';
+					import { BrowserModule } from '@angular/platform-browser';
+					import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+					import { 
+					  NgModule, Input, Output, Component, ViewEncapsulation, EventEmitter, Inject, Injector 
+					} from '@angular/core';
+
+					@Component({
+					  selector: 'm3-button',
+					  template: `&lt;button (click)="handleClick()" style="padding: .5em">{{label}}&lt;/button>`,
+					  encapsulation: ViewEncapsulation.ShadowDom
+					})
+					class ButtonComponent {
+					  @Input() label = 'default label';
+					  @Output() action = new EventEmitter&lt;number>();
+					  private count = 0;
+					  handleClick() { this.action.emit(++this.count); }
+					}
+
+					@NgModule({
+					  imports: [ BrowserModule ],
+					  declarations: [ ButtonComponent ],
+					  entryComponents: [ ButtonComponent ]
+					})
+					class AppModule {
+					  static parameters = [[Injector]];
+					  constructor(private injector: Injector) {
+					    const customButton = createCustomElement(ButtonComponent, { injector });
+					    customElements.define('m3-button', customButton);
+					  }
+					  ngDoBootstrap() {}
+					}
+					platformBrowserDynamic().bootstrapModule(AppModule);
+					</code></pre>
+					<button onclick="controls.evalTsCode(this, true)">eval</button>
+					<div style="position: absolute; bottom: 1vh; right: 1em">
+						<img src="img/show-a.png" class="pure-img" style="height: 22vh">
+						<img src="img/show.png" class="pure-img" style="height: 20vh">
+					</div>
+					<aside class="notes">Uwaga na polyfille do Web Componentów (@angular/elements dodaje)</aside>
+				</section>
+				<section data-transition="fade">
+					<h2 style="margin: 0">out 2/2</h2>
+					<pre style="margin: 0"><code class="javascript" data-trim contentEditable="true" data-line-numbers="7-10,13,14,20"
+										style="max-height: 40em; line-height: 1.1; font-size: .8em;">
+							import React, { useState, useEffect } from 'react';
+							import ReactDOM from 'react-dom';
+		
+							const Demo = ({label}) => {
+							  const [count, setCount] = React.useState(0);
+							  const refWc = React.createRef();
+							  const handleClick = (e) => setCount(e.detail);
+							  useEffect(() => {
+							    refWc.current.addEventListener('action', handleClick);
+							  });
+							  return (
+							    &lt;>
+							      &lt;m3-button label={label} ref={refWc}>&lt;/m3-button>
+							      &lt;small style={{verticalAlign: 'bottom'}}>{`x ${count}`}&lt;/small>
+							    &lt;/>
+							  );
+							}
+		
+							ReactDOM.render(
+							  &lt;Demo label="test" />,  
+							  document.getElementById('react-wc-app2')
+							);
+						</code></pre>
+					<button onclick="controls.evalCode(this)">eval</button>
+					<fieldset style="border: solid 1px black;">
+						<legend style="font-size: .5em">#react-wc-app2</legend>
+						<div id="react-wc-app2" style="height: 1.5em"></div>
+					</fieldset>
+					<div style="position: absolute; bottom: 1vh; right: 1em;">
+						<img src="img/show-a.png" class="pure-img" style="height: 22vh">
+						<img src="img/show.png" class="pure-img" style="height: 20vh">
+						<img src="img/show-r.png" class="pure-img" style="height: 20vh">
+					</div>
+				</section>
+				<section data-transition="fade">
+					<h2><a href="https://custom-elements-everywhere.com/">custom-elements-everywhere.com</a></h2>
+					<a href="https://custom-elements-everywhere.com/libraries/angular/results/results.html">
+						<img src="img/cee-a.png" class="pure-img fragment">
+					</a>
+				</section>
+				<section data-transition="fade-in slide-out">
+					Agnieszka z zespołem ochoczo zaadoptowała Web Componenty!
+					<div class="fragment">
+						<img src="img/thumb3.png" class="pure-img" style="height: 30vh">
+						<img src="img/thumb-a.png" class="pure-img" style="height: 30vh">
+					</div>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h1>Web Components + Vue</h1>
+					<img src="img/proud3.png" class="pure-img" style="position: absolute; left: 0;">
+					<img src="img/proud-v.png" class="pure-img" style="position: absolute; right: 0;">
+				</section>
+				<section data-transition="fade">
+					<h2 style="margin: 0">in</h2>
+					<pre style="margin: 0"><code class="javascript" data-trim contentEditable="true" data-line-numbers="5-7,9-13,15-16,18-19,25" 
+						style="max-height: 40em; line-height: 1; font-size: .7em;">
+					import Vue from 'vue';
+
+					const Demo = Vue.component('vue-demo', {
+					  template: `&lt;div>
+					    &lt;m3-switch :checked="checked" @change="handleChange">&lt;/m3-switch> {{checked}}
+					    &lt;br>
+					    &lt;m3-button :label="label" @action="handleClick">&lt;/m3-button>
+					  &lt;/div>`,
+					  methods: {
+					    handleChange: function(e) { this.checked = e.target.checked; },
+					    handleClick: function(e) { this.label = e.detail }
+					  },
+					  data: function() {
+					    return {
+					      checked: this.initial,
+					      label: 0
+					    }
+					  },
+					  props: { initial: Boolean }
+					});
+
+					new Vue({
+					  el: '#vue-wc-app',
+					  components: { Demo },
+					  template: '&lt;vue-demo :initial="true" />'
+					})
+					</code></pre>
+					<button onclick="controls.evalCode(this, true)">eval</button>
+					<fieldset style="border: solid 1px black;" id="vue-wc-fieldset">
+						<legend style="font-size: .5em">#vue-wc-app</legend>
+						<div id="vue-wc-app" style="height: 2em"></div>
+					</fieldset>
+					<div style="position: absolute; bottom: 1vh; right: 1em; height: 30vh">
+						<img src="img/show.png" class="pure-img">
+						<img src="img/show-v.png" class="pure-img">
+					</div>
+					<aside class="notes">Jakby mieć :checked.prop="checked" byłoby jak w Angularze</aside>
+				</section>
+				<section data-transition="fade">
+					<h2>out</h2>
+					<pre><code class="javascript" data-trim contentEditable="true" data-line-numbers="2,4-7,9-10" 
+						style="max-height: 40em; line-height: 1.05; font-size: .75em;">
+					import Vue from 'vue';
+					import wrap from '@vue/web-component-wrapper';
+
+					const VueWebComponent = Vue.component('m3-hello', {
+					  template: `&lt;div>Hi, {{msg}}!&lt;/div>`,
+					  props: { msg: String }
+					});
+
+					const CustomElement = wrap(Vue, VueWebComponent);
+					customElements.define('m3-hello', CustomElement);
+					</code></pre>
+					<button onclick="controls.evalCode(this, true)">eval</button>
+					<pre><code class="javascript" data-trim contentEditable="true" data-line-numbers="2" 
+						style="max-height: 40em; line-height: 1.05; font-size: .75em;">
+					document.getElementById('js-wc-app').innerHTML = `
+					  &lt;m3-hello msg="world">&lt;/m3-hello>
+					`;
+					</code></pre>
+					<button onclick="controls.evalCode(this)">eval</button>
+					<fieldset style="border: solid 1px black;">
+						<legend style="font-size: .5em">#js-wc-app</legend>
+						<div id="js-wc-app" style="height: 1.5em"></div>
+					</fieldset>
+					<div style="position: absolute; bottom: 1vh; right: 1em; height: 30vh">
+						<img src="img/show.png" class="pure-img">
+						<img src="img/show-v.png" class="pure-img">
+					</div>
+				</section>
+				<section data-transition="fade">
+					<h2><a href="https://custom-elements-everywhere.com/">custom-elements-everywhere.com</a></h2>
+					<a href="https://custom-elements-everywhere.com/libraries/vue/results/results.html">
+						<img src="img/cee-v.png" class="pure-img fragment">
+					</a>
+				</section>
+				<section data-transition="fade-in slide-out">
+					Vitaliy też jest OK z Web Componentami!
+					<div class="fragment">
+						<img src="img/thumb3.png" class="pure-img" style="height: 30vh">
+						<img src="img/thumb-v.png" class="pure-img" style="height: 30vh">
+					</div>
+				</section>
+			</section>
+			<section>
+				<section data-transition="fade">
+					<h2>Idziemy w to?</h2>
+					<div class="fragment">
+						<a
+							href="https://blog.angularindepth.com/developments-in-web-components-im-excited-about-in-2019-3ae7751c2f64">Developments
+							in Web Components I’m excited about in 2019</a>
+					</div>
+					<div class="fragment">
+						<a href="https://meowni.ca/posts/part-theme-explainer/">::part and ::theme, an ::explainer</a>
+					</div>
+					<div class="fragment">
+						<a href="https://github.blog/2018-09-06-removing-jquery-from-github-frontend/">GitHub</a>,
+						<a
+							href="https://developer.salesforce.com/docs/component-library/documentation/lwc/lwc.get_started_introduction">Salesforce</a>,
+						YouTube
+					</div>
+					<div class="fragment" style="height: 30vh">
+						<img src="img/thumb-r.png" class="pure-img">
+						<img src="img/thumb-a.png" class="pure-img">
+						<img src="img/thumb1.png" class="pure-img">
+						<img src="img/thumb-v.png" class="pure-img">
+					</div>
+					<aside class="notes">Czy ta technologia ma przyszłość?</aside>
+				</section>
+				<section data-background-image="img/sun.png" data-background-size="contain" data-transition="fade"
+					data-background-transition="zoom">
+					<aside class="notes">
+						Świat stał się lepszym miejscem, Janek w stronę zachodzącego słońca
+						<p>A ponieważ rozwiązał trudny technicznie problem współdzielenia kodu między
+							różnymi zespołami, został awansowany na... managera</p>
+					</aside>
+				</section>
+				<section data-transition="fade">
+					<img src="img/menago.png" class="pure-img" style="height: 40vh">
+					<aside class="notes">Ale to już temat na inną historię...</aside>
+				</section>
+				<section data-transition="fade">
+					<h2>Janek poleca</h2>
+					<div class="fragment">
+						<a href="https://github.com/webcomponents/gold-standard/wiki">
+							The Gold Standard Checklist for Web Components
+						</a>
+					</div>
+					<div class="fragment">
+						<a href="https://gist.github.com/WebReflection/ec9f6687842aa385477c4afca625bbf4">
+							Handy Custom Elements' Patterns
+						</a>
+					</div>
+					<div class="fragment">
+						<a href="https://github.com/mateusortiz/webcomponents-the-right-way">
+							(Awesome) Web Components the Right Way
+						</a>
+					</div>
+					<img src="img/thumb3.png" class="pure-img" style="height: 20vh;">
+					<div class="fragment">
+						<a href="https://mat3e.github.io/talks/components/devjs.html">
+							mat3e.github.io/talks/components/devjs
+						</a>
+					</div>
+					<div class="fragment">
+						<a href="https://mat3e.github.io/trendy/">
+							https://mat3e.github.io/trendy
+						</a>
+					</div>
+				</section>
+			</section>
+		</div>
+	</div>
+
+	<script src="js/document-register-element.js"></script>
+	<script src="js/vue.js"></script>
+	<script src="js/vue-wc.js"></script>
+	<script src="js/reflect.js"></script>
+	<script src="js/zone.js"></script>
+	<script src="js/rxjs.js"></script>
+	<script src="js/ang-core.js"></script>
+	<script src="js/ang-common.js"></script>
+	<script src="js/ang-compiler.js"></script>
+	<script src="js/ang-platform.js"></script>
+	<script src="js/ang-platform-dynamic.js"></script>
+	<script src="js/ang-elements.js"></script>
+	<script src="js/react.js"></script>
+	<script src="js/react-dom.js"></script>
+	<script src="js/babel.js"></script>
+	<script src="js/reveal.js"></script>
+	<script>
+		const controls = (function () {
+			// Babel.registerPlugin('lolizer', lolizer);
+			Reveal.initialize({
+				history: true,
+				// - null: Media will only autoplay if data-autoplay is present
+				autoPlayMedia: null,
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+				transitionSpeed: 'default', // default/fast/slow
+				backgroundTransition: 'slide', // none/fade/slide/convex/concave/zoom
+				dependencies: [
+					{ src: 'js/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+					{ src: 'js/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+
+					// Syntax highlight for <code> elements
+					{ src: 'js/highlight.js', callback: function () { setTimeout(() => hljs.initHighlightingOnLoad(), 0); } },
+
+					// Zoom in and out with Alt+click
+					{ src: 'js/zoom.js' },
+
+					{ src: 'notes/notes.js' },
+
+					{ src: 'js/math.js' }
+				]
+			});
+
+			document.querySelectorAll('.reveal .slides > section:not(:first-child):not([data-background-image])').forEach((s) => {
+				s.setAttribute('data-background-image', 'img/twitter.png');
+				s.setAttribute('data-background-size', '240px');
+				s.setAttribute('data-background-position', '.5em .5em');
+			});
+
+			// reflect polyfill has a strange name
+			window.coreJs = window['__core-js_shared__'];
+			return {
+				evalCode(btn, once) {
+					const input = btn.previousElementSibling.innerText;
+					const output = Babel.transform(input, {
+						presets: ['react'],
+						plugins: [
+							['transform-modules-umd', {
+								globals: {
+									'@angular/core': 'ng.core',
+									'@angular/platform-browser': 'ng.platformBrowser',
+									'@angular/platform-browser-dynamic': 'ng.platformBrowserDynamic',
+									'@angular/elements': 'ng.elements',
+									'zone.js': 'Zone',
+									'core-js/es/reflect': 'coreJs',
+									'core-js/features/reflect': 'coreJs',
+									'react': 'React',
+									'react-dom': 'ReactDOM',
+									'vue': 'Vue',
+									'@vue/web-component-wrapper': 'wrapVueWebComponent'
+								},
+								exactGlobals: true
+							}]
+						]
+					}).code;
+					eval.call(window, output);
+					if (once) {
+						btn.disabled = true;
+					}
+				},
+				evalTsCode(btn, once) {
+					const input = btn.previousElementSibling.innerText;
+					const output = Babel.transform(input, {
+						plugins: [
+							['transform-modules-umd', {
+								globals: {
+									'@angular/core': 'ng.core',
+									'@angular/platform-browser': 'ng.platformBrowser',
+									'@angular/platform-browser-dynamic': 'ng.platformBrowserDynamic',
+									'@angular/elements': 'ng.elements',
+									'zone.js': 'Zone',
+									'core-js/es/reflect': 'coreJs',
+									'core-js/features/reflect': 'coreJs',
+									'react': 'React',
+									'react-dom': 'ReactDOM',
+									'vue': 'Vue',
+									'@vue/web-component-wrapper': 'wrapVueWebComponent'
+								},
+								exactGlobals: true
+							}],
+							'transform-typescript',
+							['proposal-decorators', { legacy: true }],
+							['proposal-class-properties', { loose: true }]
+						]
+					}).code;
+					eval.call(window, output);
+					if (once) {
+						btn.disabled = true;
+					}
+				}
+			}
+		})();
+	</script>
+</body>
+
+</html>
