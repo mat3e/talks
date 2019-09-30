@@ -1,6 +1,6 @@
 ## 2019
-* > dev.js Warszawa 12 [04.12]
-* > Facebook Developer Circle: Warsaw 1 [09.10]: Angular - architectural decisions
+* > dev.js Warszawa 12 [04.12]: _Dlaczego czasem warto założyć gacie przez głowę? Statyczna strona internetowa na AWS-ie_
+* > Facebook Developer Circle: Warsaw 1 [09.10]: _Angular - architectural decisions_
 * > Targi Kariera IT [05.10]: _Dlaczego czasem warto założyć gacie przez głowę? Statyczna strona internetowa na AWS-ie_
 * IT Career Summit [26.09]: _A ty jak wystawiasz swoje dane? GraphQL, OData i inne WSDL-e_ [🔗](https://docs.google.com/presentation/d/e/2PACX-1vSim_SCcRoyFH7_dnLrWu5Xl-4kZiUfr5HDs6w9Vlz7BLW9dHvL9-htcSlH507-NVWQI2SkaSemne6z/pub?start=true&loop=false&delayms=3000)
 * dev.js Warszawa 11 [25.09]: _Web Componenty jako lingua franca front-endu_ [🔗](https://mat3e.github.io/talks/components/devjs#/)
