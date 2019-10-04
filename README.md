@@ -1,8 +1,9 @@
 ## 2019
-* > Facebook Developer Circle: Warsaw 1 [09.10]: Angular - architectural decisions
+* > dev.js Warszawa 12 [04.12]: _Dlaczego czasem warto założyć gacie przez głowę? Statyczna strona internetowa na AWS-ie_
+* > Facebook Developer Circle: Warsaw 1 [09.10]: _Angular - architectural decisions_
 * > Targi Kariera IT [05.10]: _Dlaczego czasem warto założyć gacie przez głowę? Statyczna strona internetowa na AWS-ie_
-* > IT Career Summit [26.09]: _A ty jak wystawiasz swoje dane? GraphQL, OData i inne WSDL-e_
-* > dev.js Warszawa 11 [25.09]: _Web Componenty jako lingua franca front-endu_
+* IT Career Summit [26.09]: _A ty jak wystawiasz swoje dane? GraphQL, OData i inne WSDL-e_ [🔗](https://docs.google.com/presentation/d/e/2PACX-1vSim_SCcRoyFH7_dnLrWu5Xl-4kZiUfr5HDs6w9Vlz7BLW9dHvL9-htcSlH507-NVWQI2SkaSemne6z/pub?start=true&loop=false&delayms=3000) [📷](https://itcareersummit.pl/wawa/wp-content/uploads/2019/10/IT-Future_2019_mm_039.jpg)
+* dev.js Warszawa 11 [25.09]: _Web Componenty jako lingua franca front-endu_ [🔗](https://mat3e.github.io/talks/components/devjs#/)
 * Warsaw TypeScript [19.09]: _What are these decorators?_ [🔗](https://mat3e.github.io/talks/decorators/wts) [📷](https://secure.meetupstatic.com/photos/event/c/e/c/a/highres_485152938.jpeg)
 * dynamIT 2019 [17.08]: _Web Componenty jako lingua franca front-endu_ [🔗](https://mat3e.github.io/talks/components/dynamit#/) [📷](https://www.facebook.com/dynamIT.pro/photos/a.909091252852565/909091802852510/)
 * ship.it 5 [25.07] _Dlaczego czasem warto założyć gacie przez głowę? Statyczna strona internetowa na AWS-ie_ [🔗](https://mat3e.github.io/talks/aws-www/ship-it#/) [📷](https://www.facebook.com/ship.it.meetup/photos/a.2301773083485463/2301773213485450/?type=3)
