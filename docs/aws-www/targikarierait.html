@@ -1,0 +1,1563 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="description" content="Presentation">
+    <meta name="keywords" content="presentation">
+    <meta name="author" content="mat3e">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/blood.css">
+    <link rel="stylesheet" href="css/idea.css">
+    <link rel="stylesheet" href="css/fontawesome.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        let link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section>
+                <section id="header" data-background-image="">
+                    <h1 style="margin-bottom: 0"><span style="font-size: .85em">Statyczna strona internetowa</span></h1>
+                    <h2>na AWS-ie</h2>
+                    <div id="header-logo"></div>
+                    <aside class="notes">
+                        Wartość - przegląd co jest obecnie warte uwagi i jak rozwijać apki. Według mnie
+                    </aside>
+                </section>
+                <section id="perspective" data-background-image="">
+                    <h5>
+                        <span>Perspektywa...</span>
+                        <span class="fragment" data-fragment-index="1"> ma znaczenie</span>
+                        <span class="fragment" data-fragment-index="2"> :)</span>
+                    </h5>
+                    <a href="https://mistrzowie.org/717022">
+                        <img src="img/perspektywa-1.jpg">
+                        <img src="img/perspektywa-2.jpg" class="fragment" data-fragment-index="1">
+                        <img src="img/perspektywa-3.jpg" class="fragment" data-fragment-index="2">
+                    </a>
+                </section>
+                <section data-background-image="img/bg-hd.jpg" data-background-transition="zoom">
+                    <ul id="about-me">
+                        <li>
+                            <ul>
+                                <li>
+                                    <a href="https://www.linkedin.com/in/mateusz-chrzonstowski/">
+                                        <i class="fab fa-linkedin"
+                                            style="color: #0077B5; background-color: #FFF; line-height: .75em"></i>
+                                        /mateusz-chrzonstowski
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://twitter.com/_mat3e_">
+                                        <i class="fab fa-twitter-square"
+                                            style="background-color: #1DA1F2; color: #FFF; line-height: .75em"></i>
+                                        /_mat3e_
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.reddit.com/user/_mat3e_">
+                                        <i class="fab fa-reddit-square"
+                                            style="background-color: #FF4500; color: #FFF; line-height: .75em"></i>
+                                        /_mat3e_
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/mat3e/">
+                                        <i class="fab fa-github-square"
+                                            style="color: #24292E; background-color: #FFF; line-height: .75em"></i>
+                                        /mat3e
+                                    </a>
+                                </li>
+                                <li style="line-height: 1">&nbsp;</li>
+                                <li class="fragment" style="line-height: .75">
+                                    <a style="font-weight: bold; font-size: .75em"
+                                        href="https://mat3e.github.io/talks/aws-www/targikarierait.html">
+                                        mat3e.github.io/talks/<br><span
+                                            style="padding-left: 1em">aws-www/targikarierait.html</span>
+                                    </a>
+                                </li>
+                                <li style="line-height: 1">&nbsp;</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="fragment" style="padding: .1em; line-height: 1">
+                                <li>
+                                    <a href="https://www.udemy.com/java-ambitny-start/?couponCode=OPENALL">
+                                        <img src="img/udemy.svg" class="pure-img" style="height: 1.5em;">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://allegro.tech/">
+                                        <img src="img/allegro-tech.svg" class="pure-img" style="height: 1.5em;">
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <div
+                        style="display: flex; align-items: center; justify-content: space-between; width: 60%; margin: 0 auto;">
+                        <img src="img/pad.png" class="pure-img" style="width: var(--map-item-big)">
+                        <div style="width: 1.5em; position: absolute; top: 2em; left: calc(20% + 1.5em)"
+                            class="fragment fade-in replace" data-fragment-index="3">
+                            <img src="img/ash-small.png" class="pure-img fragment fade-out replace"
+                                data-fragment-index="8" style="width: 1.5em;">
+                        </div>
+                        <img src="img/separator.png" class="pure-img fragment" data-fragment-index="4"
+                            style="width: 1em" data-autoslide="750">
+                        <img src="img/separator.png" class="pure-img fragment" data-fragment-index="5"
+                            style="width: 1em" data-autoslide="750">
+                        <img src="img/separator.png" class="pure-img fragment" data-fragment-index="6"
+                            style="width: 1em" data-autoslide="750">
+                        <img src="img/html.png" class="pure-img fragment" data-fragment-index="7"
+                            style="width: var(--map-item-small)" data-autoslide="750">
+                        <div style="width: 1.5em; position: absolute; top: 2em; right: 20%"
+                            class="fragment fade-in replace" data-fragment-index="8">
+                            <img src="img/ash-small.png" class="pure-img fragment fade-out replace"
+                                data-fragment-index="12" style="width: 1.5em;">
+                        </div>
+                    </div>
+                    <div class="fragment" data-fragment-index="9" data-autoslide="750"
+                        style="width: 60%; margin: 0 auto; text-align: right">
+                        <p
+                            style="width: var(--map-item-small); display: inline-block; text-align: center; margin-bottom: 0">
+                            <img src="img/separator.png" class="pure-img" style="width: 1em;">
+                            <br>
+                            <img src="img/separator.png" class="pure-img fragment" data-fragment-index="10"
+                                style="width: 1em;" data-autoslide="750">
+                        </p>
+                        <br>
+                    </div>
+                    <div class="fragment" data-fragment-index="11" data-autoslide="750"
+                        style="display: flex; align-items: center; justify-content: space-between; width: 60%; margin: 0 auto;">
+                        <img src="img/nazwa.png" class="pure-img fragment" data-fragment-index="16" data-autoslide="750"
+                            style="width: var(--map-item-big); background: rgba(255, 255, 255, .75); border: white; border-radius: 3px">
+                        <div style="width: 1.5em; position: absolute; margin-top: 1em; margin-left: 1.5em"
+                            class="fragment fade-in replace" data-fragment-index="17">
+                            <img src="img/ash-small.png" class="pure-img fragment fade-out replace"
+                                data-fragment-index="21" style="width: 1.5em;">
+                        </div>
+                        <img src="img/separator.png" class="pure-img fragment" data-fragment-index="15"
+                            style="width: 1em" data-autoslide="750">
+                        <img src="img/separator.png" class="pure-img fragment" data-fragment-index="14"
+                            style="width: 1em" data-autoslide="750">
+                        <img src="img/separator.png" class="pure-img fragment" data-fragment-index="13"
+                            style="width: 1em" data-autoslide="750">
+                        <img src="img/friko-small.png" class="pure-img" style="width: var(--map-item-small)">
+                        <div class="fragment fade-in replace" data-fragment-index="12"
+                            style="width: 1.5em; position: absolute; right: 20%; margin-top: 1em">
+                            <img src="img/ash-small.png" class="pure-img fragment fade-out replace"
+                                data-fragment-index="17" style="width: 1.5em;">
+                        </div>
+                    </div>
+                    <div class="fragment" data-fragment-index="18" data-autoslide="750"
+                        style="width: 60%; margin: 0 auto; text-align: left">
+                        <div
+                            style="width: var(--map-item-big); display: inline-block; text-align: center; margin-bottom: 0">
+                            <img src="img/separator.png" class="pure-img" style="width: 1em;">
+                            <br>
+                            <img src="img/separator.png" class="pure-img fragment" data-fragment-index="19"
+                                style="width: 1em;" data-autoslide="750">
+                            <br>
+                            <img src="img/aws.png" class="pure-img fragment" style="width: 3em" data-fragment-index="20"
+                                data-autoslide="750">
+                            <div class="fragment fade-in replace" data-fragment-index="21"
+                                style="width: 1.5em; position: absolute; left: 20%; margin-top: 2em;">
+                                <img src="img/ash-small.png" class="pure-img fragment fade-out replace"
+                                    data-fragment-index="22" style="width: 1.5em;" data-autoslide="2500">
+                                <img src="img/enter.gif" class="pure-img fragment fade-in replace"
+                                    data-fragment-index="22" style="width: 1.5em;">
+                            </div>
+                        </div>
+                    </div>
+                    <div style="position: absolute; left: calc(50% - 1.5em); top: calc(50% - 1.5em)">
+                        <div class="fragment fade-out replace" data-fragment-index="2">
+                            <img src="img/ash.gif" class="pure-img fragment from-left" style="width: 3em"
+                                data-fragment-index="1">
+                        </div>
+                        <div class="fragment fade-in replace" data-fragment-index="2">
+                            <img src="img/to-small.gif" class="pure-img fragment fade-out replace"
+                                data-fragment-index="3" style="width: 3em">
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div style="padding-left: 1em; padding-right: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .5em;"
+                        class="fragment" data-autoslide="500" data-fragment-index="1">
+                        <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;"
+                            class="fragment" data-fragment-index="3" data-autoslide="750">
+                            <img src="img/hp-b.png" class="pure-img">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-b.png" class="pure-img">
+                        </div>
+                        <span class="fragment from-left-fast" data-fragment-index="2" data-autoslide="2000">
+                            <img src="img/html.png" class="pure-img fragment tada" style="width: 3em;"
+                                data-fragment-index="5">
+                        </span>
+                    </div>
+                    <div
+                        style="padding-right: 1em; padding-left: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .25em;">
+                        <img src="img/ash-battle.png" class="pure-img fragment from-right-fast" style="width: 3.5em;"
+                            data-fragment-index="2">
+                        <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;"
+                            class="fragment" data-fragment-index="3">
+                            <img src="img/hp-b.png" class="pure-img">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-b.png" class="pure-img">
+                        </div>
+                    </div>
+                    <div class="pokemon">
+                        <span class="fragment" data-fragment-index="4">
+                            <span class="fragment fade-out replace" data-fragment-index="5">
+                                Wild static website on AWS appeared!
+                            </span>
+                            <span class="fragment fade-in replace" data-fragment-index="5">
+                                Static website on AWS used CONFUSION!
+                            </span>
+                        </span>
+                    </div>
+                </section>
+                <section data-transition="zoom" data-background-transition="zoom"
+                    data-background-image="img/cool-names.png" data-background-size="contain"></section>
+                <section>
+                    <div
+                        style="padding-left: 1em; padding-right: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .5em;">
+                        <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;">
+                            <img src="img/hp-b.png" class="pure-img">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-b.png" class="pure-img">
+                        </div>
+                        <img src="img/html.png" class="pure-img" style="width: 3em;">
+                    </div>
+                    <div
+                        style="padding-right: 1em; padding-left: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .25em;">
+                        <img src="img/ash-battle.png" class="pure-img" style="width: 3.5em;">
+                        <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;"
+                            class="fragment pulse" data-fragment-index="1" data-autoslide="750">
+                            <img src="img/hp-b.png" class="pure-img">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img fragment fade-out replace" style="width: 1em"
+                                data-fragment-index="2">
+                            <img src="img/hp.gif" class="pure-img fragment fade-in replace" style="width: 1em"
+                                data-fragment-index="2">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-b.png" class="pure-img">
+                        </div>
+                    </div>
+                    <div class="pokemon">
+                        <span class="fragment fade-out replace" data-fragment-index="1">
+                            Static website on AWS used CONFUSION!
+                        </span>
+                        <span class="fragment fade-in replace" data-fragment-index="1">
+                            Critical hit!<br><br>
+                        </span>
+                    </div>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3 class="fragment" data-fragment-index="1">
+                        <a href="https://expeditedsecurity.com/aws-in-plain-english/">aws-in-plain-english</a>
+                    </h3>
+                    <img src="img/oak.gif" class="pure-img" style="width: 3em">
+                    <a href="https://expeditedsecurity.com/aws-in-plain-english/s3/" class="fragment"
+                        data-fragment-index="2" style="display: block">
+                        <img src="img/s3.png" class="pure-img fragment fade-out replace" data-fragment-index="3">
+                        <img src="img/s3-red.png" class="pure-img fragment fade-in replace" data-fragment-index="3">
+                    </a>
+                    <aside class="notes">
+                        Wjeżdża na biało pomoc. I bynajmniej nie chodzi tutaj o dokumentację AWS-a
+                    </aside>
+                </section>
+                <section>
+                    <img src="img/s3-1.png" class="pure-img" style="width: 100%">
+                    <pre class="fragment"><code class="json" data-trim contenteditable="true">
+                        {
+                            "Version": "2012-10-17",
+                            "Statement": [
+                                {
+                                    "Sid": "PublicReadGetObject",
+                                    "Effect": "Allow",
+                                    "Principal": "*",
+                                    "Action": "s3:GetObject",
+                                    "Resource": "arn:aws:s3:::example.com/*"
+                                }
+                            ]
+                        }
+                    </code></pre>
+                </section>
+                <section data-background-image="img/s3-2.png" data-background-size="contain"></section>
+                <section>
+                    <div
+                        style="padding-left: 1em; padding-right: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .5em;">
+                        <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;"
+                            class="fragment pulse" data-fragment-index="2">
+                            <img src="img/hp-b.png" class="pure-img">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-f.png" class="pure-img fragment fade-out replace" style="width: 1em"
+                                data-fragment-index="3">
+                            <img src="img/hp-e.png" class="pure-img fragment fade-in replace" style="width: 1em"
+                                data-fragment-index="3">
+                            <img src="img/hp-f.png" class="pure-img fragment fade-out replace" style="width: 1em"
+                                data-fragment-index="2">
+                            <img src="img/hp2.gif" class="pure-img fragment fade-in replace" style="width: 1em"
+                                data-fragment-index="2">
+                            <img src="img/hp-f.png" class="pure-img fragment fade-out replace" style="width: 1em"
+                                data-fragment-index="2">
+                            <img src="img/hp-e.png" class="pure-img fragment fade-in replace" style="width: 1em"
+                                data-fragment-index="2">
+                            <img src="img/hp-b.png" class="pure-img">
+                        </div>
+                        <img src="img/html.png" class="pure-img fragment tada" style="width: 3em;"
+                            data-fragment-index="4">
+                    </div>
+                    <div
+                        style="padding-right: 1em; padding-left: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .25em;">
+                        <img src="img/ash-battle.png" class="pure-img fragment shake" style="width: 3.5em;"
+                            data-fragment-index="1">
+                        <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;">
+                            <img src="img/hp-b.png" class="pure-img">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-b.png" class="pure-img">
+                        </div>
+                    </div>
+                    <div class="pokemon">
+                        <span class="fragment fade-out replace" data-fragment-index="1">...<br><br></span>
+                        <span class="fragment fade-in replace" data-fragment-index="1">
+                            <span class="fragment fade-out replace" data-fragment-index="2">
+                                mat3e used AWS S3!<br><br>
+                            </span>
+                            <span class="fragment fade-in replace" data-fragment-index="2">
+                                <span class="fragment fade-out replace" data-fragment-index="4">
+                                    It's super effective!<br><br>
+                                </span>
+                                <span class="fragment fade-in replace" data-fragment-index="4">
+                                    <span class="fragment fade-out replace" data-fragment-index="5">
+                                        Static website on AWS used 70MB!
+                                    </span>
+                                    <span class="fragment fade-in replace" data-fragment-index="5">
+                                        It's not very effective...
+                                    </span>
+                                </span>
+                            </span>
+                        </span>
+                    </div>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3 style="margin: 0">
+                        <a href="https://aws.amazon.com/s3/pricing/">$$$</a>
+                    </h3>
+                    <div>
+                        <img src="img/oak.png" class="pure-img" style="width: 2em">
+                    </div>
+                    <table style="font-size: .5em; display: inline-block;" class="fragment">
+                        <thead style="font-weight: bold">
+                            <tr>
+                                <td colspan="2">S3 Standard Storage</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>First 50 TB / Month</td>
+                                <td>$0.023 per GB</td>
+                            </tr>
+                            <tr>
+                                <td>Next 450 TB / Month</td>
+                                <td>$0.022 per GB</td>
+                            </tr>
+                            <tr>
+                                <td>Over 500 TB / Month</td>
+                                <td>$0.021 per GB</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table style="font-size: .5em; display: inline-block;" class="fragment">
+                        <thead style="font-weight: bold">
+                            <tr>
+                                <td colspan="2">Data Transfer IN/OUT S3-Internet</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>All data transfer in</td>
+                                <td>$0 per GB</td>
+                            </tr>
+                            <tr>
+                                <td>Out up to 1 GB / Month</td>
+                                <td>$0 per GB</td>
+                            </tr>
+                            <tr>
+                                <td>Out, next 9.999 TB / Month</td>
+                                <td>$0.09 per GB</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table style="font-size: .5em" class="fragment">
+                        <thead style="font-weight: bold">
+                            <tr>
+                                <td colspan="2">Request pricing</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Data Returned by
+                                    <a
+                                        href="https://medium.com/miq-tech-and-analytics/https-medium-com-nagaraj-mediaiq-how-we-use-s3-select-for-schema-validation-and-filtering-data-at-miq-52cf036bf9be">S3
+                                        Select</a>
+                                </td>
+                                <td>$0.0007 per GB</td>
+                            </tr>
+                            <tr>
+                                <td>Data Scanned by S3 Select</td>
+                                <td>$0.002 per GB</td>
+                            </tr>
+                            <tr>
+                                <td>PUT, COPY, POST, or LIST Requests</td>
+                                <td>$0.005 per 1,000 requests</td>
+                            </tr>
+                            <tr>
+                                <td>GET, SELECT and all other Requests</td>
+                                <td>$0.0004 per 1,000 requests</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <aside class="notes">
+                        <ul>
+                            <li>
+                                S3 Select is a unique feature introduced by AWS to run SQL type query direct on S3 files
+                            </li>
+                            <li>LIST: Returns some or all (up to 1000) of the objects in a bucket</li>
+                        </ul>
+                        <br>
+                        Im więcej, tym taniej. Zawsze
+                    </aside>
+                </section>
+                <section>
+                    <div>
+                        <img src="img/calc.png" class="pure-img" style="width: 5em">
+                    </div>
+                    <ul>
+                        <li class="fragment" data-fragment-index="1">
+                            <strong>Hosting</strong> 70 MB? <span class="fragment" data-fragment-index="2">Jakieś ~0,002
+                                $ miesięcznie</span>
+                        </li>
+                        <li class="fragment" data-fragment-index="3"><strong>Trzymanie</strong> np. 2 TB? <span
+                                class="fragment" data-fragment-index="4">~50 $</span>
+                            <ul>
+                                <li class="fragment" data-fragment-index="5"><span class="fragment highlight-blue"
+                                        data-fragment-index="11">Dropbox</span>? <span class="fragment"
+                                        data-fragment-index="6">9,99 €/11,99 €</span></li>
+                            </ul>
+                        </li>
+                        <li class="fragment" data-fragment-index="7">
+                            Optymalizacje
+                            <ul>
+                                <li class="fragment" data-fragment-index="8">
+                                    <a href="https://aws.amazon.com/s3/pricing/#Data_Transfer_pricing">
+                                        Przesyłanie S3-inne usługi <span class="fragment highlight-blue"
+                                            data-fragment-index="9">w tym samym
+                                            regionie</span>? Za darmo
+                                    </a>
+                                </li>
+                                <li class="fragment" data-fragment-index="10">
+                                    S3 Glacier - $0.004 per GB (8,20 $ za 2 TB)
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <aside class="notes">
+                        <ul>
+                            <li>Ten sam region = protip1</li>
+                            <li>Dropbox ciekawy, bo oni sami używali S3</li>
+                        </ul>
+                    </aside>
+                </section>
+                <section id="prawo">
+                    <h3>Prawo Chrzonstowskiego</h3>
+                    <div style="font-size: .5em; font-style: italic" class="fragment" data-fragment-index="1">Wraz z
+                        rozwojem firmy, jej
+                        zapotrzebowanie na chmurę publiczną rośnie, maleje, rośnie, maleje,
+                        ... <span class="fragment" data-fragment-index="2">(hipoteza) aż do utworzenia przez nią nowej
+                            chmury publicznej</span></div>
+                    <p class="fragment" data-fragment-index="3">
+                        <img src="img/prawo.png" class="pure-img fragment fade-out replace" data-fragment-index="4">
+                        <span class="fragment fade-in replace" data-fragment-index="4">
+                            <img src="img/prawo-y.png" class="pure-img fragment fade-out replace"
+                                data-fragment-index="5">
+                            <span class="fragment fade-in replace" data-fragment-index="5">
+                                <img src="img/prawo-x.png" class="pure-img fragment fade-out replace"
+                                    data-fragment-index="6">
+                                <span class="fragment fade-in replace" data-fragment-index="6">
+                                    <img src="img/prawo1.png" class="pure-img fragment fade-out replace"
+                                        data-fragment-index="7">
+                                    <span class="fragment fade-in replace" data-fragment-index="7">
+                                        <img src="img/prawo2.png" class="pure-img fragment fade-out replace"
+                                            data-fragment-index="8">
+                                        <span class="fragment fade-in replace" data-fragment-index="8">
+                                            <img src="img/prawo3.png" class="pure-img fragment fade-out replace"
+                                                data-fragment-index="9">
+                                            <span class="fragment fade-in replace" data-fragment-index="9">
+                                                <img src="img/prawo4.png" class="pure-img fragment fade-out replace"
+                                                    data-fragment-index="10">
+                                                <span class="fragment fade-in replace" data-fragment-index="10">
+                                                    <img src="img/prawo5.png" class="pure-img fragment fade-out replace"
+                                                        data-fragment-index="11">
+                                                    <span class="fragment fade-in replace" data-fragment-index="11">
+                                                        <img src="img/prawo6.png"
+                                                            class="pure-img fragment fade-out replace"
+                                                            data-fragment-index="12">
+                                                        <img src="img/prawo7.png"
+                                                            class="pure-img fragment fade-in replace"
+                                                            data-fragment-index="12">
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </span>
+                                </span>
+                            </span>
+                        </span>
+                    </p>
+                    <aside class="notes">
+                        <ul>
+                            <li>nasza statyczna stronka, startupy - im się opłaca</li>
+                            <li>allegro - 17 mln userów, nie opłaca się wirtualek w chmurze, Big Data trochę</li>
+                            <li>Pokemon GO - w piku 45 mln, 5 mln dziennie (04.2017),
+                                <a
+                                    href="https://www.forbes.com/sites/insertcoin/2018/06/27/pokemon-go-is-more-popular-than-its-been-at-any-point-since-launch-in-2016/#5eaab766cfd2">147
+                                    mln (05.2018)</a>;
+                                <a
+                                    href="https://www.theserverside.com/feature/How-Pokemon-Go-created-a-Kuburnetes-powered-Java-cloud">NoSQL
+                                    od Google'a</a>,
+                                <a
+                                    href="https://cloud.google.com/blog/products/gcp/bringing-pokemon-go-to-life-on-google-cloud">Kubernetes</a>
+                                - oni są gotowi żeby się przepiąć na swoje w razie czego
+                            </li>
+                            <li>Drop - 500 mln userów
+                                <a href="https://expandedramblings.com/index.php/dropbox-statistics/">(1)</a>,
+                                <a
+                                    href="https://techcrunch.com/2017/09/15/why-dropbox-decided-to-drop-aws-and-build-its-own-infrastructure-and-network/?guccounter=1&guce_referrer_us=aHR0cHM6Ly9kdWNrZHVja2dvLmNvbS8&guce_referrer_cs=-yrummSlL3Ez0g_lXU4QQw">(2)</a>,
+                                <a
+                                    href="https://www.wired.com/2016/03/epic-story-dropboxs-exodus-amazon-cloud-empire/">(3)</a>;
+                                <a
+                                    href="https://www.geekwire.com/2018/dropbox-saved-almost-75-million-two-years-building-tech-infrastructure/">zaoszczędzili
+                                    75 mln w 2 lata</a>
+                            </li>
+                            <li>Netflix - <a
+                                    href="https://expandedramblings.com/index.php/netflix_statistics-facts/">152 mln
+                                    userów, ale 300 mln</a> (tak jak z allegro - wincyj używa niż ma konta)
+                                <br>
+                                <a
+                                    href="https://media.netflix.com/en/company-blog/completing-the-netflix-cloud-migration">We
+                                    rely on the cloud for all of our scalable computing and storage needs — our business
+                                    logic, distributed databases and big data processing/analytics, recommendations,
+                                    transcoding, and hundreds of other functions that make up the Netflix application.
+                                    Video is delivered through Netflix Open Connect, our content delivery network that
+                                    is distributed globally to efficiently deliver our bits to members’ devices. -
+                                    czerwiec 2012 ich CDN</a>
+                                <br>
+                                <a
+                                    href="https://www.networkworld.com/article/3037428/netflix-is-not-really-all-in-on-amazon-s-cloud.html">The
+                                    best way to express it is that everything you see on Netflix up until the play
+                                    button is on AWS, the actual video is delivered through our CDN</a>
+                            </li>
+                            <li>Własna chmura - Amazon budował pod swoje piki (wyprzedaże), aż w końcu zaczął wynajmować
+                                sprzęt w
+                                mniej gorących okresach</li>
+                        </ul>
+                    </aside>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <div
+                        style="padding-left: 1em; padding-right: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .5em;">
+                        <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;">
+                            <img src="img/hp-b.png" class="pure-img">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-b.png" class="pure-img">
+                        </div>
+                        <img src="img/html.png" class="pure-img fragment tada" style="width: 3em;"
+                            data-fragment-index="1">
+                    </div>
+                    <div
+                        style="padding-right: 1em; padding-left: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .25em;">
+                        <img src="img/ash-battle.png" class="pure-img" style="width: 3.5em;">
+                        <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;">
+                            <img src="img/hp-b.png" class="pure-img">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img fragment fade-out replace" style="width: 1em"
+                                data-fragment-index="2">
+                            <img src="img/hp.gif" class="pure-img fragment fade-in replace" style="width: 1em"
+                                data-fragment-index="2">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-b.png" class="pure-img">
+                        </div>
+                    </div>
+                    <div class="pokemon">
+                        <span class="fragment fade-out replace" data-fragment-index="1">...<br><br></span>
+                        <span class="fragment fade-in replace" data-fragment-index="1">
+                            <span class="fragment fade-out replace" data-fragment-index="2">
+                                Static website on AWS used ugly URL!
+                            </span>
+                            <span class="fragment fade-in replace" data-fragment-index="2">
+                                Critical hit!<br><br>
+                            </span>
+                        </span>
+                    </div>
+                </section>
+                <section>
+                    <div>
+                        http://<span
+                            class="fragment highlight-red">example.com</span>.s3-website-eu-west-1.amazonaws.com
+                    </div>
+                    <div class="fragment">
+                        <img src="img/aws.png" class="pure-img" style="height: 3em">
+                        <img src="img/ppap.gif" class="pure-img fragment" style="height: 3em">
+                        <img src="img/ovh.png" class="pure-img" style="height: 3em">
+                        <hr>
+                    </div>
+                    <ul>
+                        <li class="fragment">DNS ALIAS?
+                            <div class="fragment" style="display: flex; align-items: center" data-autoslide="4000">
+                                <img src="img/no.gif" class="pure-img" style="height: 3em">
+                                <span class="fragment">(brak stałego adresu IP)</span>
+                            </div>
+                        </li>
+                        <li class="fragment">CNAME?
+                            <div class="fragment">
+                                <img src="img/no2.gif" class="pure-img" style="height: 3em">
+                                <img src="img/404.png" class="pure-img fragment" style="height: 3em">
+                            </div>
+                        </li>
+                    </ul>
+                    <aside class="notes">
+                        example.com to nazwa bucketa
+                        <br>
+                        CNAME nie zadziałał, bo OVH wymaga adresu bezwzględnego, a więc z kropką na końcu, a to się
+                        kłóciło z S3
+                    </aside>
+                </section>
+                <section>
+                    <h4 style="margin: 0">Dystrybucja!</h4>
+                    <div>
+                        <img src="img/oak.png" class="pure-img" style="width: 2em">
+                    </div>
+                    <a href="https://expeditedsecurity.com/aws-in-plain-english" style="display: block"
+                        class="fragment">
+                        <img src="img/cloudfront.png" class="pure-img">
+                    </a>
+                    <div class="fragment" style="display: flex; flex-direction: column; align-items: center">
+                        <img src="img/cloudfront-cname-1.png" class="pure-img">
+                        <img src="img/cloudfront-cname-2.png" class="pure-img fragment">
+                    </div>
+                </section>
+                <section>
+                    <h4 style="margin: 0">Domena w AWS</h4>
+                    <div>
+                        <img src="img/oak.png" class="pure-img" style="width: 2em">
+                    </div>
+                    <a href="https://expeditedsecurity.com/aws-in-plain-english" style="display: block" class="fragment"
+                        data-fragment-index="1">
+                        <img src="img/route53.png" class="pure-img">
+                    </a>
+                    <div class="fragment" data-fragment-index="2"
+                        style="display: flex; align-items: center; justify-content: center">
+                        <img src="img/route53-1.png" class="pure-img fragment fade-out replace" style="width: 30%"
+                            data-fragment-index="3">
+                        <img src="img/route53-1-red.png" class="pure-img fragment fade-in replace" style="width: 30%"
+                            data-fragment-index="3">
+                        <img src="img/ovh-aws.png" class="pure-img fragment" style="width: 70%">
+                    </div>
+                </section>
+                <section>
+                    <h4>Certyfikat<br><span class="fragment">AWS Certificate Manager</span></h4>
+                    <div>
+                        <img src="img/oak.png" class="pure-img" style="width: 2em">
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: space-between">
+                        <img src="img/cm.png" class="pure-img fragment" style="width: 45%">
+                        <img src="img/cert.png" class="pure-img fragment" style="width: 45%">
+                    </div>
+                    <aside class="notes">
+                        Efektem będzie taki cert, ale dopiero jak się podłączymy.
+                        <br>
+                        Route 53 spięte z domeną, bucket S3 nazwany jak domena, CloudFront z
+                        wpisaną domeną, więc można wybierać!
+                    </aside>
+                </section>
+                <section data-background-image="img/route53-2.png" data-background-size="contain">
+                    <aside class="notes">S3 - gdy taki sam bucket jak domena, a CloudFront jak jest wpięte do niego
+                    </aside>
+                </section>
+                <section>
+                    <div
+                        style="padding-left: 1em; padding-right: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .5em;">
+                        <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;">
+                            <img src="img/hp-f.png" class="pure-img fragment fade-out replace" style="width: 1em"
+                                data-fragment-index="2">
+                            <img src="img/hp-e.png" class="pure-img fragment fade-in replace" style="width: 1em"
+                                data-fragment-index="2">
+                            <img src="img/hp-f.png" class="pure-img fragment fade-out replace" style="width: 1em"
+                                data-fragment-index="2">
+                            <img src="img/hp-e.png" class="pure-img fragment fade-in replace" style="width: 1em"
+                                data-fragment-index="2">
+                            <img src="img/hp-f.png" class="pure-img fragment fade-out replace" style="width: 1em"
+                                data-fragment-index="2">
+                            <img src="img/hp-e.png" class="pure-img fragment fade-in replace" style="width: 1em"
+                                data-fragment-index="2">
+                            <img src="img/hp-f.png" class="pure-img fragment fade-out replace" style="width: 1em"
+                                data-fragment-index="2">
+                            <img src="img/hp-e.png" class="pure-img fragment fade-in replace" style="width: 1em"
+                                data-fragment-index="2">
+                            <img src="img/hp-f.png" class="pure-img fragment fade-out replace" style="width: 1em"
+                                data-fragment-index="2">
+                            <img src="img/hp-e.png" class="pure-img fragment fade-in replace" style="width: 1em"
+                                data-fragment-index="2">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-b.png" class="pure-img">
+                        </div>
+                        <img src="img/html.png" class="pure-img fragment zoomOutDown" style="width: 3em;"
+                            data-fragment-index="3">
+                    </div>
+                    <div
+                        style="padding-right: 1em; padding-left: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .25em;">
+                        <img src="img/ash-battle.png" class="pure-img fragment shake" style="width: 3.5em;"
+                            data-fragment-index="1">
+                        <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;">
+                            <img src="img/hp-b.png" class="pure-img">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-b.png" class="pure-img">
+                        </div>
+                    </div>
+                    <div class="pokemon">
+                        <span class="fragment fade-out replace" data-fragment-index="1">...<br><br></span>
+                        <span class="fragment fade-in replace" data-fragment-index="1">
+                            <span class="fragment fade-out replace" data-fragment-index="2">
+                                mat3e used Route 53, ACM, CloudFront combo!
+                            </span>
+                            <span class="fragment fade-in replace" data-fragment-index="2">
+                                <span class="fragment fade-out replace" data-fragment-index="3">
+                                    It's super effective!<br><br>
+                                </span>
+                                <span class="fragment fade-in replace" data-fragment-index="3">
+                                    Static website on AWS fainted!
+                                </span>
+                            </span>
+                        </span>
+                    </div>
+                </section>
+                <section>
+                    <h3 style="font-family: 'pokemon', 'Courier New', Courier, monospace" class="fragment"
+                        data-fragment-index="1">wiele expa</h3>
+                    <img src="img/stand1.png" class="pure-img fragment fade-out replace" style="width: 3.5em"
+                        data-fragment-index="1">
+                    <img src="img/stand2.png" class="pure-img fragment fade-in replace" style="width: 3.5em"
+                        data-fragment-index="1">
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3 style="margin: 0">
+                        <a href="https://aws.amazon.com/cloudfront/pricing/">$$$</a>
+                    </h3>
+                    <div>
+                        <img src="img/oak.png" class="pure-img" style="width: 2em">
+                    </div>
+                    <div>
+                        CloudFront różnie, np. odbiór 1 GB (aż do 10 TB)
+                    </div>
+                    <ul>
+                        <li class="fragment">$0.114 w Japonii</li>
+                        <li class="fragment">$0.085 w krajach Europy</li>
+                    </ul>
+                    <br><br>
+                    <div class="fragment">+ 0,50 $ + VAT za Route 53!</div>
+                    <aside class="notes">Pomijalne dla stronki 70 MB</aside>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <div style="margin: 0 auto; text-align: center">
+                        <img src="img/html.png" class="pure-img fragment flash" style="width: 3em; margin-top: .25em"
+                            data-fragment-index="2">
+                        <span class="fragment fade-out replace" data-fragment-index="2"
+                            style="position: absolute; margin-left: -4em;">
+                            <img src="img/explosion2.gif" style="width: 5em;" class="pure-img fragment"
+                                data-fragment-index="1" data-autoslide="1200">
+                        </span>
+                        <img src="img/html2.png" class="pure-img fragment reverse-flash"
+                            style="width: 3.5em; position: absolute; margin-left: -3.25em;" data-fragment-index="2">
+                    </div>
+                    <img src="img/explosion3.gif" class="pure-img fragment" data-fragment-index="3"
+                        data-autoslide="300">
+                    <img src="img/explosion4.gif" class="pure-img fragment" data-fragment-index="4"
+                        data-autoslide="300">
+                    <img src="img/explosion5.gif" class="pure-img fragment" data-fragment-index="5">
+                    <img src="img/brain-explosion.gif" class="pure-img fragment" data-fragment-index="6"
+                        style="position: absolute; bottom: 0; right: 0">
+                    <div class="pokemon">
+                        <span class="fragment fade-out replace" data-fragment-index="1">...<br><br></span>
+                        <span class="fragment fade-in replace" data-fragment-index="1">
+                            <span class="fragment fade-out replace" data-fragment-index="3">
+                                What? Static website on AWS is evolving!
+                            </span>
+                            <span class="fragment fade-in replace" data-fragment-index="3">
+                                Into Website with visitor counter!
+                            </span>
+                        </span>
+                    </div>
+                    <aside class="notes">
+                        Zmiany w HTML-u wymagają invalidate'a w CloudFront!!!
+                    </aside>
+                </section>
+                <section>
+                    <div style="padding-left: 1em; padding-right: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .5em;"
+                        class="fragment" data-autoslide="500" data-fragment-index="1">
+                        <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;"
+                            class="fragment" data-fragment-index="3" data-autoslide="750">
+                            <img src="img/hp-b.png" class="pure-img">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-b.png" class="pure-img">
+                        </div>
+                        <span class="fragment from-left-fast" data-fragment-index="2" data-autoslide="2000">
+                            <img src="img/html2.png" class="pure-img fragment tada" style="width: 3.5em;"
+                                data-fragment-index="5">
+                        </span>
+                    </div>
+                    <div
+                        style="padding-right: 1em; padding-left: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .25em;">
+                        <img src="img/ash-battle.png" class="pure-img fragment from-right-fast" style="width: 3.5em;"
+                            data-fragment-index="2">
+                        <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;"
+                            class="fragment" data-fragment-index="3">
+                            <img src="img/hp-b.png" class="pure-img">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img fragment fade-out replace" style="width: 1em"
+                                data-fragment-index="6">
+                            <img src="img/hp2.gif" class="pure-img fragment fade-in replace" style="width: 1em"
+                                data-fragment-index="6">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-b.png" class="pure-img">
+                        </div>
+                    </div>
+                    <div class="pokemon">
+                        <span class="fragment" data-fragment-index="4">
+                            <span class="fragment fade-out replace" data-fragment-index="5">
+                                ...<br><br>
+                            </span>
+                            <span class="fragment fade-in replace" data-fragment-index="5">
+                                <span class="fragment fade-out replace" data-fragment-index="6">
+                                    Website with visitor counter used new requirements!
+                                </span>
+                                <span class="fragment fade-in replace" data-fragment-index="6">
+                                    Critical hit!<br><br>
+                                </span>
+                            </span>
+                        </span>
+                    </div>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h4 style="margin: 0">Baza!</h4>
+                    <div>
+                        <img src="img/oak.png" class="pure-img" style="width: 2em">
+                    </div>
+                    <a href="https://expeditedsecurity.com/aws-in-plain-english" style="display: block"
+                        class="fragment">
+                        <img src="img/dynamo.png" class="pure-img">
+                    </a>
+                    <a href="https://stackoverflow.com/questions/50212300/how-would-i-create-a-global-counter-for-aws-lambda-functions"
+                        class="fragment" style="display: block">
+                        <img src="img/go-for-dynamo.png" class="pure-img">
+                    </a>
+                    <aside class="notes">
+                        Można zapytać, czy to nie za dużo (zwłaszcza jak się kojarzy Azure Cosmos DB),
+                        ale to bardziej Azure Table Storage niż Cosmos DB. Prosty NoSQL
+                        <br>
+                        id=1, counter=0 - taki wpis w tabelce
+                    </aside>
+                </section>
+                <section>
+                    <h4 style="margin: 0">Lambda!</h4>
+                    <div>
+                        <img src="img/oak.png" class="pure-img" style="width: 2em">
+                    </div>
+                    <a href="https://expeditedsecurity.com/aws-in-plain-english/lambda/" style="display: block"
+                        class="fragment" data-fragment-index="1">
+                        <img src="img/lambda.png" class="pure-img fragment fade-out replace" data-fragment-index="2">
+                        <img src="img/lambda-red.png" class="pure-img fragment fade-in replace" data-fragment-index="2">
+                    </a>
+                    <pre style="width: 100%; margin-top: 0" class="fragment"><code class="javascript" data-trim contenteditable="true" style="font-size: .75em; line-height: 1.05">
+                        const AWS = require('aws-sdk');
+                        const doc = require('dynamodb-doc');
+                        AWS.config.update({ region: 'eu-west-1' });
+                        const dynamo = new doc.DynamoDB();
+                        
+                        const TableName = 'table';
+                        const Key = { id: 1 };
+                        
+                        exports.bumpCounter = async(event, context) => {
+                            const result = await dynamo.getItem({ TableName, Key }).promise();
+                            return {
+                                statusCode: 200,
+                                body: JSON.stringify(result) // { Item: { /* keys and values */ } }
+                            };
+                        };
+                    </code></pre>
+                    <aside class="notes">
+                        Wszystko na Node (tetowane na 8, już jest 10)
+                        <br>
+                        eksportujemy funkcję pobierającą zdarzenie (np. s3) i context (propsy i config); jest jeszcze
+                        callback, który pobiera error
+                        i result ale zamiast tego async/await i return
+                        <br>
+                        async/await, status, body
+                    </aside>
+                </section>
+                <section data-background-image="img/lambda-create.png" data-background-size="contain"></section>
+                <section>
+                    <h4 style="margin: 0">Uprawnienia</h4>
+                    <div>
+                        <img src="img/oak.png" class="pure-img" style="width: 2em">
+                    </div>
+                    <a href="https://expeditedsecurity.com/aws-in-plain-english" style="display: block"
+                        class="fragment">
+                        <img src="img/iam.png" class="pure-img" style="width: 80%">
+                    </a>
+                    <img src="img/iam-settings.png" class="pure-img fragment" style="width: 20%">
+                    <aside class="notes">
+                        Takie polityki, jak w S3, ale tutaj scentralizowane.
+                        <br>
+                        Rola zbiera wiele polityk
+                    </aside>
+                </section>
+                <section>
+                    <h4 style="margin: 0">Wystawienie tego na świat</h4>
+                    <div>
+                        <img src="img/oak.png" class="pure-img" style="width: 2em">
+                    </div>
+                    <a href="https://expeditedsecurity.com/aws-in-plain-english" style="display: block"
+                        class="fragment">
+                        <img src="img/gateway.png" class="pure-img" style="width: 80%">
+                    </a>
+                    <img src="img/lambda-flow.png" class="pure-img fragment" style="width: 65%">
+                </section>
+                <section>
+                    <div style="width: 80%; margin: 0 auto;">
+                        <img src="img/lambda-mng.png" class="pure-img fragment fade-out replace"
+                            data-fragment-index="1">
+                        <img src="img/lambda-mng-red.png" class="pure-img fragment fade-in replace"
+                            data-fragment-index="1">
+                    </div>
+                    <pre style="width: 100%; margin-top: 0" class="fragment"><code class="javascript" data-trim contenteditable="true" style="line-height: 1.1">
+                        const { counter } = await dynamo.getItem({ TableName, Key }).promise();
+                        return {
+                            statusCode: 200,
+                            body: JSON.stringify(
+                                (await dynamo.updateItem({
+                                    TableName,
+                                    Key,
+                                    UpdateExpression: `set counter = ${counter + 1}`,
+                                    ReturnValues: 'UPDATED_NEW'
+                                }).promise()).Attributes
+                            )
+                        };
+                    </code></pre>
+                    <aside class="notes">`ReturnValues: 'UPDATED_NEW'` => `{ Attributes: { counter: 30006 } }`</aside>
+                </section>
+                <section>
+                    <div
+                        style="padding-left: 1em; padding-right: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .5em;">
+                        <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;">
+                            <img src="img/hp-b.png" class="pure-img">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-f.png" class="pure-img fragment fade-out replace" style="width: 1em"
+                                data-fragment-index="2">
+                            <img src="img/hp.gif" class="pure-img fragment fade-in replace" style="width: 1em"
+                                data-fragment-index="2">
+                            <img src="img/hp-f.png" class="pure-img fragment fade-out replace" style="width: 1em"
+                                data-fragment-index="2">
+                            <img src="img/hp-e.png" class="pure-img fragment fade-in replace" style="width: 1em"
+                                data-fragment-index="2">
+                            <img src="img/hp-f.png" class="pure-img fragment fade-out replace" style="width: 1em"
+                                data-fragment-index="2">
+                            <img src="img/hp-e.png" class="pure-img fragment fade-in replace" style="width: 1em"
+                                data-fragment-index="2">
+                            <img src="img/hp-b.png" class="pure-img">
+                        </div>
+                        <img src="img/html2.png" class="pure-img fragment tada" style="width: 3.5em;"
+                            data-fragment-index="3">
+                    </div>
+                    <div
+                        style="padding-right: 1em; padding-left: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .25em;">
+                        <img src="img/ash-battle.png" class="pure-img fragment shake" style="width: 3.5em;"
+                            data-fragment-index="1">
+                        <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;">
+                            <img src="img/hp-b.png" class="pure-img">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img fragment fade-out replace" style="width: 1em"
+                                data-fragment-index="4">
+                            <img src="img/hp2.gif" class="pure-img fragment fade-in replace" style="width: 1em"
+                                data-fragment-index="4">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-b.png" class="pure-img">
+                        </div>
+                    </div>
+                    <div class="pokemon">
+                        <span class="fragment fade-out replace" data-fragment-index="1">...<br><br></span>
+                        <span class="fragment fade-in replace" data-fragment-index="1">
+                            <span class="fragment fade-out replace" data-fragment-index="2">
+                                mat3e used DynamoDB, Lambda, IAM & Gateway!
+                            </span>
+                            <span class="fragment fade-in replace" data-fragment-index="2">
+                                <span class="fragment fade-out replace" data-fragment-index="3">
+                                    It's super effective!<br><br>
+                                </span>
+                                <span class="fragment fade-in replace" data-fragment-index="3">
+                                    <span class="fragment fade-out replace" data-fragment-index="4">
+                                        Website with visitor counter used errors!
+                                    </span>
+                                    <span class="fragment fade-in replace" data-fragment-index="4">
+                                        Critical hit!<br><br>
+                                    </span>
+                                </span>
+                            </span>
+                        </span>
+                    </div>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3 style="margin: 0">Monitoring!</h3>
+                    <div>
+                        <img src="img/oak.png" class="pure-img" style="width: 3em">
+                    </div>
+                    <a href="https://expeditedsecurity.com/aws-in-plain-english" style="display: block"
+                        class="fragment">
+                        <img src="img/cloudwatch.png" class="pure-img">
+                    </a>
+                    <div class="fragment">
+                        Logi, metryki, spięcie się z <code>console.log</code> :)
+                    </div>
+                    <aside class="notes">
+                        Trzeba wpiąć lambdę przez IAM do CloudWatcha; można też API Gateway
+                    </aside>
+                </section>
+                <section>
+                    <div style="color: red; margin-top: -1em">
+                        <span class="fragment fade-out replace" data-fragment-index="2">Invalid UpdateExpression</span>
+                        <div class="fragment fade-in replace" data-fragment-index="2" style="margin-top: -1em">
+                            The provided expression refers to an attribute that does not exist in the item
+                        </div>
+                    </div>
+                    <pre style="width: 100%; margin-top: 0; background-color: white"><code class="javascript fragment fade-out replace" data-fragment-index="3" data-trim contenteditable="true" style="font-size: .85em;">const { counter } = await dynamo.getItem({ TableName, Key }).promise();</code><code class="javascript fragment fade-in replace" data-fragment-index="3" data-trim contenteditable="true" style="font-size: .85em;">const { Item: { counter } } = await dynamo.getItem({ TableName, Key }).promise();</code><code class="javascript" data-trim contenteditable="true" style="font-size: .85em;">
+                            return {
+                                statusCode: 200,
+                                body: JSON.stringify(
+                                    (await dynamo.updateItem({
+                                        TableName,
+                                        Key,
+                        </code><code class="javascript fragment fade-out replace" data-fragment-index="1" contenteditable="true" style="font-size: .85em;">            UpdateExpression: `set counter = ${counter + 1}`,</code><code class="javascript fragment fade-in replace" data-fragment-index="1" contenteditable="true" style="font-size: .85em;">            UpdateExpression: 'set #C = :counter',
+            ExpressionAttributeNames: { '#C': 'counter' },
+            ExpressionAttributeValues: { ':counter': (counter + 1) },</code><code class="javascript" data-trim contenteditable="true" style="font-size: .85em;">
+                                        ReturnValues: 'UPDATED_NEW'
+                                    }).promise()).Attributes
+                                )
+                            };
+                        </code></pre>
+                    <aside class="notes">
+                        counter = słowo kluczowe, lepiej użyć "szablonu"
+                        <br>
+                        tak jak zwracamy Attributes (= { counter: n }), tak też {Item} na start
+                        <br>
+                        Można by też było jakiegoś try-catcha, żeby nie zawsze szło 200
+                    </aside>
+                </section>
+                <section>
+                    <div
+                        style="padding-left: 1em; padding-right: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .5em;">
+                        <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;">
+                            <img src="img/hp-b.png" class="pure-img">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-f.png" class="pure-img fragment fade-out replace" style="width: 1em"
+                                data-fragment-index="2">
+                            <img src="img/hp.gif" class="pure-img fragment fade-in replace" style="width: 1em"
+                                data-fragment-index="2">
+                            <img src="img/hp-f.png" class="pure-img fragment fade-out replace" style="width: 1em"
+                                data-fragment-index="2">
+                            <img src="img/hp-e.png" class="pure-img fragment fade-in replace" style="width: 1em"
+                                data-fragment-index="2">
+                            <img src="img/hp-f.png" class="pure-img fragment fade-out replace" style="width: 1em"
+                                data-fragment-index="2">
+                            <img src="img/hp-e.png" class="pure-img fragment fade-in replace" style="width: 1em"
+                                data-fragment-index="2">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em;">
+                            <img src="img/hp-b.png" class="pure-img">
+                        </div>
+                        <img src="img/html2.png" class="pure-img fragment tada" style="width: 3.5em;"
+                            data-fragment-index="3">
+                    </div>
+                    <div
+                        style="padding-right: 1em; padding-left: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .25em;">
+                        <img src="img/ash-battle.png" class="pure-img fragment shake" style="width: 3.5em;"
+                            data-fragment-index="1">
+                        <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;">
+                            <img src="img/hp-b.png" class="pure-img">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img fragment fade-out replace" style="width: 1em"
+                                data-fragment-index="4">
+                            <img src="img/hp2.gif" class="pure-img fragment fade-in replace" style="width: 1em"
+                                data-fragment-index="4">
+                            <img src="img/hp-f.png" class="pure-img fragment fade-out replace" style="width: 1em"
+                                data-fragment-index="4">
+                            <img src="img/hp-e.png" class="pure-img fragment fade-in replace" style="width: 1em"
+                                data-fragment-index="4">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-b.png" class="pure-img">
+                        </div>
+                    </div>
+                    <div class="pokemon">
+                        <span class="fragment fade-out replace" data-fragment-index="1">...<br><br></span>
+                        <span class="fragment fade-in replace" data-fragment-index="1">
+                            <span class="fragment fade-out replace" data-fragment-index="2">
+                                mat3e used CloudWatch!<br><br>
+                            </span>
+                            <span class="fragment fade-in replace" data-fragment-index="2">
+                                <span class="fragment fade-out replace" data-fragment-index="3">
+                                    It's super effective!<br><br>
+                                </span>
+                                <span class="fragment fade-in replace" data-fragment-index="3">
+                                    <span class="fragment fade-out replace" data-fragment-index="4">
+                                        Website with visitor counter used CORS!
+                                    </span>
+                                    <span class="fragment fade-in replace" data-fragment-index="4">
+                                        Critical hit!<br><br>
+                                    </span>
+                                </span>
+                            </span>
+                        </span>
+                    </div>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <img src="img/gateway-cors.png" class="pure-img" style="width: 20%">
+                    <div><img src="img/gateway-stage.png" class="pure-img fragment"></div>
+                    <img src="img/lambda-limit.png" class="pure-img fragment" style="width: 20%">
+                    <aside class="notes">CORS - dodaje OPTIONS</aside>
+                </section>
+                <section>
+                    <div
+                        style="padding-left: 1em; padding-right: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .5em;">
+                        <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;">
+                            <img src="img/hp-f.png" class="pure-img fragment fade-out replace" style="width: 1em"
+                                data-fragment-index="2">
+                            <img src="img/hp-e.png" class="pure-img fragment fade-in replace" style="width: 1em"
+                                data-fragment-index="2">
+                            <img src="img/hp-f.png" class="pure-img fragment fade-out replace" style="width: 1em"
+                                data-fragment-index="2">
+                            <img src="img/hp-e.png" class="pure-img fragment fade-in replace" style="width: 1em"
+                                data-fragment-index="2">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-b.png" class="pure-img">
+                        </div>
+                        <img src="img/html2.png" style="width: 3.5em;" class="pure-img fragment zoomOutDown"
+                            data-fragment-index="3">
+                    </div>
+                    <div
+                        style="padding-right: 1em; padding-left: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .25em;">
+                        <img src="img/ash-battle.png" class="pure-img fragment shake" style="width: 3.5em;"
+                            data-fragment-index="1">
+                        <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;">
+                            <img src="img/hp-b.png" class="pure-img">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-b.png" class="pure-img">
+                        </div>
+                    </div>
+                    <div class="pokemon">
+                        <span class="fragment fade-out replace" data-fragment-index="1">...<br><br></span>
+                        <span class="fragment fade-in replace" data-fragment-index="1">
+                            <span class="fragment fade-out replace" data-fragment-index="2">
+                                mat3e used Gateway & Lambda settings!
+                            </span>
+                            <span class="fragment fade-in replace" data-fragment-index="2">
+                                <span class="fragment fade-out replace" data-fragment-index="3">
+                                    Critical hit!<br><br>
+                                </span>
+                                <span class="fragment fade-in replace" data-fragment-index="3">
+                                    Website with visitor counter fainted!
+                                </span>
+                            </span>
+                        </span>
+                    </div>
+                </section>
+                <section>
+                    <h3 style="font-family: 'pokemon', 'Courier New', Courier, monospace" class="fragment"
+                        data-fragment-index="1">wincyj expa</h3>
+                    <img src="img/stand1.png" class="pure-img fragment fade-out replace" style="width: 3.5em"
+                        data-fragment-index="1">
+                    <img src="img/stand2.png" class="pure-img fragment fade-in replace" style="width: 3.5em"
+                        data-fragment-index="1">
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3 style="margin: 0">
+                        <a href="https://aws.amazon.com/dynamodb/pricing/on-demand/">$$$</a>
+                    </h3>
+                    <div>
+                        <img src="img/oak.png" class="pure-img" style="width: 2em">
+                    </div>
+                    <ul>
+                        <li class="fragment">
+                            Milion wywołań Lambdy w miesiącu = 0,00 $!
+                        </li>
+                        <li class="fragment">
+                            25 GB w DynamoDB = 0,00 $! <span class="fragment">Read/write? Pomijalne dla 70 MB</span>
+                        </li>
+                        <li class="fragment">
+                            API Gateway = 3,5 $ za milion żądań
+                        </li>
+                        <li class="fragment">
+                            IAM = 0,00 $!
+                        </li>
+                        <li class="fragment">
+                            0,30 $ za metrykę (do 10k metryk)
+                        </li>
+                        <li class="fragment">0,57 $ za GB logów</li>
+                        <li class="fragment">3 $ za dashboard</li>
+                    </ul>
+                    <aside class="notes">
+                        Metryki to np. średnie trwanie lambdy, lb. wywołań
+                        <br>
+                        Chyba warto wyłączyć CloudWatcha
+                    </aside>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <div
+                        style="display: flex; align-items: center; justify-content: space-between; width: 80%; margin: 0 auto;">
+                        <img src="img/html.png" class="pure-img" style="width: var(--map-item-small)">
+                        <div style="width: 1.5em; position: absolute; top: 2.5em; left: calc(10% + 1.5em)">
+                            <img src="img/ash-small.png" class="pure-img fragment fade-out replace"
+                                data-fragment-index="3" style="width: 1.5em;">
+                        </div>
+                        <img src="img/separator.png" class="pure-img fragment" data-fragment-index="1"
+                            style="width: 1em" data-autoslide="750">
+                        <img src="img/map-end/s3.png" class="pure-img fragment" data-fragment-index="2"
+                            style="width: var(--map-item-small)" data-autoslide="750">
+                        <div style="width: 1.5em; position: absolute; top: 2.5em; left: calc(30% + 1.5em)"
+                            class="fragment fade-in replace" data-fragment-index="3">
+                            <img src="img/ash-small.png" class="pure-img fragment fade-out replace"
+                                data-fragment-index="6" style="width: 1.5em;">
+                        </div>
+                        <img src="img/separator.png" class="pure-img fragment" data-fragment-index="4"
+                            style="width: 1em" data-autoslide="750">
+                        <img src="img/map-end/cloudfront.png" class="pure-img fragment" data-fragment-index="5"
+                            style="width: var(--map-item-small)" data-autoslide="750">
+                        <div style="width: 1.5em; position: absolute; top: 2.5em; left: calc(55% + 1.5em)"
+                            class="fragment fade-in replace" data-fragment-index="6">
+                            <img src="img/ash-small.png" class="pure-img fragment fade-out replace"
+                                data-fragment-index="9" style="width: 1.5em;">
+                        </div>
+                        <img src="img/separator.png" class="pure-img fragment" data-fragment-index="7"
+                            style="width: 1em" data-autoslide="750">
+                        <img src="img/map-end/route53.png" class="pure-img fragment" data-fragment-index="8"
+                            style="width: var(--map-item-small)" data-autoslide="750">
+                        <div class="fragment fade-in replace" data-fragment-index="9"
+                            style="width: 1.5em; position: absolute; top: 2.5em; right: calc(20% - 1.5em)">
+                            <img src="img/ash-small.png" class="pure-img fragment fade-out replace"
+                                data-fragment-index="12" style="width: 1.5em;">
+                        </div>
+                    </div>
+                    <div class="fragment" data-fragment-index="10" data-autoslide="750"
+                        style="width: 80%; margin: 0 auto; text-align: right">
+                        <p
+                            style="width: var(--map-item-small); display: inline-block; text-align: center; margin-bottom: 0">
+                            <img src="img/separator.png" class="pure-img" style="width: 1em;">
+                        </p>
+                        <br>
+                    </div>
+                    <div class="fragment" data-fragment-index="11" data-autoslide="750"
+                        style="display: flex; flex-direction: row-reverse; align-items: center; justify-content: space-between; width: 80%; margin: 0 auto;">
+                        <img src="img/map-end/acm.png" class="pure-img" style="width: var(--map-item-small)">
+                        <div class="fragment fade-in replace" data-fragment-index="12"
+                            style="width: 1.5em; position: absolute; right: calc(20% - 1.5em); margin-top: 2.5em">
+                            <img src="img/ash-small.png" class="pure-img fragment fade-out replace"
+                                data-fragment-index="15" style="width: 1.5em;">
+                        </div>
+                        <img src="img/separator.png" class="pure-img fragment" data-fragment-index="13"
+                            style="width: 1em" data-autoslide="750">
+                        <img src="img/html2.png" class="pure-img fragment" data-fragment-index="14" data-autoslide="750"
+                            style="width: var(--map-item-small);">
+                        <div style="width: 1.5em; position: absolute; margin-top: 2.5em; left: calc(55% + 1.5em)"
+                            class="fragment fade-in replace" data-fragment-index="15">
+                            <img src="img/ash-small.png" class="pure-img fragment fade-out replace"
+                                data-fragment-index="18" style="width: 1.5em;">
+                        </div>
+                        <img src="img/separator.png" class="pure-img fragment" data-fragment-index="16"
+                            style="width: 1em" data-autoslide="750">
+                        <img src="img/map-end/dynamo.png" class="pure-img fragment" data-fragment-index="17"
+                            style="width: var(--map-item-small)" data-autoslide="750">
+                        <div class="fragment"
+                            style="width: 1.5em; position: absolute; margin-top: 2.5em; left: calc(30% + 1.5em)"
+                            data-fragment-index="18">
+                            <img src="img/ash-small.png" class="pure-img fragment fade-out replace"
+                                data-fragment-index="21" style="width: 1.5em;">
+                        </div>
+                        <img src="img/separator.png" class="pure-img fragment" data-fragment-index="19"
+                            style="width: 1em" data-autoslide="750">
+                        <img src="img/map-end/lambda.png" class="pure-img fragment" data-fragment-index="20"
+                            style="width: var(--map-item-small)" data-autoslide="750">
+                        <div style="width: 1.5em; position: absolute; margin-top: 2.5em; left: calc(5% + 1.5em)"
+                            class="fragment fade-in replace" data-fragment-index="21">
+                            <img src="img/ash-small.png" class="pure-img fragment fade-out replace"
+                                data-fragment-index="24" style="width: 1.5em;">
+                        </div>
+                    </div>
+                    <div class="fragment" data-fragment-index="22" data-autoslide="750"
+                        style="width: 80%; margin: 0 auto; text-align: left">
+                        <p
+                            style="width: var(--map-item-small); display: inline-block; text-align: center; margin-bottom: 0">
+                            <img src="img/separator.png" class="pure-img" style="width: 1em;">
+                        </p>
+                    </div>
+                    <div class="fragment" data-fragment-index="23" data-autoslide="750"
+                        style="display: flex; align-items: center; justify-content: space-between; width: 80%; margin: 0 auto;">
+                        <img src="img/map-end/api-gateway.png" class="pure-img" style="width: var(--map-item-small)">
+                        <div style="width: 1.5em; position: absolute; margin-top: 2.5em; left: calc(5% + 1.5em)"
+                            class="fragment fade-in replace" data-fragment-index="24">
+                            <img src="img/ash-small.png" class="pure-img fragment fade-out replace"
+                                data-fragment-index="27" style="width: 1.5em;">
+                        </div>
+                        <img src="img/separator.png" class="pure-img fragment" data-fragment-index="25"
+                            style="width: 1em" data-autoslide="750">
+                        <img src="img/map-end/cloudwatch.png" class="pure-img fragment" data-fragment-index="26"
+                            style="width: var(--map-item-small)" data-autoslide="750">
+                        <div class="fragment"
+                            style="width: 1.5em; position: absolute; margin-top: 2.5em; left: calc(30% + 1.5em)"
+                            data-fragment-index="27">
+                            <img src="img/ash-small.png" class="pure-img fragment fade-out replace"
+                                data-fragment-index="30" style="width: 1.5em;">
+                        </div>
+                        <img src="img/separator.png" class="pure-img fragment" data-fragment-index="28"
+                            style="width: 1em" data-autoslide="750">
+                        <img src="img/map-end/iam.png" class="pure-img fragment" data-fragment-index="29"
+                            style="width: var(--map-item-small)" data-autoslide="750">
+                        <div class="fragment"
+                            style="width: 1.5em; position: absolute; margin-top: 2.5em; left: calc(55% + 1.5em)"
+                            data-fragment-index="30">
+                            <img src="img/ash-small.png" class="pure-img fragment fade-out replace"
+                                data-fragment-index="32" style="width: 1.5em;">
+                        </div>
+                        <img src="img/separator.png" class="pure-img fragment" data-fragment-index="31"
+                            style="width: 1em" data-autoslide="750">
+                        <img src="img/stand2.png" class="pure-img fragment" style="width: var(--map-item-small)"
+                            data-fragment-index="32">
+                    </div>
+                    <aside class="notes">
+                        <ol>
+                            <li>S3</li>
+                            <li>CloudFront</li>
+                            <li>Route 53</li>
+                            <li>Certificate Manager</li>
+                            <li>DynamoDB</li>
+                            <li>Lambda</li>
+                            <li>API Gateway</li>
+                            <li>CloudWatch</li>
+                            <li>IAM</li>
+                        </ol>
+                    </aside>
+
+                </section>
+                <section>
+                    <h2>Co dalej?</h2>
+                    <ul>
+                        <li class="fragment">Warto zrobić nawet sam licznik, dla sportu :)</li>
+                        <li class="fragment">Monitoring kosztów (<i>Billing</i>, <i>Cost Explorer</i>)</li>
+                        <li class="fragment">Podpięcie <i>SNS</i></li>
+                    </ul>
+                    <div>
+                        <img src="img/stand2.png" class="pure-img fragment" style="width: 2.5em">
+                    </div>
+                    <ul>
+                        <li class="fragment">
+                            <a href="https://mat3e.github.io/trendy">
+                                mat3e.github.io/trendy
+                            </a>
+                        </li>
+                        <li class="fragment">
+                            <a href="https://mat3e.github.io/talks/aws-www/targikarierait.html">
+                                mat3e.github.io/talks/aws-www/targikarierait.html
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+            </section>
+        </div>
+    </div>
+    <script src="js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script>
+        const controls = (function () {
+            Reveal.initialize({
+                history: true,
+                // - null: Media will only autoplay if data-autoplay is present
+                autoPlayMedia: null,
+                transition: 'slide', // none/fade/slide/convex/concave/zoom
+                transitionSpeed: 'default', // default/fast/slow
+                backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
+                dependencies: [
+                    { src: 'js/classList.js', condition: function () { return !document.body.classList; } },
+
+                    { src: 'js/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                    { src: 'js/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+
+                    // Syntax highlight for <code> elements
+                    { src: 'js/highlight.js', callback: function () { hljs.initHighlightingOnLoad(); } },
+
+                    // Zoom in and out with Alt+click
+                    { src: 'js/zoom.js' },
+
+                    { src: 'notes/notes.js' },
+
+                    { src: 'js/math.js' }
+                ]
+            });
+
+            document.querySelectorAll('.reveal .slides > section section:not([data-background-image])').forEach((s) => {
+                s.setAttribute('data-background-image', 'img/twitter.png');
+                s.setAttribute('data-background-size', '240px');
+                s.setAttribute('data-background-position', '.5em .5em');
+            });
+
+            return {
+                evalCode(btn) {
+                    let codeElem = btn.previousElementSibling;
+                    if (getComputedStyle(codeElem).display === 'none') {
+                        codeElem = codeElem.previousElementSibling;
+                    }
+                    eval(codeElem.innerText);
+                }
+            }
+        })();
+    </script>
+</body>
+
+</html>
