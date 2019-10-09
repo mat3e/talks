@@ -137,5 +137,6 @@ Desktop.ini
 ######################
 .eslintcache
 Udemy*.html
-*-en*
 what-is-what*
+eslint-en*
+ts-editor-en*
