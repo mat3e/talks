@@ -18,9 +18,9 @@ ___
 
 "Nowy dzień, nowy framework". Jak żyć? 
 
-Jestem jedną z osób, śledzących front-endy i pragnę podzielić się swoimi obserwacjami. Zarówno mający na ten temat swoje własne przemyślenia jak i oczekujący "pigułki", dającej im pewien ogląd sytuacji, powinni znaleźć tutaj coś dla siebie. 
+Jestem jedną z osób, śledzących front-endy i pragnę podzielić się swoimi obserwacjami. Zarówno mający na ten temat własne przemyślenia jak i oczekujący "pigułki", dającej im pewien ogląd sytuacji, powinni znaleźć tutaj coś dla siebie. 
 
-Jacy są główni gracze, jeśli chodzi o front-end? Co jest bardziej popularne? React? Vue? Czy jest jakaś nadzieja na wspólny kod, niezależnie od użytych frameworków? Jakie są trendy i przyszłość JS-a? Czego możemy się spodziewać w 2019 roku? Na te i inne pytania postaram się odpowiedzieć w rozrywkowej formie.
+Jacy są główni gracze, jeśli chodzi o front-end? Co jest bardziej popularne? React? Vue? Czy jest jakaś nadzieja na wspólny kod, niezależny od użytych frameworków? Jakie są trendy i przyszłość JS-a? Czego możemy się spodziewać w 2019 roku? Na te i inne pytania postaram się odpowiedzieć w rozrywkowej formie.
 
 # Subiektywny przegląd sytuacji na froncie (front-endzie, 2018)
 
@@ -28,6 +28,6 @@ Jacy są główni gracze, jeśli chodzi o front-end? Co jest bardziej popularne?
 
 Co ciekawe, istnieją jednak jednostki, dla których JavaScript i jego ekosystem są naprawdę interesujące. 
 
-Jestem jedną z osób, śledzących front-endy i pragnę podzielić się swoimi obserwacjami. Zarówno mający na ten temat swoje własne przemyślenia jak i oczekujący "pigułki", dającej im pewien ogląd sytuacji, powinni znaleźć coś dla siebie w moim wystąpieniu. 
+Jestem jedną z osób, śledzących front-endy i pragnę podzielić się swoimi obserwacjami. Zarówno mający na ten temat własne przemyślenia jak i oczekujący "pigułki", dającej im pewien ogląd sytuacji, powinni znaleźć coś dla siebie w moim wystąpieniu. 
 
 Dlaczego React wygrywa z Angularem? Co to jest AngularJS i jak to się ma do Angulara? Co to jest Vue? Czy są jeszcze jacyś inni gracze, warci uwagi? Skąd różnice w gwiazdkach na GitHubie? Co z jQuery? Jakie są trendy, a jaka może być przyszłość front-endu? Na te i inne pytania postaram się odpowiedzieć w rozrywkowej formie.
