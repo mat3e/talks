@@ -1,4 +1,5 @@
 ## 2019
+* > DevFest Warsaw & Radzymin [08.12]: _Web Components - a missing lingua franca_
 * > dev.js Warszawa 12 [04.12]: _Dlaczego czasem warto założyć gacie przez głowę? Statyczna strona internetowa na AWS-ie_
 * > C_tech 15 [20.11]: _Subiektywny przegląd sytuacji na froncie (prawie 2020)_
 * Facebook Developer Circle: Warsaw 1 [09.10]: _Angular - architectural decisions_ [🔗](https://mat3e.github.io/talks/angular-arch/fb-dev.html#/)
