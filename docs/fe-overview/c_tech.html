@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="description" content="Presentation">
+    <meta name="keywords" content="presentation">
+    <meta name="author" content="mat3e">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/blood.css">
+    <link rel="stylesheet" href="css/idea.css">
+    <link rel="stylesheet" href="css/fontawesome.css">
+    <style>
+        #header {
+            text-align: left;
+            font-size: .7em;
+        }
+
+        #header-logo {
+            width: 375px;
+            height: 80px;
+            background-image: url('img/twitter.png');
+            background-size: contain;
+
+            top: -4em;
+            right: 0;
+            position: absolute;
+        }
+
+        #header h1 {
+            line-height: 1;
+        }
+
+        code[contenteditable="true"] {
+            border: 0;
+            outline: 0;
+        }
+
+        .slides section pre {
+            margin-bottom: 0;
+        }
+
+        .slides section pre+button {
+            cursor: pointer;
+
+            font-size: .65em;
+            font-weight: 100;
+            -webkit-font-smoothing: antialiased;
+
+            color: white;
+            background: #a23;
+
+            padding: 0 3px 3px;
+            border: transparent;
+            border-radius: 4px;
+        }
+
+        #perspective a {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            width: 45%;
+            margin: 0 auto;
+        }
+
+        #perspective a img {
+            border: 0;
+            margin: 0;
+            box-shadow: none;
+        }
+
+        #about-me {
+            padding: 1em;
+            background-color: rgba(255, 255, 255, .75);
+            list-style-type: none;
+            margin-left: 0;
+            float: left;
+        }
+
+        #about-me ul {
+            list-style-type: none;
+            float: left;
+            margin-left: 0;
+        }
+
+        #about-me a {
+            color: #a23;
+        }
+
+        #about-me a:hover {
+            color: #dd5566;
+        }
+
+        .reveal section img.pure-img {
+            background: rgba(255, 255, 255, 0);
+            border: none;
+            box-shadow: none;
+            margin: 0;
+        }
+
+        .reveal .slides section .fragment.replace {
+            transition: none;
+            display: inline-block;
+        }
+
+        .reveal .slides section .fragment.fade-out.visible.replace {
+            display: none;
+        }
+
+        .reveal .slides section .fragment.fade-in.replace {
+            display: none;
+        }
+
+        .reveal .slides section .fragment.fade-in.visible.replace {
+            display: inline-block;
+        }
+
+        .reveal .slides section .fragment.fade-out.crossed.visible {
+            opacity: 1;
+            visibility: visible;
+            text-decoration-line: line-through;
+            text-decoration-color: red;
+        }
+
+        .reveal .slides section .crossed.visible .fa-github,
+        .reveal .slides section .crossed.visible .fa-star {
+            text-decoration-line: line-through;
+            text-decoration-color: red;
+        }
+
+        .reveal section img.text-logo {
+            vertical-align: middle;
+            background: none;
+            box-shadow: none;
+            border: none;
+            height: 1em;
+            margin: 0;
+        }
+
+        .reveal .slides section td.long-text-cell {
+            font-size: .5em;
+            vertical-align: middle;
+        }
+
+        .reveal .slides section table.summary {
+            table-layout: fixed;
+            width: 100%;
+        }
+
+        .reveal .slides section table.summary tbody td {
+            width: 27%;
+        }
+
+        .reveal .slides section table.summary tbody td:first-child {
+            width: 19%;
+        }
+
+        .reveal .slides section .arrows-container {
+            display: flex;
+            align-items: end;
+            color: black;
+        }
+
+        .reveal .slides section .arrows-container>div {
+            flex-grow: 1;
+            flex-shrink: 0;
+            flex-basis: 0;
+        }
+
+        .reveal .slides section .arrows-container div .arrow {
+            background-image: url('img/arrow.svg');
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            text-align: left;
+            padding: .5em 0 .5em .5em;
+            color: white;
+        }
+
+        .reveal .slides section .arrows-container div .timeline-elem {
+            transform: rotate(-45deg);
+            margin-bottom: 1em;
+        }
+
+        .reveal .slides section h3 a:hover {
+            text-shadow: inherit;
+        }
+
+        .reveal .slides section a.wh-link {
+            color: white;
+        }
+
+        .reveal .slides section a.wh-link:hover {
+            color: #dd5566;
+        }
+
+        .reveal .slides section .fragment.visible.roll {
+            animation-name: roll;
+            animation-duration: 3s;
+            animation-fill-mode: both;
+        }
+
+        .reveal .slides .warn {
+            animation-name: redify;
+            animation-duration: 1s;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes roll {
+            0% {
+                opacity: 0;
+                transform: translate3d(-200%, 0, 0) rotate3d(0, 0, 1, -120deg);
+            }
+
+            50% {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate3d(200%, 0, 0) rotate3d(0, 0, 1, 120deg);
+            }
+        }
+
+        @keyframes redify {
+            0% {
+                color: white;
+            }
+
+            50% {
+                color: red;
+            }
+
+            100% {
+                color: white;
+            }
+        }
+    </style>
+    <script>
+        let link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section>
+                <section id="header" data-background-image="">
+                    <h1 style="margin-bottom: 0"><span>Subiektywny</span></h1>
+                    <h2>przegląd front-endów <span class="fragment" data-fragment-index="2">(2020)</span></h2>
+                    <div id="header-logo"></div>
+                    <span class="fragment fade-out replace" data-fragment-index="2">
+                        <img class="pure-img fragment" src="img/2020/movember.jpg" data-fragment-index="1"
+                            style="position: absolute; width: 600px;left: calc(50% - 300px); top: 0">
+                    </span>
+                    <aside class="notes">
+                        Jakiś gość co się nie umie ogolić...
+                        <br>
+                        Listopad, więc niegolenie ma swoje uzasadnienie
+                        <br>
+                        a jednocześnie już listopad, więc bardziej clickbaitowo: 2020
+                    </aside>
+                </section>
+                <section id="perspective" data-background-image="">
+                    <h5>
+                        <span>Perspektywa...</span>
+                        <span class="fragment" data-fragment-index="1"> ma znaczenie</span>
+                        <span class="fragment" data-fragment-index="2"> :)</span>
+                    </h5>
+                    <a href="https://mistrzowie.org/717022">
+                        <img src="img/perspektywa-1.jpg">
+                        <img src="img/perspektywa-2.jpg" class="fragment" data-fragment-index="1">
+                        <img src="img/perspektywa-3.jpg" class="fragment" data-fragment-index="2">
+                    </a>
+                </section>
+                <section data-background-image="img/bg-hd-new.jpg" data-background-transition="zoom">
+                    <ul id="about-me">
+                        <li>
+                            <ul>
+                                <li>
+                                    <a href="https://www.linkedin.com/in/mateusz-chrzonstowski/">
+                                        <i class="fab fa-linkedin"
+                                            style="color: #0077B5; background-color: #FFF; line-height: .75em"></i>
+                                        /mateusz-chrzonstowski
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://twitter.com/_mat3e_">
+                                        <i class="fab fa-twitter-square"
+                                            style="background-color: #1DA1F2; color: #FFF; line-height: .75em"></i>
+                                        /_mat3e_
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.reddit.com/user/_mat3e_">
+                                        <i class="fab fa-reddit-square"
+                                            style="background-color: #FF4500; color: #FFF; line-height: .75em"></i>
+                                        /_mat3e_
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/mat3e/">
+                                        <i class="fab fa-github-square"
+                                            style="color: #24292E; background-color: #FFF; line-height: .75em"></i>
+                                        /mat3e
+                                    </a>
+                                </li>
+                                <li style="line-height: 1">&nbsp;</li>
+                                <li class="fragment" style="line-height: .75">
+                                    <a style="font-weight: bold; font-size: .75em"
+                                        href="https://mat3e.github.io/talks/fe-overview/c_tech.html">
+                                        mat3e.github.io/talks/<br><span
+                                            style="padding-left: 5em">fe-overview/c_tech</span>
+                                    </a>
+                                </li>
+                                <li style="line-height: 1">&nbsp;</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="fragment" style="padding: .1em; line-height: 1">
+                                <li>
+                                    <a href="https://www.udemy.com/fajny-javascript/?couponCode=OPENALL">
+                                        <img src="img/udemy.svg" class="pure-img" style="height: 1.5em;">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://allegro.tech/">
+                                        <img src="img/allegro-tech.svg" class="pure-img" style="height: 1.5em;">
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+            </section>
+            <section data-transition="zoom">
+                <section data-transition="fade">
+                    <a href="https://i.redd.it/zlee3sbw80x01.png">
+                        <img src="img/all3small.jpg" class="pure-img">
+                    </a>
+                </section>
+                <section data-transition="fade">
+                    <h2>
+                        <span class="fragment fade-out crossed" data-fragment-index="2">
+                            <i class="fab fa-github"></i>
+                            <i class="fas fa-star"></i>
+                        </span>
+                        <span class="fragment fade-in replace" data-fragment-index="2">
+                            <i class="fas fa-level-up-alt"></i>
+                        </span>
+                    </h2>
+                    <img src="img/gh-stars-poke.png" class="pure-img fragment" data-fragment-index="1">
+                    <aside class="notes">
+                        Nie można tylko patrzeć na gwiazdki, bo AJS ma więcej niż A
+                        "ale gwiazdek, bierzemy!" - a w dokumentacji, której nikt nie czyta przecież, wspieramy do 2021"
+                        Jak czujesz wypalenie w robocie, to pomyśl, że w Google'u ktoś wspiera angulara 1.7
+                    </aside>
+                </section>
+                <section data-background-image="img/2020/bestofjs.png" data-background-size="contain"
+                    data-background-transition="zoom">
+                    <a class="fragment" href="https://bestofjs.org/projects?tags=framework&sort=yearly"
+                        data-fragment-index="2"
+                        style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">
+                        bestofjs.org/projects?tags=framework&sort=yearly
+                    </a>
+                    <div class="fragment" style="position: fixed; bottom: 0; right: 0" data-fragment-index="1">
+                        <img src="img/2020/pikachu.png" class="pure-img fragment fade-out replace"
+                            style="width: 190px; height: 154px" data-fragment-index="2">
+                    </div>
+                    <aside class="notes">Tak, jak uczy nas historia, a może historia pokemonów, warto czasem postawić na
+                        jakiegoś czarnego konia, coś z boku, więc stronka fajna</aside>
+                </section>
+                <section data-transition="fade">
+                    <h2>
+                        <i class="fab fa-npm"></i>
+                        <i class="fas fa-download"></i>
+                    </h2>
+                    <img src="img/npm-downloads-poke.png" class="pure-img fragment">
+                    <aside class="notes">W ostatnim czasie wyraźny spadek angulara i to nie na korzyść vue; aż niepojęta
+                        popularność reacta</aside>
+                </section>
+                <section data-transition="fade">
+                    <img src="img/fire.gif" class="pure-img" style="width: 600px">
+                    <aside class="notes">Z perspektywy czasu Angular najwięcej stracił na swojej ewolucji, w momencie
+                        przejścia</aside>
+                </section>
+                <section data-transition="fade">
+                    <h2 style="margin: 0">
+                        <span data-fragment-index="1" class="fade-out fragment replace">
+                            progressss
+                            <img src="img/p1.png" class="pure-img" style="height: 1em; position: absolute; right: 0">
+                        </span>
+                        <span class="fade-in fragment replace" data-fragment-index="1">
+                            <img src="img/ts.svg" class="pure-img" style="height: 1em">
+                            <img src="img/p2.png" class="pure-img" style="height: 1em; position: absolute; right: 0">
+                        </span>
+                    </h2>
+                    <img src="img/hisbest.jpg" class="pure-img fragment" style="width: 55%">
+                    <aside class="notes">Ok, mamy metryki, ale można jeszcze dołożyć coś ogólnego, niemierzalnego
+                        <br>Gdzieś się przewijało vue 3 w TS, a ostatnio był jakiś dostęp</aside>
+                </section>
+                <section data-transition="fade">
+                    <h1 style="margin: 0">46%</h1>
+                    <a href="https://blog.npmjs.org/post/180868064080/this-year-in-javascript-2018-in-review-and-npms"
+                        class="fragment">adopcji TS-a</a>
+                    <aside class="notes">
+                        <a href="https://assets.thoughtworks.com/assets/technology-radar-vol-20-en.pdf">Technology
+                            Radar</a>
+                        <br> wciąż jeszcze 2018, bo nie ma nowego npm raportu
+                        <br>
+                        <br>To jeszcze przed Babelem 7 tak naprawdę
+                    </aside>
+                </section>
+            </section>
+            <section data-transition="zoom">
+                <section data-transition="fade">
+                    <h2>Co brać? "Pewniak"?</h2>
+                    <img src="img/react.svg" class="pure-img fragment" style="width: 50%;">
+                </section>
+                <section data-transition="fade">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="text-align: center; width: 50%;">PRZED</th>
+                                <th style="text-align: center; width: 50%;">PO</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="vertical-align: middle; text-align: center" class="fragment">
+                                    <img src="img/2020/b4.jpg" class="pure-img" style="width: 70%">
+                                </td>
+                                <td style="vertical-align: middle; text-align: center" class="fragment">
+                                    <img src="img/2020/after.jpg" class="pure-img">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="https://reactjs.org/docs/hooks-overview.html" class="fragment">
+                        <img src="img/2020/reco.png" style="width: 70%">
+                    </a>
+                    <div class="fragment">
+                        <a href="https://github.com/streamich/react-use">react-use</a>
+                    </div>
+                    <aside class="notes">
+                        Sposób na bycie na bieżąco z frontendami - firmowy kanał newsów na Skype/Slacku/whateva
+                        <br>
+                        Nie każdy czekał z hookami - react-use miało 1,6k gwiazdek, zanim hooki były
+                        oficjalne w React'cie
+                    </aside>
+                </section>
+                <section data-transition="fade">
+                    <h2>Po prostu fajniejsze API?</h2>
+                    <a href="https://reactjs.org/docs/hooks-intro.html" class="fragment">
+                        <img src="img/2020/why-hook.png" class="pure-img">
+                    </a>
+                    <aside class="notes">
+                        I co nam to daje? Tylko API? To nie tylko uproszczenia, np. z <code>this</code>
+                        <br>
+                        Więcej funkcyjnego Reacta. Już React.memo() trochę tu poprawiał
+                    </aside>
+                </section>
+            </section>
+            <section data-transition="zoom">
+                <section>
+                    <h3 style="margin-top: 0">
+                        <span>Co <span class="fragment highlight-red">ja</span> bym wybrał?</span>
+                    </h3>
+                    <ol>
+                        <li class="fragment">Vanilla JS (Web Components)</li>
+                        <li class="fragment"><img src="img/2020/svelte-trim.png" class="pure-img" style="height: 1em;">
+                        </li>
+                    </ol>
+                    <p>
+                        <img src="img/web-components.jpg" class="fragment pure-img" style="width: 70%">
+                    </p>
+                </section>
+            </section>
+            <section data-transition="zoom">
+                <section data-transition="fade">
+                    <h2 style="margin-top: -1em;">
+                        <span>Web Components</span>
+                    </h2>
+                    <div id="slide2" class="fragment">
+                        <pre style="background: white;"><code class="javascript" data-trim contentEditable="true">
+                        class FullWebComp extends HTMLElement {
+                            constructor() {
+                                super();
+                        </code><code class="javascript fragment" contentEditable="true">        this.attachShadow({mode: 'closed'})
+                .appendChild(document</code><code class="javascript fragment" data-trim contentEditable="true">
+                                                      .getElementById('h2-template')
+                                                      .content
+                                                      .cloneNode(true));
+                            }
+                        }
+                        </code><code class="javascript" data-trim contentEditable="true">
+                        customElements.define('full-web-comp', FullWebComp);
+                        </code></pre>
+                        <button onclick="controls.evalCode(this)" style="font-weight: bold">eval</button>
+                    </div>
+                    <full-web-comp></full-web-comp>
+                    <template id="h2-template">
+                        <style>
+                            h2 {
+                                color: magenta !important;
+                            }
+                        </style>
+                        <h2>perfect template: <code>style</code> + <code>h2</code></h2>
+                    </template>
+                    <aside class="notes">Cykl życia, zmienne CSS, trochę tematów jest, ale dzisiaj nie o tym prezka
+                    </aside>
+                </section>
+                <section data-transition="fade">
+                    <h2>👀</h2>
+                    <ul>
+                        <li><a
+                                href="https://blog.angularindepth.com/developments-in-web-components-im-excited-about-in-2019-3ae7751c2f64">Developments
+                                in Web Components I’m excited about in 2019</a></li>
+                        <li><a href="https://github.com/webcomponents/gold-standard/wiki">The Gold Standard Checklist
+                                for Web Components</a></li>
+                        <li><a href="https://gist.github.com/WebReflection/ec9f6687842aa385477c4afca625bbf4">Handy
+                                Custom Elements' Patterns</a></li>
+                        <li><a href="https://github.com/mateusortiz/webcomponents-the-right-way">[Awesome] Web
+                                Components the Right Way</a></li>
+                        <li><a href="https://blog.bitsrc.io/7-tools-for-developing-web-components-in-2019-1d5b7360654d">7
+                                Tools for Developing Web Components in 2019</a></li>
+                    </ul>
+                </section>
+                <section data-transition="fade">
+                    <h2>
+                        <span>CanIUse?</span>
+                    </h2>
+                    <a href="https://www.webcomponents.org/" class="fragment">
+                        <img src="img/wc-tech.png" style="width: 80%">
+                    </a>
+                </section>
+            </section>
+            <section data-transition="zoom">
+                <section data-background-image="img/new-logo.png" data-background-size="contain">
+                </section>
+                <section data-background-image="img/edge/edge.png" data-background-size="contain"
+                    data-background-transition="none" data-transition="none"></section>
+                <section data-background-image="img/edge/edge-red.png" data-background-transition="none"
+                    data-background-size="contain">
+                    <aside class="notes">Typowy MS, sami się podłożyli. Nawet MS uważa edge'a za problem
+                        <br> rozwiązaniem, by było usunięcie, ale ok ;P
+                        <br> to tak pół żartem, pół serio, po prostu chciałem wbic szpilę, ale akurat jeśli chodzi o
+                        sieć, to jestem ZA różnorodnością
+                    </aside>
+                </section>
+                <section data-transition="fade">
+                    <div
+                        style="display: flex; flex-direction: column; width: 90%; align-items: center; margin: 0 auto;">
+                        <img src="img/ff-why-3.png" class="fragment pure-img" data-fragment-index="2">
+                        <img src="img/ff-why-2.png" class="pure-img fragment fade-in replace" data-fragment-index="1">
+                        <img src="img/ff-why-1.png" class="pure-img fragment fade-out replace" data-fragment-index="1">
+                    </div>
+                </section>
+                <section data-transition="fade">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: center;width: 50%">kiedyś</td>
+                                <td style="text-align: center;width: 50%">teraz</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;">
+                                    <img src="img/browsers/old.png" class="pure-img fragment">
+                                    <img src="img/jquery.svg" class="pure-img fragment" style="width: 60%">
+                                </td>
+                                <td style="vertical-align: top; text-align: center;">
+                                    <img src="img/browsers/chromium.png" class="pure-img fragment" style="width: 45%">
+                                    <img src="img/2020/frameworks.png" class="pure-img fragment">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div>
+                        <a href="https://web.skype.com">
+                            <img src="img/skype-new.png" class="fragment pure-img" style="width: 45%">
+                        </a>
+                    </div>
+                    <aside class="notes">Ja jeszcze walczę;
+                        <br>
+                        Ok, frameworki odfajkowane, web componenty - odfajkowane, przeglądarki - odfajkowane. Czas na
+                        coś, co jakiś czas temu wywróciło fronty do góry nogami
+                    </aside>
+                </section>
+            </section>
+            <section data-transition="zoom">
+                <section data-transition="fade">
+                    <h1 style="margin: 0">97%</h1>
+                    <a href="https://blog.npmjs.org/post/180868064080/this-year-in-javascript-2018-in-review-and-npms"
+                        class="fragment">kodu nowoczesnych aplikacji pochodzi z npm
+                    </a>
+                    <aside class="notes">Pierwotne założenia - backend, Node Package Manager</aside>
+                </section>
+                <section data-transition="fade">
+                    <h1 style="margin: 0">MILION</h1>
+                    <img src="img/2020/19-11/modulecounts.png" class="pure-img fragment" style="width: 50%">
+                    <div class="fragment">średnio ~850 dziennie</div>
+                    <aside class="notes">Nowy dzień, nowy framework? Nie, nie nie. Nowy dzień, 850 frameworków</aside>
+                </section>
+                <section data-transition="fade">
+                    <h2 style="margin: 0">
+                        <a
+                            href="https://blog.npmjs.org/post/180868064080/this-year-in-javascript-2018-in-review-and-npms">
+                            Micro-frameworki
+                        </a>
+                    </h2>
+                    <div class="fragment">
+                        <a href="https://www.npmjs.com/package/is-odd">
+                            <img src="img/2020/19-11/odd.png" class="pure-img" width="80%"
+                                style="border-bottom: solid 3px white">
+                        </a>
+                    </div>
+                    <div class="fragment">
+                        <a href="https://www.npmjs.com/package/is-number">
+                            <img src="img/2020/19-11/number.png" class="pure-img" width="80%">
+                        </a>
+                    </div>
+                    <a class="fragment"
+                        href="https://azer.bike/journal/i-ve-just-liberated-my-modules/"><code>left-pad</code> w
+                        2016?</a>
+                    <aside class="notes">npm miał swoje problemy wieku dziecięcego</aside>
+                </section>
+                <section data-transition="fade" data-background-image="img/gh-security.png"
+                    data-background-size="contain" data-background-transition="zoom">
+                    <aside class="notes">Część została zaadresowana, jeszcze npm audit. But still...</aside>
+                </section>
+                <section data-transition="fade" data-background-image="img/2020/pm2.png" data-background-size="contain">
+                    <aside class="notes">
+                        PM2 uses a self-hosted version of gtk as an optional dependency to ping a URL for analytics
+                        purposes
+                    </aside>
+                </section>
+                <section data-transition="fade">
+                    <img src="img/2020/ad.png" class="pure-img" style="width: 70%">
+                    <ul>
+                        <li class="fragment">20.08 - reklamy w linii komend</li>
+                        <li class="fragment">22.08 - <a
+                                href="https://github.com/kethinov/no-cli-ads">kethinov/no-cli-ads</a></li>
+                        <li class="fragment">26.08 - <a
+                                href="https://github.com/mkg20001/npm-adblock">mkg20001/npm-adblock</a></li>
+                        <li class="fragment">29.08 - <a href="https://www.zdnet.com/article/npm-bans-terminal-ads/">npm bans terminal ads</a></li>
+                    </ul>
+                    <aside class="notes">błędy użytkowników i głupota; wciąż mała dojrzałość
+                        <br>npm reaguje szybko, ale wciąż...
+                    </aside>
+                </section>
+                <section data-transition="fade" data-background-image="img/2020/regret.jpg">
+                    <aside class="notes">10 Things I Regret About Node.js - Ryan Dahl - JSConf EU // twórca Node'a
+                    </aside>
+                </section>
+                <section data-transition="fade" data-background-image="img/2020/deno.jpg" data-background-size="contain"
+                    style="width: 100%; height: 100%;">
+                    <a href="https://github.com/denoland/deno/issues/239" class="fragment"
+                        style="transform: rotate(-15deg); position: absolute; left: 0;">
+                        <img src="img/deno-hate/edon.png" class="pure-img">
+                    </a>
+                    <a href="https://github.com/denoland/deno/issues/152" class="fragment"
+                        style="transform: rotate(3deg); position: absolute; top: 0; right: 0">
+                        <img src="img/deno-hate/why.png" style="width: 550px;" class="pure-img">
+                    </a>
+                    <a href="https://github.com/denoland/deno/issues/37" class="fragment"
+                        style="transform: rotate(-1deg); position: absolute; top: 1em; left: 0">
+                        <img src="img/deno-hate/to-node.png" style="width: 750px;" class="pure-img">
+                    </a>
+                    <a href="https://github.com/denoland/deno/issues/31" class="fragment"
+                        style="transform: rotate(5deg); position: absolute; top: 3em; left: 0">
+                        <img src="img/deno-hate/six.png" style="width: 850px;" class="pure-img">
+                    </a>
+                    <a href="https://github.com/denoland/deno/issues/17" class="fragment"
+                        style="position: absolute; top: 5em; right: 20%">
+                        <img src="img/deno-hate/explain.png" style="width: 1000px;" class="pure-img">
+                    </a>
+                    <a href="https://github.com/denoland/deno/issues/56" class="fragment"
+                        style="transform: rotate(-10deg); position: absolute; top: 4em; left: 0; right: 0">
+                        <img src="img/deno-hate/unbelievable.png" style="width: 750px;" class="pure-img">
+                    </a>
+                    <a href="https://github.com/denoland/deno/issues/53" class="fragment"
+                        style="transform: rotate(3deg);position: absolute; top: 4em; left: 0; right: 0">
+                        <img src="img/deno-hate/close.png" style="width: 900px;" class="pure-img">
+                    </a>
+                    <aside class="notes">
+                        shitstorm!
+                        <ul>
+                            <li>nazwa to zmienione sylaby</li>
+                            <li>zagubieni</li>
+                            <li>sami nie wiedzą ocb</li>
+                            <li>od czapy 100%</li>
+                            <li>tłumacz się! Nie płacę, więc żądam</li>
+                            <li>podręcznikowy hejt</li>
+                            <li>I najgorsze</li>
+                        </ul>
+                        Jeśli ktoś jeszcze się waha rozpocząć przygodę z OSS, to zapraszamy xd
+                    </aside>
+                </section>
+            </section>
+            <section data-transition="zoom">
+                <section data-background-transition="zoom" data-background-image="img/2020/frontend-vs-backend.jpg"
+                    data-background-size="contain">
+                    <aside class="notes">I jeszcze skoro mam fronty w tytule warto nawiązać do odwiecznej zagwozdki -
+                        frontend vs backend. Mogę, bo ogólnie to jestem full-stackiem :P</aside>
+                </section>
+                <section>
+                    <h1 style="margin: 0">95%</h1>
+                    <a href="https://read.acloud.guru/serverless-the-future-of-software-architecture-d4473ffed864"
+                        class="fragment">kodu to front przy podejściu serverless</a>
+                    <aside class="notes">Te 5% na backendzie to może być JS</aside>
+                </section>
+                <section data-transition="fade">
+                    <h3>Front-end for the win?</h3>
+                    <img class="fragment pure-img" src="img/2020/elon.png" style="width: 50%">
+                    <aside class="notes">
+                        Czy zatem można powiedzieć FE rulez i zakończyć? NOPE
+                        <br>
+                        Nie tylko to - asystenci głosowi, chatboty</aside>
+                </section>
+                <section data-background-image="img/2020/keanu.png" data-background-size="contain" data-transition="fade">
+                    <aside class="notes">Skille Alexy i FaaS można/trzeba w JS, pwa, electron, server; js everywhere; web assembly i AutoCAD</aside>
+                </section>
+            </section>
+            <section data-transition="zoom">
+                <section>
+                    <h2 class="fragment" data-fragment-index="3">Dziękuję</h2>
+                    <img src="img/redhat-small.jpeg" class="pure-img" style="width: 30%">
+                    <ul>
+                        <li class="fragment" data-fragment-index="1">
+                            <a href="https://mat3e.github.io/trendy">
+                                mat3e.github.io/trendy
+                            </a>
+                        </li>
+                        <li class="fragment" data-fragment-index="2">
+                            <a href="https://mat3e.github.io/talks/fe-overview/c_tech.html">
+                                mat3e.github.io/talks/fe-overview/c_tech
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+            </section>
+        </div>
+    </div>
+    <script src="js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script>
+        const controls = (function () {
+            Reveal.initialize({
+                history: true,
+                // - null: Media will only autoplay if data-autoplay is present
+                autoPlayMedia: null,
+                transition: 'slide', // none/fade/slide/convex/concave/zoom
+                transitionSpeed: 'default', // default/fast/slow
+                backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
+                dependencies: [
+                    { src: 'js/classList.js', condition: function () { return !document.body.classList; } },
+
+                    { src: 'js/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                    { src: 'js/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+
+                    // Syntax highlight for <code> elements
+                    { src: 'js/highlight.js', callback: function () { hljs.initHighlightingOnLoad(); } },
+
+                    // Zoom in and out with Alt+click
+                    { src: 'js/zoom.js' },
+
+                    { src: 'notes/notes.js' },
+
+                    { src: 'js/math.js' }
+                ]
+            });
+
+            document.querySelectorAll('.reveal .slides > section section:not([data-background-image])').forEach((s) => {
+                s.setAttribute('data-background-image', 'img/twitter.png');
+                s.setAttribute('data-background-size', '240px');
+                s.setAttribute('data-background-position', '.5em .5em');
+            });
+
+            return {
+                evalCode(btn) {
+                    let codeElem = btn.previousElementSibling;
+                    if (getComputedStyle(codeElem).display === 'none') {
+                        codeElem = codeElem.previousElementSibling;
+                    }
+                    eval(codeElem.innerText);
+                }
+            }
+        })();
+    </script>
+</body>
+
+</html>
