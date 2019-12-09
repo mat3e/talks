@@ -1,8 +1,8 @@
 ## 2019
-* DevFest Warsaw & Radzymin [08.12]: _Web Components - a missing lingua franca_ [🔗](https://mat3e.github.io/talks/components/devfest.html)
+* DevFest Warsaw & Radzymin [08.12]: _Web Componenty jako lingua franca front-endu_ [🔗](https://mat3e.github.io/talks/components/devfest.html)
 * dev.js Warszawa 12 [04.12]: _Dlaczego czasem warto założyć gacie przez głowę? Statyczna strona internetowa na AWS-ie_ [🔗](https://mat3e.github.io/talks/aws-www/devjs.html)
 * C_tech 15 [20.11]: _Subiektywny przegląd sytuacji na froncie (prawie 2020)_ [🔗](https://mat3e.github.io/talks/fe-overview/c_tech.html)
-* Facebook Developer Circle: Warsaw 1 [09.10]: _Angular - architectural decisions_ [🔗](https://mat3e.github.io/talks/angular-arch/fb-dev.html#/)
+* Facebook Developer Circle: Warsaw 1 [09.10]: _Angular - decyzje architektoniczne_ [🔗](https://mat3e.github.io/talks/angular-arch/fb-dev.html#/)
 * Targi Kariera IT [05.10]: _Dlaczego czasem warto założyć gacie przez głowę? Statyczna strona internetowa na AWS-ie_ [🔗](https://mat3e.github.io/talks/aws-www/targikarierait.html)
 * IT Career Summit [26.09]: _A ty jak wystawiasz swoje dane? GraphQL, OData i inne WSDL-e_ [🔗](https://docs.google.com/presentation/d/e/2PACX-1vSim_SCcRoyFH7_dnLrWu5Xl-4kZiUfr5HDs6w9Vlz7BLW9dHvL9-htcSlH507-NVWQI2SkaSemne6z/pub?start=true&loop=false&delayms=3000) [📷](https://itcareersummit.pl/wawa/wp-content/uploads/2019/10/IT-Future_2019_mm_039.jpg)
 * dev.js Warszawa 11 [25.09]: _Web Componenty jako lingua franca front-endu_ [🔗](https://mat3e.github.io/talks/components/devjs#/)
