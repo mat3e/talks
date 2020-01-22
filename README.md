@@ -1,5 +1,5 @@
 ## 2020
-* > C_tech [20.02]: _Subiektywny przegląd sytuacji na froncie (2020)_
+* > C_tech Katowice [20.02]: _Subiektywny przegląd sytuacji na froncie (2020)_
 * > WarsawJS 66 [12.02]: _Server-side rendered micro-frontends on AWS Lambda_
 * > Allegro Tech Talks Toruń 35 [05.02]: _Server-side rendered micro-frontends on AWS Lambda_
 * > Wrocław TypeScript 11 [29.01]: _What are these decorators?_
