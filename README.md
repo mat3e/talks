@@ -1,7 +1,8 @@
 ## 2020
 * > C_tech [20.02]: _Subiektywny przegląd sytuacji na froncie (2020)_
-* > WarsawJS 66 [12.02] _Server-side rendered micro-frontends on AWS Lambda_
-* > Allegro Tech Talks Toruń 35 [05.02] _Server-side rendered micro-frontends on AWS Lambda_
+* > WarsawJS 66 [12.02]: _Server-side rendered micro-frontends on AWS Lambda_
+* > Allegro Tech Talks Toruń 35 [05.02]: _Server-side rendered micro-frontends on AWS Lambda_
+* > Wrocław TypeScript 11 [29.01]: _What are these decorators?_
 
 ## 2019
 * DevFest Warsaw & Radzymin [08.12]: _Web Componenty jako lingua franca front-endu_ [🔗](https://mat3e.github.io/talks/components/devfest.html)
