@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="description" content="Presentation">
+    <meta name="keywords" content="presentation">
+    <meta name="author" content="mat3e">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/blood.css">
+    <link rel="stylesheet" href="css/idea.css">
+    <link rel="stylesheet" href="css/fontawesome.css">
+    <style>
+        .reveal .slides section .header-margin {
+            text-align: left;
+            border-left: solid .25em white;
+            line-height: .85;
+            padding-left: .25em;
+        }
+
+        .reveal .slides section .header-logo {
+            width: 375px;
+            height: 80px;
+            background-image: url('img/twitter.png');
+            background-size: contain;
+            top: -4em;
+            right: 0;
+            position: absolute;
+        }
+
+        #about-me {
+            padding: 1em;
+            background-color: rgba(255, 255, 255, .75);
+            list-style-type: none;
+            margin-left: 0;
+            float: left;
+        }
+
+        #about-me ul {
+            list-style-type: none;
+            float: left;
+            margin-left: 0;
+        }
+
+        #about-me a {
+            color: #a23;
+        }
+
+        #about-me a:hover {
+            color: #dd5566;
+        }
+
+        .slides section img.pure-img {
+            border: none;
+            box-shadow: none;
+            background: none;
+            margin: 0;
+        }
+
+        code[contenteditable="true"] {
+            border: 0;
+            outline: 0;
+        }
+
+        #perspective a {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            width: 45%;
+            margin: 0 auto;
+        }
+
+        #perspective a img {
+            border: 0;
+            margin: 0;
+            box-shadow: none;
+        }
+
+        .slides section pre {
+            margin-bottom: 0;
+        }
+
+        .slides section pre+button {
+            cursor: pointer;
+
+            font-size: .65em;
+            font-weight: 100;
+            -webkit-font-smoothing: antialiased;
+
+            color: white;
+            background: rgb(175, 30, 35);
+
+            padding: 0 3px 3px 3px;
+            border: transparent;
+            border-radius: 4px;
+
+            display: block;
+            margin: 0 auto;
+        }
+
+        .slides section pre+button:disabled {
+            background-color: grey;
+        }
+
+        .slides section a .stripped-img {
+            border: none;
+            margin: 0;
+            box-shadow: none;
+            background-color: rgba(255, 255, 255, 0);
+        }
+
+        .slides section a .stripped-img:hover {
+            border: none;
+            margin: 0;
+            box-shadow: none;
+            background-color: rgba(255, 255, 255, 0);
+        }
+
+        .slides section .comment {
+            margin-top: -20px;
+            margin-bottom: 20px;
+            color: gray;
+        }
+
+        .reveal .slides section .fragment.replace {
+            transition: none;
+            display: inline-block;
+        }
+
+        .reveal .slides section .fragment.fade-out.visible.replace {
+            display: none;
+        }
+
+        .reveal .slides section .fragment.fade-in.replace {
+            display: none;
+        }
+
+        .reveal .slides section .fragment.fade-in.visible.replace {
+            display: inline-block;
+        }
+
+        .reveal .slides section .fragment.highlight-red.visible {
+            color: #dd5566;
+        }
+
+        #hook-here button {
+            padding: 1em;
+            border-radius: 0;
+            background-color: white;
+            border: 1px solid black;
+        }
+
+        .reveal .slides section td.long-text-cell {
+            font-size: .5em;
+            vertical-align: middle;
+        }
+
+        .reveal .slides section table.summary {
+            table-layout: fixed;
+            width: 100%;
+        }
+
+        .reveal .slides section table.summary th {
+            text-align: center;
+        }
+
+        .reveal .slides section table.summary tbody td,
+        .reveal .slides section table.summary th {
+            width: 33%;
+        }
+
+        .reveal .slides section table.summary tbody td:first-child,
+        .reveal .slides section table.summary th:first-child {
+            width: 7%;
+            vertical-align: middle;
+            text-align: center
+        }
+
+        .reveal .slides section .fragment.no-highlight.visible {
+            color: #eee;
+        }
+
+        .reveal .slides section .fragment.no-highlight {
+            opacity: 1;
+            visibility: inherit;
+        }
+
+        .reveal .slides section .centered {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section data-background-image>
+                <section data-background-image>
+                    <div class="header-margin">
+                        <h1 style="margin: 0; font-size: 1.75em">Server-side rendered micro-frontends</h1>
+                        <h2 style="font-size: 1.25em">on AWS Lambda</h2>
+                    </div>
+                    <div class="header-logo"></div>
+                    <aside class="notes">
+                        Po kolei - SSR, micro-fronty, AWS, Lambda - wyjaśnić każdy przypadek i pokazać live demo
+                    </aside>
+                </section>
+                <section id="perspective" data-background-image="">
+                    <h5>
+                        <span>Perspektywa...</span>
+                        <span class="fragment" data-fragment-index="1"> ma znaczenie</span>
+                        <span class="fragment" data-fragment-index="2"> :)</span>
+                    </h5>
+                    <a href="https://mistrzowie.org/717022">
+                        <img src="img/perspektywa-1.jpg">
+                        <img src="img/perspektywa-2.jpg" class="fragment" data-fragment-index="1">
+                        <img src="img/perspektywa-3.jpg" class="fragment" data-fragment-index="2">
+                    </a>
+                </section>
+                <section data-background-image="img/bg-hd.jpg" data-background-transition="zoom">
+                    <ul id="about-me">
+                        <li>
+                            <ul>
+                                <li>
+                                    <a href="https://www.linkedin.com/in/mateusz-chrzonstowski/">
+                                        <i class="fab fa-linkedin"
+                                            style="color: #0077B5; background-color: #FFF; line-height: .75em"></i>
+                                        /mateusz-chrzonstowski
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://twitter.com/_mat3e_">
+                                        <i class="fab fa-twitter-square"
+                                            style="background-color: #1DA1F2; color: #FFF; line-height: .75em"></i>
+                                        /_mat3e_
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.reddit.com/user/_mat3e_">
+                                        <i class="fab fa-reddit-square"
+                                            style="background-color: #FF4500; color: #FFF; line-height: .75em"></i>
+                                        /_mat3e_
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/mat3e/">
+                                        <i class="fab fa-github-square"
+                                            style="color: #24292E; background-color: #FFF; line-height: .75em"></i>
+                                        /mat3e
+                                    </a>
+                                </li>
+                                <li style="line-height: 1">&nbsp;</li>
+                                <li class="fragment" style="line-height: .75">
+                                    <a style="font-size: .75em; font-weight: bold;"
+                                        href="https://mat3e.github.io/talks/micro-frontends/att.html">
+                                        mat3e.github.io/talks
+                                        <div style="padding-left: 2.5em;">
+                                            /micro-frontends/att.html</div>
+                                    </a>
+                                </li>
+                                <li style="line-height: 1">&nbsp;</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="fragment" style="padding: .1em; line-height: 1">
+                                <li>
+                                    <a href="https://www.udemy.com/fajny-javascript/?couponCode=OPENALL">
+                                        <img src="img/udemy.svg" class="pure-img" style="height: 1.5em;">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://allegro.tech/">
+                                        <img src="img/allegro-tech.svg" class="pure-img" style="height: 1.5em;">
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section data-transition="zoom" data-background-image>
+                    <div class="header-margin">
+                        <h1 style="margin: 0; font-size: 1.75em">Server-side rendered micro-frontends</h1>
+                        <h2 style="font-size: 1.25em"><span class="fragment fade-out replace"
+                                data-fragment-index="1">on</span><del class="fragment fade-in replace"
+                                style="color: #dd5566" data-fragment-index="1">on</del> AWS Lambda</h2>
+                    </div>
+                    <div class="header-logo"></div>
+                    <aside class="notes">
+                        Po kolei - SSR, micro-fronty, AWS, Lambda - wyjaśnić każdy przypadek i pokazać live demo
+                    </aside>
+                </section>
+                <section data-transition="slide-in fade-out">
+                    <div style="display: flex; justify-content: space-evenly;">
+                        <div style="display: flex; align-items: center; justify-content: center">
+                            <img src="img/react.svg" class="pure-img fragment" style="width: 35px"
+                                data-fragment-index="1">
+                            <div data-fragment-index="6" class="fragment fade-out replace">
+                                <img src="img/thumb2.png" class="pure-img fragment" style="height: 20vh"
+                                    data-fragment-index="1">
+                            </div>
+                            <img src="img/no2.png" class="pure-img fragment fade-in replace" style="height: 20vh"
+                                data-fragment-index="6">
+                        </div>
+                        <div style="display: flex; align-items: center; justify-content: center">
+                            <img src="img/angular.svg" class="pure-img fragment" style="width: 40px"
+                                data-fragment-index="2">
+                            <div data-fragment-index="6" class="fragment fade-out replace">
+                                <img src="img/thumb4.png" class="pure-img fragment" style="height: 20vh"
+                                    data-fragment-index="2">
+                            </div>
+                            <img src="img/no1.png" class="pure-img fragment fade-in replace" style="height: 20vh"
+                                data-fragment-index="6">
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-evenly;">
+                        <span class="fragment" data-fragment-index="1">Robert</span>
+                        <span class="fragment" data-fragment-index="2">Agnieszka</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-evenly;">
+                        <div style="display: flex; align-items: center; justify-content: center">
+                            <img src="img/vue.svg" class="pure-img fragment" style="width: 35px"
+                                data-fragment-index="3">
+                            <div data-fragment-index="6" class="fragment fade-out replace">
+                                <img src="img/victory1.png" class="pure-img fragment" style="height: 23vh"
+                                    data-fragment-index="3">
+                            </div>
+                            <img src="img/no4.png" class="pure-img fragment fade-in replace"
+                                style="height: 20vh; margin-top: 3vh" data-fragment-index="6">
+                        </div>
+                        <div style="display: flex; align-items: center; justify-content: center">
+                            <img src="img/js.png" class="pure-img fragment" style="width: 30px" data-fragment-index="4">
+                            <div data-fragment-index="6" class="fragment fade-out replace">
+                                <img src="img/thumb1.png" class="pure-img" style="height: 20vh; margin-top: 3vh">
+                            </div>
+                            <img src="img/dunno.png" class="pure-img fragment fade-in replace"
+                                style="height: 20vh; margin-top: 3vh" data-fragment-index="6">
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-evenly;">
+                        <span class="fragment" data-fragment-index="3">Vitaliy</span>
+                        <span class="fragment" data-fragment-index="4">Janek</span>
+                    </div>
+                    <div class="fragment replace fade-in" data-fragment-index="5"
+                        style="position: absolute; top: 3.5em; left: calc(50% - 250px); width: 500px;">
+                        <img src="img/boyz.jpg" class="pure-img fragment replace fade-out" data-fragment-index="6"
+                            style="border: solid 1px black;">
+                    </div>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section data-transition="zoom">
+                    <h2>Binding - cd.</h2>
+                    <img src="img/digest.png" class="pure-img fragment">
+                </section>
+                <section>
+                    <h3>
+                        Rozwiązanie? <a href="https://github.com/angular/angular/tree/master/packages/zone.js"
+                            class="fragment">Zone.js!</a>
+                    </h3>
+                    <a href="https://youtu.be/3IqtmUscE_U" class="fragment">
+                        <img src="img/zone-presentation.png" class="pure-img" style="width: 50%">
+                    </a>
+                    <ul>
+                        <li class="fragment">Odpalanie asynchronicznych operacji w "strefie"</li>
+                        <li class="fragment">Lepszy stack trace, możliwość śledzenia i&nbsp;mierzenia wywołań</li>
+                        <li class="fragment">Zastosowania? <span class="fragment" data-autoslide="750">Debug</span><span
+                                class="fragment" data-autoslide="750">, testowanie</span><span class="fragment"
+                                data-autoslide="750">, profilowanie</span><span class="fragment" data-autoslide="1500">,
+                                odtwarzanie ścieżki użytkownika</span><span class="fragment"> ("tu kliknąłem")</span>
+                        </li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>
+                        To tak można?
+                        <img src="img/think.png" class="pure-img" style="width: 1em">
+                    </h2>
+                    <div>
+                        <img src="img/fiber.jpg" class="pure-img fragment" style="width: 30%">
+                    </div>
+                    <aside class="notes">React Fiber zadział się w bebechach Reacta 16 i to tak naprawdę przepisanie
+                        JS-owego stosu wywołań. Nie tylko do odczytu, ale do manipulowania kolejnością wywołań</aside>
+                </section>
+                <section>
+                    <h2>Decyzje Architektoniczne</h2>
+                    <ol>
+                        <li><span>One-way binding</span></li>
+                        <li><span class="fragment">Zone.js (kontrola nad async)</span></li>
+                        <li><span style="visibility: hidden">Tłumaczenie kodu, statyczne typowanie</span></li>
+                        <li></li>
+                        <li></li>
+                    </ol>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section data-transition="zoom">
+                    <h2 style="margin: 0">Kod</h2>
+                    <div class="fragment">
+                        <img src="img/lts.png" class="pure-img">
+                    </div>
+                    <img src="img/autistic-ie.png" class="pure-img fragment" style="width: 15vw">
+                </section>
+                <section>
+                    <div class="fragment fade-out replace" data-fragment-index="4">
+                        <div class="fragment fade-out replace" data-fragment-index="2">
+                            <img src="img/at/1-es5.png" class="pure-img fragment fade-out replace"
+                                data-fragment-index="1">
+                            <img src="img/at/2-es6.png" class="pure-img fragment fade-in replace"
+                                data-fragment-index="1">
+                        </div>
+                        <div class="fragment fade-in replace" data-fragment-index="2">
+                            <img src="img/at/3-ts.png" class="pure-img fragment fade-out replace"
+                                data-fragment-index="3">
+                            <img src="img/at/4-ts-reality.png" class="pure-img fragment fade-in replace"
+                                data-fragment-index="3">
+                        </div>
+                    </div>
+                    <div class="fragment fade-in replace" data-fragment-index="4">
+                        <img src="img/at/5-ts.png" class="pure-img fragment fade-out replace" data-fragment-index="5"
+                            data-autoslide="1500">
+                        <img src="img/at/6-all.png" class="pure-img fragment fade-in replace" data-fragment-index="5">
+                    </div>
+                    <img src="img/at/autistic.png" class="pure-img fragment"
+                        style="position: absolute; bottom: 3em; right: 0; width: 10vw">
+                </section>
+                <section data-transition="fade" data-background-transition="fade">
+                    <div style="max-width: 400px; margin: 0 auto">
+                        <div style="display: flex">
+                            <img src="img/merge/1.png" class="pure-img" style="width: 50%">
+                            <img src="img/merge/2.png" class="pure-img fragment" style="width: 50%">
+                        </div>
+                        <div style="display: flex" class="fragment">
+                            <img src="img/merge/3.png" class="pure-img" style="width: 50%">
+                            <img src="img/merge/4.png" class="pure-img" style="width: 50%">
+                        </div>
+                        <div style="display: flex;">
+                            <img src="img/merge/5.png" class="pure-img fragment" style="max-width: 100%;">
+                        </div>
+                    </div>
+                    <aside class="notes">Zone'y też z Darta wzięte</aside>
+                </section>
+                <section>
+                    <h2>Decyzje Architektoniczne</h2>
+                    <ol>
+                        <li><span>One-way binding</span></li>
+                        <li><span>Zone.js (kontrola nad async)</span></li>
+                        <li><span class="fragment">Tłumaczenie kodu, statyczne typowanie</span></li>
+                        <li></li>
+                        <li></li>
+                    </ol>
+                    <aside class="notes">Ale nie kompilujmy do ES5...</aside>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section data-transition="zoom-in none" data-background-image="img/cli/cli.png"
+                    data-background-size="contain">
+                    <h2 class="fragment">
+                        <code>@angular/cli</code>
+                    </h2>
+                    <h4 class="fragment">Command Line Interface</h4>
+                    <pre style="background: white; width: 35%" class="fragment"><code data-trim contenteditable="true">
+                        npm i -g @angular/cli
+                    </code><code data-trim contenteditable="true" class="fragment">
+                        ng new PROJECT_NAME
+                    </code></pre>
+                </section>
+                <section data-transition="none" data-background-image="img/cli/cli-cli.png"
+                    data-background-size="contain"></section>
+                <section data-transition="none" data-background-image="img/cli/cli-ts-zone.png"
+                    data-background-size="contain">
+                    <aside class="notes">Wspomniane TS i zone.js</aside>
+                </section>
+                <section data-transition="none" data-background-image="img/cli/cli-test.png"
+                    data-background-size="contain"></section>
+                <section data-transition="none" data-background-image="img/cli/cli-libs.png"
+                    data-background-size="contain"></section>
+                <section>
+                    <h2>Decyzje Architektoniczne</h2>
+                    <ol>
+                        <li><span>One-way binding</span></li>
+                        <li><span>Zone.js (kontrola nad async)</span></li>
+                        <li><span>Tłumaczenie kodu, statyczne typowanie</span></li>
+                        <li><span class="fragment">All-in-one</span></li>
+                        <li></li>
+                    </ol>
+                    <aside class="notes">React ma jakiś starter aplikacji, a tu już cały generator</aside>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section data-transition="zoom-in none" data-background-image="img/cli/cli-modules.png"
+                    data-background-size="contain">
+                    <aside class="notes">
+                        Nie tylko narzucone, że my mamy tworzyć modularnie (moduł komponentów), ale sam
+                        angular tak sobie tworzy
+                    </aside>
+                </section>
+                <section>
+                    <pre style="width: 100%"><code class="typescript" data-trim contentEditable="true" data-line-numbers="5-25,27,29-34,36" 
+                    style="max-height: 40em; line-height: 1.05; font-size: .65em;">
+                import { BrowserModule } from '@angular/platform-browser';
+                import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+                import { NgModule, Component, Input } from '@angular/core';
+
+                @Component({
+                  selector: 'angular-counter',
+                  template: `
+                    &lt;div class="centered">
+                      &lt;button (click)="setCount(count - 1)">
+                        -
+                      &lt;/button>
+                      &lt;span>{{count}}&lt;/span>
+                      &lt;button (click)="setCount(count + 1)">
+                        +
+                      &lt;/button>
+                    &lt;/div>
+                  `
+                })
+                class Counter {
+                  @Input() count: number;
+
+                  setCount(count: number) {
+                    this.count = count;
+                  }
+                }
+
+                @Component({ selector: 'angular-app', template: '&lt;angular-counter [count]="10">' }) class App { }
+
+                @NgModule({
+                  imports: [ BrowserModule ],
+                  declarations: [ App, Counter ],
+                  bootstrap: [ App ]
+                })
+                class AppModule { }
+
+                platformBrowserDynamic().bootstrapModule(AppModule);
+                </code></pre>
+                    <button style="font-weight: bold; margin: .25em auto .25em auto"
+                        onclick="controls.evalTsCode(this)">eval</button>
+                    <fieldset style="border: solid 1px white;">
+                        <!-- <legend style="font-size: .5em">&lt;angular-app></legend> -->
+                        <div style="height: .75em; font-size: .75em">
+                            <angular-app></angular-app>
+                        </div>
+                    </fieldset>
+                </section>
+                <section>
+                    <h2>Decyzje Architektoniczne</h2>
+                    <ol>
+                        <li><span>One-way binding</span></li>
+                        <li><span>Zone.js (kontrola nad async)</span></li>
+                        <li><span>Tłumaczenie kodu, statyczne typowanie</span></li>
+                        <li><span>All-in-one</span></li>
+                        <li><span class="fragment">Modularność</span></li>
+                    </ol>
+                </section>
+                <section>
+                    <pre style="width: 100%"><code class="kotlin" data-trim contenteditable="true" style="max-height: 40em" data-line-numbers="7-22">
+                        package io.github.mat3e.demo
+
+                        import io.reactivex.Observable
+                        import org.springframework.stereotype.Component
+                        import org.springframework.stereotype.Service
+                        
+                        @Service
+                        class DemoService {
+                            fun getData(): Observable&lt;String> {
+                                return Observable.just(
+                                        "First",
+                                        "Second"
+                                )
+                            }
+                        }
+                        
+                        @Component
+                        class DemoComponent(val service: DemoService) {
+                            fun render() {
+                                this.service.getData().subscribe { next -> println(next) }
+                            }
+                        }                        
+                    </code></pre>
+                    <aside class="notes">
+                        Wbrew pozorom to kod Kotlin + Spring + RxJava
+                        <br>
+                        Spring = najważniejszy framework w Javie, łącznik różnych bibliotek + Dependency Injection
+                    </aside>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section data-transition="zoom">
+                    <h2 class="fragment" data-fragment-index="3">Dzięki!</h2>
+                    <a href="https://twitter.com/aarongreenlee/status/552521061603225601">
+                        <img src="img/everything.jpg" class="pure-img">
+                    </a>
+                    <ul>
+                        <li class="fragment" data-fragment-index="1">
+                            10 trendów JS:
+                            <a href="https://mat3e.github.io/trendy">
+                                mat3e.github.io/trendy
+                            </a>
+                        </li>
+                        <li class="fragment" data-fragment-index="2">
+                            <a href="https://mat3e.github.io/talks/angular-arch/fb-dev.html">
+                                mat3e.github.io/talks/angular-arch/fb-dev
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+            </section>
+        </div>
+    </div>
+    <script src="js/reflect.js"></script>
+    <script src="js/zone.js"></script>
+    <script src="js/rxjs.js"></script>
+    <script src="js/ang-core.js"></script>
+    <script src="js/ang-common.js"></script>
+    <script src="js/ang-compiler.js"></script>
+    <script src="js/ang-platform.js"></script>
+    <script src="js/ang-platform-dynamic.js"></script>
+    <script src="js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script src="js/babel.min.js"></script>
+    <script>
+        const controls = (function () {
+            Reveal.initialize({
+                history: true,
+                // - null: Media will only autoplay if data-autoplay is present
+                autoPlayMedia: null,
+                transition: 'slide', // none/fade/slide/convex/concave/zoom
+                transitionSpeed: 'default', // default/fast/slow
+                backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
+                dependencies: [
+                    { src: 'js/classList.js', condition: function () { return !document.body.classList; } },
+
+                    { src: 'js/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                    { src: 'js/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+
+                    // Syntax highlight for <code> elements
+                    { src: 'js/highlight.js', callback: function () { setTimeout(() => hljs.initHighlightingOnLoad(), 0); } },
+
+                    // Zoom in and out with Alt+click
+                    { src: 'js/zoom.js' },
+
+                    { src: 'notes/notes.js' },
+
+                    { src: 'js/math.js' }
+                ]
+            });
+
+            document.querySelectorAll('.reveal .slides section:not([data-background-image])').forEach(s => {
+                s.setAttribute('data-background-image', 'img/twitter.png');
+                s.setAttribute('data-background-size', '240px');
+                s.setAttribute('data-background-position', '20px 20px');
+            });
+
+            return {
+                evalCode(btn) {
+                    eval(extractCodeFromBefore(btn));
+                },
+                evalTsCode(btn, once) {
+                    const input = extractCodeFromBefore(btn);
+                    const output = Babel.transform(input, {
+                        plugins: [
+                            ['transform-modules-umd', {
+                                globals: {
+                                    '@angular/core': 'ng.core',
+                                    '@angular/platform-browser': 'ng.platformBrowser',
+                                    '@angular/platform-browser-dynamic': 'ng.platformBrowserDynamic',
+                                    'zone.js': 'Zone',
+                                    'core-js/es/reflect': 'coreJs',
+                                    'core-js/features/reflect': 'coreJs'
+                                },
+                                exactGlobals: true
+                            }],
+                            'transform-typescript',
+                            ['proposal-decorators', { legacy: true }],
+                            ['proposal-class-properties', { loose: true }]
+                        ]
+                    }).code;
+                    eval.call(window, output);
+                    if (once) {
+                        btn.disabled = true;
+                    }
+                }
+            }
+
+            function extractCodeFromBefore(btn) {
+                return [...btn.parentElement.querySelectorAll('pre')].filter(e => getComputedStyle(e).display !== 'none')[0].innerText;
+            }
+        })();
+    </script>
+</body>
+
+</html>

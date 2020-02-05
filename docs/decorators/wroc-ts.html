@@ -255,7 +255,11 @@
                                     <a style="font-size: .75em; font-weight: bold;"
                                         href="https://mat3e.github.io/talks/decorators/wroc-ts.html">
                                         mat3e.github.io/talks
+<<<<<<< HEAD
                                         <div style="padding-left: 5em;">
+=======
+                                        <div style="padding-left: 3.5em;">
+>>>>>>> 6ac59d9099d77adfb43128dea9d84ee5f687ae58
                                             /decorators/wroc-ts.html</div>
                                     </a>
                                 </li>
@@ -378,7 +382,7 @@
                           alert(`Hi, I'm ${this.fullName}!`);
                         }
                     </code><code class="javascript fragment" data-trim contenteditable="true" data-fragment-index="1">
-                        const mappedPerson = new Person('Adam', 'Małysz');
+                        const person = new Person('Adam', 'Małysz');
                     </code><code class="javascript fragment" data-trim contenteditable="true" data-fragment-index="4">
                         person.sayHello();
                     </code></pre>
@@ -552,10 +556,10 @@
                               }
                             }
                     </code><code class="typescript fragment" data-fragment-index="1" contenteditable="true" style="line-height: 1.05" data-trim>
-                            const person = (
+                            const mappedPerson = (
                                 new User("Adi", "pass", "adi@mail.com") as Mappable&lt;User>
                             ).mapFromDecorators();
-                            console.log(person);
+                            console.log(mappedPerson);
                     </code></pre>
                     <button class="fragment" data-fragment-index="1" onclick="controls.evalTsCode(this)" style="font-weight: bold">eval</button>
                 </section>
