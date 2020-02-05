@@ -25,4 +25,4 @@ Tytuł złożony z samych buzzwordów? A czemu nie? Bynajmniej, nie będę jedna
 
 Mamy ponad MILION paczek na npm. Powiedzenie "nowy dzień, nowy framework" jest więc mocnym niedoszacowaniem, bo wedle http://www.modulecounts.com/, średnio przybywało ponad 600 bibliotek/frameworków dziennie.
 
-Każdy lubi inny framework, a back-end często składa się z osobnych mikroserwisów. Łącząc te 2 rzeczy, dochodzimy do micro-frontendów. Te często są renderowane po stronie serwera (Server-side rendering, SSR), a da się to zrobić korzystając z AWS-a. 
+Każdy lubi inny framework, a back-end często składa się z osobnych mikroserwisów. Łącząc te 2 rzeczy, dochodzimy do micro-frontendów. Te często są renderowane po stronie serwera (server-side rendering, SSR), a da się to zrobić korzystając z AWS-a. 
