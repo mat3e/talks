@@ -1,5 +1,5 @@
 ## 2020
-* > C_tech Katowice [20.02]: _Subiektywny przegląd sytuacji na froncie (2020)_ [🔗](https://mat3e.github.io/talks/fe-overview/c_tech_kato.html)
+* C_tech Katowice [20.02]: _Subiektywny przegląd sytuacji na froncie (2020)_ [🔗](https://mat3e.github.io/talks/fe-overview/c_tech_kato.html)
 * WarsawJS 66 [12.02]: _Server-side rendered micro-frontends on AWS Lambda_ [🔗](https://mat3e.github.io/talks/micro-frontends/WarsawJS)
 * Allegro Tech Talks Toruń 35 [05.02]: _Server-side rendered micro-frontends on AWS Lambda_ [🔗](https://mat3e.github.io/talks/micro-frontends/att) [📽️](https://www.facebook.com/allegro.tech/videos/2885440594847210/)
 * Wrocław TypeScript 11 [29.01]: _What are these decorators?_ [🔗](https://mat3e.github.io/talks/decorators/wroc-ts.html)
