@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="description" content="Presentation">
+    <meta name="keywords" content="presentation">
+    <meta name="author" content="mat3e">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/blood.css">
+    <link rel="stylesheet" href="css/idea.css">
+    <link rel="stylesheet" href="css/fontawesome.css">
+    <style>
+        #header-margin {
+            text-align: left;
+            border-left: solid .25em white;
+            line-height: .85;
+            padding-left: .25em;
+        }
+
+        #header-logo {
+            width: 375px;
+            height: 80px;
+            background-image: url('img/twitter.png');
+            background-size: contain;
+            top: -4em;
+            right: 0;
+            position: absolute;
+        }
+
+        #about-me {
+            padding: 1em;
+            background-color: rgba(255, 255, 255, .75);
+            list-style-type: none;
+            margin-left: 0;
+            float: left;
+        }
+
+        #about-me ul {
+            list-style-type: none;
+            float: left;
+            margin-left: 0;
+        }
+
+        #about-me a {
+            color: #a23;
+        }
+
+        #about-me a:hover {
+            color: #dd5566;
+        }
+
+        .slides section img.pure-img {
+            border: none;
+            box-shadow: none;
+            background: none;
+            margin: 0;
+        }
+
+        code[contenteditable="true"] {
+            border: 0;
+            outline: 0;
+        }
+
+        #perspective a {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            width: 45%;
+            margin: 0 auto;
+        }
+
+        #perspective a img {
+            border: 0;
+            margin: 0;
+            box-shadow: none;
+        }
+
+        .slides section pre {
+            margin-bottom: 0;
+        }
+
+        .slides section pre+button {
+            cursor: pointer;
+
+            font-size: .65em;
+            font-weight: 100;
+            -webkit-font-smoothing: antialiased;
+
+            color: white;
+            background: rgb(175, 30, 35);
+
+            padding: 0 3px 3px 3px;
+            border: transparent;
+            border-radius: 4px;
+
+            display: block;
+            margin: 0 auto;
+        }
+
+        .slides section pre+button:disabled {
+            background-color: grey;
+        }
+
+        .slides section a .stripped-img {
+            border: none;
+            margin: 0;
+            box-shadow: none;
+            background-color: rgba(255, 255, 255, 0);
+        }
+
+        .slides section a .stripped-img:hover {
+            border: none;
+            margin: 0;
+            box-shadow: none;
+            background-color: rgba(255, 255, 255, 0);
+        }
+
+        .slides section .comment {
+            margin-top: -20px;
+            margin-bottom: 20px;
+            color: gray;
+        }
+
+        .reveal .slides section .fragment.replace {
+            transition: none;
+            display: inline-block;
+        }
+
+        .reveal .slides section .fragment.fade-out.visible.replace {
+            display: none;
+        }
+
+        .reveal .slides section .fragment.fade-in.replace {
+            display: none;
+        }
+
+        .reveal .slides section .fragment.fade-in.visible.replace {
+            display: inline-block;
+        }
+
+        .reveal .slides section .fragment.highlight-red.visible {
+            color: #dd5566;
+        }
+
+        #hook-here button {
+            padding: 1em;
+            border-radius: 0;
+            background-color: white;
+            border: 1px solid black;
+        }
+
+        .reveal .slides section td.long-text-cell {
+            font-size: .5em;
+            vertical-align: middle;
+        }
+
+        .reveal .slides section table.summary {
+            table-layout: fixed;
+            width: 100%;
+        }
+
+        .reveal .slides section table.summary th {
+            text-align: center;
+        }
+
+        .reveal .slides section table.summary tbody td,
+        .reveal .slides section table.summary th {
+            width: 33%;
+        }
+
+        .reveal .slides section table.summary tbody td:first-child,
+        .reveal .slides section table.summary th:first-child {
+            width: 7%;
+            vertical-align: middle;
+            text-align: center
+        }
+
+        .reveal .slides section .fragment.no-highlight.visible {
+            color: #eee;
+        }
+
+        .reveal .slides section .fragment.no-highlight {
+            opacity: 1;
+            visibility: inherit;
+        }
+
+        .reveal .slides section .centered {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section data-background-image>
+                <section data-background-image>
+                    <div id="header-margin">
+                        <h1 style="margin: 0; font-size: 2.25em">Fajne testowanie</h1>
+                        <h2 style="font-size: 1.5em">JUnit 5 vs. Spock​</h2>
+                    </div>
+                    <div id="header-logo"></div>
+                    <aside class="notes">
+                        Prezentacja jednak narzędziowa, a nie o tym co i jak najlepiej testować; chociaż trochę
+                        się przewinie, wiadomo
+                    </aside>
+                </section>
+                <section id="perspective" data-background-image="">
+                    <h5>
+                        <span>Perspektywa...</span>
+                        <span class="fragment" data-fragment-index="1"> ma znaczenie</span>
+                        <span class="fragment" data-fragment-index="2"> :)</span>
+                    </h5>
+                    <a href="https://mistrzowie.org/717022">
+                        <img src="img/perspektywa-1.jpg">
+                        <img src="img/perspektywa-2.jpg" class="fragment" data-fragment-index="1">
+                        <img src="img/perspektywa-3.jpg" class="fragment" data-fragment-index="2">
+                    </a>
+                </section>
+                <section data-background-image="img/bg-hd.jpg" data-background-transition="zoom">
+                    <ul id="about-me">
+                        <li>
+                            <ul>
+                                <li>
+                                    <a href="https://www.linkedin.com/in/mateusz-chrzonstowski/">
+                                        <i class="fab fa-linkedin"
+                                            style="color: #0077B5; background-color: #FFF; line-height: .75em"></i>
+                                        /mateusz-chrzonstowski
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://twitter.com/_mat3e_">
+                                        <i class="fab fa-twitter-square"
+                                            style="background-color: #1DA1F2; color: #FFF; line-height: .75em"></i>
+                                        /_mat3e_
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.reddit.com/user/_mat3e_">
+                                        <i class="fab fa-reddit-square"
+                                            style="background-color: #FF4500; color: #FFF; line-height: .75em"></i>
+                                        /_mat3e_
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/mat3e/">
+                                        <i class="fab fa-github-square"
+                                            style="color: #24292E; background-color: #FFF; line-height: .75em"></i>
+                                        /mat3e
+                                    </a>
+                                </li>
+                                <li style="line-height: 1">&nbsp;</li>
+                                <li class="fragment" style="line-height: .75">
+                                    <a style="font-size: .75em; font-weight: bold;"
+                                        href="https://mat3e.github.io/talks/junit-spock/jcon.html">
+                                        mat3e.github.io/talks
+                                        <div style="padding-left: 5em;">
+                                            /junit-spock/jcon</div>
+                                    </a>
+                                </li>
+                                <li style="line-height: 1">&nbsp;</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="fragment" style="padding: .1em; line-height: 1">
+                                <li>
+                                    <a href="https://www.udemy.com/fajny-javascript/?couponCode=OPENALL">
+                                        <img src="img/udemy.svg" class="pure-img" style="height: 1.5em;">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.starburstdata.com/careers/" class="fragment">
+                                        <img src="img/starburst.png" class="pure-img" style="height: 1.5em;">
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+            </section>
+            <section data-background-image="">
+                <section data-transition="zoom">
+                    <h2>Narzędzia</h2>
+                    <ul>
+                        <li class="fragment">
+                            Runner
+                            <ul>
+                                <li class="fragment">Sposób na powtarzalne odpalanie testów</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">
+                            Framework
+                            <ul>
+                                <li class="fragment">Ramy na testy, generowanie raportu itp.</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">
+                            Asercje
+                            <ul>
+                                <li class="fragment">Porównywanie rezultatów z wartościami oczekiwanymi</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">
+                            Mockowanie
+                            <ul>
+                                <li class="fragment">Symulowanie zewnętrznych zależności</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <aside class="notes">
+                        Puzzle, z których będziemy składać;
+                        <ul>
+                            <li>runner - sposób odpalenia testów</li>
+                            <li>
+                                framework - szkielet, sposób pisania testów, żeby były jakoś powtarzalne itp.; raporty
+                            </li>
+                            <li>asercje - wyjątek</li>
+                            <li>mockowanie</li>
+                        </ul>
+                    </aside>
+                </section>
+            </section>
+            <section data-background-image="">
+                <section data-transition="zoom" data-background-image="img/schedule.png" data-background-size="contain">
+                    <aside class="notes">Trzeba wiedzieć, co testować</aside>
+                </section>
+                <section data-transition="none" data-background-image="img/schedule2.png"
+                    data-background-size="contain">
+                    <aside class="notes">Command, Query</aside>
+                </section>
+                <section data-transition="none" data-background-image="img/schedule3.png"
+                    data-background-size="contain">
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section data-transition="zoom-in none">
+                    <h2>JUnit</h2>
+                    <pre style="width: 100%"><code class="java" data-trim contentEditable="true" data-line-numbers="" 
+                        style="max-height: 40em; line-height: 1.05; font-size: .75em;">
+                        class ScheduleTest {
+                            void scheduleOnCall_throwsWhenDateAlreadyTaken() {
+                            }
+                        
+                            void scheduleOnCall_throwsWhenRoomAlreadyTaken() {
+                            }
+                        
+                            void scheduleOnCall_worksAsExpected() {
+                            }
+                        
+                            void scheduleNewVisit_throwsWhenDoctorUnavailable() {
+                            }
+                        
+                            void scheduleNewVisit_throwsWhenDateAlreadyTaken() {
+                            }
+                        
+                            void scheduleNewVisit_worksAsExpected() {
+                            }
+                        
+                            void overrideOnCall_throwsWhenDifferentSpecialization() {
+                            }
+                        
+                            void overrideOnCall_worksAsExpected() {
+                            }
+                        }
+                    </code></pre>
+                    <aside class="notes">Dostęp pakietowy? TAK, ale dopiero od niedawna. Trochę oszukuję, bo to nie są
+                        jeszcze testy</aside>
+                </section>
+                <section>
+                    <h3 style="margin: 0;">JUnit 5</h3>
+                    <pre style="width: 100%; margin: 0;"><code class="java" data-trim contentEditable="true" data-line-numbers="" 
+                        style="max-height: 50em; line-height: 1.05; font-size: .6em;">
+                        class ScheduleTest {
+                            @Test
+                            @DisplayName("should throw when scheduling for the taken date")
+                            void scheduleOnCall_throwsWhenDateAlreadyTaken() {
+                            }
+                        
+                            @Test
+                            @DisplayName("should throw when scheduling with the taken room")
+                            void scheduleOnCall_throwsWhenRoomAlreadyTaken() {
+                            }
+                        
+                            @Test
+                            @DisplayName("should schedule a new on call date")
+                            void scheduleOnCall_worksAsExpected() {
+                            }
+                        
+                            @Test
+                            @DisplayName("should throw when scheduling a visit to an absent doctor")
+                            void scheduleNewVisit_throwsWhenDoctorUnavailable() {
+                            }
+                        
+                            @Test
+                            @DisplayName("should throw when scheduling a visit for the taken date")
+                            void scheduleNewVisit_throwsWhenDateAlreadyTaken() {
+                            }
+                        
+                            @Test
+                            @DisplayName("should schedule a new visit")
+                            void scheduleNewVisit_worksAsExpected() {
+                            }
+                        
+                            @Test
+                            @DisplayName("should throw when overriding on call with a doctor with a different specialization")
+                            void overrideOnCall_throwsWhenDifferentSpecialization() {
+                            }
+                        
+                            @Test
+                            @DisplayName("should override on call")
+                            void overrideOnCall_worksAsExpected() {
+                            }
+                        }
+                    </code></pre>
+                    <aside class="notes">Teraz interpretowane jako testy</aside>
+                </section>
+                <section data-background-image="img/results.png" data-background-size="contain"></section>
+                <section>
+                    <h2>JUnit 5</h2>
+                    <h4 class="fragment" style="margin-bottom: 0;">
+                        JUnit Platform + JUnit Jupiter +&nbsp;JUnit&nbsp;Vintage
+                    </h4>
+                    <img src="img/jak.png" class="pure-img" style="visibility: hidden; opacity: 0;">
+                    <img src="img/jak.png" class="pure-img" style="position: fixed; bottom:0; left:0">
+                    <aside class="notes">Jak do tego doszło? Nie wiem
+                        <br>
+                        JUnit 5 is the result of JUnit Lambda and its crowdfunding campaign on Indiegogo.
+                        <br>
+                        The goal is to create an up-to-date foundation for developer-side testing on the JVM. This
+                        includes focusing on Java 8 and above, as well as enabling many different styles of testing.
+                    </aside>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section data-transition="zoom-in none">
+                    <pre style="width: 100%; margin: 0;"><code class="xml" data-trim contentEditable="true" data-line-numbers="" 
+                        style="max-height: 50em; line-height: 1.05; font-size: .6em;">
+                        <dependencies>
+                            <!-- ... -->
+                            <dependency>
+                                <groupId>org.spockframework</groupId>
+                                <artifactId>spock-core</artifactId>
+                                <version>1.3-groovy-2.5</version>
+                                <scope>test</scope>
+                            </dependency>
+                            <dependency>
+                                <groupId>org.codehaus.groovy</groupId>
+                                <artifactId>groovy-all</artifactId>
+                                <version>2.5.9</version>
+                                <type>pom</type>
+                                <scope>test</scope>
+                            </dependency>
+                        </dependencies>
+                        <build>
+                            <plugins>
+                                <!-- ... -->
+                                <plugin>
+                                    <groupId>org.codehaus.gmavenplus</groupId>
+                                    <artifactId>gmavenplus-plugin</artifactId>
+                                    <version>1.8.1</version>
+                                    <executions>
+                                        <execution>
+                                            <goals>
+                                                <goal>addTestSources</goal>
+                                                <goal>compileTests</goal>
+                                            </goals>
+                                        </execution>
+                                    </executions>
+                                </plugin>
+                                <plugin>
+                                    <groupId>org.apache.maven.plugins</groupId>
+                                    <artifactId>maven-surefire-plugin</artifactId>
+                                    <configuration>
+                                        <argLine>--illegal-access=permit</argLine>
+                                    </configuration>
+                                </plugin>
+                            </plugins>
+                        </build>
+                    </code></pre>
+                    <aside class="notes">
+                        Spock niedługo na 2.0, a Groovy już 3.0
+                    </aside>
+                </section>
+                <section>
+                    <pre style="width: 100%; margin: 0;"><code class="groovy" data-trim contentEditable="true" data-line-numbers="" 
+                        style="max-height: 50em; line-height: 1.05; font-size: .75em;">
+                        plugins {
+                            id 'org.springframework.boot' version '2.2.5.RELEASE'
+                            id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+                            id 'java'
+                            id 'groovy'
+                        }
+                        
+                        ext['groovy.version'] = '3.0.1'
+                        
+                        /* ... */
+                        
+                        repositories {
+                            mavenCentral()
+                        }
+                        
+                        dependencies {
+                            implementation 'org.springframework.boot:spring-boot-starter'
+                            testImplementation('org.springframework.boot:spring-boot-starter-test') {
+                                exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+                            }
+                            testImplementation 'org.codehaus.groovy:groovy-all:3.0.1'
+                            testImplementation 'org.spockframework:spock-core:2.0-M2-groovy-3.0'
+                        }
+                        
+                        test {
+                            useJUnitPlatform()
+                        }
+                    </code></pre>
+                    <aside class="notes">Tak będzie prościej, a już na pewno jak chcemy testy i JUnit i Spock w tym
+                        samym projekcie</aside>
+                </section>
+                <section>
+                    <pre style="width: 100%; margin: 0;"><code class="groovy" data-trim contentEditable="true" data-line-numbers="" 
+                        style="max-height: 50em; line-height: 1.05; font-size: .7em;">
+                        import spock.lang.Specification
+
+                        class ScheduleSpec extends Specification {
+                            def 'should throw when scheduling for the taken date'() {
+                            }
+
+                            def 'should throw when scheduling with the taken room'() {
+                            }
+
+                            def 'should schedule a new on call date'() {
+                            }
+
+                            def 'should throw when scheduling a visit to an absent doctor'() {
+                            }
+
+                            def 'should throw when scheduling a visit for the taken date'() {
+                            }
+
+                            def 'should schedule a new visit'() {
+                            }
+
+                            def 'should throw when overriding on call with a doctor with a different specialization'() {
+                            }
+
+                            def 'should override on call'() {
+                            }
+                        }
+                    </code></pre>
+                </section>
+                <section>
+                    <pre style="width: 100%; margin: 0;"><code class="groovy" data-trim contentEditable="true" data-line-numbers="" 
+                        style="max-height: 50em; line-height: 1.05; font-size: .65em;">
+                        class ScheduleSpec extends Specification {
+                            def 'should throw when scheduling for the taken date'() {
+                                expect:
+                                true
+                            }
+                        
+                            def 'should throw when scheduling with the taken room'() {
+                                expect:
+                                true
+                            }
+                        
+                            def 'should schedule a new on call date'() {
+                                expect:
+                                true
+                            }
+                        
+                            def 'should throw when scheduling a visit to an absent doctor'() {
+                                expect:
+                                true
+                            }
+                        
+                            def 'should throw when scheduling a visit for the taken date'() {
+                                expect:
+                                true
+                            }
+                        
+                            def 'should schedule a new visit'() {
+                                expect:
+                                true
+                            }
+                        
+                            def 'should throw when overriding on call with a doctor with a different specialization'() {
+                                expect:
+                                true
+                            }
+                        
+                            def 'should override on call'() {
+                                expect:
+                                true
+                            }
+                        }
+                    </code></pre>
+                    <aside class="notes">
+                        given-expect albo given-when-then; do tego and wszędzie
+                    </aside>
+                </section>
+                <section>
+                    <h3>Groovy - idealny do DSL</h3>
+                    <pre class="fragment"
+                        style="margin: 0; width: 100%; background: white;"><code class="groovy" data-trim contentEditable="true">
+                        def end = start + Duration.of(2, HOURS) // method "plus"
+
+                    </code><code class="groovy fragment" data-trim contentEditable="true">toTest.getPatient() == null // equals
+
+                    </code><code class="groovy fragment" data-trim contentEditable="true">entry.doctor // getDoctor()
+
+                    </code><code class="groovy fragment" data-trim contentEditable="true">[roomFoo, new Room('bar')] // new ArrayList()
+
+                    </code><code class="groovy fragment" data-trim contentEditable="true">factory() // lambda execution
+
+                    </code><code class="groovy fragment" data-trim contentEditable="true">thrown DateAlreadyTakenException</code></pre>
+                    <!-- TODO: mock 1 * -->
+                    <aside class="notes">
+                        Polecam każdemu, może nawet z JUnitem warto wziąć Groovyego do testów
+                        <br>Brak średników - w sumie podobnie w lambdach, nie?
+                        <br>
+                        przeciążone operatory
+                        <br>
+                        spacja zamiast kropki
+                    </aside>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section data-transition="zoom-in none">
+                    <article
+                        style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;">
+                        <pre style="margin: 0;"><code class="java" data-trim contentEditable="true" data-line-numbers="" 
+                            style="max-height: 50em; line-height: 1.05; font-size: .5em;">
+                            private Schedule toTest;
+
+                            @BeforeEach
+                            void init() {
+                                toTest = new Schedule();
+                            }
+
+                            @Test
+                            @DisplayName("should throw when scheduling for the taken date")
+                            void scheduleOnCall_throwsWhenDateAlreadyTaken() {
+                                // given
+                                Doctor first = exampleSurgeon();
+                                var start = ZonedDateTime.now();
+                                var end = start.plusHours(2);
+                                // and
+                                toTest.scheduleOnCall(first, start, end);
+
+                                // when
+                                Doctor second = exampleSurgeon();
+                                var start2 = start.plusHours(1);
+
+                                // then
+                                assertThrows(
+                                    DateAlreadyTakenException.class, 
+                                    () -> toTest.scheduleOnCall(second, start2, end)
+                                );
+                            }
+
+                            private static Doctor exampleSurgeon() {
+                                return new Doctor(Specialization.SURGEON);
+                            }
+                        </code></pre>
+                        <pre style="margin: 0;"><code class="groovy" data-trim contentEditable="true" data-line-numbers="" 
+                            style="max-height: 50em; line-height: 1.05; font-size: .5em;">
+                            @Subject
+                            private Schedule toTest
+
+
+                            def setup() {
+                                toTest = new Schedule()
+                            }
+
+
+                            def 'should throw when scheduling for the taken date'() {
+                                given:
+                                Doctor first = exampleSurgeon()
+                                def start = ZonedDateTime.now()
+                                def end = start.plusHours(2)
+                                and:
+                                toTest.scheduleOnCall(first, start, end)
+                                
+                                when:
+                                Doctor second = exampleSurgeon()
+                                def start2 = start.plusHours(1)
+                                and:
+                                toTest.scheduleOnCall(second, start2, end)
+                                
+                                then:
+                                thrown DateAlreadyTakenException
+                            }
+
+
+                            private static Doctor exampleSurgeon() {
+                                new Doctor(Specialization.SURGEON)
+                            }
+                        </code></pre>
+                        <aside class="notes">
+                            Tak naprawdę oba mają po 28 linijek, ale dałem entery przy assertThrows, żeby się zmieściło
+                            bez scrolla, a w Spocku zwiększyłem przerwy
+                            <br>
+                            groofy func(a) == func a
+                            <br>
+                            when i then powinien też pokolorować
+                        </aside>
+                    </article>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section data-transition="zoom-in none">
+                    <h3 style="margin: 0">
+                        <a
+                            href="https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests">Parametryzowanie</a>
+                    </h3>
+                    <pre class="fragment" style="width: 100%; margin: 0;"><code class="groovy" data-trim contentEditable="true" data-line-numbers="1,2,4,9,12-18" 
+                        style="max-height: 50em; line-height: 1.05; font-size: .7em;">
+                        @ParameterizedTest(name = "{index}: {0}")
+                        @MethodSource
+                        @DisplayName("should interfere when start between an existing start and end")
+                        void interferesWith_otherWhichStartsBeforeThisEnds(ZonedDateTime startBetween) {
+                            // given
+                            ZonedDateTime lateEnd = startBetween.plusHours(2);
+
+                            // expect
+                            assertTrue(entry.interferesWith(exampleEntry(startBetween, lateEnd)));
+                        }
+
+                        static Stream&lt;String> interferesWith_otherWhichStartsBeforeThisEnds() {
+                            return Stream.of(
+                                    start.plusSeconds(1).toString(),
+                                    start.plusHours(1).toString(),
+                                    end.minusSeconds(1).toString()
+                            );
+                        }
+                    </code></pre>
+                    <ul style="font-size: .85em;">
+                        <li class="fragment">
+                            <code>@CsvSource</code>,
+                            <code>@CsvFileSource</code>
+                        </li>
+                        <li class="fragment">
+                            <code>@ValueSource</code>, np.
+                            <pre style="margin:0;display:inline-block;"><code class="java" data-trim contenteditable="true">
+                                @ValueSource(ints = { 1, 2, 3 })
+                            </code></pre>
+                        </li>
+                        <li class="fragment">
+                            <code>@EnumSource</code>, np.
+                            <pre style="margin:0;display:inline-block;"><code class="java" data-trim contenteditable="true">
+                                @EnumSource(ChronoUnit.class)
+                            </code></pre>
+                        </li>
+                        <li class="fragment">
+                            <code>@ArgumentsSource</code> - reużywanie <code>Arguments</code>
+                        </li>
+                        <li class="fragment">
+                            <code>@NullAndEmptySource</code> + <code>null</code> + <code>empty</code>
+                        </li>
+                    </ul>
+                    <aside class="notes">Gdzieś tam wyszedłem z TestNG i czego mi zawsze brakowało to parametryzowania
+                        <br>
+                        String, a wchodzi jako data - szczegóły w dokumentacji, ale dużo konwersji możliwych
+                        <br>
+                        Arguments - klasa reprezentująca wszystkie argumenty funkcji, po kolei
+                    </aside>
+                </section>
+                <section data-background-image="img/parametrized.png" data-background-size="contain"></section>
+                <section>
+                    <pre style="width: 100%;"><code class="groovy" data-trim contentEditable="true" data-line-numbers="1,2,4,9-14" 
+                        style="max-height: 50em; line-height: 1.05; font-size: .8em;">
+                        @Unroll
+                        def 'should interfere when start between an existing start and end'() {
+                            given:
+                            def lateEnd = startBetween + of(2, HOURS)
+
+                            expect:
+                            entry.interferesWith(exampleEntry(startBetween, lateEnd))
+
+                            where:
+                            startBetween &lt;&lt; [
+                                    start + of(1, SECONDS),
+                                    start + of(30, MINUTES),
+                                    end - of(1, SECONDS)
+                            ]
+                        }
+                    </code></pre>
+                    <pre style="width: 100%;" class="fragment"><code class="groovy" data-trim contentEditable="true" data-line-numbers="1,2,4,9-13" 
+                    style="max-height: 50em; line-height: 1.05; font-size: .8em;">
+                        @Unroll
+                        def 'should interfere when end between an existing start and end (#description)'() {
+                            given:
+                            def newStart = endBetween - of(2, HOURS)
+
+                            expect:
+                            entry.interferesWith(exampleEntry(newStart, endBetween))
+
+                            where:
+                            endBetween             | description
+                            end - of(1, SECONDS)   | 'end 1s earlier'
+                            start + of(1, SECONDS) | 'end 1s after start'
+                            start + of(1, HOURS)   | 'end in between'
+                        }
+                    </code></pre>
+                </section>
+                <section data-background-image="img/unroll.png" data-background-size="contain"></section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section data-transition="zoom-in none">
+                    <h3 style="margin: 0">
+                        <a
+                            href="https://junit.org/junit5/docs/current/user-guide/#writing-tests-tagging-and-filtering">Grupowanie</a>
+                    </h3>
+                    <ul>
+                        <li class="fragment">
+                            <code>@RepeatedTest(10)</code>
+                        </li>
+                        <li class="fragment">
+                            <a href="https://junit.org/junit5/docs/current/user-guide/#writing-tests-nested">
+                                <code>@Nested</code>
+                            </a>
+                        </li>
+                        <li class="fragment">
+                            <code>@Tag</code>, np.
+                            <pre style="margin: 0; display: inline-block;"><code class="java" data-trim contentEditable="true"
+                                style="max-height: 40em; line-height: 1.05; font-size: .75em;">
+                                @Tag("unit")
+                                class ScheduleTest {
+                            </code></pre>
+                            <pre style="margin: 0; display: inline-block;"><code class="groovy" data-trim contentEditable="true"
+                                style="max-height: 40em; line-height: 1.05; font-size: .75em;">
+                                test {
+                                    useJUnitPlatform {
+                                        includeTags 'unit'
+                                    }
+                                }
+                            </code></pre>
+                        </li>
+                    </ul>
+                    <aside class="notes">
+                        @RepeatedTest - można ograć unrollem w Spocku
+                        <br>
+                        @Tag - chyba nie dla Spocka jeszcze, a @Category chyba śmigało;
+                        <br>
+                        jest też <code>excludeTags</code>
+                        <br> @Nested też nie śmiga w Spocku, brak odpowiednika
+                    </aside>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section data-transition="zoom-in none">
+                    <h3 style="margin: 0">
+                        <a
+                            href="https://junit.org/junit5/docs/current/user-guide/#writing-tests-dynamic-tests">Dynamika</a>
+                    </h3>
+                    <pre class="fragment" style="margin: 0; display: inline-block;"><code class="java" data-trim contentEditable="true"
+                        style="max-height: 40em; line-height: 1.05; font-size: .7em;">
+                        @TestFactory
+                        @DisplayName("is identified by its values")
+                        Stream&lt;DynamicNode> generateEqualityTests() {
+                            return Stream.&lt;Supplier&lt;ScheduleEntry>>of(
+                                    () -> new ScheduleEntry(
+                                            new Doctor(Specialization.SURGEON),
+                                            start,
+                                            end,
+                                            new Room("example"),
+                                            new Patient("Frank")
+                                    ), () -> new ScheduleEntry(
+                                            new Doctor(Specialization.SURGEON),
+                                            start,
+                                            end,
+                                            new Room("example")
+                                    )
+                            ).map(factory ->
+                                    dynamicTest(
+                                            factory.get().getPatient() != null ? "with patient" : "without patient",
+                                            () -> assertEquals(factory.get(), factory.get())
+                                    )
+                            );
+                        }
+                    </code></pre>
+                    <img src="img/dynamic.png" class="pure-img fragment">
+                </section>
+                <section>
+                    <h3>Test DSL</h3>
+                    <pre style="margin: 0; display: inline-block;" class="fragment"><code class="java" data-trim contentEditable="true"
+                        style="max-height: 40em; line-height: 1.05; font-size: .75em;">
+                        @TestFactory
+                        @DisplayName("calculateSquare")
+                        Stream&lt;DynamicNode> dynamicTestsWithContainers() {
+                            Function&lt;Integer, Long> testExecution = (input) -> toTest.calculateSquare(input);
+
+                            return Stream.of(
+                                    new TestSuite("positive numbers", new TestCase[]{
+                                            new TestCase(3, 9L),
+                                            new TestCase(100, 10_000L)
+                                    }),
+                                    new TestSuite("negative numbers", new TestCase[]{
+                                            new TestCase(-3, 9L)
+                                    }),
+                                    new TestSuite("specific numbers", new TestCase[]{
+                                            new TestCase(1, 1L),
+                                            new TestCase(0, 0L)
+                                    }),
+                                    new TestSuite("big numbers", new TestCase[]{
+                                            new TestCase(Integer.MAX_VALUE, 4_611_686_014_132_420_609L),
+                                            new TestCase(Integer.MIN_VALUE, 4_611_686_018_427_387_904L)
+                                    })
+                            ).map(testSuite -> testSuite.toDynamicContainer(testExecution));
+                        }
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Spock? <code class="groovy fragment">@Unroll</code></h3>
+                    <pre style="width: 100%; margin: 0;" class="fragment"><code class="groovy" data-trim contentEditable="true" data-line-numbers="" 
+                        style="max-height: 50em; line-height: 1.05; font-size: .75em;">
+                        @Unroll
+                        def 'is identified by its values (#description)'() {
+                            expect:
+                            factory() == factory()
+
+                            where:
+                            factory &lt;&lt; [
+                                    () -> new ScheduleEntry(
+                                            new Doctor(Specialization.SURGEON),
+                                            start,
+                                            end,
+                                            new Room('example'),
+                                            new Patient('Frank')
+                                    ),
+                                    () -> new ScheduleEntry(
+                                            new Doctor(Specialization.SURGEON),
+                                            start,
+                                            end,
+                                            new Room('example')
+                                    )
+                            ]
+                            description &lt;&lt; ['with patient', 'without patient']
+                        }
+                    </code></pre>
+                    <aside class="notes">Groovy 3 = "zwykłe" lambdy + fajne odpalanie</aside>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section data-transition="zoom-in none">
+                    <h3>Asercje</h3>
+                    <pre style="margin: 0; background: white; width: 100%;"
+                        class="fragment"><code class="java fragment" style="display: inline-block; line-height: 1.05; padding-bottom: 0" data-trim contentEditable="true">var e = </code><code class="java" contentEditable="true" style="line-height: 1.05; padding-top: 0;">    assertThrows(
+            RoomAlreadyTakenException.class,
+            () -> toTest.scheduleOnCall(new ScheduleEntry(
+                    exampleSurgeon(),
+                    start.plusHours(1),
+                    start.plusHours(3),
+                    roomFoo
+            ))
+    );</code><code class="java fragment" style="line-height: 1.05;" data-trim contentEditable="true">assertEquals("Cannot schedule for a room \"foo\"", e.getMessage());</code></pre>
+                    <p class="fragment">
+                        <code>assertEquals(actual, expected)</code>
+                        <br>
+                        czy
+                        <br>
+                        <code class="fragment highlight-green">assertEquals(expected, actual)</code>
+                        <br>
+                        ?
+                    </p>
+                    <aside class="notes">Jest jakiś powód, dla którego powstało AssertJ</aside>
+                </section>
+                <section data-background-image="img/spock-assert.png" data-background-size="contain"></section>
+                <section data-background-image="img/spock-assert-2.png" data-background-size="contain">
+                    <article class="fragment">
+                        <pre style="width: 100%; margin: 0;"><code class="groovy" data-trim contentEditable="true">
+                            then:
+                            def e = thrown RoomAlreadyTakenException
+                            e.message.contains(roomFoo.name)
+                        </code></pre>
+                    </article>
+                </section>
+                <section>
+                    <h3>Agregowanie</h3>
+                    <pre style="width: 100%; margin: 0;" class="fragment"><code class="java" data-trim contentEditable="true" data-line-numbers="4,6,8-12" 
+                        style="max-height: 50em; font-size: .8em;">
+                        @Test
+                        @DisplayName("should schedule a new on call date")
+                        void scheduleOnCall_worksAsExpected() {
+                          assertAll(
+                            // first schedule = works as a charm!
+                            () -> assertDoesNotThrow(() -> toTest.scheduleOnCall(exampleEntry(start, end))),
+                            // second time? NO WAY, already scheduled
+                            () -> assertThrows(
+                              BusinessScheduleException.class,
+                              () -> toTest.scheduleOnCall(exampleEntry(start, end))
+                            )
+                          );
+                        }
+                    </code></pre>
+                    <aside class="notes">
+                        All jest fajny, bo się nie blokuje na pierwszym wywaleniu
+                    </aside>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section data-transition="zoom">
+                    <h4>(Moje) podsumowanie</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th class="fragment" data-fragment-index="1">Moc</th>
+                                <th class="fragment" data-fragment-index="3">IDE</th>
+                                <th class="fragment" data-fragment-index="5">API</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    JUnit <img src="img/junit5-logo.png" class="pure-img" style="height: 1em;;">
+                                </td>
+                                <td class="fragment" data-fragment-index="2">🤩</td>
+                                <td class="fragment" data-fragment-index="4">🤩</td>
+                                <td class="fragment" data-fragment-index="6">🙂</td>
+                            </tr>
+                            <tr>
+                                <td style="font-family: -apple-system, BlinkMacSystemFont, sans-serif;">
+                                    Spock
+                                </td>
+                                <td class="fragment" data-fragment-index="2">🤩</td>
+                                <td class="fragment" data-fragment-index="4">🤨</td>
+                                <td class="fragment" data-fragment-index="6">🤩</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <aside class="notes">
+                        moc = możliwości
+                        <br>
+                        ide = np. generowanie klas, ale też narzędziówka - Maven, Gradle
+                        <br>
+                        API = łatwość robienia np. dynamicznych testów
+                        <br>
+                        spock = 3/3 moc (i mock i dobre pomysły), 1/3 wsparcie ide (np. generowanie klas), 3/3 API;
+                        jakaś tabelka i 3-stopniowa skala, jakieś emoji
+                        <br>
+                        junit 5 = 3/3 moc (nie ma mocków, ale np. Tag), 3/3 super wsparcie, 2/3 API (trudniej napisać
+                        dynamiczne albo parametryzowane testy)
+                    </aside>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section data-transition="zoom">
+                    <h3 class="fragment" style="margin: 0" data-fragment-index="4">Dzięki!</h3>
+                    <a
+                        href="https://www.reddit.com/r/ProgrammerHumor/comments/c2tc0l/when_all_200_of_your_junit_tests_pass/">
+                        <img src="img/pass.jpg" class="pure-img" style="width: 75%;">
+                    </a>
+                    <ul>
+                        <li class="fragment" data-fragment-index="1">
+                            Newsletter + raport JS:
+                            <a href="https://mat3e.github.io/trendy">
+                                mat3e.github.io/trendy
+                            </a>
+                        </li>
+                        <li class="fragment" data-fragment-index="2">
+                            <a href="https://github.com/mat3e/schedule-domain-junit-spock">
+                                github.com/mat3e/schedule-domain-junit-spock
+                            </a>
+                        </li>
+                        <li class="fragment" data-fragment-index="3">
+                            <a href="https://mat3e.github.io/talks/junit-spock/jcon.html">
+                                mat3e.github.io/talks/junit-spock/jcon
+                            </a>
+                        </li>
+                    </ul>
+                    <aside class="notes">Takich wyników każdemu</aside>
+                </section>
+            </section>
+        </div>
+    </div>
+    <script src="js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script src="js/babel.min.js"></script>
+    <script>
+        const controls = (function () {
+            Reveal.initialize({
+                history: true,
+                // - null: Media will only autoplay if data-autoplay is present
+                autoPlayMedia: null,
+                transition: 'fade', // none/fade/slide/convex/concave/zoom
+                transitionSpeed: 'default', // default/fast/slow
+                backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
+                dependencies: [
+                    { src: 'js/classList.js', condition: function () { return !document.body.classList; } },
+
+                    { src: 'js/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                    { src: 'js/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+
+                    // Syntax highlight for <code> elements
+                    { src: 'js/highlight.js', callback: function () { setTimeout(() => hljs.initHighlightingOnLoad(), 0); } },
+
+                    // Zoom in and out with Alt+click
+                    { src: 'js/zoom.js' },
+
+                    { src: 'notes/notes.js' },
+
+                    { src: 'js/math.js' }
+                ]
+            });
+
+            document.querySelectorAll('.reveal .slides section:not([data-background-image])').forEach(s => {
+                s.setAttribute('data-background-image', 'img/twitter.png');
+                s.setAttribute('data-background-size', '240px');
+                s.setAttribute('data-background-position', '20px 20px');
+            });
+
+            return {
+                evalCode(btn) {
+                    eval(extractCodeFromBefore(btn));
+                }
+            }
+
+            function extractCodeFromBefore(btn) {
+                return [...btn.parentElement.querySelectorAll('pre')].filter(e => getComputedStyle(e).display !== 'none')[0].innerText;
+            }
+        })();
+    </script>
+</body>
+
+</html>
