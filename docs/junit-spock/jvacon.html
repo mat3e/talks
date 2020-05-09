@@ -280,7 +280,7 @@
                         <li>
                             <ul class="fragment" style="padding: .1em; line-height: 1">
                                 <li>
-                                    <a href="https://www.udemy.com/fajny-javascript/?couponCode=OPENALL">
+                                    <a href="https://full-stack.engineering/">
                                         <img src="img/udemy.svg" class="pure-img" style="height: 1.5em;">
                                     </a>
                                 </li>
@@ -625,6 +625,21 @@
                     </code><code class="groovy fragment" data-trim contentEditable="true">[roomFoo, new Room('bar')] // new ArrayList()
 
                     </code><code class="groovy fragment" data-trim contentEditable="true">factory() // lambda execution
+
+                    </code><code class="groovy fragment" data-trim contentEditable="true">toTest.snapshot.entries.sort { it.from } // collection processing
+
+                    </code><code class="groovy fragment" data-trim contentEditable="true">result[0] // result.get(0)
+
+                    </code><code class="groovy fragment" data-trim contentEditable="true">
+                    private static ScheduleEntry exampleVisit( // default params
+                        ZonedDateTime from = start, 
+                        ZonedDateTime to = end
+                    ) { /* ... */ }
+
+                    </code><code class="groovy fragment" data-trim contentEditable="true">
+                    private static Doctor exampleSurgeon() {
+                        new Doctor(Specialization.SURGEON) // look ma, no return
+                    }
 
                     </code><code class="groovy fragment" data-trim contentEditable="true">thrown DateAlreadyTakenException</code></pre>
                     <!-- TODO: mock 1 * -->
@@ -977,7 +992,7 @@
                         <br>
                         ?
                     </p>
-                    <aside class="notes">Jest jakiś powód, dla którego powstało AssertJ</aside>
+                    <aside class="notes">A dla TestNG jest odwrotnie ;) jest jakiś powód, dla którego powstało AssertJ</aside>
                 </section>
                 <section data-background-image="img/spock-assert.png" data-background-size="contain"></section>
                 <section data-background-image="img/spock-assert-2.png" data-background-size="contain">
