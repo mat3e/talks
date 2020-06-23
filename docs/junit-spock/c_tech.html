@@ -268,10 +268,10 @@
                                 <li style="line-height: 1">&nbsp;</li>
                                 <li class="fragment" style="line-height: .75">
                                     <a style="font-size: .75em; font-weight: bold;"
-                                        href="https://mat3e.github.io/talks/junit-spock/jvacon.html">
+                                        href="https://mat3e.github.io/talks/junit-spock/c_tech.html">
                                         mat3e.github.io/talks
                                         <div style="padding-left: 5em;">
-                                            /junit-spock/jvacon</div>
+                                            /junit-spock/c_tech</div>
                                     </a>
                                 </li>
                                 <li style="line-height: 1">&nbsp;</li>
@@ -444,6 +444,8 @@
                         <br>
                         The goal is to create an up-to-date foundation for developer-side testing on the JVM. This
                         includes focusing on Java 8 and above, as well as enabling many different styles of testing.
+                        <br>
+                        Ale JUnit służył jako platforma do uruchamiania innych już wcześniej
                     </aside>
                 </section>
             </section>
@@ -650,6 +652,8 @@
                         przeciążone operatory
                         <br>
                         spacja zamiast kropki
+                        <br>
+                        Nie trzeba Exception.class, tylko Exception
                     </aside>
                 </section>
             </section>
@@ -838,48 +842,6 @@
                 <section data-transition="zoom-in none">
                     <h3 style="margin: 0">
                         <a
-                            href="https://junit.org/junit5/docs/current/user-guide/#writing-tests-tagging-and-filtering">Grupowanie</a>
-                    </h3>
-                    <ul>
-                        <li class="fragment">
-                            <code>@RepeatedTest(10)</code>
-                        </li>
-                        <li class="fragment">
-                            <a href="https://junit.org/junit5/docs/current/user-guide/#writing-tests-nested">
-                                <code>@Nested</code>
-                            </a>
-                        </li>
-                        <li class="fragment">
-                            <code>@Tag</code>, np.
-                            <pre style="margin: 0; display: inline-block;"><code class="java" data-trim contentEditable="true"
-                                style="max-height: 40em; line-height: 1.05; font-size: .75em;">
-                                @Tag("unit")
-                                class ScheduleTest {
-                            </code></pre>
-                            <pre style="margin: 0; display: inline-block;"><code class="groovy" data-trim contentEditable="true"
-                                style="max-height: 40em; line-height: 1.05; font-size: .75em;">
-                                test {
-                                    useJUnitPlatform {
-                                        includeTags 'unit'
-                                    }
-                                }
-                            </code></pre>
-                        </li>
-                    </ul>
-                    <aside class="notes">
-                        @RepeatedTest - można ograć unrollem w Spocku
-                        <br>
-                        @Tag - chyba nie dla Spocka jeszcze, a @Category chyba śmigało;
-                        <br>
-                        jest też <code>excludeTags</code>
-                        <br> @Nested też nie śmiga w Spocku, brak odpowiednika
-                    </aside>
-                </section>
-            </section>
-            <section data-background-image="" data-transition="zoom">
-                <section data-transition="zoom-in none">
-                    <h3 style="margin: 0">
-                        <a
                             href="https://junit.org/junit5/docs/current/user-guide/#writing-tests-dynamic-tests">Dynamika</a>
                     </h3>
                     <pre class="fragment" style="margin: 0; display: inline-block;"><code class="java" data-trim contentEditable="true"
@@ -972,6 +934,48 @@
             </section>
             <section data-background-image="" data-transition="zoom">
                 <section data-transition="zoom-in none">
+                    <h3 style="margin: 0">
+                        <a
+                            href="https://junit.org/junit5/docs/current/user-guide/#writing-tests-tagging-and-filtering">Grupowanie</a>
+                    </h3>
+                    <ul>
+                        <li class="fragment">
+                            <code>@RepeatedTest(10)</code>
+                        </li>
+                        <li class="fragment">
+                            <a href="https://junit.org/junit5/docs/current/user-guide/#writing-tests-nested">
+                                <code>@Nested</code>
+                            </a>
+                        </li>
+                        <li class="fragment">
+                            <code>@Tag</code>, np.
+                            <pre style="margin: 0; display: inline-block;"><code class="java" data-trim contentEditable="true"
+                                style="max-height: 40em; line-height: 1.05; font-size: .75em;">
+                                @Tag("unit")
+                                class ScheduleTest {
+                            </code></pre>
+                            <pre style="margin: 0; display: inline-block;"><code class="groovy" data-trim contentEditable="true"
+                                style="max-height: 40em; line-height: 1.05; font-size: .75em;">
+                                test {
+                                    useJUnitPlatform {
+                                        includeTags 'unit'
+                                    }
+                                }
+                            </code></pre>
+                        </li>
+                    </ul>
+                    <aside class="notes">
+                        @RepeatedTest - można ograć unrollem w Spocku
+                        <br>
+                        @Tag - chyba nie dla Spocka jeszcze, a @Category chyba śmigało;
+                        <br>
+                        jest też <code>excludeTags</code>
+                        <br> @Nested też nie śmiga w Spocku, brak odpowiednika
+                    </aside>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section data-transition="zoom-in none">
                     <h3>Asercje</h3>
                     <pre style="margin: 0; background: white; width: 100%;"
                         class="fragment"><code class="java fragment" style="display: inline-block; line-height: 1.05; padding-bottom: 0" data-trim contentEditable="true">var e = </code><code class="java" contentEditable="true" style="line-height: 1.05; padding-top: 0;">    assertThrows(
@@ -992,7 +996,8 @@
                         <br>
                         ?
                     </p>
-                    <aside class="notes">A dla TestNG jest odwrotnie ;) jest jakiś powód, dla którego powstało AssertJ</aside>
+                    <aside class="notes">A dla TestNG jest odwrotnie ;) jest jakiś powód, dla którego powstało AssertJ
+                    </aside>
                 </section>
                 <section data-background-image="img/spock-assert.png" data-background-size="contain"></section>
                 <section data-background-image="img/spock-assert-2.png" data-background-size="contain">
@@ -1075,6 +1080,42 @@
             </section>
             <section data-background-image="" data-transition="zoom">
                 <section data-transition="zoom">
+                    <h3>A co z TestNG?</h3>
+                    <pre style="width: 100%; margin: 0;" class="fragment"><code class="java" data-trim contentEditable="true" data-line-numbers="" class="fragment"
+                        style="max-height: 50em; font-size: .8em; line-height: 1.05;">
+                    @Test(
+                        dataProvider = "configuredProprietaryAndNotProprietaryDataSources", 
+                        testName = "should pass when valid license",
+                        groups = "unit"
+                    )
+                    public void shouldPassWhenValidLicenseAndProprietaryDataSources(
+                        List&lt;CatalogType> proprietaryCatalogTypes,
+                        List&lt;CatalogType> otherCatalogTypes
+                    ) {
+                        // ...
+                    }
+
+                    @DataProvider
+                    public Object[][] configuredProprietaryAndNotProprietaryDataSources() {
+                        return new Object[][] {
+                            { asList(ORACLE, TERADATA), asList(KAFKA, MYSQL, MONGODB) },
+                            { singletonList(ORACLE), asList(MYSQL, KAFKA, S3) },
+                            { singletonList(TERADATA), asList(S3, MYSQL) },
+                            { singletonList(SNOWFLAKE), asList(S3, MYSQL) }
+                        };
+                    }
+                </code></pre>
+                    <aside class="notes">
+                        Kod na szybko skopiowany z pracy :P
+                        <br>
+                        warto wspomnieć, bo był runnerem, zanim to było modne, testng.xml gdzie definiujemy jak i co
+                        odpalać (np. jakie grupy, da się też JUnit 3, 4), parametryzowanie - trochę toporne, ale jednak,
+                        dużo dobrych pomysłów, które moim zdaniem są lepiej zrealizowane w JUnit i Spock obecnie
+                    </aside>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section data-transition="zoom">
                     <h3 class="fragment" style="margin: 0" data-fragment-index="4">Dzięki!</h3>
                     <a
                         href="https://www.reddit.com/r/ProgrammerHumor/comments/c2tc0l/when_all_200_of_your_junit_tests_pass/">
@@ -1093,8 +1134,8 @@
                             </a>
                         </li>
                         <li class="fragment" data-fragment-index="3">
-                            <a href="https://mat3e.github.io/talks/junit-spock/jvacon.html">
-                                mat3e.github.io/talks/junit-spock/jvacon
+                            <a href="https://mat3e.github.io/talks/junit-spock/c_tech.html">
+                                mat3e.github.io/talks/junit-spock/c_tech
                             </a>
                         </li>
                     </ul>
