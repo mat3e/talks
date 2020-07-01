@@ -1,5 +1,5 @@
 ## 2020
-* C_tech [LIVE] [24.06]: _Fajne testowanie w Javie - JUnit 5 vs. Spock_ [🔗](https://mat3e.github.io/talks/junit-spock/c_tech) [📽️](https://www.facebook.com/ConnectisPL/videos/733862230692507)
+* C_tech [LIVE] [24.06]: _Fajne testowanie w Javie - JUnit 5 vs. Spock_ [🔗](https://mat3e.github.io/talks/junit-spock/c_tech) [📽️](https://youtu.be/7oXV7PcVizI?t=4061)
 * C_tech Katowice [20.02]: _Subiektywny przegląd sytuacji na froncie (2020)_ [🔗](https://mat3e.github.io/talks/fe-overview/c_tech_kato.html)
 * WarsawJS 66 [12.02]: _Server-side rendered micro-frontends on AWS Lambda_ [🔗](https://mat3e.github.io/talks/micro-frontends/WarsawJS) [📽️](https://youtu.be/bOkZ7327FLg)
 * Allegro Tech Talks Toruń 35 [05.02]: _Server-side rendered micro-frontends on AWS Lambda_ [🔗](https://mat3e.github.io/talks/micro-frontends/att) [📽️](https://www.facebook.com/allegro.tech/videos/2885440594847210/)
