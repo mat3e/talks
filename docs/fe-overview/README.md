@@ -1,3 +1,11 @@
+# My personal front-end overview (2020)
+
+"New day, new framework". How to handle this?
+
+I follow front-end trends and I want to share my thoughts on them. Both experienced front-end developers and the beginners, expecting a quick summary, should find something valuable for them in my talk.
+
+What are the main front-end players? Is Vue more popular than React? What about Angular? Can we use some kind of a common, framework-independent code? What are the trends and what is the future of JavaScript? What has happened in 2020? I will do my best to address these questions in an entertaining way.
+
 # My personal front-end overview (2019)
 
 "New day, new framework". How to handle this?
@@ -13,6 +21,14 @@ What are the main front-end players? Is Vue more popular than React? Can we use 
 Why React wins with Angular? How about Vue? Are there any other big players? What is going on with jQuery? What are the trends and what is the future of the front-end? I will do my best to address those questions in an entertaining way.
 
 ___
+
+# Subiektywny przegląd front-endów (2020)
+
+"Nowy dzień, nowy framework". Jak żyć? 
+
+Jestem jedną z osób, śledzących front-endy i pragnę podzielić się swoimi obserwacjami. Zarówno mający na ten temat własne przemyślenia jak i oczekujący "pigułki", dającej im pewien ogląd sytuacji, powinni znaleźć tutaj coś dla siebie. 
+
+Jacy są główni gracze, jeśli chodzi o front-end? Co jest bardziej popularne? React? Vue? Czy jest jakaś nadzieja na wspólny kod, niezależny od użytych frameworków? Jakie są trendy i przyszłość JS-a? Czego możemy się spodziewać w 2020 roku? Na te i inne pytania postaram się odpowiedzieć w rozrywkowej formie.
 
 # Subiektywny przegląd sytuacji na froncie (2019)
 
