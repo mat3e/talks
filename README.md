@@ -1,5 +1,8 @@
+> ## 2021
+> * Talk4Devs 65 [24.02]: _Moje rozumienie DDD (+ clean architecture) na przykładzie bajki o 3 świnkach_
+
 ## 2020
-* 4Developers 2020 [16.09]: _Moje rozumienie DDD (+ clean architecture) na przykładzie bajki o 3 świnkach_ [🔗](https://mat3e.github.io/talks/3pigs/4developers.html)
+* 4Developers 2020 [16.09]: _Moje rozumienie DDD (+ clean architecture) na przykładzie bajki o 3 świnkach_ [🔗](https://mat3e.github.io/talks/3pigs/4developers.html) [📽️](https://youtu.be/vrYPtjxYdgE)
 * C_tech [LIVE] [24.06]: _Fajne testowanie w Javie - JUnit 5 vs. Spock_ [🔗](https://mat3e.github.io/talks/junit-spock/c_tech) [📽️](https://youtu.be/7oXV7PcVizI?t=4061)
 * C_tech Katowice [20.02]: _Subiektywny przegląd sytuacji na froncie (2020)_ [🔗](https://mat3e.github.io/talks/fe-overview/c_tech_kato.html)
 * WarsawJS 66 [12.02]: _Server-side rendered micro-frontends on AWS Lambda_ [🔗](https://mat3e.github.io/talks/micro-frontends/WarsawJS) [📽️](https://youtu.be/bOkZ7327FLg)
@@ -18,7 +21,7 @@
 * dynamIT 2019 [17.08]: _Web Componenty jako lingua franca front-endu_ [🔗](https://mat3e.github.io/talks/components/dynamit#/) [📷](https://www.facebook.com/dynamIT.pro/photos/a.909091252852565/909091802852510/)
 * ship.it 5 [25.07] _Dlaczego czasem warto założyć gacie przez głowę? Statyczna strona internetowa na AWS-ie_ [🔗](https://mat3e.github.io/talks/aws-www/ship-it#/) [📷](https://www.facebook.com/ship.it.meetup/photos/a.2301773083485463/2301773213485450/?type=3)
 * meet.js Toruń 5 [23.05]: _Co ona ma, czego nie mam ja? Biblioteka React i jej klony_ [🔗](https://mat3e.github.io/talks/react-clones/meetjs.html) [📽️](https://youtu.be/l75vRjETr1s)
-* infoShare [8-9.05]: _My personal front-end overview (2019)_ [🔗](https://mat3e.github.io/talks/fe-overview/infoShare.html) [📷](https://www.facebook.com/infoshareacademy/photos/pob.1842715748/1234046890093368/?type=3&theater)
+* infoShare [8-9.05]: _My personal front-end overview (2019)_ [🔗](https://mat3e.github.io/talks/fe-overview/infoShare.html) [📷](https://www.facebook.com/infoshareacademy/photos/pob.1842715748/1234046890093368/?type=3&theater) [📽️](https://youtu.be/5mSDioimn1Q)
 * ITDay UMK [11.04]: _Subiektywny przegląd sytuacji na froncie (front-endzie)_ [🔗](https://mat3e.github.io/talks/fe-overview/UMK.html)
 * WarsawJS Meetup 56 [10.04]: _Czwarty framework_ [🔗](https://mat3e.github.io/talks/ha/WarsawJS.html) [📽️](https://youtu.be/wD9OX2Mxc80) [📷](https://www.facebook.com/warsawjs/photos/a.2631483137078013/2631483720411288/?type=3&theater)
 * ship.it 3 [21.03]: _Subiektywny przegląd sytuacji na froncie (początek 2019)_ [🔗](https://mat3e.github.io/talks/fe-overview/ship-it.html) [📽️](https://www.facebook.com/ship.it.meetup/videos/vb.2128867470776026/256414715266689) [📷](https://www.facebook.com/ship.it.meetup/photos/a.2212922172370555/2212923062370466/?type=3&theater) 
