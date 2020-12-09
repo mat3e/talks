@@ -2,6 +2,7 @@
 > * Talk4Devs 65 [24.02]: _Moje rozumienie DDD (+ clean architecture) na przykładzie bajki o 3 świnkach_
 
 ## 2020
+* WarsawJS 76 [09.12]: _JS Clean Architecture_ [🔗](https://mat3e.github.io/talks/js-arch/WarsawJS.html)
 * 4Developers 2020 [16.09]: _Moje rozumienie DDD (+ clean architecture) na przykładzie bajki o 3 świnkach_ [🔗](https://mat3e.github.io/talks/3pigs/4developers.html) [📽️](https://youtu.be/vrYPtjxYdgE)
 * C_tech [LIVE] [24.06]: _Fajne testowanie w Javie - JUnit 5 vs. Spock_ [🔗](https://mat3e.github.io/talks/junit-spock/c_tech) [📽️](https://youtu.be/7oXV7PcVizI?t=4061)
 * C_tech Katowice [20.02]: _Subiektywny przegląd sytuacji na froncie (2020)_ [🔗](https://mat3e.github.io/talks/fe-overview/c_tech_kato.html)
