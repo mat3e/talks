@@ -1,7 +1,7 @@
 Łącznie przeprowadziłem ponad 206 godzin warsztatów.
 
 ## 2019
-* GigaCon [18-19.11]: _Mikroserwisowa architektura aplikacji web – REST, CQRS, NoSQL_ [16h]
+* GigaCon [18-19.11]: _Mikroserwisowa architektura aplikacji web – REST, CQRS, NoSQL_ [16h] [🔗](https://github.com/mat3e/microservices-workshop)
 * Dedykowane szkolenie-webinar infoShare Academy [29.08, 03.09]: _Testy jednostkowe (JUnit, Mockito, AssertJ, TDD) w Springu_ [10h]
 * Allegro (Poznań) [12.06]: _Front-end dla back-endowców (Java)_ [8h]
 * Kurs infoShare Academy Java (Warszawa)
