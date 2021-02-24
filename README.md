@@ -1,4 +1,4 @@
-> ## 2021
+## 2021
 * Talk4Devs 66 [24.02]: _Moje rozumienie DDD (+ clean architecture) na przykładzie bajki o 3 świnkach_
 
 ## 2020
