@@ -1,5 +1,5 @@
 > ## 2021
-> * Talk4Devs 65 [24.02]: _Moje rozumienie DDD (+ clean architecture) na przykładzie bajki o 3 świnkach_
+* Talk4Devs 66 [24.02]: _Moje rozumienie DDD (+ clean architecture) na przykładzie bajki o 3 świnkach_
 
 ## 2020
 * WarsawJS 76 [09.12]: _JS Clean Architecture_ [🔗](https://mat3e.github.io/talks/js-arch/WarsawJS.html) [📽️](https://youtu.be/6mXM15xGtt0)
