@@ -1,5 +1,6 @@
 ## 2021
-* Talk4Devs 66 [24.02]: _Moje rozumienie DDD (+ clean architecture) na przykładzie bajki o 3 świnkach_
+> * Tech3camp 74 [09.03] _Porządkowanie kodu na froncie. JS Clean Architecture_
+* Talk4Devs 66 [24.02]: _Moje rozumienie DDD (+ clean architecture) na przykładzie bajki o 3 świnkach_ [🔗](https://mat3e.github.io/talks/3pigs/talk4devs.html) [📽️](https://youtu.be/hyh3T5O98ik)
 
 ## 2020
 * WarsawJS 76 [09.12]: _JS Clean Architecture_ [🔗](https://mat3e.github.io/talks/js-arch/WarsawJS.html) [📽️](https://youtu.be/6mXM15xGtt0)
