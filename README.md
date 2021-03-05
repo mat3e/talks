@@ -1,4 +1,7 @@
 ## 2021
+> * Click 2021 [15.04] _Moje rozumienie DDD (+ clean architecture) na przykładzie bajki o 3 świnkach_
+> * WDI 2021 [8-9.04] _SQL dobry na (prawie) wszystko z Presto/Trino_
+> * WDI 2021 [8-9.04] _Moje rozumienie DDD (+ clean architecture) na przykładzie bajki o 3 świnkach_
 > * Tech3camp 74 [09.03] _Porządkowanie kodu na froncie. JS Clean Architecture_
 * Talk4Devs 66 [24.02]: _Moje rozumienie DDD (+ clean architecture) na przykładzie bajki o 3 świnkach_ [🔗](https://mat3e.github.io/talks/3pigs/talk4devs.html) [📽️](https://youtu.be/hyh3T5O98ik)
 
