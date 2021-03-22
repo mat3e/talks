@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="description" content="Presentation">
+    <meta name="keywords" content="presentation">
+    <meta name="author" content="mat3e">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/blood.css">
+    <link rel="stylesheet" href="css/idea.css">
+    <link rel="stylesheet" href="css/fontawesome.css">
+    <link rel="stylesheet" href="css/treeview.css">
+    <style>
+        #header-margin {
+            text-align: left;
+            border-left: solid .1em white;
+            line-height: .85;
+            padding-left: .25em;
+        }
+
+        #header-logo {
+            width: 375px;
+            height: 80px;
+            background-image: url('img/twitter.png');
+            background-size: contain;
+            top: -4em;
+            right: 0;
+            position: absolute;
+        }
+
+        #about-me {
+            padding: 1em;
+            background-color: rgba(255, 255, 255, .75);
+            list-style-type: none;
+            margin-left: 0;
+            float: left;
+        }
+
+        #about-me ul {
+            list-style-type: none;
+            float: left;
+            margin-left: 0;
+            padding-left: 0;
+        }
+
+        #about-me a {
+            color: #a23;
+        }
+
+        #about-me a:hover {
+            color: #dd5566;
+        }
+
+        .slides section img.pure-img {
+            border: none;
+            box-shadow: none;
+            background: none;
+            margin: 0;
+        }
+
+        code[contenteditable="true"] {
+            border: 0;
+            outline: 0;
+        }
+
+        #perspective a {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            width: 45%;
+            margin: 0 auto;
+        }
+
+        #perspective a img {
+            border: 0;
+            margin: 0;
+            box-shadow: none;
+        }
+
+        .slides section pre {
+            margin-bottom: 0;
+        }
+
+        .slides section pre+button {
+            cursor: pointer;
+
+            font-size: .65em;
+            font-weight: 100;
+            -webkit-font-smoothing: antialiased;
+
+            color: white;
+            background: rgb(175, 30, 35);
+
+            padding: 0 3px 3px 3px;
+            border: transparent;
+            border-radius: 4px;
+
+            display: block;
+            margin: 0 auto;
+        }
+
+        .slides section pre+button:disabled {
+            background-color: grey;
+        }
+
+        .slides section a .stripped-img {
+            border: none;
+            margin: 0;
+            box-shadow: none;
+            background-color: rgba(255, 255, 255, 0);
+        }
+
+        .slides section a .stripped-img:hover {
+            border: none;
+            margin: 0;
+            box-shadow: none;
+            background-color: rgba(255, 255, 255, 0);
+        }
+
+        .slides section .comment {
+            margin-top: -20px;
+            margin-bottom: 20px;
+            color: gray;
+        }
+
+        .reveal .slides section .fragment.replace {
+            transition: none;
+            display: inline-block;
+        }
+
+        .reveal .slides section .fragment.replace.flex {
+            transition: none;
+            display: flex;
+        }
+
+        .reveal .slides section .fragment.fade-out.visible.replace {
+            display: none;
+        }
+
+        .reveal .slides section .fragment.fade-in.replace {
+            display: none;
+        }
+
+        .reveal .slides section .fragment.fade-in.visible.replace {
+            display: inline-block;
+        }
+
+        .reveal .slides section .fragment.fade-in.visible.replace.flex {
+            display: flex;
+        }
+
+        .reveal .slides section .fragment.highlight-red.visible {
+            color: #dd5566;
+        }
+
+        #hook-here button {
+            padding: 1em;
+            border-radius: 0;
+            background-color: white;
+            border: 1px solid black;
+        }
+
+        .reveal .slides section td.long-text-cell {
+            font-size: .5em;
+            vertical-align: middle;
+        }
+
+        .reveal .slides section table.summary {
+            table-layout: fixed;
+            width: 100%;
+        }
+
+        .reveal .slides section table.summary th {
+            text-align: center;
+        }
+
+        .reveal .slides section table.summary tbody td,
+        .reveal .slides section table.summary th {
+            width: 33%;
+        }
+
+        .reveal .slides section table.summary tbody td:first-child,
+        .reveal .slides section table.summary th:first-child {
+            width: 7%;
+            vertical-align: middle;
+            text-align: center
+        }
+
+        .reveal .slides section .fragment.no-highlight.visible {
+            color: #eee;
+        }
+
+        .reveal .slides section .fragment.no-highlight {
+            opacity: 1;
+            visibility: inherit;
+        }
+
+        .reveal .slides section .centered {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .Ta\(c\) {
+            text-align: center !important;
+        }
+    </style>
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section data-background-image>
+                <section data-background-image="img/elon.webp" data-background-size="cover">
+                    <div id="header-margin">
+                        <h1 style="margin: 0; font-size: 1.75em">SQL dobry na (prawie) wszystko</h1>
+                        <h2 style="font-size: 1.25em">z Presto/Trino​</h2>
+                    </div>
+                    <div id="header-logo"></div>
+                </section>
+                <section id="perspective" data-background-image="">
+                    <h5>
+                        <span>Perspektywa...</span>
+                        <span class="fragment" data-fragment-index="1"> ma znaczenie</span>
+                        <span class="fragment" data-fragment-index="2"> :)</span>
+                    </h5>
+                    <a href="https://mistrzowie.org/717022">
+                        <img src="img/perspektywa-1.jpg">
+                        <img src="img/perspektywa-2.jpg" class="fragment" data-fragment-index="1">
+                        <img src="img/perspektywa-3.jpg" class="fragment" data-fragment-index="2">
+                    </a>
+                </section>
+                <section data-background-image="img/bg-hd.jpg" data-background-transition="zoom">
+                    <ul id="about-me">
+                        <li>
+                            <ul>
+                                <li>
+                                    <a href="https://www.linkedin.com/in/mateusz-chrzonstowski/">
+                                        <i class="fab fa-linkedin"
+                                            style="color: #0077B5; background-color: #FFF; line-height: .75em"></i>
+                                        /mateusz-chrzonstowski
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://twitter.com/_mat3e_">
+                                        <i class="fab fa-twitter-square"
+                                            style="background-color: #1DA1F2; color: #FFF; line-height: .75em"></i>
+                                        /_mat3e_
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.reddit.com/user/_mat3e_">
+                                        <i class="fab fa-reddit-square"
+                                            style="background-color: #FF4500; color: #FFF; line-height: .75em"></i>
+                                        /_mat3e_
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/mat3e/">
+                                        <i class="fab fa-github-square"
+                                            style="color: #24292E; background-color: #FFF; line-height: .75em"></i>
+                                        /mat3e
+                                    </a>
+                                </li>
+                                <li style="line-height: 1">&nbsp;</li>
+                                <li class="fragment" style="line-height: .75">
+                                    <a style="font-size: .75em; font-weight: bold;"
+                                        href="https://mat3e.github.io/talks/sql/wdi21.html">
+                                        mat3e.github.io/talks/sql/wdi21
+                                    </a>
+                                    <br>
+                                    <a class="fragment" style="font-size: .75em; font-weight: bold;"
+                                        href="https://github.com/mat3e/trino-demo">
+                                        github.com/mat3e/trino-demo
+                                    </a>
+                                </li>
+                                <li style="line-height: 1">&nbsp;</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="fragment" style="padding: .1em; line-height: 1">
+                                <li>
+                                    <a href="https://full-stack.engineering/">
+                                        <img src="img/udemy.svg" class="pure-img" style="height: 1.5em;">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.starburstdata.com/careers/" class="fragment">
+                                        <img src="img/starburst.png" class="pure-img" style="height: 1.5em;">
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section>
+                    <h3><a
+                            href="https://web.archive.org/web/20070926212100/http://www.almaden.ibm.com/cs/people/chamberlin/sequel-1974.pdf">
+                            SEQUEL: A STRUCIURED ENGLISH QUERY LANGUAGE
+                        </a></h3>
+                    <cite class="fragment">SEQUEL is intended as a data base sublanguage for both the professional
+                        programmer and the more
+                        infrequent data base user.</cite>
+                    <aside class="notes">1974</aside>
+                </section>
+                <section>
+                    <pre style="width: 100%;"><code data-trim contenteditable="true" class="sql" style="max-height: 40em">
+                        SELECT 
+                          country.country_name_eng,
+                          SUM(CASE WHEN call.id IS NOT NULL THEN 1 ELSE 0 END) AS calls,
+                          AVG(
+                            ISNULL(DATEDIFF(SECOND, call.start_time, call.end_time), 0)
+                          ) AS avg_difference
+                        FROM country 
+                        LEFT JOIN city ON city.country_id = country.id
+                        LEFT JOIN customer ON city.id = customer.city_id
+                        LEFT JOIN call ON call.customer_id = customer.id
+                        GROUP BY 
+                          country.id,
+                          country.country_name_eng
+                        HAVING AVG(
+                          ISNULL(DATEDIFF(SECOND, call.start_time, call.end_time), 0)
+                        ) > (SELECT AVG(
+                          DATEDIFF(SECOND, call.start_time, call.end_time)
+                        ) FROM call)
+                        ORDER BY calls DESC, country.id ASC;
+                    </code></pre>
+                    <img src="img/leo.png" class="pure-img fragment" style="position: absolute; right: 0; bottom: 0;" />
+                </section>
+            </section>
+            <section data-background-image data-transition="zoom">
+                <section data-background-transition="zoom" data-background-image="img/cap.png"
+                    data-background-size="contain">
+                    <img src="img/9k+.gif" class="pure-img fragment"
+                        style="position: absolute; bottom: -10em; right: 0; max-width: 500px; max-height: 271px;">
+                    <aside class="notes">
+                        Nie dla biznesu, ale też problem ze skalowaniem. Następne kroki - każdy sobie, odejście od SQL
+                    </aside>
+                </section>
+                <section>
+                    <h2>Rozwiązania?</h2>
+                    <ul>
+                        <li class="fragment" data-fragment-index="1"><img src="img/spring.svg" style="height: 1em;"
+                                class="pure-img" /> Data
+                        </li>
+                        <li class="fragment" data-fragment-index="2"><img src="img/bigquery.png"
+                                style="height: 1em; background-color: rgba(255, 255, 255, .75);" class="pure-img" />
+                        </li>
+                        <li class="fragment" data-fragment-index="3"><img src="img/snowflake.png" style="height: 1em;"
+                                class="pure-img" />
+                        </li>
+                        <li class="fragment"><img src="img/athena.png"
+                                style="height: 1em; background-color: rgba(255, 255, 255, .75);" class="pure-img" />
+                        </li>
+                    </ul>
+                    <img src="img/sql-all-the-things.jpg" data-fragment-index="4" class="pure-img fragment"
+                        style="position: absolute; right: 0; bottom: 0;" />
+                    <aside class="notes">
+                        Ukrycie, wyabstraktowanie języków zapytań. Spring Data - findById
+                        <br>
+                        Inne - a czemu nie ukrywać SQL-em? BigQuery, Snowflake (ostatnio popularny) - migrowanie danych
+                        do siebie
+                    </aside>
+                </section>
+                <section>
+                    <h2><img src="img/athena.png"
+                            style="height: 1em; background-color: rgba(255, 255, 255, .75); padding: .1em .5em;"
+                            class="pure-img" /></h2>
+                    <a href="https://aws.amazon.com/athena/">
+                        <img src="img/athena-desc.png" class="pure-img fragment replace fade-out"
+                            data-fragment-index="1">
+                        <img src="img/athena-desc-red.png" class="pure-img fragment replace fade-in"
+                            data-fragment-index="1">
+                    </a>
+                    <aside class="notes">AWS tak ma, że potrafi sobie wziąć OSS, opakować i pchać dalej</aside>
+                </section>
+            </section>
+            <section data-background-image data-transition="zoom">
+                <section>
+                    <h2>Presto?</h2>
+                    <ul>
+                        <li class="fragment">Facebook => dużo danych + Hadoop</li>
+                        <li class="fragment">Nowy soft - Presto</li>
+                        <li class="fragment">Rozproszony silnik SQL (ANSI)</li>
+                        <li class="fragment">Dostęp do danych tam, gdzie leżą</li>
+                        <li class="fragment">OSS od 2013</li>
+                        <li class="fragment">Pluginy i connectory do różnych źródeł danych</li>
+                    </ul>
+                </section>
+                <section data-background-image="img/arch.jpg" data-background-size="contain"
+                    data-background-color="white">
+                    <aside class="notes">
+                        <a
+                            href="https://www.starburst.io/learn/open-source-trino/reference-architectures/">starburst.io/learn/open-source-trino/reference-architectures/</a>
+                    </aside>
+                </section>
+                <section data-background-image="img/starburst-presto.png" data-background-size="contain"
+                    data-background-color="white"></section>
+                <section>
+                    <h4 style="margin: 0">PrestoDB, PrestoSQL, Trino, ...</h4>
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <img src="img/fb.png" class="pure-img" style="width: 10%;">
+                        <a
+                            href="https://blog.starburstdata.com/original-presto-co-creators-reunite-on-the-starburst-technical-leadership-team">
+                            <img src="img/team.jpg" data-fragment-index="1" style="width: 45%"
+                                class="pure-img fragment fade-out replace">
+                            <img src="img/team2.jpg" data-fragment-index="1" style="width: 45%"
+                                class="pure-img fragment fade-in replace">
+                        </a>
+                    </div>
+                    <img src="img/arrow/down.png" class="pure-img fragment" data-fragment-index="2" style="width: 1em;">
+                    <div>
+                        <img src="img/presto.png" class="pure-img fragment" data-fragment-index="2" style="width: 2em;">
+                    </div>
+                    <h3 class="fragment" data-fragment-index="3"><img src="img/arrow/left.png" class="pure-img"
+                            style="width: 1em; margin: 0">2019<img src="img/arrow/right.png" class="pure-img"
+                            style="width: 1em;">
+                    </h3>
+                    <div class="fragment" data-fragment-index="4" style="display: flex; justify-content: space-evenly;">
+                        <h4 style="margin: 0">SQL</h4>
+                        <h4 style="margin: 0">DB</h4>
+                    </div>
+                    <h3 class="fragment" data-fragment-index="5" style="margin: 0">
+                        <img src="img/arrow/down.png" class="pure-img" style="height: .75em;">
+                        <span style="padding-left: 1.5em; padding-right: 1.5em;">2020</span>
+                        <img src="img/arrow/down.png" class="pure-img" style="height: .75em;">
+                    </h3>
+                    <div class="fragment" data-fragment-index="6" style="display: flex; justify-content: space-around;">
+                        <a href="https://trino.io/blog/2020/12/27/announcing-trino.html">
+                            <img src="img/trino.svg" class="pure-img" style="height: 1.5em">
+                        </a>
+                        <a href="https://www.starburst.io/learn/open-source-presto/prestosql-and-prestodb/">
+                            <img src="img/presto.png" class="pure-img" style="height: 1.5em">
+                        </a>
+                    </div>
+                    <aside class="notes">
+                        2012 - Eric, Martin, Dain, David
+                        <br>
+                        2019 - Martin, Dain, David + Presto Software Foundation
+                        <br>
+                        2020 - Trino, Eric dołącza do Starburst, Starburst do Presto Foundation. Nowa nazwa, bo Linux
+                        Foundation
+                        <ul>
+                            <li>prestodb/presto: “The official home of the Presto distributed SQL query engine for big
+                                data https://prestodb.github.io.”</li>
+                            <li>prestosql/presto: “Official home of Presto, the distributed SQL query engine for big
+                                data https://prestosql.io.”</li>
+                        </ul>
+                    </aside>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section data-background-image="img/coding.gif" data-background-size="cover"></section>
+                <section>
+                    <div class="pure-img fragment replace fade-out" data-fragment-index="5">
+                        <div class="fragment replace fade-out" data-fragment-index="2">
+                            <img src="img/demo/1.png" class="pure-img fragment replace fade-out" style="width: 75%;"
+                                data-fragment-index="1">
+                            <img src="img/demo/2.png" class="pure-img fragment replace fade-in" data-fragment-index="1" style="width: 75%;">
+                        </div>
+                        <div class="fragment replace fade-in" data-fragment-index="2">
+                            <img src="img/demo/3.png" class="pure-img fragment replace fade-out" style="width: 75%;"
+                                data-fragment-index="3">
+                            <img src="img/demo/4.png" class="pure-img fragment replace fade-in" data-fragment-index="3" style="width: 75%;">
+                        </div>
+                    </div>
+                    <div class="fragment replace fade-in" data-fragment-index="5">
+                        <img src="img/demo/5.png" class="pure-img" style="width: 75%;">
+                    </div>
+                </section>
+                <section>
+                    <div>
+                        <a href="https://trino.io/docs/current/installation/deployment.html">doc</a>
+                    </div>
+                    <aside id="tree"
+                        style="font-size: .5em; border: solid 1px white; width: 30%; float: left; padding: .5em; box-sizing: border-box;">
+                    </aside>
+                    <pre
+                        style="width: 70%; margin-top: 0; background-color: white; float: right; box-sizing: border-box;"><code class="properties" data-trim contentEditable="true" id="code"></code></pre>
+                    <script src="js/treeview.js"></script>
+                    <script>
+                        const t = new TreeView([
+                            {
+                                name: 'etc', children: [
+                                    {
+                                        name: 'catalog', children: [
+                                            {
+                                                name: 'mongo.properties', children: [], content: `connector.name=mongodb
+mongodb.seeds=localhost:27017
+mongodb.credentials=root:secret@admin` },
+                                            {
+                                                name: 'mysql.properties', children: [], content: `connector.name=mysql
+connection-user=root
+connection-password=secret
+connection-url=jdbc:mysql://localhost:3306` },
+                                            {
+                                                name: 'sheets.properties', children: [], content: `connector.name=gsheets
+credentials-path=/path/to/json/key
+metadata-sheet-id=sheet-id-with-metadata` },
+                                            { name: 'trino-demo.json', children: [], content: 'secret JSON with GSheets API key' }
+                                        ]
+                                    },
+                                    {
+                                        name: 'config.properties', children: [], content: `coordinator=true
+node-scheduler.include-coordinator=true
+http-server.http.port=9090
+query.max-memory=5GB
+query.max-memory-per-node=1GB
+query.max-total-memory-per-node=2GB
+discovery-server.enabled=true
+discovery.uri=http://localhost:9090` },
+                                    {
+                                        name: 'jvm.config', children: [], content: `-server
+-Xmx16G
+-XX:-UseBiasedLocking
+-XX:+UseG1GC
+-XX:G1HeapRegionSize=32M
+-XX:+ExplicitGCInvokesConcurrent
+-XX:+ExitOnOutOfMemoryError
+-XX:+HeapDumpOnOutOfMemoryError
+-XX:ReservedCodeCacheSize=512M
+-XX:PerMethodRecompilationCutoff=10000
+-XX:PerBytecodeRecompilationCutoff=10000
+-Djdk.attach.allowAttachSelf=true
+-Djdk.nio.maxCachedBufferSize=2000000` },
+                                    {
+                                        name: 'node.properties', children: [], content: `node.environment=common_for_all_the_nodes
+node.id=consistent_but_unique_node1
+node.data-dir=/path/to/store/logs/data` }
+                                ]
+                            },
+                        ], 'tree');
+                        t.on('select', ({ data: { content } }) => {
+                            const editor = document.getElementById('code');
+                            editor.innerText = content;
+                            editor.focus();
+                            editor.blur();
+                        });
+                        document.querySelectorAll('.tree-leaf-text').forEach((element) => {
+                            if (['etc', 'jvm.config'].includes(element.innerText)) {
+                                element.click();
+                            }
+                        });
+                    </script>
+                </section>
+                <section>
+                    <h1>Demo</h1>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section data-transition="zoom">
+                    <h3 class="fragment" style="margin: 0" data-fragment-index="4">Dzięki!</h3>
+                    <img src="img/sql-all-the-things.jpg" class="pure-img" style="width: 50%;">
+                    <ul>
+                        <li class="fragment" data-fragment-index="1">
+                            Newsletter + raport JS:
+                            <a href="https://mat3e.github.io/trendy">
+                                mat3e.github.io/trendy
+                            </a>
+                        </li>
+                        <li class="fragment" data-fragment-index="2">
+                            Prezka:
+                            <a href="https://mat3e.github.io/talks/sql/wdi21.html">
+                                mat3e.github.io/talks/sql/wdi21
+                            </a>
+                        </li>
+                        <li class="fragment" data-fragment-index="3">
+                            Kod:
+                            <a href="https://github.com/mat3e/trino-demo">
+                                github.com/mat3e/trino-demo
+                            </a>
+                        </li>
+                    </ul>
+                    <aside class="notes">Kilka razy dałem obrazki z Disneya. Tam był dobry trolling, ale dla nas to, to
+                        jest po prostu inny bounded context. Niedługo na Udemy będzie mój kurs o architekturze w Javie
+                    </aside>
+                </section>
+            </section>
+        </div>
+    </div>
+    <script src="js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script src="js/babel.min.js"></script>
+    <script>
+        const controls = (function () {
+            Reveal.initialize({
+                history: true,
+                // - null: Media will only autoplay if data-autoplay is present
+                autoPlayMedia: null,
+                transition: 'fade', // none/fade/slide/convex/concave/zoom
+                transitionSpeed: 'default', // default/fast/slow
+                backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
+                dependencies: [
+                    { src: 'js/classList.js', condition: function () { return !document.body.classList; } },
+
+                    { src: 'js/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                    { src: 'js/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+
+                    // Syntax highlight for <code> elements
+                    { src: 'js/highlight.js', callback: function () { setTimeout(() => hljs.initHighlightingOnLoad(), 0); } },
+
+                    // Zoom in and out with Alt+click
+                    { src: 'js/zoom.js' },
+
+                    { src: 'notes/notes.js' },
+
+                    { src: 'js/math.js' }
+                ]
+            });
+
+            document.querySelectorAll('.reveal .slides section:not([data-background-image])').forEach(s => {
+                s.setAttribute('data-background-image', 'img/twitter.png');
+                s.setAttribute('data-background-size', '240px');
+                s.setAttribute('data-background-position', '20px 20px');
+            });
+
+            return {
+                evalCode(btn) {
+                    eval(extractCodeFromBefore(btn));
+                }
+            }
+
+            function extractCodeFromBefore(btn) {
+                return [...btn.parentElement.querySelectorAll('pre')].filter(e => getComputedStyle(e).display !== 'none')[0].innerText;
+            }
+        })();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,3 @@
+:root{--tree-base: 1em;}
+.tree-leaf{position:relative}.tree-leaf .tree-child-leaves{display:block;margin-left:calc(var(--tree-base) * 1.5)}.tree-leaf .hidden{display:none;visibility:hidden}.tree-leaf .tree-expando{cursor:pointer;float:left;height:var(--tree-base);line-height:var(--tree-base);position:relative;text-align:center;top:5px;width:var(--tree-base)}.tree-leaf .tree-leaf-text{cursor:pointer;float:left;margin-left:5px}.tree-leaf .tree-leaf-text:hover{color:var(--link-color, #a23)}.tree-leaf .tree-leaf-content:after,.tree-leaf .tree-leaf-content:before{content:" ";display:table}.tree-leaf .tree-leaf-content:after{clear:both}
+/*# sourceMappingURL=treeview.min.css.map */
