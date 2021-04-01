@@ -4,7 +4,7 @@ DDD and Clean Architecture are nothing new. There are plenty of learning materia
 
 However, sometimes I had problems understanding the example domain, presented in the material. That's why I decided to go with my own example with a well-known domain. Domain I'm able to explain to my three year old son.
 
-Let's check "The Three Little Pigs" fairy tale built with DDD and Clean Architecture. This presentation is for people knowing at least a bit about DDD and Clean Architecture and wanting to check an example implementation. The code is in Java.
+Let's check "The Three Little Pigs" fairy tale built with DDD and Clean Architecture. This presentation is for people knowing at least a bit about DDD and Clean Architecture and wanting to see the example implementation. The code is in Java.
 
 ___
 
