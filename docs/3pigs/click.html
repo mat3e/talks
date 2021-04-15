@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="description" content="Presentation">
+    <meta name="keywords" content="presentation">
+    <meta name="author" content="mat3e">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/blood.css">
+    <link rel="stylesheet" href="css/idea.css">
+    <link rel="stylesheet" href="css/fontawesome.css">
+    <link rel="stylesheet" href="css/treeview.css">
+    <style>
+        #header-margin {
+            text-align: left;
+            border-left: solid .1em white;
+            line-height: .85;
+            padding-left: .25em;
+        }
+
+        #header-logo {
+            width: 375px;
+            height: 80px;
+            background-image: url('img/twitter.png');
+            background-size: contain;
+            top: -4em;
+            right: 0;
+            position: absolute;
+        }
+
+        #about-me {
+            padding: 1em;
+            background-color: rgba(255, 255, 255, .75);
+            list-style-type: none;
+            margin-left: 0;
+            float: left;
+        }
+
+        #about-me ul {
+            list-style-type: none;
+            float: left;
+            margin-left: 0;
+            padding-left: 0;
+        }
+
+        #about-me a {
+            color: #a23;
+        }
+
+        #about-me a:hover {
+            color: #dd5566;
+        }
+
+        .slides section img.pure-img {
+            border: none;
+            box-shadow: none;
+            background: none;
+            margin: 0;
+        }
+
+        code[contenteditable="true"] {
+            border: 0;
+            outline: 0;
+        }
+
+        #perspective a {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            width: 45%;
+            margin: 0 auto;
+        }
+
+        #perspective a img {
+            border: 0;
+            margin: 0;
+            box-shadow: none;
+        }
+
+        .slides section pre {
+            margin-bottom: 0;
+        }
+
+        .slides section pre+button {
+            cursor: pointer;
+
+            font-size: .65em;
+            font-weight: 100;
+            -webkit-font-smoothing: antialiased;
+
+            color: white;
+            background: rgb(175, 30, 35);
+
+            padding: 0 3px 3px 3px;
+            border: transparent;
+            border-radius: 4px;
+
+            display: block;
+            margin: 0 auto;
+        }
+
+        .slides section pre+button:disabled {
+            background-color: grey;
+        }
+
+        .slides section a .stripped-img {
+            border: none;
+            margin: 0;
+            box-shadow: none;
+            background-color: rgba(255, 255, 255, 0);
+        }
+
+        .slides section a .stripped-img:hover {
+            border: none;
+            margin: 0;
+            box-shadow: none;
+            background-color: rgba(255, 255, 255, 0);
+        }
+
+        .slides section .comment {
+            margin-top: -20px;
+            margin-bottom: 20px;
+            color: gray;
+        }
+
+        .reveal .slides section .fragment.replace {
+            transition: none;
+            display: inline-block;
+        }
+
+        .reveal .slides section .fragment.replace.flex {
+            transition: none;
+            display: flex;
+        }
+
+        .reveal .slides section .fragment.fade-out.visible.replace {
+            display: none;
+        }
+
+        .reveal .slides section .fragment.fade-in.replace {
+            display: none;
+        }
+
+        .reveal .slides section .fragment.fade-in.visible.replace {
+            display: inline-block;
+        }
+
+        .reveal .slides section .fragment.fade-in.visible.replace.flex {
+            display: flex;
+        }
+
+        .reveal .slides section .fragment.highlight-red.visible {
+            color: #dd5566;
+        }
+
+        #hook-here button {
+            padding: 1em;
+            border-radius: 0;
+            background-color: white;
+            border: 1px solid black;
+        }
+
+        .reveal .slides section td.long-text-cell {
+            font-size: .5em;
+            vertical-align: middle;
+        }
+
+        .reveal .slides section table.summary {
+            table-layout: fixed;
+            width: 100%;
+        }
+
+        .reveal .slides section table.summary th {
+            text-align: center;
+        }
+
+        .reveal .slides section table.summary tbody td,
+        .reveal .slides section table.summary th {
+            width: 33%;
+        }
+
+        .reveal .slides section table.summary tbody td:first-child,
+        .reveal .slides section table.summary th:first-child {
+            width: 7%;
+            vertical-align: middle;
+            text-align: center
+        }
+
+        .reveal .slides section .fragment.no-highlight.visible {
+            color: #eee;
+        }
+
+        .reveal .slides section .fragment.no-highlight {
+            opacity: 1;
+            visibility: inherit;
+        }
+
+        .reveal .slides section .centered {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .Ta\(c\) {
+            text-align: center !important;
+        }
+    </style>
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section data-background-image>
+                <section data-background-image="img/elon.webp" data-background-size="cover">
+                    <div id="header-margin">
+                        <h1 style="margin: 0; font-size: 1.75em">Moje rozumienie DDD (+&nbsp;clean architecture)</h1>
+                        <h2 style="font-size: 1.25em">na przykładzie bajki o&nbsp;3&nbsp;świnkach​</h2>
+                    </div>
+                    <div id="header-logo"></div>
+                    <aside class="notes">
+                        Ten pan w tle też ostatnio mówił o 3 świnkach. Chyba ściągnął ode mnie
+                        <br>
+                        moje rozumienie - a więc pokażę mój kod; DDD - omówię, taktyczne w kodzie i strategiczne w ES;
+                        CA - omówię, w kodzie; 3 świnki - omówię
+                    </aside>
+                </section>
+                <section id="perspective" data-background-image="">
+                    <h5>
+                        <span>Perspektywa...</span>
+                        <span class="fragment" data-fragment-index="1"> ma znaczenie</span>
+                        <span class="fragment" data-fragment-index="2"> :)</span>
+                    </h5>
+                    <a href="https://mistrzowie.org/717022">
+                        <img src="img/perspektywa-1.jpg">
+                        <img src="img/perspektywa-2.jpg" class="fragment" data-fragment-index="1">
+                        <img src="img/perspektywa-3.jpg" class="fragment" data-fragment-index="2">
+                    </a>
+                </section>
+                <section data-background-image="img/bg-hd.jpg" data-background-transition="zoom">
+                    <ul id="about-me">
+                        <li>
+                            <ul>
+                                <li>
+                                    <a href="https://www.linkedin.com/in/mateusz-chrzonstowski/">
+                                        <i class="fab fa-linkedin"
+                                            style="color: #0077B5; background-color: #FFF; line-height: .75em"></i>
+                                        /mateusz-chrzonstowski
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://twitter.com/_mat3e_">
+                                        <i class="fab fa-twitter-square"
+                                            style="background-color: #1DA1F2; color: #FFF; line-height: .75em"></i>
+                                        /_mat3e_
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.reddit.com/user/_mat3e_">
+                                        <i class="fab fa-reddit-square"
+                                            style="background-color: #FF4500; color: #FFF; line-height: .75em"></i>
+                                        /_mat3e_
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/mat3e/">
+                                        <i class="fab fa-github-square"
+                                            style="color: #24292E; background-color: #FFF; line-height: .75em"></i>
+                                        /mat3e
+                                    </a>
+                                </li>
+                                <li style="line-height: 1">&nbsp;</li>
+                                <li class="fragment" style="line-height: .75">
+                                    <a style="font-size: .75em; font-weight: bold;"
+                                        href="https://mat3e.github.io/talks/3pigs/click.html">
+                                        mat3e.github.io/talks/3pigs/click
+                                    </a>
+                                    <br>
+                                    <a class="fragment" style="font-size: .75em; font-weight: bold;"
+                                        href="https://github.com/mat3e/3pigs-ddd">
+                                        github.com/mat3e/3pigs-ddd
+                                    </a>
+                                </li>
+                                <li style="line-height: 1">&nbsp;</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="fragment" style="padding: .1em; line-height: 1">
+                                <li>
+                                    <a href="https://full-stack.engineering/">
+                                        <img src="img/udemy.svg" class="pure-img" style="height: 1.5em;">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.starburstdata.com/careers/" class="fragment">
+                                        <img src="img/starburst.png" class="pure-img" style="height: 1.5em;">
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section>
+                    <h3>DDD</h3>
+                    <table>
+                        <tbody>
+                            <tr class="fragment" data-fragment-index="1">
+                                <td>
+                                    <img src="img/evans1.jpg" class="pure-img" style="height: 150px">
+                                    <img src="img/vernon1.jpg" class="pure-img" style="height: 150px">
+                                </td>
+                                <td style="text-align: center; vertical-align: middle;" class="fragment"
+                                    data-fragment-index="2">
+                                    <img src="img/arrow2.png" class="pure-img" style="height: 120px;">
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr class="fragment" data-fragment-index="2">
+                                <td></td>
+                                <td>
+                                    <img src="img/evans2.png" class="pure-img" style="height: 150px">
+                                    <img src="img/vernon2.png" class="pure-img" style="height: 150px">
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr class="fragment" data-fragment-index="3">
+                                <td></td>
+                                <td style="text-align: right; vertical-align: middle;">
+                                    <img src="img/arrow.png" class="pure-img" style="height: 120px;">
+                                </td>
+                                <td>
+                                    <img src="img/evans3.jpg" class="pure-img" style="height: 150px">
+                                    <img src="img/vernon3.jpg" class="pure-img" style="height: 150px">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <aside class="notes">
+                        Oryginały, koło 50-60 $. Sztuczka - polskie odpowiedniki - 50-60 ale zł. Ale zobaczcie - kultowe
+                        blue i red book, a oni odwrócili kolory... Ostatni hak - orange i green book Evansa i Vernona
+                        ~kilkanaście $. Akurat RGB
+                    </aside>
+                </section>
+                <section>
+                    <h2>EventStorming!</h2>
+                    <ul>
+                        <li class="fragment">Kilka poziomów szczegółowości
+                            <ul>
+                                <li class="fragment">Big Picture</li>
+                                <li class="fragment">Process-Level</li>
+                                <li class="fragment">Design-Level</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Złota zasada: zdarzenia (czasowniki), a nie struktury danych (rzeczowniki)
+                        </li>
+                        <li class="fragment">Rozróżnienie między komendami (zmieniają stan systemu), a widokami</li>
+                    </ul>
+                    <aside class="notes">Na slajdzie były raczej rzeczowniki. Jak Cię pytają "co robiłeś wieczorem", to
+                        nie mówisz "piwo, wódka", tylko "ale się najea... piłem" - zdarzenie właśnie. Czas przeszły
+                        dokonany. Komendy: "Ze mną się nie napijesz?" albo "Ta, bo nie dasz rady", "Nie podpuszczam,
+                        ale", "pij!"</aside>
+                </section>
+                <section>
+                    <code id="ddd-code" style="font-size: .5em;"></code>
+                    <!-- <script src="js/treeview.js"></script>
+                    <script>
+                        const t = new TreeView([
+                            {
+                                name: 'io.github.mat3e.ddd', children: [
+                                    {
+                                        name: 'event', children: [
+                                            { name: 'DomainEvent.java', children: [] },
+                                            { name: 'DomainEventPublisher.java', children: [] },
+                                            { name: 'EventsDrivenRepository.java', children: [] },
+                                            { name: 'SnapshotWithEvents.java', children: [] }
+                                        ]
+                                    },
+                                    {
+                                        name: 'specification', children: [
+                                            { name: 'Specification.java', children: [] }
+                                        ]
+                                    },
+                                    {
+                                        name: 'vo', children: [
+                                            { name: 'EntitySnapshot.java', children: [] }
+                                        ]
+                                    },
+                                    { name: 'Aggregate.java', children: [], content: `public interface Aggregate<ID, T> extends DomainEntity<ID, T> {
+}` },
+                                    { name: 'DomainEntity.java', children: [], content: `public interface DomainEntity<ID, T> {
+    T getSnapshot();
+}` },
+                                    { name: 'DomainRepository.java', children: [] }
+                                ]
+                            },
+                        ], 'ddd-code');
+                        t.on('select', ({data: {content}}) => {
+                            const editor = document.getElementById('e-ddd-code');
+                            editor.innerText = content;
+                            editor.focus();
+                            editor.blur();
+                        })
+                    </script> -->
+                    <h2>DDD taktyczne</h2>
+                    <img src="img/ddd-code-all.png" class="pure-img fragment" style="width: 500px; margin: 0">
+                </section>
+            </section>
+            <section data-background-image data-transition="zoom">
+                <section data-background-transition="zoom">
+                    <h3 style="margin: 0">Clean Architecture</h3>
+                    <a class="fragment"
+                        href="https://herbertograca.com/2017/11/16/explicit-architecture-01-ddd-hexagonal-onion-clean-cqrs-how-i-put-it-all-together/">
+                        <img src="img/ca.png" class="pure-img" style="margin: 0; width: 75%">
+                    </a>
+                    <img src="img/ultimate-adapter.png" class="pure-img fragment"
+                        style="position: absolute; right: 1em; top: 30%; width: 20%">
+                    <aside class="notes">
+                        Esencja = odłożenie decyzji o implementacji jak najdalej w czasie. Komponent - bounded context.
+                        Tam wilk/świnka jest jednoznaczne i zrozumiałe w ten sam sposób przez wszystkich użytkowników.
+                        To nie jest wilk z Czerwonego Kapturka np.
+                        <br>
+                        Ten Excel też jest port i adapter jak na rysunku (kulka i owijka wokół niej)
+                    </aside>
+                </section>
+                <section data-background-image="img/modules-bg.png" data-background-image="cover">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td class="fragment" data-fragment-index="2" style="border: none">
+                                    <img src="img/app.png" class="pure-img" style="border: solid 1px white;">
+                                </td>
+                                <td rowspan="2" class="fragment" data-fragment-index="3" style="border: none">
+                                    <img src="img/adapters.png" class="pure-img" style="border: solid 1px white;">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fragment" data-fragment-index="1">
+                                    <img src="img/domain.png" class="pure-img" style="border: solid 1px white;">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <img src="img/mono.png" class="pure-img fragment"
+                        style="border: solid 1px white; position: absolute; width: 40%; left: 30%; top: 20%;">
+                    <aside class="notes">
+                        Shared - widzieliśmy wcześniej; tamte interfejsy. Domena - testy jednostkowe, we-wy, opisowe
+                        (DSL), żeby biznes rozumiał. App - scenariusze, User Story, fajnie się to pisze w Kotlinie.
+                        Testy - tu mamy komendy i działamy na fizyce naszego biznesu, na agregatach, serwisach
+                        domenowych. Mamy mocki, sprawdzamy np. czy komenda skutkuje zapisem do repo. Adaptery - do
+                        domeny i apki, dodatkowe we i wy; dostęp pakietowy między modułami FTW. Pierwszy moduł, gdzie
+                        Spring jest niezbędny, testy integracyjne (testowa apka springa). Tu też są propertiesy itd.
+                        Monolit - klasa startujaca.
+                    </aside>
+                </section>
+                <section>
+                    <div class="fragment replace fade-out" data-fragment-index="8">
+                        <div class="fragment replace fade-out" data-fragment-index="4">
+                            <div class="fragment replace fade-out" data-fragment-index="2">
+                                <img src="img/schema/0.png" class="pure-img fragment replace fade-out"
+                                    data-fragment-index="1">
+                                <img src="img/schema/1.png" class="pure-img fragment replace fade-in"
+                                    data-fragment-index="1">
+                            </div>
+                            <div class="fragment replace fade-in" data-fragment-index="2">
+                                <img src="img/schema/2.png" class="pure-img fragment replace fade-out"
+                                    data-fragment-index="3">
+                                <img src="img/schema/3.png" class="pure-img fragment replace fade-in"
+                                    data-fragment-index="3">
+                            </div>
+                        </div>
+                        <div class="fragment replace fade-in" data-fragment-index="4">
+                            <div class="fragment replace fade-out" data-fragment-index="6">
+                                <img src="img/schema/4.png" class="pure-img fragment replace fade-out"
+                                    data-fragment-index="5">
+                                <img src="img/schema/5.png" class="pure-img fragment replace fade-in"
+                                    data-fragment-index="5">
+                            </div>
+                            <div class="fragment replace fade-in" data-fragment-index="6">
+                                <img src="img/schema/6.png" class="pure-img fragment replace fade-out"
+                                    data-fragment-index="7">
+                                <img src="img/schema/7.png" class="pure-img fragment replace fade-in"
+                                    data-fragment-index="7">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fragment replace fade-in" data-fragment-index="8">
+                        <img src="img/schema/8.png" class="pure-img">
+                    </div>
+                </section>
+            </section>
+            <section data-background-image data-transition="zoom">
+                <section data-background-image="img/pigs.jpg" data-background-size="cover">
+                    <aside class="notes">
+                        to były ramy, teraz w te ramy wpakujemy naszą domenę, ale najpierw ją poznajmy: świnki!
+                    </aside>
+                </section>
+                <section>
+                    <h2 style="margin-bottom:0">Założenia</h2>
+                    <ul>
+                        <li class="fragment">Budowanie ze słomy, z drewna, z cegieł</li>
+                        <li class="fragment">Po zdmuchnięciu domu - ucieczka do sąsiedniego</li>
+                        <li class="fragment">Rezygnacja wilka po próbach zdmuchnięcia domu z&nbsp;cegieł</li>
+                        <li class="fragment">Wyciągnięcie wniosków przez świnki, nauka</li>
+                        <li class="fragment">
+                            Przemilczane:
+                            <ul>
+                                <li class="fragment">Wspinanie się wilka przez komin</li>
+                                <li class="fragment">Zjadanie świnek</li>
+                                <li class="fragment">Opowiadanie o mamie świnek</li>
+                                <li class="fragment">Imprezowanie świnek po skończonej pracy</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <aside class="notes">
+                        polskie wersje nierzadko odpuszczają komin; w agnielskich natrafiłem na
+                        zjadanie; czasem pojawia się mama (na początku albo na końcu)
+                        <br>
+                        A skoro znamy +/- domenę i wiemy coś o DDD i Clean Arch, to czas to połączyć
+                    </aside>
+                </section>
+                <section>
+                    <h2>User Story</h2>
+                    <ul>
+                        <li class="fragment">Co system powinien "wystawić na świat"</li>
+                        <li class="fragment">Jako użytkownik, chcę poznać bajkę o trzech świnkach, żeby móc ją
+                            opowiedzieć innym
+                            <ul>
+                                <li class="fragment">...</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">
+                            Jako świnka, chcę zbudować dom, dostosowany do moich potrzeb
+                            <ul>
+                                <li class="fragment">Dokumentowanie i utrwalanie informacji</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">
+                            Jako wilk chcę zdmuchnąć dom, żeby móc złapać świnkę
+                            <ul>
+                                <li class="fragment">Rejestr - z tym domem już próbowano</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <aside class="notes">ES ~ domena, reguły gry, a US ~ aplikacja, czego użytkownik potrzebuje. Tak jak
+                        biurokracja potrzebuje znać adresy i inne info o chacie. Ma sens? Jak naciągniemy fakty, to tak!
+                        adaptery = to, co programiści lubią najbardziej; miejsce na onanizm techniczy :)</aside>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section data-background-image="img/ppap.gif" data-background-size="cover"></section>
+                <section>
+                    <h2>Jaki agregat?</h2>
+                    <div style="display: flex; align-items: center;">
+                        <div>
+                            <a href="https://disney.fandom.com/wiki/The_Three_Little_Pigs?file=18706.jpg">
+                                <img src="img/pig.jpg" class="pure-img fragment" style="width: 250px;">
+                            </a>
+                            <br>
+                            <img src="img/homer.jpg" class="pure-img fragment" style="height: 120px;">
+                            <img src="img/proletariat.png" class="pure-img fragment" style="height: 120px;">
+                        </div>
+                        <div>
+                            <a href="https://disney.fandom.com/wiki/The_Three_Little_Pigs?file=1933-cochons-07.jpg">
+                                <img src="img/wolf-blow.png" class="pure-img fragment" style="width: 250px;">
+                            </a>
+                        </div>
+                        <div>
+                            <a href="https://disney.fandom.com/wiki/The_Three_Little_Pigs?file=THREE_LITTLE_PIGS.png">
+                                <img src="img/house.png" class="pure-img fragment" style="width: 250px;">
+                            </a>
+                            <br>
+                            <img src="img/material/straw.png" class="pure-img fragment" style="width: 100px;">
+                            <img src="img/material/wood.png" class="pure-img fragment" style="width: 100px;">
+                            <img src="img/material/bricks.png" class="pure-img fragment" style="width: 100px;">
+                        </div>
+                    </div>
+                    <aside class="notes">Są różne warianty domu i świnki. Do zastanowienia się - co powinno być
+                        agregatem?</aside>
+                </section>
+                <section data-background-image="img/es.jpg" data-background-color="#fff" data-background-size="contain">
+                    <h2 class="fragment">Big Picture</h2>
+                    <aside class="notes">Aż tak się nie będę rozwodził. Naklejamy zdarzenia, porządkujemy
+                        chronologicznie</aside>
+                </section>
+                <section data-background-image="img/es2.jpg" data-background-color="#fff"
+                    data-background-size="contain">
+                    <h2 class="fragment">Design-Level</h2>
+                    <aside class="notes">I nagle okazuje się, że to dom powinien hermetyzować reguły. Process-Level -
+                        szukamy kontekstów do domen. U nas luz, jedna domena, metryki</aside>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section data-background-image="img/coding.gif" data-background-size="cover"></section>
+                <section>
+                    <h3 style="margin: 0">Jak zbudować dom?</h3>
+                    <a href="https://toggl.com/blog/build-horse-programming"
+                        style="display: flex; flex-direction: column; width: 55%; margin: 0 auto;">
+                        <img src="img/horse/1.png" class="pure-img fragment" data-fragment-index="1">
+                        <img src="img/horse/2.png" class="pure-img fragment" data-fragment-index="2">
+                        <span class="fragment replace fade-out flex" data-fragment-index="4">
+                            <img src="img/horse/3.png" class="pure-img fragment" data-fragment-index="3">
+                        </span>
+                        <img src="img/horse/4.png" class="pure-img fragment replace fade-in" data-fragment-index="4">
+                    </a>
+                    <aside class="notes">Sprawa od dawna rozwiązana. Co prawda na innym przykładze, ale jednak. Z Javą -
+                        prosta sprawa. Ale akurat fabryka domów, to nie brzmi tak źle. Niektórzy mają jednak gorzej...
+                        Ale żeby nie było, że śmieję się z języka, w którym nie programuję, to jeszcze inny przypadek.
+                        Śmieszki z JSa zawsze na propsie. Jak jakiś inny język, to kliknąć w obrazek, sprawdzić i sprawa
+                        załatwiona. Akurat fabryka jest wzorcem w DDD</aside>
+                </section>
+                <section>
+                    <a href="https://disney.fandom.com/wiki/Big_Bad_Wolf">
+                        <img src="img/wolf.png" class="pure-img" style="height: 150px;">
+                    </a>
+                    <pre style="width: 100%; background-color: white; font-size: .475em; line-height: 1.05; margin-top: 0;"
+                        class="fragment"><code class="java" style="max-height: 40em" data-trim contentEditable="true" data-line-numbers="1,8-14,16-25">
+                            public class BigBadWolfService {
+                                private final DomainEventPublisher eventPublisher;
+                            
+                                BigBadWolfService(final DomainEventPublisher eventPublisher) {
+                                    this.eventPublisher = eventPublisher;
+                                }
+                            
+                                public void blowDown(final House target) {
+                                    try {
+                                        target.handleHurricane();
+                                    } catch (House.IndestructibleHouseException e) {
+                                        retryBlowing(target);
+                                    }
+                                }
+                            
+                                private void retryBlowing(final House target) {
+                                    try {
+                                        target.handleHurricane();
+                                    } catch (House.IndestructibleHouseException e) {
+                                        eventPublisher.publish(
+                                            new WolfResignedFromAttacking(target.getSnapshot().id())
+                                        );
+                                    }
+                                }
+                            }
+                    </code></pre>
+                    <aside class="notes">
+                        Ale w innym bounded context - w Czerwonym Kapturku np. wilk byłby agregatem albo encją -
+                        zmienny, perzystowalny stan (przebrany za babcię, zjadł Kapturka, zjadł babcię, martwy).
+                        Działamy na agregacie, korzystamy z jego metod pakietowych i ze snapshota
+                    </aside>
+                </section>
+                <section>
+                    <h3>Specyfikacja</h3>
+                    <pre style="width: 100%; background-color: white; font-size: .475em; line-height: 1.05; margin-top: 0;"
+                        class="fragment"><code class="groovy" style="max-height: 40em" data-trim contentEditable="true" data-line-numbers>
+                            @Unroll('house from #inputMaterial vs. #resource')
+                            def 'should fail for material different than in specification'() {
+                                given:
+                                def house = houseFrom inputMaterial
+
+                                expect:
+                                !new ConstructionSpecification(resource).isSatisfiedBy(house)
+
+                                where:
+                                resource | inputMaterial
+                                STRAW    | BRICKS
+                                WOOD     | STRAW
+                                STRAW    | WOOD
+                            }
+                    </code></pre>
+                    <p>
+                        <img src="img/results.png" class="pure-img fragment">
+                    </p>
+                    <aside class="notes">Piękne testy w Spocku</aside>
+                </section>
+                <section>
+                    <h2>Overengineering?</h2>
+                    <div style="display: flex; align-items: center; justify-content: center;">
+                        <a href="https://disney.fandom.com/wiki/Maleficent">
+                            <img src="img/zlo1.png" class="pure-img fragment" style="height: 250px"
+                                data-fragment-index="1">
+                        </a>
+                        <img src="img/arrow3.png" class="pure-img fragment" style="height: 150px"
+                            data-fragment-index="2">
+                        <img src="img/zlo2.png" class="pure-img fragment" style="height: 250px" data-fragment-index="2">
+                    </div>
+                    <pre style="font-size: .475em; line-height: 1.05; margin-top: 0;" class="fragment"
+                        data-autoslide="2000"><code class="java" style="max-height: 40em" data-trim contentEditable="true">
+                            WolfOnSteroidsSpecification {
+                                boolean isSatisfiedBy(Wolf wolf) {
+                                    return wolf.powerLevel() > 9000;
+                                }
+                            }
+                    </code></pre>
+                    <img src="img/9k+.gif" class="pure-img fragment"
+                        style="position: absolute; bottom: -1em; right: 0; width: 250px;">
+                    <aside class="notes">Ja tutaj piszę bajkę w Javie. Oczywiście, że jest overengineering. Z drugiej
+                        strony jako rodzic muszę zauważać pewne rzeczy. Zdarza się, że zło jest nie tyle
+                        już relatywizowane, co gloryfikowane w bajkach. Była sobie zła wiedźma w "Śpiącej Królewnie",
+                        więc zrobili o niej film i dali Angelinę Jolie. Angelinkę, rozumiesz? Dla mnie jako programisty
+                        jest to więc sygnał, że trzeba się zabezpieczyć. A nuż zrobią bajkę, że warto ćwiczyć i pojawi
+                        się jakiś silny wilk, co zdmuchnie nawet cegły?</aside>
+                </section>
+                <section>
+                    <a href="https://www.bettersoftwaredesign.pl/episodes/7">
+                        <img src="img/Mariusz.png" class="pure-img" style="height: 7em">
+                    </a>
+                    <span class="fragment" data-fragment-index="1">
+                        <img src="img/ca-cc.png" class="pure-img fragment replace fade-out" style="height: 7em"
+                            data-fragment-index="2">
+                        <img src="img/ca-cc2.png" class="pure-img fragment replace fade-in" style="height: 7em"
+                            data-fragment-index="2">
+                    </span>
+                    <pre style="width: 100%; background-color: white; font-size: .45em; line-height: 1.1; margin-top: 0;"
+                        class="fragment"><code class="java" style="max-height: 40em" data-trim contentEditable="true" data-line-numbers="1,2,6-10">
+                            @Before("handling()")
+                            void logBeforeHandling(JoinPoint jp) {
+                              if (logger.isInfoEnabled()) {
+                                var command = jp.getArgs()[0];
+                                if (command instanceof BuildHouse buildCommand) {
+                                  switch (buildCommand.getOwner()) {
+                                    case VERY_LAZY -> logger.info("The first little pig was very lazy");
+                                    case LAZY -> logger.info("The second little pig was a bit more ambitious");
+                                    case NOT_LAZY -> logger.info("The third little pig was ready for hard work");
+                                  }
+                                }
+                              }
+                            }
+                    </code></pre>
+                    <aside class="notes">
+                        Jest też polityka dla fabryki, świnka to enum, komendy i handler, ale to już popatrzymy w
+                        kodzie. Podobnie HATEOAS
+                    </aside>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section data-transition="zoom">
+                    <h3 class="fragment" style="margin: 0" data-fragment-index="5">Dzięki!</h3>
+                    <h4 class="fragment" style="margin: 0" data-fragment-index="6">Pytania?</h4>
+                    <a
+                        href="https://disney.fandom.com/wiki/The_Three_Little_Pigs?file=Tumblr_mihpakJxZP1qhcrb0o1_1280.jpg">
+                        <img src="img/end.jpg" class="pure-img fragment replace fade-out" style="width: 55%;"
+                            data-fragment-index="1">
+                        <img src="img/end2.png" class="pure-img fragment replace fade-in" style="width: 55%;"
+                            data-fragment-index="1">
+                    </a>
+                    <ul>
+                        <li class="fragment" data-fragment-index="2">
+                            Newsletter + raport JS:
+                            <a href="https://mat3e.github.io/trendy">
+                                mat3e.github.io/trendy
+                            </a>
+                        </li>
+                        <li class="fragment" data-fragment-index="3">
+                            Kod:
+                            <a href="https://github.com/mat3e/3pigs-ddd">
+                                github.com/mat3e/3pigs-ddd
+                            </a>
+                        </li>
+                        <li class="fragment" data-fragment-index="4">
+                            Prezka:
+                            <a href="https://mat3e.github.io/talks/3pigs/click.html">
+                                mat3e.github.io/talks/3pigs/click
+                            </a>
+                        </li>
+                    </ul>
+                    <aside class="notes">Kilka razy dałem obrazki z Disneya. Tam był dobry trolling, ale dla nas to, to
+                        jest po prostu inny bounded context. Niedługo na Udemy będzie mój kurs o architekturze w Javie
+                    </aside>
+                </section>
+            </section>
+        </div>
+    </div>
+    <script src="js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script src="js/babel.min.js"></script>
+    <script>
+        const controls = (function () {
+            Reveal.initialize({
+                history: true,
+                // - null: Media will only autoplay if data-autoplay is present
+                autoPlayMedia: null,
+                transition: 'fade', // none/fade/slide/convex/concave/zoom
+                transitionSpeed: 'default', // default/fast/slow
+                backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
+                dependencies: [
+                    { src: 'js/classList.js', condition: function () { return !document.body.classList; } },
+
+                    { src: 'js/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                    { src: 'js/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+
+                    // Syntax highlight for <code> elements
+                    { src: 'js/highlight.js', callback: function () { setTimeout(() => hljs.initHighlightingOnLoad(), 0); } },
+
+                    // Zoom in and out with Alt+click
+                    { src: 'js/zoom.js' },
+
+                    { src: 'notes/notes.js' },
+
+                    { src: 'js/math.js' }
+                ]
+            });
+
+            document.querySelectorAll('.reveal .slides section:not([data-background-image])').forEach(s => {
+                s.setAttribute('data-background-image', 'img/twitter.png');
+                s.setAttribute('data-background-size', '240px');
+                s.setAttribute('data-background-position', '20px 20px');
+            });
+
+            return {
+                evalCode(btn) {
+                    eval(extractCodeFromBefore(btn));
+                }
+            }
+
+            function extractCodeFromBefore(btn) {
+                return [...btn.parentElement.querySelectorAll('pre')].filter(e => getComputedStyle(e).display !== 'none')[0].innerText;
+            }
+        })();
+    </script>
+</body>
+
+</html>
