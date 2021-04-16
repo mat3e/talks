@@ -1,5 +1,5 @@
 ## 2021
-* Click 2021 [15.04] _Moje rozumienie DDD (+ clean architecture) na przykładzie bajki o 3 świnkach_ [🔗](https://mat3e.github.io/talks/3pigs/click.html#/)
+* Click 2021 [15.04] _Moje rozumienie DDD (+ clean architecture) na przykładzie bajki o 3 świnkach_ [🔗](https://mat3e.github.io/talks/3pigs/click.html#/) [📽️](https://www.youtube.com/watch?v=LVN7tof5LDg)
 * WDI 2021 [8-9.04] _SQL dobry na (prawie) wszystko z Presto/Trino_ [🔗](https://mat3e.github.io/talks/sql/wdi21.html#/)
 * WDI 2021 [8-9.04] _Moje rozumienie DDD (+ clean architecture) na przykładzie bajki o 3 świnkach_ [🔗](https://mat3e.github.io/talks/3pigs/wdi21.html#/)
 * Tech3camp 74 [09.03] _Porządkowanie kodu na froncie. JS Clean Architecture_ [🔗](https://mat3e.github.io/talks/js-arch/Tech3camp.html#/) [📽️](https://www.youtube.com/watch?v=PXPz7VsYN3w)
