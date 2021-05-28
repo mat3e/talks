@@ -1,4 +1,5 @@
 ## 2021
+> * Ya!vaConf [24.06] _Fajne testowanie - JUnit 5 vs. Spock_
 * Click 2021 [15.04] _Moje rozumienie DDD (+ clean architecture) na przykładzie bajki o 3 świnkach_ [🔗](https://mat3e.github.io/talks/3pigs/click.html#/) [📽️](https://www.youtube.com/watch?v=LVN7tof5LDg)
 * WDI 2021 [8-9.04] _SQL dobry na (prawie) wszystko z Presto/Trino_ [🔗](https://mat3e.github.io/talks/sql/wdi21.html#/) [📽️](https://www.youtube.com/watch?v=PhV4KaRSBwE)
 * WDI 2021 [8-9.04] _Moje rozumienie DDD (+ clean architecture) na przykładzie bajki o 3 świnkach_ [🔗](https://mat3e.github.io/talks/3pigs/wdi21.html#/)
