@@ -319,11 +319,10 @@
                 <section>
                     <h3>Strategic DDD - example</h3>
                     <div style="width: 75%; margin: 0 auto">
-                        <div style="background: no-repeat center url('img/strategic/generic.png'); height: 180px">
-                            <h4 style="color: red; margin-bottom: .5em; transform: rotateZ(-10deg);" class="fragment"
-                                data-fragment-index="1">Identity & Access<br>Management</h4>
-                            <img class="pure-img fragment" data-fragment-index="2" src="img/auth0.png"
-                                style="height: 1em;" />
+                        <div style="background: no-repeat center url('img/strategic/core.png'); height: 200px">
+                            <br>
+                            <h4 style="color: red; margin-bottom: 0; transform: rotateZ(-10deg);" class="fragment"
+                                data-fragment-index="1">Fairy tales</h4>
                         </div>
                         <div style="background: no-repeat center url('img/strategic/supporting.png'); height: 200px">
                             <br>
@@ -332,10 +331,11 @@
                             <img class="pure-img fragment" data-fragment-index="5" src="img/whatif.png"
                                 style="height: 2em;" />
                         </div>
-                        <div style="background: no-repeat center url('img/strategic/core.png'); height: 200px">
-                            <br>
-                            <h4 style="color: red; margin-bottom: 0; transform: rotateZ(-10deg);" class="fragment"
-                                data-fragment-index="3">Fairy tales</h4>
+                        <div style="background: no-repeat center url('img/strategic/generic.png'); height: 180px">
+                            <h4 style="color: red; margin-bottom: .5em; transform: rotateZ(-10deg);" class="fragment"
+                                data-fragment-index="2">Identity & Access<br>Management</h4>
+                            <img class="pure-img fragment" data-fragment-index="3" src="img/auth0.png"
+                                style="height: 1em;" />
                         </div>
                     </div>
                 </section>
@@ -396,13 +396,15 @@
                     </aside>
                 </section>
                 <section>
+                    <h2>How to plan all of this?</h2>
+                </section>
+                <section>
                     <h2>EventStorming!</h2>
                     <ul>
+                        <li class="fragment">Golden rule: events (verbs, past tense), NOT data structures (nouns)</li>
                         <li class="fragment">Big Picture ES - to discover domains etc.</li>
                         <li class="fragment">Process-Level ES - to discover Bounded Contexts</li>
                         <li class="fragment">Design-Level ES - for a tactical DDD within a BC</li>
-                        <li class="fragment">Golden rule: events (verbs, past tense), NOT data structures (nouns)
-                        </li>
                         <li class="fragment">Commands (change the system's state) & queries (views)</li>
                     </ul>
                     <aside class="notes">
@@ -412,46 +414,6 @@
                     </aside>
                 </section>
                 <section>
-                    <code id="ddd-code" style="font-size: .5em;"></code>
-                    <!-- <script src="js/treeview.js"></script>
-                    <script>
-                        const t = new TreeView([
-                            {
-                                name: 'io.github.mat3e.ddd', children: [
-                                    {
-                                        name: 'event', children: [
-                                            { name: 'DomainEvent.java', children: [] },
-                                            { name: 'DomainEventPublisher.java', children: [] },
-                                            { name: 'EventsDrivenRepository.java', children: [] },
-                                            { name: 'SnapshotWithEvents.java', children: [] }
-                                        ]
-                                    },
-                                    {
-                                        name: 'specification', children: [
-                                            { name: 'Specification.java', children: [] }
-                                        ]
-                                    },
-                                    {
-                                        name: 'vo', children: [
-                                            { name: 'EntitySnapshot.java', children: [] }
-                                        ]
-                                    },
-                                    { name: 'Aggregate.java', children: [], content: `public interface Aggregate<ID, T> extends DomainEntity<ID, T> {
-}` },
-                                    { name: 'DomainEntity.java', children: [], content: `public interface DomainEntity<ID, T> {
-    T getSnapshot();
-}` },
-                                    { name: 'DomainRepository.java', children: [] }
-                                ]
-                            },
-                        ], 'ddd-code');
-                        t.on('select', ({data: {content}}) => {
-                            const editor = document.getElementById('e-ddd-code');
-                            editor.innerText = content;
-                            editor.focus();
-                            editor.blur();
-                        })
-                    </script> -->
                     <h2 style="margin-bottom: 0;">Tactical DDD</h2>
                     <div style="width: 300px; height: 300px;" class="fragment fade-out replace" data-fragment-index="2">
                         <br />
@@ -490,6 +452,71 @@
                     <h2>Tactical DDD - code</h2>
                     <img src="img/ddd-code-all.png" class="pure-img fragment" style="width: 500px; margin: 0">
                     <aside class="notes">actually show the code from repo</aside>
+                </section>
+                <section>
+                    <h2>What aggregate for <i>The Three Little Pigs?</i></h2>
+                </section>
+                <section>
+                    <h2 style="margin-bottom:0">Concepts</h2>
+                    <ul>
+                        <li class="fragment">House building: straw, wood, bricks</li>
+                        <li class="fragment">Wolf blowing house down => pig escaping to the neighbor</li>
+                        <li class="fragment">Wolf resigning after 2 failures</li>
+                        <li class="fragment">Pigs learning from the mistakes and improve</li>
+                        <li class="fragment">
+                            Skipping:
+                            <ul>
+                                <li class="fragment">Mother of the pigs</li>
+                                <li class="fragment">Chimney climbing</li>
+                                <li class="fragment">Eating the pigs</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>So what?</h2>
+                    <div style="display: flex; align-items: center;">
+                        <div>
+                            <a href="https://disney.fandom.com/wiki/The_Three_Little_Pigs?file=18706.jpg">
+                                <img src="img/pig.jpg" class="pure-img fragment" style="width: 250px;">
+                            </a>
+                            <br>
+                            <img src="img/homer.jpg" class="pure-img fragment" style="height: 120px;">
+                            <img src="img/proletariat.png" class="pure-img fragment" style="height: 120px;">
+                        </div>
+                        <div>
+                            <a href="https://disney.fandom.com/wiki/The_Three_Little_Pigs?file=1933-cochons-07.jpg">
+                                <img src="img/wolf-blow.png" class="pure-img fragment" style="width: 250px;">
+                            </a>
+                        </div>
+                        <div>
+                            <a href="https://disney.fandom.com/wiki/The_Three_Little_Pigs?file=THREE_LITTLE_PIGS.png">
+                                <img src="img/house.png" class="pure-img fragment" style="width: 250px;">
+                            </a>
+                            <br>
+                            <img src="img/material/straw.png" class="pure-img fragment" style="width: 100px;">
+                            <img src="img/material/wood.png" class="pure-img fragment" style="width: 100px;">
+                            <img src="img/material/bricks.png" class="pure-img fragment" style="width: 100px;">
+                        </div>
+                    </div>
+                </section>
+                <section data-background-image="img/stop.jpg">
+                    <aside class="notes">Whatever you picked, you should stop right here. It was thinking in nouns, in
+                        data structures, not with the actual behaviors, evnets</aside>
+                </section>
+                <section data-background-image="img/es.jpg" data-background-color="#fff" data-background-size="contain">
+                    <h2 class="fragment">Big Picture</h2>
+                    <aside class="notes">events put in the chronological order</aside>
+                </section>
+                <section data-background-image="img/es2.jpg" data-background-color="#fff"
+                    data-background-size="contain">
+                    <h2 class="fragment">Design-Level</h2>
+                    <aside class="notes">
+                        On these yellow, rectangural cards I wrote an aggregate name already, but there can be just
+                        rules like "check material" (material specification)
+                        <br>
+                        Process-Level - skipping, already a single BC
+                    </aside>
                 </section>
             </section>
             <section data-background-image data-transition="zoom">
@@ -569,30 +596,6 @@
                         monolith can have its own "app" and calls adapters from different domains
                     </aside>
                 </section>
-            </section>
-            <section data-background-image data-transition="zoom">
-                <section data-background-image="img/pigs.jpg" data-background-size="cover">
-                    <aside class="notes">
-                        more datils on pigs!
-                    </aside>
-                </section>
-                <section>
-                    <h2 style="margin-bottom:0">Scope</h2>
-                    <ul>
-                        <li class="fragment">House building: straw, wood, bricks</li>
-                        <li class="fragment">Wolf blowing house down => pig escaping to the neighbor</li>
-                        <li class="fragment">Wolf resigning after 2 failures</li>
-                        <li class="fragment">Pigs learning from the mistakes and improve</li>
-                        <li class="fragment">
-                            Skipping:
-                            <ul>
-                                <li class="fragment">Mother of the pigs</li>
-                                <li class="fragment">Chimney climbing</li>
-                                <li class="fragment">Eating the pigs</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </section>
                 <section>
                     <h2>User Story</h2>
                     <ul>
@@ -617,51 +620,6 @@
                     </ul>
                     <aside class="notes">ES ~ domain, game rules; US ~ app, what user needs; adapters ~ what programmer
                         needs</aside>
-                </section>
-            </section>
-            <section data-background-image="" data-transition="zoom">
-                <section data-background-image="img/ppap.gif" data-background-size="cover"></section>
-                <section>
-                    <h2>What aggregate?</h2>
-                    <div style="display: flex; align-items: center;">
-                        <div>
-                            <a href="https://disney.fandom.com/wiki/The_Three_Little_Pigs?file=18706.jpg">
-                                <img src="img/pig.jpg" class="pure-img fragment" style="width: 250px;">
-                            </a>
-                            <br>
-                            <img src="img/homer.jpg" class="pure-img fragment" style="height: 120px;">
-                            <img src="img/proletariat.png" class="pure-img fragment" style="height: 120px;">
-                        </div>
-                        <div>
-                            <a href="https://disney.fandom.com/wiki/The_Three_Little_Pigs?file=1933-cochons-07.jpg">
-                                <img src="img/wolf-blow.png" class="pure-img fragment" style="width: 250px;">
-                            </a>
-                        </div>
-                        <div>
-                            <a href="https://disney.fandom.com/wiki/The_Three_Little_Pigs?file=THREE_LITTLE_PIGS.png">
-                                <img src="img/house.png" class="pure-img fragment" style="width: 250px;">
-                            </a>
-                            <br>
-                            <img src="img/material/straw.png" class="pure-img fragment" style="width: 100px;">
-                            <img src="img/material/wood.png" class="pure-img fragment" style="width: 100px;">
-                            <img src="img/material/bricks.png" class="pure-img fragment" style="width: 100px;">
-                        </div>
-                    </div>
-                </section>
-                <section data-background-image="img/stop.jpg">
-                    <aside class="notes">Whatever you picked, you should stop right here. It was thinking in nouns, in
-                        data structures, not with the actual behaviors, evnets</aside>
-                </section>
-                <section data-background-image="img/es.jpg" data-background-color="#fff" data-background-size="contain">
-                    <h2 class="fragment">Big Picture</h2>
-                    <aside class="notes">Aż tak się nie będę rozwodził. Naklejamy zdarzenia, porządkujemy
-                        chronologicznie</aside>
-                </section>
-                <section data-background-image="img/es2.jpg" data-background-color="#fff"
-                    data-background-size="contain">
-                    <h2 class="fragment">Design-Level</h2>
-                    <aside class="notes">I nagle okazuje się, że to dom powinien hermetyzować reguły. Process-Level -
-                        szukamy kontekstów do domen. U nas luz, jedna domena, metryki</aside>
                 </section>
             </section>
             <section data-background-image="" data-transition="zoom">
