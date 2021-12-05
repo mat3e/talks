@@ -1,4 +1,7 @@
-Łącznie przeprowadziłem ponad 206 godzin warsztatów.
+Łącznie przeprowadziłem ponad 208 godzin warsztatów.
+
+## 2021
+* infoShare Academy [09.12] _EventSotrming, DDD, Czysta Architektura - przegląd i wprowadzenie_
 
 ## 2019
 * GigaCon [18-19.11]: _Mikroserwisowa architektura aplikacji web – REST, CQRS, NoSQL_ [16h] [🔗](https://github.com/mat3e/microservices-workshop)
