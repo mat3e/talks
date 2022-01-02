@@ -1,4 +1,7 @@
-Łącznie przeprowadziłem ponad 208 godzin warsztatów.
+Łącznie przeprowadziłem ponad 224 godziny warsztatów.
+
+## 2022
+* Alior Bank [13-14.01] _Domain-Driven Design_
 
 ## 2021
 * infoShare Academy [09.12] _EventSotrming, DDD, Czysta Architektura - przegląd i wprowadzenie_
