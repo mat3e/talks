@@ -1,3 +1,3 @@
 # DDD Workshop
 ## EventStorming, DDD, Clean Architecture
-Wprowadzenie 
+[https://github.com/mat3e/ddd-workshop](https://github.com/mat3e/ddd-workshop)
