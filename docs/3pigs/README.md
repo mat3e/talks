@@ -1,4 +1,4 @@
-# My understanding of DDD & Clean Architecture on the example of The Three Little Pigs
+# My understanding of DDD & Clean Architecture on the example of "The Three Little Pigs"
 
 DDD and Clean Architecture are nothing new. There are plenty of learning materials in the topic. Books, online courses, conference talks to name a few…
 
