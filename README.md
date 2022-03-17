@@ -1,10 +1,11 @@
 ## 2022
+> * ? [19.05] _Subiektywny przegląd front-endów (2022)_
 > * GeeCon 2022 [11-13.05] _My understanding of DDD & Clean Architecture on the example of The Three Little Pigs_
 > * 4Developers 2022 [06.04] _Nieoczywiste funkcje Springa_
 > * WDI 2022 [02.04] _Nieoczywisty Spring_
 > * WDI 2022 [02.04] _Subiektywny przegląd front-endów (2022)_
-> * IS Pomeranian Roadshow Toruń [29.03] _?_
-> * IS Pomeranian Roadshow Olsztyn [28.03] _?_
+> * IS Pomeranian Roadshow Toruń [29.03] _Moje rozumienie DDD (+ clean architecture) na przykładzie bajki o 3 świnkach_
+> * IS Pomeranian Roadshow Olsztyn [28.03] _Moje rozumienie DDD (+ clean architecture) na przykładzie bajki o 3 świnkach_
 
 ## 2021
 * GSK TechFest [03.12] _A fairy tale about 3 pigs (Domain-Driven Design and Clean Architecture)_
