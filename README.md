@@ -1,5 +1,5 @@
 ## 2022
-> * ? [19.05] _Subiektywny przegląd front-endów (2022)_
+> * Infoshare F3 [19.05] _Subiektywny przegląd front-endów (2022)_
 > * GeeCon 2022 [11-13.05] _My understanding of DDD & Clean Architecture on the example of The Three Little Pigs_
 > * 4Developers 2022 [06.04] _Nieoczywiste funkcje Springa_
 > * WDI 2022 [02.04] _Nieoczywisty Spring_
