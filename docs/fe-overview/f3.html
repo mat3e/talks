@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="description" content="Presentation">
+    <meta name="keywords" content="presentation">
+    <meta name="author" content="mat3e">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/blood.css">
+
+    <link rel="stylesheet" href="css/idea.css">
+    <link rel="stylesheet" href="css/fontawesome.css">
+    <style>
+        #header {
+            text-align: left;
+            font-size: .7em;
+        }
+
+        #header-logo {
+            width: 375px;
+            height: 80px;
+            background-image: url('img/twitter.png');
+            background-size: contain;
+
+            top: -4em;
+            right: 0;
+            position: absolute;
+        }
+
+        #header h1 {
+            line-height: 1;
+        }
+
+        code[contenteditable="true"] {
+            border: 0;
+            outline: 0;
+        }
+
+        .slides section pre {
+            margin-bottom: 0;
+        }
+
+        .slides section pre+button {
+            cursor: pointer;
+
+            font-size: .65em;
+            font-weight: bold;
+            -webkit-font-smoothing: antialiased;
+
+            color: white;
+            background: #a23;
+
+            padding: 0 3px 3px;
+            border: transparent;
+            border-radius: 4px;
+        }
+
+        .slides section pre+button:disabled {
+            background-color: grey;
+        }
+
+        #perspective a {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            width: 45%;
+            margin: 0 auto;
+        }
+
+        #perspective a img {
+            border: 0;
+            margin: 0;
+            box-shadow: none;
+        }
+
+        #about-me {
+            padding: 1em;
+            background-color: rgba(255, 255, 255, .75);
+            list-style-type: none;
+            margin-left: 0;
+            float: left;
+        }
+
+        #about-me ul {
+            list-style-type: none;
+            float: left;
+            margin-left: 0;
+        }
+
+        #about-me a {
+            color: #a23;
+        }
+
+        #about-me a:hover {
+            color: #dd5566;
+        }
+
+        .reveal section img.pure-img {
+            background: rgba(255, 255, 255, 0);
+            border: none;
+            box-shadow: none;
+            margin: 0;
+        }
+
+        .reveal .slides section .fragment.replace {
+            transition: none;
+            display: inline-block;
+        }
+
+        .reveal .slides section .fragment.fade-out.visible.replace {
+            display: none;
+        }
+
+        .reveal .slides section .fragment.fade-in.replace {
+            display: none;
+        }
+
+        .reveal .slides section .fragment.fade-in.visible.replace {
+            display: inline-block;
+        }
+
+        .reveal .slides section .fragment.fade-out.crossed.visible {
+            opacity: 1;
+            visibility: visible;
+            text-decoration-line: line-through;
+            text-decoration-color: red;
+        }
+
+        .reveal .slides section .crossed.visible .fa-github,
+        .reveal .slides section .crossed.visible .fa-star {
+            text-decoration-line: line-through;
+            text-decoration-color: red;
+        }
+
+        .reveal section img.text-logo {
+            vertical-align: middle;
+            background: none;
+            box-shadow: none;
+            border: none;
+            height: 1em;
+            margin: 0;
+        }
+
+        .reveal .slides section td.long-text-cell {
+            font-size: .5em;
+            vertical-align: middle;
+        }
+
+        .reveal .slides section table.summary {
+            table-layout: fixed;
+            width: 100%;
+        }
+
+        .reveal .slides section table.summary tbody td {
+            width: 27%;
+        }
+
+        .reveal .slides section table.summary tbody td:first-child {
+            width: 19%;
+        }
+
+        .reveal .slides section .arrows-container {
+            display: flex;
+            align-items: end;
+            color: black;
+        }
+
+        .reveal .slides section .arrows-container>div {
+            flex-grow: 1;
+            flex-shrink: 0;
+            flex-basis: 0;
+        }
+
+        .reveal .slides section .arrows-container div .arrow {
+            background-image: url('img/arrow.svg');
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            text-align: left;
+            padding: .5em 0 .5em .5em;
+            color: white;
+        }
+
+        .reveal .slides section .arrows-container div .timeline-elem {
+            transform: rotate(-45deg);
+            margin-bottom: 1em;
+        }
+
+        .reveal .slides section h3 a:hover {
+            text-shadow: inherit;
+        }
+
+        .reveal .slides section a.wh-link {
+            color: white;
+        }
+
+        .reveal .slides section a.wh-link:hover {
+            color: #dd5566;
+        }
+
+        .reveal .slides section .fragment.visible.roll {
+            animation-name: roll;
+            animation-duration: 3s;
+            animation-fill-mode: both;
+        }
+
+        .reveal .slides .warn {
+            animation-name: redify;
+            animation-duration: 1s;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes roll {
+            0% {
+                opacity: 0;
+                transform: translate3d(-200%, 0, 0) rotate3d(0, 0, 1, -120deg);
+            }
+
+            50% {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate3d(200%, 0, 0) rotate3d(0, 0, 1, 120deg);
+            }
+        }
+
+        @keyframes redify {
+            0% {
+                color: white;
+            }
+
+            50% {
+                color: red;
+            }
+
+            100% {
+                color: white;
+            }
+        }
+    </style>
+    <script>
+        let link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section data-background-image>
+                <section id="header" data-background-image="">
+                    <h1 style="margin-bottom: 0"><span>Subiektywny</span></h1>
+                    <h2>przegląd front-endów (2022)</h2>
+                    <div id="header-logo"></div>
+                </section>
+                <section id="perspective" data-background-image="">
+                    <h5>
+                        <span>Perspektywa...</span>
+                        <span class="fragment" data-fragment-index="1"> ma znaczenie</span>
+                        <span class="fragment" data-fragment-index="2"> :)</span>
+                    </h5>
+                    <a href="https://mistrzowie.org/717022">
+                        <img src="img/perspektywa-1.jpg">
+                        <img src="img/perspektywa-2.jpg" class="fragment" data-fragment-index="1">
+                        <img src="img/perspektywa-3.jpg" class="fragment" data-fragment-index="2">
+                    </a>
+                </section>
+                <section data-background-image="img/bg-hd-new.jpg" data-background-transition="zoom">
+                    <ul id="about-me">
+                        <li>
+                            <ul>
+                                <li>
+                                    <a href="https://www.linkedin.com/in/mateusz-chrzonstowski/">
+                                        <i class="fab fa-linkedin"
+                                            style="color: #0077B5; background-color: #FFF; line-height: .75em"></i>
+                                        /mateusz-chrzonstowski
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://twitter.com/_mat3e_">
+                                        <i class="fab fa-twitter-square"
+                                            style="background-color: #1DA1F2; color: #FFF; line-height: .75em"></i>
+                                        /_mat3e_
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.reddit.com/user/_mat3e_">
+                                        <i class="fab fa-reddit-square"
+                                            style="background-color: #FF4500; color: #FFF; line-height: .75em"></i>
+                                        /_mat3e_
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/mat3e/">
+                                        <i class="fab fa-github-square"
+                                            style="color: #24292E; background-color: #FFF; line-height: .75em"></i>
+                                        /mat3e
+                                    </a>
+                                </li>
+                                <li style="line-height: 1">&nbsp;</li>
+                                <li class="fragment" style="line-height: .75">
+                                    <a style="font-weight: bold; font-size: .75em"
+                                        href="https://mat3e.github.io/talks/fe-overview/f3.html">
+                                        mat3e.github.io/talks/fe-overview/f3
+                                    </a>
+                                </li>
+                                <li style="line-height: 1">&nbsp;</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="fragment" style="padding: .1em; line-height: 1">
+                                <ul style="padding: .1em; line-height: 1">
+                                    <li>
+                                        <a href="https://jobs.glovoapp.com/">
+                                            <img src="img/glovo.png" class="pure-img" style="height: 1.5em;">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://full-stack.engineering/" class="fragment">
+                                            <img src="img/udemy-new.svg" class="pure-img" style="height: 1.5em;">
+                                        </a>
+                                    </li>
+                                    <li class="fragment">
+                                        <a href="https://devskiller.com/jobs/">
+                                            <img src="img/ds.png" class="pure-img" style="height: .75em;">
+                                        </a>
+                                    </li>
+                                </ul>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+            </section>
+            <section data-transition="zoom" data-background-image>
+                <section data-background-image="img/2022/fakt.png" data-background-size="contain">
+                </section>
+                <section data-background-image="img/2022/tiobe.png" data-background-size="contain"
+                    data-background-color="white">
+                    <h3 class="fragment">
+                        <a href="https://www.tiobe.com/tiobe-index/">tiobe.com/tiobe-index</a>
+                    </h3>
+                    <aside class="notes">JS stabilnie na miejscu 7</aside>
+                </section>
+                <section data-background-image="img/2022/so/1.png" data-background-size="contain"
+                    data-background-color="rgb(17,27,57)">
+                    <h4 class="fragment">
+                        <a
+                            href="https://insights.stackoverflow.com/survey/2021">insights.stackoverflow.com/survey/2021</a>
+                    </h4>
+                    <aside class="notes">
+                        JavaScript completes its ninth year in a row as the most commonly used programming language
+                    </aside>
+                </section>
+                <section data-background-image="img/2022/so/2.png" data-background-size="contain"
+                    data-background-color="rgb(17,27,57)">
+                </section>
+                <section data-background-image="img/2022/so/3.png" data-background-size="contain"
+                    data-background-color="rgb(17,27,57)">
+                </section>
+            </section>
+            <section data-transition="zoom" data-background-image="">
+                <section data-background-image="img/2022/pooh.jpg" data-background-size="contain"></section>
+                <section data-background-image="img/2020/elon.png" data-background-size="contain">
+                    <aside class="notes">
+                        Nowe interfejsy - asystenci głosowi, chatboty
+                    </aside>
+                </section>
+                <section>
+                    <h2>JS > front-end</h2>
+                    <ul>
+                        <li class="fragment">Alexa skills, Google</li>
+                        <li class="fragment">Aplikacje desktopowe z Electronem</li>
+                        <li class="fragment">PWA/TWA</li>
+                        <li class="fragment">Lambda@Edge, ogólnie FaaS, Serverless</li>
+                    </ul>
+                </section>
+                <section>
+                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                        <img src="img/2022/servers.jpg" class="pure-img" width="50%">
+                        <img src="img/2022/seen.png" class="pure-img fragment" width="50%">
+                    </div>
+                </section>
+                <section>
+                    <h2>Node.js/Chromium</h2>
+                    <ul>
+                        <li class="fragment" data-fragment-index="1">Stabilnie - lider</li>
+                        <li class="fragment" data-fragment-index="2">16, LTS</li>
+                        <li class="fragment" data-fragment-index="3">Wielowątkowość</li>
+                        <li class="fragment" data-fragment-index="4">Fun fact: <a
+                                href="https://www.reddit.com/r/spacex/comments/gxb7j1/comment/ft62781/?utm_source=share&utm_medium=web2x&context=3">JS
+                                kosmosie</a>
+                        </li>
+                    </ul>
+                    <img src="img/2022/poland.png" class="pure-img fragment" data-fragment-index="4"
+                        style="position: absolute; right:0; bottom:0; width: 10%;">
+                    <aside class="notes">Tak naprawdę w większości poprzednich przypadków
+                        <br>
+                        Powiedziałem, że lider; czemu nie "jedyne rozwiązanie"?
+                    </aside>
+                </section>
+                <section>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: center;width: 50%">kiedyś</td>
+                                <td style="text-align: center;width: 50%">teraz</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;">
+                                    <img src="img/browsers/old.png" class="pure-img fragment">
+                                    <img src="img/jquery.svg" class="pure-img fragment" style="width: 60%">
+                                </td>
+                                <td style="vertical-align: top; text-align: center;">
+                                    <img src="img/browsers/chromium.png" class="pure-img fragment" style="width: 45%">
+                                    <img src="img/2020/frameworks.png" class="pure-img fragment">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </section>
+            <section data-transition="zoom" data-background-image="">
+                <section>
+                    <a href="https://i.redd.it/zlee3sbw80x01.png">
+                        <img src="img/all3small.jpg" class="pure-img">
+                    </a>
+                    <div class="fragment" style="position: fixed; bottom: 0; right: 0" data-fragment-index="1">
+                        <img src="img/2022/pikachu.png" class="pure-img" style="width: 190px; height: 154px">
+                    </div>
+                    <aside class="notes">Tak, jak uczy nas historia, a może historia pokemonów, warto czasem postawić na
+                        jakiegoś czarnego konia, coś z boku, więc stronka fajna
+                        <br>
+                        <br>
+                        Na Svelte patrzyłem od dawna (2020), ale jakoś się nie przemogłem
+                        <br>
+                        <br>
+                        Svelte jako Pikachu i że trochę co innego niż frameworki HTML-first (Angular i Vue 1) i JS-first
+                        (React) - już Vue 2+ zaczęło mieszać (niby szablony, a virtual DOM), a Svelte miesza jeszcze
+                        bardziej, bo to bardziej kompilator
+                    </aside>
+                </section>
+                <section data-background-image="img/2022/bestof/total.png" data-background-size="contain">
+                    <h4><a href="https://bestofjs.org/projects?tags=framework&sort=total"
+                            class="fragment">bestofjs.org/projects?sort=total</a></h4>
+                </section>
+                <section data-background-image="img/2022/bestof/added.png" data-background-size="contain">
+                    <aside class="notes">Ciekawie, bo Vue zawsze było uznawane za lepiej zarządzanego Angulara, a
+                        powielają jego rozdzielenie się między repozytoriami i zobaczymy, czy nie wyjdą na tym kiepsko.
+                        Z jednej strony odcinka moe pomóc, ale Angularowi chyba nie pomogło...</aside>
+                </section>
+                <section data-background-image="img/2022/angularend.png" data-background-size="contain"
+                    data-background-color="white">
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <img src="img/2022/salute.jpg" class="fragment pure-img" data-fragment-index="1"
+                        style="position: absolute; left: 0; bottom: 0; height: 250px;">
+                    <aside class="notes">Apropo Angulara. Koniec z końcem roku (2021). Przedłuzyli trochę przez
+                        pandemię. Koniec jakiejś
+                        epoki</aside>
+                </section>
+                <section data-background-color="white" data-background-image="img/2022/tw.png"
+                    data-background-size="contain">
+                    <h4>
+                        <a href="https://www.thoughtworks.com/en-gb/radar">thoughtworks.com/radar v26</a>
+                    </h4>
+                    <div class="fragment replace fade-out" data-fragment-index="3">
+                        <img src="img/2022/redux.png" class="pure-img fragment" style="height: 500px"
+                            data-fragment-index="1">
+                        <img src="img/2022/hooks.png" class="pure-img fragment" style="height: 500px"
+                            data-fragment-index="2">
+                    </div>
+                    <a href="https://twitter.com/swyx/status/1481101214851170304"><img src="img/2022/brianholt.png"
+                            data-fragment-index="3" class="pure-img fragment fade-in replace"
+                            style="position: fixed; width: 40%; left: 30%; top:0"></a>
+                    <aside class="notes">W Angulara już wbiłem, że źle wprowadzili swoje zmiany, Vue zobaczymy, bo teraz
+                        faktycznie widzę jego użycie na produkcji; tylko nie wiem jak z tym Vue 3. No i React</aside>
+                </section>
+                <section>
+                    <div>
+                        <img src="img/2022/vue-wc.png" class="pure-img" style="width: 50%" />
+                    </div>
+                    <ul>
+                        <li class="fragment">TS</li>
+                        <li class="fragment">Nowe repo</li>
+                    </ul>
+                </section>
+            </section>
+            <section data-transition="zoom">
+                <section>
+                    <a href="https://i.redd.it/zlee3sbw80x01.png">
+                        <img src="img/2020/frameworks.png" class="pure-img" style="width: 20%">
+                    </a>
+                    <h2 class="fragment">2 MILIONY</h2>
+                    <a href="http://www.modulecounts.com/">
+                        <img src="img/2022/count.png" class="pure-img fragment" style="width: 50%">
+                    </a>
+                    <div class="fragment">1000+ nowych dziennie</div>
+                    <aside class="notes">Nowy dzień, nowy framework? Nie, nie nie. Nowy dzień, 1000 frameworków</aside>
+                </section>
+                <section>
+                    <div>
+                        <a href="https://github.com/lerna/lerna/commit/8b99493ac90484e05f7ebee533c0763534d60218">
+                            <img src="img/2022/lerna.png" class="pure-img" style="width: 50%" />
+                        </a>
+                    </div>
+                </section>
+                <section>
+                    <h4 style="margin: 0">
+                        <a
+                            href="https://blog.npmjs.org/post/180868064080/this-year-in-javascript-2018-in-review-and-npms">
+                            Micro-frameworki
+                        </a>
+                    </h4>
+                    <div class="fragment">
+                        <a href="https://www.npmjs.com/package/is-odd">
+                            <img src="img/2022/odd.png" class="pure-img" width="70%">
+                        </a>
+                    </div>
+                    <div class="fragment" style="margin-bottom: 0;">
+                        <a href="https://www.npmjs.com/package/is-number">
+                            <img src="img/2022/num.png" class="pure-img" width="70%">
+                        </a>
+                    </div>
+                    <a class="fragment" style="font-size: .75em;"
+                        href="https://azer.bike/journal/i-ve-just-liberated-my-modules/"><code>left-pad</code> w
+                        2016?</a>
+                    <aside class="notes">npm miał swoje problemy wieku dziecięcego</aside>
+                </section>
+                <section data-transition="fade" data-background-image="img/2020/pm2.png" data-background-size="contain">
+                    <h2 class="fragment">2019</h2>
+                    <aside class="notes">
+                        PM2 uses a self-hosted version of gtk as an optional dependency to ping a URL for analytics
+                        purposes
+                    </aside>
+                </section>
+                <section data-background-image="img/2022/miner.png" data-background-size="contain"
+                    data-background-color="white">
+                    <h3 class="fragment"><a
+                            href="https://www.bleepingcomputer.com/news/security/popular-npm-library-hijacked-to-install-password-stealers-miners/">Neverending
+                            story...<br><br><br></a></h3>
+                </section>
+                <section data-background-image="img/2022/liberty.png" data-background-size="contain"
+                    data-background-color="white">
+                    <a
+                        href="https://techcrunch.com/2022/01/18/open-source-developers-who-work-for-free-are-discovering-they-have-power/"><img
+                            src="img/2022/liberty2.png" class="pure-img fragment" style="border: solid 1px black;"></a>
+                    <img src="img/2022/lib3.png" class="pure-img fragment"
+                        style="position: fixed; top: 20%; width: 90%; left: 5%; border: solid 1px black;">
+                </section>
+                <section data-background-image="img/2020/regret.jpg">
+                    <aside class="notes">10 Things I Regret About Node.js - Ryan Dahl - JSConf EU // twórca Node'a
+                    </aside>
+                </section>
+                <section data-background-image="img/2022/v1.png" data-background-color="white"
+                    data-background-size="contain"></section>
+                <section data-background-image="img/2020/deno.jpg" data-background-size="contain"
+                    style="width: 100%; height: 100%;">
+                    <a href="https://github.com/denoland/deno/issues/239" class="fragment"
+                        style="transform: rotate(-15deg); position: absolute; left: 0;">
+                        <img src="img/deno-hate/edon.png" class="pure-img" style="border: solid 1px black;">
+                    </a>
+                    <a href="https://github.com/denoland/deno/issues/152" class="fragment"
+                        style="transform: rotate(3deg); position: absolute; top: 0; right: 0">
+                        <img src="img/deno-hate/why.png" style="width: 550px; border: solid 1px black;"
+                            class="pure-img">
+                    </a>
+                    <a href="https://github.com/denoland/deno/issues/31" class="fragment"
+                        style="transform: rotate(5deg); position: absolute; top: 3em; left: -3em">
+                        <img src="img/deno-hate/six.png" style="width: 850px; border: solid 1px black;"
+                            class="pure-img">
+                    </a>
+                    <a href="https://github.com/denoland/deno/issues/17" class="fragment"
+                        style="position: absolute; top: 5em; right: 20%">
+                        <img src="img/deno-hate/explain.png" style="width: 1000px; border: solid 1px black;"
+                            class="pure-img">
+                    </a>
+                    <a href="https://github.com/denoland/deno/issues/56" class="fragment"
+                        style="transform: rotate(-10deg); position: absolute; top: 4em; left: 0; right: 0">
+                        <img src="img/deno-hate/unbelievable.png" style="width: 750px; border: solid 1px black;"
+                            class="pure-img">
+                    </a>
+                    <a href="https://github.com/denoland/deno/issues/53" class="fragment"
+                        style="transform: rotate(3deg);position: absolute; top: 4em; left: 0">
+                        <img src="img/deno-hate/close.png" style="width: 900px; border: solid 1px black;"
+                            class="pure-img">
+                    </a>
+                    <aside class="notes">
+                        shitstorm!
+                        <ul>
+                            <li>nazwa to zmienione sylaby</li>
+                            <li>zagubieni</li>
+                            <li>sami nie wiedzą ocb</li>
+                            <li>od czapy 100%</li>
+                            <li>tłumacz się! Nie płacę, więc żądam</li>
+                            <li>podręcznikowy hejt</li>
+                            <li>I najgorsze</li>
+                        </ul>
+                        Jeśli ktoś jeszcze się waha rozpocząć przygodę z OSS, to zapraszamy xd
+                    </aside>
+                </section>
+                <section data-background-image="img/2022/so/deno.png" data-background-size="contain"
+                    data-background-color="rgb(17,27,57)"></section>
+                <section>
+                    <div style="display: flex; flex-direction: column; width: 75%; margin: 0 auto;">
+                        <a href="https://github.com/ajv-validator/ajv/issues/1082#issuecomment-583675399">
+                            <img src="img/2022/ajv1.png" class="pure-img" />
+                        </a>
+                        <a href="https://github.com/ajv-validator/ajv/issues/1082#issuecomment-615919989">
+                            <img src="img/2022/ajv2.png" class="pure-img fragment" />
+                        </a>
+                    </div>
+                </section>
+                <section>
+                    <a href="https://github.com/Marak/colors.js/commit/074a0f8ed0c31c35d13d28632bd8a049ff136fb6">
+                        <img src="img/2022/marak.png" class="pure-img" />
+                    </a>
+                </section>
+            </section>
+            <section data-transition="zoom">
+                <section data-background-image="img/2022/bias.jpg" data-background-size="contain">
+                    <aside class="notes">
+                        Przewija się temat korpo i sponsoringu przez nie
+                        <br>
+                        Może OSS ma szansę tylko pod korporacjami?
+                        <br>
+                        Lighthouse 8.4.0 (2021-09-08) wywalił to
+                    </aside>
+                </section>
+                <section>
+                    <h4><a href="https://github.blog/2020-03-16-npm-is-joining-github/">npm is joining GitHub</a></h4>
+                    <img src="img/2022/msbuy.png" class="fragment pure-img">
+                </section>
+                <section>
+                    <h2>2018</h2>
+                    <div style="text-align: center" class="fragment fade-out replace" data-fragment-index="1">
+                        <a href="http://funthingstodowhenbored.com/quote/first-they-ignore-you-mahatma-gandhi-quotes">
+                            <img src="img/ghandi.png" class="pure-img">
+                        </a>
+                    </div>
+                    <img src="img/redhat-small.jpeg" class="fragment fade-in replace pure-img" data-fragment-index="1"
+                        style="margin: 0; width: 30%">
+                </section>
+                <section>
+                    <h2>2022</h2>
+                    <ul>
+                        <li class="fragment" data-fragment-index="1"><a href="http://github.new/">github.new</a></li>
+                        <li class="fragment" data-fragment-index="2"><code>.</code> - VS Code online</li>
+                        <li class="fragment" data-fragment-index="3">GitHub bot</li>
+                        <li class="fragment">npm</li>
+                        <img class="fragment pure-img" style="position: fixed; border: 0; right: 0; width: 40%;"
+                            src="img/2022/tn.png" data-fragment-index="3">
+                    </ul>
+                    <aside class="notes">
+                        Może nas jeszcze nie zautomatyzuja, ale jest też szybkość powstawania nowych rzeczy i ich
+                        używania.
+                        <br>
+                        <br>
+                        Głównych frameworków jest 3, ale są poboczne i pomocnicze
+                    </aside>
+                </section>
+            </section>
+            <section data-transition="zoom" data-background-image="">
+                <section>
+                    <h2>
+                        <span>Trendy</span>
+                    </h2>
+                    <ul style="font-size: .9em;">
+                        <li class="fragment">
+                            Coraz mocniejsze narzędzia rozumiane i&nbsp;wykorzystywane w pełni przez coraz mniej
+                            programistów
+                        </li>
+                        <li class="fragment">Naturalna kolej rzeczy?</li>
+                        <li class="fragment">
+                            <img src="img/webpack.png" class="pure-img text-logo"> - code splitting, lazy loading, ...
+                        </li>
+                        <li class="fragment"><img src="img/2022/yarn.svg" class="pure-img text-logo"> - różne sztuczki
+                            zamiast monorepo</li>
+                        <li class="fragment"><img src="img/npm.svg" class="pure-img text-logo"> - goni Yarna</li>
+                        <li class="fragment">
+                            Package.json - coraz więcej konfiguracji
+                            <ul>
+                                <li class="fragment">Browserlist, <img src="img/babel.svg" class="pure-img text-logo">,
+                                    TS</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Przeglądarki - coraz bliżej systemów operacyjnych</li>
+                    </ul>
+                </section>
+                <section data-background-image="img/2022/js.jpg" data-background-size="contain">
+                    <div style="background-color: rgba(0, 0, 0, .5); padding-top: 1em; padding-bottom: 1em;"
+                        class="fragment" data-fragment-index="1">
+                        <h2 class="fragment" data-fragment-index="3">Dziękuję</h2>
+                        <ul>
+                            <li>
+                                <a href="https://mat3e.github.io/trendy">
+                                    mat3e.github.io/trendy
+                                </a>
+                            </li>
+                            <li class="fragment" data-fragment-index="2">
+                                <a href="https://mat3e.github.io/talks/fe-overview/f3.html">
+                                    mat3e.github.io/talks/fe-overview/f3
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+            </section>
+        </div>
+    </div>
+    <script src="js/document-register-element.js"></script>
+    <script src="js/reveal.js"></script>
+    <script>
+        const controls = (function () {
+            // Babel.registerPlugin('lolizer', lolizer);
+            Reveal.initialize({
+                history: true,
+                // - null: Media will only autoplay if data-autoplay is present
+                autoPlayMedia: null,
+                transition: 'fade', // none/fade/slide/convex/concave/zoom
+                transitionSpeed: 'default', // default/fast/slow
+                backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
+                dependencies: [
+                    {
+                        src: 'js/marked.js', condition: function () {
+                            return !!document.querySelector('[data-markdown]');
+                        }
+                    },
+                    {
+                        src: 'js/markdown.js', condition: function () {
+                            return !!document.querySelector('[data-markdown]');
+                        }
+                    },
+
+                    // Syntax highlight for <code> elements
+                    {
+                        src: 'js/highlight.js', callback: function () {
+                            setTimeout(() => hljs.initHighlightingOnLoad(), 0);
+                        }
+                    },
+
+                    // Zoom in and out with Alt+click
+                    { src: 'js/zoom.js' },
+
+                    { src: 'notes/notes.js' },
+
+                    { src: 'js/math.js' }
+                ]
+            });
+
+            document.querySelectorAll('.reveal .slides section:not([data-background-image])').forEach(s => {
+                s.setAttribute('data-background-image', 'img/twitter.png');
+                s.setAttribute('data-background-size', '240px');
+                s.setAttribute('data-background-position', '.5em .5em');
+            });
+
+            // reflect polyfill has a strange name
+            window.coreJs = window['__core-js_shared__'];
+            return {
+                evalCode(btn, once) {
+                    const input = btn.previousElementSibling.innerText;
+                    const output = Babel.transform(input, {
+                        presets: ['react'],
+                        plugins: [
+                            ['transform-modules-umd', {
+                                globals: {
+                                    '@angular/core': 'ng.core',
+                                    '@angular/platform-browser': 'ng.platformBrowser',
+                                    '@angular/platform-browser-dynamic': 'ng.platformBrowserDynamic',
+                                    '@angular/elements': 'ng.elements',
+                                    'zone.js': 'Zone',
+                                    'core-js/es/reflect': 'coreJs',
+                                    'core-js/features/reflect': 'coreJs',
+                                    'react': 'React',
+                                    'react-dom': 'ReactDOM',
+                                    'vue': 'Vue',
+                                    '@vue/web-component-wrapper': 'wrapVueWebComponent'
+                                },
+                                exactGlobals: true
+                            }]
+                        ]
+                    }).code;
+                    eval.call(window, output);
+                    if (once) {
+                        btn.disabled = true;
+                    }
+                },
+                evalTsCode(btn, once) {
+                    const input = btn.previousElementSibling.innerText;
+                    const output = Babel.transform(input, {
+                        plugins: [
+                            ['transform-modules-umd', {
+                                globals: {
+                                    '@angular/core': 'ng.core',
+                                    '@angular/platform-browser': 'ng.platformBrowser',
+                                    '@angular/platform-browser-dynamic': 'ng.platformBrowserDynamic',
+                                    '@angular/elements': 'ng.elements',
+                                    'zone.js': 'Zone',
+                                    'core-js/es/reflect': 'coreJs',
+                                    'core-js/features/reflect': 'coreJs',
+                                    'react': 'React',
+                                    'react-dom': 'ReactDOM',
+                                    'vue': 'Vue',
+                                    '@vue/web-component-wrapper': 'wrapVueWebComponent'
+                                },
+                                exactGlobals: true
+                            }],
+                            'transform-typescript',
+                            ['proposal-decorators', { legacy: true }],
+                            ['proposal-class-properties', { loose: true }]
+                        ]
+                    }).code;
+                    eval.call(window, output);
+                    if (once) {
+                        btn.disabled = true;
+                    }
+                }
+            }
+        })();
+    </script>
+</body>
+
+</html>
