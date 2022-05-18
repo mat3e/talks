@@ -1,3 +1,11 @@
+# My personal front-end overview (2022)
+
+"New day, new framework" - is this still valid?
+
+I follow front-end trends and I want to share my thoughts on them. Both experienced front-end developers and the beginners, expecting a quick summary, should find something valuable for them in my talk.
+
+I'm going to start with facts & statistics, then we'll think about the future of JS & its frameworks, talk through npm problems and we'll finish up with an open topic: can anyone take over our lovely technologies?
+
 # My personal front-end overview (2020)
 
 "New day, new framework". How to handle this?
@@ -21,6 +29,14 @@ What are the main front-end players? Is Vue more popular than React? Can we use 
 Why React wins with Angular? How about Vue? Are there any other big players? What is going on with jQuery? What are the trends and what is the future of the front-end? I will do my best to address those questions in an entertaining way.
 
 ___
+
+# Subiektywny przegląd front-endów (2022)
+
+"Nowy dzień, nowy framework" - czy dalej tak to działa na front-endzie?
+
+Jestem jedną z osób, śledzących newsy JS i pragnę podzielić się swoimi obserwacjami. Zarówno mający na ten temat własne przemyślenia jak i oczekujący "pigułki", dającej pewien ogląd sytuacji, powinni znaleźć tutaj coś dla siebie.
+
+Zaczniemy od faktów i statystyk, zastanowimy się jaką przyszłość mają przed sobą JavaScript i frameworki, spojrzymy na problemy npm-a, a zakończymy sygnałami odnośnie zawłaszczania technologii.
 
 # Subiektywny przegląd front-endów (2020)
 
