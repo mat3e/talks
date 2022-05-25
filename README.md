@@ -1,4 +1,5 @@
 ## 2022
+> * dev.js Summit 2022 [13.10] _Porządki w kodzie - JS Clean Architecture_
 > * BB Days 4 IT 2022 [10.09] ?
 > * WarsawJS 93 [08.06] _My personal front-end overview (2022)_
 * Infoshare F3 [19.05] _Subiektywny przegląd front-endów (2022)_ [🔗](https://mat3e.github.io/talks/fe-overview/f3.html)
