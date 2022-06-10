@@ -4,7 +4,7 @@
 > * dynamIT 2022 [03.09] ?
 > * Charity JavaScript webinar [29.06] - _Cleaning things up - JS clean architecture_
 > * Confitura 2022 [25.06] - _Moje rozumienie DDD i Clean Architecture na przykładzie bajki o trzech świnkach_
-> * WarsawJS 93 [08.06] _My personal front-end overview (2022)_
+* WarsawJS 93 [08.06] _My personal front-end overview (2022)_ [🔗](https://mat3e.github.io/talks/fe-overview/WarsawJS.html)
 * Infoshare F3 [19.05] _Subiektywny przegląd front-endów (2022)_ [🔗](https://mat3e.github.io/talks/fe-overview/f3.html)
 * GeeCon 2022 [12.05] _My understanding of DDD & Clean Architecture on the example of The Three Little Pigs_ [🔗](https://mat3e.github.io/talks/3pigs/geecon.html#/)
 * 4Developers 2022 [06.04] _Nieoczywiste funkcje Springa_ [🔗](https://github.com/mat3e/less-popular-spring-functions)
