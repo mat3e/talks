@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="description" content="Presentation">
+    <meta name="keywords" content="presentation">
+    <meta name="author" content="mat3e">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/blood.css">
+    <link rel="stylesheet" href="css/idea.css">
+    <link rel="stylesheet" href="css/fontawesome.css">
+    <link rel="stylesheet" href="css/treeview.css">
+    <style>
+        #header-margin {
+            text-align: left;
+            border-left: solid .1em white;
+            line-height: .85;
+            padding-left: .25em;
+        }
+
+        #header-logo {
+            width: 224px;
+            height: 47px;
+            background-image: url('img/twitter.png');
+            background-size: contain;
+
+            top: -4em;
+            right: 0;
+            position: absolute;
+        }
+
+        #perspective a {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            width: 45%;
+            margin: 0 auto;
+        }
+
+        #perspective a img {
+            border: 0;
+            margin: 0;
+            box-shadow: none;
+        }
+
+        #about-me {
+            padding: 1em;
+            background-color: rgba(255, 255, 255, .75);
+            list-style-type: none;
+            margin-left: 0;
+            float: left;
+        }
+
+        #about-me ul {
+            list-style-type: none;
+            float: left;
+            margin-left: 0;
+            padding-left: 0;
+        }
+
+        #about-me a {
+            color: #a23;
+        }
+
+        #about-me a:hover {
+            color: #dd5566;
+        }
+
+        .slides section img.pure-img {
+            border: none;
+            box-shadow: none;
+            background: none;
+            margin: 0;
+        }
+
+        code[contenteditable="true"] {
+            border: 0;
+            outline: 0;
+        }
+
+        .slides section pre {
+            margin-bottom: 0;
+        }
+
+        .slides section pre+button {
+            cursor: pointer;
+
+            font-size: .65em;
+            font-weight: 100;
+            -webkit-font-smoothing: antialiased;
+
+            color: white;
+            background: rgb(175, 30, 35);
+
+            padding: 0 3px 3px 3px;
+            border: transparent;
+            border-radius: 4px;
+
+            display: block;
+            margin: 0 auto;
+        }
+
+        .slides section pre+button:disabled {
+            background-color: grey;
+        }
+
+        .slides section a .stripped-img {
+            border: none;
+            margin: 0;
+            box-shadow: none;
+            background-color: rgba(255, 255, 255, 0);
+        }
+
+        .slides section a .stripped-img:hover {
+            border: none;
+            margin: 0;
+            box-shadow: none;
+            background-color: rgba(255, 255, 255, 0);
+        }
+
+        .slides section .comment {
+            margin-top: -20px;
+            margin-bottom: 20px;
+            color: gray;
+        }
+
+        .reveal .slides section .fragment.replace {
+            transition: none;
+            display: inline-block;
+        }
+
+        .reveal .slides section .fragment.replace.flex {
+            transition: none;
+            display: flex;
+        }
+
+        .reveal .slides section .fragment.fade-out.visible.replace {
+            display: none;
+        }
+
+        .reveal .slides section .fragment.fade-in.replace {
+            display: none;
+        }
+
+        .reveal .slides section .fragment.fade-in.visible.replace {
+            display: inline-block;
+        }
+
+        .reveal .slides section .fragment.fade-in.visible.replace.flex {
+            display: flex;
+        }
+
+        .reveal .slides section .fragment.highlight-red.visible {
+            color: #dd5566;
+        }
+
+        #hook-here button {
+            padding: 1em;
+            border-radius: 0;
+            background-color: white;
+            border: 1px solid black;
+        }
+
+        .reveal .slides section td.long-text-cell {
+            font-size: .5em;
+            vertical-align: middle;
+        }
+
+        .reveal .slides section table.summary {
+            table-layout: fixed;
+            width: 100%;
+        }
+
+        .reveal .slides section table.summary th {
+            text-align: center;
+        }
+
+        .reveal .slides section table.summary tbody td,
+        .reveal .slides section table.summary th {
+            width: 33%;
+        }
+
+        .reveal .slides section table.summary tbody td:first-child,
+        .reveal .slides section table.summary th:first-child {
+            width: 7%;
+            vertical-align: middle;
+            text-align: center
+        }
+
+        .reveal .slides section .fragment.no-highlight.visible {
+            color: #eee;
+        }
+
+        .reveal .slides section .fragment.no-highlight {
+            opacity: 1;
+            visibility: inherit;
+        }
+
+        .reveal .slides section .centered {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .Ta\(c\) {
+            text-align: center !important;
+        }
+    </style>
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section data-background-image>
+                <section data-background-image="img/elon.webp" data-background-size="cover">
+                    <div id="header-margin">
+                        <h1 style="margin: 0; font-size: 1.75em">Moje rozumienie DDD (+&nbsp;clean architecture)</h1>
+                        <h2 style="font-size: 1.25em">na przykładzie bajki o&nbsp;3&nbsp;świnkach​</h2>
+                    </div>
+                    <div id="header-logo"></div>
+                    <aside class="notes">
+                        Ostatnio kupno twittera, ale kilka miechów temu było o świniach i chipach
+                    </aside>
+                </section>
+                <section id="perspective" data-background-image="">
+                    <h5>
+                        <span>Perspektywa...</span>
+                        <span class="fragment" data-fragment-index="1"> ma znaczenie</span>
+                        <span class="fragment" data-fragment-index="2"> :)</span>
+                    </h5>
+                    <a href="https://mistrzowie.org/717022">
+                        <img src="img/perspektywa-1.jpg">
+                        <img src="img/perspektywa-2.jpg" class="fragment" data-fragment-index="1">
+                        <img src="img/perspektywa-3.jpg" class="fragment" data-fragment-index="2">
+                    </a>
+                </section>
+                <section data-background-image="img/bg-hd.jpg" data-background-transition="zoom">
+                    <ul id="about-me">
+                        <li>
+                            <ul>
+                                <li>
+                                    <a href="https://www.linkedin.com/in/mateusz-chrzonstowski/">
+                                        <i class="fab fa-linkedin"
+                                            style="color: #0077B5; background-color: #FFF; line-height: .75em"></i>
+                                        /mateusz-chrzonstowski
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://twitter.com/_mat3e_">
+                                        <i class="fab fa-twitter-square"
+                                            style="background-color: #1DA1F2; color: #FFF; line-height: .75em"></i>
+                                        /_mat3e_
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.reddit.com/user/_mat3e_">
+                                        <i class="fab fa-reddit-square"
+                                            style="background-color: #FF4500; color: #FFF; line-height: .75em"></i>
+                                        /_mat3e_
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/mat3e/">
+                                        <i class="fab fa-github-square"
+                                            style="color: #24292E; background-color: #FFF; line-height: .75em"></i>
+                                        /mat3e
+                                    </a>
+                                </li>
+                                <li style="line-height: 1">&nbsp;</li>
+                                <li class="fragment" style="line-height: .75">
+                                    <a style="font-size: .75em; font-weight: bold;"
+                                        href="https://mat3e.github.io/talks/3pigs/confitura.html">
+                                        mat3e.github.io/talks/3pigs/confitura
+                                    </a>
+                                    <br>
+                                    <a class="fragment" style="font-size: .75em; font-weight: bold;"
+                                        href="https://github.com/mat3e/3pigs-ddd">
+                                        github.com/mat3e/3pigs-ddd
+                                    </a>
+                                </li>
+                                <li style="line-height: 1">&nbsp;</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="fragment" style="padding: .1em; line-height: 1">
+                                <li>
+                                    <a href="https://jobs.glovoapp.com/">
+                                        <img src="img/glovo.png" class="pure-img" style="height: 1.5em;">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://full-stack.engineering/" class="fragment">
+                                        <img src="img/udemy-new.svg" class="pure-img" style="height: 1.5em;">
+                                    </a>
+                                </li>
+                                <li class="fragment">
+                                    <a href="https://devskiller.com/jobs/">
+                                        <img src="img/ds.png" class="pure-img" style="height: .75em;">
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section>
+                    <h1>DDD</h1>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td class="fragment" data-fragment-index="1">
+                                    <h3 class="fragment highlight-red">Strategiczne</h3>
+                                </td>
+                                <td class="fragment" data-fragment-index="1">
+                                    <h3>Taktyczne</h3>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+                <section>
+                    <h3>Domeny</h3>
+                    <img src="img/strategic/supporting.png" class="pure-img fragment" data-fragment-index="2"
+                        alt="supporting subdomain" height="180" />
+                    <img src="img/strategic/generic.png" class="pure-img fragment" data-fragment-index="3"
+                        alt="generic subdomain" />
+                    <div>
+                        <img src="img/strategic/supporting.png" class="pure-img fragment" data-fragment-index="2"
+                            alt="supporting subdomain" height="180" />
+                        <img src="img/strategic/core.png" class="pure-img fragment" data-fragment-index="1"
+                            alt="core domain" />
+                        <img src="img/strategic/supporting.png" class="pure-img fragment" data-fragment-index="2"
+                            alt="supporting subdomain" height="180" />
+                    </div>
+                    <img src="img/strategic/generic.png" class="pure-img fragment" data-fragment-index="3"
+                        alt="generic subdomain" />
+                    <img src="img/strategic/generic.png" class="pure-img fragment" data-fragment-index="3"
+                        alt="generic subdomain" />
+                    <aside class="notes">
+                        problem space, 3 levels, core makes money, unique psysics of our business
+                    </aside>
+                </section>
+                <section>
+                    <h3>Bounded Context</h3>
+                    <div class="fragment">
+                        <div style="background: no-repeat center url('img/strategic/core.png'); height: 200px">
+                            <br>
+                            <h4 style="color: red; margin-bottom: 0; transform: rotateZ(-10deg);">Fairy tales</h4>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th style="width: 50%; text-align: center; border-right: 1px solid white;"><img
+                                            src="img/redhood.webp" class="pure-img fragment" style="height: 3em;" />
+                                    </th>
+                                    <th style="width: 50%; text-align: center;"><img src="img/3pigs.png"
+                                            class="pure-img fragment" style="height: 3em;" /></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="2" style="text-align: center;" class="fragment">Mama</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="text-align: center;" class="fragment">Dom</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="text-align: center;" class="fragment">Wilk</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <aside class="notes">
+                        Within our core domain there are e.g. 2 bounded contexts - Red Hood & The Three Little Pigs;
+                        they obviously have different main objects (Girl, huntsman, granny), but they also share same
+                        words. And even the words sound the same they mean sth different in each domain - ubiquitous
+                        lang
+                        <br />
+                        How to find this?
+                    </aside>
+                </section>
+                <section>
+                    <h2>Jak się za to zabrać?</h2>
+                    <img src="img/how.webp" class="pure-img" style="position: absolute; bottom: 0; left: 0; width: 2em">
+                </section>
+                <section>
+                    <h2>EventStorming!</h2>
+                    <ul>
+                        <li class="fragment">Złota zasada: zdarzenia (czasowniki, czas przeszły, dokonany), a NIE
+                            struktury danych (rzeczowniki)
+                        </li>
+                        <li class="fragment">Big Picture ES - znajdowanie domen</li>
+                        <li class="fragment">Process-Level ES - odkrywanie Bounded Contextów</li>
+                        <li class="fragment">Design-Level ES - taktyczne DDD w obrębie BC</li>
+                        <li class="fragment">Komendy (zmiana stanu systemu) i widoki</li>
+                    </ul>
+                    <aside class="notes">
+                        "Co robiłeś wieczorem?", "piwo, wódka, wino" vs. "ale się naje... napiłem"
+                        <br>
+                        Komendy zależne od adaptera: "ze mną się nie napijesz?", "nie dasz rady tego wypić"
+                    </aside>
+                </section>
+                <section data-background-image="img/timelapse.gif" data-background-size="contain">
+                    <ul style="color: black;">
+                        <li class="fragment">Obecność na miejscu</li>
+                        <li class="fragment">Zaangażowanie kluczowych osób</li>
+                        <li class="fragment">2 dni, odcinka od świata</li>
+                    </ul>
+                </section>
+                <section data-background-color="white" data-background-image="img/DDD_Model_Exploration_Whirlpool.png"
+                    data-background-size="contain">
+                    <h4 class="fragment">
+                        <a
+                            href="https://www.domainlanguage.com/ddd/whirlpool/"><b>domainlanguage.com/ddd/whirlpool</b></a>
+                    </h4>
+                </section>
+                <section data-background-color="rgb(242,242,242)" data-background-image="img/robota.png"
+                    data-background-size="contain">
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section>
+                    <h1>DDD</h1>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <h3>Strategiczne</h3>
+                                </td>
+                                <td>
+                                    <h3 class="fragment highlight-red">Taktyczne</h3>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+                <section>
+                    <h2 style="margin-bottom: 0;">Klocki DDD</h2>
+                    <div style="width: 300px; height: 300px;" class="fragment fade-out replace" data-fragment-index="2">
+                        <br />
+                        <br />
+                        <img src="img/tactical/entity.png" class="pure-img fragment" data-fragment-index="1" />
+                    </div>
+                    <div style="background-image: url('img/tactical/aggregate.png'); width: 300px; height: 300px;"
+                        class="fragment fade-in replace" data-fragment-index="2">
+                        <br />
+                        <br />
+                        <img src="img/tactical/entity.png" class="pure-img" />
+                    </div>
+                    <img src="img/tactical/repo.png" class="pure-img fragment" data-fragment-index="3" />
+                    <div>
+                        <img src="img/tactical/service.png" class="pure-img fragment" data-fragment-index="4" />
+                        <img src="img/tactical/vo.png" class="pure-img fragment" data-fragment-index="5" />
+                        <img src="img/tactical/event.png" class="pure-img fragment" data-fragment-index="6" />
+                        <img src="img/tactical/snap.png" class="pure-img fragment" data-fragment-index="8" />
+                    </div>
+                    <span class="fragment" data-fragment-index="7">Specification, Policy</span>
+                    <aside class="notes">
+                        <ul>
+                            <li>entity = unique id</li>
+                            <li>aggregate = aggregates (encapsulates) invariants, rules to be fulfilled alltogether</li>
+                            <li>repo = stores and restores an aggregate - single db transaction</li>
+                            <li>service = stateles domain logic, e.g. calculators</li>
+                            <li>vo = data structure identifiable based on props; money</li>
+                            <li>event = not necesarry from event sourcing, but a noteworthy thing happening in the
+                                domain and announced either internally or also externally</li>
+                            <li>snapshot = not pure DDD, a little trick which helped me a lot implementing; X-ray photo
+                            </li>
+                        </ul>
+                    </aside>
+                </section>
+                <section>
+                    <h2>Kod</h2>
+                    <img src="img/ddd-code-all.png" class="pure-img fragment" style="width: 500px; margin: 0">
+                    <aside class="notes">actually show the code from repo</aside>
+                </section>
+                <section data-background-image="img/water.gif" data-background-size="contain"></section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section data-background-image="img/pigs.jpg" data-background-size="cover">
+                    <aside class="notes">
+                        to były ramy, teraz w te ramy wpakujemy naszą domenę, ale najpierw ją poznajmy: świnki!
+                    </aside>
+                </section>
+                <section>
+                    <h2>Jaki agregat w <i>Trzech małych świnkach</i>?</h2>
+                </section>
+                <section>
+                    <h2 style="margin-bottom:0">Założenia, biznes</h2>
+                    <ul>
+                        <li class="fragment">Budowanie domu: słoma, drewno, cegły</li>
+                        <li class="fragment">Zdmuchnięcie domu przez wilka => ucieczka świnki do sąsiada</li>
+                        <li class="fragment">Rezygnacja po 2 nieudanych próbach zdmuchnięcia domu</li>
+                        <li class="fragment">Wyciąganie wniosków i nauka na błędach</li>
+                        <li class="fragment">
+                            Pominięte:
+                            <ul>
+                                <li class="fragment">Mama świnek</li>
+                                <li class="fragment">Wchodzenie przez komin</li>
+                                <li class="fragment">Zjadanie świnek</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Czyli co?</h2>
+                    <div style="display: flex; align-items: center;">
+                        <div>
+                            <a href="https://disney.fandom.com/wiki/The_Three_Little_Pigs?file=18706.jpg">
+                                <img src="img/pig.jpg" class="pure-img fragment" style="width: 250px;">
+                            </a>
+                            <br>
+                            <img src="img/homer.jpg" class="pure-img fragment" style="height: 120px;">
+                            <img src="img/proletariat.png" class="pure-img fragment" style="height: 120px;">
+                        </div>
+                        <div>
+                            <a href="https://disney.fandom.com/wiki/The_Three_Little_Pigs?file=1933-cochons-07.jpg">
+                                <img src="img/wolf-blow.png" class="pure-img fragment" style="width: 250px;">
+                            </a>
+                        </div>
+                        <div>
+                            <a href="https://disney.fandom.com/wiki/The_Three_Little_Pigs?file=THREE_LITTLE_PIGS.png">
+                                <img src="img/house.png" class="pure-img fragment" style="width: 250px;">
+                            </a>
+                            <br>
+                            <img src="img/material/straw.png" class="pure-img fragment" style="width: 100px;">
+                            <img src="img/material/wood.png" class="pure-img fragment" style="width: 100px;">
+                            <img src="img/material/bricks.png" class="pure-img fragment" style="width: 100px;">
+                        </div>
+                    </div>
+                </section>
+                <section data-background-image="img/stop.jpg">
+                    <aside class="notes">Whatever you picked, you should stop right here. It was thinking in nouns, in
+                        data structures, not with the actual behaviors, evnets</aside>
+                </section>
+                <section data-background-image="img/es.jpg" data-background-color="#fff" data-background-size="contain">
+                    <h2 class="fragment">Big Picture</h2>
+                    <aside class="notes">
+                        chronologia; ważne są 2 zdarzenia, które powodują następne - destroyed or not
+                    </aside>
+                </section>
+                <section data-background-image="img/esnew2.jpg" data-background-color="#fff"
+                    data-background-size="contain">
+                    <h2 class="fragment">Design-Level</h2>
+                    <aside class="notes">
+                        Process-Level - skipping, already a single BC
+                    </aside>
+                </section>
+            </section>
+            <section data-background-image data-transition="zoom">
+                <section data-background-transition="zoom">
+                    <h3 style="margin: 0">Clean Architecture</h3>
+                    <a class="fragment"
+                        href="https://herbertograca.com/2017/11/16/explicit-architecture-01-ddd-hexagonal-onion-clean-cqrs-how-i-put-it-all-together/">
+                        <img src="img/ca.png" class="pure-img" style="margin: 0; width: 75%">
+                    </a>
+                    <img src="img/ultimate-adapter.png" class="pure-img fragment"
+                        style="position: absolute; right: 1em; top: 30%; width: 20%">
+                    <aside class="notes">
+                        In the center we have our business invariants, our rules we want to build on
+                        <br>
+                        This arch helps postponing the decision about the actual implementation
+                    </aside>
+                </section>
+                <section data-background-image="img/modules-bg.png" data-background-image="cover">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td class="fragment" data-fragment-index="2" style="border: none">
+                                    <img src="img/app.png" class="pure-img" style="border: solid 1px white;">
+                                </td>
+                                <td rowspan="2" class="fragment" data-fragment-index="3" style="border: none">
+                                    <img src="img/adapters.png" class="pure-img" style="border: solid 1px white;">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fragment" data-fragment-index="1">
+                                    <img src="img/domain.png" class="pure-img" style="border: solid 1px white;">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <img src="img/mono.png" class="pure-img fragment"
+                        style="border: solid 1px white; position: absolute; width: 40%; left: 30%; top: 20%;">
+                    <aside class="notes">
+                        Shared - mentioned interfaces.
+                        <br>
+                        Domain - unit tests, in-out, descriptive (DSL); even business can understand.
+                        <br>
+                        App - use cases/scenarios, User Story, Kotlin's nice forthat. Tests - commands & operating on
+                        the business physics, aggregates, services. I use mocks and checks if command results in repo
+                        save.
+                        <br>
+                        Adapters - adapters for ports from domain and app + input and output ones; package-private
+                        access between modules. Here we add frameworks (e.g. Java Spring), integration testing (Spring
+                        test app). App properties, etc.
+                        <br>
+                        Monolith - main class, but instead of it we could have a couple of microservice apps and each
+                        should take e.g. adapters from another BC.
+                    </aside>
+                </section>
+                <section>
+                    <div class="fragment replace fade-out" data-fragment-index="4">
+                        <div class="fragment replace fade-out" data-fragment-index="2">
+                            <img src="img/schema/0.png" class="pure-img fragment replace fade-out"
+                                data-fragment-index="1">
+                            <img src="img/schema/1.png" class="pure-img fragment replace fade-in"
+                                data-fragment-index="1">
+                        </div>
+                        <div class="fragment replace fade-in" data-fragment-index="2">
+                            <img src="img/schema/5.png" class="pure-img fragment replace fade-out"
+                                data-fragment-index="3">
+                            <img src="img/schema/6new.png" class="pure-img fragment replace fade-in"
+                                data-fragment-index="3">
+                        </div>
+                    </div>
+                    <div class="fragment replace fade-in" data-fragment-index="4">
+                        <img src="img/schema/7.png" class="pure-img fragment replace fade-out" data-fragment-index="5">
+                        <img src="img/schema/8.png" class="pure-img fragment replace fade-in" data-fragment-index="5">
+                    </div>
+                    <aside class="notes">
+                        Each BC is a potential microservice
+                        <br>
+                        monolith can have its own "app" and calls adapters from different domains
+                    </aside>
+                </section>
+                <section>
+                    <h3 style="margin-bottom: 0">User Story/Command</h3>
+                    <ul>
+                        <li class="fragment" data-fragment-index="1">As a user, I want to get to know a fairy tale, so
+                            that I can tell it to
+                            others
+                        </li>
+                        <li class="fragment" data-fragment-index="2">
+                            <span class="fragment highlight-green" data-fragment-index="8">
+                                As a pig, I want to build a house, so that it fulfills my requirements
+                            </span>
+                            <ul>
+                                <li class="fragment" data-fragment-index="3">
+                                    Dokumentowanie i utrwalanie informacji
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="fragment" data-fragment-index="4">
+                            <span class="fragment strike" data-fragment-index="8">
+                                As a pig, I want to visit my neighbor
+                            </span>
+                        </li>
+                        <li class="fragment" data-fragment-index="5">
+                            <span class="fragment strike" data-fragment-index="8">
+                                As a pig, I want to share my knowledge with my roommates
+                            </span>
+                        </li>
+                        <li class="fragment" data-fragment-index="6">
+                            <span class="fragment highlight-green" data-fragment-index="8">
+                                As a wolf, I want to blow the pig's house down, so that I can catch the pig
+                            </span>
+                            <ul>
+                                <li class="fragment" data-fragment-index="7">Rejestr - z tym domem już próbowano</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <aside class="notes">ES ~ domain, game rules; US ~ app, what user needs; adapters ~ what programmer
+                        needs</aside>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section data-background-color="white" data-background-image="img/4pig.jpg"
+                    data-background-size="contain"></section>
+                <section data-background-image="img/coding.gif" data-background-size="cover"></section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section data-transition="zoom">
+                    <h3 class="fragment" style="margin: 0">Dzięki!</h3>
+                    <a
+                        href="https://disney.fandom.com/wiki/The_Three_Little_Pigs?file=Tumblr_mihpakJxZP1qhcrb0o1_1280.jpg">
+                        <img src="img/end.jpg" class="pure-img fragment replace fade-out" style="width: 55%;"
+                            data-fragment-index="1">
+                        <img src="img/end2.png" class="pure-img fragment replace fade-in" style="width: 55%;"
+                            data-fragment-index="1">
+                    </a>
+                    <ul>
+                        <li class="fragment" data-fragment-index="2">
+                            Newsletter + raport JS:
+                            <a href="https://mat3e.github.io/trendy">
+                                mat3e.github.io/trendy
+                            </a>
+                        </li>
+                        <li class="fragment" data-fragment-index="3">
+                            Kod:
+                            <a href="https://github.com/mat3e/3pigs-ddd">
+                                github.com/mat3e/3pigs-ddd
+                            </a>
+                        </li>
+                        <li class="fragment" data-fragment-index="4">
+                            Prezka:
+                            <a href="https://mat3e.github.io/talks/3pigs/confitura.html">
+                                mat3e.github.io/talks/3pigs/confitura
+                            </a>
+                        </li>
+                    </ul>
+                    <aside class="notes">
+                        Another Bounded Context
+                    </aside>
+                </section>
+            </section>
+        </div>
+    </div>
+    <script src="js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script src="js/babel.min.js"></script>
+    <script>
+        const controls = (function () {
+            Reveal.initialize({
+                history: true,
+                // - null: Media will only autoplay if data-autoplay is present
+                autoPlayMedia: null,
+                transition: 'fade', // none/fade/slide/convex/concave/zoom
+                transitionSpeed: 'default', // default/fast/slow
+                backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
+                dependencies: [
+                    { src: 'js/classList.js', condition: function () { return !document.body.classList; } },
+
+                    { src: 'js/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                    { src: 'js/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+
+                    // Syntax highlight for <code> elements
+                    { src: 'js/highlight.js', callback: function () { setTimeout(() => hljs.initHighlightingOnLoad(), 0); } },
+
+                    // Zoom in and out with Alt+click
+                    { src: 'js/zoom.js' },
+
+                    { src: 'notes/notes.js' },
+
+                    { src: 'js/math.js' }
+                ]
+            });
+
+            document.querySelectorAll('.reveal .slides section:not([data-background-image])').forEach(s => {
+                s.setAttribute('data-background-image', 'img/confitura.svg');
+                s.setAttribute('data-background-size', '255px');
+                s.setAttribute('data-background-position', '30px 30px');
+            });
+
+            return {
+                evalCode(btn) {
+                    eval(extractCodeFromBefore(btn));
+                }
+            }
+
+            function extractCodeFromBefore(btn) {
+                return [...btn.parentElement.querySelectorAll('pre')].filter(e => getComputedStyle(e).display !== 'none')[0].innerText;
+            }
+        })();
+    </script>
+</body>
+
+</html>
