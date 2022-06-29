@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="description" content="Presentation">
+    <meta name="keywords" content="presentation">
+    <meta name="author" content="mat3e">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/blood.css">
+    <link rel="stylesheet" href="css/idea.css">
+    <link rel="stylesheet" href="css/fontawesome.css">
+    <style>
+        @font-face {
+            font-family: 'Gloria Hallelujah';
+            font-style: normal;
+            font-weight: 400;
+            src: url('webfonts/gloria.woff2') format('woff2');
+        }
+
+        .reveal .slides section .header-margin {
+            text-align: left;
+            border-left: solid .25em white;
+            line-height: .85;
+            padding-left: .25em;
+        }
+
+        .reveal .slides section .header-logo {
+            width: 250px;
+            height: 53px;
+            background-image: url('img/twitter.png');
+            background-size: contain;
+            top: -4em;
+            right: 0;
+            position: absolute;
+        }
+
+        #about-me {
+            padding: 1em;
+            background-color: rgba(255, 255, 255, .75);
+            list-style-type: none;
+            margin-left: 0;
+            float: left;
+        }
+
+        #about-me ul {
+            list-style-type: none;
+            float: left;
+            margin-left: 0;
+        }
+
+        #about-me a {
+            color: #a23;
+        }
+
+        #about-me a:hover {
+            color: #dd5566;
+        }
+
+        .slides section img.pure-img {
+            border: none;
+            box-shadow: none;
+            background: none;
+            margin: 0;
+        }
+
+        code[contenteditable="true"] {
+            border: 0;
+            outline: 0;
+        }
+
+        .slides section pre {
+            margin-bottom: 0;
+        }
+
+        .slides section pre+button {
+            cursor: pointer;
+
+            font-size: .65em;
+            font-weight: 100;
+            -webkit-font-smoothing: antialiased;
+
+            color: white;
+            background: rgb(175, 30, 35);
+
+            padding: 0 3px 3px 3px;
+            border: transparent;
+            border-radius: 4px;
+
+            display: block;
+            margin: 0 auto;
+        }
+
+        .slides section pre+button:disabled {
+            background-color: grey;
+        }
+
+        .slides section a .stripped-img {
+            border: none;
+            margin: 0;
+            box-shadow: none;
+            background-color: rgba(255, 255, 255, 0);
+        }
+
+        .slides section a .stripped-img:hover {
+            border: none;
+            margin: 0;
+            box-shadow: none;
+            background-color: rgba(255, 255, 255, 0);
+        }
+
+        .slides section .comment {
+            margin-top: -20px;
+            margin-bottom: 20px;
+            color: gray;
+        }
+
+        .reveal .slides section .fragment.replace {
+            transition: none;
+            display: inline-block;
+        }
+
+        .reveal .slides section .fragment.fade-out.f.replace {
+            display: flex;
+        }
+
+        .reveal .slides section .fragment.fade-out.visible.replace {
+            display: none;
+        }
+
+        .reveal .slides section .fragment.fade-in.replace {
+            display: none;
+        }
+
+        .reveal .slides section .fragment.fade-in.visible.replace {
+            display: inline-block;
+        }
+
+        .reveal .slides section .fragment.highlight-red.visible {
+            color: #dd5566;
+        }
+
+        #hook-here button {
+            padding: 1em;
+            border-radius: 0;
+            background-color: white;
+            border: 1px solid black;
+        }
+
+        .reveal .slides section td.long-text-cell {
+            font-size: .5em;
+            vertical-align: middle;
+        }
+
+        .reveal .slides section table.summary {
+            table-layout: fixed;
+            width: 100%;
+        }
+
+        .reveal .slides section table.summary th {
+            text-align: center;
+        }
+
+        .reveal .slides section table.summary tbody td,
+        .reveal .slides section table.summary th {
+            width: 33%;
+        }
+
+        .reveal .slides section table.summary tbody td:first-child,
+        .reveal .slides section table.summary th:first-child {
+            width: 7%;
+            vertical-align: middle;
+            text-align: center
+        }
+
+        .reveal .slides section .fragment.no-highlight.visible {
+            color: #eee;
+        }
+
+        .reveal .slides section .fragment.no-highlight {
+            opacity: 1;
+            visibility: inherit;
+        }
+
+        .reveal .slides section .centered {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section data-background-image>
+                <section data-background-image>
+                    <div class="header-margin">
+                        <h1 style="margin: 0; font-size: 2em">Cleaning things up</h1>
+                        <h2 style="font-size: 1.5em">JS Clean Architecture</h2>
+                    </div>
+                    <div class="header-logo"></div>
+                </section>
+                <section data-background-image="">
+                    <h3>
+                        <span>Context</span><span class="fragment" data-fragment-index="1"> is important</span>
+                    </h3>
+                    <a class="fragment" data-fragment-index="1"
+                        href="https://www.reddit.com/r/ProgrammerHumor/comments/8lt4gg/sometimes_i_wonder_if_nontech_friends_wonder/">
+                        <img src="img/search.png" class="pure-img">
+                    </a>
+                </section>
+                <section data-background-image="img/bg-hd.jpg" data-background-transition="zoom">
+                    <ul id="about-me">
+                        <li>
+                            <ul style="padding-left: 0;">
+                                <li>
+                                    <a href="https://www.linkedin.com/in/mateusz-chrzonstowski/">
+                                        <i class="fab fa-linkedin"
+                                            style="color: #0077B5; background-color: #FFF; line-height: .75em"></i>
+                                        /mateusz-chrzonstowski
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://twitter.com/_mat3e_">
+                                        <i class="fab fa-twitter-square"
+                                            style="background-color: #1DA1F2; color: #FFF; line-height: .75em"></i>
+                                        /_mat3e_
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.reddit.com/user/_mat3e_">
+                                        <i class="fab fa-reddit-square"
+                                            style="background-color: #FF4500; color: #FFF; line-height: .75em"></i>
+                                        /_mat3e_
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/mat3e/">
+                                        <i class="fab fa-github-square"
+                                            style="color: #24292E; background-color: #FFF; line-height: .75em"></i>
+                                        /mat3e
+                                    </a>
+                                </li>
+                                <li style="line-height: 1">&nbsp;</li>
+                                <li class="fragment" style="line-height: .75">
+                                    <a style="font-size: .75em; font-weight: bold;"
+                                        href="https://mat3e.github.io/talks/js-arch/charity.html">
+                                        mat3e.github.io/talks/js-arch/charity
+                                    </a>
+                                </li>
+                                <li style="line-height: 1">&nbsp;</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="fragment" style="padding: .1em; line-height: 1">
+                                <li>
+                                    <a href="https://jobs.glovoapp.com/">
+                                        <img src="img/glovo.png" class="pure-img" style="height: 1.5em;">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://full-stack.engineering/" class="fragment">
+                                        <img src="img/udemy-new.svg" class="pure-img" style="height: 1.5em;">
+                                    </a>
+                                </li>
+                                <li class="fragment">
+                                    <a href="https://devskiller.com/jobs/">
+                                        <img src="img/ds.png" class="pure-img" style="height: .75em;">
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section data-transition="zoom">
+                    <h2>Reading code</h2>
+                    <h1 class="fragment">&gt;</h1>
+                    <h2>Writing code</h2>
+                    <aside class="notes">Base assumption here. Sorry. If you look for a write-only lang, maybe Perl is
+                        for you? :D scripting for a single person is not a scenario here, I'm talking about big business
+                        projects, web apps and so on.</aside>
+                </section>
+                <section data-background-size="contain" data-background-image="img/framework.jpg">
+                    <aside class="notes">
+                        Sorry, look somewhere else for trendy topics. It's sth more about the legacy code. But it
+                        touches a sensitive topic. Sth appears and we forget about old, well thought practicies. It's
+                        not as bad, since 2016 React dominates.
+                    </aside>
+                </section>
+                <section>
+                    <h2>Architecture?</h2>
+                    <h4 class="fragment" data-fragment-index="1">micro-frontends!</h4>
+                    <div class="fragment" data-fragment-index="1">
+                        <img src="img/no.gif" class="pure-img" style="height: 3em">
+                    </div>
+                    <aside class="notes">
+                        micro-frontends = independent deployments; many teams, different frameworks or
+                        transition between frameworks, like AngularJS to React
+                        <br />
+                        <br />
+                        web components = data/logic sharing; worth using e.g. as company-wide adapters
+                    </aside>
+                </section>
+                <section>
+                    <h3>
+                        <a href="https://hackernoon.com/how-it-feels-to-learn-javascript-in-2016-d3a717dd577f">
+                            <code>How it feels to learn JavaScript in 2016</code>
+                        </a>
+                    </h3>
+                    <img src="img/react.svg" class="pure-img fragment" style="height: 3em" />
+                    <aside class="notes">
+                        jQuery 2006+; Backbone 2010-2014; ExtJS 2013; Angular 2014-2016; React
+                        2016-; Mikrolibki/mirkoframeworki - (?) 2019-
+                        <br /><br />
+                        Summary of the article - React. Beginning of this year - personal fe overview -
+                        7M downloads, nowadays - 9M. A week! Angular/Vue ~ 2.1, 2M
+                    </aside>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section data-transition="zoom">
+                    <h2>Clean Code</h2>
+                    <h4 class="fragment" data-fragment-index="1">(single module level)</h4>
+                    <aside class="notes">Reminder: module = file</aside>
+                </section>
+                <section>
+                    <pre style="background-color: white;" class="fragment replace fade-out" data-fragment-index="6"><code class="javascript" style="padding-bottom: 1em;" data-trim contenteditable="true">
+                    import React from 'react';
+                    import { makeStyles } from '@material-ui/core/styles';
+
+                    </code><code class="javascript fragment replace fade-out" style="padding-top: 0; padding-bottom: 0" data-trim contenteditable="true" data-fragment-index="3">const useStyles = makeStyles({</code><code class="javascript fragment replace fade-in" style="padding-top: 0; padding-bottom: 0" data-trim contenteditable="true" data-fragment-index="3">export const useStyles = makeStyles({</code><code class="javascript" style="padding-top: 0;" data-trim contenteditable="true">
+                        root: {
+                            backgroundColor: 'red',
+                            color: props => props.color,
+                        },
+                    });
+
+                    export default function MyComponent(props) {
+                        const classes = useStyles(props);
+                        return &lt;div className={classes.root} />;
+                    }
+                    </code></pre>
+                    <pre style="background-color: white;" class="fragment replace fade-in" data-fragment-index="6"><code class="javascript" data-trim contenteditable="true">
+                    import React from 'react';
+                    import { makeStyles } from '@material-ui/core/styles';
+                    
+                    export default function MyComponent(props) {
+                        const classes = useStyles(props);
+                        return &lt;div className={classes.root} />;
+                    }
+                    
+                    const useStyles = makeStyles({
+                        root: {
+                            backgroundColor: 'red',
+                            color: props => props.color,
+                        },
+                    });
+                    </code></pre>
+                    <a href="https://material-ui.com/styles/api/#examples-3" class="fragment"
+                        data-fragment-index="2">source: material-ui.com</a>
+                    <div class="fragment" data-fragment-index="4">Name? <code class="fragment"
+                            data-fragment-index="5">MyComponent.jsx</code></div>
+                    <aside class="notes">
+                        Official framework docs. I understand they want to show their solutions, put them on top, but
+                        it's not readable.
+                        <br /><br />
+                        In general worth extracting functions to have them const.
+                    </aside>
+                </section>
+                <section>
+                    <h3 style="margin: 0">Java</h3>
+                    <pre class="fragment" style="margin-top: 0"><code class="java" style="max-height: 40em; font-size: .9em; line-height: 1.1;" data-trim contenteditable="true">
+                        public class Test {
+                          public static final int A = 77;
+
+                          protected int b;
+                          private String name;
+                        
+                          Test() {
+                            this.a = 0;
+                          }
+                        
+                          public void foo() {
+                            help();
+                          }
+                        
+                          private void help() {
+                            // ...
+                          }
+                        }
+
+                        class NotPublic {
+                          // similar to above
+                        }
+                    </code></pre>
+                    <div class="fragment">
+                        <a href="https://stackoverflow.com/a/1760877/4774651">Uncle Bob</a>,
+                        <a href="https://checkstyle.sourceforge.io/config_coding.html#DeclarationOrder">checkstyle</a>, 
+                        <a href="https://google.github.io/styleguide/javaguide.html#s4.8.7-modifiers">Google Java Style Guide</a>, 
+                        <a href="https://docs.oracle.com/javase/specs/jvms/se17/html/jvms-4.html">Java Language Specification</a>
+                    </div>
+                </section>
+                <section>
+                    <h4>
+                        <a
+                            href="https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md">johnpapa/angular-styleguide</a>
+                    </h4>
+                    <div>
+                        <em class="fragment">Place bindable members at the top (...) and not spread through the
+                            controller code</em>
+                    </div>
+                    <pre class="fragment"><code class="javascript" style="max-height: 40em; font-size: .8em; line-height: 1;" data-trim contenteditable="true">
+                    /* recommended */
+                    function SessionsController() {
+                        var vm = this;
+
+                        vm.gotoSession = gotoSession;
+                        vm.refresh = refresh;
+                        vm.search = search;
+                        vm.sessions = [];
+                        vm.title = 'Sessions';
+
+                        ////////////
+
+                        function gotoSession() {
+                            /* */
+                        }
+
+                        function refresh() {
+                            /* */
+                        }
+
+                        function search() {
+                            /* */
+                        }
+                    }
+                    </code></pre>
+                    <aside class="notes">There also alphabetized</aside>
+                </section>
+                <section>
+                    <img src="img/allthethings.jpg" class="pure-img" />
+                    <aside class="notes">hope it's obvious</aside>
+                </section>
+                <section>
+                    <pre><code class="typescript" style="max-height: 40em; font-size: .8em; line-height: 1;" data-trim contenteditable="true" data-line-numbers="1-3,5-7,10-13,15,23,24">
+                        export interface Dataservice {
+                            getAvengers(): Avenger[];
+                        }
+
+                        angular
+                            .module('app.core')
+                            .factory('dataservice', dataservice);
+                        
+                        dataservice.$inject = ['$http'];
+                        function dataservice($http: IHttpService): Dataservice {
+                            return {
+                                getAvengers
+                            };
+                        
+                            function getAvengers(): Avenger[] {
+                                return $http.get('/api/maa')
+                                    .then(getAvengersComplete)
+                                    .catch(getAvengersFailed);
+                        
+                                function getAvengersComplete(response) { /* ... */ }
+                        
+                                function getAvengersFailed(error) { /* ... */ }
+                            }
+                        }
+                    </code></pre>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section data-transition="zoom">
+                    <h2>Clean Architecture</h2>
+                    <h4 class="fragment" data-fragment-index="1">(organizing modules)</h4>
+                </section>
+                <section data-background-image="img/structure/simple.png" data-background-size="contain">
+                    <aside class="notes">Anyone with a similar structure? Sometimes also css/styles</aside>
+                </section>
+                <section>
+                    <h2>Problems?</h2>
+                    <ul>
+                        <li class="fragment">Harder to work on a feature (e.g. user/project)
+                            <ul>
+                                <li class="fragment">Usually a feature-related issue</li>
+                                <li class="fragment">Not e.g. fixing all the services</li>
+                                <li class="fragment">Looking for a reason in multiple directories</li>
+                                <li class="fragment">Writing in multiple directories</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Many (7+) files per folder
+                            <ul>
+                                <li class="fragment">Especially in <code>components</code></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Let's introduce state!</h3>
+                    <a href="https://www.thoughtworks.com/en-gb/radar">
+                        <img src="img/tw.png" class="pure-img fragment" />
+                    </a>
+                </section>
+                <section>
+                    <h2>Redux</h2>
+                    <ul>
+                        <li class="fragment">Doesn't organize the app</li>
+                        <li class="fragment">Different purpose - working/sharing the data</li>
+                        <li class="fragment">A way of building the app</li>
+                    </ul>
+                </section>
+                <section data-background-image="img/structure/redux.png" data-background-size="contain"></section>
+                <section data-background-image="img/redux.png" data-background-size="contain">
+                    <aside class="notes">Not a topic for this presenation. Especially, even Dan made this :d</aside>
+                </section>
+                <section>
+                    <h4>
+                        <a href="https://react-file-structure.surge.sh/">react-file-structure.surge.sh</a>
+                    </h4>
+                    <img src="img/dan-arch.png" class="pure-img fragment">
+                    <aside class="notes">Dan is like Guru, so happy to say there is his tutorial
+                        <br />
+                        <br />
+                        I see, but I think we should take a different approach by default. No matter the size of the
+                        app. Small apps tend to grow fast
+                    </aside>
+                </section>
+                <section>
+                    <h4>
+                        <a
+                            href="https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md#application-structure-lift-principle">johnpapa/angular-styleguide</a>
+                    </h4>
+                    <div class="fragment" style="margin-bottom: 20px;">
+                        <h4 style="margin: 0">LIFT Principle</h4>
+                        <ol>
+                            <li class="fragment"><strong>L</strong>ocate easily</li>
+                            <li class="fragment"><strong>I</strong>dentify the file purpose</li>
+                            <li class="fragment"><strong>F</strong>lat folder structure</li>
+                            <li class="fragment"><strong>T</strong>-DRY (Try to Stick to DRY)</li>
+                        </ol>
+                    </div>
+                    <div class="fragment">
+                        <h4 style="margin: 0">Folders-by-Feature Structure</h4>
+                        <ul>
+                            <li class="fragment">Folders named for the feature they represent</li>
+                            <li class="fragment">Helps following LIFT</li>
+                        </ul>
+                    </div>
+                    <aside class="notes">
+                        <ul>
+                            <li>Coming back to Angular; IMO React devs should work with Angular for some time,
+                                not as a punishment, but to become a better dev</li>
+                            <li>General approach - framework, not a lib</li>
+                            <li>Some good patterns. We should take them and use JSX as a different visualisation method
+                            </li>
+                            <li>But let's go step by step</li>
+                            <li>Each feature with known files</li>
+                            <li>T-DRY - other rules are more important</li>
+                        </ul>
+                    </aside>
+                </section>
+                <section data-background-image="img/structure/target2.png" data-background-size="contain">
+                    <aside class="notes">Here's an example - how it could look like. Images, css also here</aside>
+                </section>
+                <section>
+                    <a href="https://medium.com/glovo-engineering/javas-default-access-7153b476ff5d">
+                        <img src="img/java.png" class="pure-img" />
+                    </a>
+                </section>
+                <section>
+                    <h4>How to divide files in folder?</h4>
+                    <ul>
+                        <li class="fragment"><a
+                                href="https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0">Presentational
+                                and Container Components</a>
+                            <ul>
+                                <li class="fragment"><em>I’ve seen it enforced (...) with almost
+                                        dogmatic fervor far too many times</em>
+                                </li>
+                                <li class="fragment"><code>Table</code>, <code>TableView</code> - come on</li>
+                                <li class="fragment">Sometimes handy to have a small state in presentational-like
+                                    component
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="fragment"><em>(...) it let me separate
+                                complex stateful logic from other aspects of the component. <strong>Hooks</strong> let
+                                me do the same (...) without an arbitrary division</em></li>
+                    </ul>
+                    <aside class="notes">The return of Abramov; container - stateful, class; presentational - dumb,
+                        function; useful state - e.g wizard and steps inside; won't make it much easier to switch from
+                        React to sth else
+                        <br />
+                        <br />
+                        Still worth to think about such dividing, maybe within a single file and export just container
+                    </aside>
+                </section>
+                <section data-background-image="img/structure/hooks.png" data-background-size="contain">
+                    <aside class="notes">Hope not like that, hard to find good patterns - where to use hooks, how to
+                        share them</aside>
+                </section>
+                <section>
+                    <h4>Hooks?</h4>
+                    <ul>
+                        <li class="fragment">Good for cross-cutting business logic,
+                            e.g.&nbsp;<code>useAssignedTags</code>
+                        </li>
+                        <li class="fragment">Useful rather for technical aspects - routing,
+                            <code>useMountSubscription</code>
+                        </li>
+                        <li class="fragment">Not a silver bullet</li>
+                    </ul>
+                    <a href="https://twitter.com/swyx/status/1481101214851170304"><img src="img/brianholt.png"
+                            class="pure-img fragment fade-in replace"
+                            style="position: fixed; width: 40%; left: 30%; top:0"></a>
+                    <aside class="notes">tags - you can tag both project and task; downloading connected tags</aside>
+                </section>
+                <section>
+                    <h4>Building blocks</h4>
+                    <ul>
+                        <li class="fragment">Angular: service, module, component, pipe, ...
+                            <div class="fragment">
+                                <img src="img/blown.gif" class="pure-img" style="height: 3em">
+                            </div>
+                        </li>
+                        <li class="fragment">React:
+                            <div>
+                                <img src="img/react-all.jpg" class="pure-img" style="height: 3em">
+                            </div>
+                        </li>
+                    </ul>
+                    <aside class="notes">Hooks etc. are tools for building components</aside>
+                </section>
+                <section>
+                    <h4>My recommendations</h4>
+                    <ul>
+                        <li class="fragment">Define, agree & use them. All over the codebase!</li>
+                        <li class="fragment">
+                            <a
+                                href="https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md#defer-controller-logic-to-services">Defer
+                                Controller Logic to Services</a>
+                        </li>
+                        <li class="fragment">MVC!
+                            <ul>
+                                <li class="fragment">Many MVC approaches</li>
+                                <li class="fragment">Model - data from API & functions processing it</li>
+                                <li class="fragment">View - JSX; worth dividing into presentational & container
+                                    components</li>
+                                <li class="fragment">Controller - logic used in View</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+                <section data-background-image="img/structure/target.png" data-background-size="contain"></section>
+                <section>
+                    <pre><code class="typescript" style="max-height: 40em; font-size: .95em; line-height: 1.1;" data-trim contenteditable="true" data-line-numbers="2,4,5,11,13,17-23">
+                        import React, { useState } from 'react';
+                        import { useMountSubscription } from '../common';
+
+                        import { getProject, Project as Model } from './project.api';
+                        import { clickProject } from './project.service';
+
+                        export interface ProjectProps {
+                            id: number;
+                        }
+
+                        export function Project({ id }: ProjectProps) {
+                            const [project, setProject] = useState&lt;Model>();
+                            useMountSubscription(() => getProject(id).then(setProject));
+                            if (!project) {
+                                return null;
+                            }
+                            return (
+                                &lt;ul onClick={() => clickProject(project)}>
+                                    &lt;li>{project.name}&lt;/li>
+                                    &lt;li>{project.type}&lt;/li>
+                                &lt;/ul>
+                            );
+                        }
+
+                    </code></pre>
+                </section>
+                <section>
+                    <h4>Achievements</h4>
+                    <ul>
+                        <li class="fragment">Super nice tests - just for <code>clickProject</code>
+                            <ul>
+                                <li class="fragment">Testing context, history, others with React&nbsp;Testing Library =
+                                    mess</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Easy to change framework/solution
+                            <ul>
+                                <li class="fragment">React = just View from MVC. As it should be</li>
+                                <li class="fragment"><i>A JavaScript library for building user interfaces</i></li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Easy to maintain after the first shock</li>
+                    </ul>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section data-transition="zoom">
+                    <h2>Clean Architecture</h2>
+                    <h4 class="fragment" data-fragment-index="1">(packages)</h4>
+                </section>
+                <section data-background-image="img/structure/target.png" data-background-size="contain">
+                    <aside class="notes">Simple case assuming we rely on Material UI on other external design system &
+                        solution</aside>
+                </section>
+                <section>
+                    <h4>What when own design system?</h4>
+                    <ul>
+                        <li class="fragment">Bare minimum - separate folder, e.g. <code>layout</code></li>
+                        <li class="fragment">First project using design system - monorepo</li>
+                        <li class="fragment">Next - internal npm and separate packages</li>
+                        <li class="fragment">Big company - adapters approach
+                            <ol>
+                                <li class="fragment">CSS package</li>
+                                <li class="fragment">Web Components package</li>
+                                <li class="fragment">React (and other) adapters for Web Components</li>
+                                <li class="fragment">Application</li>
+                            </ol>
+                        </li>
+                    </ul>
+                    <aside class="notes">Works also for some company-wide solutions, like e.g. auth lib; we were close
+                        to adapters in allegro</aside>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section data-transition="zoom">
+                    <h2 class="fragment" data-fragment-index="5">Thanks!</h2>
+                    <img src="img/coelho.jpg" class="pure-img">
+                    <ul>
+                        <li class="fragment" data-fragment-index="1">
+                            Newsletter + JS trends:
+                            <a href="https://mat3e.github.io/trends">
+                                mat3e.github.io/trendy
+                            </a>
+                        </li>
+                        <li class="fragment" data-fragment-index="3">
+                            <a href="https://mat3e.github.io/talks/js-arch/charity.html">
+                                mat3e.github.io/talks/js-arch/charity
+                            </a>
+                        </li>
+                    </ul>
+                    <aside class="notes">Keep It Simple Stupid</aside>
+                </section>
+            </section>
+        </div>
+    </div>
+    <script src="js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script src="js/babel.min.js"></script>
+    <script>
+        const controls = (function () {
+            Reveal.initialize({
+                history: true,
+                // - null: Media will only autoplay if data-autoplay is present
+                autoPlayMedia: null,
+                transition: 'slide', // none/fade/slide/convex/concave/zoom
+                transitionSpeed: 'default', // default/fast/slow
+                backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
+                dependencies: [
+                    { src: 'js/classList.js', condition: function () { return !document.body.classList; } },
+
+                    { src: 'js/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                    { src: 'js/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+
+                    // Syntax highlight for <code> elements
+                    { src: 'js/highlight.js', callback: function () { setTimeout(() => hljs.initHighlightingOnLoad(), 0); } },
+
+                    // Zoom in and out with Alt+click
+                    { src: 'js/zoom.js' },
+
+                    { src: 'notes/notes.js' },
+
+                    { src: 'js/math.js' }
+                ]
+            });
+
+            document.querySelectorAll('.reveal .slides section:not([data-background-image])').forEach(s => {
+                s.setAttribute('data-background-image', 'img/twitter.png');
+                s.setAttribute('data-background-size', '240px');
+                s.setAttribute('data-background-position', '20px 20px');
+            });
+
+            return {
+                evalCode(btn) {
+                    eval(extractCodeBeforeButton(btn));
+                },
+                async fetch(btn) {
+                    const pres = extractAllPreBeforeButton(btn);
+                    const [method, url] = filterFor(pres, 'url').innerText.split(' ');
+                    const body = filterFor(pres, 'body').innerText;
+                    const response = filterFor(pres, 'response').firstElementChild;
+                    const json = JSON.stringify(
+                        await (
+                            await fetch(url, {
+                                method,
+                                mode: 'cors',
+                                cache: 'no-cache',
+                                credentials: 'same-origin',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                redirect: 'follow',
+                                referrerPolicy: 'no-referrer',
+                                body
+                            })
+                        ).json(),
+                        null,
+                        2
+                    );
+                    response.innerText = json;
+                    response.focus();
+                    btn.focus();
+                }
+            }
+            function extractCodeBeforeButton(btn) {
+                return extractAllPreBeforeButton(btn)[0].innerText;
+            }
+            function extractAllPreBeforeButton(btn) {
+                return [...btn.parentElement.querySelectorAll('pre')].filter(e => getComputedStyle(e).display !== 'none');
+            }
+            function filterFor(arr, text) {
+                return arr.filter(e => e.firstElementChild.dataset.forJs === text)[0];
+            }
+        })();
+    </script>
+</body>
+
+</html>
