@@ -2,11 +2,11 @@
 > * dev.js Summit 2022 [13.10] _Porządki w kodzie - JS Clean Architecture_
 > * BB Days 4 IT 2022 [10.09] ?
 > * dynamIT 2022 [03.09] ?
-> * Charity JavaScript webinar [29.06] - _Cleaning things up - JS clean architecture_
-> * Confitura 2022 [25.06] - _Moje rozumienie DDD i Clean Architecture na przykładzie bajki o trzech świnkach_
-* WarsawJS 93 [08.06] _My personal front-end overview (2022)_ [🔗](https://mat3e.github.io/talks/fe-overview/WarsawJS.html)
+* Charity JavaScript webinar [29.06] - _Cleaning things up - JS clean architecture_ [🔗](https://mat3e.github.io/talks/js-arch/charity.html#/) [📽️](https://www.youtube.com/watch?v=cpFTllo-Ngo)
+* Confitura 2022 [25.06] - _Moje rozumienie DDD i Clean Architecture na przykładzie bajki o trzech świnkach_ [🔗](https://mat3e.github.io/talks/3pigs/confitura.html#/)
+* WarsawJS 93 [08.06] _My personal front-end overview (2022)_ [🔗](https://mat3e.github.io/talks/fe-overview/WarsawJS.html) [📷](https://www.facebook.com/warsawjs/photos/3633929443500039)
 * Infoshare F3 [19.05] _Subiektywny przegląd front-endów (2022)_ [🔗](https://mat3e.github.io/talks/fe-overview/f3.html)
-* GeeCon 2022 [12.05] _My understanding of DDD & Clean Architecture on the example of The Three Little Pigs_ [🔗](https://mat3e.github.io/talks/3pigs/geecon.html#/)
+* GeeCon 2022 [12.05] _My understanding of DDD & Clean Architecture on the example of The Three Little Pigs_ [🔗](https://mat3e.github.io/talks/3pigs/geecon.html#/) [📷](https://twitter.com/_semisiu/status/1524675574454800385)
 * 4Developers 2022 [06.04] _Nieoczywiste funkcje Springa_ [🔗](https://github.com/mat3e/less-popular-spring-functions)
 * WDI 2022 [02.04] _Nieoczywisty Spring_ [🔗](https://github.com/mat3e/less-popular-spring-functions)
 * WDI 2022 [02.04] _Subiektywny przegląd front-endów (2022)_ [🔗](https://mat3e.github.io/talks/fe-overview/wdi22.html)
@@ -37,13 +37,13 @@
 * C_tech 15 [20.11]: _Subiektywny przegląd sytuacji na froncie (prawie 2020)_ [🔗](https://mat3e.github.io/talks/fe-overview/c_tech.html)
 * Facebook Developer Circle: Warsaw 1 [09.10]: _Angular - decyzje architektoniczne_ [🔗](https://mat3e.github.io/talks/angular-arch/fb-dev.html#/)
 * Targi Kariera IT [05.10]: _Dlaczego czasem warto założyć gacie przez głowę? Statyczna strona internetowa na AWS-ie_ [🔗](https://mat3e.github.io/talks/aws-www/targikarierait.html)
-* IT Career Summit [26.09]: _A ty jak wystawiasz swoje dane? GraphQL, OData i inne WSDL-e_ [🔗](https://docs.google.com/presentation/d/e/2PACX-1vSim_SCcRoyFH7_dnLrWu5Xl-4kZiUfr5HDs6w9Vlz7BLW9dHvL9-htcSlH507-NVWQI2SkaSemne6z/pub?start=true&loop=false&delayms=3000) [📷](https://itcareersummit.pl/wawa/wp-content/uploads/2019/10/IT-Future_2019_mm_039.jpg)
+* IT Career Summit [26.09]: _A ty jak wystawiasz swoje dane? GraphQL, OData i inne WSDL-e_ [🔗](https://docs.google.com/presentation/d/e/2PACX-1vSim_SCcRoyFH7_dnLrWu5Xl-4kZiUfr5HDs6w9Vlz7BLW9dHvL9-htcSlH507-NVWQI2SkaSemne6z/pub?start=true&loop=false&delayms=3000)
 * dev.js Warszawa 11 [25.09]: _Web Componenty jako lingua franca front-endu_ [🔗](https://mat3e.github.io/talks/components/devjs#/)
 * Warsaw TypeScript 5 [19.09]: _What are these decorators?_ [🔗](https://mat3e.github.io/talks/decorators/wts) [📷](https://secure.meetupstatic.com/photos/event/c/e/c/a/highres_485152938.jpeg)
 * dynamIT 2019 [17.08]: _Web Componenty jako lingua franca front-endu_ [🔗](https://mat3e.github.io/talks/components/dynamit#/) [📷](https://www.facebook.com/dynamIT.pro/photos/a.909091252852565/909091802852510/)
 * ship.it 5 [25.07] _Dlaczego czasem warto założyć gacie przez głowę? Statyczna strona internetowa na AWS-ie_ [🔗](https://mat3e.github.io/talks/aws-www/ship-it#/) [📷](https://www.facebook.com/ship.it.meetup/photos/a.2301773083485463/2301773213485450/?type=3)
 * meet.js Toruń 5 [23.05]: _Co ona ma, czego nie mam ja? Biblioteka React i jej klony_ [🔗](https://mat3e.github.io/talks/react-clones/meetjs.html) [📽️](https://youtu.be/l75vRjETr1s)
-* infoShare [8-9.05]: _My personal front-end overview (2019)_ [🔗](https://mat3e.github.io/talks/fe-overview/infoShare.html) [📷](https://www.facebook.com/infoshareacademy/photos/pob.1842715748/1234046890093368/?type=3&theater) [📽️](https://youtu.be/5mSDioimn1Q)
+* infoShare [8-9.05]: _My personal front-end overview (2019)_ [🔗](https://mat3e.github.io/talks/fe-overview/infoShare.html) [📽️](https://youtu.be/5mSDioimn1Q) [📷](https://www.facebook.com/infoshareacademy/photos/pob.1842715748/1234046890093368/?type=3&theater)
 * ITDay UMK [11.04]: _Subiektywny przegląd sytuacji na froncie (front-endzie)_ [🔗](https://mat3e.github.io/talks/fe-overview/UMK.html)
 * WarsawJS Meetup 56 [10.04]: _Czwarty framework_ [🔗](https://mat3e.github.io/talks/ha/WarsawJS.html) [📽️](https://youtu.be/wD9OX2Mxc80) [📷](https://www.facebook.com/warsawjs/photos/a.2631483137078013/2631483720411288/?type=3&theater)
 * ship.it 3 [21.03]: _Subiektywny przegląd sytuacji na froncie (początek 2019)_ [🔗](https://mat3e.github.io/talks/fe-overview/ship-it.html) [📽️](https://www.facebook.com/ship.it.meetup/videos/vb.2128867470776026/256414715266689) [📷](https://www.facebook.com/ship.it.meetup/photos/a.2212922172370555/2212923062370466/?type=3&theater) 
