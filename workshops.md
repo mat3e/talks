@@ -1,6 +1,7 @@
-Łącznie przeprowadziłem ponad 224 godziny warsztatów.
+Łącznie przeprowadziłem ponad 230 godziny warsztatów.
 
 ## 2022
+* Kurs infoShare Academy Java (online) [09.07]: _Spring: Wprowadzenie, Core, Boot_ [6h]
 * Alior Bank [13-14.01] _Domain-Driven Design_
 
 ## 2021
