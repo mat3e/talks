@@ -1,7 +1,6 @@
 ## 2022
 > * dev.js Summit 2022 [13.10] _Porządki w kodzie - JS Clean Architecture_
 > * BB Days 4 IT 2022 [10.09] ?
-> * dynamIT 2022 [03.09] ?
 * Charity JavaScript webinar [29.06] - _Cleaning things up - JS clean architecture_ [🔗](https://mat3e.github.io/talks/js-arch/charity.html#/) [📽️](https://www.youtube.com/watch?v=cpFTllo-Ngo)
 * Confitura 2022 [25.06] - _Moje rozumienie DDD i Clean Architecture na przykładzie bajki o trzech świnkach_ [🔗](https://mat3e.github.io/talks/3pigs/confitura.html#/)
 * WarsawJS 93 [08.06] _My personal front-end overview (2022)_ [🔗](https://mat3e.github.io/talks/fe-overview/WarsawJS.html) [📽️](https://www.youtube.com/watch?v=pFoa9YlEtLc) [📷](https://www.facebook.com/warsawjs/photos/3633929443500039)
