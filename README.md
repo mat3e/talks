@@ -1,5 +1,5 @@
 ## 2022
-> * dev.js Summit 2022 [13.10] _Porządki w kodzie - JS Clean Architecture_
+* dev.js Summit 2022 [13.10] _Porządki w kodzie - JS Clean Architecture_ [🔗](https://mat3e.github.io/talks/js-arch/devjssummit.html#/) [📽](https://www.youtube.com/watch?v=TOVobKN_4X0) 
 * Ya!vaConf 2022 [28.09] _Nieoczywiste funkcje Springa_ [🔗](https://github.com/mat3e/less-popular-spring-functions)
 * BB Days 4 IT 2022 [10.09] _Subiektywny przegląd front-endów (2022)_ [🔗](https://mat3e.github.io/talks/fe-overview/BBDays4IT.html)
 * Charity JavaScript webinar [29.06] - _Cleaning things up - JS clean architecture_ [🔗](https://mat3e.github.io/talks/js-arch/charity.html#/) [📽️](https://www.youtube.com/watch?v=cpFTllo-Ngo)
