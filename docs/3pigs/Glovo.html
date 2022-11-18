@@ -32,20 +32,6 @@
             position: absolute;
         }
 
-        #perspective a {
-            display: flex;
-            flex-direction: column;
-            align-items: stretch;
-            width: 45%;
-            margin: 0 auto;
-        }
-
-        #perspective a img {
-            border: 0;
-            margin: 0;
-            box-shadow: none;
-        }
-
         #about-me {
             padding: 1em;
             background-color: rgba(255, 255, 255, .75);
@@ -224,24 +210,24 @@
             <section data-background-image>
                 <section data-background-image="img/elon.webp" data-background-size="cover">
                     <div id="header-margin">
-                        <h1 style="margin: 0; font-size: 1.75em">Moje rozumienie DDD (+&nbsp;clean architecture)</h1>
-                        <h2 style="font-size: 1.25em">na przykładzie bajki o&nbsp;3&nbsp;świnkach​</h2>
+                        <h1 style="margin: 0; font-size: 1.75em">Domain-Driven Design &&nbsp;Clean Architecture</h1>
+                        <h2 style="font-size: 1.25em">on the example of <i>The&nbsp;Three&nbsp;Little Pigs</i></h2>
                     </div>
                     <div id="header-logo"></div>
                     <aside class="notes">
-                        Ostatnio kupno twittera, ale kilka miechów temu było o świniach i chipach
+                        The man in the background was also talking about the three little pigs, but it was a different
+                        domain
+                        <br>
+                        We'll take to the domains soon, but let's start with an introduction
                     </aside>
                 </section>
-                <section id="perspective" data-background-image="">
-                    <h5>
-                        <span>Perspektywa...</span>
-                        <span class="fragment" data-fragment-index="1"> ma znaczenie</span>
-                        <span class="fragment" data-fragment-index="2"> :)</span>
-                    </h5>
-                    <a href="https://mistrzowie.org/717022">
-                        <img src="img/perspektywa-1.jpg">
-                        <img src="img/perspektywa-2.jpg" class="fragment" data-fragment-index="1">
-                        <img src="img/perspektywa-3.jpg" class="fragment" data-fragment-index="2">
+                <section data-background-image="">
+                    <h3>
+                        <span>Context</span><span class="fragment" data-fragment-index="1"> is important</span>
+                    </h3>
+                    <a class="fragment" data-fragment-index="1"
+                        href="https://www.reddit.com/r/ProgrammerHumor/comments/8lt4gg/sometimes_i_wonder_if_nontech_friends_wonder/">
+                        <img src="img/search.png" class="pure-img">
                     </a>
                 </section>
                 <section data-background-image="img/bg-hd.jpg" data-background-transition="zoom">
@@ -279,8 +265,8 @@
                                 <li style="line-height: 1">&nbsp;</li>
                                 <li class="fragment" style="line-height: .75">
                                     <a style="font-size: .75em; font-weight: bold;"
-                                        href="https://mat3e.github.io/talks/3pigs/confitura.html">
-                                        mat3e.github.io/talks/3pigs/confitura
+                                        href="https://mat3e.github.io/talks/3pigs/Glovo.html">
+                                        mat3e.github.io/talks/3pigs/Glovo
                                     </a>
                                     <br>
                                     <a class="fragment" style="font-size: .75em; font-weight: bold;"
@@ -320,17 +306,17 @@
                         <tbody>
                             <tr>
                                 <td class="fragment" data-fragment-index="1">
-                                    <h3 class="fragment highlight-red">Strategiczne</h3>
+                                    <h3 class="fragment highlight-red">Strategic</h3>
                                 </td>
                                 <td class="fragment" data-fragment-index="1">
-                                    <h3>Taktyczne</h3>
+                                    <h3>Tactical</h3>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </section>
                 <section>
-                    <h3>Domeny</h3>
+                    <h3>Strategic DDD</h3>
                     <img src="img/strategic/supporting.png" class="pure-img fragment" data-fragment-index="2"
                         alt="supporting subdomain" height="180" />
                     <img src="img/strategic/generic.png" class="pure-img fragment" data-fragment-index="3"
@@ -370,13 +356,13 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td colspan="2" style="text-align: center;" class="fragment">Mama</td>
+                                    <td colspan="2" style="text-align: center;" class="fragment">Mother</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="2" style="text-align: center;" class="fragment">Dom</td>
+                                    <td colspan="2" style="text-align: center;" class="fragment">House</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="2" style="text-align: center;" class="fragment">Wilk</td>
+                                    <td colspan="2" style="text-align: center;" class="fragment">Wolf</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -391,31 +377,29 @@
                     </aside>
                 </section>
                 <section>
-                    <h2>Jak się za to zabrać?</h2>
+                    <h2>How to plan all of this?</h2>
                     <img src="img/how.webp" class="pure-img" style="position: absolute; bottom: 0; left: 0; width: 2em">
                 </section>
                 <section>
                     <h2>EventStorming!</h2>
                     <ul>
-                        <li class="fragment">Złota zasada: zdarzenia (czasowniki, czas przeszły, dokonany), a NIE
-                            struktury danych (rzeczowniki)
-                        </li>
-                        <li class="fragment">Big Picture ES - znajdowanie domen</li>
-                        <li class="fragment">Process-Level ES - odkrywanie Bounded Contextów</li>
-                        <li class="fragment">Design-Level ES - taktyczne DDD w obrębie BC</li>
-                        <li class="fragment">Komendy (zmiana stanu systemu) i widoki</li>
+                        <li class="fragment">Golden rule: events (verbs, past tense), NOT data structures (nouns)</li>
+                        <li class="fragment">Big Picture ES - to discover domains etc.</li>
+                        <li class="fragment">Process-Level ES - to discover Bounded Contexts</li>
+                        <li class="fragment">Design-Level ES - for a tactical DDD within a BC</li>
+                        <li class="fragment">Commands (change the system's state) &&nbsp;queries (views)</li>
                     </ul>
                     <aside class="notes">
-                        "Co robiłeś wieczorem?", "piwo, wódka, wino" vs. "ale się naje... napiłem"
-                        <br>
-                        Komendy zależne od adaptera: "ze mną się nie napijesz?", "nie dasz rady tego wypić"
+                        Intuitive: How was your evening? We don't answer like "wine, voodka, beer", but rather "I drunk
+                        too much". Events. And commands are like (depending on the adapter): "come on, just one more
+                        drink", "don't you wanna drink with me"
                     </aside>
                 </section>
                 <section data-background-image="img/timelapse.gif" data-background-size="contain">
                     <ul style="color: black;">
-                        <li class="fragment">Obecność na miejscu</li>
-                        <li class="fragment">Zaangażowanie kluczowych osób</li>
-                        <li class="fragment">2 dni, odcinka od świata</li>
+                        <li class="fragment">Offline</li>
+                        <li class="fragment">Involvement of key people</li>
+                        <li class="fragment">2 days, isolation</li>
                     </ul>
                 </section>
                 <section data-background-color="white" data-background-image="img/DDD_Model_Exploration_Whirlpool.png"
@@ -436,17 +420,17 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <h3>Strategiczne</h3>
+                                    <h3>Strategic</h3>
                                 </td>
                                 <td>
-                                    <h3 class="fragment highlight-red">Taktyczne</h3>
+                                    <h3 class="fragment highlight-red">Tactical</h3>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </section>
                 <section>
-                    <h2 style="margin-bottom: 0;">Klocki DDD</h2>
+                    <h3 style="margin-bottom: 0;">DDD building blocks</h3>
                     <div style="width: 300px; height: 300px;" class="fragment fade-out replace" data-fragment-index="2">
                         <br />
                         <br />
@@ -481,7 +465,7 @@
                     </aside>
                 </section>
                 <section>
-                    <h2>Kod</h2>
+                    <h2>code</h2>
                     <img src="img/ddd-code-all.png" class="pure-img fragment" style="width: 500px; margin: 0">
                     <aside class="notes">actually show the code from repo</aside>
                 </section>
@@ -494,27 +478,27 @@
                     </aside>
                 </section>
                 <section>
-                    <h2>Jaki agregat w <i>Trzech małych świnkach</i>?</h2>
+                    <h2>What aggregate for <i>The Three Little Pigs?</i></h2>
                 </section>
                 <section>
-                    <h2 style="margin-bottom:0">Założenia, biznes</h2>
+                    <h3 style="margin-bottom:0">Concepts, business</h3>
                     <ul>
-                        <li class="fragment">Budowanie domu: słoma, drewno, cegły</li>
-                        <li class="fragment">Zdmuchnięcie domu przez wilka => ucieczka świnki do sąsiada</li>
-                        <li class="fragment">Rezygnacja po 2 nieudanych próbach zdmuchnięcia domu</li>
-                        <li class="fragment">Wyciąganie wniosków i nauka na błędach</li>
+                        <li class="fragment">House building: straw, wood, bricks</li>
+                        <li class="fragment">Wolf blowing house down => pig escaping to the neighbor</li>
+                        <li class="fragment">Wolf resigning after 2 failures</li>
+                        <li class="fragment">Pigs learning from the mistakes and improve</li>
                         <li class="fragment">
-                            Pominięte:
+                            Skipping:
                             <ul>
-                                <li class="fragment">Mama świnek</li>
-                                <li class="fragment">Wchodzenie przez komin</li>
-                                <li class="fragment">Zjadanie świnek</li>
+                                <li class="fragment">Mother of the pigs</li>
+                                <li class="fragment">Chimney climbing</li>
+                                <li class="fragment">Eating the pigs</li>
                             </ul>
                         </li>
                     </ul>
                 </section>
                 <section>
-                    <h2>Czyli co?</h2>
+                    <h2>So what?</h2>
                     <div style="display: flex; align-items: center;">
                         <div>
                             <a href="https://disney.fandom.com/wiki/The_Three_Little_Pigs?file=18706.jpg">
@@ -546,14 +530,15 @@
                 </section>
                 <section data-background-image="img/es.jpg" data-background-color="#fff" data-background-size="contain">
                     <h2 class="fragment">Big Picture</h2>
-                    <aside class="notes">
-                        chronologia; ważne są 2 zdarzenia, które powodują następne - destroyed or not
-                    </aside>
+                    <aside class="notes">events put in the chronological order</aside>
                 </section>
                 <section data-background-image="img/esnew2.jpg" data-background-color="#fff"
                     data-background-size="contain">
                     <h2 class="fragment">Design-Level</h2>
                     <aside class="notes">
+                        On these yellow, rectangural cards I wrote an aggregate name already, but there can be just
+                        rules like "check material" (material specification)
+                        <br>
                         Process-Level - skipping, already a single BC
                     </aside>
                 </section>
@@ -626,8 +611,17 @@
                         </div>
                     </div>
                     <div class="fragment replace fade-in" data-fragment-index="4">
-                        <img src="img/schema/7.png" class="pure-img fragment replace fade-out" data-fragment-index="5">
-                        <img src="img/schema/8.png" class="pure-img fragment replace fade-in" data-fragment-index="5">
+                        <div class="fragment replace fade-out" data-fragment-index="6">
+                            <img src="img/schema/7.png" class="pure-img fragment replace fade-out"
+                                data-fragment-index="5">
+                            <img src="img/schema/8new.png" class="pure-img fragment replace fade-in"
+                                data-fragment-index="5">
+                        </div>
+                        <div class="fragment replace fade-in" data-fragment-index="6">
+                            <div>
+                                <img src="img/schema/9.png" class="pure-img">
+                            </div>
+                        </div>
                     </div>
                     <aside class="notes">
                         Each BC is a potential microservice
@@ -648,7 +642,7 @@
                             </span>
                             <ul>
                                 <li class="fragment" data-fragment-index="3">
-                                    Dokumentowanie i utrwalanie informacji
+                                    Documenting & storing the information
                                 </li>
                             </ul>
                         </li>
@@ -667,7 +661,8 @@
                                 As a wolf, I want to blow the pig's house down, so that I can catch the pig
                             </span>
                             <ul>
-                                <li class="fragment" data-fragment-index="7">Rejestr - z tym domem już próbowano</li>
+                                <li class="fragment" data-fragment-index="7">Registry - this house is hard to destroy
+                                </li>
                             </ul>
                         </li>
                     </ul>
@@ -678,22 +673,22 @@
             <section data-background-image="" data-transition="zoom">
                 <section data-background-image="img/coding.gif" data-background-size="cover"></section>
                 <section>
-                    <a href="https://www.youtube.com/watch?v=I0ZLVzAU7Ic">
-                        <img class="pure-img" style="width: 45%" src="img/ref/gp.png" />
+                    <h3>Can we do simpler?</h3>
+                    <a href="https://www.youtube.com/watch?v=KrLFs6f2bOA">
+                        <img class="pure-img fragment" style="width: 45%" src="img/ref/jnen.png" />
                     </a>
                     <a href="https://www.youtube.com/watch?v=Da42_gVqDKE">
                         <img class="pure-img fragment" style="width: 45%" src="img/ref/ks.png" />
                     </a>
-                    <a href="https://www.youtube.com/watch?v=ma15iBQpmHU">
-                        <img class="pure-img fragment" style="width: 45%" src="img/ref/jn.png" />
+                    <br>
+                    <a href="https://aulatic-terradeferrol.blogspot.com/2011/08/carapuchina-vermella.html">
+                        <img class="pure-img fragment" style="width: 100px" src="img/rh.png" />
                     </a>
                 </section>
-                <section data-background-color="white" data-background-image="img/4pig.jpg"
-                    data-background-size="contain"></section>
             </section>
             <section data-background-image="" data-transition="zoom">
                 <section data-transition="zoom">
-                    <h3 class="fragment" style="margin: 0">Dzięki!</h3>
+                    <h3 class="fragment" style="margin: 0">Thanks!</h3>
                     <a
                         href="https://disney.fandom.com/wiki/The_Three_Little_Pigs?file=Tumblr_mihpakJxZP1qhcrb0o1_1280.jpg">
                         <img src="img/end.jpg" class="pure-img fragment replace fade-out" style="width: 55%;"
@@ -703,22 +698,20 @@
                     </a>
                     <ul>
                         <li class="fragment" data-fragment-index="2">
-                            Newsletter + raport JS:
-                            <a href="https://mat3e.github.io/trendy">
-                                mat3e.github.io/trendy
-                            </a>
-                        </li>
-                        <li class="fragment" data-fragment-index="3">
-                            Kod:
+                            Code:
                             <a href="https://github.com/mat3e/3pigs-ddd">
                                 github.com/mat3e/3pigs-ddd
                             </a>
                         </li>
-                        <li class="fragment" data-fragment-index="4">
-                            Prezka:
-                            <a href="https://mat3e.github.io/talks/3pigs/confitura.html">
-                                mat3e.github.io/talks/3pigs/confitura
+                        <li class="fragment" data-fragment-index="3">
+                            Slides:
+                            <a href="https://mat3e.github.io/talks/3pigs/Glovo.html">
+                                mat3e.github.io/talks/3pigs/Glovo
                             </a>
+                        </li>
+                        <li class="fragment" data-fragment-index="4">
+                            ES/consulting, <span class="fragment" data-fragment-index="5">Growth Arch, </span><span
+                                class="fragment" data-fragment-index="6">CW Arch</span>
                         </li>
                     </ul>
                     <aside class="notes">
@@ -759,9 +752,9 @@
             });
 
             document.querySelectorAll('.reveal .slides section:not([data-background-image])').forEach(s => {
-                s.setAttribute('data-background-image', 'img/confitura.svg');
-                s.setAttribute('data-background-size', '255px');
-                s.setAttribute('data-background-position', '30px 30px');
+                s.setAttribute('data-background-image', 'img/glovo.png');
+                s.setAttribute('data-background-size', '170px');
+                s.setAttribute('data-background-position', '25px 25px');
             });
 
             return {
