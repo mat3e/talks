@@ -4,7 +4,7 @@
 * Ya!vaConf 2022 [28.09] _Nieoczywiste funkcje Springa_ [🔗](https://github.com/mat3e/less-popular-spring-functions)
 * BB Days 4 IT 2022 [10.09] _Subiektywny przegląd front-endów (2022)_ [🔗](https://mat3e.github.io/talks/fe-overview/BBDays4IT.html) [📽️](https://www.youtube.com/watch?v=_IXhqJzdrOM)
 * Charity JavaScript webinar [29.06] - _Cleaning things up - JS clean architecture_ [🔗](https://mat3e.github.io/talks/js-arch/charity.html#/) [📽️](https://www.youtube.com/watch?v=cpFTllo-Ngo)
-* Confitura 2022 [25.06] - _Moje rozumienie DDD i Clean Architecture na przykładzie bajki o trzech świnkach_ [🔗](https://mat3e.github.io/talks/3pigs/confitura.html#/)
+* Confitura 2022 [25.06] - _Moje rozumienie DDD i Clean Architecture na przykładzie bajki o trzech świnkach_ [🔗](https://mat3e.github.io/talks/3pigs/confitura.html#/) [📽](https://www.youtube.com/watch?v=O2FHKdOBX40)
 * WarsawJS 93 [08.06] _My personal front-end overview (2022)_ [🔗](https://mat3e.github.io/talks/fe-overview/WarsawJS.html) [📽️](https://www.youtube.com/watch?v=pFoa9YlEtLc) [📷](https://www.facebook.com/warsawjs/photos/3633929443500039)
 * Infoshare F3 [19.05] _Subiektywny przegląd front-endów (2022)_ [🔗](https://mat3e.github.io/talks/fe-overview/f3.html)
 * GeeCon 2022 [12.05] _My understanding of DDD & Clean Architecture on the example of The Three Little Pigs_ [🔗](https://mat3e.github.io/talks/3pigs/geecon.html#/) [📽️](https://www.youtube.com/watch?v=KIj-q8uOUpM) [📷](https://twitter.com/_semisiu/status/1524675574454800385)
