@@ -1,3 +1,6 @@
+## 2023
+> * BB Days 4 IT 2022 [16.09] _Potwierdzam, byłem tym layoffem_
+
 ## 2022
 * Glovo & Friends Tech Conference [18.11] - _DDD & Clean Architecture on the example of The Three Little Pigs_ [📽️](https://engineering.glovoapp.com/events/glovo-friends-tech-conference/)
 * dev.js Summit 2022 [13.10] _Porządki w kodzie - JS Clean Architecture_ [🔗](https://mat3e.github.io/talks/js-arch/devjssummit.html#/) [📽](https://engineering.glovoapp.com/events/glovo-friends-tech-conference/) 
