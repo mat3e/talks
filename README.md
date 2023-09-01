@@ -11,7 +11,7 @@
 * WarsawJS 93 [08.06] _My personal front-end overview (2022)_ [🔗](https://mat3e.github.io/talks/fe-overview/WarsawJS.html) [📽️](https://www.youtube.com/watch?v=pFoa9YlEtLc) [📷](https://www.facebook.com/warsawjs/photos/3633929443500039)
 * Infoshare F3 [19.05] _Subiektywny przegląd front-endów (2022)_ [🔗](https://mat3e.github.io/talks/fe-overview/f3.html)
 * GeeCon 2022 [12.05] _My understanding of DDD & Clean Architecture on the example of The Three Little Pigs_ [🔗](https://mat3e.github.io/talks/3pigs/geecon.html#/) [📽️](https://www.youtube.com/watch?v=KIj-q8uOUpM) [📷](https://twitter.com/_semisiu/status/1524675574454800385)
-* 4Developers 2022 [06.04] _Nieoczywiste funkcje Springa_ [🔗](https://github.com/mat3e/less-popular-spring-functions)
+* 4Developers 2022 [06.04] _Nieoczywiste funkcje Springa_ [🔗](https://github.com/mat3e/less-popular-spring-functions) [📽️](https://www.youtube.com/watch?v=h4tXoakxzlY)
 * WDI 2022 [02.04] _Nieoczywisty Spring_ [🔗](https://github.com/mat3e/less-popular-spring-functions)
 * WDI 2022 [02.04] _Subiektywny przegląd front-endów (2022)_ [🔗](https://mat3e.github.io/talks/fe-overview/wdi22.html)
 * IS Pomeranian Roadshow Toruń [29.03] _Moje rozumienie DDD (+ clean architecture) na przykładzie bajki o 3 świnkach_ [🔗](https://mat3e.github.io/talks/3pigs/isr.html#/)
