@@ -1,0 +1,1391 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Layoffs</title>
+
+    <meta name="description" content="package-by-feature, package-private access, encapsulation, modularity">
+    <meta name="author" content="mat3e">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/black.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="plugin/highlight/github.css">
+    <link rel="stylesheet" href="css/fontawesome.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .reveal section img.pure-img {
+            background: rgba(255, 255, 255, 0);
+            border: none;
+            box-shadow: none;
+            margin: 0;
+        }
+
+        #header-logo {
+            width: 300px;
+            height: 64px;
+            background-image: url('img/twitter.png');
+            background-size: contain;
+
+            top: -4em;
+            right: 0;
+            position: absolute;
+        }
+
+        #about-me {
+            padding: 1em;
+            background-color: rgba(255, 255, 255, .75);
+            list-style-type: none;
+            margin-left: 0;
+            float: left;
+        }
+
+        #about-me ul {
+            list-style-type: none;
+            float: left;
+            margin-left: 0;
+        }
+
+        #about-me a {
+            color: #a23;
+        }
+
+        #about-me a:hover {
+            color: #dd5566;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+        <section data-background-image>
+            <section data-background-image>
+                <h1 style="text-align: left; margin-bottom: 0">Potwierdzam,</h1>
+                <h2 style="text-align: left">byłem tym layoffem</h2>
+                <div id="header-logo"></div>
+            </section>
+            <section data-background-image>
+                <h5>
+                    <span>Perspektywa...</span>
+                    <span class="fragment" data-fragment-index="1"> ma znaczenie</span>
+                    <span class="fragment" data-fragment-index="2"> :)</span>
+                </h5>
+                <a href="https://mistrzowie.org/717022" class="r-vstack" style="width: 45%; margin: 0 auto">
+                    <img style="margin: 0" src="img/perspektywa-1.jpg"/>
+                    <img style="margin: 0" src="img/perspektywa-2.jpg" class="fragment" data-fragment-index="1"/>
+                    <img style="margin: 0" src="img/perspektywa-3.jpg" class="fragment" data-fragment-index="2"/>
+                </a>
+            </section>
+            <section data-background-image="img/bg-hd-new.jpg" data-background-transition="zoom">
+                <ul id="about-me">
+                    <li>
+                        <ul>
+                            <li>
+                                <a href="https://www.linkedin.com/in/mateusz-chrzonstowski/">
+                                    <i class="fab fa-linkedin"
+                                       style="color: #0077B5; background-color: #FFF; line-height: .75em"></i>
+                                    /mateusz-chrzonstowski
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://twitter.com/_mat3e_">
+                                    <i class="fab fa-twitter-square"
+                                       style="background-color: #1DA1F2; color: #FFF; line-height: .75em"></i>
+                                    /_mat3e_
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.reddit.com/user/_mat3e_">
+                                    <i class="fab fa-reddit-square"
+                                       style="background-color: #FF4500; color: #FFF; line-height: .75em"></i>
+                                    /_mat3e_
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/mat3e/">
+                                    <i class="fab fa-github-square"
+                                       style="color: #24292E; background-color: #FFF; line-height: .75em"></i>
+                                    /mat3e
+                                </a>
+                            </li>
+                            <li style="line-height: 1">&nbsp;</li>
+                            <li class="fragment" style="line-height: .75">
+                                <a style="font-weight: bold; font-size: .75em"
+                                   href="https://mat3e.github.io/talks/layoffs/BBDays4IT.html">
+                                    mat3e.github.io/talks/layoffs/BBDays4IT
+                                </a>
+                            </li>
+                            <li style="line-height: 1">&nbsp;</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul class="fragment" style="padding: .1em; line-height: 1">
+                            <ul style="padding: .1em; line-height: 1">
+                                <li>
+                                    <a href="">
+                                        <img src="img/pplus.png" style="height: 2em; margin: 0">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://full-stack.engineering/" class="fragment">
+                                        <img src="img/udemy-new.svg" class="pure-img" style="height: 1em; margin: 0">
+                                    </a>
+                                </li>
+                            </ul>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+        </section>
+
+        <section data-background-image data-transition="slide-in fade-out">
+            <section>
+                <div
+                        style="display: flex; align-items: center; justify-content: space-between; width: 60%; margin: 0 auto;">
+                    <img src="img/pad.png" class="pure-img" style="width: var(--map-item-big)">
+                    <div style="width: 1.5em; position: absolute; top: 2em; left: calc(20% + 1.5em)"
+                         class="fragment fade-in replace" data-fragment-index="3">
+                        <img src="img/ash-small.png" class="pure-img fragment fade-out replace"
+                             data-fragment-index="8" style="width: 1.5em;">
+                    </div>
+                    <img src="img/separator.png" class="pure-img fragment" data-fragment-index="4"
+                         style="width: 1em" data-autoslide="750">
+                    <img src="img/separator.png" class="pure-img fragment" data-fragment-index="5"
+                         style="width: 1em" data-autoslide="750">
+                    <img src="img/separator.png" class="pure-img fragment" data-fragment-index="6"
+                         style="width: 1em" data-autoslide="750">
+                    <img src="img/uni.gif" class="pure-img fragment" data-fragment-index="7"
+                         style="width: var(--map-item-big)" data-autoslide="750">
+                    <div style="width: 1.5em; position: absolute; top: 2em; right: 20%"
+                         class="fragment fade-in replace" data-fragment-index="8">
+                        <img src="img/ash-small.png" class="pure-img fragment fade-out replace"
+                             data-fragment-index="9" style="width: 1.5em; margin-top: .75em" data-autoslide="2500">
+                        <img src="img/enter.gif" class="pure-img fragment fade-in replace"
+                             data-fragment-index="9" style="width: 1.5em; margin-top: .75em">
+                    </div>
+                </div>
+                <div style="width: 60%; margin: 0 auto; text-align: right; visibility: hidden">
+                    <p
+                            style="width: var(--map-item-big); display: inline-block; text-align: center; margin-bottom: 0">
+                        <img src="img/separator.png" class="pure-img" style="width: 1em; margin-top: .5em">
+                        <br>
+                        <img src="img/separator.png" class="pure-img" style="width: 1em;">
+                    </p>
+                    <br>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: space-between; width: 60%; margin: 0 auto;; visibility: hidden">
+                    <img src="img/stonks.png" class="pure-img"
+                         style="width: var(--map-item-small); background: rgba(255, 255, 255, .75); border: white; border-radius: 3px">
+                    <div style="width: 1.5em; position: absolute; margin-top: 2em; margin-left: 1.5em">
+                    </div>
+                    <img src="img/separator.png" class="pure-img" style="width: 1em">
+                    <img src="img/separator.png" class="pure-img" style="width: 1em">
+                    <img src="img/separator.png" class="pure-img" style="width: 1em">
+                    <img src="img/jop.png" class="pure-img" style="width: var(--map-item-big)">
+                </div>
+                <div style="width: 60%; margin: 0 auto; text-align: left; visibility: hidden">
+                    <div
+                            style="width: var(--map-item-small); display: inline-block; text-align: center; margin-bottom: 0">
+                        <img src="img/separator.png" class="pure-img" style="width: 1em; margin-top: .5em">
+                        <br>
+                        <img src="img/separator.png" class="pure-img" style="width: 1em;">
+                        <br>
+                        <img src="img/lo.png" class="pure-img" style="width: 3em" data-fragment-index="20">
+                    </div>
+                </div>
+                <div style="position: absolute; left: calc(50% - 1.5em); top: calc(50% - 1.5em)">
+                    <div class="fragment fade-out replace" data-fragment-index="2">
+                        <img src="img/ash.gif" class="pure-img fragment from-left" style="width: 3em"
+                             data-fragment-index="1">
+                    </div>
+                    <div class="fragment fade-in replace" data-fragment-index="2">
+                        <img src="img/to-small.gif" class="pure-img fragment fade-out replace"
+                             data-fragment-index="3" style="width: 3em">
+                    </div>
+                </div>
+            </section>
+            <section data-autoslide="500" data-transition="slide-in zoom-out">
+                <div style="padding-left: 1em; padding-right: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .5em;"
+                     class="fragment" data-autoslide="500" data-fragment-index="1">
+                    <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;"
+                         class="fragment" data-fragment-index="3" data-autoslide="750">
+                        <img src="img/hp-b.png" class="pure-img">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 4em;">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 4em;">
+                        <img src="img/hp-b.png" class="pure-img">
+                    </div>
+                    <span class="fragment from-left-fast" data-fragment-index="2" data-autoslide="2000">
+                        <img src="img/job.png" class="pure-img fragment tada" style="width: 3em;"
+                             data-fragment-index="5" data-autoslide="0">
+                    </span>
+                </div>
+                <div
+                        style="padding-right: 1em; padding-left: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .25em;">
+                    <img src="img/ash-battle.png" class="pure-img fragment from-right-fast" style="width: 3.5em;"
+                         data-fragment-index="2" data-autoslide="0">
+                    <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;"
+                         class="fragment" data-fragment-index="3" data-autoslide="0">
+                        <img src="img/hp-b.png" class="pure-img">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                        <img src="img/hp-b.png" class="pure-img">
+                    </div>
+                </div>
+                <div class="pokemon">
+                        <span class="fragment" data-fragment-index="4" data-autoslide="0">
+                            <span class="fragment fade-out replace" data-fragment-index="5" data-autoslide="0">
+                                Wild recruitment process appears!
+                            </span>
+                            <span class="fragment fade-in replace" data-fragment-index="5" data-autoslide="0">
+                                Recruitment process used weird conditions!
+                            </span>
+                        </span>
+                </div>
+            </section>
+            <section data-transition="zoom">
+                <img src="img/areczek.jpg"/>
+            </section>
+            <section data-transition="zoom">
+                <div
+                        style="padding-left: 1em; padding-right: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .5em;">
+                    <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;"
+                         class="fragment pulse" data-fragment-index="5" data-autoslide="750">
+                        <img src="img/hp-b.png" class="pure-img">
+                        <img src="img/hp-f.png" class="pure-img fragment fade-out replace" style="width: 4em"
+                             data-fragment-index="10">
+                        <img src="img/hp4.gif" class="pure-img fragment fade-in replace" style="width: 4em"
+                             data-fragment-index="10">
+                        <img src="img/hp-f.png" class="pure-img fragment fade-out replace" style="width: 4em"
+                             data-fragment-index="6">
+                        <img src="img/hp2.gif" class="pure-img fragment fade-in replace" style="width: 4em"
+                             data-fragment-index="6">
+                        <img src="img/hp-b.png" class="pure-img">
+                    </div>
+                    <span class="fragment zoomOutDown" data-fragment-index="11">
+                    <img src="img/job.png" class="pure-img fragment tada" style="width: 3em;"
+                         data-fragment-index="7">
+                    </span>
+                </div>
+                <div
+                        style="padding-right: 1em; padding-left: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .25em;">
+                    <img src="img/ash-battle.png" class="pure-img fragment shake" style="width: 3.5em;"
+                         data-fragment-index="4">
+                    <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;"
+                         class="fragment pulse" data-fragment-index="1" data-autoslide="750">
+                        <img src="img/hp-b.png" class="pure-img">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                        <img src="img/hp-f.png" class="pure-img fragment fade-out replace" style="width: 1em"
+                             data-fragment-index="8">
+                        <img src="img/hp3.gif" class="pure-img fragment fade-in replace" style="width: 1em"
+                             data-fragment-index="8">
+                        <img src="img/hp-f.png" class="pure-img fragment fade-out replace" style="width: 1em"
+                             data-fragment-index="2">
+                        <img src="img/hp.gif" class="pure-img fragment fade-in replace" style="width: 1em"
+                             data-fragment-index="2">
+                        <img src="img/hp-b.png" class="pure-img">
+                    </div>
+                </div>
+                <div class="pokemon">
+                    <span class="fragment fade-out replace" data-fragment-index="1">Recruitment process used weird conditions!</span>
+                    <span class="fragment fade-out replace" data-fragment-index="8">
+                        <span class="fragment fade-in replace" data-fragment-index="1">
+                            <span class="fragment fade-out replace" data-fragment-index="4">
+                                Critical hit!<br><br>
+                            </span>
+                            <span class="fragment fade-in replace" data-fragment-index="4">
+                                <span class="fragment fade-out replace" data-fragment-index="5">
+                                    mat3e used other offer!
+                                </span>
+                                <span class="fragment fade-in replace" data-fragment-index="5">
+                                    <span class="fragment fade-out replace" data-fragment-index="7">
+                                        It's super effective!<br><br>
+                                    </span>
+                                    <span class="fragment fade-in replace" data-fragment-index="7">
+                                        Recruitment process used lower salary!
+                                    </span>
+                                </span>
+                            </span>
+                        </span>
+                    </span>
+                    <span class="fragment fade-in replace" data-fragment-index="8">
+                        <span class="fragment fade-out replace" data-fragment-index="9">
+                            Critical hit!<br><br>
+                        </span>
+                        <span class="fragment fade-in replace" data-fragment-index="9">
+                            <span class="fragment fade-out replace" data-fragment-index="10">
+                                mat3e chose technical growth!
+                            </span>
+                            <span class="fragment fade-in replace" data-fragment-index="10">
+                                <span class="fragment fade-out replace" data-fragment-index="11">
+                                    It's super effective!<br><br>
+                                </span>
+                                <span class="fragment fade-in replace" data-fragment-index="11">
+                                    Recruitment process fainted!
+                                </span>
+                            </span>
+                        </span>
+                    </span>
+                </div>
+            </section>
+            <section data-transition="zoom-in">
+                <h3 style="font-family: 'pokemon', 'Courier New', Courier, monospace" class="fragment"
+                    data-fragment-index="1">wiele expa</h3>
+                <img src="img/stand1.png" class="pure-img fragment fade-out replace" style="width: 3.5em"
+                     data-fragment-index="1">
+                <img src="img/stand2.png" class="pure-img fragment fade-in replace" style="width: 3.5em"
+                     data-fragment-index="1">
+            </section>
+        </section>
+
+        <section data-background-image data-transition="fade">
+            <section>
+                <div
+                        style="display: flex; align-items: center; justify-content: space-between; width: 60%; margin: 0 auto;">
+                    <img src="img/pad.png" class="pure-img" style="width: var(--map-item-big)">
+                    <div style="width: 1.5em; position: absolute; top: 2em; left: calc(20% + 1.5em)"></div>
+                    <img src="img/separator.png" class="pure-img"
+                         style="width: 1em" data-autoslide="750">
+                    <img src="img/separator.png" class="pure-img"
+                         style="width: 1em" data-autoslide="750">
+                    <img src="img/separator.png" class="pure-img"
+                         style="width: 1em" data-autoslide="750">
+                    <img src="img/uni.gif" class="pure-img"
+                         style="width: var(--map-item-big)" data-autoslide="750">
+                    <div style="width: 1.5em; position: absolute; top: 2em; right: 20%">
+                        <img src="img/ash-small.png" class="pure-img fragment fade-out replace"
+                             data-fragment-index="12" style="width: 1.5em; margin-top: .75em">
+                    </div>
+                </div>
+                <div class="fragment" data-fragment-index="9" data-autoslide="750"
+                     style="width: 60%; margin: 0 auto; text-align: right">
+                    <p
+                            style="width: var(--map-item-big); display: inline-block; text-align: center; margin-bottom: 0">
+                        <img src="img/separator.png" class="pure-img" style="width: 1em; margin-top: .5em">
+                        <br>
+                        <img src="img/separator.png" class="pure-img fragment" data-fragment-index="10"
+                             style="width: 1em;" data-autoslide="750">
+                    </p>
+                    <br>
+                </div>
+                <div class="fragment" data-fragment-index="11" data-autoslide="750"
+                     style="display: flex; align-items: center; justify-content: space-between; width: 60%; margin: 0 auto;">
+                    <img src="img/stonks.png" class="pure-img"
+                         style="width: var(--map-item-small); background: rgba(255, 255, 255, .75); border: white; border-radius: 3px; visibility: hidden">
+                    <img src="img/separator.png" class="pure-img" style="width: 1em; visibility: hidden">
+                    <img src="img/separator.png" class="pure-img" style="width: 1em; visibility: hidden">
+                    <img src="img/separator.png" class="pure-img" style="width: 1em; visibility: hidden">
+                    <img src="img/jop.png" class="pure-img" style="width: var(--map-item-big)">
+                    <div class="fragment fade-in replace" data-fragment-index="12"
+                         style="width: 1.5em; position: absolute; right: 20%; margin-top: 2em">
+                        <img src="img/ash-small.png" class="pure-img fragment fade-out replace"
+                             data-fragment-index="13" style="width: 1.5em;" data-autoslide="2500">
+                        <img src="img/enter.gif" class="pure-img fragment fade-in replace"
+                             data-fragment-index="13" style="width: 1.5em;">
+                    </div>
+                </div>
+                <div style="width: 60%; margin: 0 auto; text-align: left; visibility: hidden">
+                    <div
+                            style="width: var(--map-item-small); display: inline-block; text-align: center; margin-bottom: 0">
+                        <img src="img/separator.png" class="pure-img" style="width: 1em; margin-top: .5em">
+                        <br>
+                        <img src="img/separator.png" class="pure-img" style="width: 1em;">
+                        <br>
+                        <img src="img/lo.png" class="pure-img" style="width: 3em">
+                    </div>
+                </div>
+            </section>
+            <section>
+                <h2>
+                    <img src="img/oak.gif" class="pure-img" style="width: 1em">
+                </h2>
+                <blockquote class="fragment" style="font-size: .7em">
+                    Nawet jeśli nie myślimy o podwyżce, jesteśmy zadowoleni z pensji, którą mamy dzisiaj, to
+                    przynajmniej
+                    <span class="fragment highlight-green">raz na pół roku warto chodzić na rozmowy kwalifikacyjne (...) by budować to mocne poczucie pewności siebie</span>.
+                </blockquote>
+                <a class="fragment" style="font-size: .5em; font-style: italic"
+                   href="https://jakoszczedzacpieniadze.pl/jak-negocjowac-podwyzke-pensji-rozmowa-z-szefem">jakoszczedzacpieniadze.pl/jak-negocjowac-podwyzke-pensji-rozmowa-z-szefem</a>
+                <ol>
+                    <li class="fragment">Czy rynek mi nie ucieka?</li>
+                    <li class="fragment">Na ile mnie wycenia?</li>
+                    <li class="fragment">Trening 💪🏻</li>
+                </ol>
+            </section>
+        </section>
+
+        <section data-background-image data-transition="fade">
+            <section>
+                <div
+                        style="display: flex; align-items: center; justify-content: space-between; width: 60%; margin: 0 auto;">
+                    <img src="img/pad.png" class="pure-img" style="width: var(--map-item-big)">
+                    <div style="width: 1.5em; position: absolute; top: 2em; left: calc(20% + 1.5em)"></div>
+                    <img src="img/separator.png" class="pure-img"
+                         style="width: 1em" data-autoslide="750">
+                    <img src="img/separator.png" class="pure-img"
+                         style="width: 1em" data-autoslide="750">
+                    <img src="img/separator.png" class="pure-img"
+                         style="width: 1em" data-autoslide="750">
+                    <img src="img/uni.gif" class="pure-img"
+                         style="width: var(--map-item-big)" data-autoslide="750">
+                </div>
+                <div style="width: 60%; margin: 0 auto; text-align: right">
+                    <p
+                            style="width: var(--map-item-big); display: inline-block; text-align: center; margin-bottom: 0">
+                        <img src="img/separator.png" class="pure-img" style="width: 1em; margin-top: .5em">
+                        <br>
+                        <img src="img/separator.png" class="pure-img" style="width: 1em;">
+                    </p>
+                    <br>
+                </div>
+                <div
+                        style="display: flex; align-items: center; justify-content: space-between; width: 60%; margin: 0 auto;">
+                    <img src="img/stonks.png" class="pure-img fragment" data-fragment-index="16" data-autoslide="750"
+                         style="width: var(--map-item-small); background: rgba(255, 255, 255, .75); border: white; border-radius: 3px">
+                    <div style="width: 1.5em; position: absolute; margin-top: 2em; margin-left: 1.5em"
+                         class="fragment fade-in replace" data-fragment-index="17">
+                        <img src="img/ash-small.png" class="pure-img fragment fade-out replace"
+                             data-fragment-index="21" style="width: 1.5em;">
+                    </div>
+                    <img src="img/separator.png" class="pure-img fragment" data-fragment-index="15"
+                         style="width: 1em" data-autoslide="750">
+                    <img src="img/separator.png" class="pure-img fragment" data-fragment-index="14"
+                         style="width: 1em" data-autoslide="750">
+                    <img src="img/separator.png" class="pure-img fragment" data-fragment-index="13"
+                         style="width: 1em" data-autoslide="750">
+                    <img src="img/jop.png" class="pure-img" style="width: var(--map-item-big)">
+                    <div style="width: 1.5em; position: absolute; right: 20%; margin-top: 2em">
+                        <img src="img/ash-small.png" class="pure-img fragment fade-out replace"
+                             data-fragment-index="17" style="width: 1.5em;">
+                    </div>
+                </div>
+                <div class="fragment" data-fragment-index="18" data-autoslide="750"
+                     style="width: 60%; margin: 0 auto; text-align: left">
+                    <div
+                            style="width: var(--map-item-small); display: inline-block; text-align: center; margin-bottom: 0">
+                        <img src="img/separator.png" class="pure-img" style="width: 1em; margin-top: .5em">
+                        <br>
+                        <img src="img/separator.png" class="pure-img fragment" data-fragment-index="19"
+                             style="width: 1em;" data-autoslide="750">
+                        <br>
+                        <img src="img/lo.png" class="pure-img fragment" style="width: 3em" data-fragment-index="20"
+                             data-autoslide="750">
+                        <div class="fragment fade-in replace" data-fragment-index="21"
+                             style="width: 1.5em; position: absolute; left: 25%; margin-top: 2em;">
+                            <img src="img/ash-small.png" class="pure-img fragment fade-out replace"
+                                 data-fragment-index="22" style="width: 1.5em;" data-autoslide="2500">
+                            <img src="img/enter.gif" class="pure-img fragment fade-in replace"
+                                 data-fragment-index="22" style="width: 1.5em;">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section data-autoslide="500" data-transition="slide-in zoom-out">
+                <div style="padding-left: 1em; padding-right: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .5em;"
+                     class="fragment" data-autoslide="500" data-fragment-index="1">
+                    <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;"
+                         class="fragment" data-fragment-index="3" data-autoslide="750">
+                        <img src="img/hp-b.png" class="pure-img">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 8em;">
+                        <img src="img/hp-b.png" class="pure-img">
+                    </div>
+                    <span class="fragment from-left-fast" data-fragment-index="2" data-autoslide="2000">
+                        <img src="img/lo.png" class="pure-img fragment tada" style="width: 3em;"
+                             data-fragment-index="5" data-autoslide="0">
+                    </span>
+                </div>
+                <div
+                        style="padding-right: 1em; padding-left: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .25em;">
+                    <img src="img/ash-battle.png" class="pure-img fragment from-right-fast" style="width: 3.5em;"
+                         data-fragment-index="2" data-autoslide="0">
+                    <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;"
+                         class="fragment" data-fragment-index="3" data-autoslide="0">
+                        <img src="img/hp-b.png" class="pure-img">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 6em">
+                        <img src="img/hp-e.png" class="pure-img" style="width: 2em">
+                        <img src="img/hp-b.png" class="pure-img">
+                    </div>
+                </div>
+                <div class="pokemon">
+                    <span class="fragment" data-fragment-index="4" data-autoslide="0">
+                        <span class="fragment fade-out replace" data-fragment-index="5" data-autoslide="0">
+                            Wild layoffs appeared!<br/><br/>
+                        </span>
+                        <span class="fragment fade-in replace" data-fragment-index="5" data-autoslide="0">
+                            Layoffs used Twitter as the example!
+                        </span>
+                    </span>
+                </div>
+            </section>
+            <section data-background-image="img/50.png" data-background-size="contain" data-background-color="white"
+                     data-transition="zoom" data-background-transition="zoom">
+                <a href="https://www.financialexpress.com/life/technology-elon-musk-reveals-real-reason-why-he-fired-almost-50-of-twitters-workforce-2776211/">źródło</a>
+            </section>
+            <section data-transition="slide-in zoom-out">
+                <table>
+                    <thead>
+                    <tr style="opacity: 50%">
+                        <td>Data</td>
+                        <td>Firma</td>
+                        <td>Ilość</td>
+                        <td>%%</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="fragment">
+                        <td>01.11</td>
+                        <td>Booking.com</td>
+                        <td>226</td>
+                        <td>?</td>
+                    </tr>
+                    <tr class="fragment">
+                        <td>03.11</td>
+                        <td>Lyft</td>
+                        <td>700</td>
+                        <td>13%</td>
+                    </tr>
+                    <tr class="fragment">
+                        <td>03.11</td>
+                        <td>Stripe</td>
+                        <td>1000</td>
+                        <td>14%</td>
+                    </tr>
+                    <tr class="fragment">
+                        <td>04.11</td>
+                        <td>Twitter</td>
+                        <td>3700</td>
+                        <td>50%</td>
+                    </tr>
+                    <tr class="fragment">
+                        <td>07.11</td>
+                        <td>Zendesk</td>
+                        <td>350</td>
+                        <td>5%</td>
+                    </tr>
+                    <tr class="fragment">
+                        <td>07.11</td>
+                        <td>Salesforce</td>
+                        <td>1000</td>
+                        <td>1%</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section data-transition="zoom">
+                <div
+                        style="padding-left: 1em; padding-right: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .5em;">
+                    <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;">
+                        <img src="img/hp-b.png" class="pure-img">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 8em">
+                        <img src="img/hp-b.png" class="pure-img">
+                    </div>
+                    <img src="img/lo.png" class="pure-img" style="width: 3em;">
+                </div>
+                <div
+                        style="padding-right: 1em; padding-left: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .25em;">
+                    <img src="img/ash-battle.png" class="pure-img fragment shake" style="width: 3.5em;"
+                         data-fragment-index="2">
+                    <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;">
+                        <img src="img/hp-b.png" class="pure-img">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 6em">
+                        <img src="img/hp-e.png" class="pure-img" style="width: 2em">
+                        <img src="img/hp-b.png" class="pure-img">
+                    </div>
+                </div>
+                <div class="pokemon">
+                    <span class="fragment fade-out replace" data-fragment-index="2">
+                        <span class="fragment fade-out replace" data-fragment-index="1">
+                            Layoffs used Twitter as the example!
+                        </span>
+                        <span class="fragment fade-in replace" data-fragment-index="1">
+                            It's not very effective...
+                        </span>
+                    </span>
+                    <span class="fragment fade-in replace" data-fragment-index="2">
+                        mat3e used facts & stats!
+                    </span>
+                </div>
+            </section>
+            <section data-transition="zoom">
+                <blockquote style="font-size: .7em">
+                    <ol start="6">
+                        <li>[www] <a href="https://layoffs.fyi/">Layoffs.fyi</a> [ENG] // all
+                            <ul>
+                                <li>Ciąg dalszy <strong>zwolnień</strong> - stronka <strong>agregująca newsy</strong>
+                                </li>
+                                <li><strong>W kontrze: nie kojarzę takich podsumowań sprzed 2022</strong>, a może gdyby
+                                    przeliczyć to na spokojnie, wyszłyby podobne liczby
+                                </li>
+                                <li>Zwłaszcza, że od razu widać, że <strong>znaczna ilość</strong> wypisanych firm to
+                                    <strong>startupy na różnych etapach "startowania"</strong></li>
+                            </ul>
+                        </li>
+                        <li>[www] <a href="https://www.levels.fyi/">levels.fyi</a> [ENG] // all
+                            <ul>
+                                <li>Dalej na przekór zwolnieniom ;)</li>
+                                <li><strong>Widełki płacowe</strong> z różnych firm</li>
+                                <li>Do tego próba mapowania poziomów <strong>"seniority" pomiędzy firmami</strong></li>
+                            </ul>
+                        </li>
+                    </ol>
+                </blockquote>
+                <a class="fragment" style="font-size: .5em; font-style: italic"
+                   href="https://mailchi.mp/aaa94c3d9e05/materialy-styczen">Newsletter, 10.01</a>
+            </section>
+            <section data-transition="zoom">
+                <div
+                        style="padding-left: 1em; padding-right: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .5em;">
+                    <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;"
+                         class="fragment pulse" data-fragment-index="1" data-autoslide="750">
+                        <img src="img/hp-b.png" class="pure-img">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 4em">
+                        <img src="img/hp-f.png" class="pure-img fragment fade-out replace" style="width: 4em"
+                             data-fragment-index="2">
+                        <img src="img/hp.gif" class="pure-img fragment fade-in replace" style="width: 4em"
+                             data-fragment-index="2">
+                        <img src="img/hp-b.png" class="pure-img">
+                    </div>
+                    <img src="img/lo.png" class="pure-img fragment tada" style="width: 3em;" data-fragment-index="3">
+                </div>
+                <div
+                        style="padding-right: 1em; padding-left: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .25em;">
+                    <img src="img/ash-battle.png" class="pure-img fragment shake" style="width: 3.5em;"
+                         data-fragment-index="6">
+                    <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;"
+                         class="fragment pulse" data-fragment-index="4" data-autoslide="750">
+                        <img src="img/hp-b.png" class="pure-img">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 5em">
+                        <img src="img/hp-f.png" class="pure-img fragment fade-out replace" style="width: 1em"
+                             data-fragment-index="5">
+                        <img src="img/hp2.gif" class="pure-img fragment fade-in replace" style="width: 1em"
+                             data-fragment-index="5">
+                        <img src="img/hp-e.png" class="pure-img" style="width: 2em">
+                        <img src="img/hp-b.png" class="pure-img">
+                    </div>
+                </div>
+                <div class="pokemon">
+                    <span class="fragment fade-out replace" data-fragment-index="3">
+                        <span class="fragment fade-out replace" data-fragment-index="1">
+                            mat3e used facts & stats!
+                        </span>
+                        <span class="fragment fade-in replace" data-fragment-index="1">
+                            It's super effective!<br><br>
+                        </span>
+                    </span>
+                    <span class="fragment fade-in replace" data-fragment-index="3">
+                        <span class="fragment fade-out replace" data-fragment-index="6">
+                            <span class="fragment fade-out replace" data-fragment-index="4">
+                            Layoffs used more rumors & panic!
+                        </span>
+                        <span class="fragment fade-in replace" data-fragment-index="4">
+                            Critical hit!<br><br>
+                        </span>
+                        </span>
+                        <span class="fragment fade-in replace" data-fragment-index="6">
+                            mat3e used local rumors & news!
+                        </span>
+                    </span>
+                </div>
+            </section>
+            <section data-background-image="img/netf.png" data-background-size="contain" data-background-color="white"
+                     data-transition="zoom" data-background-transition="zoom">
+                <a href="https://next.gazeta.pl/next/7,151243,29342143,netflix-otwiera-centrum-inzynieryjne-w-polsce.html">źródło</a>
+            </section>
+            <section data-transition="zoom-in fade-out">
+                <div
+                        style="padding-left: 1em; padding-right: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .5em;">
+                    <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;"
+                         class="fragment pulse" data-fragment-index="1" data-autoslide="750">
+                        <img src="img/hp-b.png" class="pure-img">
+                        <img src="img/hp-f.png" class="pure-img fragment fade-out replace" style="width: 4em"
+                             data-fragment-index="2">
+                        <img src="img/hp4.gif" class="pure-img fragment fade-in replace" style="width: 4em"
+                             data-fragment-index="2">
+                        <img src="img/hp-e.png" class="pure-img" style="width: 4em">
+                        <img src="img/hp-b.png" class="pure-img">
+                    </div>
+                    <img src="img/lo.png" class="pure-img fragment zoomOutDown" style="width: 3em;"
+                         data-fragment-index="3">
+                </div>
+                <div
+                        style="padding-right: 1em; padding-left: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .25em;">
+                    <img src="img/ash-battle.png" class="pure-img" style="width: 3.5em;">
+                    <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;">
+                        <img src="img/hp-b.png" class="pure-img">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 5em">
+                        <img src="img/hp-e.png" class="pure-img" style="width: 3em">
+                        <img src="img/hp-b.png" class="pure-img">
+                    </div>
+                </div>
+                <div class="pokemon">
+                    <span class="fragment fade-out replace" data-fragment-index="3">
+                        <span class="fragment fade-out replace" data-fragment-index="1">
+                            mat3e used local rumors & news!
+                        </span>
+                        <span class="fragment fade-in replace" data-fragment-index="1">
+                            It's super effective!<br><br>
+                        </span>
+                    </span>
+                    <span class="fragment fade-in replace" data-fragment-index="3">
+                        Layoffs fainted!<br/><br/>
+                    </span>
+                </div>
+            </section>
+        </section>
+
+        <section data-background-image data-transition="fade">
+            <section>
+                <div style="margin: 0 auto; text-align: center">
+                    <img src="img/lo.png" class="pure-img fragment flash" style="width: 3em; margin-top: .25em"
+                         data-fragment-index="2">
+                    <span class="fragment fade-out replace" data-fragment-index="2"
+                          style="position: absolute; margin-left: -4em;">
+                            <img src="img/explosion2.gif" style="width: 5em;" class="pure-img fragment"
+                                 data-fragment-index="1" data-autoslide="1200">
+                        </span>
+                    <img src="img/lo2.png" class="pure-img fragment reverse-flash"
+                         style="width: 3.5em; position: absolute; margin-left: -3.25em;" data-fragment-index="2">
+                </div>
+                <img src="img/explosion3.gif" class="pure-img fragment" data-fragment-index="3"
+                     data-autoslide="300">
+                <img src="img/explosion4.gif" class="pure-img fragment" data-fragment-index="4"
+                     data-autoslide="300">
+                <img src="img/explosion5.gif" class="pure-img fragment" data-fragment-index="5">
+                <img src="img/brain-explosion.gif" class="pure-img fragment" data-fragment-index="6"
+                     style="position: absolute; bottom: 0; right: 0; z-index: 999">
+                <div class="pokemon">
+                    <span class="fragment fade-out replace" data-fragment-index="1">...<br><br></span>
+                    <span class="fragment fade-in replace" data-fragment-index="1">
+                            <span class="fragment fade-out replace" data-fragment-index="3">
+                                What? Layoffs are evolving!
+                            </span>
+                            <span class="fragment fade-in replace" data-fragment-index="3">
+                                Into My Layoff from work!
+                            </span>
+                        </span>
+                </div>
+            </section>
+            <section data-autoslide="500" data-transition="slide-in zoom-out">
+                <div style="padding-left: 1em; padding-right: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .5em;"
+                     class="fragment" data-fragment-index="1">
+                    <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;"
+                         class="fragment" data-fragment-index="3" data-autoslide="750">
+                        <img src="img/hp-b.png" class="pure-img">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 8em;">
+                        <img src="img/hp-b.png" class="pure-img">
+                    </div>
+                    <span class="fragment from-left-fast" data-fragment-index="2" data-autoslide="2000">
+                            <img src="img/lo2.png" class="pure-img fragment tada" style="width: 3.5em;"
+                                 data-fragment-index="5" data-autoslide="0">
+                        </span>
+                </div>
+                <div
+                        style="padding-right: 1em; padding-left: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .25em;">
+                    <img src="img/ash-battle.png" class="pure-img fragment from-right-fast" style="width: 3.5em;"
+                         data-fragment-index="2" data-autoslide="0">
+                    <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;"
+                         class="fragment" data-fragment-index="3" data-autoslide="0">
+                        <img src="img/hp-b.png" class="pure-img">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 5em">
+                        <img src="img/hp-e.png" class="pure-img" style="width: 3em">
+                        <img src="img/hp-b.png" class="pure-img">
+                    </div>
+                </div>
+                <div class="pokemon">
+                    <span class="fragment" data-fragment-index="4" data-autoslide="0">
+                        <span class="fragment fade-out replace" data-fragment-index="5" data-autoslide="0">
+                            ...<br><br>
+                        </span>
+                        <span class="fragment fade-in replace" data-fragment-index="5" data-autoslide="0">
+                            My Layoff used domino effect!
+                        </span>
+                    </span>
+                </div>
+            </section>
+            <section data-transition="zoom-in slide-out">
+                <div class="r-hstack" style="width: 80%; margin: 0 auto">
+                    <img src="img/2022.png" style="margin: 0"/>
+                    <img src="img/2023.png" class="fragment" style="margin: 0"/>
+                </div>
+                <img src="img/post-covid.png" class="fragment" style="width: 60%">
+            </section>
+            <section>
+                <table style="font-size: .75em">
+                    <thead>
+                    <tr style="opacity: 50%">
+                        <td>Data</td>
+                        <td>Firma</td>
+                        <td>Ilość</td>
+                        <td>%%</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="fragment">
+                        <td>04.01</td>
+                        <td>Salesforce</td>
+                        <td>8000</td>
+                        <td>10%</td>
+                    </tr>
+                    <tr class="fragment">
+                        <td>04.01</td>
+                        <td>Amazon</td>
+                        <td>8000</td>
+                        <td>2%</td>
+                    </tr>
+                    <tr class="fragment">
+                        <td>18.01</td>
+                        <td>Microsoft</td>
+                        <td>10000</td>
+                        <td>5%</td>
+                    </tr>
+                    <tr class="fragment">
+                        <td>20.01</td>
+                        <td>Google</td>
+                        <td>12000</td>
+                        <td>6%</td>
+                    </tr>
+                    <tr class="fragment">
+                        <td>23.01</td>
+                        <td>Spotify</td>
+                        <td>600</td>
+                        <td>6%</td>
+                    </tr>
+                    <tr class="fragment">
+                        <td>25.01</td>
+                        <td>IBM</td>
+                        <td>3900</td>
+                        <td>2%</td>
+                    </tr>
+                    <tr class="fragment">
+                        <td>26.01</td>
+                        <td>SAP</td>
+                        <td>3000</td>
+                        <td>3%</td>
+                    </tr>
+                    <tr class="fragment">
+                        <td>30.01</td>
+                        <td>Glovo</td>
+                        <td>250</td>
+                        <td>6%</td>
+                    </tr>
+                    <tr class="fragment">
+                        <td>30.01</td>
+                        <td>OLX Group</td>
+                        <td>1500</td>
+                        <td>15%</td>
+                    </tr>
+                    <tr class="fragment">
+                        <td>30.01</td>
+                        <td>Philips</td>
+                        <td>6000</td>
+                        <td>13%</td>
+                    </tr>
+                    <tr class="fragment">
+                        <td>31.01</td>
+                        <td>Paypal</td>
+                        <td>2000</td>
+                        <td>7%</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section>
+                <h2>Historie</h2>
+                <ul>
+                    <li class="fragment">Zwolnienia z dnia na dzień</li>
+                    <li class="fragment">Odcinanie dostępów</li>
+                    <li class="fragment">Zwalnianie na wizach pracowniczych</li>
+                    <li class="fragment">Zwalnienie ludzi na dyżurze</li>
+                    <li class="fragment">"A co gdybym został w poprzedniej firmie?"
+                        <ul>
+                            <li class="fragment">Telefon od zwolnionego z poprzedniej firmy</li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+            <section data-transition="slide-in zoom-out">
+                <div style="padding-left: 1em; padding-right: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .5em;">
+                    <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;">
+                        <img src="img/hp-b.png" class="pure-img">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 8em;">
+                        <img src="img/hp-b.png" class="pure-img">
+                    </div>
+                    <img src="img/lo2.png" class="pure-img" style="width: 3.5em;">
+                </div>
+                <div
+                        style="padding-right: 1em; padding-left: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .25em;">
+                    <img src="img/ash-battle.png" class="pure-img fragment shake" style="width: 3.5em;"
+                         data-fragment-index="3">
+                    <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;"
+                         class="fragment pulse" data-fragment-index="1" data-autoslide="750">
+                        <img src="img/hp-b.png" class="pure-img">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 4em">
+                        <img src="img/hp-f.png" class="pure-img fragment fade-out replace" style="width: 1em"
+                             data-fragment-index="2">
+                        <img src="img/hp.gif" class="pure-img fragment fade-in replace" style="width: 1em"
+                             data-fragment-index="2">
+                        <img src="img/hp-e.png" class="pure-img" style="width: 3em">
+                        <img src="img/hp-b.png" class="pure-img">
+                    </div>
+                </div>
+                <div class="pokemon">
+                    <span class="fragment fade-out replace" data-fragment-index="3">
+                        <span class="fragment fade-out replace" data-fragment-index="1">
+                            My Layoff used domino effect!
+                        </span>
+                        <span class="fragment fade-in replace" data-fragment-index="1">
+                            Critical hit!<br><br>
+                        </span>
+                    </span>
+                    <span class="fragment fade-in replace" data-fragment-index="3">
+                        mat3e used preparation!
+                    </span>
+                </div>
+            </section>
+            <section data-transition="zoom">
+                <h1>
+                    <a href="https://jakoszczedzacpieniadze.pl/">
+                        <img src="img/jop.png" style="height: 1em">
+                    </a>
+                </h1>
+                <ul>
+                    <li class="fragment">"Próbne" rozmowy rekrutacyjne
+                        <ul>
+                            <li class="fragment">Nagle nie takie "próbne" 😉</li>
+                        </ul>
+                    </li>
+                    <li class="fragment">Budżet domowy - wydatki pod kontrolą</li>
+                    <li class="fragment">Poduszka finansowa + odprawa (~5 miesięcy)</li>
+                </ul>
+            </section>
+            <section data-transition="zoom">
+                <div style="padding-left: 1em; padding-right: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .5em;">
+                    <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;"
+                         class="fragment pulse" data-fragment-index="1" data-autoslide="750">
+                        <img src="img/hp-b.png" class="pure-img">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 6em;">
+                        <img src="img/hp-f.png" class="pure-img fragment fade-out replace" style="width: 2em"
+                             data-fragment-index="2">
+                        <img src="img/hp2.gif" class="pure-img fragment fade-in replace" style="width: 2em"
+                             data-fragment-index="2">
+                        <img src="img/hp-b.png" class="pure-img">
+                    </div>
+                    <img src="img/lo2.png" class="pure-img fragment tada" style="width: 3.5em;" data-fragment-index="3">
+                </div>
+                <div
+                        style="padding-right: 1em; padding-left: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .25em;">
+                    <img src="img/ash-battle.png" class="pure-img fragment shake" style="width: 3.5em;"
+                         data-fragment-index="6">
+                    <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;"
+                         class="fragment pulse" data-fragment-index="4" data-autoslide="750">
+                        <img src="img/hp-b.png" class="pure-img">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 3em">
+                        <img src="img/hp-f.png" class="pure-img fragment fade-out replace" style="width: 1em"
+                             data-fragment-index="5">
+                        <img src="img/hp3.gif" class="pure-img fragment fade-in replace" style="width: 1em"
+                             data-fragment-index="5">
+                        <img src="img/hp-e.png" class="pure-img" style="width: 4em">
+                        <img src="img/hp-b.png" class="pure-img">
+                    </div>
+                </div>
+                <div class="pokemon">
+                    <span class="fragment fade-out replace" data-fragment-index="6">
+                        <span class="fragment fade-out replace" data-fragment-index="3">
+                            <span class="fragment fade-out replace" data-fragment-index="1">
+                                mat3e used preparation!
+                            </span>
+                            <span class="fragment fade-in replace" data-fragment-index="1">
+                                Critical hit!<br><br>
+                            </span>
+                        </span>
+                        <span class="fragment fade-in replace" data-fragment-index="3">
+                            <span class="fragment fade-out replace" data-fragment-index="4">
+                                My Layoff used interview failure!
+                            </span>
+                            <span class="fragment fade-in replace" data-fragment-index="4">
+                                Critical hit!<br><br>
+                            </span>
+                        </span>
+                    </span>
+                    <span class="fragment fade-in replace" data-fragment-index="6">
+                        mat3e used learning opportunity!
+                    </span>
+                </div>
+            </section>
+            <section data-transition="zoom">
+                <blockquote style="font-size: .6em">
+                    <ol>
+                        <li>
+                            <a href="https://www.coursera.org/learn/algorithms-part1">Algorithms, Part I</a> [ENG] //
+                            all
+                            <ul>
+                                <li>Kilkanaście godzin samego wideo</li>
+                                <li><strong>Darmowy kurs</strong> online na platformie Coursera</li>
+                                <li><strong>Kevin Wayne, Robert Sedgewick</strong></li>
+                                <li><strong>Princeton</strong></li>
+                                <li>Jak łatwo zgadnąć - jest też część 2 i ją też polecam</li>
+                                <li>Miałem algorytmy i struktury danych na studiach, ale ten kurs jest dużo bardziej
+                                    <strong>praktyczny</strong> i poprowadzony w naprawdę <strong>przystępny</strong>
+                                    sposób
+                                </li>
+                                <li>Zaczyna się od <strong>union-find</strong> a potem napięcie rośnie ;)</li>
+                                <li>Przykładowe kody w Javie</li>
+                                <li>Można też rzucić okiem na <strong>stronę powiązaną z kursem</strong> i książką:
+                                    <a href="https://algs4.cs.princeton.edu/home/">https://algs4.cs.princeton.edu/home/</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ol>
+                </blockquote>
+                <a class="fragment" style="font-size: .5em; font-style: italic"
+                   href="https://mailchi.mp/73b9887e96f3/materialy-marzec">Newsletter, 10.03</a>
+            </section>
+            <section data-transition="slide-in zoom-out">
+                <a href="https://www.youtube.com/watch?v=SSjuU2-7WYc">
+                    <img src="img/527.png">
+                </a>
+                <div class="fragment">
+                    527 odrzuceń
+                </div>
+            </section>
+            <section>
+                <h2>O samych Layoffach</h2>
+                <ul>
+                    <li class="fragment">
+                        <a href="https://www.youtube.com/watch?v=tB0BglO7sn8">
+                            Czy to koniec branży?
+                        </a>
+                        <ul>
+                            <li class="fragment"><a href="https://en.wikipedia.org/wiki/Great_Resignation">The Great
+                                Resignation</a></li>
+                        </ul>
+                    </li>
+                    <li class="fragment">
+                        <a href="https://www.youtube.com/watch?v=lo1HRGl1CvE">Skutek wcześniejszego dodruku pustego
+                            pieniądza</a>
+                    </li>
+                    <li class="fragment">
+                        <a href="https://www.levels.fyi/community/thread/t62Pnf/how-i-d-navigate-a-job-search-in-today-s-environment-amidst-all-the-layoffs">
+                            Szukanie pracy po layoffie</a>
+                    </li>
+                </ul>
+            </section>
+            <section data-transition="zoom">
+                <div style="padding-left: 1em; padding-right: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .5em;">
+                    <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;"
+                         class="fragment pulse" data-fragment-index="1" data-autoslide="750">
+                        <img src="img/hp-b.png" class="pure-img">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 4em;">
+                        <img src="img/hp-f.png" class="pure-img fragment fade-out replace" style="width: 2em"
+                             data-fragment-index="2">
+                        <img src="img/hp4.gif" class="pure-img fragment fade-in replace" style="width: 2em"
+                             data-fragment-index="2">
+                        <img src="img/hp-e.png" class="pure-img" style="width: 2em;">
+                        <img src="img/hp-b.png" class="pure-img">
+                    </div>
+                    <img src="img/lo2.png" class="pure-img fragment tada" style="width: 3.5em;" data-fragment-index="3">
+                </div>
+                <div
+                        style="padding-right: 1em; padding-left: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .25em;">
+                    <img src="img/ash-battle.png" class="pure-img" style="width: 3.5em;">
+                    <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;">
+                        <img src="img/hp-b.png" class="pure-img">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 3em">
+                        <img src="img/hp-e.png" class="pure-img" style="width: 5em">
+                        <img src="img/hp-b.png" class="pure-img">
+                    </div>
+                </div>
+                <div class="pokemon">
+                    <span class="fragment fade-out replace" data-fragment-index="3">
+                        <span class="fragment fade-out replace" data-fragment-index="1">
+                            mat3e used learning opportunity!
+                        </span>
+                        <span class="fragment fade-in replace" data-fragment-index="1">
+                            Critical hit!<br><br>
+                        </span>
+                    </span>
+                    <span class="fragment fade-in replace" data-fragment-index="3">
+                        <span class="fragment fade-out replace" data-fragment-index="4">
+                            My Layoff used "ChatGPT will replace you"!
+                        </span>
+                        <span class="fragment fade-in replace" data-fragment-index="4">
+                            It's not very effective...
+                        </span>
+                    </span>
+                </div>
+            </section>
+            <section data-transition="zoom">
+                <img src="img/availability.png">
+            </section>
+            <section>
+                <div class="r-vstack" style="height: 60vh">
+                    <img src="img/getters.png" style="margin: 0">
+                    <img src="img/getters2.png" style="margin: 0" class="fragment">
+                </div>
+            </section>
+            <section data-transition="slide-in zoom-out">
+                <a href="https://twitter.com/milan_milanovic/status/1622127889108926466">
+                    <img src="img/ai.png">
+                </a>
+                <div class="fragment" style="font-style: italic">
+                    <a href="https://medium.com/@mat3e/are-programmers-safe-from-automation-9246fc1aa525">Are
+                        programmers safe from automation?</a>
+                </div>
+            </section>
+            <section data-transition="zoom">
+                <div style="padding-left: 1em; padding-right: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .5em;">
+                    <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;">
+                        <img src="img/hp-b.png" class="pure-img">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 4em;">
+                        <img src="img/hp-e.png" class="pure-img" style="width: 4em;">
+                        <img src="img/hp-b.png" class="pure-img">
+                    </div>
+                    <img src="img/lo2.png" class="pure-img" style="width: 3.5em;">
+                </div>
+                <div
+                        style="padding-right: 1em; padding-left: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .25em;">
+                    <img src="img/ash-battle.png" class="pure-img fragment shake" style="width: 3.5em;"
+                         data-fragment-index="1">
+                    <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;">
+                        <img src="img/hp-b.png" class="pure-img">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 3em">
+                        <img src="img/hp-e.png" class="pure-img" style="width: 5em">
+                        <img src="img/hp-b.png" class="pure-img">
+                    </div>
+                </div>
+                <div class="pokemon">
+                    <span class="fragment fade-out replace" data-fragment-index="1">
+                        ...
+                    </span>
+                    <span class="fragment fade-in replace" data-fragment-index="1">
+                        mat3e used power of networking!
+                    </span>
+                </div>
+            </section>
+            <section data-transition="zoom">
+                <ol>
+                    <li>
+                        <a href="https://nofluffjobs.com/pl">No Fluff Jobs</a>/<a href="https://justjoin.it/">Just Join
+                        IT</a>
+                    </li>
+                    <li class="fragment">
+                        <a href="https://www.linkedin.com/">LinkedIn</a>
+                    </li>
+                    <li class="fragment">Kontakt ze znajomymi w danej firmie</li>
+                    <li class="fragment">Wysyłka CV (polecenie)</li>
+                </ol>
+            </section>
+            <section data-transition="slide-in zoom-out">
+                <div>Box</div>
+                <div style="position: absolute; top: 30%; right: 1%">Tink</div>
+                <div style="margin-left: 40%">Netflix</div>
+                <div>Paramount</div>
+                <div style="position: absolute; top: 10%; left: 10%">Google</div>
+                <div style="margin-left: -30%">Connectis_</div>
+                <div style="position: absolute; bottom: 10%; right: 2%">Pragmile</div>
+                <div style="position: absolute; top: 0; left: 30%">Avenga</div>
+                <div style="margin-left: 30%;">RTB House</div>
+                <div style="position: absolute;">Affirm</div>
+                <div style="margin-left: -4em">ClickUp</div>
+                <div style="margin-right: -20%">Santander CIB</div>
+                <div style="margin-left: -10%">Dev-Heroes</div>
+                <div style="position: absolute; left: 15%">Digital New Agency</div>
+            </section>
+            <section data-transition="zoom">
+                <div style="padding-left: 1em; padding-right: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .5em;">
+                    <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;"
+                         class="fragment pulse" data-fragment-index="1" data-autoslide="750">
+                        <img src="img/hp-b.png" class="pure-img">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 2em;">
+                        <img src="img/hp-f.png" class="pure-img fragment fade-out replace" style="width: 2em"
+                             data-fragment-index="2">
+                        <img src="img/hp.gif" class="pure-img fragment fade-in replace" style="width: 2em"
+                             data-fragment-index="2">
+                        <img src="img/hp-e.png" class="pure-img" style="width: 4em;">
+                        <img src="img/hp-b.png" class="pure-img">
+                    </div>
+                    <img src="img/lo2.png" class="pure-img fragment tada" style="width: 3.5em;" data-fragment-index="3">
+                </div>
+                <div
+                        style="padding-right: 1em; padding-left: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .25em;">
+                    <img src="img/ash-battle.png" class="pure-img" style="width: 3.5em;">
+                    <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;">
+                        <img src="img/hp-b.png" class="pure-img">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 3em">
+                        <img src="img/hp-e.png" class="pure-img" style="width: 5em">
+                        <img src="img/hp-b.png" class="pure-img">
+                    </div>
+                </div>
+                <div class="pokemon">
+                    <span class="fragment fade-out replace" data-fragment-index="3">
+                        <span class="fragment fade-out replace" data-fragment-index="1">
+                            mat3e used power of networking!
+                        </span>
+                        <span class="fragment fade-in replace" data-fragment-index="1">
+                            Critical hit!<br><br>
+                        </span>
+                    </span>
+                    <span class="fragment fade-in replace" data-fragment-index="3">
+                        My Layoff used weird market!
+                    </span>
+                </div>
+            </section>
+            <section data-transition="zoom" data-auto-animate>
+                <div>Box</div>
+                <div style="position: absolute; top: 30%; right: 1%">Tink</div>
+                <div style="margin-left: 40%">Netflix</div>
+                <div data-id="p">Paramount</div>
+                <div style="position: absolute; top: 10%; left: 10%">Google</div>
+                <div style="margin-left: -30%">Connectis_</div>
+                <div style="position: absolute; bottom: 10%; right: 2%">Pragmile</div>
+                <div style="position: absolute; top: 0; left: 30%">Avenga</div>
+                <div style="margin-left: 30%;">RTB House</div>
+                <div style="position: absolute;">Affirm</div>
+                <div style="margin-left: -4em">ClickUp</div>
+                <div data-id="s" style="margin-right: -20%">Santander CIB</div>
+                <div style="margin-left: -10%">Dev-Heroes</div>
+                <div data-id="d" style="position: absolute; left: 15%">Digital New Agency</div>
+            </section>
+            <section data-auto-animate>
+                <div data-id="p">Paramount</div>
+                <div data-id="s">Santander CIB</div>
+                <div data-id="d">Digital New Agency</div>
+                <aside class="notes">Część nie miała aktualnie etatów (po przejściu rekrutacji), trochę ja odrzuciłem,
+                    część się odezwała z follow-upem za późno, ale część za dużo algorytmiki i nie przeszedłem
+                </aside>
+            </section>
+            <section data-background-image="img/interview.png" data-background-size="contain"
+                     data-background-color="white"
+                     data-transition="zoom" data-background-transition="zoom">
+                <a href="https://www.pcmag.com/news/chatgpt-passes-google-coding-interview-for-level-3-engineer-with-183k-salary">źródło</a>
+                <aside class="notes">+ przyda się do tłumaczenia z frameworka na inny albo między językami</aside>
+            </section>
+            <section data-transition="zoom">
+                <div style="padding-left: 1em; padding-right: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .5em;">
+                    <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;"
+                         class="fragment pulse" data-fragment-index="4" data-autoslide="750">
+                        <img src="img/hp-b.png" class="pure-img">
+                        <img src="img/hp-f.png" class="pure-img fragment fade-out replace" style="width: 2em"
+                             data-fragment-index="5">
+                        <img src="img/hp3.gif" class="pure-img fragment fade-in replace" style="width: 2em"
+                             data-fragment-index="5">
+                        <img src="img/hp-e.png" class="pure-img" style="width: 6em;">
+                        <img src="img/hp-b.png" class="pure-img">
+                    </div>
+                    <img src="img/lo2.png" class="pure-img fragment zoomOutDown" style="width: 3.5em;"
+                         data-fragment-index="6">
+                </div>
+                <div
+                        style="padding-right: 1em; padding-left: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .25em;">
+                    <img src="img/ash-battle.png" class="pure-img fragment shake" style="width: 3.5em;"
+                         data-fragment-index="3">
+                    <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;"
+                         class="fragment pulse" data-fragment-index="1" data-autoslide="750">
+                        <img src="img/hp-b.png" class="pure-img">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 2em">
+                        <img src="img/hp-f.png" class="pure-img fragment fade-out replace" style="width: 1em"
+                             data-fragment-index="2">
+                        <img src="img/hp4.gif" class="pure-img fragment fade-in replace" style="width: 1em"
+                             data-fragment-index="2">
+                        <img src="img/hp-e.png" class="pure-img" style="width: 5em">
+                        <img src="img/hp-b.png" class="pure-img">
+                    </div>
+                </div>
+                <div class="pokemon">
+                    <span class="fragment fade-out replace" data-fragment-index="6">
+                        <span class="fragment fade-out replace" data-fragment-index="3">
+                            <span class="fragment fade-out replace" data-fragment-index="1">
+                                My Layoff used weird market!
+                            </span>
+                            <span class="fragment fade-in replace" data-fragment-index="1">
+                                Critical hit!<br><br>
+                            </span>
+                        </span>
+                        <span class="fragment fade-in replace" data-fragment-index="3">
+                            <span class="fragment fade-out replace" data-fragment-index="4">
+                                mat3e used determination!
+                            </span>
+                            <span class="fragment fade-in replace" data-fragment-index="4">
+                                It's super effective!<br><br>
+                            </span>
+                        </span>
+                    </span>
+                    <span class="fragment fade-in replace" data-fragment-index="6">
+                        Recruitment process fainted!
+                    </span>
+                </div>
+            </section>
+        </section>
+
+        <section>
+            <h2 class="fragment" data-fragment-index="3">Dziękuję!</h2>
+            <div>
+                <img src="img/stand2.png" class="pure-img" style="width: 2.5em">
+            </div>
+            <ul>
+                <li class="fragment" data-fragment-index="1">
+                    <a href="https://mat3e.github.io/trendy">
+                        mat3e.github.io/trendy
+                    </a>
+                </li>
+                <li class="fragment" data-fragment-index="2">
+                    <a href="https://mat3e.github.io/talks/layoffs/BBDays4IT.html">
+                        mat3e.github.io/talks/layoffs/BBDays4IT
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </div>
+
+</div>
+
+<script src="dist/reveal.js"></script>
+<script src="plugin/zoom/zoom.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/search/search.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script>
+
+    // Also available as an ES module, see:
+    // https://revealjs.com/initialization/
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        center: true,
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight]
+    });
+
+    document.querySelectorAll('.reveal .slides section:not([data-background-image])').forEach(s => {
+        s.setAttribute('data-background-image', 'img/twitter.png');
+        s.setAttribute('data-background-size', '240px');
+        s.setAttribute('data-background-position', '.5em .5em');
+    });
+
+</script>
+
+</body>
+</html>
