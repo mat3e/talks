@@ -1,5 +1,5 @@
 ## 2023
-> * BB Days 4 IT 2023 [16.09] _Potwierdzam, byłem tym layoffem_
+* BB Days 4 IT 2023 [16.09] _Potwierdzam, byłem tym layoffem_ [🔗](https://mat3e.github.io/talks/layoffs/BBDays4IT.html) [📽️](https://www.youtube.com/watch?v=7DeNpa_Wko4)
 
 ## 2022
 * Glovo & Friends Tech Conference [18.11] - _DDD & Clean Architecture on the example of The Three Little Pigs_ [📽️](https://engineering.glovoapp.com/events/glovo-friends-tech-conference/)
