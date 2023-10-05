@@ -796,8 +796,29 @@
         </section>
 
         <section>
-            <section>IO</section>
             <section>
+            <h1>IO</h1>
+            <ul>
+                <li class="fragment">Powolne - szczególnie jeśli dostęp odbywa się <b>przez sieć</b></li>
+                <li class="fragment">Współdzielone między testami - ryzykowne, ale szybsze</li>
+                <li class="fragment">Warto rozważyć lokalne współdzielone instancje</li>
+            </ul>
+          </section>
+          <section>
+            <h3>W najgorszym wypadku ryzykujemy niedeterministycznym zachowaniem</h3>
+            <img src="img/farquad.png">
+          </section>
+          <section>
+            <h2>W naszym przypadku</h2>
+            <ul>
+              <li>Zmieniliśmy devo'wego Redisa na wersję embedded</li>
+              <li>Zeszliśmy z 27min do 16min</li>
+              <li>Pozbyliśmy się JedisException i zerwanych połączeń</li>
+              <li>Zysk ~40%</li>
+            </ul>
+            <img width="120" src="img/embedded-redis.png"/>
+          </section>
+          <section>
                 <div class="r-stretch chart-wrapper">
                     <fieldset>
                         <legend>zysk ▶</legend>
@@ -811,13 +832,76 @@
                     </fieldset>
                 </div>
             </section>
-            <section>testcontainers</section>
+          <section>
+            <h2>Testcontainers</h2>
+            <ul>
+              <li>Przydatne, ale wymuszają użycie runtime zgodnego z API Docker'a</li>
+              <li>Zazwyczaj większe zasoby niż binarki/executable (na przykład Embedded Redis)</li>
+              <li>Stawianie trwa relatywnie wolno - jeśli możliwe, lepiej ponownie użyć</li>
+            </ul>
+          </section>
         </section>
 
         <section>
-            <section>
-                Zrównoleglanie
-            </section>
+          <section>
+              <h2>Zrównoleglanie testów</h2>
+              <img width="800" src="img/deadlock.jpeg"/>
+          </section>
+          <section>
+            <table>
+              <tr>
+                <th></th>
+                <th><b>Virgin</b> Build system (Gradle)</th>
+                <th><b>Chad</b> Test runner (JUnit 5)</th>
+              </tr>
+              <tr>
+                <td>Podział pracy</td>
+                <td>Domyślnie przez executory</td>
+                <td>Poprzez wątki</td>
+              </tr>
+              <tr>
+                <td>Zrównoleglanie testów</td>
+                <td>Tylko na poziomie klas</td>
+                <td>Na poziomie klas i metod</td>
+              </tr>
+            </table>
+          </section>
+          <section>
+            <table>
+              <tr>
+                <td>Wydajność</td>
+                <td>W skrajnych przypadkach, gdy za dużo wątków - OutOfMemoryError</td>
+                <td>~~JVM + (załadowane beany * liczba kontekstów)</td>
+              </tr>
+              <tr>
+                <td>Kontrola</td>
+                <td>Odpala wszystko i ciężko wydzielać</td>
+                <td>Można włączać/wyłączać zrównoleglanie za pomocą adnotacji @Isolated I @Execution</td>
+              </tr>
+            </table>
+          </section>
+          <section>
+            <ul>
+              <li>Ryzykowne, gdy testy odwołują się do wspólnych zasobów (pola static, singletony)</li>
+              <li>To samo tyczy się danych inicjalizowanych na potrzeby testów (nowy user, pakiet w bazie)</li>
+            </ul>
+          </section>
+          <section>
+            <ul>
+              Trzeba pamiętać o: 
+              <li>Używaniu unikatowych inicjowanych danych w obrębie jednostki (klasy/metody)</li>
+              <li>Zrównoleglaniu tylko testów, które trochę trwają (z doświadczenia więcej niż 1s)</li>
+              <li>Zdrowym rozsądku :)</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Zrównoleglanie przez "rurociąg"</h2>
+            <img src="img/jenkins-parallel.png"/>
+            <ul>
+              <li>Uważać na locki Gradle'a!</li>
+              <li>Może nie najlepiej, ale jako tako</li>
+            </ul>
+          </section>
         </section>
 
         <section>
