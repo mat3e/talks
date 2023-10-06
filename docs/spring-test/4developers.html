@@ -61,6 +61,26 @@
             height: 3em;
             margin: -1.5em;
         }
+
+        .chart-wrapper > div:nth-of-type(1) {
+            left: 60%;
+            top: 40%;
+        }
+
+        .chart-wrapper > div:nth-of-type(2) {
+            left: 15%;
+            top: 15%;
+        }
+
+        .chart-wrapper > div:nth-of-type(3) {
+            right: 15%;
+            bottom: 25%;
+        }
+
+        .chart-wrapper > div:nth-of-type(4) {
+            right: 25%;
+            top: 10%;
+        }
     </style>
 </head>
 
@@ -107,6 +127,47 @@
                     Spotify: <em>Testing of Microservices</em>
                 </a>
                 <img class="fragment" src="img/uvi2.gif" alt="Each window worked in isolation"/>
+            </section>
+        </section>
+
+        <section>
+            <section data-auto-animate>
+                <h2>Testy Integracyjne</h2>
+                <ul>
+                    <li class="fragment">
+                        <a href="https://docs.spring.io/spring-framework/reference/testing/integration.html">Dokumentacja
+                            Springa</a>:
+                        <q>[Integration Testing] lets you test the correct wiring of your Spring IoC container
+                            contexts</q>
+                        <ul>
+                            <li class="fragment">+ I/O</li>
+                            <li class="fragment">Przed wdrożeniem</li>
+                            <li class="fragment">Bez pełnej infrastruktury</li>
+                        </ul>
+                    </li>
+                    <li class="fragment">
+                        <blockquote data-id="int-def"
+                                    style="display: inline; padding: 0; font-style: inherit; background: none; box-shadow: none">
+                            Każdy start kontekstu Springa to już integracja
+                        </blockquote>
+                    </li>
+                </ul>
+            </section>
+            <section data-auto-animate>
+                <h2>Testy Integracyjne</h2>
+                <blockquote data-id="int-def" style="width: 90%">Każdy start kontekstu Springa to już integracja
+                </blockquote>
+            </section>
+            <section data-background-image="img/java/island.png" data-background-size="contain"
+                     data-background-color="white">
+                <img class="fragment" style="height: 5em" src="img/java/springbeans.png"
+                     alt="IntelliJ showing Spring beans"/>
+                <h2 class="r-hstack fragment" data-fragment-index="1">
+                    <img src="img/java/bean.png" style="height: 3em" alt="coffee bean"/>
+                    <span class="fragment" data-fragment-index="2" style="text-shadow: 0 0 10px black;">⇒</span>
+                    <img class="fragment" data-fragment-index="2" src="img/java/logo.png" style="height: 5em"
+                         alt="java logo"/>
+                </h2>
             </section>
         </section>
 
@@ -411,6 +472,22 @@
                     <img class="fragment" style="width: 45%" src="img/ref/ks.png"/>
                 </a>
             </section>
+            <section>
+                <h2>"Ukryta" logika</h2>
+                <ul>
+                    <li class="fragment">Fallback, <code>@HystrixCommand</code></li>
+                    <li class="fragment"><code>@Transactional</code></li>
+                    <li class="fragment"><code>@Cacheable</code></li>
+                    <li class="fragment"><code>@ConditionalOn...</code>
+                        <ul>
+                            <li class="fragment" style="font-size: .9em">
+                                Potencjalnie: <code>ApplicationContextRunner</code>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="fragment">Filter, interceptor, <code>@PreAuthorize</code>, AOP</li>
+                </ul>
+            </section>
             <section data-auto-animate>
                 <pre data-id="unit-test" class="r-stretch" style="width: 100%;"><code class="java" data-trim
                                                                                       contenteditable="true"
@@ -552,47 +629,6 @@
         </section>
 
         <section>
-            <section data-auto-animate>
-                <h2>Testy Integracyjne</h2>
-                <ul>
-                    <li class="fragment">
-                        <a href="https://docs.spring.io/spring-framework/reference/testing/integration.html">Dokumentacja
-                            Springa</a>:
-                        <q>[Integration Testing] lets you test the correct wiring of your Spring IoC container
-                            contexts</q>
-                        <ul>
-                            <li class="fragment">+ I/O</li>
-                            <li class="fragment">Przed wdrożeniem</li>
-                            <li class="fragment">Bez pełnej infrastruktury</li>
-                        </ul>
-                    </li>
-                    <li class="fragment">
-                        <blockquote data-id="int-def"
-                                    style="display: inline; padding: 0; font-style: inherit; background: none; box-shadow: none">
-                            Każdy start kontekstu Springa to już integracja
-                        </blockquote>
-                    </li>
-                </ul>
-            </section>
-            <section data-auto-animate>
-                <h2>Testy Integracyjne</h2>
-                <blockquote data-id="int-def" style="width: 90%">Każdy start kontekstu Springa to już integracja
-                </blockquote>
-            </section>
-            <section data-background-image="img/java/island.png" data-background-size="contain"
-                     data-background-color="white">
-                <img class="fragment" style="height: 5em" src="img/java/springbeans.png"
-                     alt="IntelliJ showing Spring beans"/>
-                <h2 class="r-hstack fragment" data-fragment-index="1">
-                    <img src="img/java/bean.png" style="height: 3em" alt="coffee bean"/>
-                    <span class="fragment" data-fragment-index="2" style="text-shadow: 0 0 10px black;">⇒</span>
-                    <img class="fragment" data-fragment-index="2" src="img/java/logo.png" style="height: 5em"
-                         alt="java logo"/>
-                </h2>
-            </section>
-        </section>
-
-        <section>
             <section>
                 Nie trzeba SpringExtension
             </section>
@@ -627,10 +663,6 @@
             <section>
                 <img src="img/intellij.png" style="width: 35%">
             </section>
-        </section>
-
-        <section>
-            <section>Konteksty Springa - nawet jak jeden slice, to uwaga</section>
             <section data-auto-animate class="stretch">
                 <div style="position: absolute; top: 30%; right: 1%"><code>@WebMvcTest</code></div>
                 <div style="margin-left: 40%"><code>@SpringJUnitWebConfig</code></div>
@@ -650,19 +682,25 @@
             <section data-auto-animate>
                 <div style="font-size: 1.5em" data-id="main"><code>@SpringBootTest</code></div>
                 <ul>
-                    <li class="fragment">One setup to rule them all</li>
-                    <li class="fragment">No <code>@MockBean</code> in each test</li>
-                    <li class="fragment">
-                        Properties defined just once
-                        <ul>
-                            <li class="fragment">No <code>@TestPropertySource</code></li>
-                            <li class="fragment">No <code>@SpringBootTest(properties = ...</code></li>
-                        </ul>
-                    </li>
-                    <li class="fragment">
-                        Ideally, Spring context starts once and is shared between all the integration tests
-                    </li>
+                    <li class="fragment">Jeden za wszystkich, wszyscy za jednego ;)</li>
+                    <li class="fragment">Optymalizować testy pod cache'owanie i&nbsp;reużywanie kontekstów</li>
+                    <li class="fragment">Np. klasa bazowa lub interfejs dla wszystkich testów integracyjnych</li>
                 </ul>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h3>
+                    <img src="img/ring.png" style="height: 1em; margin: 0">ne context to rule them all
+                </h3>
+                <div class="fragment">Na pewno <em>tylko jeden</em> kontekst?</div>
+                <pre data-id="spring-config" style="width: 100%;" class="fragment"><code class="yaml" data-trim
+                                                                                         data-line-numbers>
+                    logging:
+                      level:
+                        org.springframework.test.context.cache: DEBUG
+                </code></pre>
             </section>
             <section data-auto-animate data-auto-animate-restart>
                 <h2 data-id="ile">Ile kontekstów?</h2>
@@ -689,6 +727,7 @@
                     Field error in object 'asset' on field 'id': rejected value [  ]; codes [NotBlank.asset.id,NotBlank.id,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [asset.id,id]; arguments []; default message [id]]; default message [must not be blank]
                     ...
                 </code></pre>
+                <aside class="notes">Bieda wersja - zliczamy ile razy pokazuje się logo Springa</aside>
             </section>
             <section data-auto-animate>
                 <h2 data-id="ile">Ile kontekstów?</h2>
@@ -729,6 +768,7 @@
                     Field error in object 'asset' on field 'id': rejected value [  ]; codes [NotBlank.asset.id,NotBlank.id,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [asset.id,id]; arguments []; default message [id]]; default message [must not be blank]
                     ...
                 </code></pre>
+                <aside class="notes">debug prawdę powie, ale zaśmieci logi</aside>
             </section>
             <section data-auto-animate>
                 <h2 data-id="ile">Ile kontekstów - log</h2>
@@ -742,19 +782,164 @@
                         missCount = 1
                     ]
                 </code></pre>
-                <pre data-id="spring-config" style="width: 100%;" class="fragment"><code class="yaml" data-trim
-                                                                                         data-line-numbers>
-                    logging:
-                      level:
-                        org.springframework.test.context.cache: DEBUG
+                <aside class="notes">
+                    <ul>
+                        <li>max 32 unikatowych kontekstów w testach</li>
+                        <li>można nadpisać przez spring.test.context.cache.maxSize</li>
+                    </ul>
+                </aside>
+            </section>
+            <section data-auto-animate>
+                <h2 data-id="ile">Szczegóły implementacyjne :)</h2>
+                <pre style="width: 100%;"><code class="java" style="font-size: .75em;" data-trim
+                                                data-line-numbers="1-3,5|4|7-8|10-12">
+                    // SpringExtension
+                    public static ApplicationContext getApplicationContext(ExtensionContext context) {
+                      return getTestContextManager(context).getTestContext().getApplicationContext();
+                      // DefaultTestContext -> this.cacheAwareContextLoaderDelegate.loadContext(...)
+                    }
+
+                    // DefaultCacheAwareContextLoaderDelegate
+                    static final ContextCache defaultContextCache = new DefaultContextCache();
+
+                    // DefaultContextCache
+                    private final Map&lt;MergedContextConfiguration, ApplicationContext> contextMap =
+                        Collections.synchronizedMap(new LruCache(32, 0.75f));
                 </code></pre>
+                <aside class="notes">
+                    <ul>
+                        <li>
+                            trzymane jako pole static więc uwaga na forkMode(Maven) / maxParallelForks(Gradle)
+                            <ul>
+                                <li>(cache współdzielony dla wszystkich wątków, ale nie procesów) !!!</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </aside>
             </section>
             <section>
+                <h3><code>MergedContextConfiguration</code></h3>
+                <ul>
+                    <li class="fragment"><code>@TestPropertySource</code></li>
+                    <li class="fragment"><code>@ActiveProfiles</code></li>
+                    <li class="fragment"><code>@ContextConfiguration</code></li>
+                    <li class="fragment"><code>@DynamicPropertySource</code></li>
+                    <li class="fragment"><code>@MockBean</code></li>
+                    <li class="fragment"><code>@SpyBean</code></li>
+                    <li class="fragment"><code>@DirtiesContext</code></li>
+                </ul>
+            </section>
+            <section>
+                <h2>Schodzenie z kontekstów</h2>
+                <ul>
+                    <li class="fragment">
+                        <code>grep</code> po testach - <code>@MockBean</code>, <code>@SpyBean</code>, etc.
+                        <ul>
+                            <li class="fragment">Może niepotrzebne/nieużywane?</li>
+                        </ul>
+                    </li>
+                    <li class="fragment">
+                        <code>grep</code> po propsach (<code>@TestPropertySource</code> itp.)
+                        <ul>
+                            <li class="fragment">Wstrzykiwać w już utworzonych kontekstach (a&nbsp;nie każdy sobie)</li>
+                            <li class="fragment">
+                                Część może do <code>application.properties</code> (np. w
+                                <code>src/test/resources/</code>)?
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="fragment">Dalsza edukacja zespołu + <em>code review</em></li>
+                </ul>
+            </section>
+            <section data-transition="zoom">
                 <div class="r-stretch chart-wrapper">
                     <fieldset>
                         <legend>zysk ▶</legend>
                     </fieldset>
-                    <div style="left: 60%; top: 40%" class="fragment">współdzielenie kontekstów</div>
+                    <div class="fragment">współdzielenie kontekstów</div>
+                    <fieldset>
+                        <legend>pracochłonność ▶</legend>
+                    </fieldset>
+                </div>
+            </section>
+            <section>
+                <a href="https://www.youtube.com/watch?v=c-GV2PxymoY">
+                    <img style="width: 75%" src="img/ref/broken.png"/>
+                </a>
+                <aside class="notes">Jeszcze więcej, głównie o współdzieleniu kontekstów, po angielsku</aside>
+            </section>
+        </section>
+
+        <section>
+            <section data-auto-animate>
+                <img src="img/deeper.jpg">
+                <h2 data-id="tuning" class="fragment">Dokręcanie śrubek</h2>
+            </section>
+            <section data-auto-animate>
+                <h2 data-id="tuning"><code>@Lazy</code></h2>
+                <ul>
+                    <li class="fragment">Zwykle smrodek w kodzie - cykliczne zależności</li>
+                    <li class="fragment">Ale w testach?</li>
+                </ul>
+                <pre class="fragment"><code class="yaml" data-trim>
+                    spring:
+                      main:
+                        lazy-initialization: true
+                </code></pre>
+                <div class="fragment">
+                    <em>Konsultanci go nienawidzą, odkrył sekret szybszego uruchamiania testów</em> 😉
+                </div>
+                <aside class="notes">
+                    <ul>
+                        <li>Idealne dla długo wstających kontekstów (~2m ⇒ 10s)</li>
+                        <li>Unit + integracyjne ⇒ 10min</li>
+                    </ul>
+                </aside>
+            </section>
+            <section data-transition="zoom">
+                <div class="r-stretch chart-wrapper">
+                    <fieldset>
+                        <legend>zysk ▶</legend>
+                    </fieldset>
+                    <div>współdzielenie kontekstów</div>
+                    <div class="fragment"><code>@Lazy</code></div>
+                    <fieldset>
+                        <legend>pracochłonność ▶</legend>
+                    </fieldset>
+                </div>
+            </section>
+            <section>
+                <h3>Wyłączenie zbędnych beanów</h3>
+                <div class="fragment" data-fragment-index="1">Czyli których?</div>
+                <pre class="fragment" data-fragment-index="2"><code data-trim class="yaml">debug: true</code></pre>
+                <pre class="fragment" data-fragment-index="2"><code data-trim class="plaintext" style="font-size: .75em; line-height: 1.1">
+                    ============================
+                    CONDITIONS EVALUATION REPORT
+                    ============================
+
+
+                    Positive matches:
+                    -----------------
+
+                       AopAutoConfiguration matched:
+                          - @ConditionalOnClass found required classes 'org.springframework.context.annotation.EnableAspectJAutoProxy', 'org.aspectj.lang.annotation.Aspect', 'org.aspectj.lang.reflect.Advice', 'org.aspectj.weaver.AnnotatedElement' (OnClassCondition)
+                          - @ConditionalOnProperty (spring.aop.auto=true) matched (OnPropertyCondition)
+
+                    ...
+                </code></pre>
+                <pre class="fragment"><code class="plaintext">GET /actuator/beans</code></pre>
+                <aside class="notes">
+                    Niewielki zysk (max kilka %) i więcej pracy - ale przy okazji porządki w kodzie
+                </aside>
+            </section>
+            <section data-transition="zoom">
+                <div class="r-stretch chart-wrapper">
+                    <fieldset>
+                        <legend>zysk ▶</legend>
+                    </fieldset>
+                    <div>współdzielenie kontekstów</div>
+                    <div><code>@Lazy</code></div>
+                    <div class="fragment">wyłączenie beanów</div>
                     <fieldset>
                         <legend>pracochłonność ▶</legend>
                     </fieldset>
@@ -763,145 +948,114 @@
         </section>
 
         <section>
-            <section>Dokręcanie śrubek</section>
-            <section>@Lazy</section>
             <section>
+                <h1>IO</h1>
+                <ul>
+                    <li class="fragment">Powolne - szczególnie jeśli dostęp odbywa się <b>przez sieć</b></li>
+                    <li class="fragment">Współdzielone między testami - ryzykowne, ale szybsze</li>
+                    <li class="fragment">Warto rozważyć lokalne współdzielone instancje</li>
+                </ul>
+            </section>
+            <section>
+                <h3>W najgorszym wypadku ryzykujemy niedeterministycznym zachowaniem</h3>
+                <img src="img/farquad.png">
+            </section>
+            <section>
+                <h2>W naszym przypadku</h2>
+                <ul>
+                    <li>Zmieniliśmy devo'wego Redisa na wersję embedded</li>
+                    <li>Zeszliśmy z 27min do 16min</li>
+                    <li>Pozbyliśmy się JedisException i zerwanych połączeń</li>
+                    <li>Zysk ~40%</li>
+                </ul>
+                <img width="120" src="img/embedded-redis.png"/>
+            </section>
+            <section data-transition="zoom">
                 <div class="r-stretch chart-wrapper">
                     <fieldset>
                         <legend>zysk ▶</legend>
                     </fieldset>
-                    <div style="left: 60%; top: 40%">współdzielenie kontekstów</div>
-                    <div style="left: 15%; top: 15%" class="fragment"><code>@Lazy</code></div>
+                    <div>współdzielenie kontekstów</div>
+                    <div><code>@Lazy</code></div>
+                    <div>wyłączenie beanów</div>
+                    <div class="fragment">wspólne I/O</div>
                     <fieldset>
                         <legend>pracochłonność ▶</legend>
                     </fieldset>
                 </div>
             </section>
             <section>
-                Wyłączenie zbędnych beanów
-            </section>
-            <section>
-                <div class="r-stretch chart-wrapper">
-                    <fieldset>
-                        <legend>zysk ▶</legend>
-                    </fieldset>
-                    <div style="left: 60%; top: 40%">współdzielenie kontekstów</div>
-                    <div style="left: 15%; top: 15%"><code>@Lazy</code></div>
-                    <div style="right: 15%; bottom: 25%" class="fragment">wyłączenie beanów</div>
-                    <fieldset>
-                        <legend>pracochłonność ▶</legend>
-                    </fieldset>
-                </div>
+                <h2>Testcontainers</h2>
+                <ul>
+                    <li>Przydatne, ale wymuszają użycie runtime zgodnego z API Docker'a</li>
+                    <li>Zazwyczaj większe zasoby niż binarki/executable (na przykład Embedded Redis)</li>
+                    <li>Stawianie trwa relatywnie wolno - jeśli możliwe, lepiej ponownie użyć</li>
+                </ul>
             </section>
         </section>
 
         <section>
             <section>
-            <h1>IO</h1>
-            <ul>
-                <li class="fragment">Powolne - szczególnie jeśli dostęp odbywa się <b>przez sieć</b></li>
-                <li class="fragment">Współdzielone między testami - ryzykowne, ale szybsze</li>
-                <li class="fragment">Warto rozważyć lokalne współdzielone instancje</li>
-            </ul>
-          </section>
-          <section>
-            <h3>W najgorszym wypadku ryzykujemy niedeterministycznym zachowaniem</h3>
-            <img src="img/farquad.png">
-          </section>
-          <section>
-            <h2>W naszym przypadku</h2>
-            <ul>
-              <li>Zmieniliśmy devo'wego Redisa na wersję embedded</li>
-              <li>Zeszliśmy z 27min do 16min</li>
-              <li>Pozbyliśmy się JedisException i zerwanych połączeń</li>
-              <li>Zysk ~40%</li>
-            </ul>
-            <img width="120" src="img/embedded-redis.png"/>
-          </section>
-          <section>
-                <div class="r-stretch chart-wrapper">
-                    <fieldset>
-                        <legend>zysk ▶</legend>
-                    </fieldset>
-                    <div style="left: 60%; top: 40%">współdzielenie kontekstów</div>
-                    <div style="left: 15%; top: 15%"><code>@Lazy</code></div>
-                    <div style="right: 15%; bottom: 25%">wyłączenie beanów</div>
-                    <div style="right: 25%; top: 15%" class="fragment">wspólne I/O</div>
-                    <fieldset>
-                        <legend>pracochłonność ▶</legend>
-                    </fieldset>
-                </div>
+                <h2>Zrównoleglanie testów</h2>
+                <img width="800" src="img/deadlock.jpeg"/>
             </section>
-          <section>
-            <h2>Testcontainers</h2>
-            <ul>
-              <li>Przydatne, ale wymuszają użycie runtime zgodnego z API Docker'a</li>
-              <li>Zazwyczaj większe zasoby niż binarki/executable (na przykład Embedded Redis)</li>
-              <li>Stawianie trwa relatywnie wolno - jeśli możliwe, lepiej ponownie użyć</li>
-            </ul>
-          </section>
-        </section>
-
-        <section>
-          <section>
-              <h2>Zrównoleglanie testów</h2>
-              <img width="800" src="img/deadlock.jpeg"/>
-          </section>
-          <section>
-            <table>
-              <tr>
-                <th></th>
-                <th><b>Virgin</b> Build system (Gradle)</th>
-                <th><b>Chad</b> Test runner (JUnit 5)</th>
-              </tr>
-              <tr>
-                <td>Podział pracy</td>
-                <td>Domyślnie przez executory</td>
-                <td>Poprzez wątki</td>
-              </tr>
-              <tr>
-                <td>Zrównoleglanie testów</td>
-                <td>Tylko na poziomie klas</td>
-                <td>Na poziomie klas i metod</td>
-              </tr>
-            </table>
-          </section>
-          <section>
-            <table>
-              <tr>
-                <td>Wydajność</td>
-                <td>W skrajnych przypadkach, gdy za dużo wątków - OutOfMemoryError</td>
-                <td>~~JVM + (załadowane beany * liczba kontekstów)</td>
-              </tr>
-              <tr>
-                <td>Kontrola</td>
-                <td>Odpala wszystko i ciężko wydzielać</td>
-                <td>Można włączać/wyłączać zrównoleglanie za pomocą adnotacji @Isolated I @Execution</td>
-              </tr>
-            </table>
-          </section>
-          <section>
-            <ul>
-              <li>Ryzykowne, gdy testy odwołują się do wspólnych zasobów (pola static, singletony)</li>
-              <li>To samo tyczy się danych inicjalizowanych na potrzeby testów (nowy user, pakiet w bazie)</li>
-            </ul>
-          </section>
-          <section>
-            <ul>
-              Trzeba pamiętać o: 
-              <li>Używaniu unikatowych inicjowanych danych w obrębie jednostki (klasy/metody)</li>
-              <li>Zrównoleglaniu tylko testów, które trochę trwają (z doświadczenia więcej niż 1s)</li>
-              <li>Zdrowym rozsądku :)</li>
-            </ul>
-          </section>
-          <section>
-            <h2>Zrównoleglanie przez "rurociąg"</h2>
-            <img src="img/jenkins-parallel.png"/>
-            <ul>
-              <li>Uważać na locki Gradle'a!</li>
-              <li>Może nie najlepiej, ale jako tako</li>
-            </ul>
-          </section>
+            <section>
+                <table>
+                    <tr>
+                        <th></th>
+                        <th><b>Virgin</b> Build system (Gradle)</th>
+                        <th><b>Chad</b> Test runner (JUnit 5)</th>
+                    </tr>
+                    <tr>
+                        <td>Podział pracy</td>
+                        <td>Domyślnie przez executory</td>
+                        <td>Poprzez wątki</td>
+                    </tr>
+                    <tr>
+                        <td>Zrównoleglanie testów</td>
+                        <td>Tylko na poziomie klas</td>
+                        <td>Na poziomie klas i metod</td>
+                    </tr>
+                </table>
+            </section>
+            <section>
+                <table>
+                    <tr>
+                        <td>Wydajność</td>
+                        <td>W skrajnych przypadkach, gdy za dużo wątków - OutOfMemoryError</td>
+                        <td>~~JVM + (załadowane beany * liczba kontekstów)</td>
+                    </tr>
+                    <tr>
+                        <td>Kontrola</td>
+                        <td>Odpala wszystko i ciężko wydzielać</td>
+                        <td>Można włączać/wyłączać zrównoleglanie za pomocą adnotacji @Isolated I @Execution</td>
+                    </tr>
+                </table>
+            </section>
+            <section>
+                <ul>
+                    <li>Ryzykowne, gdy testy odwołują się do wspólnych zasobów (pola static, singletony)</li>
+                    <li>To samo tyczy się danych inicjalizowanych na potrzeby testów (nowy user, pakiet w bazie)</li>
+                </ul>
+            </section>
+            <section>
+                <ul>
+                    Trzeba pamiętać o:
+                    <li>Używaniu unikatowych inicjowanych danych w obrębie jednostki (klasy/metody)</li>
+                    <li>Zrównoleglaniu tylko testów, które trochę trwają (z doświadczenia więcej niż 1s)</li>
+                    <li>Zdrowym rozsądku :)</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Zrównoleglanie przez "rurociąg"</h2>
+                <img src="img/jenkins-parallel.png"/>
+                <ul>
+                    <li>Uważać na locki Gradle'a!</li>
+                    <li>Może nie najlepiej, ale jako tako</li>
+                </ul>
+            </section>
+            <section data-background-image="img/byide.png" data-background-size="contain">
+            </section>
         </section>
 
         <section>
