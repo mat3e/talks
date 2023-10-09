@@ -55,11 +55,14 @@
         .chart-wrapper > div {
             position: absolute;
             border-radius: 100%;
-            background: rgba(0, 128, 0, .4);
+            background: rgba(0, 128, 0, .8);
             border: 1px solid darkgreen;
             width: 3em;
             height: 3em;
             margin: -1.5em;
+            padding: .35em;
+            box-sizing: border-box;
+            line-height: 1.1;
         }
 
         .chart-wrapper > div:nth-of-type(1) {
@@ -81,6 +84,16 @@
             right: 25%;
             top: 10%;
         }
+
+        .chart-wrapper > div:nth-of-type(5) {
+            left: 25%;
+            top: 25%;
+        }
+
+        .chart-wrapper > div:nth-of-type(6) {
+            left: 35%;
+            top: 17%;
+        }
     </style>
 </head>
 
@@ -90,8 +103,12 @@
     <div class="slides">
         <section data-fragment-index>
             <section data-background-image>
-                <h1 style="text-align: left; margin-bottom: 0">Trochę więcej</h1>
-                <h2 style="text-align: left">o testach w Springu</h2>
+                <h1 style="margin-bottom: 0">Trochę więcej</h1>
+                <h2>o testach w Springu</h2>
+                <div class="r-hstack" style="justify-content: space-around;">
+                    <img class="fragment" src="img/dkac.png" style="height: 4.5em">
+                    <img class="fragment" src="img/mat.png" style="height: 4.5em">
+                </div>
             </section>
         </section>
 
@@ -629,11 +646,721 @@
         </section>
 
         <section>
-            <section>
-                Nie trzeba SpringExtension
+            <section data-auto-animate="int-tests" data-auto-animate-restart>
+                <pre data-id="int-test" class="r-stretch" style="width: 100%;"><code class="java" data-trim
+                                                                                     contenteditable="true"
+                                                                                     data-line-numbers="30-31">
+                    package io.github.mat3e.downloads.limiting.rest;
+
+                    import com.fasterxml.jackson.databind.JavaType;
+                    import com.fasterxml.jackson.databind.ObjectMapper;
+                    import com.fasterxml.jackson.databind.type.TypeFactory;
+                    import io.github.mat3e.downloads.limiting.LimitingFacade;
+                    import io.github.mat3e.downloads.limiting.api.AccountId;
+                    import io.github.mat3e.downloads.limiting.api.Asset;
+                    import io.github.mat3e.downloads.limiting.api.AssetDeserialization;
+                    import org.junit.jupiter.api.Test;
+                    import org.junit.jupiter.api.extension.ExtendWith;
+                    import org.springframework.beans.factory.annotation.Autowired;
+                    import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+                    import org.springframework.boot.test.context.SpringBootTest;
+                    import org.springframework.test.context.junit.jupiter.SpringExtension;
+                    import org.springframework.test.web.servlet.MockMvc;
+                    import org.springframework.test.web.servlet.ResultActions;
+
+                    import java.util.Collection;
+
+                    import static java.util.stream.Collectors.toUnmodifiableList;
+                    import static org.assertj.core.api.BDDAssertions.then;
+                    import static org.springframework.http.MediaType.APPLICATION_JSON;
+                    import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+                    import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+                    import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+                    import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+                    @AutoConfigureMockMvc
+                    @SpringBootTest
+                    @ExtendWith(SpringExtension.class)
+                    class LimitingIntTest {
+                        private static final String ACCOUNT_ID = "1";
+
+                        @Autowired
+                        private MockMvc mockMvc;
+
+                        @Test
+                        void downloadStarted_storesAssetsTillLimit() throws Exception {
+                            givenAccountLimit(2);
+                            // and
+                            httpSuccessfulPostAsset(
+                                    "{",
+                                    " \"id\": \"123\",",
+                                    " \"countryCode\": \"US\"",
+                                    "}");
+                            // and
+                            httpSuccessfulPostAsset(
+                                    "{",
+                                    " \"id\": \"456\",",
+                                    " \"countryCode\": \"US\"",
+                                    "}");
+
+                            // when
+                            httpPostAsset(
+                                    "{",
+                                    " \"id\": \"789\",",
+                                    " \"countryCode\": \"US\"",
+                                    "}"
+                            ).andExpect(status().isUnprocessableEntity());
+
+                            then(httpSuccessfulGetAssets()).containsExactly(
+                                    Asset.withId("123").inCountry("US"),
+                                    Asset.withId("456").inCountry("US"));
+
+                            // when
+                            httpSuccessfulDeleteAsset("123", "US");
+                            // and
+                            httpSuccessfulPostAsset(
+                                    "{",
+                                    " \"id\": \"789\",",
+                                    " \"countryCode\": \"US\"",
+                                    "}");
+
+                            then(httpSuccessfulGetAssets()).containsExactly(
+                                    Asset.withId("456").inCountry("US"),
+                                    Asset.withId("789").inCountry("US"));
+                        }
+
+                        @Test
+                        void illegalParams_returnsClientError() throws Exception {
+                            // given
+                            var validBody = "{ \"id\": \"123\", \"countryCode\": \"US\" }";
+
+                            // expect 404 - no account created, no assets
+                            httpGetAssets("lookMaNotExistingId").andExpect(status().isNotFound());
+                            httpPostAsset(validBody).andExpect(status().isNotFound());
+                            httpDeleteAsset("123", "US").andExpect(status().isNotFound());
+
+                            // expect 400
+                            httpPostAssetForAccount("  ", validBody).andExpect(status().isBadRequest());
+                            httpPostAsset("{ \"countryCode\": \"US\" }").andExpect(status().isBadRequest());
+                            httpPostAsset("{ \"id\": \"123\" }").andExpect(status().isBadRequest());
+                            httpDeleteAsset("  ", "OK").andExpect(status().isBadRequest());
+                            httpDeleteAsset("123", "  ").andExpect(status().isBadRequest());
+                        }
+
+                        private void httpSuccessfulDeleteAsset(String assetId, String countryCode) {
+                            try {
+                                httpDeleteAsset(assetId, countryCode).andExpect(status().isNoContent());
+                            } catch (Exception e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+
+                        private ResultActions httpDeleteAsset(String assetId, String countryCode) throws Exception {
+                            return mockMvc.perform(delete("/api/accounts/{id}/assets/{assetId}", ACCOUNT_ID, assetId)
+                                    .queryParam("countryCode", countryCode));
+                        }
+
+                        private Collection&lt;Asset> httpSuccessfulGetAssets() {
+                            try {
+                                String jsonResponse = httpGetAssets(ACCOUNT_ID)
+                                        .andExpect(status().isOk())
+                                        .andReturn().getResponse().getContentAsString();
+                                JavaType returnType =
+                                        TypeFactory.defaultInstance().constructCollectionType(Collection.class, AssetDeserialization.class);
+                                return new ObjectMapper().&lt;Collection&lt;AssetDeserialization>>readValue(jsonResponse, returnType).stream()
+                                        .map(AssetDeserialization::toApi)
+                                        .collect(toUnmodifiableList());
+                            } catch (Exception e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+
+                        private ResultActions httpGetAssets(String accountId) throws Exception {
+                            return mockMvc.perform(get("/api/accounts/{id}/assets", accountId).contentType(APPLICATION_JSON));
+                        }
+
+                        private void httpSuccessfulPostAsset(String... jsonLines) {
+                            try {
+                                httpPostAsset(jsonLines).andExpect(status().isCreated());
+                            } catch (Exception e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+
+                        private ResultActions httpPostAsset(String... jsonLines) throws Exception {
+                            return httpPostAssetForAccount(ACCOUNT_ID, jsonLines);
+                        }
+
+                        private ResultActions httpPostAssetForAccount(String accountId, String... jsonLines) throws Exception {
+                            return mockMvc.perform(post("/api/accounts/{id}/assets", accountId)
+                                    .contentType(APPLICATION_JSON)
+                                    .content(String.join("\n", jsonLines)));
+                        }
+
+                        void givenAccountLimit(int limit) {
+                            facade.overrideAccountLimit(AccountId.valueOf(ACCOUNT_ID), limit);
+                        }
+
+                        @Autowired
+                        private LimitingFacade facade;
+                    }
+                </code></pre>
+            </section>
+            <section data-auto-animate>
+                <pre data-id="int-test" class="r-stretch" style="width: 100%;"><code class="java" data-trim
+                                                                                     contenteditable="true"
+                                                                                     data-line-numbers="28">
+                    package io.github.mat3e.downloads.limiting.rest;
+
+                    import com.fasterxml.jackson.databind.JavaType;
+                    import com.fasterxml.jackson.databind.ObjectMapper;
+                    import com.fasterxml.jackson.databind.type.TypeFactory;
+                    import io.github.mat3e.downloads.limiting.LimitingFacade;
+                    import io.github.mat3e.downloads.limiting.api.AccountId;
+                    import io.github.mat3e.downloads.limiting.api.Asset;
+                    import io.github.mat3e.downloads.limiting.api.AssetDeserialization;
+                    import org.junit.jupiter.api.Test;
+                    import org.springframework.beans.factory.annotation.Autowired;
+                    import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+                    import org.springframework.boot.test.context.SpringBootTest;
+                    import org.springframework.test.web.servlet.MockMvc;
+                    import org.springframework.test.web.servlet.ResultActions;
+
+                    import java.util.Collection;
+
+                    import static java.util.stream.Collectors.toUnmodifiableList;
+                    import static org.assertj.core.api.BDDAssertions.then;
+                    import static org.springframework.http.MediaType.APPLICATION_JSON;
+                    import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+                    import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+                    import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+                    import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+                    @AutoConfigureMockMvc
+                    @SpringBootTest
+                    class LimitingIntTest {
+                        private static final String ACCOUNT_ID = "1";
+
+                        @Autowired
+                        private MockMvc mockMvc;
+
+                        @Test
+                        void downloadStarted_storesAssetsTillLimit() throws Exception {
+                            givenAccountLimit(2);
+                            // and
+                            httpSuccessfulPostAsset(
+                                    "{",
+                                    " \"id\": \"123\",",
+                                    " \"countryCode\": \"US\"",
+                                    "}");
+                            // and
+                            httpSuccessfulPostAsset(
+                                    "{",
+                                    " \"id\": \"456\",",
+                                    " \"countryCode\": \"US\"",
+                                    "}");
+
+                            // when
+                            httpPostAsset(
+                                    "{",
+                                    " \"id\": \"789\",",
+                                    " \"countryCode\": \"US\"",
+                                    "}"
+                            ).andExpect(status().isUnprocessableEntity());
+
+                            then(httpSuccessfulGetAssets()).containsExactly(
+                                    Asset.withId("123").inCountry("US"),
+                                    Asset.withId("456").inCountry("US"));
+
+                            // when
+                            httpSuccessfulDeleteAsset("123", "US");
+                            // and
+                            httpSuccessfulPostAsset(
+                                    "{",
+                                    " \"id\": \"789\",",
+                                    " \"countryCode\": \"US\"",
+                                    "}");
+
+                            then(httpSuccessfulGetAssets()).containsExactly(
+                                    Asset.withId("456").inCountry("US"),
+                                    Asset.withId("789").inCountry("US"));
+                        }
+
+                        @Test
+                        void illegalParams_returnsClientError() throws Exception {
+                            // given
+                            var validBody = "{ \"id\": \"123\", \"countryCode\": \"US\" }";
+
+                            // expect 404 - no account created, no assets
+                            httpGetAssets("lookMaNotExistingId").andExpect(status().isNotFound());
+                            httpPostAsset(validBody).andExpect(status().isNotFound());
+                            httpDeleteAsset("123", "US").andExpect(status().isNotFound());
+
+                            // expect 400
+                            httpPostAssetForAccount("  ", validBody).andExpect(status().isBadRequest());
+                            httpPostAsset("{ \"countryCode\": \"US\" }").andExpect(status().isBadRequest());
+                            httpPostAsset("{ \"id\": \"123\" }").andExpect(status().isBadRequest());
+                            httpDeleteAsset("  ", "OK").andExpect(status().isBadRequest());
+                            httpDeleteAsset("123", "  ").andExpect(status().isBadRequest());
+                        }
+
+                        private void httpSuccessfulDeleteAsset(String assetId, String countryCode) {
+                            try {
+                                httpDeleteAsset(assetId, countryCode).andExpect(status().isNoContent());
+                            } catch (Exception e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+
+                        private ResultActions httpDeleteAsset(String assetId, String countryCode) throws Exception {
+                            return mockMvc.perform(delete("/api/accounts/{id}/assets/{assetId}", ACCOUNT_ID, assetId)
+                                    .queryParam("countryCode", countryCode));
+                        }
+
+                        private Collection&lt;Asset> httpSuccessfulGetAssets() {
+                            try {
+                                String jsonResponse = httpGetAssets(ACCOUNT_ID)
+                                        .andExpect(status().isOk())
+                                        .andReturn().getResponse().getContentAsString();
+                                JavaType returnType =
+                                        TypeFactory.defaultInstance().constructCollectionType(Collection.class, AssetDeserialization.class);
+                                return new ObjectMapper().&lt;Collection&lt;AssetDeserialization>>readValue(jsonResponse, returnType).stream()
+                                        .map(AssetDeserialization::toApi)
+                                        .collect(toUnmodifiableList());
+                            } catch (Exception e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+
+                        private ResultActions httpGetAssets(String accountId) throws Exception {
+                            return mockMvc.perform(get("/api/accounts/{id}/assets", accountId).contentType(APPLICATION_JSON));
+                        }
+
+                        private void httpSuccessfulPostAsset(String... jsonLines) {
+                            try {
+                                httpPostAsset(jsonLines).andExpect(status().isCreated());
+                            } catch (Exception e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+
+                        private ResultActions httpPostAsset(String... jsonLines) throws Exception {
+                            return httpPostAssetForAccount(ACCOUNT_ID, jsonLines);
+                        }
+
+                        private ResultActions httpPostAssetForAccount(String accountId, String... jsonLines) throws Exception {
+                            return mockMvc.perform(post("/api/accounts/{id}/assets", accountId)
+                                    .contentType(APPLICATION_JSON)
+                                    .content(String.join("\n", jsonLines)));
+                        }
+
+                        void givenAccountLimit(int limit) {
+                            facade.overrideAccountLimit(AccountId.valueOf(ACCOUNT_ID), limit);
+                        }
+
+                        @Autowired
+                        private LimitingFacade facade;
+                    }
+                </code></pre>
+            </section>
+            <section data-auto-animate>
+                <pre data-id="test-annotation" style="width: 100%;"><code class="java" data-trim contenteditable="true"
+                                                                          data-line-numbers="1-9|6">
+                    @Target(ElementType.TYPE)
+                    @Retention(RetentionPolicy.RUNTIME)
+                    @Documented
+                    @Inherited
+                    @BootstrapWith(SpringBootTestContextBootstrapper.class)
+                    @ExtendWith(SpringExtension.class)
+                    public @interface SpringBootTest {
+                      /* ... */
+                    }
+                </code></pre>
+            </section>
+            <section data-auto-animate>
+                <pre data-id="test-annotation" style="width: 100%;" class="r-stretch"><code class="java" data-trim
+                                                                                            contenteditable="true"
+                                                                                            style="font-size: .73em; line-height: 1.1"
+                                                                                            data-line-numbers="22|17-33|7-9,25">
+                    /**
+                     * Annotation for a JPA test that focuses &lt;strong>only&lt;/strong> on JPA components.
+                     * &lt;p>
+                     * Using this annotation will disable full auto-configuration and instead apply only
+                     * configuration relevant to JPA tests.
+                     * &lt;p>
+                     * By default, tests annotated with {@code @DataJpaTest} are transactional and roll back
+                     * at the end of each test. They also use an embedded in-memory database (replacing any
+                     * explicit or usually auto-configured DataSource).
+                     * ...
+                     * If you are looking to load your full application configuration, but use an embedded
+                     * database, you should consider {@link SpringBootTest @SpringBootTest} combined with
+                     * {@link AutoConfigureTestDatabase @AutoConfigureTestDatabase} rather than this
+                     * annotation.
+                     * ...
+                     */
+                    @Target(ElementType.TYPE)
+                    @Retention(RetentionPolicy.RUNTIME)
+                    @Documented
+                    @Inherited
+                    @BootstrapWith(DataJpaTestContextBootstrapper.class)
+                    @ExtendWith(SpringExtension.class)
+                    @OverrideAutoConfiguration(enabled = false)
+                    @TypeExcludeFilters(DataJpaTypeExcludeFilter.class)
+                    @Transactional
+                    @AutoConfigureCache
+                    @AutoConfigureDataJpa
+                    @AutoConfigureTestDatabase
+                    @AutoConfigureTestEntityManager
+                    @ImportAutoConfiguration
+                    public @interface DataJpaTest {
+                      /* ... */
+                    }
+                </code></pre>
+            </section>
+            <section data-auto-animate data-auto-animate-restart>
+                <pre data-id="int-test" class="r-stretch" style="width: 100%;"><code class="java" data-trim
+                                                                                     contenteditable="true"
+                                                                                     data-line-numbers="28-29">
+                    package io.github.mat3e.downloads.limiting.rest;
+
+                    import com.fasterxml.jackson.databind.JavaType;
+                    import com.fasterxml.jackson.databind.ObjectMapper;
+                    import com.fasterxml.jackson.databind.type.TypeFactory;
+                    import io.github.mat3e.downloads.limiting.LimitingFacade;
+                    import io.github.mat3e.downloads.limiting.api.AccountId;
+                    import io.github.mat3e.downloads.limiting.api.Asset;
+                    import io.github.mat3e.downloads.limiting.api.AssetDeserialization;
+                    import org.junit.jupiter.api.Test;
+                    import org.springframework.beans.factory.annotation.Autowired;
+                    import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+                    import org.springframework.boot.test.context.SpringBootTest;
+                    import org.springframework.test.web.servlet.MockMvc;
+                    import org.springframework.test.web.servlet.ResultActions;
+
+                    import java.util.Collection;
+
+                    import static java.util.stream.Collectors.toUnmodifiableList;
+                    import static org.assertj.core.api.BDDAssertions.then;
+                    import static org.springframework.http.MediaType.APPLICATION_JSON;
+                    import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+                    import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+                    import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+                    import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+                    @AutoConfigureMockMvc
+                    @SpringBootTest
+                    class LimitingIntTest {
+                        private static final String ACCOUNT_ID = "1";
+
+                        @Autowired
+                        private MockMvc mockMvc;
+
+                        @Test
+                        void downloadStarted_storesAssetsTillLimit() throws Exception {
+                            givenAccountLimit(2);
+                            // and
+                            httpSuccessfulPostAsset(
+                                    "{",
+                                    " \"id\": \"123\",",
+                                    " \"countryCode\": \"US\"",
+                                    "}");
+                            // and
+                            httpSuccessfulPostAsset(
+                                    "{",
+                                    " \"id\": \"456\",",
+                                    " \"countryCode\": \"US\"",
+                                    "}");
+
+                            // when
+                            httpPostAsset(
+                                    "{",
+                                    " \"id\": \"789\",",
+                                    " \"countryCode\": \"US\"",
+                                    "}"
+                            ).andExpect(status().isUnprocessableEntity());
+
+                            then(httpSuccessfulGetAssets()).containsExactly(
+                                    Asset.withId("123").inCountry("US"),
+                                    Asset.withId("456").inCountry("US"));
+
+                            // when
+                            httpSuccessfulDeleteAsset("123", "US");
+                            // and
+                            httpSuccessfulPostAsset(
+                                    "{",
+                                    " \"id\": \"789\",",
+                                    " \"countryCode\": \"US\"",
+                                    "}");
+
+                            then(httpSuccessfulGetAssets()).containsExactly(
+                                    Asset.withId("456").inCountry("US"),
+                                    Asset.withId("789").inCountry("US"));
+                        }
+
+                        @Test
+                        void illegalParams_returnsClientError() throws Exception {
+                            // given
+                            var validBody = "{ \"id\": \"123\", \"countryCode\": \"US\" }";
+
+                            // expect 404 - no account created, no assets
+                            httpGetAssets("lookMaNotExistingId").andExpect(status().isNotFound());
+                            httpPostAsset(validBody).andExpect(status().isNotFound());
+                            httpDeleteAsset("123", "US").andExpect(status().isNotFound());
+
+                            // expect 400
+                            httpPostAssetForAccount("  ", validBody).andExpect(status().isBadRequest());
+                            httpPostAsset("{ \"countryCode\": \"US\" }").andExpect(status().isBadRequest());
+                            httpPostAsset("{ \"id\": \"123\" }").andExpect(status().isBadRequest());
+                            httpDeleteAsset("  ", "OK").andExpect(status().isBadRequest());
+                            httpDeleteAsset("123", "  ").andExpect(status().isBadRequest());
+                        }
+
+                        private void httpSuccessfulDeleteAsset(String assetId, String countryCode) {
+                            try {
+                                httpDeleteAsset(assetId, countryCode).andExpect(status().isNoContent());
+                            } catch (Exception e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+
+                        private ResultActions httpDeleteAsset(String assetId, String countryCode) throws Exception {
+                            return mockMvc.perform(delete("/api/accounts/{id}/assets/{assetId}", ACCOUNT_ID, assetId)
+                                    .queryParam("countryCode", countryCode));
+                        }
+
+                        private Collection&lt;Asset> httpSuccessfulGetAssets() {
+                            try {
+                                String jsonResponse = httpGetAssets(ACCOUNT_ID)
+                                        .andExpect(status().isOk())
+                                        .andReturn().getResponse().getContentAsString();
+                                JavaType returnType =
+                                        TypeFactory.defaultInstance().constructCollectionType(Collection.class, AssetDeserialization.class);
+                                return new ObjectMapper().&lt;Collection&lt;AssetDeserialization>>readValue(jsonResponse, returnType).stream()
+                                        .map(AssetDeserialization::toApi)
+                                        .collect(toUnmodifiableList());
+                            } catch (Exception e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+
+                        private ResultActions httpGetAssets(String accountId) throws Exception {
+                            return mockMvc.perform(get("/api/accounts/{id}/assets", accountId).contentType(APPLICATION_JSON));
+                        }
+
+                        private void httpSuccessfulPostAsset(String... jsonLines) {
+                            try {
+                                httpPostAsset(jsonLines).andExpect(status().isCreated());
+                            } catch (Exception e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+
+                        private ResultActions httpPostAsset(String... jsonLines) throws Exception {
+                            return httpPostAssetForAccount(ACCOUNT_ID, jsonLines);
+                        }
+
+                        private ResultActions httpPostAssetForAccount(String accountId, String... jsonLines) throws Exception {
+                            return mockMvc.perform(post("/api/accounts/{id}/assets", accountId)
+                                    .contentType(APPLICATION_JSON)
+                                    .content(String.join("\n", jsonLines)));
+                        }
+
+                        void givenAccountLimit(int limit) {
+                            facade.overrideAccountLimit(AccountId.valueOf(ACCOUNT_ID), limit);
+                        }
+
+                        @Autowired
+                        private LimitingFacade facade;
+                    }
+                </code></pre>
+            </section>
+            <section data-auto-animate>
+                <pre data-id="int-test" class="r-stretch" style="width: 100%;"><code class="java" data-trim
+                                                                                     contenteditable="true"
+                                                                                     data-line-numbers="28,30-31|29">
+                    package io.github.mat3e.downloads.limiting.rest;
+
+                    import com.fasterxml.jackson.databind.JavaType;
+                    import com.fasterxml.jackson.databind.ObjectMapper;
+                    import com.fasterxml.jackson.databind.type.TypeFactory;
+                    import io.github.mat3e.downloads.limiting.LimitingFacade;
+                    import io.github.mat3e.downloads.limiting.api.AccountId;
+                    import io.github.mat3e.downloads.limiting.api.Asset;
+                    import io.github.mat3e.downloads.limiting.api.AssetDeserialization;
+                    import org.junit.jupiter.api.Test;
+                    import org.springframework.beans.factory.annotation.Autowired;
+                    import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+                    import org.springframework.boot.test.context.SpringBootTest;
+                    import org.springframework.test.web.servlet.MockMvc;
+                    import org.springframework.test.web.servlet.ResultActions;
+                    import org.springframework.transaction.annotation.Transactional;
+
+                    import java.util.Collection;
+
+                    import static java.util.stream.Collectors.toUnmodifiableList;
+                    import static org.assertj.core.api.BDDAssertions.then;
+                    import static org.springframework.http.MediaType.APPLICATION_JSON;
+                    import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+                    import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+                    import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+                    import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+                    @Transactional
+                    @AutoConfigureMockMvc
+                    @SpringBootTest
+                    class LimitingIntTest {
+                        private static final String ACCOUNT_ID = "1";
+
+                        @Autowired
+                        private MockMvc mockMvc;
+
+                        @Test
+                        void downloadStarted_storesAssetsTillLimit() throws Exception {
+                            givenAccountLimit(2);
+                            // and
+                            httpSuccessfulPostAsset(
+                                    "{",
+                                    " \"id\": \"123\",",
+                                    " \"countryCode\": \"US\"",
+                                    "}");
+                            // and
+                            httpSuccessfulPostAsset(
+                                    "{",
+                                    " \"id\": \"456\",",
+                                    " \"countryCode\": \"US\"",
+                                    "}");
+
+                            // when
+                            httpPostAsset(
+                                    "{",
+                                    " \"id\": \"789\",",
+                                    " \"countryCode\": \"US\"",
+                                    "}"
+                            ).andExpect(status().isUnprocessableEntity());
+
+                            then(httpSuccessfulGetAssets()).containsExactly(
+                                    Asset.withId("123").inCountry("US"),
+                                    Asset.withId("456").inCountry("US"));
+
+                            // when
+                            httpSuccessfulDeleteAsset("123", "US");
+                            // and
+                            httpSuccessfulPostAsset(
+                                    "{",
+                                    " \"id\": \"789\",",
+                                    " \"countryCode\": \"US\"",
+                                    "}");
+
+                            then(httpSuccessfulGetAssets()).containsExactly(
+                                    Asset.withId("456").inCountry("US"),
+                                    Asset.withId("789").inCountry("US"));
+                        }
+
+                        @Test
+                        void illegalParams_returnsClientError() throws Exception {
+                            // given
+                            var validBody = "{ \"id\": \"123\", \"countryCode\": \"US\" }";
+
+                            // expect 404 - no account created, no assets
+                            httpGetAssets("lookMaNotExistingId").andExpect(status().isNotFound());
+                            httpPostAsset(validBody).andExpect(status().isNotFound());
+                            httpDeleteAsset("123", "US").andExpect(status().isNotFound());
+
+                            // expect 400
+                            httpPostAssetForAccount("  ", validBody).andExpect(status().isBadRequest());
+                            httpPostAsset("{ \"countryCode\": \"US\" }").andExpect(status().isBadRequest());
+                            httpPostAsset("{ \"id\": \"123\" }").andExpect(status().isBadRequest());
+                            httpDeleteAsset("  ", "OK").andExpect(status().isBadRequest());
+                            httpDeleteAsset("123", "  ").andExpect(status().isBadRequest());
+                        }
+
+                        private void httpSuccessfulDeleteAsset(String assetId, String countryCode) {
+                            try {
+                                httpDeleteAsset(assetId, countryCode).andExpect(status().isNoContent());
+                            } catch (Exception e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+
+                        private ResultActions httpDeleteAsset(String assetId, String countryCode) throws Exception {
+                            return mockMvc.perform(delete("/api/accounts/{id}/assets/{assetId}", ACCOUNT_ID, assetId)
+                                    .queryParam("countryCode", countryCode));
+                        }
+
+                        private Collection&lt;Asset> httpSuccessfulGetAssets() {
+                            try {
+                                String jsonResponse = httpGetAssets(ACCOUNT_ID)
+                                        .andExpect(status().isOk())
+                                        .andReturn().getResponse().getContentAsString();
+                                JavaType returnType =
+                                        TypeFactory.defaultInstance().constructCollectionType(Collection.class, AssetDeserialization.class);
+                                return new ObjectMapper().&lt;Collection&lt;AssetDeserialization>>readValue(jsonResponse, returnType).stream()
+                                        .map(AssetDeserialization::toApi)
+                                        .collect(toUnmodifiableList());
+                            } catch (Exception e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+
+                        private ResultActions httpGetAssets(String accountId) throws Exception {
+                            return mockMvc.perform(get("/api/accounts/{id}/assets", accountId).contentType(APPLICATION_JSON));
+                        }
+
+                        private void httpSuccessfulPostAsset(String... jsonLines) {
+                            try {
+                                httpPostAsset(jsonLines).andExpect(status().isCreated());
+                            } catch (Exception e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+
+                        private ResultActions httpPostAsset(String... jsonLines) throws Exception {
+                            return httpPostAssetForAccount(ACCOUNT_ID, jsonLines);
+                        }
+
+                        private ResultActions httpPostAssetForAccount(String accountId, String... jsonLines) throws Exception {
+                            return mockMvc.perform(post("/api/accounts/{id}/assets", accountId)
+                                    .contentType(APPLICATION_JSON)
+                                    .content(String.join("\n", jsonLines)));
+                        }
+
+                        void givenAccountLimit(int limit) {
+                            facade.overrideAccountLimit(AccountId.valueOf(ACCOUNT_ID), limit);
+                        }
+
+                        @Autowired
+                        private LimitingFacade facade;
+                    }
+                </code></pre>
             </section>
             <section>
-                Transactional
+                <pre style="width: 100%;"><code class="java" data-trim contenteditable="true"
+                                                data-line-numbers="15-18,23-24">
+                    package io.github.mat3e.downloads.limiting;
+
+                    import org.junit.jupiter.api.Tag;
+                    import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+                    import org.springframework.boot.test.context.SpringBootTest;
+                    import org.springframework.transaction.annotation.Transactional;
+
+                    import java.lang.annotation.Documented;
+                    import java.lang.annotation.ElementType;
+                    import java.lang.annotation.Inherited;
+                    import java.lang.annotation.Retention;
+                    import java.lang.annotation.RetentionPolicy;
+                    import java.lang.annotation.Target;
+
+                    @Tag("integration")
+                    @Transactional
+                    @AutoConfigureMockMvc
+                    @SpringBootTest
+                    @Target(ElementType.TYPE)
+                    @Retention(RetentionPolicy.RUNTIME)
+                    @Documented
+                    @Inherited
+                    public @interface IntegrationTest {
+                    }
+                </code></pre>
             </section>
         </section>
 
@@ -820,13 +1547,17 @@
             <section>
                 <h3><code>MergedContextConfiguration</code></h3>
                 <ul>
-                    <li class="fragment"><code>@TestPropertySource</code></li>
-                    <li class="fragment"><code>@ActiveProfiles</code></li>
-                    <li class="fragment"><code>@ContextConfiguration</code></li>
-                    <li class="fragment"><code>@DynamicPropertySource</code></li>
-                    <li class="fragment"><code>@MockBean</code></li>
-                    <li class="fragment"><code>@SpyBean</code></li>
-                    <li class="fragment"><code>@DirtiesContext</code></li>
+                    <li class="fragment" data-fragment-index="1"><code>@TestPropertySource</code></li>
+                    <li class="fragment" data-fragment-index="2"><code>@ActiveProfiles</code></li>
+                    <li class="fragment" data-fragment-index="3"><code>@ContextConfiguration</code></li>
+                    <li class="fragment" data-fragment-index="4"><code>@DynamicPropertySource</code></li>
+                    <li class="fragment" data-fragment-index="5"><code>@MockBean</code></li>
+                    <li class="fragment" data-fragment-index="6"><code>@SpyBean</code></li>
+                    <li class="fragment" data-fragment-index="7">
+                        <span class="fragment strike" data-fragment-index="8">
+                            <code class="fragment highlight-red" data-fragment-index="8">@DirtiesContext</code>
+                        </span>
+                    </li>
                 </ul>
             </section>
             <section>
@@ -841,7 +1572,9 @@
                     <li class="fragment">
                         <code>grep</code> po propsach (<code>@TestPropertySource</code> itp.)
                         <ul>
-                            <li class="fragment">Używać domyślnych properties'ów (zdefiniowanych w application.properties / application.yml) gdzie się da</li>
+                            <li class="fragment">Używać domyślnych properties'ów (zdefiniowanych w
+                                application.properties / application.yml) gdzie się da
+                            </li>
                         </ul>
                     </li>
                     <li class="fragment">Dalsza edukacja zespołu + <em>code review</em></li>
@@ -908,7 +1641,8 @@
                 <h3>Wyłączenie zbędnych beanów</h3>
                 <div class="fragment" data-fragment-index="1">Czyli których?</div>
                 <pre class="fragment" data-fragment-index="2"><code data-trim class="yaml">debug: true</code></pre>
-                <pre class="fragment" data-fragment-index="2"><code data-trim class="plaintext" style="font-size: .75em; line-height: 1.1">
+                <pre class="fragment" data-fragment-index="2"><code data-trim class="plaintext"
+                                                                    style="font-size: .75em; line-height: 1.1">
                     ============================
                     CONDITIONS EVALUATION REPORT
                     ============================
@@ -959,10 +1693,10 @@
             <section>
                 <h2>W naszym przypadku</h2>
                 <ul>
-                    <li class = "fragment">Zmieniliśmy devo'wego Redisa na wersję embedded</li>
-                    <li class = "fragment">Zeszliśmy z 27min do 16min</li>
-                    <li class = "fragment">Pozbyliśmy się JedisException i zerwanych połączeń</li>
-                    <li class = "fragment">Zysk ~40%</li>
+                    <li class="fragment">Zmieniliśmy devo'wego Redisa na wersję embedded</li>
+                    <li class="fragment">Zeszliśmy z 27min do 16min</li>
+                    <li class="fragment">Pozbyliśmy się JedisException i zerwanych połączeń</li>
+                    <li class="fragment">Zysk ~40%</li>
                 </ul>
                 <img width="120" src="img/embedded-redis.png"/>
             </section>
@@ -983,9 +1717,10 @@
             <section>
                 <h2>Testcontainers</h2>
                 <ul>
-                    <li class = "fragment">Przydatne, ale wymuszają użycie runtime zgodnego z API Docker'a</li>
-                    <li class = "fragment">Zazwyczaj większe zasoby niż binarki/executable (na przykład Embedded Redis)</li>
-                    <li class = "fragment">Stawianie trwa relatywnie wolno - jeśli możliwe, lepiej ponownie użyć</li>
+                    <li class="fragment">Przydatne, ale wymuszają użycie runtime zgodnego z API Docker'a</li>
+                    <li class="fragment">Zazwyczaj większe zasoby niż binarki/executable (na przykład Embedded Redis)
+                    </li>
+                    <li class="fragment">Stawianie trwa relatywnie wolno - jeśli możliwe, lepiej ponownie użyć</li>
                 </ul>
             </section>
         </section>
@@ -995,17 +1730,21 @@
                 <h2>Zrównoleglanie testów</h2>
                 <img width="800" src="img/deadlock.jpeg"/>
             </section>
-          <section>
-            <h2>Gradle vs JUnit5 runner</h2>
-            <ul>
-              <li class = "fragment">Procesy <b>VS</b> wątki</li>
-              <li class = "fragment">Tylko na poziomie klas <b>VS</b> na poziomie klas i metod</li>
-              <li class = "fragment">OutOfMemoryError gdy za dużo wątków <br><b>VS</b> JVM na koniec świata i jeszcze dalej</li>
-              <li class = "fragment">Odpala wszystko równolegle i ciężko kontrolować <b>VS</b> łatwe w(y)łączanie z użyciem @Isolated i @Execution</li>
-            </ul>
+            <section>
+                <h2>Gradle vs JUnit5 runner</h2>
+                <ul>
+                    <li class="fragment">Procesy <b>VS</b> wątki</li>
+                    <li class="fragment">Tylko na poziomie klas <b>VS</b> na poziomie klas i metod</li>
+                    <li class="fragment">OutOfMemoryError gdy za dużo wątków <br><b>VS</b> JVM na koniec świata i
+                        jeszcze dalej
+                    </li>
+                    <li class="fragment">Odpala wszystko równolegle i ciężko kontrolować <b>VS</b> łatwe w(y)łączanie z
+                        użyciem @Isolated i @Execution
+                    </li>
+                </ul>
             </section>
             <section>
-              <img src="img/gradle-vs-junit5.png" />
+                <img src="img/gradle-vs-junit5.png"/>
             </section>
             <section>
                 <h2>Kto nie ryzykuje ten nie je</h2>
@@ -1022,40 +1761,74 @@
                     <li>Zdrowym rozsądku :)</li>
                 </ul>
             </section>
+            <section data-transition="zoom">
+                <div class="r-stretch chart-wrapper">
+                    <fieldset>
+                        <legend>zysk ▶</legend>
+                    </fieldset>
+                    <div>współdzielenie kontekstów</div>
+                    <div><code>@Lazy</code></div>
+                    <div>wyłączenie beanów</div>
+                    <div>wspólne I/O</div>
+                    <div class="fragment">zrównoleglanie runnerem</div>
+                    <fieldset>
+                        <legend>pracochłonność ▶</legend>
+                    </fieldset>
+                </div>
+            </section>
+            <section data-background-image="img/byide.png" data-background-size="contain">
+            </section>
+        </section>
+
+        <section>
+
             <section>
                 <h2>Zrównoleglanie przez "rurociąg"</h2>
                 <img src="img/jenkins-parallel.png"/>
                 <ul>
-                    <li class = "fragment">Uważać na locki Gradle'a!</li>
-                    <li class = "fragment">Może nie najlepiej, ale jako tako</li>
+                    <li class="fragment">Uważać na locki Gradle'a!</li>
+                    <li class="fragment">Może nie najlepiej, ale jako tako</li>
                 </ul>
             </section>
-          <section data-auto-animate>
-            <pre><code data-code-class="groovy" data-line-numbers="|3">
-        stage('Tests') {
-            parallel {
-                stage('Unit tests') {
-                    steps {
+            <section data-auto-animate>
+            <pre style="width: 100%;"><code data-code-class="groovy" data-trim data-line-numbers="|2">
+                stage('Tests') {
+                  parallel {
+                    stage('Unit tests') {
+                      steps {
                         sh "./gradlew test"
+                      }
                     }
-                }
-                stage('Integration tests') {
-                    steps {
+                    stage('Integration tests') {
+                      steps {
                         sh "./gradlew integrationTest"
+                      }
                     }
-                }
-                stage('Integration tests intl') {
-                    steps {
+                    stage('Integration tests intl') {
+                      steps {
                         sh "./gradlew integrationTestIntl"
+                      }
                     }
+                    // ...
+                  }
                 }
-              ...
-            }
-          }
-            </code>
-          </pre>
-          </section>
-            <section data-background-image="img/byide.png" data-background-size="contain">
+            </code></pre>
+            </section>
+            <section data-transition="zoom">
+                <div class="r-stretch chart-wrapper">
+                    <fieldset>
+                        <legend>zysk ▶</legend>
+                    </fieldset>
+                    <div>współdzielenie kontekstów</div>
+                    <div><code>@Lazy</code></div>
+                    <div>wyłączenie beanów</div>
+                    <div>wspólne I/O</div>
+                    <div>zrównoleglanie runnerem</div>
+                    <div class="fragment">zrównoleglanie w&nbsp;CI</div>
+                    <fieldset>
+                        <legend>pracochłonność ▶</legend>
+                    </fieldset>
+                </div>
             </section>
         </section>
 
