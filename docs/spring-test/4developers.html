@@ -1681,14 +1681,14 @@
                 <h3><code>MergedContextConfiguration</code></h3>
                 <ul>
                     <li class="fragment" data-fragment-index="1"><code>@TestPropertySource</code></li>
+                    <li class="fragment" data-fragment-index="1"><code>@DynamicPropertySource</code></li>
                     <li class="fragment" data-fragment-index="2"><code>@ActiveProfiles</code></li>
                     <li class="fragment" data-fragment-index="3"><code>@ContextConfiguration</code></li>
-                    <li class="fragment" data-fragment-index="4"><code>@DynamicPropertySource</code></li>
-                    <li class="fragment" data-fragment-index="5"><code>@MockBean</code></li>
-                    <li class="fragment" data-fragment-index="6"><code>@SpyBean</code></li>
-                    <li class="fragment" data-fragment-index="7">
-                        <span class="fragment strike" data-fragment-index="8">
-                            <code class="fragment highlight-red" data-fragment-index="8">@DirtiesContext</code>
+                    <li class="fragment" data-fragment-index="4"><code>@MockBean</code></li>
+                    <li class="fragment" data-fragment-index="4"><code>@SpyBean</code></li>
+                    <li class="fragment" data-fragment-index="5">
+                        <span class="fragment strike" data-fragment-index="6">
+                            <code class="fragment highlight-red" data-fragment-index="6">@DirtiesContext</code>
                         </span>
                     </li>
                 </ul>
@@ -1725,6 +1725,7 @@
                 </div>
             </section>
             <section>
+                <h2>Więcej o kontekstach Springa</h2>
                 <a href="https://www.youtube.com/watch?v=c-GV2PxymoY">
                     <img style="width: 75%" src="img/ref/broken.png"/>
                 </a>
@@ -1815,14 +1816,14 @@
                 <h2>IO</h2>
                 <ul>
                     <li class="fragment" data-fragment-index="1">Wolne - szczególnie <strong>przez sieć</strong></li>
-                    <li class="fragment" data-fragment-index="2">Współdzielone między testami - ryzykowne
+                    <li class="fragment" data-fragment-index="2">Lokalne instancje praktycznie zawsze <strong>szybsze</strong></li>
+                    <li class="fragment" data-fragment-index="3">Lokalne współdzielone instancje? Trochę ryzykowne
                         <ul>
-                            <li class="fragment" data-fragment-index="3">Ale szybsze</li>
+                            <li class="fragment" data-fragment-index="4">Ale jeszcze szybsze</li>
                         </ul>
                     </li>
-                    <li class="fragment">Może lokalne, współdzielone instancje?</li>
                 </ul>
-                <img class="fragment" data-fragment-index="3" src="img/speed.jpg" style="width: 35%;">
+                <img class="fragment" data-fragment-index="4" src="img/speed.jpg" style="width: 35%;">
             </section>
             <section>
                 <h2>Co może pójść nie tak? ;)</h2>
@@ -1910,6 +1911,31 @@
                 </table>
             </section>
             <section>
+            <ul>
+              <h2>Dużo opcji synchronizacji</h2>
+            </ul>
+                <pre class="fragment" data-fragment-index="1"><code class="java" data-trim class="plaintext"
+                                                                    style="font-size: .75em; line-height: 1.1">
+@Execution(ExecutionMode.CONCURRENT)
+class ConcurrentTest extends IntegrationTest { ...
+            </code></pre>
+
+            <pre class="fragment" data-fragment-index="2"><code class="java" data-trim class="plaintext"
+                                                                    style="font-size: .75em; line-height: 1.1">
+@Isolated // => @ResourceLock("org.junit.platform.engine.support.hierarchical.ExclusiveResource.GLOBAL_KEY")
+class IsolatedTest extends IntegrationTest { ...
+            </code></pre>
+
+
+<pre class="fragment" data-fragment-index="3"><code class="properties" data-trim class="plaintext"
+                                                                    style="font-size: .75em; line-height: 1.1">
+junit.jupiter.execution.parallel.enabled = true
+junit.jupiter.execution.parallel.mode.default = same_thread
+junit.jupiter.execution.parallel.mode.classes.default = concurrent
+            </code></pre>
+
+            </section>
+            <section>
                 <h2>Kto nie ryzykuje...</h2>
                 <ul>
                     <li class="fragment">Wspólne "zasoby"
@@ -1958,7 +1984,7 @@
             <section>
                 <h3>Zrównoleglanie przez "rurociąg"</h3>
                 <img style="margin: 0" class="fragment" data-fragment-index="1" src="img/jenkins-parallel.png"/>
-                <div class="fragment">Uwaga na locki Gradle'a!</div>
+            <div class="fragment">Uwaga na locki Gradle'a! => musimy skompilować wspólne źródła krok wczesniej poprzez <code>:compileIntegrationClasses</code></div>
                 <div>
                     <img class="fragment" data-fragment-index="1" src="img/jakotako.jpg" style="width: 35%">
                 </div>
