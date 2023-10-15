@@ -6,7 +6,8 @@
 
     <title>Spring tests</title>
 
-    <meta name="description" content="package-by-feature, package-private access, encapsulation, modularity">
+    <meta name="description"
+          content="Good tests (especially integration tests) practices + optimizations which worked (and not worked) for us">
     <meta name="author" content="mat3e">
 
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -181,12 +182,8 @@
                             Springa</a>:
                         <q>[Integration Testing] lets you test the correct wiring of your Spring IoC container
                             contexts</q>
-                        <ul>
-                            <li class="fragment">+ I/O</li>
-                            <li class="fragment">Przed wdrożeniem</li>
-                            <li class="fragment">Bez pełnej infrastruktury</li>
-                        </ul>
                     </li>
+                    <li class="fragment">+ I/O</li>
                     <li class="fragment">
                         <blockquote data-id="int-def"
                                     style="display: inline; padding: 0; font-style: inherit; background: none; box-shadow: none">
@@ -199,17 +196,6 @@
                 <h2>Testy Integracyjne</h2>
                 <blockquote data-id="int-def" style="width: 90%">Każdy start kontekstu Springa to już integracja
                 </blockquote>
-            </section>
-            <section data-background-image="img/java/island.png" data-background-size="contain"
-                     data-background-color="white">
-                <img class="fragment" style="height: 5em" src="img/java/springbeans.png"
-                     alt="IntelliJ showing Spring beans"/>
-                <h2 class="r-hstack fragment" data-fragment-index="1">
-                    <img src="img/java/bean.png" style="height: 3em" alt="coffee bean"/>
-                    <span class="fragment" data-fragment-index="2" style="text-shadow: 0 0 10px black;">⇒</span>
-                    <img class="fragment" data-fragment-index="2" src="img/java/logo.png" style="height: 5em"
-                         alt="java logo"/>
-                </h2>
             </section>
             <section>
                 <h2>"Ukryta" logika</h2>
@@ -382,75 +368,7 @@
             <section data-auto-animate>
                 <pre data-id="unit-test" class="r-stretch" style="width: 100%;"><code class="java" data-trim
                                                                                       contenteditable="true"
-                                                                                      data-line-numbers="17-29|31-46">
-                    package io.github.mat3e.downloads.limiting;
-
-                    import io.github.mat3e.downloads.limiting.api.AccountId;
-                    import io.github.mat3e.downloads.reporting.ReportingFacade;
-                    import org.junit.jupiter.api.Test;
-                    import org.junit.jupiter.api.extension.ExtendWith;
-                    import org.mockito.ArgumentCaptor;
-                    import org.mockito.InjectMocks;
-                    import org.mockito.Mock;
-                    import org.mockito.junit.jupiter.MockitoExtension;
-                    import java.time.Clock;
-                    import java.util.Optional;
-                    import static org.assertj.core.api.Assertions.assertThat;
-                    import static org.mockito.Mockito.verify;
-                    import static org.mockito.Mockito.when;
-
-                    @ExtendWith(MockitoExtension.class)
-                    class LimitingFacadeTest {
-                      @Mock
-                      private Clock clock;
-                      @Mock
-                      private AccountRepository accountRepository;
-                      @Mock
-                      private AccountSettingRepository accountSettingRepository;
-                      @Mock
-                      private ReportingFacade reporting;
-
-                      @InjectMocks
-                      private LimitingFacade systemUnderTest;
-
-                      @Test
-                      void newAccount_overrideLimit_createsAccount() {
-                        // given
-                        var accountId = AccountId.valueOf("1");
-                        when(accountSettingRepository.findById(accountId)).thenReturn(Optional.empty());
-
-                        // when
-                        systemUnderTest.overrideAccountLimit(accountId, 1);
-
-                        // then
-                        var accountSettingCaptor = ArgumentCaptor.forClass(AccountSetting.class);
-                        verify(accountSettingRepository).save(accountSettingCaptor.capture());
-                        var account = accountSettingCaptor.getValue();
-                        assertThat(account.id()).isEqualTo(accountId);
-                        assertThat(account.limit()).isEqualTo(1);
-                      }
-
-                      @Test
-                      void existingAccount_overrideLimit_updatesAccount() {
-                        // given
-                        var accountId = AccountId.valueOf("1");
-                        var existingAccount = new AccountSetting(accountId.getId(), 2, 1);
-                        when(accountSettingRepository.findById(accountId)).thenReturn(Optional.of(existingAccount));
-
-                        // when
-                        systemUnderTest.overrideAccountLimit(accountId, 1);
-
-                        // then
-                        assertThat(existingAccount.limit()).isEqualTo(1);
-                        verify(accountSettingRepository).save(existingAccount);
-                      }
-                    }
-                </code></pre>
-            </section>
-            <section data-auto-animate>
-                <pre data-id="unit-test" class="r-stretch" style="width: 100%;"><code class="java" data-trim
-                                                                                      contenteditable="true"
-                                                                                      data-line-numbers="32-49">
+                                                                                      data-line-numbers="17-33|35-49">
                     package io.github.mat3e.downloads.limiting;
 
                     import io.github.mat3e.downloads.limiting.api.AccountId;
@@ -1204,6 +1122,176 @@
             <section data-auto-animate>
                 <pre data-id="int-test" class="r-stretch" style="width: 100%;"><code class="java" data-trim
                                                                                      contenteditable="true"
+                                                                                     data-line-numbers="28,30-31">
+                    package io.github.mat3e.downloads.limiting.rest;
+
+                    import com.fasterxml.jackson.databind.JavaType;
+                    import com.fasterxml.jackson.databind.ObjectMapper;
+                    import com.fasterxml.jackson.databind.type.TypeFactory;
+                    import io.github.mat3e.downloads.limiting.LimitingFacade;
+                    import io.github.mat3e.downloads.limiting.api.AccountId;
+                    import io.github.mat3e.downloads.limiting.api.Asset;
+                    import io.github.mat3e.downloads.limiting.api.AssetDeserialization;
+                    import org.junit.jupiter.api.Test;
+                    import org.springframework.beans.factory.annotation.Autowired;
+                    import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+                    import org.springframework.boot.test.context.SpringBootTest;
+                    import org.springframework.test.web.servlet.MockMvc;
+                    import org.springframework.test.web.servlet.ResultActions;
+                    import org.springframework.transaction.annotation.Transactional;
+
+                    import java.util.Collection;
+
+                    import static java.util.stream.Collectors.toUnmodifiableList;
+                    import static org.assertj.core.api.BDDAssertions.then;
+                    import static org.springframework.http.MediaType.APPLICATION_JSON;
+                    import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+                    import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+                    import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+                    import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+                    @Transactional
+                    @AutoConfigureMockMvc
+                    @SpringBootTest
+                    class LimitingIntTest {
+                      private static final String ACCOUNT_ID = "1";
+
+                      @Autowired
+                      private MockMvc mockMvc;
+
+                      @Test
+                      void downloadStarted_storesAssetsTillLimit() throws Exception {
+                        givenAccountLimit(2);
+                        // and
+                        httpSuccessfulPostAsset(
+                            "{",
+                            " \"id\": \"123\",",
+                            " \"countryCode\": \"US\"",
+                            "}");
+                        // and
+                        httpSuccessfulPostAsset(
+                            "{",
+                            " \"id\": \"456\",",
+                            " \"countryCode\": \"US\"",
+                            "}");
+
+                        // when
+                        httpPostAsset(
+                            "{",
+                            " \"id\": \"789\",",
+                            " \"countryCode\": \"US\"",
+                            "}"
+                        ).andExpect(status().isUnprocessableEntity());
+
+                        then(httpSuccessfulGetAssets()).containsExactly(
+                            Asset.withId("123").inCountry("US"),
+                            Asset.withId("456").inCountry("US"));
+
+                        // when
+                        httpSuccessfulDeleteAsset("123", "US");
+                        // and
+                        httpSuccessfulPostAsset(
+                            "{",
+                            " \"id\": \"789\",",
+                            " \"countryCode\": \"US\"",
+                            "}");
+
+                        then(httpSuccessfulGetAssets()).containsExactly(
+                            Asset.withId("456").inCountry("US"),
+                            Asset.withId("789").inCountry("US"));
+                      }
+
+                      @Test
+                      void illegalParams_returnsClientError() throws Exception {
+                        // given
+                        var validBody = "{ \"id\": \"123\", \"countryCode\": \"US\" }";
+
+                        // expect 404 - no account created, no assets
+                        httpGetAssets("lookMaNotExistingId").andExpect(status().isNotFound());
+                        httpPostAsset(validBody).andExpect(status().isNotFound());
+                        httpDeleteAsset("123", "US").andExpect(status().isNotFound());
+
+                        // expect 400
+                        httpPostAssetForAccount("  ", validBody).andExpect(status().isBadRequest());
+                        httpPostAsset("{ \"countryCode\": \"US\" }").andExpect(status().isBadRequest());
+                        httpPostAsset("{ \"id\": \"123\" }").andExpect(status().isBadRequest());
+                        httpDeleteAsset("  ", "OK").andExpect(status().isBadRequest());
+                        httpDeleteAsset("123", "  ").andExpect(status().isBadRequest());
+                      }
+
+                      private void httpSuccessfulDeleteAsset(String assetId, String countryCode) {
+                        try {
+                          httpDeleteAsset(assetId, countryCode).andExpect(status().isNoContent());
+                        } catch (Exception e) {
+                          throw new RuntimeException(e);
+                        }
+                      }
+
+                      private ResultActions httpDeleteAsset(String assetId, String countryCode) throws Exception {
+                        return mockMvc.perform(delete("/api/accounts/{id}/assets/{assetId}", ACCOUNT_ID, assetId)
+                            .queryParam("countryCode", countryCode));
+                      }
+
+                      private Collection&lt;Asset> httpSuccessfulGetAssets() {
+                        try {
+                          String jsonResponse = httpGetAssets(ACCOUNT_ID)
+                              .andExpect(status().isOk())
+                              .andReturn().getResponse().getContentAsString();
+                          JavaType returnType =
+                              TypeFactory.defaultInstance().constructCollectionType(Collection.class, AssetDeserialization.class);
+                          return new ObjectMapper().&lt;Collection&lt;AssetDeserialization>>readValue(jsonResponse, returnType).stream()
+                              .map(AssetDeserialization::toApi)
+                              .collect(toUnmodifiableList());
+                        } catch (Exception e) {
+                          throw new RuntimeException(e);
+                        }
+                      }
+
+                      private ResultActions httpGetAssets(String accountId) throws Exception {
+                        return mockMvc.perform(get("/api/accounts/{id}/assets", accountId).contentType(APPLICATION_JSON));
+                      }
+
+                      private void httpSuccessfulPostAsset(String... jsonLines) {
+                        try {
+                          httpPostAsset(jsonLines).andExpect(status().isCreated());
+                        } catch (Exception e) {
+                          throw new RuntimeException(e);
+                        }
+                      }
+
+                      private ResultActions httpPostAsset(String... jsonLines) throws Exception {
+                        return httpPostAssetForAccount(ACCOUNT_ID, jsonLines);
+                      }
+
+                      private ResultActions httpPostAssetForAccount(String accountId, String... jsonLines) throws Exception {
+                        return mockMvc.perform(post("/api/accounts/{id}/assets", accountId)
+                            .contentType(APPLICATION_JSON)
+                            .content(String.join("\n", jsonLines)));
+                      }
+
+                      void givenAccountLimit(int limit) {
+                        facade.overrideAccountLimit(AccountId.valueOf(ACCOUNT_ID), limit);
+                      }
+
+                      @Autowired
+                      private LimitingFacade facade;
+                    }
+                </code></pre>
+            </section>
+            <section>
+                <blockquote style="font-style: normal">⚠️ <code>@Transactional</code> + JPA ⚠️</blockquote>
+                <a class="fragment" href="https://nurkiewicz.com/2011/11/spring-pitfalls-transactional-tests.html">
+                    <em>Spring pitfalls: transactional tests considered harmful</em>
+                </a>
+                <div class="fragment">Fun fact: 2011</div>
+                <aside class="notes">
+                    Ale część problemów JPA-specific, podczas gdy JPA ogólnie problem, a <code>@Transactional</code>
+                    działa i z JDBC i innymi
+                </aside>
+            </section>
+            <section data-auto-animate>
+                <pre data-id="int-test" class="r-stretch" style="width: 100%;"><code class="java" data-trim
+                                                                                     contenteditable="true"
                                                                                      data-line-numbers="28,30-31|29|34-35|53-59|137-145">
                     package io.github.mat3e.downloads.limiting.rest;
 
@@ -1725,7 +1813,7 @@
                 </div>
             </section>
             <section>
-                <h2>Więcej o kontekstach Springa</h2>
+                <h2>Więcej o współdzieleniu</h2>
                 <a href="https://www.youtube.com/watch?v=c-GV2PxymoY">
                     <img style="width: 75%" src="img/ref/broken.png"/>
                 </a>
@@ -1816,7 +1904,8 @@
                 <h2>IO</h2>
                 <ul>
                     <li class="fragment" data-fragment-index="1">Wolne - szczególnie <strong>przez sieć</strong></li>
-                    <li class="fragment" data-fragment-index="2">Lokalne instancje praktycznie zawsze <strong>szybsze</strong></li>
+                    <li class="fragment" data-fragment-index="2">Lokalne instancje praktycznie zawsze
+                        <strong>szybsze</strong></li>
                     <li class="fragment" data-fragment-index="3">Lokalne współdzielone instancje? Trochę ryzykowne
                         <ul>
                             <li class="fragment" data-fragment-index="4">Ale jeszcze szybsze</li>
@@ -1865,15 +1954,21 @@
                 <ul>
                     <li class="fragment">Środowisko uruchomieniowe zgodne z&nbsp;API Dockera</li>
                     <li class="fragment">Raczej więcej zasobów niż dla binarek/executable (~Embedded Redis)</li>
-                    <li class="fragment">Relatywnie wolne wstawanie - lepiej reużywać</li>
+                    <li class="fragment">Relatywnie wolny start - lepiej raz na wszystkie testy</li>
                     <li class="fragment">Dalsze usprawnienia
                         <ul>
-                            <li class="fragment">Równoległy start kontenerów</li>
-                            <li class="fragment">Uruchomione kontenery i "podłączanie" testów</li>
                             <li class="fragment">
-                                <code>ApplicationContextInitializer</code> - <a
-                                    href="https://maciejwalkowiak.com/blog/testcontainers-spring-boot-setup/"><em>The
-                                best way to use Testcontainers with Spring Boot</em></a>
+                                <a href="https://maciejwalkowiak.com/blog/testcontainers-spring-boot-setup/">
+                                    Równoległy start kontenerów
+                                </a>
+                            </li>
+                            <li class="fragment"><a href="https://java.testcontainers.org/features/reuse/">Reuse</a> -
+                                "podłączanie" testów
+                            </li>
+                            <li class="fragment">
+                                <a href="https://www.baeldung.com/spring-boot-built-in-testcontainers">
+                                    <em>Built-in Testcontainers Support in Spring Boot</em>
+                                </a>
                             </li>
                         </ul>
                     </li>
@@ -1911,28 +2006,24 @@
                 </table>
             </section>
             <section>
-            <ul>
-              <h2>Dużo opcji synchronizacji</h2>
-            </ul>
-                <pre class="fragment" data-fragment-index="1"><code class="java" data-trim class="plaintext"
-                                                                    style="font-size: .75em; line-height: 1.1">
-@Execution(ExecutionMode.CONCURRENT)
-class ConcurrentTest extends IntegrationTest { ...
-            </code></pre>
+                <ul>
+                    <h2>Synchronizacje</h2>
+                </ul>
+                <pre class="fragment" style="width: 100%;"><code class="java" data-trim>
+                    @Execution(ExecutionMode.CONCURRENT)
+                    class ConcurrentTest extends IntegrationTest { // ...
+                </code></pre>
+                <pre class="fragment" style="width: 100%;"><code class="java" data-trim>
+                    @Isolated
+                    // @ResourceLock("org.junit.platform.engine.support.hierarchical.ExclusiveResource.GLOBAL_KEY")
+                    class IsolatedTest extends IntegrationTest { // ...
+                 </code></pre>
 
-            <pre class="fragment" data-fragment-index="2"><code class="java" data-trim class="plaintext"
-                                                                    style="font-size: .75em; line-height: 1.1">
-@Isolated // => @ResourceLock("org.junit.platform.engine.support.hierarchical.ExclusiveResource.GLOBAL_KEY")
-class IsolatedTest extends IntegrationTest { ...
-            </code></pre>
-
-
-<pre class="fragment" data-fragment-index="3"><code class="properties" data-trim class="plaintext"
-                                                                    style="font-size: .75em; line-height: 1.1">
-junit.jupiter.execution.parallel.enabled = true
-junit.jupiter.execution.parallel.mode.default = same_thread
-junit.jupiter.execution.parallel.mode.classes.default = concurrent
-            </code></pre>
+                <pre class="fragment" style="width: 100%;"><code class="properties" data-trim>
+                    junit.jupiter.execution.parallel.enabled = true
+                    junit.jupiter.execution.parallel.mode.default = same_thread
+                    junit.jupiter.execution.parallel.mode.classes.default = concurrent
+                </code></pre>
 
             </section>
             <section>
@@ -1984,7 +2075,9 @@ junit.jupiter.execution.parallel.mode.classes.default = concurrent
             <section>
                 <h3>Zrównoleglanie przez "rurociąg"</h3>
                 <img style="margin: 0" class="fragment" data-fragment-index="1" src="img/jenkins-parallel.png"/>
-            <div class="fragment">Uwaga na locki Gradle'a! => musimy skompilować wspólne źródła krok wczesniej poprzez <code>:compileIntegrationClasses</code></div>
+                <blockquote style="font-style: normal" class="fragment">⚠️ locki Gradle'a ⚠️</blockquote>
+                <div class="fragment">=> kompilować wspólne źródła wczesniej (<code>:compileIntegrationClasses</code>)
+                </div>
                 <div>
                     <img class="fragment" data-fragment-index="1" src="img/jakotako.jpg" style="width: 35%">
                 </div>
