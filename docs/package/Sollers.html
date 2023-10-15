@@ -1,0 +1,1641 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Siła pakietów w Javie</title>
+
+    <meta name="description" content="package-by-feature, package-private access, encapsulation, modularity">
+    <meta name="author" content="mat3e">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/black.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="plugin/highlight/github.css">
+    <link rel="stylesheet" href="dist/fontawesome.css">
+    <style>
+        #about-me {
+            padding: 1em;
+            background-color: rgba(255, 255, 255, .75);
+            list-style-type: none;
+            margin-left: 0;
+            float: left;
+        }
+
+        #about-me ul {
+            list-style-type: none;
+            float: left;
+            margin-left: 0;
+        }
+
+        #about-me a {
+            color: #a23;
+        }
+
+        #about-me a:hover {
+            color: #dd5566;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+        <section data-background-image>
+            <section data-background-image>
+                <h1 style="text-align: left">Siła pakietów w&nbsp;Javie</h1>
+                <div style="width: 320px; height: 64px; background-image: url('img/twitter.png'); background-size: contain; top: -4em; right: 0; position: absolute;"></div>
+            </section>
+            <section data-background-image>
+                <h5>
+                    <span>Perspektywa...</span>
+                    <span class="fragment" data-fragment-index="1"> ma znaczenie</span>
+                    <span class="fragment" data-fragment-index="2"> :)</span>
+                </h5>
+                <a href="https://mistrzowie.org/717022" class="r-vstack" style="width: 45%; margin: 0 auto">
+                    <img style="margin: 0" src="img/perspektywa-1.jpg"/>
+                    <img style="margin: 0" src="img/perspektywa-2.jpg" class="fragment" data-fragment-index="1"/>
+                    <img style="margin: 0" src="img/perspektywa-3.jpg" class="fragment" data-fragment-index="2"/>
+                </a>
+            </section>
+            <section data-background-image="img/bg-hd-new.jpg" data-background-transition="zoom">
+                <ul id="about-me">
+                    <li>
+                        <ul>
+                            <li>
+                                <a href="https://www.linkedin.com/in/mateusz-chrzonstowski/">
+                                    <i class="fab fa-linkedin"
+                                       style="color: #0077B5; background-color: #FFF; line-height: .75em"></i>
+                                    /mateusz-chrzonstowski
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://twitter.com/_mat3e_">
+                                    <i class="fab fa-twitter-square"
+                                       style="background-color: #1DA1F2; color: #FFF; line-height: .75em"></i>
+                                    /_mat3e_
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.reddit.com/user/_mat3e_">
+                                    <i class="fab fa-reddit-square"
+                                       style="background-color: #FF4500; color: #FFF; line-height: .75em"></i>
+                                    /_mat3e_
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/mat3e/">
+                                    <i class="fab fa-github-square"
+                                       style="color: #24292E; background-color: #FFF; line-height: .75em"></i>
+                                    /mat3e
+                                </a>
+                            </li>
+                            <li style="line-height: 1">&nbsp;</li>
+                            <li class="fragment" style="line-height: .75">
+                                <a style="font-weight: bold; font-size: .75em"
+                                   href="https://mat3e.github.io/talks/package/Sollers.html">
+                                    mat3e.github.io/talks/package/Sollers
+                                </a>
+                            </li>
+                            <li style="line-height: 1">&nbsp;</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul class="fragment" style="padding: .1em; line-height: 1">
+                            <ul style="padding: .1em; line-height: 1">
+                                <li class="r-hstack">
+                                    <a href="">
+                                        <img src="img/pplus.png" style="height: 2em; margin: 0">
+                                    </a>
+                                    <a href="https://sollers.eu/career/" class="fragment">
+                                        <img src="img/sc.png" style="height: 1em; margin: 0">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://full-stack.engineering/" class="fragment">
+                                        <img src="img/udemy-new.svg" class="pure-img" style="height: 1em; margin: 0">
+                                    </a>
+                                </li>
+                            </ul>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+        </section>
+
+        <section data-background-image>
+            <section data-background-image>
+                <div class="r-hstack">
+                    <a href="https://github.com/full-stack-engineering/java-clean-architecture/tree/b35b04b79ea005488831cf246ff1684fcc4df99f/src/main/java/io/github/mat3e">
+                        <img alt="package-by-layer" src="img/pbl.png"/>
+                    </a>
+                    <a href="https://github.com/full-stack-engineering/java-clean-architecture/tree/de825c67c6c5d6c280c97c5f8d6bf8a78afa6828/src/main/java/io/github/mat3e"
+                       class="r-stack fragment" data-fragment-index="1">
+                        <img alt="package-by-feature" class="fragment fade-out" src="img/pbf.png"
+                             data-fragment-index="4"/>
+                        <img alt="package-by-feature" class="fragment" src="img/pbf2.png" data-fragment-index="4"/>
+                    </a>
+                </div>
+                <div class="fragment" data-fragment-index="2">
+                    <a href="https://blog.cleancoder.com/uncle-bob/2011/09/30/Screaming-Architecture.html">
+                        <em>Screaming Architecture</em>
+                    </a>
+                </div>
+                <small class="fragment" data-fragment-index="3">
+                    <a href="https://github.com/full-stack-engineering/java-clean-architecture">link do repo</a>
+                </small>
+                <aside class="notes">
+                    <ul>
+                        <li>First tells about the framework(s), second - about the app</li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <a href="http://www.javapractices.com/topic/TopicAction.do?Id=205">
+                    <em>Package by feature, not layer</em>
+                </a>
+                <h2 class="fragment" style="margin: 0" data-fragment-index="1">
+                    <img src="img/car.png" alt="car" style="height: 1em">
+                </h2>
+                <div class="r-hstack" style="font-size: .5em">
+                    <ul class="fragment" data-fragment-index="2">
+                        <li>electrical</li>
+                        <li>mechanical</li>
+                        <li>hydraulic</li>
+                    </ul>
+                    <div style="width: 10%"></div>
+                    <ul class="fragment" data-fragment-index="3">
+                        <li>safety</li>
+                        <li>engine</li>
+                        <li>steering</li>
+                        <li>fuel system</li>
+                        <li>...</li>
+                    </ul>
+                </div>
+                <hr class="fragment" data-fragment-index="4"/>
+                <h2 style="margin: 0" class="fragment" data-fragment-index="4">
+                    <img src="img/office.png" alt="office" style="height: 1em">
+                </h2>
+                <div class="r-hstack" style="font-size: .5em">
+                    <ul class="fragment">
+                        <li>executives</li>
+                        <li>managers</li>
+                        <li>employees</li>
+                    </ul>
+                    <div style="width: 10%"></div>
+                    <ul class="fragment">
+                        <li>front office</li>
+                        <li>back office</li>
+                        <li>accounting</li>
+                        <li>personnel</li>
+                        <li>mail room</li>
+                    </ul>
+                </div>
+                <aside class="notes">Not natural in other places</aside>
+            </section>
+            <section>
+                <h3 style="margin: 0">Wady "typowego" podziału</h3>
+                <ul>
+                    <li class="fragment">Błędne abstrakcje
+                        <ul style="font-size: .7em">
+                            <li class="fragment">
+                                Trzymanie razem repozytoriów, kontrolerów itp., zachęca do szukania ich części
+                                wspólnych, a nie części wspólnych biznesu (domeny)
+                            </li>
+                            <li class="fragment">Wyższe, biznesowe abstrakcje ukryte za technicznymi</li>
+                        </ul>
+                    </li>
+                    <li class="fragment">Łatwiej o spadek jakości
+                        <ul style="font-size: .7em">
+                            <li class="fragment">Klasy muszą być publiczne, więc łatwiej o brzydkie obejścia (~<em>użyję
+                                repo
+                                bezpośrednio, potem zrefaktoruję</em>)
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="fragment">Trudniejsze utrzymanie
+                        <ul style="font-size: .7em">
+                            <li class="fragment">Bugi skupiają sięna funkcjach ⇒ "problem z <em>max position</em>", a
+                                nie "problem ze wszystkimi <em>repozytoriami</em>"
+                            </li>
+                            <li class="fragment">Szukanie błędu ⇒ dużo skakania między pakietami</li>
+                            <li class="fragment">Pisanie kodu ⇒ więcej klas do wyboru (wszystko <code>public</code>),
+                                trudniej znaleźć właściwe
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="fragment">➡️ TL;DR złe pakiety = potrzeba więcej dyscypliny ⬅️</div>
+            </section>
+            <section data-auto-animate>
+                <video data-id="import" data-autoplay src="img/rec1.mov"></video>
+            </section>
+            <section data-auto-animate>
+                <video data-id="import" data-autoplay src="img/rec2.mov"></video>
+            </section>
+        </section>
+
+        <section data-background-image>
+            <section data-auto-animate data-auto-animate-restart>
+                <a href="https://www.cin.ufpe.br/~sugarloafplop/mud.pdf">
+                    <em>Big Ball of Mud</em>
+                </a>
+                <blockquote class="fragment" style="font-size: .7em"
+                            cite="https://www.cin.ufpe.br/~sugarloafplop/mud.pdf"
+                            data-id="cite">
+                    Even systems with well-defined architectures are prone to structural erosion. The
+                    relentless onslaught of changing requirements (...) can gradually undermine its structure
+                </blockquote>
+                <aside class="notes">
+                    Not like people sit together and decide to build the ugliest thing possible
+                    <br/>
+                    Erosion is actually a good indicator that your system is successful (unneeded systems don't get new
+                    requirements)
+                </aside>
+            </section>
+            <section data-auto-animate>
+                <blockquote style="font-size: .7em" cite="https://www.cin.ufpe.br/~sugarloafplop/mud.pdf"
+                            data-id="cite">
+                    There are good reasons that good programmers build BIG BALLS OF MUD. It may well be that (...) the
+                    market moves so fast that (...) expedient, slash-and-burn, disposable programming is, in fact, a
+                    state-of-the-art strategy
+                </blockquote>
+                <blockquote class="fragment" style="font-size: .7em"
+                            cite="https://www.cin.ufpe.br/~sugarloafplop/mud.pdf">
+                    Therefore, if you can’t easily make a mess go away, <strong>at least cordon it off</strong>. This
+                    restricts the disorder to a fixed area, keeps it out of sight, and can set the stage for additional
+                    refactoring
+                </blockquote>
+                <a class="fragment" href="https://www.youtube.com/watch?v=Ed94CfxgsCA">
+                    <em>The art of destroying software (Greg Young)</em>
+                </a>
+                <aside class="notes">First citation was form the introduction, 2nd is from the ending, last from
+                    SWEEPING IT
+                    UNDER THE RUG
+                    <br/>
+                    full
+                    <blockquote style="font-size: .7em" cite="https://www.cin.ufpe.br/~sugarloafplop/mud.pdf">
+                        There are good reasons that good programmers build BIG BALLS OF MUD. It may well be that the
+                        economics
+                        of the software world are such that the market moves so fast that long term architectural
+                        ambitions
+                        are
+                        foolhardy, and that expedient, slash-and-burn, disposable programming is, in fact, a
+                        state-of-the-art
+                        strategy
+                    </blockquote>
+                    <br/>
+                    Another nice from the end
+                    <blockquote style="font-size: .7em" cite="https://www.cin.ufpe.br/~sugarloafplop/mud.pdf">
+                        As a master chef tolerates a messy kitchen, developers must not be afraid to get a little mud on
+                        their shoes as they explore new territory for the first time. Architectural insight is not the
+                        product of master plans, but of hard won experience
+                    </blockquote>
+                </aside>
+            </section>
+            <section data-auto-animate data-auto-animate-restart>
+                <img src="img/pooservices.jpg" data-id="pooservices"
+                     alt="Monolith vs. Microservices = big ball of mud vs. many small balls of mud">
+            </section>
+            <section data-auto-animate>
+                <div class="r-vstack">
+                    <img src="img/drake1.jpg" style="margin: 0" alt="Waiting for microservices" data-id="pooservices">
+                    <img src="img/drake2.jpg" style="margin: 0" class="fragment"
+                         alt="Treating packages as microservices">
+                </div>
+            </section>
+        </section>
+
+        <section data-background-image>
+            <section data-auto-animate data-auto-animate-restart>
+                <h3 data-id="clazz">Szybki start <span
+                        class="fragment">- dobre praktyki z&nbsp;<code>class</code></span> w pakietach</h3>
+                <pre class="fragment" style="margin: 0 auto;width: 100%" data-id="encapsulate"><code class="java"
+                                                                                                     data-trim
+                                                                                                     data-line-numbers="1">
+                        public class Encapsulation {
+                          public static final int CONSTANT = 1_077;
+
+                          protected final int hierarchyProperty;
+                          private String internalProperty;
+
+                          protected Encapsulation(int hierarchyProperty) {
+                            this.hierarchyProperty = hierarchyProperty + CONSTANT;
+                          }
+
+                          public void command(String value) {
+                            overrideName(value, true);
+                          }
+
+                          public String query() {
+                            return internalProperty;
+                          }
+
+                          private void overrideName(String value, boolean enforced) {
+                            // ...
+                          }
+                        }
+
+                        class HiddenHelper {
+                            // similar to above
+                        }
+                </code></pre>
+            </section>
+            <section data-auto-animate>
+                <h3 data-id="clazz">Szybki start - dobre praktyki z&nbsp;<code>class</code> w pakietach</h3>
+                <pre style="margin: 0 auto;width: 100%" data-id="encapsulate"><code class="java" data-trim
+                                                                                    data-line-numbers="1|2-5">
+                        public class Encapsulation { // ~ pakiet
+                          public static final int CONSTANT = 1_077;
+
+                          protected final int hierarchyProperty;
+                          private String internalProperty;
+
+                          protected Encapsulation(int hierarchyProperty) {
+                            this.hierarchyProperty = hierarchyProperty + CONSTANT;
+                          }
+
+                          public void command(String value) {
+                            overrideName(value, true);
+                          }
+
+                          public String query() {
+                            return internalProperty;
+                          }
+
+                          private void overrideName(String value, boolean enforced) {
+                            // ...
+                          }
+                        }
+
+                        class HiddenHelper {
+                            // similar to above
+                        }
+                </code></pre>
+            </section>
+            <section data-auto-animate>
+                <h3 data-id="clazz">Szybki start - dobre praktyki z&nbsp;<code>class</code> w pakietach</h3>
+                <pre style="margin: 0 auto;width: 100%" data-id="encapsulate"><code class="java" data-trim
+                                                                                    data-line-numbers="2-5|7-9">
+                        public class Encapsulation { // ~ pakiet
+                          public static final int CONSTANT = 1_077; // kontrakty (DTO)
+
+                          protected final int hierarchyProperty;
+                          private String internalProperty;
+
+                          protected Encapsulation(int hierarchyProperty) {
+                            this.hierarchyProperty = hierarchyProperty + CONSTANT;
+                          }
+
+                          public void command(String value) {
+                            overrideName(value, true);
+                          }
+
+                          public String query() {
+                            return internalProperty;
+                          }
+
+                          private void overrideName(String value, boolean enforced) {
+                            // ...
+                          }
+                        }
+
+                        class HiddenHelper {
+                            // similar to above
+                        }
+                </code></pre>
+            </section>
+            <section data-auto-animate>
+                <h3 data-id="clazz">Szybki start - dobre praktyki z&nbsp;<code>class</code> w pakietach</h3>
+                <pre style="margin: 0 auto;width: 100%" data-id="encapsulate"><code class="java" data-trim
+                                                                                    data-line-numbers="7-10|12-14,16-18">
+                        public class Encapsulation { // ~ pakiet
+                          public static final int CONSTANT = 1_077; // kontrakty (DTO)
+
+                          protected final int hierarchyProperty;
+                          private String internalProperty;
+
+                          // ~ Spring @Configuration
+                          protected Encapsulation(int hierarchyProperty) {
+                            this.hierarchyProperty = hierarchyProperty + CONSTANT;
+                          }
+
+                          public void command(String value) {
+                            overrideName(value, true);
+                          }
+
+                          public String query() {
+                            return internalProperty;
+                          }
+
+                          private void overrideName(String value, boolean enforced) {
+                            // ...
+                          }
+                        }
+
+                        class HiddenHelper {
+                            // similar to above
+                        }
+                </code></pre>
+            </section>
+            <section data-auto-animate>
+                <h3 data-id="clazz">Szybki start - dobre praktyki z&nbsp;<code>class</code> w pakietach</h3>
+                <pre style="margin: 0 auto;width: 100%" data-id="encapsulate"><code class="java" data-trim
+                                                                                    data-line-numbers="12-15,17-19|21-23,26-28">
+                        public class Encapsulation { // ~ pakiet
+                          public static final int CONSTANT = 1_077; // kontrakty (DTO)
+
+                          protected final int hierarchyProperty;
+                          private String internalProperty;
+
+                          // ~ Spring @Configuration
+                          protected Encapsulation(int hierarchyProperty) {
+                            this.hierarchyProperty = hierarchyProperty + CONSTANT;
+                          }
+
+                          // jedyne klasy publiczne: Facade/Service/Command + Query
+                          public void command(String value) {
+                            overrideName(value, true);
+                          }
+
+                          public String query() {
+                            return internalProperty;
+                          }
+
+                          private void overrideName(String value, boolean enforced) {
+                            // ...
+                          }
+                        }
+
+                        class HiddenHelper {
+                            // similar to above
+                        }
+                </code></pre>
+            </section>
+            <section data-auto-animate>
+                <h3 data-id="clazz">Szybki start - dobre praktyki z&nbsp;<code>class</code> w pakietach</h3>
+                <pre style="margin: 0 auto;width: 100%" data-id="encapsulate"><code class="java" data-trim
+                                                                                    data-line-numbers="21-24,27-29">
+                        public class Encapsulation { // ~ pakiet
+                          public static final int CONSTANT = 1_077; // kontrakty (DTO)
+
+                          protected final int hierarchyProperty;
+                          private String internalProperty;
+
+                          // ~ Spring @Configuration
+                          protected Encapsulation(int hierarchyProperty) {
+                            this.hierarchyProperty = hierarchyProperty + CONSTANT;
+                          }
+
+                          // jedyne klasy publiczne: Facade/Service/Command + Query
+                          public void command(String value) {
+                            overrideName(value, true);
+                          }
+
+                          public String query() {
+                            return internalProperty;
+                          }
+
+                          // klasy pakietowe (package-private)
+                          private void overrideName(String value, boolean enforced) {
+                            // ...
+                          }
+                        }
+
+                        class HiddenHelper {
+                            // similar to above
+                        }
+                </code></pre>
+            </section>
+            <section data-auto-animate>
+                <h3 data-id="clazz">Szybki start - dobre praktyki z&nbsp;<code>class</code> w pakietach</h3>
+                <div>
+                    <a href="https://stackoverflow.com/a/1760877/4774651">Uncle Bob</a>,
+                    <a href="https://checkstyle.org/checks/coding/declarationorder.html">checkstyle</a>,
+                    <a href="https://google.github.io/styleguide/javaguide.html#s4.8.7-modifiers">Google Java Style
+                        Guide</a>
+                </div>
+            </section>
+            <section data-auto-animate>
+                <h3 data-id="clazz"><code>class</code> ⇒ <code>package</code></h3>
+                <img src="img/pp.png" style="width: 80%; margin: 0" data-id="encapsulate" alt="package-private access">
+                <div class="fragment">
+                    <a href="https://github.com/mat3e/ddd-workshop/tree/master/app">link do repo</a>
+                </div>
+            </section>
+            <section data-auto-animate data-auto-animate-restart>
+                <h1 style="display: inline-block" data-id="S">S</h1>
+                <h1 style="display: inline-block" data-id="O">O</h1>
+                <h1 style="display: inline-block" data-id="L">L</h1>
+                <h1 style="display: inline-block" data-id="I">I</h1>
+                <h1 style="display: inline-block" data-id="D">D</h1>
+            </section>
+            <section data-auto-animate>
+                <div><h1 style="display: inline-block" data-id="S">S</h1></div>
+                <div><h1 style="display: inline-block" data-id="O">O</h1></div>
+                <div><h1 style="display: inline-block" data-id="L">L</h1></div>
+                <div><h1 style="display: inline-block" data-id="I">I</h1></div>
+                <div><h1 style="display: inline-block" data-id="D">D</h1></div>
+            </section>
+            <section data-auto-animate style="text-align: left">
+                <div>
+                    <h1 style="display: inline-block; margin: 0" data-id="S">S</h1><span>ingle Responsibility</span>
+                </div>
+                <div><h1 style="display: inline-block; margin: 0" data-id="O">O</h1><span>pen/Closed</span></div>
+                <div class="fragment semi-fade-out" data-fragment-index="1">
+                    <h1 style="display: inline-block; margin: 0" data-id="L">L</h1><span>iskov Substitution</span>
+                </div>
+                <div class="fragment semi-fade-out" data-fragment-index="1">
+                    <h1 style="display: inline-block; margin: 0" data-id="I">I</h1><span>nterface Segregation</span>
+                </div>
+                <div class="fragment semi-fade-out" data-fragment-index="1">
+                    <h1 style="display: inline-block; margin: 0" data-id="D">D</h1><span>ependency Inversion</span>
+                </div>
+            </section>
+            <section data-auto-animate style="text-align: left">
+                <div>
+                    <h1 style="display: inline-block; margin: 0" data-id="S">C</h1>
+                    <span>omposable: plays well with others</span>
+                </div>
+                <div>
+                    <h1 style="display: inline-block; margin: 0" data-id="O">U</h1>
+                    <span>nix philosophy: does one thing well</span>
+                </div>
+                <div>
+                    <h1 style="display: inline-block; margin: 0" data-id="L">P</h1>
+                    <span>redictable: does what you expect</span>
+                </div>
+                <div>
+                    <h1 style="display: inline-block; margin: 0" data-id="I">I</h1><span>diomatic: feels natural</span>
+                </div>
+                <div>
+                    <h1 style="display: inline-block; margin: 0" data-id="D">D</h1><span>omain-based</span>
+                </div>
+            </section>
+            <section data-auto-animate>
+                <a href="https://dannorth.net/2022/02/10/cupid-for-joyful-coding/">
+                    <h1 style="display: inline-block" data-id="S">C</h1>
+                    <h1 style="display: inline-block" data-id="O">U</h1>
+                    <h1 style="display: inline-block" data-id="L">P</h1>
+                    <h1 style="display: inline-block" data-id="I">I</h1>
+                    <h1 style="display: inline-block" data-id="D">D</h1>
+                </a>
+                <div>
+                    <a href="https://dannorth.net/2021/03/16/cupid-the-back-story/">geneza</a>
+                </div>
+                <aside class="notes">Dan North</aside>
+            </section>
+        </section>
+
+        <section data-background-image>
+            <section>
+                <h2>Praca własna</h2>
+                <ol>
+                    <li class="fragment">Zmienić ustawienia IntelliJ, żeby
+                        <ol>
+                            <li class="fragment">tworzone <code>class</code>, <code>interface</code> itp. były domyślnie
+                                <code>package-private</code>,
+                            </li>
+                            <li class="fragment">dostęp pakietowy był używany domyślnie przy generowaniu metody,</li>
+                            <li class="fragment">pokazywać ikonki dostępu w panelu <em>Project View</em>.</li>
+                        </ol>
+                    </li>
+                    <li class="fragment">Odpowiedź w <a
+                            href="https://medium.com/glovo-engineering/javas-default-access-7153b476ff5d">moim
+                        artykule</a>
+                    </li>
+                </ol>
+            </section>
+        </section>
+
+        <section data-background-image>
+            <section>
+                <h2>Testowalność - BDD</h2>
+                <ul>
+                    <li class="fragment">
+                        <a href="https://dannorth.net/introducing-bdd/">Dan North</a> (ten od CUPID)
+                    </li>
+                    <li class="fragment">
+                        Pakiet jako "jednostka" w teście jednostkowym
+                        <ul>
+                            <li class="fragment">~ Component Test</li>
+                        </ul>
+                    </li>
+                    <li class="fragment">Sprawdzanie zachowań
+                        <ul>
+                            <li class="fragment">Użycie klasy konfiguracyjnej do stworzenia publicznych klas w teście
+                            </li>
+                            <li class="fragment">Setup i asercje tylko przez publiczne klasy</li>
+                            <li class="fragment">Mockować tylko inne pakiety</li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+            <section data-auto-animate data-auto-animate-restart>
+                <div class="r-vstack" style="--incidence: 1.8em; --height: 2em; width: 100%">
+                    <div data-id="e2e" style="width: 100%">
+                        <h3 style="margin: 0 auto; width: calc(50% - 4 * var(--incidence)); height: 0; border-left: var(--incidence) solid transparent; border-right: var(--incidence) solid transparent; border-bottom: var(--height) solid #FF5E99FF">
+                            <small>E2E</small>
+                        </h3>
+                    </div>
+                    <div data-id="int" style="width: 100%">
+                        <h3 style="margin: 0 auto; width: calc(50% - 2 * var(--incidence)); height: 0; border-left: var(--incidence) solid transparent; border-right: var(--incidence) solid transparent; border-bottom: var(--height) solid #D08A1DFF">
+                            <small>Integration</small>
+                        </h3>
+                    </div>
+                    <div style="width: 100%;" data-id="unit">
+                        <h3
+                                style="margin: 0 auto; width: 50%; height: 0; border-left: var(--incidence) solid transparent; border-right: var(--incidence) solid transparent; border-bottom: var(--height) solid #74A7CBFF">
+                            Unit
+                        </h3>
+                    </div>
+                </div>
+            </section>
+            <section data-auto-animate>
+                <div class="r-vstack" style="--incidence: 1.8em; --height: 2em; width: 100%">
+                    <div data-id="e2e" style="width: 100%">
+                        <h3 style="margin: 0 auto; width: calc(50% - 4 * var(--incidence)); height: 0; border-left: var(--incidence) solid transparent; border-right: var(--incidence) solid transparent; border-bottom: var(--height) solid #FF5E99FF">
+                            <small>E2E</small>
+                        </h3>
+                    </div>
+                    <div data-id="int" style="width: 100%">
+                        <h3 style="margin: 0 auto; width: calc(50% - 2 * var(--incidence)); height: 0; border-left: calc(var(--incidence) / 2) solid transparent; border-right: calc(var(--incidence) / 2) solid transparent; border-bottom: calc(var(--height) / 2) solid #D08A1DFF">
+                            <small>Int</small>
+                        </h3>
+                    </div>
+                    <div data-id="component" style="width: 100%">
+                        <h3 style="margin: 0 auto; width: calc(50% - var(--incidence)); height: 0; border-left: calc(var(--incidence) / 2) solid transparent; border-right: calc(var(--incidence) / 2) solid transparent; border-bottom: calc(var(--height) / 2) solid #78B9E6FF">
+                            <small>Component</small>
+                        </h3>
+                    </div>
+                    <div style="width: 100%;" data-id="unit">
+                        <h3
+                                style="margin: 0 auto; width: 50%; height: 0; border-left: var(--incidence) solid transparent; border-right: var(--incidence) solid transparent; border-bottom: var(--height) solid #74A7CBFF">
+                            Unit
+                        </h3>
+                    </div>
+                </div>
+            </section>
+            <section data-auto-animate data-transition="fade-out">
+                <style>
+                    #other-border:before {
+                        content: 'Component';
+                        position: absolute;
+                        top: calc(-1.5 * var(--height));
+                        width: 100%;
+                        display: block;
+                    }
+                </style>
+                <div class="r-vstack" style="--incidence: 1.8em; --height: 2em; width: 100%">
+                    <div data-id="e2e" style="width: 100%">
+                        <h3 style="margin: 0 auto; width: 0; height: 0; border-left: calc(var(--incidence) / 2) solid transparent; border-right: calc(var(--incidence) / 2) solid transparent; border-bottom: calc(var(--height) / 4) solid #FF5E99FF"></h3>
+                    </div>
+                    <div data-id="int" style="width: 100%">
+                        <h3 style="margin: 0 auto; width: 50%; height: 0; border-left: calc(var(--incidence) / 2) solid transparent; border-right: calc(var(--incidence) / 2) solid transparent; border-bottom: calc(var(--height) / 2 + var(--height)) solid #D08A1DFF">
+                            Integration
+                        </h3>
+                    </div>
+                    <div data-id="component" style="width: 100%">
+                        <h3 style="position: relative; margin: 0 auto; width: 40%; height: 0; border-left: calc(var(--incidence) / 2) solid transparent; border-right: calc(var(--incidence) / 2) solid transparent; border-top: calc(var(--height) / 2 + var(--height)) solid #78B9E6FF"
+                            id="other-border">
+                        </h3>
+                    </div>
+                    <div style="width: 100%;" data-id="unit">
+                        <h3
+                                style="margin: 0 auto; width: 0; height: 0; border-left: calc(var(--incidence) / 2) solid transparent; border-right: calc(var(--incidence) / 2) solid transparent; border-top: calc(var(--height) / 4) solid #74A7CBFF"></h3>
+                    </div>
+                </div>
+            </section>
+            <section data-transition="fade-in">
+                <div class="r-vstack" style="--incidence: 3.5em; --height: 1em; width: 100%">
+                    <h3 style="margin: 0 auto; width: calc(50% - 2 * var(--incidence)); height: 0; border-left: var(--incidence) solid transparent; border-right: var(--incidence) solid transparent; border-bottom: var(--height) solid #FF5E99FF"></h3>
+                    <div style="width: 100%">
+                        <h3 class="r-hstack"
+                            style="margin: 0 auto; width: 50%; height: 3em; background-color: #D08A1DFF;">
+                            Integration
+                        </h3>
+                    </div>
+                    <h3 style="margin: 0 auto; width: calc(50% - 2 * var(--incidence)); height: 0; border-left: var(--incidence) solid transparent; border-right: var(--incidence) solid transparent; border-top: var(--height) solid #74A7CBFF"></h3>
+                </div>
+                <a class="fragment" href="https://engineering.atspotify.com/2018/01/testing-of-microservices/">
+                    <em>Spotify: Testing of Microservices</em>
+                </a>
+                <ul style="font-size: .75em">
+                    <li class="fragment">Kod robi, co powinien robić</li>
+                    <li class="fragment">Działa sprawnie, w odpowiedni i przewidywalny sposób</li>
+                    <li class="fragment">Łatwość utrzymania</li>
+                </ul>
+                <h2 class="fragment"
+                    style="text-shadow: 0 0 10px black; text-decoration-line: underline overline; text-decoration-thickness: from-font; text-decoration-color: red; position: absolute; top: 50%; left: 20%; transform: rotate(-10deg);">
+                    dokumentowanie<br/>zachowań</h2>
+            </section>
+        </section>
+
+        <section data-background-image>
+            <section>
+                <h2>spring-boot-starter-test</h2>
+                <pre class="fragment" style="width: 100%"><code style="font-size: .95em" class="xml" data-trim
+                                                                data-line-numbers><script type="text/template">
+                    <dependency>
+                      <groupId>org.springframework.boot</groupId>
+                      <artifactId>spring-boot-starter-test</artifactId>
+                      <scope>test</scope>
+                    </dependency>
+                </script></code></pre>
+                <pre class="fragment" style="width: 100%"><code style="font-size: .95em" class="groovy" data-trim>
+                    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+                </code></pre>
+                <ul style="list-style-type: '+ '">
+                    <li class="fragment">spring-boot-test, spring-test</li>
+                    <li class="fragment">JUnit (Platform + Jupiter)</li>
+                    <li class="fragment">Mockito</li>
+                    <li class="fragment">AssertJ, Hamcrest</li>
+                    <li class="fragment">Różne JSON-y, XML-e</li>
+                </ul>
+            </section>
+            <section data-auto-animate>
+                <a href="https://www.youtube.com/watch?v=ma15iBQpmHU">
+                    <img style="width: 45%" src="img/ref/jn-mid.png"/>
+                </a>
+                <a href="https://www.youtube.com/watch?v=PwMNtiKb-P4">
+                    <img class="fragment" style="width: 45%" src="img/ref/jn-test.png"/>
+                </a>
+                <a href="https://www.youtube.com/watch?v=Da42_gVqDKE">
+                    <img class="fragment" style="width: 45%" src="img/ref/ks.png"/>
+                </a>
+                <div class="fragment">
+                    <a href="https://github.com/mat3e/downloads-service/">github.com/mat3e/downloads-service</a>
+                </div>
+            </section>
+            <section data-auto-animate data-background-image>
+                <pre data-id="unit-test" class="r-stretch" style="width: 100%;"><code class="java" data-trim
+                                                                                      contenteditable="true"
+                                                                                      data-line-numbers="12-15,17-28|23-28">
+                    package io.github.mat3e.downloads.limiting;
+
+                    import io.github.mat3e.downloads.limiting.api.AccountId;
+                    import io.github.mat3e.downloads.reporting.ReportingFacade;
+                    import org.junit.jupiter.api.BeforeEach;
+                    import org.junit.jupiter.api.Test;
+                    import org.mockito.ArgumentCaptor;
+
+                    import java.time.Clock;
+                    import java.util.Optional;
+
+                    import static org.assertj.core.api.Assertions.assertThat;
+                    import static org.mockito.Mockito.mock;
+                    import static org.mockito.Mockito.verify;
+                    import static org.mockito.Mockito.when;
+
+                    class LimitingFacadeTest {
+                      private final Clock clock = mock(Clock.class);
+                      private final AccountRepository accountRepository = mock(AccountRepository.class);
+                      private final AccountSettingRepository accountSettingRepository = mock(AccountSettingRepository.class);
+                      private final ReportingFacade reporting = mock(ReportingFacade.class);
+
+                      private LimitingFacade systemUnderTest;
+
+                      @BeforeEach
+                      void setUp() {
+                        systemUnderTest = new LimitingFacade(clock, accountRepository, accountSettingRepository, reporting);
+                      }
+
+                      @Test
+                      void newAccount_overrideLimit_createsAccount() {
+                        // given
+                        var accountId = AccountId.valueOf("1");
+                        when(accountSettingRepository.findById(accountId))
+                            .thenReturn(Optional.empty());
+
+                        // when
+                        systemUnderTest.overrideAccountLimit(accountId, 1);
+
+                        // then
+                        var captor = ArgumentCaptor.forClass(AccountSetting.class);
+                        verify(accountSettingRepository).save(captor.capture());
+                        var account = captor.getValue();
+                        assertThat(account.id()).isEqualTo(accountId);
+                        assertThat(account.limit()).isEqualTo(1);
+                      }
+
+                      @Test
+                      void existingAccount_overrideLimit_updatesAccount() {
+                        // given
+                        var accountId = AccountId.valueOf("1");
+                        var existingAccount = mock(AccountSetting.class);
+                        when(accountSettingRepository.findById(accountId))
+                            .thenReturn(Optional.of(existingAccount));
+
+                        // when
+                        systemUnderTest.overrideAccountLimit(accountId, 1);
+
+                        // then
+                        verify(existingAccount).overrideLimit(1);
+                        verify(accountSettingRepository).save(existingAccount);
+                      }
+                    }
+                </code></pre>
+            </section>
+            <section data-auto-animate data-background-image>
+                <pre data-id="unit-test" class="r-stretch" style="width: 100%;"><code class="java" data-trim
+                                                                                      contenteditable="true"
+                                                                                      data-line-numbers="23-24|44-45|46,48-50|55-56|44-58">
+                    package io.github.mat3e.downloads.limiting;
+
+                    import io.github.mat3e.downloads.limiting.api.AccountId;
+                    import io.github.mat3e.downloads.reporting.ReportingFacade;
+                    import org.junit.jupiter.api.BeforeEach;
+                    import org.junit.jupiter.api.Test;
+                    import org.mockito.ArgumentCaptor;
+
+                    import java.time.Clock;
+                    import java.util.Optional;
+
+                    import static org.assertj.core.api.Assertions.assertThat;
+                    import static org.mockito.Mockito.mock;
+                    import static org.mockito.Mockito.verify;
+                    import static org.mockito.Mockito.when;
+
+                    class LimitingFacadeTest {
+                      private final Clock clock = mock(Clock.class);
+                      private final AccountRepository accountRepository = mock(AccountRepository.class);
+                      private final AccountSettingRepository accountSettingRepository = mock(AccountSettingRepository.class);
+                      private final ReportingFacade reporting = mock(ReportingFacade.class);
+
+                      private final LimitingFacade systemUnderTest =
+                          new LimitingFacade(clock, accountRepository, accountSettingRepository, reporting);
+
+                      @Test
+                      void newAccount_overrideLimit_createsAccount() {
+                        // given
+                        var accountId = AccountId.valueOf("1");
+                        when(accountSettingRepository.findById(accountId))
+                            .thenReturn(Optional.empty());
+
+                        // when
+                        systemUnderTest.overrideAccountLimit(accountId, 1);
+
+                        // then
+                        var captor = ArgumentCaptor.forClass(AccountSetting.class);
+                        verify(accountSettingRepository).save(captor.capture());
+                        var account = captor.getValue();
+                        assertThat(account.id()).isEqualTo(accountId);
+                        assertThat(account.limit()).isEqualTo(1);
+                      }
+
+                      @Test
+                      void existingAccount_overrideLimit_updatesAccount() {
+                        // given
+                        var accountId = AccountId.valueOf("1");
+                        var existingAccount = mock(AccountSetting.class);
+                        when(accountSettingRepository.findById(accountId))
+                            .thenReturn(Optional.of(existingAccount));
+
+                        // when
+                        systemUnderTest.overrideAccountLimit(accountId, 1);
+
+                        // then
+                        verify(existingAccount).overrideLimit(1);
+                        verify(accountSettingRepository).save(existingAccount);
+                      }
+                    }
+                </code></pre>
+            </section>
+            <section>
+                <h2 style="margin: 0">
+                    <a href="https://site.mockito.org/"><img src="img/mockito.png" style="height: 2em; margin: 0"
+                                                             alt="Mockito logo"/></a>
+                </h2>
+                <blockquote>
+                    <ul>
+                        <li class="fragment">Do not mock types you don't own</li>
+                        <li class="fragment">Don't mock value objects</li>
+                        <li class="fragment">Don't mock everything</li>
+                    </ul>
+                </blockquote>
+            </section>
+            <section data-auto-animate data-background-image>
+                <pre data-id="unit-test" class="r-stretch" style="width: 100%;"><code class="java" data-trim
+                                                                                      contenteditable="true"
+                                                                                      data-line-numbers="44-58">
+                    package io.github.mat3e.downloads.limiting;
+
+                    import io.github.mat3e.downloads.limiting.api.AccountId;
+                    import io.github.mat3e.downloads.reporting.ReportingFacade;
+                    import org.junit.jupiter.api.BeforeEach;
+                    import org.junit.jupiter.api.Test;
+                    import org.mockito.ArgumentCaptor;
+
+                    import java.time.Clock;
+                    import java.util.Optional;
+
+                    import static org.assertj.core.api.Assertions.assertThat;
+                    import static org.mockito.Mockito.mock;
+                    import static org.mockito.Mockito.verify;
+                    import static org.mockito.Mockito.when;
+
+                    class LimitingFacadeTest {
+                      private final Clock clock = mock(Clock.class);
+                      private final AccountRepository accountRepository = mock(AccountRepository.class);
+                      private final AccountSettingRepository accountSettingRepository = mock(AccountSettingRepository.class);
+                      private final ReportingFacade reporting = mock(ReportingFacade.class);
+
+                      private final LimitingFacade systemUnderTest =
+                          new LimitingFacade(clock, accountRepository, accountSettingRepository, reporting);
+
+                      @Test
+                      void newAccount_overrideLimit_createsAccount() {
+                        // given
+                        var accountId = AccountId.valueOf("1");
+                        when(accountSettingRepository.findById(accountId))
+                            .thenReturn(Optional.empty());
+
+                        // when
+                        systemUnderTest.overrideAccountLimit(accountId, 1);
+
+                        // then
+                        var captor = ArgumentCaptor.forClass(AccountSetting.class);
+                        verify(accountSettingRepository).save(captor.capture());
+                        var account = captor.getValue();
+                        assertThat(account.id()).isEqualTo(accountId);
+                        assertThat(account.limit()).isEqualTo(1);
+                      }
+
+                      @Test
+                      void existingAccount_overrideLimit_updatesAccount() {
+                        // given
+                        var accountId = AccountId.valueOf("1");
+                        var existingAccount = mock(AccountSetting.class);
+                        when(accountSettingRepository.findById(accountId))
+                            .thenReturn(Optional.of(existingAccount));
+
+                        // when
+                        systemUnderTest.overrideAccountLimit(accountId, 1);
+
+                        // then
+                        verify(existingAccount).overrideLimit(1);
+                        verify(accountSettingRepository).save(existingAccount);
+                      }
+                    }
+                </code></pre>
+            </section>
+            <section data-auto-animate data-background-image>
+                <pre data-id="unit-test" class="r-stretch" style="width: 100%;"><code class="java" data-trim
+                                                                                      contenteditable="true"
+                                                                                      data-line-numbers="44-58|17-24">
+                    package io.github.mat3e.downloads.limiting;
+
+                    import io.github.mat3e.downloads.limiting.api.AccountId;
+                    import io.github.mat3e.downloads.reporting.ReportingFacade;
+                    import org.junit.jupiter.api.BeforeEach;
+                    import org.junit.jupiter.api.Test;
+                    import org.mockito.ArgumentCaptor;
+
+                    import java.time.Clock;
+                    import java.util.Optional;
+
+                    import static org.assertj.core.api.Assertions.assertThat;
+                    import static org.mockito.Mockito.mock;
+                    import static org.mockito.Mockito.verify;
+                    import static org.mockito.Mockito.when;
+
+                    class LimitingFacadeTest {
+                      private final Clock clock = mock(Clock.class);
+                      private final AccountRepository accountRepository = mock(AccountRepository.class);
+                      private final AccountSettingRepository accountSettingRepository = mock(AccountSettingRepository.class);
+                      private final ReportingFacade reporting = mock(ReportingFacade.class);
+
+                      private final LimitingFacade systemUnderTest =
+                          new LimitingFacade(clock, accountRepository, accountSettingRepository, reporting);
+
+                      @Test
+                      void newAccount_overrideLimit_createsAccount() {
+                        // given
+                        var accountId = AccountId.valueOf("1");
+                        when(accountSettingRepository.findById(accountId))
+                            .thenReturn(Optional.empty());
+
+                        // when
+                        systemUnderTest.overrideAccountLimit(accountId, 1);
+
+                        // then
+                        var captor = ArgumentCaptor.forClass(AccountSetting.class);
+                        verify(accountSettingRepository).save(captor.capture());
+                        var account = captor.getValue();
+                        assertThat(account.id()).isEqualTo(accountId);
+                        assertThat(account.limit()).isEqualTo(1);
+                      }
+
+                      @Test
+                      void existingAccount_overrideLimit_updatesAccount() {
+                        // given
+                        var accountId = AccountId.valueOf("1");
+                        var existingAccount = new AccountSetting(accountId.getId(), 2, 1);
+                        when(accountSettingRepository.findById(accountId))
+                            .thenReturn(Optional.of(existingAccount));
+
+                        // when
+                        systemUnderTest.overrideAccountLimit(accountId, 1);
+
+                        // then
+                        assertThat(existingAccount.limit()).isEqualTo(1);
+                        verify(accountSettingRepository).save(existingAccount);
+                      }
+                    }
+                </code></pre>
+                <aside class="notes">
+                    To jest lepszy test - coś się faktycznie zmieniło. Taki mindset potrzebny
+                    <br/>
+                    Można mieć wywołanie overrideAccount, ale co jeśli ta metoda nic nie robi? Dopiero
+                    AccountSettingTest ma to wykryć?
+                </aside>
+            </section>
+            <section data-auto-animate data-background-image>
+                <pre data-id="unit-test" class="r-stretch" style="width: 100%;"><code class="java" data-trim
+                                                                                      contenteditable="true"
+                                                                                      data-line-numbers="18-33|32-33,37-49|37-49">
+                    package io.github.mat3e.downloads.limiting;
+
+                    import io.github.mat3e.downloads.limiting.api.AccountId;
+                    import io.github.mat3e.downloads.reporting.ReportingFacade;
+                    import org.junit.jupiter.api.Test;
+                    import org.junit.jupiter.api.extension.ExtendWith;
+                    import org.mockito.ArgumentCaptor;
+                    import org.mockito.Captor;
+                    import org.mockito.InjectMocks;
+                    import org.mockito.Mock;
+                    import org.mockito.junit.jupiter.MockitoExtension;
+                    import java.time.Clock;
+                    import java.util.Optional;
+                    import static org.assertj.core.api.Assertions.assertThat;
+                    import static org.mockito.Mockito.verify;
+                    import static org.mockito.Mockito.when;
+
+                    @ExtendWith(MockitoExtension.class)
+                    class LimitingFacadeTest {
+                      @Mock
+                      private Clock clock;
+                      @Mock
+                      private AccountRepository accountRepository;
+                      @Mock
+                      private AccountSettingRepository accountSettingRepository;
+                      @Mock
+                      private ReportingFacade reporting;
+
+                      @InjectMocks
+                      private LimitingFacade systemUnderTest;
+
+                      @Captor
+                      private ArgumentCaptor&lt;AccountSetting> captor;
+
+                      @Test
+                      void newAccount_overrideLimit_createsAccount() {
+                        // given
+                        var accountId = AccountId.valueOf("1");
+                        when(accountSettingRepository.findById(accountId))
+                            .thenReturn(Optional.empty());
+
+                        // when
+                        systemUnderTest.overrideAccountLimit(accountId, 1);
+
+                        // then
+                        verify(accountSettingRepository).save(captor.capture());
+                        var account = captor.getValue();
+                        assertThat(account.id()).isEqualTo(accountId);
+                        assertThat(account.limit()).isEqualTo(1);
+                      }
+
+                      @Test
+                      void existingAccount_overrideLimit_updatesAccount() {
+                        // given
+                        var accountId = AccountId.valueOf("1");
+                        var existingAccount = new AccountSetting(accountId.getId(), 2, 1);
+                        when(accountSettingRepository.findById(accountId))
+                            .thenReturn(Optional.of(existingAccount));
+
+                        // when
+                        systemUnderTest.overrideAccountLimit(accountId, 1);
+
+                        // then
+                        assertThat(existingAccount.limit()).isEqualTo(1);
+                        verify(accountSettingRepository).save(existingAccount);
+                      }
+                    }
+                </code></pre>
+            </section>
+            <section data-auto-animate>
+                <pre data-id="unit-test" class="r-stretch" style="width: 100%;"><code class="java" data-trim
+                                                                                      contenteditable="true"
+                                                                                      data-line-numbers="37-47|5,15-16|5">
+                    package io.github.mat3e.downloads.limiting;
+
+                    import io.github.mat3e.downloads.limiting.api.AccountId;
+                    import io.github.mat3e.downloads.reporting.ReportingFacade;
+                    import org.assertj.core.api.BDDAssertions;
+                    import org.junit.jupiter.api.Test;
+                    import org.junit.jupiter.api.extension.ExtendWith;
+                    import org.mockito.ArgumentCaptor;
+                    import org.mockito.Captor;
+                    import org.mockito.InjectMocks;
+                    import org.mockito.Mock;
+                    import org.mockito.junit.jupiter.MockitoExtension;
+                    import java.time.Clock;
+                    import java.util.Optional;
+                    import static org.mockito.BDDMockito.given;
+                    import static org.mockito.BDDMockito.then;
+
+                    @ExtendWith(MockitoExtension.class)
+                    class LimitingFacadeTest {
+                      @Mock
+                      private Clock clock;
+                      @Mock
+                      private AccountRepository accountRepository;
+                      @Mock
+                      private AccountSettingRepository accountSettingRepository;
+                      @Mock
+                      private ReportingFacade reporting;
+
+                      @InjectMocks
+                      private LimitingFacade systemUnderTest;
+
+                      @Captor
+                      private ArgumentCaptor&lt;AccountSetting> accountSettingCaptor;
+
+                      @Test
+                      void newAccount_overrideLimit_createsAccount() {
+                        var accountId = AccountId.valueOf("1");
+                        given(accountSettingRepository.findById(accountId))
+                            .willReturn(Optional.empty());
+
+                        // when
+                        systemUnderTest.overrideAccountLimit(accountId, 1);
+
+                        then(accountSettingRepository).should().save(accountSettingCaptor.capture());
+                        var account = accountSettingCaptor.getValue();
+                        BDDAssertions.then(account.id()).isEqualTo(accountId);
+                        BDDAssertions.then(account.limit()).isEqualTo(1);
+                      }
+
+                      @Test
+                      void existingAccount_overrideLimit_updatesAccount() {
+                        var accountId = AccountId.valueOf("1");
+                        var existingAccount = new AccountSetting(accountId.getId(), 2, 1);
+                        given(accountSettingRepository.findById(accountId)).willReturn(Optional.of(existingAccount));
+
+                        // when
+                        systemUnderTest.overrideAccountLimit(accountId, 1);
+
+                        then(accountSettingRepository).should().save(existingAccount);
+                        BDDAssertions.then(existingAccount.limit()).isEqualTo(1);
+                      }
+                    }
+                </code></pre>
+            </section>
+            <section>
+                <h2 style="text-decoration: underline dotted #74A7CBFF">Unit</h2>
+                <ul>
+                    <li class="fragment" data-fragment-index="1">Dobre, gdy sporo logiki w pojedynczej klasie
+                        <ul>
+                            <li class="fragment" data-fragment-index="2">Np. walidacje w klasach z danymi</li>
+                        </ul>
+                    </li>
+                    <li class="fragment" data-fragment-index="3">Zamiast mockowania - może np. <code>Supplier</code>?
+                    </li>
+                    <li class="fragment" data-fragment-index="4">Super szybkie</li>
+                    <li class="fragment">Potencjalnie do wywalenia - za blisko szczegółów implementacyjnych</li>
+                </ul>
+                <img class="fragment" data-fragment-index="4" style="width: 30%" src="img/speed.jpg"
+                     alt="Cars: I Am Speed">
+            </section>
+        </section>
+
+        <section data-background-image>
+            <section>
+                <h2 style="text-decoration: underline dotted #78B9E6FF">Component</h2>
+                <ul>
+                    <li class="fragment">Jednostką "komponent", np. cały pakiet
+                        <ul>
+                            <li class="fragment">
+                                Wewnętrzne I/O (np. repozytoria) zastąpione w&nbsp;testach przez wersje
+                                <em>in-memory</em>
+                            </li>
+                            <li class="fragment">
+                                Mockowanie - tylko innych komponentów, systemów, itp.
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="fragment">Traktowanie komponentu niczym <em>black box</em></li>
+                    <li class="fragment">Łatwiej potem zamienić w mikroserwis, przepisać</li>
+                    <li class="fragment">O takie BDD chodzi!</li>
+                </ul>
+            </section>
+            <section data-background-image data-auto-animate>
+                <small data-id="src"><code>main/.../limiting</code></small>
+                <pre class="r-stretch" style="width: 100%; margin: 0"><code class="java" data-trim
+                                                                            contenteditable="true"
+                                                                            data-line-numbers="10-23">
+                    package io.github.mat3e.downloads.limiting;
+
+                    import io.github.mat3e.downloads.reporting.ReportingFacade;
+                    import lombok.RequiredArgsConstructor;
+                    import org.springframework.context.annotation.Bean;
+                    import org.springframework.context.annotation.Configuration;
+
+                    import java.time.Clock;
+
+                    @Configuration
+                    @RequiredArgsConstructor
+                    class LimitingConfiguration {
+                      /* just IO dependencies and other modules */
+                      private final Clock clock;
+                      private final AccountRepository accountRepository;
+                      private final AccountSettingRepository accountSettingRepository;
+                      private final ReportingFacade reportingFacade;
+
+                      @Bean
+                      LimitingFacade facade() {
+                        return new LimitingFacade(clock, accountRepository, accountSettingRepository, reportingFacade);
+                      }
+                    }
+                </code></pre>
+            </section>
+            <section data-background-image data-auto-animate>
+                <small data-id="src"><code>testFixtures/.../limiting</code></small>
+                <pre class="r-stretch" style="width: 100%; margin: 0"><code class="java" data-trim
+                                                                            contenteditable="true"
+                                                                            data-line-numbers="9-27|12-14|16,22|17-19|20-21|24-26">
+                    package io.github.mat3e.downloads.limiting;
+
+                    import io.github.mat3e.downloads.reporting.ReportingFacade;
+
+                    import java.time.Clock;
+                    import java.time.Instant;
+                    import java.time.ZoneOffset;
+
+                    class LimitingTestSetup {
+                      private final LimitingConfiguration creator; // Spring
+
+                      LimitingTestSetup(ReportingFacade reportingFacade) {
+                        this(Clock.fixed(Instant.EPOCH, ZoneOffset.UTC), reportingFacade);
+                      }
+
+                      LimitingTestSetup(Clock clock, ReportingFacade reportingFacade) {
+                        var accountRepository = new InMemoryAccountRepository();
+                        var settingsRepository
+                            = new InMemoryAccountSettingRepository(clock, accountRepository);
+                        creator = new LimitingConfiguration(
+                            clock, accountRepository, settingsRepository, reportingFacade);
+                      }
+
+                      LimitingFacade facade() {
+                        return creator.facade();
+                      }
+                    }
+                </code></pre>
+            </section>
+            <section data-background-image data-auto-animate>
+                <small data-id="src"><code>test/.../limiting</code></small>
+                <pre class="r-stretch" style="width: 100%; margin: 0"><code class="java" data-trim
+                                                                            contenteditable="true"
+                                                                            data-line-numbers="20-25|66-86">
+                    package io.github.mat3e.downloads.limiting;
+
+                    import io.github.mat3e.downloads.exceptionhandling.BusinessException;
+                    import io.github.mat3e.downloads.limiting.LimitingFacade.AccountLimitExceeded;
+                    import io.github.mat3e.downloads.limiting.api.AccountId;
+                    import io.github.mat3e.downloads.limiting.api.Asset;
+                    import io.github.mat3e.downloads.reporting.CapturingReportingFacade;
+                    import org.junit.jupiter.api.Test;
+
+                    import static io.github.mat3e.downloads.limiting.BusinessAssertions.then;
+                    import static io.github.mat3e.downloads.limiting.BusinessAssertions.thenFoundIn;
+                    import static org.assertj.core.api.Assertions.assertThat;
+                    import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+                    import static org.assertj.core.api.Assertions.catchException;
+                    import static org.assertj.core.api.Assertions.tuple;
+
+                    class LimitingTest {
+                      private static final AccountId ACCOUNT_ID = AccountId.valueOf("1");
+
+                      private final CapturingReportingFacade reporting
+                          = new CapturingReportingFacade();
+                      private final LimitingTestSetup setup
+                          = new LimitingTestSetup(reporting);
+                      private final LimitingFacade limiting
+                          = setup.facade();
+
+                      @Test
+                      void findAccount_unknownAccount_returnsEmpty() {
+                        assertThat(limiting.findForAccount(ACCOUNT_ID)).isEmpty();
+                      }
+
+                      @Test
+                      void downloadStarted_notExistingAccount_throwsNotFound() {
+                        assertThatExceptionOfType(BusinessException.class)
+                            .isThrownBy(() -> limiting.assignDownloadedAsset(ACCOUNT_ID, Asset.withId("123").inCountry("US")))
+                            .withMessageContaining("not found")
+                            .withMessageContaining(ACCOUNT_ID.getId());
+                      }
+
+                      @Test
+                      void assetRemoved_notExistingAccount_throwsNotFound() {
+                        assertThatExceptionOfType(BusinessException.class)
+                            .isThrownBy(() -> limiting.removeDownloadedAsset(ACCOUNT_ID, Asset.withId("123").inCountry("US")))
+                            .withMessageContaining("not found")
+                            .withMessageContaining(ACCOUNT_ID.getId());
+                      }
+
+                      @Test
+                      void overrideLimit_illegalValue_throws() {
+                        assertThatExceptionOfType(BusinessException.class)
+                            .isThrownBy(() -> limiting.overrideAccountLimit(ACCOUNT_ID, -1))
+                            .withMessageContaining("negative");
+                      }
+
+                      @Test
+                      void downloadStarted_limitNotExceeded_storesAsset() {
+                        // given
+                        limiting.overrideAccountLimit(ACCOUNT_ID, 1);
+
+                        // when
+                        limiting.assignDownloadedAsset(ACCOUNT_ID, Asset.withId("123").inCountry("US"));
+
+                        thenFoundIn(limiting, ACCOUNT_ID).containsExactly(Asset.withId("123").inCountry("US"));
+                      }
+
+                      @Test
+                      void downloadStarted_limitExceeded_doesNotStoreAsset() {
+                        // given
+                        limiting.overrideAccountLimit(ACCOUNT_ID, 1);
+                        // and
+                        limiting.assignDownloadedAsset(
+                            ACCOUNT_ID,
+                            Asset.withId("123").inCountry("US")
+                        );
+
+                        // when
+                        var exception =
+                            catchException(() -> limiting.assignDownloadedAsset(
+                                ACCOUNT_ID,
+                                Asset.withId("456").inCountry("US"))
+                            );
+
+                        then(exception).isInstanceOf(AccountLimitExceeded.class);
+                        thenFoundIn(limiting, ACCOUNT_ID)
+                            .containsExactly(Asset.withId("123").inCountry("US"));
+                      }
+
+                      @Test
+                      void downloadStarted_sameAsset_doesNotStoreAsset() {
+                        // given
+                        limiting.overrideAccountLimit(ACCOUNT_ID, 2);
+                        // and
+                        limiting.assignDownloadedAsset(ACCOUNT_ID, Asset.withId("123").inCountry("US"));
+
+                        // when
+                        limiting.assignDownloadedAsset(ACCOUNT_ID, Asset.withId("123").inCountry("US"));
+
+                        thenFoundIn(limiting, ACCOUNT_ID).containsExactly(Asset.withId("123").inCountry("US"));
+                        reporting.recordedEvents()
+                            .extracting("accountId", "asset")
+                            .containsExactly(tuple(ACCOUNT_ID, Asset.withId("123").inCountry("US")));
+                      }
+
+                      @Test
+                      void downloadStarted_sameAssetDifferentCountry_storesAsset() {
+                        // given
+                        limiting.overrideAccountLimit(ACCOUNT_ID, 2);
+                        // and
+                        limiting.assignDownloadedAsset(ACCOUNT_ID, Asset.withId("123").inCountry("DE"));
+
+                        // when
+                        limiting.assignDownloadedAsset(ACCOUNT_ID, Asset.withId("123").inCountry("FR"));
+
+                        thenFoundIn(limiting, ACCOUNT_ID).containsExactly(
+                            Asset.withId("123").inCountry("DE"),
+                            Asset.withId("123").inCountry("FR"));
+                        reporting.recordedEvents()
+                            .extracting("accountId", "asset", "existingAssetCountry")
+                            .containsExactly((tuple(ACCOUNT_ID, Asset.withId("123").inCountry("FR"), "DE")));
+                      }
+
+                      @Test
+                      void assetRemoved_noAsset_ignores() {
+                        // given
+                        limiting.overrideAccountLimit(ACCOUNT_ID, 2);
+
+                        // when
+                        limiting.removeDownloadedAsset(ACCOUNT_ID, Asset.withId("123").inCountry("US"));
+
+                        thenFoundIn(limiting, ACCOUNT_ID).isEmpty();
+                        reporting.recordedEvents()
+                            .extracting("accountId", "asset")
+                            .containsExactly(tuple(ACCOUNT_ID, Asset.withId("123").inCountry("US")));
+                      }
+
+                      @Test
+                      void assetRemoved_newDownloadStarted_storesAsset() {
+                        // given
+                        limiting.overrideAccountLimit(ACCOUNT_ID, 2);
+                        // and
+                        limiting.assignDownloadedAsset(ACCOUNT_ID, Asset.withId("123").inCountry("DE"));
+                        // and
+                        limiting.assignDownloadedAsset(ACCOUNT_ID, Asset.withId("123").inCountry("FR"));
+
+                        // when
+                        limiting.removeDownloadedAsset(ACCOUNT_ID, Asset.withId("123").inCountry("FR"));
+                        // and
+                        limiting.assignDownloadedAsset(ACCOUNT_ID, Asset.withId("456").inCountry("DE"));
+
+                        thenFoundIn(limiting, ACCOUNT_ID).containsExactly(
+                            Asset.withId("123").inCountry("DE"),
+                            Asset.withId("456").inCountry("DE"));
+                      }
+
+                      @Test
+                      void downloadStarted_limitIncreased_storesAsset() {
+                        // given
+                        limiting.overrideAccountLimit(ACCOUNT_ID, 1);
+                        // and
+                        limiting.assignDownloadedAsset(ACCOUNT_ID, Asset.withId("123").inCountry("DE"));
+
+                        // when
+                        var exception =
+                            catchException(() -> limiting.assignDownloadedAsset(ACCOUNT_ID, Asset.withId("456").inCountry("DE")));
+
+                        then(exception).isInstanceOf(AccountLimitExceeded.class);
+                        thenFoundIn(limiting, ACCOUNT_ID).containsExactly(Asset.withId("123").inCountry("DE"));
+
+                        // when
+                        limiting.overrideAccountLimit(ACCOUNT_ID, 2);
+                        // and
+                        limiting.assignDownloadedAsset(ACCOUNT_ID, Asset.withId("456").inCountry("DE"));
+
+                        thenFoundIn(limiting, ACCOUNT_ID).containsExactly(
+                            Asset.withId("123").inCountry("DE"),
+                            Asset.withId("456").inCountry("DE"));
+                      }
+                    }
+                </code></pre>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h2 style="text-decoration: underline dotted #D08A1DFF">Integration</h2>
+                <div class="r-stack">
+                    <img class="fragment current-visible" src="img/uvi.gif" alt="Lock worked in isolation"/>
+                    <img class="fragment current-visible" src="img/uvi2.gif" alt="Each window worked in isolation"/>
+                    <img class="fragment" src="img/uvi3.gif" alt="Each gate worked in isolation"/>
+                </div>
+            </section>
+            <section>
+                <h2>Ale... <span class="fragment">Co właściwie "integrujemy"?</span></h2>
+                <blockquote style="font-size: .8em" class="fragment">
+                    A key element of Spring is
+                    <strong>infrastructural support at the application level:</strong>
+                    Spring focuses on the
+                    <strong>"plumbing"</strong>
+                    of enterprise applications
+                    <small style="margin-top: .5em; display: block; font-style: normal">
+                        <a href="https://spring.io/projects/spring-framework">Spring</a> (i inne kontenery IoC)
+                    </small>
+                </blockquote>
+                <blockquote style="font-size: .8em" class="fragment">
+                    [Integration Testing] lets you test the correct wiring of your Spring IoC container contexts
+                    <small style="margin-top: .5em; display: block; font-style: normal">
+                        <a href="https://docs.spring.io/spring-framework/reference/testing/integration.html">Dokumentacja</a>
+                    </small>
+                </blockquote>
+                <div class="fragment">IoC = integracja między naszymi obiektami (beans)</div>
+                <aside class="notes">IoC container</aside>
+            </section>
+            <section data-background-image="img/java/island.png" data-background-size="contain"
+                     data-background-color="white">
+                <img class="fragment" style="height: 5em" src="img/java/springbeans.png"
+                     alt="IntelliJ showing Spring beans"/>
+                <h2 class="r-hstack fragment" data-fragment-index="1">
+                    <img src="img/java/bean.png" style="height: 3em" alt="coffee bean"/>
+                    <span class="fragment" data-fragment-index="2" style="text-shadow: 0 0 10px black;">⇒</span>
+                    <img class="fragment" data-fragment-index="2" src="img/java/logo.png" style="height: 5em"
+                         alt="java logo"/>
+                </h2>
+            </section>
+            <section>
+                <h2 style="text-decoration: underline dotted #D08A1DFF">Testy integracyjne</h2>
+                <ul>
+                    <li class="fragment">Cała apka, symulacja od A do Z</li>
+                    <li class="fragment">Fallback, <code>@HystrixCommand</code></li>
+                    <li class="fragment"><code>@Transactional</code>
+                        <ul>
+                            <li class="fragment" style="font-size: .9em">Uwaga na transakcje samych testów
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="fragment"><code>@Cacheable</code></li>
+                    <li class="fragment"><code>@ConditionalOn...</code>
+                        <ul>
+                            <li class="fragment" style="font-size: .9em"><code>ApplicationContextRunner</code>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="fragment">Filtry, interceptory, <code>@PreAuthorize</code>, AOP</li>
+                </ul>
+            </section>
+            <section data-autoslide="1000" class="stretch" data-auto-animate>
+                <div class="fragment" style="position: absolute; top: 30%; right: 1%"><code>@WebMvcTest</code></div>
+                <div class="fragment" style="margin-left: 40%"><code>@SpringJUnitWebConfig</code></div>
+                <div class="fragment" style="position: absolute; top: 3%; left: 3%"><code>@DataLdapTest</code></div>
+                <div class="fragment" style="position: absolute; bottom: 40%; left: 30%">
+                    <code>@DataMongoTest</code>
+                </div>
+                <div class="fragment" style="position: absolute; bottom: 30%"><code>@SpringJUnitConfig</code></div>
+                <div class="fragment" data-id="main" style="position: absolute; bottom: 10%; right: 2%"><code>@SpringBootTest</code>
+                </div>
+                <div class="fragment" style="position: absolute; left: 50%; top: 42%"><code>@JsonTest</code></div>
+                <div class="fragment" style="margin-left: -4em; margin-top: 1em"><code>@DataJdbcTest</code></div>
+                <div class="fragment" style="position: absolute; top: 30%; left: 20%"><code>@DataJpaTest</code></div>
+                <div class="fragment" data-autoslide="0" style="position: absolute; left: 5%; bottom: 15%">
+                    <code>@DataRedisTest</code></div>
+            </section>
+            <section data-auto-animate>
+                <div style="font-size: 1.5em" data-id="main"><code>@SpringBootTest</code></div>
+                <ul>
+                    <li class="fragment">Reguła kciuka: korzystać tylko z tego ;)</li>
+                    <li class="fragment">Optymalizacja testów pod cache'owanie i&nbsp;reużywanie kontekstów</li>
+                    <li class="fragment">Klasa bazowa, wspólna adnotacja, interfejs...</li>
+                </ul>
+            </section>
+        </section>
+
+        <section>
+            <div class="r-stack">
+                <h2 class="fragment" data-fragment-index="7">Dziękuję!</h2>
+                <h2 class="fragment fade-out" data-fragment-index="7">Lepsze pakiety</h2>
+            </div>
+            <ul>
+                <li class="fragment" data-fragment-index="1">Screaming architecture, CUPID</li>
+                <li class="fragment" data-fragment-index="2">Hermetyzacja, modularność</li>
+                <li class="fragment" data-fragment-index="3">Łatwość usuwania</li>
+                <li class="fragment" data-fragment-index="4">Bezpieczeństwo, testowalność</li>
+            </ul>
+            <br/>
+            <br/>
+            <ul style="list-style-type: none">
+                <li class="fragment" data-fragment-index="5">
+                    <a href="https://mat3e.github.io/talks/package/Sollers.html">mat3e.github.io/talks/package/Sollers</a>
+                </li>
+                <li class="fragment" data-fragment-index="6">
+                    <a href="https://github.com/mat3e/downloads-service/">github.com/mat3e/downloads-service</a>
+                </li>
+            </ul>
+            <aside class="notes">
+                Remove, e.g. to extract, also refactor
+                <br/>
+                Feel free to involve me in case you have more questions, when developing, etc. Happy to pair program
+            </aside>
+        </section>
+
+    </div>
+
+</div>
+
+<script src="dist/reveal.js"></script>
+<script src="plugin/zoom/zoom.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/search/search.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script>
+
+    // Also available as an ES module, see:
+    // https://revealjs.com/initialization/
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        center: true,
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight]
+    });
+
+    document.querySelectorAll('.reveal .slides section:not([data-background-image])').forEach(s => {
+        s.setAttribute('data-background-image', 'img/twitter.png');
+        s.setAttribute('data-background-size', '240px');
+        s.setAttribute('data-background-position', '.5em .5em');
+    });
+
+</script>
+
+</body>
+</html>
