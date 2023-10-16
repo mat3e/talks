@@ -2009,6 +2009,11 @@
                 <ul>
                     <h2>Synchronizacje</h2>
                 </ul>
+                <pre class="fragment" style="width: 100%;"><code class="properties" data-trim>
+                    junit.jupiter.execution.parallel.enabled = true
+                    junit.jupiter.execution.parallel.mode.default = same_thread
+                    junit.jupiter.execution.parallel.mode.classes.default = concurrent
+                </code></pre>
                 <pre class="fragment" style="width: 100%;"><code class="java" data-trim>
                     @Execution(ExecutionMode.CONCURRENT)
                     class ConcurrentTest extends IntegrationTest { // ...
@@ -2018,13 +2023,6 @@
                     // @ResourceLock("org.junit.platform.engine.support.hierarchical.ExclusiveResource.GLOBAL_KEY")
                     class IsolatedTest extends IntegrationTest { // ...
                  </code></pre>
-
-                <pre class="fragment" style="width: 100%;"><code class="properties" data-trim>
-                    junit.jupiter.execution.parallel.enabled = true
-                    junit.jupiter.execution.parallel.mode.default = same_thread
-                    junit.jupiter.execution.parallel.mode.classes.default = concurrent
-                </code></pre>
-
             </section>
             <section>
                 <h2>Kto nie ryzykuje...</h2>
