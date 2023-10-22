@@ -1,6 +1,6 @@
 ## 2023
-> * 4Developers Poznań [17.10] _Trochę więcej o testach w Springu_
-> * Sollers Tech Talks x Białystok [16.10] _Siła pakietów w Javie_
+* 4Developers Poznań [17.10] _Trochę więcej o testach w Springu_ [🔗](https://mat3e.github.io/talks/spring-test/4developers.html)
+* Sollers Tech Talks x Białystok [16.10] _Siła pakietów w Javie_ [🔗](https://mat3e.github.io/talks/package/Sollers.html)
 * BB Days 4 IT 2023 [16.09] _Potwierdzam, byłem tym layoffem_ [🔗](https://mat3e.github.io/talks/layoffs/BBDays4IT.html) [📽️](https://www.youtube.com/watch?v=7DeNpa_Wko4)
 
 ## 2022
