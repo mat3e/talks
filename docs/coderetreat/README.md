@@ -31,3 +31,4 @@ Perform the setup before the workshop, please.
 * [ ] Quick look at Conway's Game of Life:
     * [ ] Wiki: https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life.
     * [ ] Infographic: https://raw.githubusercontent.com/marcoemrich/game-of-life-rules/master/gol_rules_accessible.png.
+    * [ ] Demo app: https://playgameoflife.com/.
