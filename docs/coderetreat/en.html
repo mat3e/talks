@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Coderetreat</title>
+
+    <meta name="description" content="package-by-feature, package-private access, encapsulation, modularity">
+    <meta name="author" content="mat3e">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/black.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="plugin/highlight/github.css">
+    <link rel="stylesheet" href="dist/fontawesome.css">
+    <style>
+        .reveal .fragment.next-highlight {
+            opacity: .5;
+            visibility: inherit;
+        }
+
+        .reveal .fragment.next-highlight.visible {
+            opacity: .5;
+            visibility: inherit;
+        }
+
+        .reveal .fragment.next-highlight.current-fragment {
+            opacity: 1;
+            visibility: inherit;
+        }
+
+        .reveal .static-semi-fade-out {
+            opacity: .5;
+            visibility: inherit;
+        }
+
+        .no-margin img {
+            margin: 0;
+            width: 2em;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+        <section data-background-image>
+            <section data-background-image>
+                <h1 style="text-align: left">Global Day of&nbsp;<a href="https://www.coderetreat.org">Coderetreat</a>
+                </h1>
+                <h2 class="fragment" style="text-align: left">demo</h2>
+                <div style="width: 320px; height: 64px; background-image: url('img/twitter.png'); background-size: contain; top: -2em; right: 0; position: absolute;"></div>
+            </section>
+            <section>
+                <h2>Introduction</h2>
+                <ol>
+                    <li class="fragment">Who am I? What project I work on in Paramount?</li>
+                    <li class="fragment">How much do I use TDD and Pair-Programming?</li>
+                    <li class="fragment">What is my shoe size?</li>
+                </ol>
+            </section>
+        </section>
+
+        <section data-background-image>
+            <section data-background-image data-transition="none">
+                <blockquote style="font-size: .7em; width: 100%">
+                    <span class="fragment semi-fade-out" data-fragment-index="1">Coderetreats are free day-long, intensive practice events, </span><span
+                        data-id="goal">focusing on the fundamentals of software development and design</span><span
+                        class="fragment semi-fade-out" data-fragment-index="1">.
+                    By providing developers the opportunity to take part in focused practice, </span><span
+                        class="fragment semi-fade-out" data-fragment-index="1" data-id="not-done">away from the pressures of "getting things done"</span><span
+                        class="fragment semi-fade-out" data-fragment-index="1">,
+                    the coderetreat format has proven itself to be a highly effective means of learning and nurturing
+                    software development skills.</span>
+                    <small style="margin-top: .5em; display: block; font-style: normal">
+                        <a href="https://www.coderetreat.org/">coderetreat.org</a>
+                    </small>
+                </blockquote>
+                <blockquote style="font-size: .7em; width: 100%">
+                    <span class="fragment semi-fade-out" data-fragment-index="1">Coderetreat is a full-day event for practicing software development. Away from the pressures of
+                        ‘getting things done’, developers</span>
+                    <span data-id="road" class="fragment semi-fade-out" data-fragment-index="1">focus on and develop specific aspects of <strong><em>how</em></strong> they build code to explore good software development techniques</span><span
+                        class="fragment semi-fade-out" data-fragment-index="1">.
+                    Developers work <em>together</em> to </span><span
+                        data-id="retro" class="fragment semi-fade-out" data-fragment-index="1">build code and share their experiences</span><span
+                        class="fragment semi-fade-out" data-fragment-index="1">.
+                    Coderetreat uses a </span><span data-id="problem" class="fragment semi-fade-out"
+                                                    data-fragment-index="1">software <a
+                        href="https://www.coderetreat.org/the-workshop/#what-is-game-of-life">problem</a> with just enough complexity to create rich learning without overburdening the developers</span><span
+                        class="fragment semi-fade-out" data-fragment-index="1">.
+                    By </span><span data-id="sessions" class="fragment semi-fade-out" data-fragment-index="1">repeatedly building an implementation, adding additional challenges, and changing work partners</span>
+                    <span class="fragment semi-fade-out" data-fragment-index="1">frequently, Coderetreat is a framework for continuous learning how to build software
+                        <strong>better</strong>.</span>
+                    <small style="margin-top: .5em; display: block; font-style: normal">
+                        <a href="https://www.coderetreat.org/the-workshop/">coderetreat.org/the-workshop</a>
+                    </small>
+                </blockquote>
+            </section>
+            <section data-background-image data-transition="none">
+                <blockquote style="font-size: .7em; width: 100%">
+                    <span class="static-semi-fade-out">Coderetreats are free day-long, intensive practice events, </span><span
+                        data-id="goal" class="static-semi-fade-out">focusing on the fundamentals of software development and design</span><span
+                        class="static-semi-fade-out">.
+                    By providing developers the opportunity to take part in focused practice, </span><span
+                        class="fragment next-highlight" data-fragment-index="1" data-id="not-done">away from the pressures of "getting things done"</span><span
+                        class="static-semi-fade-out">,
+                    the coderetreat format has proven itself to be a highly effective means of learning and nurturing
+                    software development skills.</span>
+                    <small style="margin-top: .5em; display: block; font-style: normal">
+                        <a href="https://www.coderetreat.org/">coderetreat.org</a>
+                    </small>
+                </blockquote>
+                <blockquote style="font-size: .7em; width: 100%">
+                    <span class="static-semi-fade-out">Coderetreat is a full-day event for practicing software development. Away from the pressures of
+                        ‘getting things done’, developers</span>
+                    <span data-id="road" class="fragment semi-fade-out" data-fragment-index="1">focus on and develop specific aspects of <strong><em>how</em></strong> they build code to explore good software development techniques</span><span
+                        class="static-semi-fade-out">.
+                    Developers work <em>together</em> to </span><span
+                        data-id="retro" class="fragment next-highlight" data-fragment-index="5">build code and share their experiences</span><span
+                        class="static-semi-fade-out">.
+                    Coderetreat uses a </span><span data-id="problem" class="fragment next-highlight"
+                                                    data-fragment-index="3">software <a
+                        href="https://www.coderetreat.org/the-workshop/#what-is-game-of-life">problem</a> with just enough complexity to create rich learning without overburdening the developers</span><span
+                        class="static-semi-fade-out">.
+                    By </span><span data-id="sessions" class="fragment next-highlight" data-fragment-index="4">repeatedly building an implementation, adding additional challenges, and changing work partners</span>
+                    <span class="static-semi-fade-out">frequently, Coderetreat is a framework for continuous learning how to build software
+                        <strong>better</strong>.</span>
+                    <small style="margin-top: .5em; display: block; font-style: normal">
+                        <a href="https://www.coderetreat.org/the-workshop/">coderetreat.org/the-workshop</a>
+                    </small>
+                </blockquote>
+                <h1 class="fragment" style="position: absolute; top: 30%; width: 100%; text-align: center">
+                    🛣️ > 🎯
+                </h1>
+            </section>
+        </section>
+
+        <section data-background-image>
+            <section>
+                <h2>Pair-Programming</h2>
+                <ul>
+                    <li class="fragment">
+                        Recommendation: <a href="http://wiki.c2.com/?PairProgrammingPingPongPattern">Ping-Pong</a>
+                        <ul>
+                            <li class="fragment">Too boring? Try <em>Ball-Board</em> or <em>Mute Ping-Pong</em> (<a
+                                    href="https://www.coderetreat.org/facilitators/constraints/#pairing-constraints">ref</a>)
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="fragment">
+                        Lazy Coder - write the least to make test pass
+                        <ul>
+                            <li class="fragment">
+                                If both advanced - consider <a
+                                    href="https://www.coderetreat.org/facilitators/constraints/#test-driven-development-constraints">Evil
+                                Coder</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="fragment">Talk and consult with each other</li>
+                </ul>
+            </section>
+            <section>
+                <h2><a href="http://butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd">The Three Laws of TDD</a></h2>
+                <ol>
+                    <li class="fragment">
+                        You are not allowed to write any production code unless it is to make a failing unit test pass.
+                    </li>
+                    <li class="fragment">
+                        You are not allowed to write any more of a unit test than is sufficient to fail; <span
+                            class="fragment highlight-green">and compilation
+                        failures are failures</span>.
+                    </li>
+                    <li class="fragment">
+                        You are not allowed to write any more production code than is sufficient to pass the one failing
+                        unit test.
+                    </li>
+                </ol>
+            </section>
+            <section>
+                <a href="https://www.youtube.com/watch?v=ma15iBQpmHU">
+                    <img style="width: 45%" src="img/ref/jn-mid.png"/>
+                </a>
+                <a href="https://www.youtube.com/watch?v=PwMNtiKb-P4">
+                    <img class="fragment" style="width: 45%" src="img/ref/jn-test.png"/>
+                </a>
+                <a href="https://www.youtube.com/watch?v=Da42_gVqDKE">
+                    <img class="fragment" style="width: 45%" src="img/ref/ks.png"/>
+                </a>
+                <a href="https://youtu.be/5Er7juSAMXI?si=G82JHjYQw7lw9Yu0&t=1528" class="fragment"
+                   style="width: 100%; position: absolute; left: 0; top: 20%; text-align: center">
+                    <img src="img/ref/jn-best.png" style="width: 70%"/>
+                </a>
+            </section>
+            <section data-background-image="img/tdd/0.png" data-background-color="white"
+                     data-background-size="contain" data-transition="none" data-background-transition="none">
+            </section>
+            <section data-background-image="img/tdd/1.png" data-background-color="white"
+                     data-background-size="contain" data-transition="none" data-background-transition="none">
+            </section>
+            <section data-background-image="img/tdd/2.png" data-background-color="white"
+                     data-background-size="contain" data-transition="none" data-background-transition="none">
+                <div class="fragment" style="text-align: center">
+                    <img src="img/tdd/code0.png" class="fragment fade-out"/>
+                </div>
+            </section>
+            <section data-background-image="img/tdd/3.png" data-background-color="white"
+                     data-background-size="contain" data-transition="none" data-background-transition="none">
+                <div class="fragment" style="text-align: center">
+                    <img src="img/tdd/code1.png" class="fragment fade-out"/>
+                </div>
+            </section>
+            <section data-background-image="img/tdd/4.png" data-background-color="white"
+                     data-background-size="contain" data-transition="none" data-background-transition="none">
+                <div class="fragment" style="text-align: center">
+                    <img src="img/tdd/code2.png" class="fragment fade-out"/>
+                </div>
+            </section>
+            <section data-background-image="img/tdd/5.png" data-background-color="white"
+                     data-background-size="contain" data-transition="none" data-background-transition="none">
+            </section>
+            <section data-background-image="img/tdd/6.png" data-background-color="white"
+                     data-background-size="contain" data-transition="none" data-background-transition="none">
+            </section>
+            <section data-background-image="img/tdd/7.png" data-background-color="white"
+                     data-background-size="contain" data-transition="none" data-background-transition="none">
+            </section>
+        </section>
+
+        <section data-background-image>
+            <section data-background-color="white">
+                <div>
+                    <a href="https://github.com/marcoemrich/game-of-life-rules/">github.com/marcoemrich/game-of-life-rules</a>
+                </div>
+                <a href="https://github.com/marcoemrich/game-of-life-rules/" class="r-vstack"
+                   style="width: 50%; margin: 0 auto">
+                    <img src="img/gol/0.png" class="fragment">
+                    <img src="img/gol/1.png" class="fragment">
+                    <img src="img/gol/2.png" class="fragment">
+                    <img src="img/gol/3.png" class="fragment">
+                </a>
+            </section>
+            <section>
+                <h2>Patterns</h2>
+                <div class="r-vstack no-margin">
+                    <div class="fragment"><img src="img/patterns/0.png"></div>
+                    <div class="fragment"><img src="img/patterns/1a.png"> <img src="img/patterns/1b.png"></div>
+                    <div class="fragment"><img src="img/patterns/2.gif"></div>
+                    <div class="fragment"><img src="img/patterns/3.gif"></div>
+                    <div class="fragment"><img src="img/patterns/4.gif"></div>
+                </div>
+                <div class="fragment"><a href="https://playgameoflife.com/">online simulator</a></div>
+            </section>
+        </section>
+
+        <section data-background-image>
+            <section data-auto-animate>
+                <h1 data-id="s1">Session 1</h1>
+                <h2 class="fragment">Give it a try</h2>
+            </section>
+            <section data-auto-animate>
+                <h1 data-id="s1">Session 1</h1>
+                <h3>retro</h3>
+                <ol>
+                    <li class="fragment">Have you deleted your code already?
+                        <ul>
+                            <li class="fragment">Delete if not</li>
+                            <li class="fragment">How does it feel?</li>
+                        </ul>
+                    </li>
+                    <li class="fragment">What would you change in the next iteration?</li>
+                    <li class="fragment">Thoughts?</li>
+                </ol>
+            </section>
+        </section>
+
+        <section data-background-image>
+            <section data-auto-animate>
+                <h1 data-id="s2">Session 2</h1>
+                <h2 class="fragment">No mouse time!</h2>
+                <aside class="notes">
+                    Every class name and variable name needs to be a verb: CreatesCellGeneration, AppliesRuleNumberOne.
+                </aside>
+            </section>
+            <section data-auto-animate>
+                <h1 data-id="s2">Session 2</h1>
+                <h3>retro</h3>
+                <ol>
+                    <li class="fragment">What keyboard shortcuts you learnt and would use?</li>
+                    <li class="fragment">What to change what to further add?</li>
+                    <li class="fragment">Thoughts?</li>
+                </ol>
+            </section>
+        </section>
+
+        <section data-background-image>
+            <section data-auto-animate>
+                <h1 data-id="s3">Session 3</h1>
+                <h2 class="fragment">Your secondary language</h2>
+                <aside class="notes">
+                    Immutable objects
+                </aside>
+            </section>
+            <section data-auto-animate>
+                <h1 data-id="s3">Session 3</h1>
+                <h3>retro</h3>
+                <ol>
+                    <li class="fragment">Did it become easier?</li>
+                    <li class="fragment">Would you use this language in the last iteration?</li>
+                    <li class="fragment">Thoughts?</li>
+                </ol>
+            </section>
+        </section>
+
+        <section data-background-image>
+            <section data-auto-animate>
+                <h1 data-id="s4">Session 4</h1>
+                <h2 class="fragment" data-fragment-index="1">5-min deadlines</h2>
+                <a class="fragment" data-fragment-index="1" href="https://www.coderetreat.org/facilitators/constraints/#test-driven-development-constraints">ref</a>
+            </section>
+        </section>
+
+        <section>
+            <section data-auto-animate>
+                <h2>The Closing Circle</h2>
+                <ol>
+                    <li class="fragment">What did you learn today?</li>
+                    <li class="fragment">What surprised you today?</li>
+                    <li class="fragment">What will you apply starting Monday?</li>
+                </ol>
+                <br/>
+                <br/>
+                <div class="fragment">+Feedback for facilitator :)</div>
+            </section>
+        </section>
+    </div>
+</div>
+
+<script src="dist/reveal.js"></script>
+<script src="plugin/zoom/zoom.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/search/search.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script>
+
+    // Also available as an ES module, see:
+    // https://revealjs.com/initialization/
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        center: true,
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight]
+    });
+
+    /*document.querySelectorAll('.reveal .slides section:not([data-background-image])').forEach(s => {
+        s.setAttribute('data-background-image', 'img/twitter.png');
+        s.setAttribute('data-background-size', '240px');
+        s.setAttribute('data-background-position', '.5em .5em');
+    });*/
+
+</script>
+
+</body>
+</html>
