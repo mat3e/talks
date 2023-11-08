@@ -1,11 +1,14 @@
-Łącznie przeprowadziłem ponad 230 godziny warsztatów.
+Łącznie przeprowadziłem ponad 234 godziny warsztatów.
+
+## 2023
+* Paramount [03.11]: wewnętrzny _Global Day of Coderetreat_ [4h]
 
 ## 2022
 * Kurs infoShare Academy Java (online) [09.07]: _Spring: Wprowadzenie, Core, Boot_ [6h]
-* Alior Bank [13-14.01] _Domain-Driven Design_
+* Dedykowane szkolenie-webinar infoShare Academy [13-14.01]: _Domain-Driven Design_
 
 ## 2021
-* infoShare Academy [09.12] _EventSotrming, DDD, Czysta Architektura - przegląd i wprowadzenie_
+* infoShare Academy [09.12]: _EventSotrming, DDD, Czysta Architektura - przegląd i wprowadzenie_
 
 ## 2019
 * GigaCon [18-19.11]: _Mikroserwisowa architektura aplikacji web – REST, CQRS, NoSQL_ [16h] [🔗](https://github.com/mat3e/microservices-workshop)
