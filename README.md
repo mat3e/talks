@@ -1,3 +1,8 @@
+## 2024
+
+> * WarsawJS 113 [13.03] _Advent of Code sneak peek_
+* Polish JUG [01.02] _Moje rozumienie DDD (+ clean architecture) na przykładzie bajki o 3 świnkach_ [🔗](https://mat3e.github.io/talks/3pigs/PJUG.html)
+
 ## 2023
 * 4Developers Poznań [17.10] _Trochę więcej o testach w Springu_ [🔗](https://mat3e.github.io/talks/spring-test/4developers.html)
 * Sollers Tech Talks x Białystok [16.10] _Siła pakietów w Javie_ [🔗](https://mat3e.github.io/talks/package/Sollers.html)
