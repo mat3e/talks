@@ -1,4 +1,7 @@
-Łącznie przeprowadziłem ponad 234 godziny warsztatów.
+Łącznie przeprowadziłem ponad 242 godziny warsztatów.
+
+## 2024
+* Paramount [04.03] internal full-day workshop in English (hybrid): _Spring for QA_
 
 ## 2023
 * Paramount [03.11]: wewnętrzny _Global Day of Coderetreat_ [4h]
