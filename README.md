@@ -1,6 +1,6 @@
 ## 2024
 
-> * WarsawJS 113 [13.03] _Advent of Code sneak peek_
+> * WarsawJS 113 [13.03] _Advent of Code sneak peek_ [🔗](https://mat3e.github.io/talks/aoc/WarsawJS.html)
 * Polish JUG [01.02] _Moje rozumienie DDD (+ clean architecture) na przykładzie bajki o 3 świnkach_ [🔗](https://mat3e.github.io/talks/3pigs/PJUG.html)
 
 ## 2023
