@@ -1,0 +1,1199 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Advent of Code - sneak peek</title>
+
+    <meta name="description" content="package-by-feature, package-private access, encapsulation, modularity">
+    <meta name="author" content="mat3e">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/night.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="plugin/highlight/github.css">
+    <link rel="stylesheet" href="dist/fontawesome.css">
+
+    <style>
+        .reveal .no-m {
+            margin: 0;
+        }
+
+        .reveal .slides section .fragment.fade-out.visible.replace {
+            display: none;
+        }
+
+        .reveal .slides section .fragment.fade-in.replace {
+            display: none;
+        }
+
+        .reveal .slides section .fragment.current-visible.replace {
+            display: none;
+        }
+
+        .reveal .slides section .fragment.current-visible.current-fragment.replace {
+            display: inline-block;
+        }
+
+        .reveal .slides section .fragment.fade-in.replace {
+            display: none;
+        }
+
+        .reveal .slides section .fragment.fade-in.visible.replace {
+            display: inline-block;
+        }
+
+        .slides section .btn {
+            cursor: pointer;
+            font-size: .5em;
+            border: 1px solid black;
+            border-radius: 4px;
+            padding: .25em;
+            background-color: var(--r-link-color);
+        }
+
+        .slides section .btn:hover {
+            background-color: var(--r-link-color-hover);
+        }
+
+        .slides section .btn:active {
+            background-color: var(--r-link-color-dark);
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+        <section data-background-image>
+            <section data-background-image>
+                <h1 style="font-size: 2.5em; text-align: left; text-decoration: none; color: #00cc00; text-shadow: 0 0 2px #00cc00, 0 0 5px #00cc00;">
+                    Advent of Code
+                </h1>
+                <h2 style="text-align: left" class="fragment">sneak peek</h2>
+                <div style="width: 320px; height: 64px; background-image: url('img/twitter.png'); background-size: contain; top: -4em; right: 0; position: absolute;"></div>
+            </section>
+        </section>
+
+        <section data-background-image>
+            <section data-background-image="img/first.webp" data-background-size="contain">
+                <a href="https://media.giphy.com/media/2YmyC9O0DCgS16Snx7/giphy.gif">sauce</a>
+                <div>
+                    <a href="https://commons.wikimedia.org/wiki/File:ChatGPT_logo.svg">
+                        <img src="img/chatlogo.png" class="fragment">
+                    </a>
+                </div>
+                <a href="https://adventofcode.com/2023/about">
+                    <img src="img/gpt.png" class="fragment">
+                </a>
+            </section>
+        </section>
+
+        <section data-background-image>
+            <section>
+                <div class="r-vstack">
+                    <img src="img/panik1.jpg" class="no-m"/>
+                    <img src="img/panik2.jpg" class="no-m fragment fade-left"/>
+                    <img src="img/panik3.jpg" class="no-m fragment fade-right"/>
+                </div>
+                <div class="fragment" style="position: absolute; top: 30%; text-align: center">
+                    <img src="img/day6-toofast.png">
+                </div>
+            </section>
+            <section>
+                <h3>Netflix adaptation ;)</h3>
+                <a href="https://www.instagram.com/lowcostcosplayth">
+                    <img src="img/nadapt.jpg" style="width: 50%">
+                </a>
+            </section>
+            <section>
+                <div class="r-vstack" style="width: 70%; margin: 0 auto">
+                    <img src="img/times/times-a.png" class="no-m" data-id="header">
+                    <img src="img/times/times-d.png" class="no-m fragment fade-out replace"
+                         data-fragment-index="0">
+                    <img src="img/times/times-d2.png" class="no-m fragment current-visible replace"
+                         data-fragment-index="0">
+                    <img src="img/times/times-d3.png" class="no-m fragment fade-in replace" data-id="footer">
+                </div>
+                <aside class="notes">9:00 po zawiezieniu miętusów - panik, już zrobione</aside>
+            </section>
+            <section data-background-image="img/allday.webp" data-background-size="contain">
+                <a href="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaXQydnV1MGM4cXhxN3UwbnI3ZDZyaXFya2tpc2ZiOW85ZTg3a2tmeCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/XV74ZvGRXcZdS/giphy.gif">sauce</a>
+            </section>
+            <section data-auto-animate>
+                <div class="r-vstack" style="width: 70%; margin: 0 auto">
+                    <img src="img/times/times-a.png" class="no-m" data-id="header">
+                    <img src="img/times/times-d.png" class="no-m" data-id="footer">
+                </div>
+            </section>
+            <section data-auto-animate>
+                <div class="r-vstack" style="width: 70%; margin: 0 auto">
+                    <img src="img/times/times-a.png" class="no-m" data-id="header">
+                    <img src="img/times/times-c.png" class="no-m" data-auto-animate-delay="1">
+                    <img src="img/times/times-d.png" class="no-m" data-id="footer">
+                </div>
+            </section>
+        </section>
+
+        <section data-background-image>
+            <!--
+            Day 1 Takes longer than expected even writing quick&ugly...
+            2: Using RegEx to solve the problem = you've 2 problems now. But worked here
+            3: After having graph working it was trivial to operate or adjacent nodes
+            4: tests finally; commit: Done in a first try. Probably thanks to TDD
+            5: Tricky out of memory, so created my own class with API close to Map; Split manually into pairs and process
+            them in separate execution of the program
+            8: Generators FTW
+            8.2:
+            Least common multiple would not always work - all the elements need to get
+            to their end (/.+Z/) after the total number of instructions, which was the case.
+
+            Otherwise, there could be a different path, AFTER a given element got
+            to the first node ending with 'Z' and perhaps that path could be shorter...
+            10.2: Too hard to find loopholes; found hint to scale up. - graf x3
+            11.2: Dijkstra needed priority queue
+            12:
+            Had really hard time with that. Wanted to use Combinations, but failed.
+            Then, wrote function accepting already split groups (ignoring '.'),
+            but it was overcomplicated and had some bugs.
+
+            Rewritten similar to what I found on Reddit, just with strings.
+            13:
+            Started with binary numbers, but it wasn't bringing much.
+
+            Also, found instructions confusing - it wasn't clear if
+            we can have just a single or multiple mirrors in pattern.
+            It appeared (from wrong answers) multiple were possible.
+            14: Had some problems with array references though
+            14.2:
+            Wait for 10 occurrences of cycle, as I'm just checking results
+            and they could be accidentally the same
+            15.2: Easy as JS Maps preserve insertion order of keys
+            16:
+            For part 2 was afraid of performance, so wanted to have
+            dynamic programming and recursive way of solving,
+            but it was hard to skip duplicates without a proper graph,
+            and it appeared original way is efficient enough to loop
+            it through all the starting points
+            17.2:
+            Had pretty good abstractions, yet "minimum 4 steps" rule required changes
+            in both graph and crucible state.
+
+            * Graph knows far neighbors and their accumulated weights
+            * Crucible got a different way of choosing next states and moving
+            18: The only trick was to start from 1, 1
+            18.2: Learn about and use Pick's theorem and Shoelace formula
+            19.2:
+            I was negating just for the last step instead of negating all previous steps
+            each time. I also missed a case of duplicated transitions (`or` not `and`).
+            20.1:
+            I started with TDD, but had some issues with understanding the flow.
+            Took a break and rewritten everything kinda similar to what I had,
+            but with inspiration taken from Redux/Flux and in a hacky way, w/o tests
+            as it was enough to confirm the final count to ensure it works.
+            20.2:
+            In ugly way, taken from Reddit
+            https://www.reddit.com/r/adventofcode/comments/18mmfxb/2023_day_20_solutions/
+            and YT: https://www.youtube.com/watch?v=lxm6i21O83k
+            22.1:
+            Didn't keep highest bricks first and that was causing wrong positioning.
+            24.1: Math
+            25.1:
+            repeat random cut until 3 cuts
+            Karger's algorithm used for min cut.
+            -->
+            <section>
+                <ol>
+                    <li>Quick hacking in browser console</li>
+                    <li class="fragment">Same + regex</li>
+                    <li class="fragment">First graph</li>
+                    <li class="fragment">TDD <span class="fragment">and it worked 😱</span></li>
+                </ol>
+            </section>
+            <section>
+                <div class="r-stack">
+                    <a href="https://twitter.com/unclebobmartin/status/1730703781111730255" class="fragment fade-out"
+                       data-fragment-index="0">
+                        <img src="img/wujek.png">
+                    </a>
+                    <pre style="width: 100%" class="fragment" data-fragment-index="0"><code data-trim class="json"
+                                                                                            data-line-numbers="7-15"
+                                                                                            style="font-size: .9em">
+                        {
+                          "name": "trying-aoc23",
+                          "version": "0.0.1",
+                          "description": "Trying Advent of Code for the first time",
+                          "main": "1-1.js",
+                          "type": "module",
+                          "scripts": {
+                            "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+                          },
+                          "devDependencies": {
+                            "jest": "^29.7.0"
+                          },
+                          "jest": {
+                            "testEnvironment": "node"
+                          },
+                          "repository": {
+                            "type": "git",
+                            "url": "git+https://github.com/mat3e/trying-aoc23.git"
+                          },
+                          "keywords": [
+                            "Advent",
+                            "Code"
+                          ],
+                          "author": "mat3e",
+                          "license": "MIT",
+                          "bugs": {
+                            "url": "https://github.com/mat3e/trying-aoc23/issues"
+                          },
+                          "homepage": "https://github.com/mat3e/trying-aoc23#readme"
+                        }
+                    </code></pre>
+                </div>
+            </section>
+            <section>
+                <a href="https://www.youtube.com/watch?v=KyFVA4Spcgg" class="fragment fade-out"
+                   style="position: absolute; display: block; text-align: center;width: 100%"
+                   data-fragment-index="0"><img src="img/tdd.png"/></a>
+                <pre style="margin: 0 auto; width: 100%" class="fragment" data-fragment-index="0"><code
+                        class="javascript" data-trim data-line-numbers>
+                    describe('iterator', () => {
+                      it('moves to next state - easy scenario', () => {
+                        // given
+                        const toTest = iterator(
+                          `Card 172: 92  9 73 82 15  6 44 28 88 34 | 99 78 11 46  9 36 89 65 17  8 16 94 68 63 12 54 25 33 69 47 13 38 93 50 59
+                          Card 173: 31 18 13 56 72 | 74 77 10 23 35 67 36 11`);
+
+                        expect(toTest.state).toEqual(new Map([[172, 1], [173, 1]]));
+
+                        // when
+                        toTest.next();
+
+                        // then
+                        expect(toTest.state).toEqual(new Map([[172, 1], [173, 2]]));
+                        expect(toTest.hasNext()).toBe(true);
+                </code></pre>
+            </section>
+        </section>
+
+        <section data-background-image>
+            <section>
+                <h2>Day 5</h2>
+                <ul>
+                    <li class="fragment">First issues</li>
+                    <li class="fragment">
+                        <code>Map</code>? <span class="fragment">OOM</span>
+                    </li>
+                    <li class="fragment"><em>Brute force</em>? <span class="fragment">18m</span></li>
+                </ul>
+            </section>
+            <section data-background-image="img/day5-history.png" data-background-size="contain">
+                <a href="https://www.reddit.com/r/adventofcode/comments/18b4b0r/comment/kc2jzmb/" class="fragment"
+                   style="transform: rotate(-5deg); position: absolute; left: 0;">
+                    <img src="img/day5-sheet.png">
+                </a>
+                <a href="https://www.reddit.com/r/adventofcode/comments/18b4b0r/comment/kc4pepw/" class="fragment"
+                   style="transform: rotate(3deg); position: absolute; top: 0; right: 0">
+                    <img src="img/day5-j.png">
+                </a>
+                <a href="https://www.reddit.com/r/adventofcode/comments/18b4b0r/comment/kc4j6hu/" class="fragment"
+                   style="transform: rotate(5deg); position: absolute; top: 3em; left: -3em">
+                    <img src="img/day5-jq.png">
+                </a>
+                <a href="https://www.reddit.com/r/adventofcode/comments/18b4b0r/comment/kc41scd/" class="fragment"
+                   style="position: absolute; top: 3em; left: -1em">
+                    <img src="img/day5-dyalog.png">
+                </a>
+                <a href="https://www.reddit.com/r/adventofcode/comments/18b4b0r/comment/kc2vb86/" class="fragment"
+                   style="transform: rotate(-10deg); position: absolute; top: 4em; left: 0; right: 0">
+                    <img src="img/day5-mongo.png">
+                </a>
+            </section>
+            <section>
+                <a href="https://www.reddit.com/r/adventofcode/comments/18b4b0r/comment/keeuh1o/">
+                    <div class="r-vstack">
+                        <img src="img/day5-befunge-1.png" style="margin: 0">
+                        <img src="img/day5-befunge-2.png" style="margin: 0" class="fragment">
+                    </div>
+                </a>
+                <pre class="fragment current-visible" data-fragment-index="1"
+                     style="position: absolute; top: 0; width: 100%"><code
+                        data-trim style="font-size: .69em; line-height: 1">
+&lt;v p:0*2a;=list size;                     n(4"FRTH"(4"TOYS"                                         ;;
+         ;stack = [next values] [current values] dst_range src_range ln i;                          ;;
+         ;depth =      (n+4)+   (n+4-1) - 4      3         2         1  0;
+
+ >          gk& 00g 01p v
+                >$ a, & v;read line;    ;Vi&lt;src?;      ;Vi>ln?; ;Ni=dst+(Vi-src),size-=1;
+   >                    >&& 01g:!#v  _  :3+P 3P- :0\`!] :3P \`] 4P+ 01g4+0\-L :3+L$ 01g1-01p   v
+    >$ 0g:01p :!|!:-1 <              !                |       |
+   $^;reset; <  > :P. ^              :          ;i--; $       $
+   |`\0: -0'_^# `a: ~v#< 0    $k3 <  ^             -1 <       <                                <
+    ;\n\n = new map; >$                                                                        v
+   > \a*+              ^                                             @,a.,a  N $$(4"IMTH"  D   <
+    ;we have to read the first number;
+    ;of a new group by hand because  ;
+    ;we cant detect line breaks      ;
+                </code></pre>
+            </section>
+            <section>
+                <a href="https://www.reddit.com/r/adventofcode/comments/18i0xtn/comment/kdb87vl/">
+                    <div class="r-vstack">
+                        <img src="img/uiua/1.png" style="margin: 0; width: 60%">
+                        <img src="img/uiua/2.png" style="margin: 0; width: 60%" class="fragment">
+                        <img src="img/uiua/3.png" style="margin: 0; width: 60%" class="fragment">
+                        <img src="img/uiua/4.png" style="margin: 0; width: 60%" class="fragment">
+                        <img src="img/uiua/5.png" style="margin: 0; width: 60%" class="fragment">
+                    </div>
+                </a>
+            </section>
+            <section>
+                <h3>Top langs?</h3>
+                <ol>
+                    <li>Python</li>
+                    <li class="fragment">Rust</li>
+                    <li class="fragment">C#, JS/TS, Kotlin, Java</li>
+                </ol>
+            </section>
+            <section>
+                <h3>This and that</h3>
+                <ul>
+                    <li class="fragment">Zig</li>
+                    <li class="fragment">D</li>
+                    <li class="fragment">APL</li>
+                    <li class="fragment">Vim keystrokes</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Day 5</h2>
+                <ul>
+                    <li>First issues</li>
+                    <li>
+                        <code>Map</code>? <span>OOM</span>
+                    </li>
+                    <li><em>Brute force</em>? <span>18m</span></li>
+                </ul>
+                <a class="fragment" href="https://www.mariowiki.com/Mario_Maze"
+                   style="width: 100%;display: block; text-align: center;position: absolute;top: 10%">
+                    <img src="img/maze.png" style="width: 30%">
+                </a>
+            </section>
+        </section>
+
+        <section data-background-image>
+            <section>
+                <h3>Day 8</h3>
+                <div class="r-stack fragment" data-fragment-index="2">
+                    <img src="img/day8/1.png" style="width: 50%" class="fragment fade-out" data-fragment-index="3">
+                    <img src="img/day8/2.png" style="width: 50%" class="fragment" data-fragment-index="3">
+                </div>
+                <a class="r-vstack" href="https://www.reddit.com/r/adventofcode/comments/18dgbhq/comment/kch3ok2/">
+                    <img src="img/day8/r1.png" class="no-m">
+                    <img src="img/day8/r2.png" class="no-m fragment" data-fragment-index="0">
+                    <img src="img/day8/r3.png" class="no-m fragment" data-fragment-index="1">
+                    <img src="img/day8/r4.png" class="no-m fragment" data-fragment-index="3">
+                    <img src="img/day8/r5.png" class="no-m fragment" data-fragment-index="4">
+                </a>
+            </section>
+            <section data-background-image>
+                <pre style="margin: .5em auto 0; width: 100%;"><code style="font-size: .9em; line-height: 1.1"
+                                                                     class="javascript" data-trim data-line-numbers>
+                    describe('parseInstructions', () => {
+                        it('loops through instructions till needed', () => {
+                            const first = parseInstructions('RL');
+                            const second = parseInstructions('LLR');
+
+                            expect(first.next().value).toEqual(1);
+                            expect(second.next().value).toEqual(0);
+
+                            expect(first.next().value).toEqual(0);
+                            expect(second.next().value).toEqual(0);
+                </code></pre>
+                <hr class="fragment no-m" data-fragment-index="0"/>
+                <pre style="margin: 0 auto; width: 100%" class="fragment" data-fragment-index="0"><code
+                        style="font-size: .9em; line-height: 1.1"
+                        class="javascript" data-trim data-line-numbers>
+                    export function* parseInstructions(input) {
+                        const instructions = input.split('');
+                        const dictionary = {
+                            'L': 0,
+                            'R': 1
+                        };
+                        for (let index = 0; ; index++) {
+                            yield dictionary[instructions[index % instructions.length]];
+                        }
+                    }
+                </code></pre>
+                <ul style="list-style-type: '+ '; margin-top: .5em" class="fragment" data-fragment-index="1">
+                    <li>Least Common Multiple</li>
+                    <li>Greatest Common Divisor</li>
+                </ul>
+            </section>
+        </section>
+
+        <section data-background-image>
+            <section data-auto-animate>
+                <h2>Day 10</h2>
+                <div class="r-hstack">
+                    <pre style="width: 10%; margin: 0 3.5em"><code class="javascript" data-trim
+                                                                   style="text-align: center">
+                        .|.
+                        FJ.
+                    </code></pre>
+                    <h2 class="fragment" data-fragment-index="1">⇒</h2>
+                    <pre class="fragment" data-fragment-index="1" style="width: 10%; margin: 0 3.5em"><code
+                            class="javascript" data-trim style="text-align: center">
+                        .|.
+                        ┌┘.
+                    </code></pre>
+                </div>
+            </section>
+            <section data-auto-animate>
+                <h2>Day 10</h2>
+                <pre style="width: 10%"><code class="javascript" data-trim style="text-align: center" data-id="here2">
+                    J
+                </code></pre>
+            </section>
+            <section data-auto-animate>
+                <h2>Day 10</h2>
+                <pre style="width: 10%"><code class="javascript" data-trim style="text-align: center" data-id="here2">
+                    .|.
+                    -J.
+                    ...
+                </code></pre>
+            </section>
+            <section data-background-image>
+                <div style="position: absolute; top: 0; text-align: center; z-index: 100"
+                     class="fragment current-visible">
+                    <img src="img/prettyprint.png">
+                </div>
+                <pre style="width: 100%;" class="no-m r-stretch"><code class="javascript" data-trim=""
+                                                                       contenteditable="true"
+                                                                       data-line-numbers="332-341|332-341|53-55,58-59|114-120|66-67,70-74,78,80-81,83-84,86|126-130,135-136|168-175">
+                    const validConnections = new Map([
+                        ['F', {
+                            left: new Set(),
+                            top: new Set(),
+                            right: new Set(['-', '7', 'J', 'S']),
+                            bottom: new Set(['|', 'J', 'L', 'S']),
+                        }],
+                        ['-', {
+                            left: new Set(['-', 'F', 'L', 'S']),
+                            top: new Set(),
+                            right: new Set(['-', '7', 'J', 'S']),
+                            bottom: new Set(),
+                        }],
+                        ['7', {
+                            left: new Set(['-', 'F', 'L', 'S']),
+                            top: new Set(),
+                            right: new Set(),
+                            bottom: new Set(['|', 'J', 'L', 'S']),
+                        }],
+                        ['|', {
+                            left: new Set(),
+                            top: new Set(['|', 'F', '7', 'S']),
+                            right: new Set(),
+                            bottom: new Set(['|', 'J', 'L', 'S']),
+                        }],
+                        ['L', {
+                            left: new Set(),
+                            top: new Set(['|', 'F', '7', 'S']),
+                            right: new Set(['-', '7', 'J', 'S']),
+                            bottom: new Set(),
+                        }],
+                        ['J', {
+                            left: new Set(['-', 'F', 'L', 'S']),
+                            top: new Set(['|', 'F', '7', 'S']),
+                            right: new Set(),
+                            bottom: new Set(),
+                        }],
+                        ['S', {
+                            left: new Set(['-', 'F', 'L']),
+                            top: new Set(['|', 'F', '7']),
+                            right: new Set(['-', '7', 'J']),
+                            bottom: new Set(['|', 'J', 'L']),
+                        }],
+                    ]);
+
+                    const reversedDirections = new Map([
+                        ['left', 'right'],
+                        ['right', 'left'],
+                        ['top', 'bottom'],
+                        ['bottom', 'top'],
+                    ]);
+
+                    class Graph {
+                        /** @type {Map&lt;string, string>} */
+                        #points = new Map();
+                        /** @type {Map&lt;string, Set&lt;string>>} */
+                        #matchingPipes = new Map();
+                        /** @type {Map&lt;string, Set&lt;string>>} */
+                        #adjacency = new Map();
+                        #sPoint = '';
+                        #height = NaN;
+                        #width = Number.NEGATIVE_INFINITY;
+                        #mainLoop = new Set();
+                        #input = '';
+
+                        constructor(input) {
+                            const lines = input.split('\n');
+                            this.#input = input;
+                            this.#height = lines.length - 1;
+                            lines.forEach((line, y) => {
+                                line = line.trim();
+                                for (let x = 0; x < line.length; x++) {
+                                    const point = this.toPoint(x, y);
+                                    const value = line[x];
+                                    if (value === 'S') {
+                                        this.#sPoint = point;
+                                    }
+                                    this.#points.set(point, value);
+                                    this.#matchingPipes.set(point, new Set());
+                                    this.#adjacency.set(point, new Set());
+                                    this.#connectNeighbors(x, y);
+                                    this.#width = Math.max(this.#width, x);
+                                }
+                            });
+                            this.#mainLoop = this.#mainCycle();
+                        }
+
+                        inMainLoop(point) {
+                            return this.#mainLoop.has(point);
+                        }
+
+                        nonCycleNeighborsOf(point) {
+                            return [...this.#adjacency.get(point)].filter(neighbor => !this.#mainLoop.has(neighbor));
+                        }
+
+                        /**
+                         * @param {Set&lt;string>} points
+                         * @type {Set&lt;string>}
+                         */
+                        allButMainLoopAnd(points) {
+                            const result = new Set();
+                            this.#input.split('\n').forEach((line, y) => {
+                                line = line.trim();
+                                for (let x = 0; x < line.length; x++) {
+                                    const point = this.toPoint(x, y);
+                                    if (!this.#mainLoop.has(point) && !points.has(point)) {
+                                        result.add(point);
+                                    }
+                                }
+                            });
+                            return result;
+                        }
+
+                        toPoint(x, y) {
+                            return `${x},${y}`;
+                        }
+
+                        fromPoint(point) {
+                            return point.split(',').map(Number);
+                        }
+
+                        get length() {
+                            return this.#mainLoop.size;
+                        }
+
+                        #connectNeighbors(x, y) {
+                            const {left, top, right, bottom}
+                                = this.#potentialNeighborsOf(x, y);
+                            const current = this.toPoint(x, y);
+                            const currentValue = this.#points.get(current);
+                            const [leftValue, topValue, rightValue, bottomValue]
+                                = [left, top, right, bottom]
+                                .map(point => this.#points.get(point));
+                            if (leftValue) {
+                                this.#adjacency.get(current).add(left);
+                                this.#adjacency.get(left).add(current);
+                                if (this.#canConnect(currentValue, leftValue, 'left')) {
+                                    this.#matchingPipes.get(current).add(left);
+                                    this.#matchingPipes.get(left).add(current);
+                                }
+                            }
+                            if (topValue) {
+                                this.#adjacency.get(current).add(top);
+                                this.#adjacency.get(top).add(current);
+                                if (this.#canConnect(currentValue, topValue, 'top')) {
+                                    this.#matchingPipes.get(current).add(top);
+                                    this.#matchingPipes.get(top).add(current);
+                                }
+                            }
+                            if (rightValue) {
+                                this.#adjacency.get(current).add(right);
+                                this.#adjacency.get(right).add(current);
+                                if (this.#canConnect(currentValue, rightValue, 'right')) {
+                                    this.#matchingPipes.get(current).add(right);
+                                    this.#matchingPipes.get(right).add(current);
+                                }
+                            }
+                            if (bottomValue) {
+                                this.#adjacency.get(current).add(bottom);
+                                this.#adjacency.get(bottom).add(current);
+                                if (this.#canConnect(currentValue, bottomValue, 'bottom')) {
+                                    this.#matchingPipes.get(current).add(bottom);
+                                    this.#matchingPipes.get(bottom).add(current);
+                                }
+                            }
+                        }
+
+                        #potentialNeighborsOf(x, y) {
+                            return {
+                                left: this.toPoint(x - 1, y),
+                                top: this.toPoint(x, y - 1),
+                                right: this.toPoint(x + 1, y),
+                                bottom: this.toPoint(x, y + 1),
+                            };
+                        }
+
+                        #canConnect(value, potentialNeighborValue, direction) {
+                            return validConnections.has(value) &&
+                                validConnections.get(value)[direction].has(potentialNeighborValue) &&
+                                validConnections.get(potentialNeighborValue)[reversedDirections.get(direction)].has(value);
+                        }
+
+                        #mainCycle() {
+                            const visited = new Set();
+                            const queue = [this.#sPoint];
+                            while (queue.length > 0) {
+                                const current = queue.shift();
+                                if (visited.has(current)) {
+                                    continue;
+                                }
+                                visited.add(current);
+                                this.#cycleNeighborsOf(current).forEach(neighbor => queue.push(neighbor));
+                            }
+                            return visited;
+                        }
+
+                        #cycleNeighborsOf(current) {
+                            return [...this.#matchingPipes.get(current)].filter(point => this.#matchingPipes.get(point).size === 2)
+                        }
+                    }
+
+                    function scaleUpTimes3(input) {
+                        const result = [];
+                        input.split('\n').forEach((line) => {
+                            line = line.trim();
+                            let row = '';
+                            let row2 = '';
+                            let row3 = '';
+                            for (let x = 0; x < line.length; x++) {
+                                const resizedValue = resizeTimes3(line[x]);
+                                row += resizedValue[0];
+                                row2 += resizedValue[1];
+                                row3 += resizedValue[2];
+                            }
+                            result.push(row, row2, row3);
+                        });
+                        return result.join('\n');
+                    }
+
+                    const defaultResizeTimes3 = [
+                        '...',
+                        '...',
+                        '...',
+                    ];
+                    const resizedTimes3 = new Map([
+                        ['F', [
+                            '...',
+                            '.F-',
+                            '.|.',
+                        ]],
+                        ['-', [
+                            '...',
+                            '---',
+                            '...',
+                        ]],
+                        ['7', [
+                            '...',
+                            '-7.',
+                            '.|.',
+                        ]],
+                        ['|', [
+                            '.|.',
+                            '.|.',
+                            '.|.',
+                        ]],
+                        ['L', [
+                            '.|.',
+                            '.L-',
+                            '...',
+                        ]],
+                        ['J', [
+                            '.|.',
+                            '-J.',
+                            '...',
+                        ]],
+                        ['S', [
+                            '.|.',
+                            '-S-',
+                            '.|.',
+                        ]],
+                    ]);
+
+                    function resizeTimes3(value) {
+                        return resizedTimes3.get(value) ?? defaultResizeTimes3;
+                    }
+
+                    function enclosedPoints(input) {
+                        const originalGraph = new Graph(input);
+                        // prettyPrint(input, originalGraph);
+                        const graph = new Graph(scaleUpTimes3(input));
+                        const stack = [graph.toPoint(0, 0)];
+                        const floodFilled = new Set();
+                        while (stack.length > 0) {
+                            const current = stack.pop();
+                            if (floodFilled.has(current)) {
+                                continue;
+                            }
+                            floodFilled.add(current);
+                            stack.push(...graph.nonCycleNeighborsOf(current));
+                        }
+                        return [
+                            ...new Set(
+                                [...graph.allButMainLoopAnd(floodFilled)]
+                                    .map(point => graph.fromPoint(point))
+                                    .map(([x, y]) => graph.toPoint(x / 3 | 0, y / 3 | 0))
+                            )]
+                            .filter(point => !originalGraph.inMainLoop(point))
+                            .length;
+                    }
+
+                    const beautifyDict = new Map([
+                        ['F', '┌'],
+                        ['-', '─'],
+                        ['7', '┐'],
+                        ['|', '│'],
+                        ['L', '└'],
+                        ['J', '┘'],
+                        ['S', 'S'],
+                    ]);
+
+                    function prettyPrint(input, graph = new Graph(input)) {
+                        let text = '';
+                        input.split('\n').forEach((line, y) => {
+                            line = line.trim();
+                            const firstPoint = graph.toPoint(0, y);
+                            let previousInMain = graph.inMainLoop(firstPoint);
+                            let formattedText = (previousInMain ? beautifyDict.get(line[0]) : line[0]);
+                            for (let x = 1; x < line.length; x++) {
+                                const value = line[x];
+                                const point = graph.toPoint(x, y);
+                                if (graph.inMainLoop(point)) {
+                                    if (previousInMain) {
+                                        formattedText += beautifyDict.get(value);
+                                        continue;
+                                    }
+                                    formattedText += beautifyDict.get(value);
+                                    previousInMain = true;
+                                    continue;
+                                }
+                                if (previousInMain) {
+                                    formattedText += value;
+                                    previousInMain = false;
+                                    continue;
+                                }
+                                formattedText += value;
+                            }
+                            text += formattedText + '\n';
+                        });
+                        console.log(text);
+                    }
+
+                    prettyPrint(`FF7FSF7F7F7F7F7F---7
+                                 L|LJ||||||||||||F--J
+                                 FL-7LJLJ||||||LJL-77
+                                 F--JF--7||LJLJ7F7FJ-
+                                 L---JF-JLJ.||-FJLJJ7
+                                 |F|F-JF---7F7-L7L|7|
+                                 |FFJF7L7F-JF7|JL---7
+                                 7-L-JL7||F7|L7F-7F7|
+                                 L.L7LFJ|||||FJL7||LJ
+                                 L7JLJL-JLJLJL--JLJ.L`);
+                </code></pre>
+                <button class="btn" onclick="controls.evalCode(this)">eval</button>
+                <div class="fragment">
+                    <a href="https://github.com/mat3e/trying-aoc23/blob/main/23-1.js">Better (?) OOP => Day 23</a>
+                </div>
+            </section>
+        </section>
+
+        <section data-background-image>
+            <section data-auto-animate>
+                <h3 class="no-m">Day 11</h3>
+                <div style="margin-bottom: .5em">
+                    <a href="https://github.com/mat3e/trying-aoc23/blob/main/11-2.js" data-id="pq">
+                        <code class="fragment">Priority Queue</code>
+                    </a>
+                </div>
+                <pre style="width: 100%; visibility: hidden" class="no-m r-stretch"><code class="javascript"
+                                                                                          style="font-size: .69em; line-height: 1.1"
+                                                                                          data-trim
+                                                                                          data-line-numbers="1,5,7-11,18-30">
+                    dijkstraBetweenGalaxies(start, galaxyPathFoundCallback, optionalEnd) {
+                        if (!this.#galaxies.has(start)) {
+                            throw new Error('Not a galaxy');
+                        }
+                        const queue = new BinaryHeap();
+                        const pathToOtherGalaxies = new Map();
+                        const dist = new Map();
+                        dist.set(start, 0);
+                        queue.push(start, 0);
+                        while (queue.length > 0) {
+                            const currentPoint = queue.pop();
+                            if (this.#galaxies.has(currentPoint) && currentPoint !== start && (!optionalEnd || currentPoint === optionalEnd)) {
+                                galaxyPathFoundCallback(dist.get(currentPoint));
+                                if (optionalEnd) {
+                                    return;
+                                }
+                            }
+                            this.#adjacency.get(currentPoint).forEach((neighbor) => {
+                                const potentialDistance = dist.get(currentPoint) + this.#weight(currentPoint, neighbor);
+                                if (!dist.has(neighbor) || potentialDistance < dist.get(neighbor)) {
+                                    dist.set(neighbor, potentialDistance);
+                                    pathToOtherGalaxies.set(neighbor, currentPoint);
+                                    if (queue.has(neighbor)) {
+                                        queue.update(neighbor, potentialDistance);
+                                    } else {
+                                        queue.push(neighbor, potentialDistance);
+                                    }
+                                }
+                            });
+                        }
+                    }
+                </code></pre>
+            </section>
+            <section data-auto-animate>
+                <h3 class="no-m">Day 11</h3>
+                <div style="margin-bottom: .5em">
+                    <a href="https://github.com/mat3e/trying-aoc23/blob/main/11-2.js" data-id="pq">
+                        <code>Priority Queue</code>
+                    </a>
+                </div>
+                <pre data-id="d11" style="width: 100%" class="no-m r-stretch"><code class="javascript"
+                                                                                    style="font-size: .69em; line-height: 1.1"
+                                                                                    data-trim
+                                                                                    data-line-numbers="1,5,7-11,18-30">
+                    dijkstraBetweenGalaxies(start, galaxyPathFoundCallback, optionalEnd) {
+                        if (!this.#galaxies.has(start)) {
+                            throw new Error('Not a galaxy');
+                        }
+                        const queue = new BinaryHeap();
+                        const pathToOtherGalaxies = new Map();
+                        const dist = new Map();
+                        dist.set(start, 0);
+                        queue.push(start, 0);
+                        while (queue.length > 0) {
+                            const currentPoint = queue.pop();
+                            if (this.#galaxies.has(currentPoint) && currentPoint !== start && (!optionalEnd || currentPoint === optionalEnd)) {
+                                galaxyPathFoundCallback(dist.get(currentPoint));
+                                if (optionalEnd) {
+                                    return;
+                                }
+                            }
+                            this.#adjacency.get(currentPoint).forEach((neighbor) => {
+                                const potentialDistance = dist.get(currentPoint) + this.#weight(currentPoint, neighbor);
+                                if (!dist.has(neighbor) || potentialDistance < dist.get(neighbor)) {
+                                    dist.set(neighbor, potentialDistance);
+                                    pathToOtherGalaxies.set(neighbor, currentPoint);
+                                    if (queue.has(neighbor)) {
+                                        queue.update(neighbor, potentialDistance);
+                                    } else {
+                                        queue.push(neighbor, potentialDistance);
+                                    }
+                                }
+                            });
+                        }
+                    }
+                </code></pre>
+            </section>
+            <section data-auto-animate>
+                <h3 class="no-m">Day 11</h3>
+                <div style="margin-bottom: .5em">
+                    <a href="https://github.com/mat3e/trying-aoc23/blob/main/11-2.js" data-id="pq">
+                        <code>Priority Queue</code>
+                    </a>
+                </div>
+                <pre data-id="d11" style="width: 100%" class="no-m r-stretch"><code class="javascript"
+                                                                                    style="font-size: .69em; line-height: 1.1"
+                                                                                    data-trim
+                                                                                    data-line-numbers="1,5-6,8-9,22-27,29-30">
+                    bfsBetweenGalaxies(start, galaxyPathFoundCallback, optionalEnd) {
+                        if (!this.#galaxies.has(start)) {
+                            throw new Error('Not a galaxy');
+                        }
+                        const queue = [start];
+                        const visited = new Set([start]);
+                        const pathToOtherGalaxies = new Map();
+                        while (queue.length > 0) {
+                            const currentPoint = queue.shift();
+                            if (this.#galaxies.has(currentPoint) && currentPoint !== start && (!optionalEnd || currentPoint === optionalEnd)) {
+                                const fromCurrentToStart = [];
+                                let currentPathPoint = currentPoint;
+                                while (currentPathPoint !== start) {
+                                    fromCurrentToStart.push(currentPathPoint);
+                                    currentPathPoint = pathToOtherGalaxies.get(currentPathPoint);
+                                }
+                                galaxyPathFoundCallback(fromCurrentToStart.reverse());
+                                if (optionalEnd) {
+                                    return;
+                                }
+                            }
+                            this.#adjacency.get(currentPoint).forEach((neighbor) => {
+                                if (visited.has(neighbor)) {
+                                    return;
+                                }
+                                visited.add(neighbor);
+                                queue.push(neighbor);
+                                pathToOtherGalaxies.set(neighbor, currentPoint);
+                            });
+                        }
+                    }
+                </code></pre>
+            </section>
+            <section data-auto-animate data-auto-animate-restart="">
+                <img src="img/day11.png">
+            </section>
+            <section data-auto-animate>
+                <img src="img/day12.png">
+            </section>
+        </section>
+
+        <section data-background-image>
+            <section>
+                <h2>Day 12</h2>
+                <pre class="fragment"><code class="javascript" data-trim data-line-numbers="1,3">
+                    console.time();
+                    console.log(countAllArrangements(`input here`));
+                    console.timeEnd();
+                </code></pre>
+            </section>
+            <section>
+                <h2>Day 13</h2>
+                <div class="fragment" data-fragment-index="1">
+                    Mirror? One or many?
+                </div>
+                <pre class="fragment" data-fragment-index="2"><code class="javascript" data-trim>
+                    function transpose(arr) {
+                        return arr[0].map((_, i) => arr.map(row => row[i]));
+                    }
+                </code></pre>
+                <div class="r-hstack r-frame fragment" data-fragment-index="3" style="border-width: 1px">
+                    <code>transpose([</code>
+                    <pre style="width: 25%; text-align: center; display: inline-block; margin-left: 0; margin-right: 0"><code
+                            class="javascript"
+                            data-trim>
+                            ["A", "B", "C"],
+                            ["D", "E", "F"]
+                    </code></pre>
+                    <code>])</code>
+                </div>
+                <button class="btn fragment" data-fragment-index="3" onclick="controls.evalTranspose(this)">eval
+                </button>
+            </section>
+            <section>
+                <h2>Day 14</h2>
+                <ul>
+                    <li class="fragment"><code>transpose</code>!</li>
+                    <li class="fragment">Array of stack of results</li>
+                </ul>
+            </section>
+            <section>
+                <ol start="15">
+                    <li>EZ! <code>Map</code> preserves the order</li>
+                    <li class="fragment">Performant? DP? <em class="fragment">Premature optimization</em></li>
+                    <li class="fragment">Good abstractions = smooth 2nd part</li>
+                    <li class="fragment">Pick's theorem, Shoelace formula</li>
+                </ol>
+            </section>
+        </section>
+
+        <section data-background-image>
+            <section>
+                <h2>Day 19</h2>
+                <pre class="fragment" style="width: 100%;"><code class="javascript" data-trim style="font-size: .9em">
+                    export function parsePart(input) {
+                        return eval(`(function() { return ${input}; })()`.replaceAll('=', ':'));
+                    }
+                </code></pre>
+            </section>
+            <section data-auto-animate>
+                <img src="img/day19-sickness-c.png" data-id="scores">
+            </section>
+            <section data-auto-animate>
+                <img src="img/day25-c.png" data-id="scores">
+            </section>
+        </section>
+
+        <section data-background-image>
+            <section data-background-image="img/allday.webp" data-background-size="contain"></section>
+            <section>
+                <h2>Day 20</h2>
+                <ol>
+                    <li class="fragment">Redux/Flux, no TDD</li>
+                    <li class="fragment">
+                        Got from <a href="https://youtu.be/lxm6i21O83k?si=Tm0EgYN-BZ5Nznk_&t=907">HyperNeutrino</a>
+                        <ul>
+                            <li class="fragment">Input data analysis</li>
+                            <li class="fragment"><a href="https://dreampuf.github.io/GraphvizOnline">Graphviz</a>,
+                                looking for cycles
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+            </section>
+        </section>
+
+        <section data-background-image>
+            <section>
+                <h2>Day 21</h2>
+                <ul>
+                    <li class="fragment">Misleading example</li>
+                    <li class="fragment">Even more input data analysis</li>
+                </ul>
+            </section>
+            <section data-background-image data-background-video="img/day21-input.mp4" data-background-video-loop="true"
+                     data-background-size="contain">
+                <a href="https://www.reddit.com/r/adventofcode/comments/18nevo3/comment/keays65/">
+                    sauce
+                </a>
+            </section>
+        </section>
+
+        <section data-background-image>
+            <section data-background-image
+                     data-background-iframe="https://mazegame.org/adventofcode/2023/day22/index.anim.html"
+                     data-background-interactive>
+                <h2>Day 22</h2>
+            </section>
+        </section>
+
+        <section data-background-image>
+            <section>
+                <h3>Day 23</h3>
+                <ol>
+                    <li class="fragment" data-fragment-index="1">Longest path</li>
+                    <li class="fragment" data-fragment-index="2">Skipped - had enough</li>
+                </ol>
+                <hr class="fragment" data-fragment-index="2"/>
+                <h3 class="fragment" data-fragment-index="3">Day 24</h3>
+                <ol>
+                    <li class="fragment" data-fragment-index="4">Maths - crossing points</li>
+                    <li class="fragment" data-fragment-index="5">
+                        <a href="https://www.npmjs.com/package/z3-solver">
+                            <code>Z3</code> 👎🏻
+                        </a>
+                    </li>
+                </ol>
+                <hr class="fragment" data-fragment-index="5"/>
+                <h3 class="fragment">Day 25</h3>
+                <ol>
+                    <li class="fragment">Karger's min cut</li>
+                    <li class="fragment">No 2nd ⭐️ as no 2nd stars in above 2</li>
+                </ol>
+            </section>
+            <aside class="notes">
+                Someone solved 24.2 with pure algebra though
+            </aside>
+        </section>
+
+        <section data-background-image>
+            <section data-auto-animate>
+                <div class="r-vstack" style="width: 70%; margin: 0 auto">
+                    <img src="img/times/times-a.png" class="no-m" data-id="header">
+                    <img src="img/times/times-c.png" class="no-m" data-id="mid">
+                    <img src="img/times/times-d.png" class="no-m" data-id="footer">
+                </div>
+            </section>
+            <section data-auto-animate>
+                <div class="r-vstack" style="width: 70%; margin: 0 auto">
+                    <img src="img/times/times-a.png" class="no-m" data-id="header">
+                    <img src="img/times/times-b.png" class="no-m" data-auto-animate-delay="1">
+                    <img src="img/times/times-c.png" class="no-m" data-id="mid">
+                    <img src="img/times/times-d.png" class="no-m" data-id="footer">
+                </div>
+            </section>
+            <section data-background-image="img/cheers.webp" data-background-size="contain">
+                <div style="background-color: rgba(255, 255, 255, .25); text-shadow: 1px 1px 2px black;">
+                    <a class="fragment" href="https://mat3e.github.io/talks/aoc/WarsawJS.html">mat3e.github.io/talks/aoc/WarsawJS</a>
+                    <br/>
+                    <a class="fragment" href="https://github.com/mat3e/trying-aoc23">github.com/mat3e/trying-aoc23</a>
+                    <br/>
+                    <a class="fragment" href="https://mat3e.github.io/trendy">
+                        mat3e.github.io/trendy
+                    </a>
+                </div>
+                <div class="fragment" style="position: fixed; bottom: 0; text-align: center; width: 100%">
+                    <a href="https://media.giphy.com/media/bKBM7H63PIykM/giphy.gif">sauce</a>
+                </div>
+            </section>
+        </section>
+
+    </div>
+
+</div>
+
+<script src="dist/reveal.js"></script>
+<script src="plugin/zoom/zoom.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/search/search.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script>
+    const controls = {
+        evalCode(btn) {
+            let code = btn.previousElementSibling.children.item(0).innerText;
+            for (let i = 0; i < btn.previousElementSibling.children.length; i++) {
+                if (btn.previousElementSibling.children.item(i).classList.contains('visible')) {
+                    code = btn.previousElementSibling.children.item(i).innerText;
+                }
+            }
+            const input = code
+                .split('\n')
+                .filter(line => !!line.trim())
+                .join('\n');
+            eval(input);
+        },
+        evalTranspose(btn) {
+            const arrCodeElement = btn.previousElementSibling.querySelector('pre code');
+            const arr = eval(`[${arrCodeElement.innerText}]`);
+            let newArr = JSON.stringify(
+                arr[0].map((_, i) => arr.map(row => row[i]))
+            );
+            newArr = newArr.substring(1, newArr.length - 1).split('],[').join('],\n[') + ' ';
+            arrCodeElement.innerHTML = newArr;
+        }
+    }
+
+    // Also available as an ES module, see:
+    // https://revealjs.com/initialization/
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        center: true,
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight]
+    });
+
+    document.querySelectorAll('.reveal .slides section:not([data-background-image])').forEach(s => {
+        s.setAttribute('data-background-image', 'img/twitter.png');
+        s.setAttribute('data-background-size', '240px');
+        s.setAttribute('data-background-position', '.5em .5em');
+    });
+</script>
+
+</body>
+</html>
