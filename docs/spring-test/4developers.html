@@ -108,6 +108,13 @@
             left: 35%;
             top: 17%;
         }
+
+        .color-green {
+            color: #34eb3d;
+        }
+        .color-red {
+            color: #ff0000;
+        }
     </style>
 </head>
 
@@ -1801,6 +1808,30 @@
                     <li class="fragment">Dalsza edukacja zespołu + <em>code review</em></li>
                 </ol>
             </section>
+            <section>
+                <h2>Współdzielona konfiguracja - propozycja</h2>
+                <pre style="width: 100%;"><code class="java" style="font-size: .75em;" data-trim
+                                                data-line-numbers="">
+                    
+                    @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+                    @ActiveProfiles("integration-test")
+                    @ContextConfiguration(
+                            initializers = EmbeddedRedisConnectionInitializer.class,
+                            classes = {
+                                CollectorRegistryTestConfiguration.class
+                            })
+                    public abstract class IntegrationTest {
+
+                    }
+
+                    // in test
+                    class OrderIntegrationTest extends IntegrationTest {
+
+                    }
+                </code></pre>
+
+
+            </section>
             <section data-transition="zoom">
                 <div class="r-stretch chart-wrapper">
                     <fieldset>
@@ -1847,6 +1878,15 @@
                     </ul>
                 </aside>
             </section>
+            <section>
+                <h2>Zady i walety</h2>
+                <ul>
+                    <li class="color-green">Szybsze wstawanie kontekstu (2m => 20s)</li>
+                    <li class="color-green">Dużo mniejsze zużycie pamięci (nie wszystkie beany są potrzebne w każdym teście)</li>
+                    <li class="color-red">@Conditional nie zadziała, jeśli Bean nie jest zawołany</li>
+                            <li class="color-red">Niektóre elementy inicjalizowane jako <i>static</i> muszą być rejestrowane jako Bean -> <a href="https://stackoverflow.com/questions/40936617/java-lang-illegalstateexception-this-object-has-not-been-built-when-adding-cu">Spring Security</a></li>
+                </ul>
+            </section>
             <section data-transition="zoom">
                 <div class="r-stretch chart-wrapper">
                     <fieldset>
@@ -1884,6 +1924,15 @@
                     Niewielki zysk (max kilka %) i więcej pracy - ale przy okazji porządki w kodzie
                 </aside>
             </section>
+            <section>
+                        <h2>Usuwanie zbędnych beanów</h2>
+                        <img height="300rem" src="./img/wszyscy-won.jpg" />
+                        <ul>
+                            <li>Klasy z metodą @Scheduled / Workery</li>
+                            <li>Niepotrzebne konfiguracje (np.: Swagger)</li>
+                            <li>Ograniczanie zasobów (np.: zmniejszenie puli wątków PubSub)</li>
+                        </ul>
+            </section>
             <section data-transition="zoom">
                 <div class="r-stretch chart-wrapper">
                     <fieldset>
@@ -1896,6 +1945,14 @@
                         <legend>pracochłonność ▶</legend>
                     </fieldset>
                 </div>
+            </section>
+
+            <section>
+                <h2>Alternatywne podejście (2024)</h2>
+                <a href="https://github.com/linyimin0812/spring-startup-analyzer">spring-startup-analyzer</a>
+                <pre class="fragment"><code class="plaintext">java -javaagent:./spring-startup-analyzer/lib/spring-profiler-agent.jar \
+     -jar project-demo.jar</code></pre>
+                <img height="300rem" class="fragment" src="./img/spring-bean-timeline.png"/>
             </section>
         </section>
 
@@ -2010,6 +2067,8 @@
                     <h2>Synchronizacje</h2>
                 </ul>
                 <pre class="fragment" style="width: 100%;"><code class="properties" data-trim>
+                    # src/integration/resources/junit-platform.properties
+
                     junit.jupiter.execution.parallel.enabled = true
                     junit.jupiter.execution.parallel.mode.default = same_thread
                     junit.jupiter.execution.parallel.mode.classes.default = concurrent
