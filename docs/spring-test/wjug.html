@@ -1,0 +1,2332 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Spring tests</title>
+
+    <meta name="description"
+          content="Good tests (especially integration tests) practices + optimizations which worked (and not worked) for us">
+    <meta name="author" content="mat3e">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/black.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="plugin/highlight/github.css">
+
+
+    <style>
+        table.pooh td {
+            width: 50%;
+            border-bottom: 0;
+        }
+
+        table.pooh tr:first-child, table.pooh tr.visible {
+            border-bottom: 1px dotted;
+        }
+
+        table.pooh td:first-child {
+            border-right: 1px dotted;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+        }
+
+        .chart-wrapper > fieldset:first-child {
+            box-sizing: border-box;
+            border-top: 1px solid;
+            padding-left: 2em;
+            transform: rotate(-90deg) translate(-1.3em);
+            transform-origin: left;
+        }
+
+        .chart-wrapper > fieldset:first-child > legend {
+            letter-spacing: 1em;
+        }
+
+        .chart-wrapper > fieldset:last-child {
+            border-top: 1px solid;
+            padding-left: 2em;
+        }
+
+        .chart-wrapper > fieldset:last-child > legend {
+            letter-spacing: .75em;
+        }
+
+        .chart-wrapper > div {
+            position: absolute;
+            border-radius: 100%;
+            background: rgba(0, 128, 0, .8);
+            border: 1px solid darkgreen;
+            width: 3em;
+            height: 3em;
+            margin: -1.5em;
+            padding: .35em;
+            box-sizing: border-box;
+            line-height: 1.1;
+        }
+
+        .chart-wrapper > div:nth-of-type(1) {
+            left: 60%;
+            top: 40%;
+        }
+
+        .chart-wrapper > div:nth-of-type(2) {
+            left: 15%;
+            top: 15%;
+        }
+
+        .chart-wrapper > div:nth-of-type(3) {
+            right: 15%;
+            bottom: 25%;
+        }
+
+        .chart-wrapper > div:nth-of-type(4) {
+            right: 25%;
+            top: 10%;
+        }
+
+        .chart-wrapper > div:nth-of-type(5) {
+            left: 25%;
+            top: 25%;
+        }
+
+        .chart-wrapper > div:nth-of-type(6) {
+            left: 35%;
+            top: 17%;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+        <section data-fragment-index>
+            <section data-background-image>
+                <h1 style="margin-bottom: 0">Trochę więcej</h1>
+                <h2>o testach w Springu</h2>
+                <div class="r-hstack" style="justify-content: space-around;">
+                    <img class="fragment" src="img/dkac.png" style="height: 4.5em">
+                    <img class="fragment" src="img/mat.png" style="height: 4.5em">
+                </div>
+            </section>
+            <section data-background-image>
+                <h5>
+                    <span>Perspektywa...</span>
+                    <span class="fragment" data-fragment-index="1"> ma znaczenie</span>
+                    <span class="fragment" data-fragment-index="2"> :)</span>
+                </h5>
+                <a href="https://mistrzowie.org/717022" class="r-vstack" style="width: 45%; margin: 0 auto">
+                    <img style="margin: 0" src="img/perspektywa-1.jpg"/>
+                    <img style="margin: 0" src="img/perspektywa-2.jpg" class="fragment" data-fragment-index="1"/>
+                    <img style="margin: 0" src="img/perspektywa-3.jpg" class="fragment" data-fragment-index="2"/>
+                </a>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <div class="r-vstack" style="--incidence: 1.8em; --height: 2em; width: 100%">
+                    <div style="width: 100%">
+                        <h3 style="margin: 0 auto; width: calc(50% - 4 * var(--incidence)); height: 0; border-left: var(--incidence) solid transparent; border-right: var(--incidence) solid transparent; border-bottom: var(--height) solid #FF5E99FF">
+                            <small>E2E</small>
+                        </h3>
+                    </div>
+                    <div style="width: 100%">
+                        <h3 data-id="int"
+                            style="margin: 0 auto; width: calc(50% - 2 * var(--incidence)); height: 0; border-left: var(--incidence) solid transparent; border-right: var(--incidence) solid transparent; border-bottom: var(--height) solid #D08A1DFF">
+                            <small>Integration</small>
+                        </h3>
+                    </div>
+                    <h3 style="margin: 0 auto; width: 50%; height: 0; border-left: var(--incidence) solid transparent; border-right: var(--incidence) solid transparent; border-bottom: var(--height) solid #74A7CBFF">
+                        Unit
+                    </h3>
+                </div>
+            </section>
+            <section>
+                <h3 style="margin: 0">Test <u>jednostkowy</u></h3>
+                <a href="https://www.youtube.com/watch?v=ma15iBQpmHU">
+                    <img class="fragment" style="width: 45%" src="img/ref/jn-mid.png"/>
+                </a>
+                <a href="https://www.youtube.com/watch?v=PwMNtiKb-P4">
+                    <img class="fragment" style="width: 45%" src="img/ref/jn-test.png"/>
+                </a>
+                <a href="https://www.youtube.com/watch?v=Da42_gVqDKE">
+                    <img class="fragment" style="width: 45%" src="img/ref/ks.png"/>
+                </a>
+                <a href="https://www.youtube.com/watch?v=-f6zHVBlNxU">
+                    <img class="fragment" style="width: 45%" src="img/ref/ps.png"/>
+                </a>
+            </section>
+            <section>
+                <h2>"Ukryta" logika</h2>
+                <ul>
+                    <li class="fragment">Fallback, <code>@CircuitBreaker</code></li>
+                    <li class="fragment"><code>@Transactional</code></li>
+                    <li class="fragment"><code>@Cacheable</code></li>
+                    <li class="fragment"><code>@ConditionalOn...</code>
+                        <ul>
+                            <li class="fragment" style="font-size: .9em">
+                                Potencjalnie: <code>ApplicationContextRunner</code>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="fragment">Filter, interceptor, <code>@PreAuthorize</code>, AOP</li>
+                </ul>
+            </section>
+            <section data-auto-animate>
+                <h2>Testy Integracyjne</h2>
+                <ul>
+                    <li class="fragment">
+                        <a href="https://docs.spring.io/spring-framework/reference/testing/integration.html">Dokumentacja
+                            Springa</a>:
+                        <q>[Integration Testing] lets you test the correct wiring of your Spring IoC container
+                            contexts</q>
+                    </li>
+                    <li class="fragment">+ I/O</li>
+                    <li class="fragment">
+                        <blockquote data-id="int-def"
+                                    style="display: inline; padding: 0; font-style: inherit; background: none; box-shadow: none">
+                            Każdy start kontekstu Springa to już integracja
+                        </blockquote>
+                    </li>
+                </ul>
+            </section>
+            <section data-auto-animate>
+                <h2>Testy Integracyjne</h2>
+                <blockquote data-id="int-def" style="width: 90%">Każdy start kontekstu Springa to już integracja
+                </blockquote>
+            </section>
+            <section data-auto-animate>
+                <div class="r-vstack" style="--incidence: 1.8em; --height: 2em; width: 100%">
+                    <div style="width: 100%">
+                        <h3 style="margin: 0 auto; width: calc(50% - 4 * var(--incidence)); height: 0; border-left: var(--incidence) solid transparent; border-right: var(--incidence) solid transparent; border-bottom: var(--height) solid #FF5E99FF">
+                            <small>E2E</small>
+                        </h3>
+                    </div>
+                    <div style="width: 100%">
+                        <h3 data-id="int"
+                            style="margin: 0 auto; width: calc(50% - 2 * var(--incidence)); height: 0; border-left: var(--incidence) solid transparent; border-right: var(--incidence) solid transparent; border-bottom: var(--height) solid #D08A1DFF">
+                            <small>Integration</small>
+                        </h3>
+                    </div>
+                    <h3 style="margin: 0 auto; width: 50%; height: 0; border-left: var(--incidence) solid transparent; border-right: var(--incidence) solid transparent; border-bottom: var(--height) solid #74A7CBFF">
+                        Unit
+                    </h3>
+                </div>
+            </section>
+            <section data-auto-animate>
+                <div class="r-vstack" style="--incidence: 3.5em; --height: 1em; width: 100%">
+                    <h3 style="margin: 0 auto; width: calc(50% - 2 * var(--incidence)); height: 0; border-left: var(--incidence) solid transparent; border-right: var(--incidence) solid transparent; border-bottom: var(--height) solid #FF5E99FF"></h3>
+                    <h3 data-id="int" class="r-hstack"
+                        style="margin: 0 auto; width: 50%; height: 3em; background-color: #D08A1DFF;">
+                        Integration
+                    </h3>
+                    <h3 style="margin: 0 auto; width: calc(50% - 2 * var(--incidence)); height: 0; border-left: var(--incidence) solid transparent; border-right: var(--incidence) solid transparent; border-top: var(--height) solid #74A7CBFF"></h3>
+                </div>
+                <a class="fragment" href="https://engineering.atspotify.com/2018/01/testing-of-microservices/">
+                    Spotify: <em>Testing of Microservices</em>
+                </a>
+                <img class="fragment" src="img/uvi2.gif" alt="Each window worked in isolation"/>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h2>spring-boot-starter-test</h2>
+                <pre class="fragment" style="width: 100%"><code style="font-size: .95em" class="xml" data-trim
+                                                                data-line-numbers><script type="text/template">
+                    <dependency>
+                      <groupId>org.springframework.boot</groupId>
+                      <artifactId>spring-boot-starter-test</artifactId>
+                      <scope>test</scope>
+                    </dependency>
+                </script></code></pre>
+                <pre class="fragment" style="width: 100%"><code style="font-size: .95em" class="groovy" data-trim>
+                    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+                </code></pre>
+                <ul style="list-style-type: '+ '">
+                    <li class="fragment">spring-boot-test, spring-test</li>
+                    <li class="fragment">JUnit (Platform + Jupiter)</li>
+                    <li class="fragment">Mockito</li>
+                    <li class="fragment">AssertJ, Hamcrest</li>
+                    <li class="fragment">Różne JSON-y, XML-e</li>
+                </ul>
+            </section>
+            <section data-auto-animate>
+                <pre data-id="unit-test" class="r-stretch" style="width: 100%;"><code class="java" data-trim
+                                                                                      contenteditable="true"
+                                                                                      data-line-numbers="12-15,17-28|17,23-28">
+                    package io.github.mat3e.downloads.limiting;
+
+                    import io.github.mat3e.downloads.limiting.api.AccountId;
+                    import io.github.mat3e.downloads.reporting.ReportingFacade;
+                    import org.junit.jupiter.api.BeforeEach;
+                    import org.junit.jupiter.api.Test;
+                    import org.mockito.ArgumentCaptor;
+
+                    import java.time.Clock;
+                    import java.util.Optional;
+
+                    import static org.assertj.core.api.Assertions.assertThat;
+                    import static org.mockito.Mockito.mock;
+                    import static org.mockito.Mockito.verify;
+                    import static org.mockito.Mockito.when;
+
+                    class LimitingFacadeTest {
+                      private final Clock clock = mock(Clock.class);
+                      private final AccountRepository accountRepository = mock(AccountRepository.class);
+                      private final AccountSettingRepository accountSettingRepository = mock(AccountSettingRepository.class);
+                      private final ReportingFacade reporting = mock(ReportingFacade.class);
+
+                      private LimitingFacade systemUnderTest;
+
+                      @BeforeEach
+                      void setUp() {
+                        systemUnderTest = new LimitingFacade(clock, accountRepository, accountSettingRepository, reporting);
+                      }
+
+                      @Test
+                      void newAccount_overrideLimit_createsAccount() {
+                        // given
+                        var accountId = AccountId.valueOf("1");
+                        when(accountSettingRepository.findById(accountId)).thenReturn(Optional.empty());
+
+                        // when
+                        systemUnderTest.overrideAccountLimit(accountId, 1);
+
+                        // then
+                        var accountSettingCaptor = ArgumentCaptor.forClass(AccountSetting.class);
+                        verify(accountSettingRepository).save(accountSettingCaptor.capture());
+                        assertThat(accountSettingCaptor.getValue().id()).isEqualTo(accountId);
+                        assertThat(accountSettingCaptor.getValue().limit()).isEqualTo(1);
+                      }
+
+                      @Test
+                      void existingAccount_overrideLimit_updatesAccount() {
+                        // given
+                        var accountId = AccountId.valueOf("1");
+                        var existingAccount = mock(AccountSetting.class);
+                        when(accountSettingRepository.findById(accountId)).thenReturn(Optional.of(existingAccount));
+
+                        // when
+                        systemUnderTest.overrideAccountLimit(accountId, 1);
+
+                        // then
+                        verify(existingAccount).overrideLimit(1);
+                        verify(accountSettingRepository).save(existingAccount);
+                      }
+                    }
+                </code></pre>
+            </section>
+            <section data-auto-animate>
+                <pre data-id="unit-test" class="r-stretch" style="width: 100%;"><code class="java" data-trim
+                                                                                      contenteditable="true"
+                                                                                      data-line-numbers="23-24,17">
+                    package io.github.mat3e.downloads.limiting;
+
+                    import io.github.mat3e.downloads.limiting.api.AccountId;
+                    import io.github.mat3e.downloads.reporting.ReportingFacade;
+                    import org.junit.jupiter.api.BeforeEach;
+                    import org.junit.jupiter.api.Test;
+                    import org.mockito.ArgumentCaptor;
+
+                    import java.time.Clock;
+                    import java.util.Optional;
+
+                    import static org.assertj.core.api.Assertions.assertThat;
+                    import static org.mockito.Mockito.mock;
+                    import static org.mockito.Mockito.verify;
+                    import static org.mockito.Mockito.when;
+
+                    class LimitingFacadeTest {
+                      private final Clock clock = mock(Clock.class);
+                      private final AccountRepository accountRepository = mock(AccountRepository.class);
+                      private final AccountSettingRepository accountSettingRepository = mock(AccountSettingRepository.class);
+                      private final ReportingFacade reporting = mock(ReportingFacade.class);
+
+                      private final LimitingFacade systemUnderTest =
+                          new LimitingFacade(clock, accountRepository, accountSettingRepository, reporting);
+
+                      @Test
+                      void newAccount_overrideLimit_createsAccount() {
+                        // given
+                        var accountId = AccountId.valueOf("1");
+                        when(accountSettingRepository.findById(accountId)).thenReturn(Optional.empty());
+
+                        // when
+                        systemUnderTest.overrideAccountLimit(accountId, 1);
+
+                        // then
+                        var accountSettingCaptor = ArgumentCaptor.forClass(AccountSetting.class);
+                        verify(accountSettingRepository).save(accountSettingCaptor.capture());
+                        assertThat(accountSettingCaptor.getValue().id()).isEqualTo(accountId);
+                        assertThat(accountSettingCaptor.getValue().limit()).isEqualTo(1);
+                      }
+
+                      @Test
+                      void existingAccount_overrideLimit_updatesAccount() {
+                        // given
+                        var accountId = AccountId.valueOf("1");
+                        var existingAccount = mock(AccountSetting.class);
+                        when(accountSettingRepository.findById(accountId)).thenReturn(Optional.of(existingAccount));
+
+                        // when
+                        systemUnderTest.overrideAccountLimit(accountId, 1);
+
+                        // then
+                        verify(existingAccount).overrideLimit(1);
+                        verify(accountSettingRepository).save(existingAccount);
+                      }
+                    }
+                </code></pre>
+            </section>
+            <section data-auto-animate>
+                <pre data-id="unit-test" class="r-stretch" style="width: 100%;"><code class="java" data-trim
+                                                                                      contenteditable="true"
+                                                                                      data-line-numbers="18-19,29-30|35-49">
+                    package io.github.mat3e.downloads.limiting;
+
+                    import io.github.mat3e.downloads.limiting.api.AccountId;
+                    import io.github.mat3e.downloads.reporting.ReportingFacade;
+                    import org.junit.jupiter.api.Test;
+                    import org.junit.jupiter.api.extension.ExtendWith;
+                    import org.mockito.ArgumentCaptor;
+                    import org.mockito.Captor;
+                    import org.mockito.InjectMocks;
+                    import org.mockito.Mock;
+                    import org.mockito.junit.jupiter.MockitoExtension;
+                    import java.time.Clock;
+                    import java.util.Optional;
+                    import static org.assertj.core.api.Assertions.assertThat;
+                    import static org.mockito.Mockito.verify;
+                    import static org.mockito.Mockito.when;
+
+                    @ExtendWith(MockitoExtension.class)
+                    class LimitingFacadeTest {
+                      @Mock
+                      private Clock clock;
+                      @Mock
+                      private AccountRepository accountRepository;
+                      @Mock
+                      private AccountSettingRepository accountSettingRepository;
+                      @Mock
+                      private ReportingFacade reporting;
+
+                      @InjectMocks
+                      private LimitingFacade systemUnderTest;
+
+                      @Captor
+                      private ArgumentCaptor&lt;AccountSetting> accountSettingCaptor;
+
+                      @Test
+                      void newAccount_overrideLimit_createsAccount() {
+                        // given
+                        var accountId = AccountId.valueOf("1");
+                        when(accountSettingRepository.findById(accountId)).thenReturn(Optional.empty());
+
+                        // when
+                        systemUnderTest.overrideAccountLimit(accountId, 1);
+
+                        // then
+                        verify(accountSettingRepository).save(accountSettingCaptor.capture());
+                        var account = accountSettingCaptor.getValue();
+                        assertThat(account.id()).isEqualTo(accountId);
+                        assertThat(account.limit()).isEqualTo(1);
+                      }
+
+                      @Test
+                      void existingAccount_overrideLimit_updatesAccount() {
+                        // given
+                        var accountId = AccountId.valueOf("1");
+                        var existingAccount = new AccountSetting(accountId.getId(), 2, 1);
+                        when(accountSettingRepository.findById(accountId)).thenReturn(Optional.of(existingAccount));
+
+                        // when
+                        systemUnderTest.overrideAccountLimit(accountId, 1);
+
+                        // then
+                        assertThat(existingAccount.limit()).isEqualTo(1);
+                        verify(accountSettingRepository).save(existingAccount);
+                      }
+                    }
+                </code></pre>
+            </section>
+            <section data-auto-animate>
+                <pre data-id="unit-test" class="r-stretch" style="width: 100%;"><code class="java" data-trim
+                                                                                      contenteditable="true"
+                                                                                      data-line-numbers="37-48">
+                    package io.github.mat3e.downloads.limiting;
+
+                    import io.github.mat3e.downloads.limiting.api.AccountId;
+                    import io.github.mat3e.downloads.reporting.ReportingFacade;
+                    import org.junit.jupiter.api.Test;
+                    import org.junit.jupiter.api.extension.ExtendWith;
+                    import org.mockito.ArgumentCaptor;
+                    import org.mockito.Captor;
+                    import org.mockito.InjectMocks;
+                    import org.mockito.Mock;
+                    import org.mockito.junit.jupiter.MockitoExtension;
+                    import java.time.Clock;
+                    import java.util.Optional;
+                    import static org.assertj.core.api.Assertions.assertThat;
+                    import static org.mockito.Mockito.verify;
+                    import static org.mockito.Mockito.when;
+
+                    @ExtendWith(MockitoExtension.class)
+                    class LimitingFacadeTest {
+                      @Mock
+                      private Clock clock;
+                      @Mock
+                      private AccountRepository accountRepository;
+                      @Mock
+                      private AccountSettingRepository accountSettingRepository;
+                      @Mock
+                      private ReportingFacade reporting;
+
+                      @InjectMocks
+                      private LimitingFacade systemUnderTest;
+
+                      @Captor
+                      private ArgumentCaptor&lt;AccountSetting> accountSettingCaptor;
+
+                      @Test
+                      void newAccount_overrideLimit_createsAccount() {
+                        // given
+                        var accountId = AccountId.valueOf("1");
+                        when(accountSettingRepository.findById(accountId)).thenReturn(Optional.empty());
+
+                        // when
+                        systemUnderTest.overrideAccountLimit(accountId, 1);
+
+                        // then
+                        verify(accountSettingRepository).save(accountSettingCaptor.capture());
+                        var account = accountSettingCaptor.getValue();
+                        assertThat(account.id()).isEqualTo(accountId);
+                        assertThat(account.limit()).isEqualTo(1);
+                      }
+
+                      @Test
+                      void existingAccount_overrideLimit_updatesAccount() {
+                        // given
+                        var accountId = AccountId.valueOf("1");
+                        var existingAccount = new AccountSetting(accountId.getId(), 2, 1);
+                        when(accountSettingRepository.findById(accountId)).thenReturn(Optional.of(existingAccount));
+
+                        // when
+                        systemUnderTest.overrideAccountLimit(accountId, 1);
+
+                        // then
+                        assertThat(existingAccount.limit()).isEqualTo(1);
+                        verify(accountSettingRepository).save(existingAccount);
+                      }
+                    }
+                </code></pre>
+            </section>
+            <section data-auto-animate>
+                <pre data-id="unit-test" class="r-stretch" style="width: 100%;"><code class="java" data-trim
+                                                                                      contenteditable="true"
+                                                                                      data-line-numbers="37-46|14-16|14">
+                    package io.github.mat3e.downloads.limiting;
+
+                    import io.github.mat3e.downloads.limiting.api.AccountId;
+                    import io.github.mat3e.downloads.reporting.ReportingFacade;
+                    import org.junit.jupiter.api.Test;
+                    import org.junit.jupiter.api.extension.ExtendWith;
+                    import org.mockito.ArgumentCaptor;
+                    import org.mockito.Captor;
+                    import org.mockito.InjectMocks;
+                    import org.mockito.Mock;
+                    import org.mockito.junit.jupiter.MockitoExtension;
+                    import java.time.Clock;
+                    import java.util.Optional;
+                    import static org.assertj.core.api.BDDAssertions.and;
+                    import static org.mockito.BDDMockito.given;
+                    import static org.mockito.BDDMockito.then;
+
+                    @ExtendWith(MockitoExtension.class)
+                    class LimitingFacadeTest {
+                      @Mock
+                      private Clock clock;
+                      @Mock
+                      private AccountRepository accountRepository;
+                      @Mock
+                      private AccountSettingRepository accountSettingRepository;
+                      @Mock
+                      private ReportingFacade reporting;
+
+                      @InjectMocks
+                      private LimitingFacade systemUnderTest;
+
+                      @Captor
+                      private ArgumentCaptor&lt;AccountSetting> accountSettingCaptor;
+
+                      @Test
+                      void newAccount_overrideLimit_createsAccount() {
+                        var accountId = AccountId.valueOf("1");
+                        given(accountSettingRepository.findById(accountId)).willReturn(Optional.empty());
+
+                        // when
+                        systemUnderTest.overrideAccountLimit(accountId, 1);
+
+                        then(accountSettingRepository).should().save(accountSettingCaptor.capture());
+                        var account = accountSettingCaptor.getValue();
+                        and.then(account.id()).isEqualTo(accountId);
+                        and.then(account.limit()).isEqualTo(1);
+                      }
+
+                      @Test
+                      void existingAccount_overrideLimit_updatesAccount() {
+                        var accountId = AccountId.valueOf("1");
+                        var existingAccount = new AccountSetting(accountId.getId(), 2, 1);
+                        given(accountSettingRepository.findById(accountId)).willReturn(Optional.of(existingAccount));
+
+                        // when
+                        systemUnderTest.overrideAccountLimit(accountId, 1);
+
+                        then(accountSettingRepository).should().save(existingAccount);
+                        and.then(existingAccount.limit()).isEqualTo(1);
+                      }
+                    }
+                </code></pre>
+            </section>
+            <section>
+                <pre><code class="java" data-trim>
+                    import org.springframework.boot.test.json.BasicJsonTester;
+                    import org.springframework.boot.test.json.JsonContent;
+                </code></pre>
+                <pre class="fragment"><code class="java" data-trim>
+                then(asJson(item)).isStrictlyEqualToJson("""
+                    {
+                      "itemId": 123,
+                      "itemType": "movie",
+                      "item": {
+                        "name": "Test",
+                        "slug": "test-slug"
+                      }
+                    }""");
+                </code></pre>
+                <pre class="fragment"><code class="java" data-trim style="font-size: .85em;">
+                    private JsonContent&lt;Object> asJson(CollectionItem toParse) throws JsonProcessingException {
+                        String jsonResult = new ObjectMapper().writeValueAsString(toParse);
+                        return new BasicJsonTester(getClass()).from(jsonResult);
+                    }
+                </code></pre>
+            </section>
+            <section>
+                <pre style="width: 100%"><code class="java" data-trim>
+                    import org.springframework.boot.test.system.CapturedOutput;
+                    import org.springframework.boot.test.system.OutputCaptureExtension;
+                </code></pre>
+                <pre style="width: 100%" class="fragment"><code class="java" data-trim style="font-size: .9em;">
+                    @Test
+                    @ExtendWith(OutputCaptureExtension.class)
+                    void should_warn_about_null_country(CapturedOutput capturedOutput) {
+                        // when
+                        SubscriptionCountry.from((Country) null);
+
+                        then(capturedOutput.getOut()).contains("nullable Country");
+                    }
+                </code></pre>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <img src="img/wincyj.jpg">
+            </section>
+            <section data-auto-animate="int-tests" data-auto-animate-restart>
+                <pre data-id="int-test" class="r-stretch" style="width: 100%;"><code class="java" data-trim
+                                                                                     contenteditable="true"
+                                                                                     data-line-numbers="30-31">
+                    package io.github.mat3e.downloads.limiting.rest;
+
+                    import com.fasterxml.jackson.databind.JavaType;
+                    import com.fasterxml.jackson.databind.ObjectMapper;
+                    import com.fasterxml.jackson.databind.type.TypeFactory;
+                    import io.github.mat3e.downloads.limiting.LimitingFacade;
+                    import io.github.mat3e.downloads.limiting.api.AccountId;
+                    import io.github.mat3e.downloads.limiting.api.Asset;
+                    import io.github.mat3e.downloads.limiting.api.AssetDeserialization;
+                    import org.junit.jupiter.api.Test;
+                    import org.junit.jupiter.api.extension.ExtendWith;
+                    import org.springframework.beans.factory.annotation.Autowired;
+                    import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+                    import org.springframework.boot.test.context.SpringBootTest;
+                    import org.springframework.test.context.junit.jupiter.SpringExtension;
+                    import org.springframework.test.web.servlet.MockMvc;
+                    import org.springframework.test.web.servlet.ResultActions;
+
+                    import java.util.Collection;
+
+                    import static java.util.stream.Collectors.toUnmodifiableList;
+                    import static org.assertj.core.api.BDDAssertions.then;
+                    import static org.springframework.http.MediaType.APPLICATION_JSON;
+                    import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+                    import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+                    import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+                    import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+                    @AutoConfigureMockMvc
+                    @SpringBootTest
+                    @ExtendWith(SpringExtension.class)
+                    class LimitingIntTest {
+                      private static final String ACCOUNT_ID = "1";
+
+                      @Autowired
+                      private MockMvc mockMvc;
+
+                      @Test
+                      void downloadStarted_storesAssetsTillLimit() throws Exception {
+                        givenAccountLimit(2);
+                        // and
+                        httpSuccessfulPostAsset(
+                            "{",
+                            " \"id\": \"123\",",
+                            " \"countryCode\": \"US\"",
+                            "}");
+                        // and
+                        httpSuccessfulPostAsset(
+                            "{",
+                            " \"id\": \"456\",",
+                            " \"countryCode\": \"US\"",
+                            "}");
+
+                        // when
+                        httpPostAsset(
+                            "{",
+                            " \"id\": \"789\",",
+                            " \"countryCode\": \"US\"",
+                            "}"
+                        ).andExpect(status().isUnprocessableEntity());
+
+                        then(httpSuccessfulGetAssets()).containsExactly(
+                            Asset.withId("123").inCountry("US"),
+                            Asset.withId("456").inCountry("US"));
+
+                        // when
+                        httpSuccessfulDeleteAsset("123", "US");
+                        // and
+                        httpSuccessfulPostAsset(
+                            "{",
+                            " \"id\": \"789\",",
+                            " \"countryCode\": \"US\"",
+                            "}");
+
+                        then(httpSuccessfulGetAssets()).containsExactly(
+                            Asset.withId("456").inCountry("US"),
+                            Asset.withId("789").inCountry("US"));
+                      }
+
+                      @Test
+                      void illegalParams_returnsClientError() throws Exception {
+                        // given
+                        var validBody = "{ \"id\": \"123\", \"countryCode\": \"US\" }";
+
+                        // expect 404 - no account created, no assets
+                        httpGetAssets("lookMaNotExistingId").andExpect(status().isNotFound());
+                        httpPostAsset(validBody).andExpect(status().isNotFound());
+                        httpDeleteAsset("123", "US").andExpect(status().isNotFound());
+
+                        // expect 400
+                        httpPostAssetForAccount("  ", validBody).andExpect(status().isBadRequest());
+                        httpPostAsset("{ \"countryCode\": \"US\" }").andExpect(status().isBadRequest());
+                        httpPostAsset("{ \"id\": \"123\" }").andExpect(status().isBadRequest());
+                        httpDeleteAsset("  ", "OK").andExpect(status().isBadRequest());
+                        httpDeleteAsset("123", "  ").andExpect(status().isBadRequest());
+                      }
+
+                      private void httpSuccessfulDeleteAsset(String assetId, String countryCode) {
+                        try {
+                          httpDeleteAsset(assetId, countryCode).andExpect(status().isNoContent());
+                        } catch (Exception e) {
+                          throw new RuntimeException(e);
+                        }
+                      }
+
+                      private ResultActions httpDeleteAsset(String assetId, String countryCode) throws Exception {
+                        return mockMvc.perform(delete("/api/accounts/{id}/assets/{assetId}", ACCOUNT_ID, assetId)
+                            .queryParam("countryCode", countryCode));
+                      }
+
+                      private Collection&lt;Asset> httpSuccessfulGetAssets() {
+                        try {
+                          String jsonResponse = httpGetAssets(ACCOUNT_ID)
+                              .andExpect(status().isOk())
+                              .andReturn().getResponse().getContentAsString();
+                          JavaType returnType =
+                              TypeFactory.defaultInstance().constructCollectionType(Collection.class, AssetDeserialization.class);
+                          return new ObjectMapper().&lt;Collection&lt;AssetDeserialization>>readValue(jsonResponse, returnType).stream()
+                              .map(AssetDeserialization::toApi)
+                              .collect(toUnmodifiableList());
+                        } catch (Exception e) {
+                          throw new RuntimeException(e);
+                        }
+                      }
+
+                      private ResultActions httpGetAssets(String accountId) throws Exception {
+                        return mockMvc.perform(get("/api/accounts/{id}/assets", accountId).contentType(APPLICATION_JSON));
+                      }
+
+                      private void httpSuccessfulPostAsset(String... jsonLines) {
+                        try {
+                          httpPostAsset(jsonLines).andExpect(status().isCreated());
+                        } catch (Exception e) {
+                          throw new RuntimeException(e);
+                        }
+                      }
+
+                      private ResultActions httpPostAsset(String... jsonLines) throws Exception {
+                        return httpPostAssetForAccount(ACCOUNT_ID, jsonLines);
+                      }
+
+                      private ResultActions httpPostAssetForAccount(String accountId, String... jsonLines) throws Exception {
+                        return mockMvc.perform(post("/api/accounts/{id}/assets", accountId)
+                            .contentType(APPLICATION_JSON)
+                            .content(String.join("\n", jsonLines)));
+                      }
+
+                      void givenAccountLimit(int limit) {
+                        facade.overrideAccountLimit(AccountId.valueOf(ACCOUNT_ID), limit);
+                      }
+
+                      @Autowired
+                      private LimitingFacade facade;
+                    }
+                </code></pre>
+            </section>
+            <section data-auto-animate>
+                <pre data-id="int-test" class="r-stretch" style="width: 100%;"><code class="java" data-trim
+                                                                                     contenteditable="true"
+                                                                                     data-line-numbers="28">
+                    package io.github.mat3e.downloads.limiting.rest;
+
+                    import com.fasterxml.jackson.databind.JavaType;
+                    import com.fasterxml.jackson.databind.ObjectMapper;
+                    import com.fasterxml.jackson.databind.type.TypeFactory;
+                    import io.github.mat3e.downloads.limiting.LimitingFacade;
+                    import io.github.mat3e.downloads.limiting.api.AccountId;
+                    import io.github.mat3e.downloads.limiting.api.Asset;
+                    import io.github.mat3e.downloads.limiting.api.AssetDeserialization;
+                    import org.junit.jupiter.api.Test;
+                    import org.springframework.beans.factory.annotation.Autowired;
+                    import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+                    import org.springframework.boot.test.context.SpringBootTest;
+                    import org.springframework.test.web.servlet.MockMvc;
+                    import org.springframework.test.web.servlet.ResultActions;
+
+                    import java.util.Collection;
+
+                    import static java.util.stream.Collectors.toUnmodifiableList;
+                    import static org.assertj.core.api.BDDAssertions.then;
+                    import static org.springframework.http.MediaType.APPLICATION_JSON;
+                    import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+                    import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+                    import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+                    import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+                    @AutoConfigureMockMvc
+                    @SpringBootTest
+                    class LimitingIntTest {
+                      private static final String ACCOUNT_ID = "1";
+
+                      @Autowired
+                      private MockMvc mockMvc;
+
+                      @Test
+                      void downloadStarted_storesAssetsTillLimit() throws Exception {
+                        givenAccountLimit(2);
+                        // and
+                        httpSuccessfulPostAsset(
+                            "{",
+                            " \"id\": \"123\",",
+                            " \"countryCode\": \"US\"",
+                            "}");
+                        // and
+                        httpSuccessfulPostAsset(
+                            "{",
+                            " \"id\": \"456\",",
+                            " \"countryCode\": \"US\"",
+                            "}");
+
+                        // when
+                        httpPostAsset(
+                            "{",
+                            " \"id\": \"789\",",
+                            " \"countryCode\": \"US\"",
+                            "}"
+                        ).andExpect(status().isUnprocessableEntity());
+
+                        then(httpSuccessfulGetAssets()).containsExactly(
+                            Asset.withId("123").inCountry("US"),
+                            Asset.withId("456").inCountry("US"));
+
+                        // when
+                        httpSuccessfulDeleteAsset("123", "US");
+                        // and
+                        httpSuccessfulPostAsset(
+                            "{",
+                            " \"id\": \"789\",",
+                            " \"countryCode\": \"US\"",
+                            "}");
+
+                        then(httpSuccessfulGetAssets()).containsExactly(
+                            Asset.withId("456").inCountry("US"),
+                            Asset.withId("789").inCountry("US"));
+                      }
+
+                      @Test
+                      void illegalParams_returnsClientError() throws Exception {
+                        // given
+                        var validBody = "{ \"id\": \"123\", \"countryCode\": \"US\" }";
+
+                        // expect 404 - no account created, no assets
+                        httpGetAssets("lookMaNotExistingId").andExpect(status().isNotFound());
+                        httpPostAsset(validBody).andExpect(status().isNotFound());
+                        httpDeleteAsset("123", "US").andExpect(status().isNotFound());
+
+                        // expect 400
+                        httpPostAssetForAccount("  ", validBody).andExpect(status().isBadRequest());
+                        httpPostAsset("{ \"countryCode\": \"US\" }").andExpect(status().isBadRequest());
+                        httpPostAsset("{ \"id\": \"123\" }").andExpect(status().isBadRequest());
+                        httpDeleteAsset("  ", "OK").andExpect(status().isBadRequest());
+                        httpDeleteAsset("123", "  ").andExpect(status().isBadRequest());
+                      }
+
+                      private void httpSuccessfulDeleteAsset(String assetId, String countryCode) {
+                        try {
+                          httpDeleteAsset(assetId, countryCode).andExpect(status().isNoContent());
+                        } catch (Exception e) {
+                          throw new RuntimeException(e);
+                        }
+                      }
+
+                      private ResultActions httpDeleteAsset(String assetId, String countryCode) throws Exception {
+                        return mockMvc.perform(delete("/api/accounts/{id}/assets/{assetId}", ACCOUNT_ID, assetId)
+                            .queryParam("countryCode", countryCode));
+                      }
+
+                      private Collection&lt;Asset> httpSuccessfulGetAssets() {
+                        try {
+                          String jsonResponse = httpGetAssets(ACCOUNT_ID)
+                              .andExpect(status().isOk())
+                              .andReturn().getResponse().getContentAsString();
+                          JavaType returnType =
+                              TypeFactory.defaultInstance().constructCollectionType(Collection.class, AssetDeserialization.class);
+                          return new ObjectMapper().&lt;Collection&lt;AssetDeserialization>>readValue(jsonResponse, returnType).stream()
+                              .map(AssetDeserialization::toApi)
+                              .collect(toUnmodifiableList());
+                        } catch (Exception e) {
+                          throw new RuntimeException(e);
+                        }
+                      }
+
+                      private ResultActions httpGetAssets(String accountId) throws Exception {
+                        return mockMvc.perform(get("/api/accounts/{id}/assets", accountId).contentType(APPLICATION_JSON));
+                      }
+
+                      private void httpSuccessfulPostAsset(String... jsonLines) {
+                        try {
+                          httpPostAsset(jsonLines).andExpect(status().isCreated());
+                        } catch (Exception e) {
+                          throw new RuntimeException(e);
+                        }
+                      }
+
+                      private ResultActions httpPostAsset(String... jsonLines) throws Exception {
+                        return httpPostAssetForAccount(ACCOUNT_ID, jsonLines);
+                      }
+
+                      private ResultActions httpPostAssetForAccount(String accountId, String... jsonLines) throws Exception {
+                        return mockMvc.perform(post("/api/accounts/{id}/assets", accountId)
+                            .contentType(APPLICATION_JSON)
+                            .content(String.join("\n", jsonLines)));
+                      }
+
+                      void givenAccountLimit(int limit) {
+                        facade.overrideAccountLimit(AccountId.valueOf(ACCOUNT_ID), limit);
+                      }
+
+                      @Autowired
+                      private LimitingFacade facade;
+                    }
+                </code></pre>
+            </section>
+            <section data-auto-animate>
+                <pre data-id="test-annotation" style="width: 100%;"><code class="java" data-trim
+                                                                          data-line-numbers="7|1-9|6">
+                    @Target(ElementType.TYPE)
+                    @Retention(RetentionPolicy.RUNTIME)
+                    @Documented
+                    @Inherited
+                    @BootstrapWith(SpringBootTestContextBootstrapper.class)
+                    @ExtendWith(SpringExtension.class)
+                    public @interface SpringBootTest {
+                      /* ... */
+                    }
+                </code></pre>
+            </section>
+            <section data-auto-animate>
+                <pre data-id="test-annotation" style="width: 100%;" class="r-stretch"><code class="java" data-trim
+                                                                                            style="font-size: .73em; line-height: 1.1"
+                                                                                            data-line-numbers="22|17-33|7-9,25">
+                    /**
+                     * Annotation for a JPA test that focuses &lt;strong>only&lt;/strong> on JPA components.
+                     * &lt;p>
+                     * Using this annotation will disable full auto-configuration and instead apply only
+                     * configuration relevant to JPA tests.
+                     * &lt;p>
+                     * By default, tests annotated with {@code @DataJpaTest} are transactional and roll back
+                     * at the end of each test. They also use an embedded in-memory database (replacing any
+                     * explicit or usually auto-configured DataSource).
+                     * ...
+                     * If you are looking to load your full application configuration, but use an embedded
+                     * database, you should consider {@link SpringBootTest @SpringBootTest} combined with
+                     * {@link AutoConfigureTestDatabase @AutoConfigureTestDatabase} rather than this
+                     * annotation.
+                     * ...
+                     */
+                    @Target(ElementType.TYPE)
+                    @Retention(RetentionPolicy.RUNTIME)
+                    @Documented
+                    @Inherited
+                    @BootstrapWith(DataJpaTestContextBootstrapper.class)
+                    @ExtendWith(SpringExtension.class)
+                    @OverrideAutoConfiguration(enabled = false)
+                    @TypeExcludeFilters(DataJpaTypeExcludeFilter.class)
+                    @Transactional
+                    @AutoConfigureCache
+                    @AutoConfigureDataJpa
+                    @AutoConfigureTestDatabase
+                    @AutoConfigureTestEntityManager
+                    @ImportAutoConfiguration
+                    public @interface DataJpaTest {
+                      /* ... */
+                    }
+                </code></pre>
+            </section>
+            <section data-auto-animate data-auto-animate-restart>
+                <pre data-id="int-test" class="r-stretch" style="width: 100%;"><code class="java" data-trim
+                                                                                     contenteditable="true"
+                                                                                     data-line-numbers="28-29">
+                    package io.github.mat3e.downloads.limiting.rest;
+
+                    import com.fasterxml.jackson.databind.JavaType;
+                    import com.fasterxml.jackson.databind.ObjectMapper;
+                    import com.fasterxml.jackson.databind.type.TypeFactory;
+                    import io.github.mat3e.downloads.limiting.LimitingFacade;
+                    import io.github.mat3e.downloads.limiting.api.AccountId;
+                    import io.github.mat3e.downloads.limiting.api.Asset;
+                    import io.github.mat3e.downloads.limiting.api.AssetDeserialization;
+                    import org.junit.jupiter.api.Test;
+                    import org.springframework.beans.factory.annotation.Autowired;
+                    import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+                    import org.springframework.boot.test.context.SpringBootTest;
+                    import org.springframework.test.web.servlet.MockMvc;
+                    import org.springframework.test.web.servlet.ResultActions;
+
+                    import java.util.Collection;
+
+                    import static java.util.stream.Collectors.toUnmodifiableList;
+                    import static org.assertj.core.api.BDDAssertions.then;
+                    import static org.springframework.http.MediaType.APPLICATION_JSON;
+                    import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+                    import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+                    import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+                    import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+                    @AutoConfigureMockMvc
+                    @SpringBootTest
+                    class LimitingIntTest {
+                      private static final String ACCOUNT_ID = "1";
+
+                      @Autowired
+                      private MockMvc mockMvc;
+
+                      @Test
+                      void downloadStarted_storesAssetsTillLimit() throws Exception {
+                        givenAccountLimit(2);
+                        // and
+                        httpSuccessfulPostAsset(
+                            "{",
+                            " \"id\": \"123\",",
+                            " \"countryCode\": \"US\"",
+                            "}");
+                        // and
+                        httpSuccessfulPostAsset(
+                            "{",
+                            " \"id\": \"456\",",
+                            " \"countryCode\": \"US\"",
+                            "}");
+
+                        // when
+                        httpPostAsset(
+                            "{",
+                            " \"id\": \"789\",",
+                            " \"countryCode\": \"US\"",
+                            "}"
+                        ).andExpect(status().isUnprocessableEntity());
+
+                        then(httpSuccessfulGetAssets()).containsExactly(
+                            Asset.withId("123").inCountry("US"),
+                            Asset.withId("456").inCountry("US"));
+
+                        // when
+                        httpSuccessfulDeleteAsset("123", "US");
+                        // and
+                        httpSuccessfulPostAsset(
+                            "{",
+                            " \"id\": \"789\",",
+                            " \"countryCode\": \"US\"",
+                            "}");
+
+                        then(httpSuccessfulGetAssets()).containsExactly(
+                            Asset.withId("456").inCountry("US"),
+                            Asset.withId("789").inCountry("US"));
+                      }
+
+                      @Test
+                      void illegalParams_returnsClientError() throws Exception {
+                        // given
+                        var validBody = "{ \"id\": \"123\", \"countryCode\": \"US\" }";
+
+                        // expect 404 - no account created, no assets
+                        httpGetAssets("lookMaNotExistingId").andExpect(status().isNotFound());
+                        httpPostAsset(validBody).andExpect(status().isNotFound());
+                        httpDeleteAsset("123", "US").andExpect(status().isNotFound());
+
+                        // expect 400
+                        httpPostAssetForAccount("  ", validBody).andExpect(status().isBadRequest());
+                        httpPostAsset("{ \"countryCode\": \"US\" }").andExpect(status().isBadRequest());
+                        httpPostAsset("{ \"id\": \"123\" }").andExpect(status().isBadRequest());
+                        httpDeleteAsset("  ", "OK").andExpect(status().isBadRequest());
+                        httpDeleteAsset("123", "  ").andExpect(status().isBadRequest());
+                      }
+
+                      private void httpSuccessfulDeleteAsset(String assetId, String countryCode) {
+                        try {
+                          httpDeleteAsset(assetId, countryCode).andExpect(status().isNoContent());
+                        } catch (Exception e) {
+                          throw new RuntimeException(e);
+                        }
+                      }
+
+                      private ResultActions httpDeleteAsset(String assetId, String countryCode) throws Exception {
+                        return mockMvc.perform(delete("/api/accounts/{id}/assets/{assetId}", ACCOUNT_ID, assetId)
+                            .queryParam("countryCode", countryCode));
+                      }
+
+                      private Collection&lt;Asset> httpSuccessfulGetAssets() {
+                        try {
+                          String jsonResponse = httpGetAssets(ACCOUNT_ID)
+                              .andExpect(status().isOk())
+                              .andReturn().getResponse().getContentAsString();
+                          JavaType returnType =
+                              TypeFactory.defaultInstance().constructCollectionType(Collection.class, AssetDeserialization.class);
+                          return new ObjectMapper().&lt;Collection&lt;AssetDeserialization>>readValue(jsonResponse, returnType).stream()
+                              .map(AssetDeserialization::toApi)
+                              .collect(toUnmodifiableList());
+                        } catch (Exception e) {
+                          throw new RuntimeException(e);
+                        }
+                      }
+
+                      private ResultActions httpGetAssets(String accountId) throws Exception {
+                        return mockMvc.perform(get("/api/accounts/{id}/assets", accountId).contentType(APPLICATION_JSON));
+                      }
+
+                      private void httpSuccessfulPostAsset(String... jsonLines) {
+                        try {
+                          httpPostAsset(jsonLines).andExpect(status().isCreated());
+                        } catch (Exception e) {
+                          throw new RuntimeException(e);
+                        }
+                      }
+
+                      private ResultActions httpPostAsset(String... jsonLines) throws Exception {
+                        return httpPostAssetForAccount(ACCOUNT_ID, jsonLines);
+                      }
+
+                      private ResultActions httpPostAssetForAccount(String accountId, String... jsonLines) throws Exception {
+                        return mockMvc.perform(post("/api/accounts/{id}/assets", accountId)
+                            .contentType(APPLICATION_JSON)
+                            .content(String.join("\n", jsonLines)));
+                      }
+
+                      void givenAccountLimit(int limit) {
+                        facade.overrideAccountLimit(AccountId.valueOf(ACCOUNT_ID), limit);
+                      }
+
+                      @Autowired
+                      private LimitingFacade facade;
+                    }
+                </code></pre>
+            </section>
+            <section data-auto-animate>
+                <pre data-id="int-test" class="r-stretch" style="width: 100%;"><code class="java" data-trim
+                                                                                     contenteditable="true"
+                                                                                     data-line-numbers="28,30-31">
+                    package io.github.mat3e.downloads.limiting.rest;
+
+                    import com.fasterxml.jackson.databind.JavaType;
+                    import com.fasterxml.jackson.databind.ObjectMapper;
+                    import com.fasterxml.jackson.databind.type.TypeFactory;
+                    import io.github.mat3e.downloads.limiting.LimitingFacade;
+                    import io.github.mat3e.downloads.limiting.api.AccountId;
+                    import io.github.mat3e.downloads.limiting.api.Asset;
+                    import io.github.mat3e.downloads.limiting.api.AssetDeserialization;
+                    import org.junit.jupiter.api.Test;
+                    import org.springframework.beans.factory.annotation.Autowired;
+                    import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+                    import org.springframework.boot.test.context.SpringBootTest;
+                    import org.springframework.test.web.servlet.MockMvc;
+                    import org.springframework.test.web.servlet.ResultActions;
+                    import org.springframework.transaction.annotation.Transactional;
+
+                    import java.util.Collection;
+
+                    import static java.util.stream.Collectors.toUnmodifiableList;
+                    import static org.assertj.core.api.BDDAssertions.then;
+                    import static org.springframework.http.MediaType.APPLICATION_JSON;
+                    import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+                    import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+                    import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+                    import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+                    @Transactional
+                    @AutoConfigureMockMvc
+                    @SpringBootTest
+                    class LimitingIntTest {
+                      private static final String ACCOUNT_ID = "1";
+
+                      @Autowired
+                      private MockMvc mockMvc;
+
+                      @Test
+                      void downloadStarted_storesAssetsTillLimit() throws Exception {
+                        givenAccountLimit(2);
+                        // and
+                        httpSuccessfulPostAsset(
+                            "{",
+                            " \"id\": \"123\",",
+                            " \"countryCode\": \"US\"",
+                            "}");
+                        // and
+                        httpSuccessfulPostAsset(
+                            "{",
+                            " \"id\": \"456\",",
+                            " \"countryCode\": \"US\"",
+                            "}");
+
+                        // when
+                        httpPostAsset(
+                            "{",
+                            " \"id\": \"789\",",
+                            " \"countryCode\": \"US\"",
+                            "}"
+                        ).andExpect(status().isUnprocessableEntity());
+
+                        then(httpSuccessfulGetAssets()).containsExactly(
+                            Asset.withId("123").inCountry("US"),
+                            Asset.withId("456").inCountry("US"));
+
+                        // when
+                        httpSuccessfulDeleteAsset("123", "US");
+                        // and
+                        httpSuccessfulPostAsset(
+                            "{",
+                            " \"id\": \"789\",",
+                            " \"countryCode\": \"US\"",
+                            "}");
+
+                        then(httpSuccessfulGetAssets()).containsExactly(
+                            Asset.withId("456").inCountry("US"),
+                            Asset.withId("789").inCountry("US"));
+                      }
+
+                      @Test
+                      void illegalParams_returnsClientError() throws Exception {
+                        // given
+                        var validBody = "{ \"id\": \"123\", \"countryCode\": \"US\" }";
+
+                        // expect 404 - no account created, no assets
+                        httpGetAssets("lookMaNotExistingId").andExpect(status().isNotFound());
+                        httpPostAsset(validBody).andExpect(status().isNotFound());
+                        httpDeleteAsset("123", "US").andExpect(status().isNotFound());
+
+                        // expect 400
+                        httpPostAssetForAccount("  ", validBody).andExpect(status().isBadRequest());
+                        httpPostAsset("{ \"countryCode\": \"US\" }").andExpect(status().isBadRequest());
+                        httpPostAsset("{ \"id\": \"123\" }").andExpect(status().isBadRequest());
+                        httpDeleteAsset("  ", "OK").andExpect(status().isBadRequest());
+                        httpDeleteAsset("123", "  ").andExpect(status().isBadRequest());
+                      }
+
+                      private void httpSuccessfulDeleteAsset(String assetId, String countryCode) {
+                        try {
+                          httpDeleteAsset(assetId, countryCode).andExpect(status().isNoContent());
+                        } catch (Exception e) {
+                          throw new RuntimeException(e);
+                        }
+                      }
+
+                      private ResultActions httpDeleteAsset(String assetId, String countryCode) throws Exception {
+                        return mockMvc.perform(delete("/api/accounts/{id}/assets/{assetId}", ACCOUNT_ID, assetId)
+                            .queryParam("countryCode", countryCode));
+                      }
+
+                      private Collection&lt;Asset> httpSuccessfulGetAssets() {
+                        try {
+                          String jsonResponse = httpGetAssets(ACCOUNT_ID)
+                              .andExpect(status().isOk())
+                              .andReturn().getResponse().getContentAsString();
+                          JavaType returnType =
+                              TypeFactory.defaultInstance().constructCollectionType(Collection.class, AssetDeserialization.class);
+                          return new ObjectMapper().&lt;Collection&lt;AssetDeserialization>>readValue(jsonResponse, returnType).stream()
+                              .map(AssetDeserialization::toApi)
+                              .collect(toUnmodifiableList());
+                        } catch (Exception e) {
+                          throw new RuntimeException(e);
+                        }
+                      }
+
+                      private ResultActions httpGetAssets(String accountId) throws Exception {
+                        return mockMvc.perform(get("/api/accounts/{id}/assets", accountId).contentType(APPLICATION_JSON));
+                      }
+
+                      private void httpSuccessfulPostAsset(String... jsonLines) {
+                        try {
+                          httpPostAsset(jsonLines).andExpect(status().isCreated());
+                        } catch (Exception e) {
+                          throw new RuntimeException(e);
+                        }
+                      }
+
+                      private ResultActions httpPostAsset(String... jsonLines) throws Exception {
+                        return httpPostAssetForAccount(ACCOUNT_ID, jsonLines);
+                      }
+
+                      private ResultActions httpPostAssetForAccount(String accountId, String... jsonLines) throws Exception {
+                        return mockMvc.perform(post("/api/accounts/{id}/assets", accountId)
+                            .contentType(APPLICATION_JSON)
+                            .content(String.join("\n", jsonLines)));
+                      }
+
+                      void givenAccountLimit(int limit) {
+                        facade.overrideAccountLimit(AccountId.valueOf(ACCOUNT_ID), limit);
+                      }
+
+                      @Autowired
+                      private LimitingFacade facade;
+                    }
+                </code></pre>
+            </section>
+            <section>
+                <blockquote style="font-style: normal">⚠️ <code>@Transactional</code> + JPA ⚠️</blockquote>
+                <a class="fragment" href="https://nurkiewicz.com/2011/11/spring-pitfalls-transactional-tests.html">
+                    <em>Spring pitfalls: transactional tests considered harmful</em>
+                </a>
+                <div class="fragment">Fun fact: 2011</div>
+                <aside class="notes">
+                    Ale część problemów JPA-specific, podczas gdy JPA ogólnie problem, a <code>@Transactional</code>
+                    działa i z JDBC i innymi
+                </aside>
+            </section>
+            <section data-auto-animate>
+                <pre data-id="int-test" class="r-stretch" style="width: 100%;"><code class="java" data-trim
+                                                                                     contenteditable="true"
+                                                                                     data-line-numbers="28,30-31|29|34-35|53-59|137-145">
+                    package io.github.mat3e.downloads.limiting.rest;
+
+                    import com.fasterxml.jackson.databind.JavaType;
+                    import com.fasterxml.jackson.databind.ObjectMapper;
+                    import com.fasterxml.jackson.databind.type.TypeFactory;
+                    import io.github.mat3e.downloads.limiting.LimitingFacade;
+                    import io.github.mat3e.downloads.limiting.api.AccountId;
+                    import io.github.mat3e.downloads.limiting.api.Asset;
+                    import io.github.mat3e.downloads.limiting.api.AssetDeserialization;
+                    import org.junit.jupiter.api.Test;
+                    import org.springframework.beans.factory.annotation.Autowired;
+                    import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+                    import org.springframework.boot.test.context.SpringBootTest;
+                    import org.springframework.test.web.servlet.MockMvc;
+                    import org.springframework.test.web.servlet.ResultActions;
+                    import org.springframework.transaction.annotation.Transactional;
+
+                    import java.util.Collection;
+
+                    import static java.util.stream.Collectors.toUnmodifiableList;
+                    import static org.assertj.core.api.BDDAssertions.then;
+                    import static org.springframework.http.MediaType.APPLICATION_JSON;
+                    import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+                    import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+                    import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+                    import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+                    @Transactional
+                    @AutoConfigureMockMvc
+                    @SpringBootTest
+                    class LimitingIntTest {
+                      private static final String ACCOUNT_ID = "1";
+
+                      @Autowired
+                      private MockMvc mockMvc;
+
+                      @Test
+                      void downloadStarted_storesAssetsTillLimit() throws Exception {
+                        givenAccountLimit(2);
+                        // and
+                        httpSuccessfulPostAsset(
+                            "{",
+                            " \"id\": \"123\",",
+                            " \"countryCode\": \"US\"",
+                            "}");
+                        // and
+                        httpSuccessfulPostAsset(
+                            "{",
+                            " \"id\": \"456\",",
+                            " \"countryCode\": \"US\"",
+                            "}");
+
+                        // when
+                        httpPostAsset(
+                            "{",
+                            " \"id\": \"789\",",
+                            " \"countryCode\": \"US\"",
+                            "}"
+                        ).andExpect(status().isUnprocessableEntity());
+
+                        then(httpSuccessfulGetAssets()).containsExactly(
+                            Asset.withId("123").inCountry("US"),
+                            Asset.withId("456").inCountry("US"));
+
+                        // when
+                        httpSuccessfulDeleteAsset("123", "US");
+                        // and
+                        httpSuccessfulPostAsset(
+                            "{",
+                            " \"id\": \"789\",",
+                            " \"countryCode\": \"US\"",
+                            "}");
+
+                        then(httpSuccessfulGetAssets()).containsExactly(
+                            Asset.withId("456").inCountry("US"),
+                            Asset.withId("789").inCountry("US"));
+                      }
+
+                      @Test
+                      void illegalParams_returnsClientError() throws Exception {
+                        // given
+                        var validBody = "{ \"id\": \"123\", \"countryCode\": \"US\" }";
+
+                        // expect 404 - no account created, no assets
+                        httpGetAssets("lookMaNotExistingId").andExpect(status().isNotFound());
+                        httpPostAsset(validBody).andExpect(status().isNotFound());
+                        httpDeleteAsset("123", "US").andExpect(status().isNotFound());
+
+                        // expect 400
+                        httpPostAssetForAccount("  ", validBody).andExpect(status().isBadRequest());
+                        httpPostAsset("{ \"countryCode\": \"US\" }").andExpect(status().isBadRequest());
+                        httpPostAsset("{ \"id\": \"123\" }").andExpect(status().isBadRequest());
+                        httpDeleteAsset("  ", "OK").andExpect(status().isBadRequest());
+                        httpDeleteAsset("123", "  ").andExpect(status().isBadRequest());
+                      }
+
+                      private void httpSuccessfulDeleteAsset(String assetId, String countryCode) {
+                        try {
+                          httpDeleteAsset(assetId, countryCode).andExpect(status().isNoContent());
+                        } catch (Exception e) {
+                          throw new RuntimeException(e);
+                        }
+                      }
+
+                      private ResultActions httpDeleteAsset(String assetId, String countryCode) throws Exception {
+                        return mockMvc.perform(delete("/api/accounts/{id}/assets/{assetId}", ACCOUNT_ID, assetId)
+                            .queryParam("countryCode", countryCode));
+                      }
+
+                      private Collection&lt;Asset> httpSuccessfulGetAssets() {
+                        try {
+                          String jsonResponse = httpGetAssets(ACCOUNT_ID)
+                              .andExpect(status().isOk())
+                              .andReturn().getResponse().getContentAsString();
+                          JavaType returnType =
+                              TypeFactory.defaultInstance().constructCollectionType(Collection.class, AssetDeserialization.class);
+                          return new ObjectMapper().&lt;Collection&lt;AssetDeserialization>>readValue(jsonResponse, returnType).stream()
+                              .map(AssetDeserialization::toApi)
+                              .collect(toUnmodifiableList());
+                        } catch (Exception e) {
+                          throw new RuntimeException(e);
+                        }
+                      }
+
+                      private ResultActions httpGetAssets(String accountId) throws Exception {
+                        return mockMvc.perform(get("/api/accounts/{id}/assets", accountId).contentType(APPLICATION_JSON));
+                      }
+
+                      private void httpSuccessfulPostAsset(String... jsonLines) {
+                        try {
+                          httpPostAsset(jsonLines).andExpect(status().isCreated());
+                        } catch (Exception e) {
+                          throw new RuntimeException(e);
+                        }
+                      }
+
+                      private ResultActions httpPostAsset(String... jsonLines) throws Exception {
+                        return httpPostAssetForAccount(ACCOUNT_ID, jsonLines);
+                      }
+
+                      private ResultActions httpPostAssetForAccount(String accountId, String... jsonLines) throws Exception {
+                        return mockMvc.perform(post("/api/accounts/{id}/assets", accountId)
+                            .contentType(APPLICATION_JSON)
+                            .content(String.join("\n", jsonLines)));
+                      }
+
+                      void givenAccountLimit(int limit) {
+                        facade.overrideAccountLimit(AccountId.valueOf(ACCOUNT_ID), limit);
+                      }
+
+                      @Autowired
+                      private LimitingFacade facade;
+                    }
+                </code></pre>
+            </section>
+        </section>
+
+        <section>
+            <section data-background-image="img/brain.png" data-background-size="contain"></section>
+            <section>
+                <pre style="width: 100%;"><code class="java" data-trim
+                                                data-line-numbers="15-18,23-24">
+                    package io.github.mat3e.downloads.limiting;
+
+                    import org.junit.jupiter.api.Tag;
+                    import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+                    import org.springframework.boot.test.context.SpringBootTest;
+                    import org.springframework.transaction.annotation.Transactional;
+
+                    import java.lang.annotation.Documented;
+                    import java.lang.annotation.ElementType;
+                    import java.lang.annotation.Inherited;
+                    import java.lang.annotation.Retention;
+                    import java.lang.annotation.RetentionPolicy;
+                    import java.lang.annotation.Target;
+
+                    @Tag("integration")
+                    @Transactional
+                    @AutoConfigureMockMvc
+                    @SpringBootTest
+                    @Target(ElementType.TYPE)
+                    @Retention(RetentionPolicy.RUNTIME)
+                    @Documented
+                    @Inherited
+                    public @interface IntegrationTest {
+                    }
+                </code></pre>
+                <pre style="width: 100%;" class="fragment"><code class="java" data-trim>
+                    @IntegrationTest
+                    class LimitingControllerIntTest {
+                        /* ... */
+                    }
+                </code></pre>
+            </section>
+            <section>
+                <pre class="r-stretch" style="width: 100%;"><code class="java" data-trim
+                                                                  style="font-size: .75em; line-height: 1.1"
+                                                                  data-line-numbers="32|37-50|26-31|53-62|55|24,27|64-89">
+                    package io.github.mat3e.downloads;
+
+                    import io.prometheus.client.CollectorRegistry;
+                    import org.springframework.beans.factory.annotation.Autowired;
+                    import org.springframework.boot.actuate.autoconfigure.metrics.export.prometheus.PrometheusMetricsExportAutoConfiguration;
+                    import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+                    import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+                    import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+                    import org.springframework.boot.test.context.SpringBootTest;
+                    import org.springframework.context.annotation.Bean;
+                    import org.springframework.context.annotation.Configuration;
+                    import org.springframework.test.web.servlet.MockMvc;
+                    import org.springframework.transaction.PlatformTransactionManager;
+                    import org.springframework.transaction.TransactionDefinition;
+                    import org.springframework.transaction.TransactionException;
+                    import org.springframework.transaction.TransactionStatus;
+                    import org.springframework.transaction.annotation.Transactional;
+                    import org.springframework.transaction.support.SimpleTransactionStatus;
+
+                    import javax.annotation.Nonnull;
+                    import javax.annotation.Nullable;
+                    import java.util.List;
+
+                    @Transactional // => rollback at the end of each test
+                    @AutoConfigureMockMvc
+                    @SpringBootTest(properties = {
+                        "app.repositories.type=in-mem", // not used in prod code anyhow
+                        "app.metrics.type=in-mem",
+                        "spring.cloud.gcp.core.enabled=false"
+                        // ...
+                    })
+                    class AbstractInMemoryScenario&lt;SELF extends AbstractInMemoryScenario&lt;? extends SELF>> {
+
+                      @Autowired
+                      protected MockMvc mockMvc;
+
+                      @SuppressWarnings("unchecked")
+                      protected SELF given() {
+                        return (SELF) this;
+                      }
+
+                      @SuppressWarnings("unchecked")
+                      protected SELF when() {
+                        return (SELF) this;
+                      }
+
+                      @SuppressWarnings("unchecked")
+                      protected SELF and() {
+                        return (SELF) this;
+                      }
+                    }
+
+                    @Configuration(proxyBeanMethods = false)
+                    @ConditionalOnProperty(name = "app.metrics.type", havingValue = "in-mem")
+                    @EnableAutoConfiguration(exclude = PrometheusMetricsExportAutoConfiguration.class)
+                    class PrometheusTestConfiguration {
+
+                      @Bean
+                      CollectorRegistry collectorRegistry() {
+                        return CollectorRegistry.defaultRegistry;
+                      }
+                    }
+
+                    @Configuration(proxyBeanMethods = false)
+                    @ConditionalOnProperty(name = "app.repositories.type", havingValue = "in-mem")
+                    class InMemoryRepositoryConfig {
+
+                      /**
+                       * Injected instances of Cleanable will be cleaned up after each test.
+                       */
+                      @Bean
+                      PlatformTransactionManager cleaningTransactionManager(List&lt;Cleanable> toClean) {
+                        return new PlatformTransactionManager() {
+                          @Nonnull
+                          @Override
+                          public TransactionStatus getTransaction(@Nullable TransactionDefinition definition) throws TransactionException {
+                            return new SimpleTransactionStatus();
+                          }
+
+                          @Override
+                          public void commit(@Nonnull TransactionStatus status) throws TransactionException {
+                          }
+
+                          @Override
+                          public void rollback(@Nonnull TransactionStatus status) throws TransactionException {
+                            toClean.forEach(Cleanable::clean);
+                          }
+                        };
+                      }
+                    }
+                </code></pre>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <div class="r-stack">
+                    <img src="img/micro.jpg" class="fragment fade-out" data-fragment-index="0">
+                    <img src="img/micro2.jpg" class="fragment" data-fragment-index="0">
+                </div>
+            </section>
+            <section data-autoslide="1000" class="stretch">
+                <div class="fragment" style="position: absolute; top: 30%; right: 1%"><code>@WebMvcTest</code></div>
+                <div class="fragment" style="margin-left: 40%"><code>@SpringJUnitWebConfig</code></div>
+                <div class="fragment" style="position: absolute; top: 3%; left: 3%"><code>@DataLdapTest</code></div>
+                <div class="fragment" style="position: absolute; bottom: 40%; left: 30%">
+                    <code>@DataMongoTest</code>
+                </div>
+                <div class="fragment" style="position: absolute; bottom: 30%"><code>@SpringJUnitConfig</code></div>
+                <div class="fragment" data-id="main" style="position: absolute; bottom: 10%; right: 2%"><code>@SpringBootTest</code>
+                </div>
+                <div class="fragment" style="position: absolute; left: 50%; top: 42%"><code>@JsonTest</code></div>
+                <div class="fragment" style="margin-left: -4em; margin-top: 1em"><code>@DataJdbcTest</code></div>
+                <div class="fragment" style="position: absolute; top: 30%; left: 20%"><code>@DataJpaTest</code></div>
+                <div class="fragment" data-autoslide="0" style="position: absolute; left: 5%; bottom: 15%">
+                    <code>@DataRedisTest</code></div>
+            </section>
+            <section>
+                <img src="img/intellij.png" style="width: 35%">
+                <br/>
+                <a href="https://github.com/mat3e/downloads-service">github.com/mat3e/downloads-service</a>
+            </section>
+            <section data-auto-animate class="stretch">
+                <div style="position: absolute; top: 30%; right: 1%"><code>@WebMvcTest</code></div>
+                <div style="margin-left: 40%"><code>@SpringJUnitWebConfig</code></div>
+                <div style="position: absolute; bottom: 30%"><code>@SpringJUnitConfig</code></div>
+                <div style="position: absolute; top: 3%; left: 3%"><code>@DataLdapTest</code></div>
+                <div style="position: absolute; bottom: 40%; left: 30%"><code>@DataMongoTest</code></div>
+                <div data-id="main" style="position: absolute; bottom: 10%; right: 2%">
+                    <code>@SpringBootTest</code>
+                </div>
+                <div style="position: absolute; left: 50%; top: 42%"><code>@JsonTest</code></div>
+                <div style="margin-left: -4em; margin-top: 1em"><code>@DataJdbcTest</code></div>
+                <div style="position: absolute; top: 30%; left: 20%"><code>@DataJpaTest</code></div>
+                <div data-autoslide="0" style="position: absolute; left: 5%; bottom: 15%">
+                    <code>@DataRedisTest</code>
+                </div>
+            </section>
+            <section data-auto-animate>
+                <div style="font-size: 1.5em" data-id="main"><code>@SpringBootTest</code></div>
+                <ul>
+                    <li class="fragment">Reguła kciuka: korzystać tylko z tego ;)</li>
+                    <li class="fragment">Optymalizacja testów pod cache'owanie i&nbsp;reużywanie kontekstów</li>
+                    <li class="fragment">Klasa bazowa, wspólna adnotacja, interfejs...</li>
+                </ul>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h3>
+                    <img src="img/ring.png" style="height: 1em; margin: 0">ne context to rule them all
+                </h3>
+                <div class="fragment">Na pewno <em>tylko jeden</em> kontekst?</div>
+                <pre data-id="spring-config" style="width: 100%;" class="fragment"><code class="yaml" data-trim
+                                                                                         data-line-numbers>
+                    logging:
+                      level:
+                        org.springframework.test.context.cache: DEBUG
+                </code></pre>
+            </section>
+            <section data-auto-animate data-auto-animate-restart>
+                <h2 data-id="ile">Ile kontekstów?</h2>
+                <pre data-id="spring-log" class="r-stretch" style="width: 100%;"><code class="plaintext" data-trim
+                                                                                       data-line-numbers
+                                                                                       style="font-size: .5em; line-height: 1.1">
+                    ...
+                    19:41:08.116 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: context [DefaultTestContext@5eefa415 testClass = LimitingControllerIntTest, testInstance = [null], testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@181d7f28 testClass = LimitingControllerIntTest, locations = '{}', classes = '{class io.github.mat3e.downloads.DownloadsApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@630cb4a4, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@4b3fa0b3, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@5357c287, [ImportsContextCustomizer@78d50a3c key = [org.springframework.boot.test.autoconfigure.web.servlet.MockMvcAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebClientAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebDriverAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.client.servlet.OAuth2ClientAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.resource.servlet.OAuth2ResourceServerAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcSecurityConfiguration, org.springframework.boot.test.autoconfigure.web.reactive.WebTestClientAutoConfiguration]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@5b080f3a, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@6f603e89, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@64df9a61, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@379614be], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -> true]], class annotated with @DirtiesContext [false] with mode [null].
+
+                      .   ____          _            __ _ _
+                     /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+                    ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+                     \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+                      '  |____| .__|_| |_|_| |_\__, | / / / /
+                     =========|_|==============|___/=/_/_/_/
+                     :: Spring Boot ::               (v2.7.15)
+
+                    2023-10-01 19:41:08.270  INFO 74526 --- [    Test worker] i.g.m.d.l.r.LimitingControllerIntTest    : Starting LimitingControllerIntTest using Java 17.0.7 on CA042772 with PID 74526 (started by chrzonsm0401 in /Users/chrzonsm0401/IdeaProjects/downloads-service/core)
+                    2023-10-01 19:41:08.271  INFO 74526 --- [    Test worker] i.g.m.d.l.r.LimitingControllerIntTest    : No active profile set, falling back to 1 default profile: "default"
+                    ...
+                    2023-10-01 19:41:09.606  INFO 74526 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+                    2023-10-01 19:41:09.622  INFO 74526 --- [    Test worker] i.g.m.d.l.r.LimitingControllerIntTest    : Started LimitingControllerIntTest in 1.484 seconds (JVM running for 2.016)
+                    2023-10-01 19:41:09.639  INFO 74526 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Began transaction (1) for test context [DefaultTestContext@5eefa415 testClass = LimitingControllerIntTest, testInstance = io.github.mat3e.downloads.limiting.rest.LimitingControllerIntTest@7adff6cb, testMethod = illegalParams_returnsClientError@LimitingControllerIntTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@181d7f28 testClass = LimitingControllerIntTest, locations = '{}', classes = '{class io.github.mat3e.downloads.DownloadsApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@630cb4a4, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@4b3fa0b3, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@5357c287, [ImportsContextCustomizer@78d50a3c key = [org.springframework.boot.test.autoconfigure.web.servlet.MockMvcAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebClientAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebDriverAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.client.servlet.OAuth2ClientAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.resource.servlet.OAuth2ResourceServerAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcSecurityConfiguration, org.springframework.boot.test.autoconfigure.web.reactive.WebTestClientAutoConfiguration]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@5b080f3a, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@6f603e89, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@64df9a61, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@379614be], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -> true, 'org.springframework.test.context.web.ServletTestExecutionListener.populatedRequestContextHolder' -> true, 'org.springframework.test.context.web.ServletTestExecutionListener.resetRequestContextHolder' -> true, 'org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -> false]]; transaction manager [org.springframework.jdbc.support.JdbcTransactionManager@13ebccd]; rollback [true]
+                    Field error in object 'asset' on field 'id': rejected value [  ]; codes [NotBlank.asset.id,NotBlank.id,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [asset.id,id]; arguments []; default message [id]]; default message [must not be blank]
+                    ...
+                </code></pre>
+                <aside class="notes">Bieda wersja - zliczamy ile razy pokazuje się logo Springa</aside>
+            </section>
+            <section data-auto-animate>
+                <h2 data-id="ile">Ile kontekstów?</h2>
+                <pre data-id="spring-log" class="r-stretch" style="width: 100%;"><code class="plaintext" data-trim
+                                                                                       data-line-numbers="|17-18"
+                                                                                       style="font-size: .5em; line-height: 1.1">
+                    ...
+                    19:41:08.116 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: context [DefaultTestContext@5eefa415 testClass = LimitingControllerIntTest, testInstance = [null], testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@181d7f28 testClass = LimitingControllerIntTest, locations = '{}', classes = '{class io.github.mat3e.downloads.DownloadsApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@630cb4a4, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@4b3fa0b3, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@5357c287, [ImportsContextCustomizer@78d50a3c key = [org.springframework.boot.test.autoconfigure.web.servlet.MockMvcAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebClientAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebDriverAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.client.servlet.OAuth2ClientAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.resource.servlet.OAuth2ResourceServerAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcSecurityConfiguration, org.springframework.boot.test.autoconfigure.web.reactive.WebTestClientAutoConfiguration]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@5b080f3a, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@6f603e89, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@64df9a61, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@379614be], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -> true]], class annotated with @DirtiesContext [false] with mode [null].
+
+                      .   ____          _            __ _ _
+                     /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+                    ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+                     \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+                      '  |____| .__|_| |_|_| |_\__, | / / / /
+                     =========|_|==============|___/=/_/_/_/
+                     :: Spring Boot ::               (v2.7.15)
+
+                    2023-10-01 19:41:08.270  INFO 74526 --- [    Test worker] i.g.m.d.l.r.LimitingControllerIntTest    : Starting LimitingControllerIntTest using Java 17.0.7 on CA042772 with PID 74526 (started by chrzonsm0401 in /Users/chrzonsm0401/IdeaProjects/downloads-service/core)
+                    2023-10-01 19:41:08.271  INFO 74526 --- [    Test worker] i.g.m.d.l.r.LimitingControllerIntTest    : No active profile set, falling back to 1 default profile: "default"
+                    ...
+                    2023-10-01 19:41:09.606  INFO 74526 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+                    2023-10-01 19:41:09.622  INFO 74526 --- [    Test worker] i.g.m.d.l.r.LimitingControllerIntTest    : Started LimitingControllerIntTest in 1.484 seconds (JVM running for 2.016)
+                    2023-10-01 19:41:09.624 DEBUG 74715 --- [    Test worker] c.DefaultCacheAwareContextLoaderDelegate : Storing ApplicationContext [1779219567] in cache under key [[WebMergedContextConfiguration@181d7f28 testClass = LimitingControllerIntTest, locations = '{}', classes = '{class io.github.mat3e.downloads.DownloadsApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@630cb4a4, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@4b3fa0b3, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@5357c287, [ImportsContextCustomizer@78d50a3c key = [org.springframework.boot.test.autoconfigure.web.servlet.MockMvcAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebClientAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebDriverAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.client.servlet.OAuth2ClientAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.resource.servlet.OAuth2ResourceServerAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcSecurityConfiguration, org.springframework.boot.test.autoconfigure.web.reactive.WebTestClientAutoConfiguration]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@5b080f3a, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@6f603e89, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@64df9a61, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@379614be], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]]]
+                    2023-10-01 19:41:09.624 DEBUG 74715 --- [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@10fc1a22 size = 1, maxSize = 32, parentContextCount = 0, hitCount = 0, missCount = 1]
+                    2023-10-01 19:41:09.630 DEBUG 74715 --- [    Test worker] c.DefaultCacheAwareContextLoaderDelegate : Retrieved ApplicationContext [1779219567] from cache with key [[WebMergedContextConfiguration@181d7f28 testClass = LimitingControllerIntTest, locations = '{}', classes = '{class io.github.mat3e.downloads.DownloadsApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@630cb4a4, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@4b3fa0b3, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@5357c287, [ImportsContextCustomizer@78d50a3c key = [org.springframework.boot.test.autoconfigure.web.servlet.MockMvcAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebClientAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebDriverAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.client.servlet.OAuth2ClientAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.resource.servlet.OAuth2ResourceServerAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcSecurityConfiguration, org.springframework.boot.test.autoconfigure.web.reactive.WebTestClientAutoConfiguration]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@5b080f3a, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@6f603e89, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@64df9a61, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@379614be], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]]]
+                    2023-10-01 19:41:09.630 DEBUG 74715 --- [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@10fc1a22 size = 1, maxSize = 32, parentContextCount = 0, hitCount = 1, missCount = 1]
+                    2023-10-01 19:41:09.632 DEBUG 74715 --- [    Test worker] c.DefaultCacheAwareContextLoaderDelegate : Retrieved ApplicationContext [1779219567] from cache with key [[WebMergedContextConfiguration@181d7f28 testClass = LimitingControllerIntTest, locations = '{}', classes = '{class io.github.mat3e.downloads.DownloadsApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@630cb4a4, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@4b3fa0b3, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@5357c287, [ImportsContextCustomizer@78d50a3c key = [org.springframework.boot.test.autoconfigure.web.servlet.MockMvcAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebClientAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebDriverAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.client.servlet.OAuth2ClientAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.resource.servlet.OAuth2ResourceServerAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcSecurityConfiguration, org.springframework.boot.test.autoconfigure.web.reactive.WebTestClientAutoConfiguration]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@5b080f3a, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@6f603e89, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@64df9a61, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@379614be], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]]]
+                    2023-10-01 19:41:09.632 DEBUG 74715 --- [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@10fc1a22 size = 1, maxSize = 32, parentContextCount = 0, hitCount = 2, missCount = 1]
+                    2023-10-01 19:41:09.636 DEBUG 74715 --- [    Test worker] c.DefaultCacheAwareContextLoaderDelegate : Retrieved ApplicationContext [1779219567] from cache with key [[WebMergedContextConfiguration@181d7f28 testClass = LimitingControllerIntTest, locations = '{}', classes = '{class io.github.mat3e.downloads.DownloadsApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@630cb4a4, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@4b3fa0b3, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@5357c287, [ImportsContextCustomizer@78d50a3c key = [org.springframework.boot.test.autoconfigure.web.servlet.MockMvcAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebClientAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebDriverAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.client.servlet.OAuth2ClientAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.resource.servlet.OAuth2ResourceServerAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcSecurityConfiguration, org.springframework.boot.test.autoconfigure.web.reactive.WebTestClientAutoConfiguration]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@5b080f3a, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@6f603e89, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@64df9a61, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@379614be], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]]]
+                    2023-10-01 19:41:09.636 DEBUG 74715 --- [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@10fc1a22 size = 1, maxSize = 32, parentContextCount = 0, hitCount = 3, missCount = 1]
+                    2023-10-01 19:41:09.639  INFO 74526 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Began transaction (1) for test context [DefaultTestContext@5eefa415 testClass = LimitingControllerIntTest, testInstance = io.github.mat3e.downloads.limiting.rest.LimitingControllerIntTest@7adff6cb, testMethod = illegalParams_returnsClientError@LimitingControllerIntTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@181d7f28 testClass = LimitingControllerIntTest, locations = '{}', classes = '{class io.github.mat3e.downloads.DownloadsApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@630cb4a4, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@4b3fa0b3, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@5357c287, [ImportsContextCustomizer@78d50a3c key = [org.springframework.boot.test.autoconfigure.web.servlet.MockMvcAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebClientAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebDriverAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.client.servlet.OAuth2ClientAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.resource.servlet.OAuth2ResourceServerAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcSecurityConfiguration, org.springframework.boot.test.autoconfigure.web.reactive.WebTestClientAutoConfiguration]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@5b080f3a, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@6f603e89, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@64df9a61, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@379614be], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -> true, 'org.springframework.test.context.web.ServletTestExecutionListener.populatedRequestContextHolder' -> true, 'org.springframework.test.context.web.ServletTestExecutionListener.resetRequestContextHolder' -> true, 'org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -> false]]; transaction manager [org.springframework.jdbc.support.JdbcTransactionManager@13ebccd]; rollback [true]
+                    2023-10-01 19:41:09.640 DEBUG 74715 --- [    Test worker] c.DefaultCacheAwareContextLoaderDelegate : Retrieved ApplicationContext [1779219567] from cache with key [[WebMergedContextConfiguration@181d7f28 testClass = LimitingControllerIntTest, locations = '{}', classes = '{class io.github.mat3e.downloads.DownloadsApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@630cb4a4, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@4b3fa0b3, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@5357c287, [ImportsContextCustomizer@78d50a3c key = [org.springframework.boot.test.autoconfigure.web.servlet.MockMvcAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebClientAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebDriverAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.client.servlet.OAuth2ClientAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.resource.servlet.OAuth2ResourceServerAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcSecurityConfiguration, org.springframework.boot.test.autoconfigure.web.reactive.WebTestClientAutoConfiguration]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@5b080f3a, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@6f603e89, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@64df9a61, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@379614be], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]]]
+                    2023-10-01 19:41:09.640 DEBUG 74715 --- [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@10fc1a22 size = 1, maxSize = 32, parentContextCount = 0, hitCount = 4, missCount = 1]
+                    2023-10-01 19:41:09.641 DEBUG 74715 --- [    Test worker] c.DefaultCacheAwareContextLoaderDelegate : Retrieved ApplicationContext [1779219567] from cache with key [[WebMergedContextConfiguration@181d7f28 testClass = LimitingControllerIntTest, locations = '{}', classes = '{class io.github.mat3e.downloads.DownloadsApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@630cb4a4, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@4b3fa0b3, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@5357c287, [ImportsContextCustomizer@78d50a3c key = [org.springframework.boot.test.autoconfigure.web.servlet.MockMvcAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebClientAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebDriverAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.client.servlet.OAuth2ClientAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.resource.servlet.OAuth2ResourceServerAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcSecurityConfiguration, org.springframework.boot.test.autoconfigure.web.reactive.WebTestClientAutoConfiguration]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@5b080f3a, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@6f603e89, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@64df9a61, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@379614be], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]]]
+                    2023-10-01 19:41:09.640 DEBUG 74715 --- [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@10fc1a22 size = 1, maxSize = 32, parentContextCount = 0, hitCount = 5, missCount = 1]
+                    2023-10-01 19:41:09.806 DEBUG 74715 --- [    Test worker] c.DefaultCacheAwareContextLoaderDelegate : Retrieved ApplicationContext [1779219567] from cache with key [[WebMergedContextConfiguration@181d7f28 testClass = LimitingControllerIntTest, locations = '{}', classes = '{class io.github.mat3e.downloads.DownloadsApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@630cb4a4, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@4b3fa0b3, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@5357c287, [ImportsContextCustomizer@78d50a3c key = [org.springframework.boot.test.autoconfigure.web.servlet.MockMvcAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebClientAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebDriverAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.client.servlet.OAuth2ClientAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.resource.servlet.OAuth2ResourceServerAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcSecurityConfiguration, org.springframework.boot.test.autoconfigure.web.reactive.WebTestClientAutoConfiguration]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@5b080f3a, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@6f603e89, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@64df9a61, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@379614be], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]]]
+                    2023-10-01 19:41:09.806 DEBUG 74715 --- [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@10fc1a22 size = 1, maxSize = 32, parentContextCount = 0, hitCount = 6, missCount = 1]
+                    Field error in object 'asset' on field 'id': rejected value [  ]; codes [NotBlank.asset.id,NotBlank.id,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [asset.id,id]; arguments []; default message [id]]; default message [must not be blank]
+                    ...
+                </code></pre>
+                <aside class="notes">debug prawdę powie, ale zaśmieci logi</aside>
+            </section>
+            <section data-auto-animate>
+                <h2 data-id="ile">Ile kontekstów - log</h2>
+                <pre style="width: 100%;"><code class="plaintext" data-trim data-line-numbers>
+                    Spring test ApplicationContext cache statistics:
+                    [DefaultContextCache@10fc1a22
+                        size = 1,
+                        maxSize = 32,
+                        parentContextCount = 0,
+                        hitCount = 0,
+                        missCount = 1
+                    ]
+                </code></pre>
+                <aside class="notes">
+                    <ul>
+                        <li>max 32 unikatowych kontekstów w testach</li>
+                        <li>można nadpisać przez spring.test.context.cache.maxSize</li>
+                    </ul>
+                </aside>
+            </section>
+            <section data-auto-animate>
+                <h2 data-id="ile">Szczegóły implementacyjne :)</h2>
+                <pre style="width: 100%;"><code class="java" style="font-size: .75em;" data-trim
+                                                data-line-numbers="1-3,5|4|7-8|10-12">
+                    // SpringExtension
+                    public static ApplicationContext getApplicationContext(ExtensionContext context) {
+                      return getTestContextManager(context).getTestContext().getApplicationContext();
+                      // DefaultTestContext -> this.cacheAwareContextLoaderDelegate.loadContext(...)
+                    }
+
+                    // DefaultCacheAwareContextLoaderDelegate
+                    static final ContextCache defaultContextCache = new DefaultContextCache();
+
+                    // DefaultContextCache
+                    private final Map&lt;MergedContextConfiguration, ApplicationContext> contextMap =
+                        Collections.synchronizedMap(new LruCache(32, 0.75f));
+                </code></pre>
+                <aside class="notes">
+                    <ul>
+                        <li>
+                            trzymane jako pole static więc uwaga na forkMode(Maven) / maxParallelForks(Gradle)
+                            <ul>
+                                <li>(cache współdzielony dla wszystkich wątków, ale nie procesów) !!!</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <h3><code>MergedContextConfiguration</code></h3>
+                <ul>
+                    <li class="fragment" data-fragment-index="1"><code>@TestPropertySource</code></li>
+                    <li class="fragment" data-fragment-index="1"><code>@DynamicPropertySource</code></li>
+                    <li class="fragment" data-fragment-index="2"><code>@ActiveProfiles</code></li>
+                    <li class="fragment" data-fragment-index="3"><code>@ContextConfiguration</code></li>
+                    <li class="fragment" data-fragment-index="4"><code>@MockBean</code></li>
+                    <li class="fragment" data-fragment-index="4"><code>@SpyBean</code></li>
+                    <li class="fragment" data-fragment-index="5">
+                        <span class="fragment strike" data-fragment-index="6">
+                            <code class="fragment highlight-red" data-fragment-index="6">@DirtiesContext</code>
+                        </span>
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <h3>Dużo kontekstów = dużo pamięci :(</h3>
+                <img src="img/memory.png">
+            </section>
+            <section>
+                <h2>Schodzenie z kontekstów</h2>
+                <ol>
+                    <li class="fragment">
+                        <code>grep</code> po testach - <code>@MockBean</code>, <code>@SpyBean</code>, etc.
+                        <ul>
+                            <li class="fragment">Może niepotrzebne/nieużywane?</li>
+                        </ul>
+                    </li>
+                    <li class="fragment">
+                        <code>grep</code> po propsach (<code>@TestPropertySource</code> itp.)
+                        <ul>
+                            <li class="fragment">Używać domyślnych properties'ów (np. z&nbsp;application.properties/yml)
+                                gdzie się da
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="fragment">Dalsza edukacja zespołu + <em>code review</em></li>
+                </ol>
+            </section>
+            <section data-transition="zoom">
+                <div class="r-stretch chart-wrapper">
+                    <fieldset>
+                        <legend>zysk ▶</legend>
+                    </fieldset>
+                    <div class="fragment">współdzielenie kontekstów</div>
+                    <fieldset>
+                        <legend>pracochłonność ▶</legend>
+                    </fieldset>
+                </div>
+            </section>
+            <section>
+                <h2>Więcej o współdzieleniu</h2>
+                <a href="https://www.youtube.com/watch?v=c-GV2PxymoY">
+                    <img style="width: 75%" src="img/ref/broken.png"/>
+                </a>
+                <aside class="notes">Jeszcze więcej, głównie o współdzieleniu kontekstów, po angielsku</aside>
+            </section>
+        </section>
+
+        <section>
+            <section data-auto-animate>
+                <img src="img/deeper.jpg">
+                <h2 data-id="tuning" class="fragment">Dokręcanie śrubek</h2>
+            </section>
+            <section data-auto-animate>
+                <h2 data-id="tuning"><code>@Lazy</code></h2>
+                <ul>
+                    <li class="fragment">Zwykle smrodek w kodzie - cykliczne zależności</li>
+                    <li class="fragment">Ale w testach?</li>
+                </ul>
+                <pre class="fragment"><code class="yaml" data-trim>
+                    spring:
+                      main:
+                        lazy-initialization: true
+                </code></pre>
+                <div class="fragment">
+                    <em>Konsultanci go nienawidzą, odkrył sekret szybszego uruchamiania testów</em> 😉
+                </div>
+                <aside class="notes">
+                    <ul>
+                        <li>Idealne dla długo wstających kontekstów (~2m ⇒ 10s)</li>
+                        <li>Unit + integracyjne ⇒ 10min</li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <h2 style="margin: 0">Zady i walety</h2>
+                <ul>
+                    <li class="fragment" data-fragment-index="1"><span class="fragment highlight-green"
+                                                                       data-fragment-index="1">
+                        Szybsze wstawanie kontekstu (2m ⇒ 20s)
+                    </span></li>
+                    <li class="fragment" data-fragment-index="2"><span class="fragment highlight-green"
+                                                                       data-fragment-index="2">
+                        Lepsze zarządzanie pamięcią - testy dokładają tylko potrzebne beany
+                    </span></li>
+                    <li class="fragment" data-fragment-index="3"><span class="fragment highlight-green"
+                                                                       data-fragment-index="3">
+                        Mniejsze zużycie pamięci (przy słabym pokryciu lub dużej ilości kontekstów)
+                    </span></li>
+                    <li class="fragment" data-fragment-index="4"><span class="fragment highlight-red"
+                                                                       data-fragment-index="4">
+                        <code>@Conditional</code> wymaga zawołania <code>Bean</code>a
+                    </span></li>
+                    <li class="fragment" data-fragment-index="5"><span class="fragment highlight-red"
+                                                                       data-fragment-index="5">
+                        Niektóre <code>static</code> elementy jako <code>Bean</code> (~<a
+                            href="https://stackoverflow.com/questions/40936617/java-lang-illegalstateexception-this-object-has-not-been-built-when-adding-cu">
+                        Spring Security</a>)
+                    </span></li>
+                    <li class="fragment" data-fragment-index="6"><span class="fragment highlight-red"
+                                                                       data-fragment-index="6">
+                        <code>CacheMetricsRegistrar</code> i podobne jawnie wstrzykiwane w teście
+                    </span></li>
+                    <li class="fragment" data-fragment-index="7"><span class="fragment highlight-red"
+                                                                       data-fragment-index="7">
+                        <em>Startup check</em>
+                    </span></li>
+                </ul>
+            </section>
+            <section data-transition="zoom">
+                <div class="r-stretch chart-wrapper">
+                    <fieldset>
+                        <legend>zysk ▶</legend>
+                    </fieldset>
+                    <div>współdzielenie kontekstów</div>
+                    <div class="fragment"><code>@Lazy</code></div>
+                    <fieldset>
+                        <legend>pracochłonność ▶</legend>
+                    </fieldset>
+                </div>
+            </section>
+            <section data-auto-animate>
+                <h3>Wyłączanie zbędnych beanów</h3>
+                <div class="fragment" data-fragment-index="1">Czyli których?</div>
+                <pre class="fragment" data-fragment-index="2"><code data-trim class="yaml">debug: true</code></pre>
+                <pre class="fragment" data-fragment-index="2"><code data-trim class="plaintext"
+                                                                    style="font-size: .75em; line-height: 1.1">
+                    ============================
+                    CONDITIONS EVALUATION REPORT
+                    ============================
+
+
+                    Positive matches:
+                    -----------------
+
+                       AopAutoConfiguration matched:
+                          - @ConditionalOnClass found required classes 'org.springframework.context.annotation.EnableAspectJAutoProxy', 'org.aspectj.lang.annotation.Aspect', 'org.aspectj.lang.reflect.Advice', 'org.aspectj.weaver.AnnotatedElement' (OnClassCondition)
+                          - @ConditionalOnProperty (spring.aop.auto=true) matched (OnPropertyCondition)
+
+                    ...
+                </code></pre>
+                <pre class="fragment"><code class="plaintext">GET /actuator/beans</code></pre>
+                <aside class="notes">
+                    Niewielki zysk (max kilka %) i więcej pracy - ale przy okazji porządki w kodzie
+                </aside>
+            </section>
+            <section data-auto-animate>
+                <h3>Wyłączanie zbędnych beanów</h3>
+                <img style="width: 40%" src="./img/wszyscy-won.jpg"/>
+                <ul>
+                    <li class="fragment"><code>@Scheduled</code> (workery)</li>
+                    <li class="fragment">Niepotrzebne konfiguracje (np. <em>Swagger</em>)</li>
+                    <li class="fragment">Ograniczanie, np. puli wątków Pub/Sub</li>
+                </ul>
+            </section>
+            <section data-transition="zoom">
+                <div class="r-stretch chart-wrapper">
+                    <fieldset>
+                        <legend>zysk ▶</legend>
+                    </fieldset>
+                    <div>współdzielenie kontekstów</div>
+                    <div><code>@Lazy</code></div>
+                    <div class="fragment">wyłączenie beanów</div>
+                    <fieldset>
+                        <legend>pracochłonność ▶</legend>
+                    </fieldset>
+                </div>
+            </section>
+
+            <section>
+                <h2>Kolejna iteracja (2024)</h2>
+                <a href="https://github.com/linyimin0812/spring-startup-analyzer">spring-startup-analyzer</a>
+                <pre class="fragment" style="width: 100%;"><code style="font-size: .9em" class="plaintext">java -javaagent:./spring-startup-analyzer/lib/spring-profiler-agent.jar \
+     -jar project-demo.jar</code></pre>
+                <img height="300rem" class="fragment" src="./img/spring-bean-timeline.png"/>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h2>IO</h2>
+                <ul>
+                    <li class="fragment" data-fragment-index="1">Wolne - szczególnie <strong>przez sieć</strong></li>
+                    <li class="fragment" data-fragment-index="2">Lokalne instancje praktycznie zawsze
+                        <strong>szybsze</strong></li>
+                    <li class="fragment" data-fragment-index="3">Lokalne współdzielone instancje? Trochę ryzykowne
+                        <ul>
+                            <li class="fragment" data-fragment-index="4">Ale jeszcze szybsze</li>
+                        </ul>
+                    </li>
+                </ul>
+                <img class="fragment" data-fragment-index="4" src="img/speed.jpg" style="width: 35%;">
+            </section>
+            <section>
+                <h2>Co może pójść nie tak? ;)</h2>
+                <img class="fragment" src="img/farquad.png">
+                <div class="fragment">Ryzyko niedeterministycznych zachowań</div>
+            </section>
+            <section>
+                <h2>"U nas działa"</h2>
+                <ul>
+                    <li class="fragment" data-fragment-index="1">Redis na dev ⇒ embedded</li>
+                    <li class="fragment" data-fragment-index="2">27 ⇒ 16min
+                        <ul>
+                            <li class="fragment" data-fragment-index="3">Zysk ~40%</li>
+                        </ul>
+                    </li>
+                    <li class="fragment">Zero <code>JedisException</code> i zerwanych połączeń</li>
+                </ul>
+                <div class="r-hstack">
+                    <img style="width: 120px;" class="fragment" src="img/embedded-redis.png" data-fragment-index="2"/>
+                    <img src="img/stonks.png" class="fragment" style="height: 3em" data-fragment-index="3">
+                </div>
+            </section>
+            <section>
+                <h2>Testcontainers</h2>
+                <ul>
+                    <li class="fragment">Środowisko uruchomieniowe zgodne z&nbsp;API Dockera
+                        <ul>
+                            <li class="fragment">
+                                <a href="https://rancherdesktop.com/rancher-desktop-with-docker/">Rancher Desktop</a>
+                            </li>
+                        </ul>
+                    </li>
+                    </li>
+                    <li class="fragment">
+                        <pre style="width: 100%; padding:0;margin:0"><code
+                                data-trim>testcontainers.reuse.enable=true</code></pre>
+                        <ul>
+                            <li class="fragment">Spoko<span class="fragment">, ale
+                                nie np. w testach migracji bazy</span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="fragment">Sztuczki, np. <em>topic</em>=<em>subscription</em> w Pub/Sub</li>
+                    <li class="fragment"><a href="http://www.awaitility.org/">Awaitility</a></li>
+                </ul>
+            </section>
+            <section data-transition="zoom">
+                <div class="r-stretch chart-wrapper">
+                    <fieldset>
+                        <legend>zysk ▶</legend>
+                    </fieldset>
+                    <div>współdzielenie kontekstów</div>
+                    <div><code>@Lazy</code></div>
+                    <div>wyłączenie beanów</div>
+                    <div class="fragment">wspólne I/O</div>
+                    <fieldset>
+                        <legend>pracochłonność ▶</legend>
+                    </fieldset>
+                </div>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h2>Zrównoleglanie</h2>
+                <img class="fragment" style="width: 75%" src="img/deadlock.jpeg"/>
+            </section>
+            <section>
+                <table class="pooh">
+                    <tr>
+                        <td class="fragment"><img src="img/poor-gradle.jpeg" style="width: 100%; margin: 0"></td>
+                        <td class="fragment"><img src="img/super-junit.jpeg" style="width: 100%; margin: 0"></td>
+                    </tr>
+                    <tr class="fragment">
+                        <td>Procesy</td>
+                        <td>Wątki</td>
+                    </tr>
+                    <tr class="fragment">
+                        <td>Klasy</td>
+                        <td>Klasy lub metody</td>
+                    </tr>
+                    <tr class="fragment">
+                        <td><code>OutOfMemoryError</code> (za dużo wątków)</td>
+                        <td>JVM na koniec świata i&nbsp;jeszcze dalej</td>
+                    </tr>
+                    <tr class="fragment">
+                        <td>Odpalenie wszystkiego równolegle, ciężko kontrolować</td>
+                        <td>W(y)łączanie z&nbsp;użyciem <code>@Isolated</code> i&nbsp;<code>@Execution</code></td>
+                    </tr>
+                </table>
+            </section>
+            <section>
+                <ul>
+                    <h2>Synchronizacje</h2>
+                </ul>
+                <pre class="fragment" style="width: 100%;"><code class="properties" data-trim>
+                    # src/integration/resources/junit-platform.properties
+
+                    junit.jupiter.execution.parallel.enabled = true
+                    junit.jupiter.execution.parallel.mode.default = same_thread
+                    junit.jupiter.execution.parallel.mode.classes.default = concurrent
+                </code></pre>
+                <pre class="fragment" style="width: 100%;"><code class="java" data-trim>
+                    @Execution(ExecutionMode.CONCURRENT)
+                    class ConcurrentTest extends IntegrationTest { // ...
+                </code></pre>
+                <pre class="fragment" style="width: 100%;"><code class="java" data-trim>
+                    @Isolated
+                    // @ResourceLock("org.junit.platform.engine.support.hierarchical.ExclusiveResource.GLOBAL_KEY")
+                    class IsolatedTest extends IntegrationTest { // ...
+                 </code></pre>
+            </section>
+            <section>
+                <h2>Kto nie ryzykuje...</h2>
+                <ul>
+                    <li class="fragment">Wspólne "zasoby"
+                        <ul>
+                            <li class="fragment">Pola <code>static</code></li>
+                            <li class="fragment">Singletony</li>
+                        </ul>
+                    </li>
+                    <li class="fragment">
+                        Problematyczna inicjalizacja
+                        <ul>
+                            <li class="fragment">Np. nowy użytkownik, jego konfiguracja</li>
+                            <li class="fragment">⇒ lepiej korzystać z unikalnych danych w obrębie
+                                klasy/metody/jednostki
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="fragment">Zrównoleglanie tylko długo trwających testów
+                        <ul>
+                            <li class="fragment">Z doświadczenia - więcej niż 1s</li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+            <section data-transition="zoom">
+                <div class="r-stretch chart-wrapper">
+                    <fieldset>
+                        <legend>zysk ▶</legend>
+                    </fieldset>
+                    <div>współdzielenie kontekstów</div>
+                    <div><code>@Lazy</code></div>
+                    <div>wyłączenie beanów</div>
+                    <div>wspólne I/O</div>
+                    <div class="fragment">zrównoleglanie runnerem</div>
+                    <fieldset>
+                        <legend>pracochłonność ▶</legend>
+                    </fieldset>
+                </div>
+            </section>
+        </section>
+
+        <section>
+
+            <section>
+                <h3>Zrównoleglanie przez "rurociąg"</h3>
+                <img style="margin: 0" class="fragment" data-fragment-index="1" src="img/jenkins-parallel.png"/>
+                <blockquote style="font-style: normal" class="fragment">⚠️ locki Gradle'a ⚠️</blockquote>
+                <div class="fragment">=> kompilować wspólne źródła wczesniej (<code>:compileIntegrationClasses</code>)
+                </div>
+                <div>
+                    <img class="fragment" data-fragment-index="1" src="img/jakotako.jpg" style="width: 35%">
+                </div>
+            </section>
+            <section data-auto-animate>
+            <pre data-id="parallel" style="width: 100%;" class="r-stretch"><code data-code-class="groovy" data-trim
+                                                                                 data-line-numbers>
+                stage('Tests') {
+                    stage('Unit tests') {
+                      steps {
+                        sh "./gradlew test"
+                      }
+                    }
+                    stage('Integration tests') {
+                      steps {
+                        sh "./gradlew integrationTest"
+                      }
+                    }
+                    stage('Integration tests intl') {
+                      steps {
+                        sh "./gradlew integrationTestIntl"
+                      }
+                    }
+                    // ...
+                }
+            </code></pre>
+            </section>
+            <section data-auto-animate>
+            <pre data-id="parallel" style="width: 100%;" class="r-stretch"><code data-code-class="groovy" data-trim
+                                                                                 data-line-numbers="2,19">
+                stage('Tests') {
+                  parallel {
+                    stage('Unit tests') {
+                      steps {
+                        sh "./gradlew test"
+                      }
+                    }
+                    stage('Integration tests') {
+                      steps {
+                        sh "./gradlew integrationTest"
+                      }
+                    }
+                    stage('Integration tests intl') {
+                      steps {
+                        sh "./gradlew integrationTestIntl"
+                      }
+                    }
+                    // ...
+                  }
+                }
+            </code></pre>
+            </section>
+            <section data-transition="zoom">
+                <div class="r-stretch chart-wrapper">
+                    <fieldset>
+                        <legend>zysk ▶</legend>
+                    </fieldset>
+                    <div>współdzielenie kontekstów</div>
+                    <div><code>@Lazy</code></div>
+                    <div>wyłączenie beanów</div>
+                    <div>wspólne I/O</div>
+                    <div>zrównoleglanie runnerem</div>
+                    <div class="fragment">zrównoleglanie w&nbsp;CI</div>
+                    <fieldset>
+                        <legend>pracochłonność ▶</legend>
+                    </fieldset>
+                </div>
+            </section>
+            <!--<section data-transition="zoom">
+                <div class="r-stretch chart-wrapper" style="padding-left: 1em; padding-bottom: .5em">
+                    <fieldset>
+                        <legend>&nbsp;gain ▶</legend>
+                    </fieldset>
+                    <div>sharing contexts</div>
+                    <div class="fragment"><code>@Lazy</code></div>
+                    <div class="fragment">cleaning beans</div>
+                    <div class="fragment">local I/O</div>
+                    <div class="fragment">parallelization in&nbsp;runner</div>
+                    <div class="fragment">parallelization in&nbsp;CI</div>
+                    <fieldset>
+                        <legend>&nbsp;effort ▶</legend>
+                    </fieldset>
+                </div>
+            </section>-->
+        </section>
+
+        <section>
+            <h3 class="fragment" style="margin: 0">Dziękujemy za uwagę!</h3>
+            <div class="r-stack">
+                <img src="img/Shrek.png" class="fragment fade-out" data-fragment-index="0" width="20%">
+                <img src="img/shrek2.png" width="20%" class="fragment" data-fragment-index="0">
+            </div>
+            <ul>
+                <li class="fragment" data-fragment-index="1">
+                    <a href="https://mat3e.github.io/talks/spring-test/wjug.html">mat3e.github.io/talks/spring-test/wjug</a>
+                </li>
+                <li class="fragment" data-fragment-index="2">
+                    <a href="https://github.com/mat3e/downloads-service/">github.com/mat3e/downloads-service</a>
+                </li>
+                <li class="fragment" data-fragment-index="3">
+                    <em style="font-size: .75em">paramount.tech/blog/2023/12/11/a-little-more-on-spring-tests-</em>
+                    <ol>
+                        <li>
+                            <a href="https://paramount.tech/blog/2023/12/11/a-little-more-on-spring-tests-good-practices.html">good-practices.html</a>
+                        </li>
+                        <li>
+                            <a href="https://paramount.tech/blog/2023/12/11/a-little-more-on-spring-tests-our-optimizations.html">our-optimizations.html</a>
+                        </li>
+                    </ol>
+                </li>
+            </ul>
+        </section>
+
+    </div>
+
+</div>
+
+<script src="dist/reveal.js"></script>
+<script src="plugin/zoom/zoom.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/search/search.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script>
+    // Also available as an ES module, see:
+    // https://revealjs.com/initialization/
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        center: true,
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight]
+    });
+
+</script>
+
+</body>
+</html>
