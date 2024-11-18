@@ -1,6 +1,6 @@
 ## 2024
 
-* WJUG 316 [03.09] _Trochę więcej o testach w Springu_ [🔗](https://mat3e.github.io/talks/spring-test/wjug.html)
+* WJUG 316 [03.09] _Trochę więcej o testach w Springu_ [🔗](https://mat3e.github.io/talks/spring-test/wjug.html) [📽️](https://www.youtube.com/watch?v=aUxxrXuPTh4)
 * WarsawJS 113 [13.03] _Advent of Code sneak peek_ [🔗](https://mat3e.github.io/talks/aoc/WarsawJS.html) [📽️](https://www.youtube.com/watch?v=SbNSdKhjhKA)
 * Polish JUG [01.02] _Moje rozumienie DDD (+ clean architecture) na przykładzie bajki o 3 świnkach_ [🔗](https://mat3e.github.io/talks/3pigs/PJUG.html)
 
