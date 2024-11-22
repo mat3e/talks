@@ -11,7 +11,7 @@
 
 ## 2022
 * Glovo & Friends Tech Conference [18.11] - _DDD & Clean Architecture on the example of The Three Little Pigs_ [📽️](https://engineering.glovoapp.com/events/glovo-friends-tech-conference/)
-* dev.js Summit 2022 [13.10] _Porządki w kodzie - JS Clean Architecture_ [🔗](https://mat3e.github.io/talks/js-arch/devjssummit.html#/) [📽](https://engineering.glovoapp.com/events/glovo-friends-tech-conference/) 
+* dev.js Summit 2022 [13.10] _Porządki w kodzie - JS Clean Architecture_ [🔗](https://mat3e.github.io/talks/js-arch/devjssummit.html#/) [📽](https://www.youtube.com/watch?v=TOVobKN_4X0) 
 * Ya!vaConf 2022 [28.09] _Nieoczywiste funkcje Springa_ [🔗](https://github.com/mat3e/less-popular-spring-functions)
 * BB Days 4 IT 2022 [10.09] _Subiektywny przegląd front-endów (2022)_ [🔗](https://mat3e.github.io/talks/fe-overview/BBDays4IT.html) [📽️](https://www.youtube.com/watch?v=_IXhqJzdrOM)
 * Charity JavaScript webinar [29.06] - _Cleaning things up - JS clean architecture_ [🔗](https://mat3e.github.io/talks/js-arch/charity.html#/) [📽️](https://www.youtube.com/watch?v=cpFTllo-Ngo)
