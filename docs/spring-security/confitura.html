@@ -1,0 +1,2011 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Spring Security</title>
+
+    <meta name="description"
+          content="Serwery (Authorization i Resource), OAuth Client, SecurityFilterChain i ciut więcej ze Spring Security">
+    <meta name="author" content="mat3e">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/black.css">
+
+    <link rel="stylesheet" href="plugin/highlight/github.css">
+    <link rel="stylesheet" href="plugin/fa/css/fontawesome.min.css">
+    <link rel="stylesheet" href="plugin/fa/css/brands.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .reveal section img.pure-img {
+            background: rgba(255, 255, 255, 0);
+            border: none;
+            box-shadow: none;
+            margin: 0;
+        }
+
+        #perspective a {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            width: 45%;
+            margin: 0 auto;
+        }
+
+        #perspective a img {
+            border: 0;
+            margin: 0;
+            box-shadow: none;
+        }
+
+        #about-me {
+            padding: 1em;
+            background-color: rgba(255, 255, 255, .75);
+            list-style-type: none;
+            margin-left: 0;
+            float: left;
+        }
+
+        #about-me ul {
+            list-style-type: none;
+            float: left;
+            margin-left: 0;
+            padding-left: 0;
+        }
+
+        #about-me a {
+            color: #a23;
+        }
+
+        #about-me a:hover {
+            color: #dd5566;
+        }
+    </style>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section data-background-image>
+            <section data-background-image="img/logo-security.svg"
+                     data-background-size="contain">
+                <div style="text-align:left;border-left: solid .1em white;line-height:.85;padding-left:.25em;">
+                    <h1 style="text-shadow: #000 1px 0 10px;margin: 0; font-size: 1.9em">Serwery, OAuth Client,
+                        <code>SecurityFilterChain</code>
+                    </h1>
+                    <h2 style="text-shadow: #000 1px 0 10px;font-size: 1.35em">i ciut więcej ze Spring Security</h2>
+                </div>
+                <div style="width: 320px; height: 64px; background-image: url('img/twitter.png'); background-size: contain; top: -4em; right: 0; position: absolute;"></div>
+            </section>
+            <section id="perspective" data-background-image>
+                <h5>
+                    <span>Perspektywa...</span>
+                    <span class="fragment" data-fragment-index="1"> ma znaczenie</span>
+                    <span class="fragment" data-fragment-index="2"> :)</span>
+                </h5>
+                <a href="https://mistrzowie.org/717022">
+                    <img src="img/perspektywa-1.jpg">
+                    <img src="img/perspektywa-2.jpg" class="fragment" data-fragment-index="1">
+                    <img src="img/perspektywa-3.jpg" class="fragment" data-fragment-index="2">
+                </a>
+            </section>
+            <section data-background-image="img/bg-hd.jpg" data-background-transition="zoom">
+                <ul id="about-me">
+                    <li>
+                        <ul>
+                            <li>
+                                <a href="https://www.linkedin.com/in/mateusz-chrzonstowski/">
+                                    <i class="fa-brands fa-square-linkedin"
+                                       style="color: #0077B5; background-color: #FFF; line-height: .75em"></i>
+                                    /mateusz-chrzonstowski
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://x.com/_mat3e_">
+                                    <i class="fa-brands fa-square-x-twitter"
+                                       style="color: #000; line-height: .75em"></i>
+                                    /_mat3e_
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.reddit.com/user/_mat3e_">
+                                    <i class="fa-brands fa-square-reddit"
+                                       style="color: #FF4500; line-height: .75em"></i>
+                                    /_mat3e_
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/mat3e/">
+                                    <i class="fa-brands fa-square-github"
+                                       style="color: #24292E; background-color: #FFF; line-height: .75em"></i>
+                                    /mat3e
+                                </a>
+                            </li>
+                            <li style="line-height: 1">&nbsp;</li>
+                            <li class="fragment" style="line-height: .75">
+                                <a style="font-size: .75em; font-weight: bold;"
+                                   href="https://mat3e.github.io/talks/spring-security/confitura.html">
+                                    mat3e.github.io/talks/
+                                    <div style="margin-left: 4.5em;margin-top: .25em">
+                                        spring-security/confitura
+                                    </div>
+                                </a>
+                            </li>
+                            <li style="line-height: 1">&nbsp;</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul class="fragment" style="padding: .1em; line-height: 1; text-align: center">
+                            <li>
+                                <a href="https://paramount.tech/careers-warsaw/">
+                                    <img src="img/paramount.png" style="height: 2em; margin: 0">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://full-stack.engineering/" class="fragment">
+                                    <img src="img/udemy-new.svg" style="height: 1em; margin: 0">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://polskietermopile.pl/projekty/400/" class="fragment">
+                                    <img src="img/400 logo.png" style="height: 1em; margin: 0">
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+        </section>
+        <section data-background-image data-transition="slide-in zoom-out">
+            <section data-auto-animate>
+                <h1><code>Auth</code></h1>
+            </section>
+            <section data-auto-animate>
+                <h1><code>Auth</code></h1>
+                <table>
+                    <tbody>
+                    <tr>
+                        <td data-id="n" style="width: 50%;text-align: center">
+                            <h2><code>Auth</code></h2>
+                        </td>
+                        <td data-id="z" style="width: 50%;text-align: center">
+                            <h2><code>Auth</code></h2>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section data-auto-animate>
+                <h1><code>Auth</code></h1>
+                <table>
+                    <tbody>
+                    <tr>
+                        <td data-id="n" style="width: 50%;text-align: center">
+                            <h2><code>AuthN</code></h2>
+                        </td>
+                        <td data-id="z" style="width: 50%;text-align: center">
+                            <h2><code>AuthZ</code></h2>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <aside class="notes">
+                    Pytanie za gadżety -> jak to tłumaczymy?
+                </aside>
+            </section>
+            <section data-auto-animate>
+                <h1><code>Auth</code></h1>
+                <table>
+                    <tbody>
+                    <tr>
+                        <td data-id="n" style="width: 50%;text-align: center">
+                            Authentication
+                        </td>
+                        <td data-id="z" style="width: 50%;text-align: center">
+                            Authorization
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section data-auto-animate data-transition="slide-in zoom-out">
+                <h1><code>Auth</code></h1>
+                <small>
+                    <em>
+                        <a href="https://github.com/nurkiewicz/polski-w-it">github.com/nurkiewicz/polski-w-it</a>
+                    </em>
+                </small>
+                <table>
+                    <tbody>
+                    <tr>
+                        <td data-id="n" style="width: 50%;text-align: center">
+                            Uwierzytelnianie
+                        </td>
+                        <td data-id="z" style="width: 50%;text-align: center">
+                            Autoryzacja
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div style="position: absolute; left: calc(50% - 3em); top: calc(50% - 1.5em)">
+                    <div class="fragment fade-out replace" data-fragment-index="2">
+                        <img src="img/ash.gif" class="pure-img fragment from-left" style="width: 3em"
+                             data-fragment-index="1">
+                    </div>
+                    <div class="fragment fade-in replace" data-fragment-index="2">
+                        <div class="r-stack" style="margin-top: .5em">
+                            <img src="img/to-small.gif" class="pure-img fragment fade-out replace"
+                                 data-fragment-index="3" style="width: 3em" data-autoslide="2500">
+                            <img src="img/enter.gif" class="pure-img fragment fade-in replace"
+                                 data-fragment-index="3" style="width: 1.5em; margin-left: .75em; margin-top: 2.5em">
+                        </div>
+                    </div>
+                </div>
+                <aside class="notes">
+                    Pytanie za gadżety -> krótko czym AuthN, czym AuthZ
+                </aside>
+            </section>
+            <section data-autoslide="500" data-transition="zoom">
+                <div style="padding-left: 1em; padding-right: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .5em;"
+                     class="fragment" data-autoslide="500" data-fragment-index="1">
+                    <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;"
+                         class="fragment" data-fragment-index="3" data-autoslide="750">
+                        <img src="img/hp-b.png" class="pure-img">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 3em;">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 3em;">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 3em;">
+                        <img src="img/hp-b.png" class="pure-img">
+                    </div>
+                    <span class="fragment from-left-fast" data-fragment-index="2" data-autoslide="2000">
+                        <img src="img/authn.png" class="pure-img fragment tada" style="width: 3em;"
+                             data-fragment-index="5" data-autoslide="0">
+                    </span>
+                </div>
+                <div style="padding-right: 1em; padding-left: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .25em;">
+                    <span class="fragment shake" data-fragment-index="8"><img src="img/ash-battle.png"
+                                                                              class="pure-img fragment from-right-fast"
+                                                                              style="width: 3.5em;"
+                                                                              data-fragment-index="2"
+                                                                              data-autoslide="0"></span>
+                    <div class="fragment pulse" data-fragment-index="6" data-autoslide="750">
+                        <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;"
+                             class="fragment" data-fragment-index="3" data-autoslide="0">
+                            <img src="img/hp-b.png" class="pure-img">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img fragment fade-out replace" style="width: 1em"
+                                 data-fragment-index="7" data-autoslide="0">
+                            <img src="img/hp.gif" class="pure-img fragment fade-in replace" style="width: 1em"
+                                 data-fragment-index="7" data-autoslide="0">
+                            <img src="img/hp-b.png" class="pure-img">
+                        </div>
+                    </div>
+                </div>
+                <div class="pokemon">
+                    <span class="fragment fade-out replace" data-fragment-index="6" data-autoslide="0">
+                        <span class="fragment" data-fragment-index="4" data-autoslide="0">
+                            <span class="fragment fade-out replace" data-fragment-index="5" data-autoslide="0">
+                                Wild AuthN appears!<br/><br/>
+                            </span>
+                            <span class="fragment fade-in replace" data-fragment-index="5" data-autoslide="0">
+                                AuthN used custom code mixed with Spring!
+                            </span>
+                        </span>
+                    </span>
+                    <span class="fragment fade-in replace" data-fragment-index="6" data-autoslide="0">
+                            <span class="fragment fade-out replace" data-fragment-index="8" data-autoslide="0">
+                                Critical hit!<br><br>
+                            </span>
+                            <span class="fragment fade-in replace" data-fragment-index="8" data-autoslide="0">
+                                mat3e used articles and tutorials!
+                            </span>
+                        </span>
+                </div>
+            </section>
+        </section>
+        <section data-background-image data-transition="zoom">
+            <section>
+                <img src="img/later-fix.png"/>
+            </section>
+            <section>
+                <h2>
+                    <img src="img/oak.gif" style="width: 1em">
+                </h2>
+                <img src="img/arrow.png" style="position: absolute; left: 30%; top: 10%" data-fragment-index="1"
+                     class="fragment"/>
+                <div>
+                    <a href="https://www.linkedin.com/posts/ihor-polataiko_spring-security-guide-part-1-introduction-activity-7271964584482123776-8iMT">
+                        <img src="img/ihor.png" style="width: 50%" data-fragment-index="1" class="fragment"/>
+                    </a>
+                </div>
+            </section>
+            <section>
+                <blockquote style="font-size: .75em; text-align: left; width: 95%">
+                    <div>
+                        📚 Explore the full series:
+                    </div>
+                    <div>
+                        1️⃣ <a
+                            href="https://medium.com/@ihor.polataiko/spring-security-guide-part-1-introduction-c2709ff1bd98">Introduction</a>
+                        📝
+                    </div>
+                    <div>
+                        2️⃣ <a
+                            href="https://medium.com/@ihor.polataiko/spring-security-guide-part-2-simple-authentication-with-opaque-token-0417187f7e9e">Simple
+                        authentication with Opaque token</a> 📝
+                    </div>
+                    <div>
+                        3️⃣ <a
+                            href="https://medium.com/@ihor.polataiko/spring-security-guide-part-3-simple-authentication-with-jwt-token-42c23a1c375d">Simple
+                        authentication with JWT token</a> 📝
+                    </div>
+                    <div>
+                        4️⃣ <a
+                            href="https://medium.com/@ihor.polataiko/spring-security-guide-part-4-out-of-the-box-implementations-http-basic-with-userdetailsservice-9ec3360c66ed">Out-of-the-box
+                        implementations — HTTP Basic with UserDetailsService</a> 📝
+                    </div>
+                    <div>
+                        5️⃣ <a
+                            href="https://medium.com/@ihor.polataiko/spring-security-guide-part-5-out-of-the-box-implementations-form-login-f538197b7b17">Out-of-the-box
+                        implementations — Form login</a> 📝
+                    </div>
+                    <div>
+                        6️⃣ <a
+                            href="https://medium.com/@ihor.polataiko/spring-security-guide-part-6-custom-implementation-of-jwt-api-key-authentication-5c22a6791f3c">Custom
+                        implementation of JWT + API Key authentication</a> 📝
+                    </div>
+                    <div>
+                        7️⃣ <a
+                            href="https://medium.com/@ihor.polataiko/spring-security-guide-part-7-custom-jwt-api-key-auth-with-configurers-e984cbe40160">Custom
+                        JWT + API Key auth with Configurers</a> 📝
+                    </div>
+                    <div>
+                        8️⃣ <a
+                            href="https://medium.com/@ihor.polataiko/spring-security-guide-part-8-authenticationfilter-based-implementation-of-jwt-api-key-auth-ed42ed24f5a9">AuthenticationFilter-based
+                        implementation of JWT + API
+                        Key auth</a> 📝
+                    </div>
+                    <div>
+                        9️⃣ <a
+                            href="https://medium.com/@ihor.polataiko/spring-security-guide-part-9-authenticationfilter-based-jwt-api-key-auth-with-configurers-fb91309558d0">AuthenticationFilter-based
+                        JWT + API Key auth with
+                        Configurers</a> 📝
+                    </div>
+                    <div>
+                        🔟 <a
+                            href="https://medium.com/@ihor.polataiko/spring-security-guide-part-10-oauth-client-implementation-1ffdd23d25d3">OAuth
+                        client implementation</a> 📝
+                    </div>
+                    <div>
+                        1️⃣1️⃣ <a
+                            href="https://medium.com/@ihor.polataiko/spring-security-guide-part-11-combining-different-authentication-mechanisms-fbb288df7433">Combining
+                        different authentication mechanisms</a> 📝
+                    </div>
+                </blockquote>
+            </section>
+            <section data-auto-animate>
+                <h2>
+                    <a href="https://docs.spring.io/spring-security/reference/servlet/architecture.html">Spring Security
+                        Arch</a>
+                </h2>
+                <img data-id="sfc" src="img/sfc/1.png" style="filter: invert(1)">
+            </section>
+            <section data-auto-animate>
+                <h2>
+                    <a href="https://docs.spring.io/spring-security/reference/servlet/architecture.html">Spring Security
+                        Arch</a>
+                </h2>
+                <img data-id="sfc" src="img/sfc/2.png" style="filter: invert(1)">
+            </section>
+            <section data-auto-animate>
+                <h2>
+                    <a href="https://docs.spring.io/spring-security/reference/servlet/architecture.html">Spring Security
+                        Arch</a>
+                </h2>
+                <img data-id="sfc" src="img/sfc/2.png"
+                     style="filter: invert(1); position: absolute;  left: 16%; opacity: 0">
+                <img data-id="sfc2" src="img/sfc/3.png" style="filter: invert(1)">
+            </section>
+            <section data-auto-animate>
+                <h2>
+                    <a href="https://docs.spring.io/spring-security/reference/servlet/architecture.html">Spring Security
+                        Arch</a>
+                </h2>
+                <img data-id="sfc2" src="img/sfc/4.png" style="filter: invert(1)">
+            </section>
+            <section data-auto-animate>
+                <h2>
+                    <a href="https://docs.spring.io/spring-security/reference/servlet/architecture.html">Spring Security
+                        Arch</a>
+                </h2>
+                <img data-id="sfc2" src="img/sfc/5.png" style="filter: invert(1)">
+            </section>
+            <section>
+                <h2><code>AuthenticationManager</code></h2>
+                <ul>
+                    <li class="fragment">Dostaje <code>Authentication</code> (<code>isAuthenticated() == false</code>)
+                        <ul>
+                            <li class="fragment">Rzuca gdy <code>disabled</code>, <code>locked</code>, złe dane
+                                uwierzytelniające
+                            </li>
+                            <li class="fragment">Zwraca <code>Authentication</code> (<code>isAuthenticated() ==
+                                true</code>)
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <h2><code>AuthenticationProvider</code></h2>
+                <ul>
+                    <li class="fragment">Podobne, ale może zwracać <code>null</code>a</li>
+                    <li class="fragment">Metoda <code>supports(Class&lt;?>)</code></li>
+                    <li class="fragment">Strategia!
+                        <span class="fragment"><code>ProviderManager implements AuthenticationManager</code></span>
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <h2><code>UserDetailsService</code></h2>
+                <ul>
+                    <li class="fragment">Dostarczanie użytkownika po loginie</li>
+                    <li class="fragment"><code>UsernameNotFoundException</code> gdy brak użytkownika lub użytkownik bez
+                        uprawnień (<code>GrantedAuthority</code>)
+                    </li>
+                    <li class="fragment"><code>DaoAuthenticationProvider implements AuthenticationProvider</code></li>
+                </ul>
+            </section>
+            <section>
+                <h2 style="margin: 0"><code>Configurer</code>, <code>Customizer</code></h2>
+                <div class="fragment">
+                    <a href="https://x.com/tomasz_ducin/status/1860240988184223783">
+                        <img src="img/ducin.png" style="width: 50%">
+                    </a>
+                </div>
+                <aside class="notes">configurer = init (shared objects) + configure</aside>
+            </section>
+            <section data-background-image="img/pokedex.png" data-background-size="contain"
+                     style="height: 100vh; width: 100%">
+                <div class="fragment fade-out replace" data-fragment-index="4">
+                    <img src="img/dex-1.jpg" style="position: absolute; top: 0; left: 20%" class="fragment"
+                         data-fragment-index="1">
+                    <img src="img/dex-2.jpg" style="position: absolute; top: 3em; left: 35%" class="fragment"
+                         data-fragment-index="2">
+                    <img src="img/dex-3.jpg" style="position: absolute; top: 6em; left: 50%" class="fragment"
+                         data-fragment-index="2">
+                    <img src="img/dex-4.jpg" style="position: absolute; top: 9em; left: 65%" class="fragment"
+                         data-fragment-index="3">
+                </div>
+                <a href="https://www.youtube.com/watch?v=3spgz1LXcS8" class="fragment fade-in replace"
+                   data-fragment-index="4"
+                   style="position: absolute; top: 6em; left: 50%; width: 60%; left: 20%; transform: rotate(25deg)">
+                    <img src="img/laur-spicla.png" class="pure-img">
+                </a>
+            </section>
+            <section>
+                <h2><a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-13">OAuth 2.1</a></h2>
+                <pre><code class="r-stretch" data-trim>
+                         +--------+                               +---------------+
+                         |        |--(1)- Authorization Request ->|   Resource    |
+                         |        |                               |     Owner     |
+                         |        |<-(2)-- Authorization Grant ---|               |
+                         |        |                               +---------------+
+                         |        |
+                         |        |                               +---------------+
+                         |        |--(3)-- Authorization Grant -->| Authorization |
+                         | Client |                               |     Server    |
+                         |        |<-(4)----- Access Token -------|               |
+                         |        |                               +---------------+
+                         |        |
+                         |        |                               +---------------+
+                         |        |--(5)----- Access Token ------>|    Resource   |
+                         |        |                               |     Server    |
+                         |        |<-(6)--- Protected Resource ---|               |
+                         +--------+                               +---------------+
+                </code></pre>
+            </section>
+            <section>
+                <h3 style="margin: 0">
+                    <a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-13#name-authorization-code-grant">
+                        Authorization Code Flow
+                    </a>
+                </h3>
+                <pre style="width: 71%;overflow: hidden"><code class="r-stretch" data-trim
+                                                               style="font-size: .75em; line-height: 1.1">
+                 +----------+
+                 | Resource |
+                 |   Owner  |
+                 +----------+
+                       ^
+                       |
+                       |
+                 +-----|----+          Client Identifier      +---------------+
+                 | .---+---------(1)-- & Redirect URI ------->|               |
+                 | |   |    |                                 |               |
+                 | |   '---------(2)-- User authenticates --->|               |
+                 | | User-  |                                 | Authorization |
+                 | | Agent  |                                 |     Server    |
+                 | |        |                                 |               |
+                 | |    .--------(3)-- Authorization Code ---<|               |
+                 +-|----|---+                                 +---------------+
+                   |    |                                         ^      v
+                   |    |                                         |      |
+                   ^    v                                         |      |
+                 +---------+                                      |      |
+                 |         |>---(4)-- Authorization Code ---------'      |
+                 |  Client |          & Redirect URI                     |
+                 |         |                                             |
+                 |         |<---(5)----- Access Token -------------------'
+                 +---------+       (w/ Optional Refresh Token)
+                </code></pre>
+                <h4 style="margin: 0" class="fragment">(PKCE w 1)</h4>
+                <aside class="notes">
+                    authorization code żeby dostać access token. Czemu nie od razu access token? Tak było w implicit
+                    grant, ale już nie ma. 1 i 3 to przekierowania i tak bezpieczniej - nawet jak się podrąbie
+                    przekierowanie, to auth code jest jednorazowy i trzeba dodatkowo przekazać info o kliencie w 4
+
+                    <br/>
+                    PKCE (Proof-Key for Code Exchange) - random value + hash for random value
+                </aside>
+            </section>
+            <section>
+                <h3><code>application-security.yaml</code> (protip)</h3>
+                <ul>
+                    <li class="fragment">Wszystko związane z zabezpieczeniami od razu tam</li>
+                    <li class="fragment">Profile grupujące podobne właściwości
+                        <ul>
+                            <li class="fragment">Uruchamianie wielu jednocześnie</li>
+                            <li class="fragment">Profil=środowisko? Niekoniecznie (~zmienne środowiskowe)</li>
+                        </ul>
+                    </li>
+                    <li class="fragment">Łatwo uruchomić lokalnie (kompatybilność wsteczna)</li>
+                </ul>
+            </section>
+            <section>
+                <pre style="width: 100%"><code class="java r-stretch" data-trim data-line-numbers>
+                    @Configuration(proxyBeanMethods = false)
+                    class SecurityConfiguration {
+                      @Profile({"!security"})
+                      @Bean
+                      SecurityFilterChain noAuthenticationFilterChain(HttpSecurity http) throws Exception {
+                        return http
+                          .csrf(AbstractHttpConfigurer::disable)
+                          .cors(AbstractHttpConfigurer::disable);
+                          .authorizeHttpRequests((request) ->
+                              request.anyRequest().permitAll());
+                          .build();
+                      }
+
+                      @Profile({"security"})
+                      @Configuration(proxyBeanMethods = false)
+                      @EnableConfigurationProperties(BasicAuthSettings.class)
+                      static class SecurityTurnedOn {
+                        // all other filter chains here
+                      }
+                    }
+                </code></pre>
+            </section>
+        </section>
+        <section data-background-image data-transition="zoom">
+            <section>
+                <div style="padding-left: 1em; padding-right: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .5em;">
+                    <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;"
+                         class="fragment pulse" data-fragment-index="1" data-autoslide="750">
+                        <img src="img/hp-b.png" class="pure-img">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 3em;">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 3em;">
+                        <img src="img/hp-f.png" class="pure-img fragment fade-out replace" data-fragment-index="2"
+                             style="width: 3em;">
+                        <img src="img/hp2.gif" class="pure-img fragment fade-in replace" style="width: 3em"
+                             data-fragment-index="2">
+                        <img src="img/hp-b.png" class="pure-img">
+                    </div>
+                    <span>
+                        <img src="img/authn.png" class="pure-img fragment tada" style="width: 3em;"
+                             data-fragment-index="3">
+                    </span>
+                </div>
+                <div style="padding-right: 1em; padding-left: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .25em;">
+                    <span><img src="img/ash-battle.png" class="pure-img" style="width: 3.5em;"></span>
+                    <div>
+                        <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;"
+                             class="fragment pulse" data-fragment-index="4" data-autoslide="750">
+                            <img src="img/hp-b.png" class="pure-img">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" style="width: 1em"
+                                 class="pure-img fragment fade-out replace" data-fragment-index="5">
+                            <img src="img/hp3.gif" class="pure-img fragment fade-in replace" style="width: 1em"
+                                 data-fragment-index="5">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-b.png" class="pure-img">
+                        </div>
+                    </div>
+                </div>
+                <div class="pokemon">
+                    <span class="fragment fade-out replace" data-fragment-index="3">
+                        <span>
+                            <span class="fragment fade-out replace" data-fragment-index=1">
+                                mat3e used articles and tutorials!
+                            </span>
+                            <span class="fragment fade-in replace" data-fragment-index="1">
+                                It's super effective!<br><br>
+                            </span>
+                        </span>
+                    </span>
+                    <span class="fragment fade-in replace" data-fragment-index="3">
+                        <span class="fragment fade-out replace" data-fragment-index="6">
+                            <span class="fragment fade-out replace" data-fragment-index="4">
+                                AuthN used Okta<br><br>
+                            </span>
+                            <span class="fragment fade-in replace" data-fragment-index="4">
+                                Critical hit!<br><br>
+                            </span>
+                        </span>
+                        <span class="fragment fade-in replace" data-fragment-index="6">
+                            mat3e used Okta dependency!
+                        </span>
+                    </span>
+                </div>
+            </section>
+        </section>
+        <section data-background-image data-transition="zoom">
+            <section data-auto-animate>
+                <pre data-id="os-m"><code class="xml" data-trim data-line-numbers>
+                    &lt;dependency>
+                        &lt;groupId>com.okta.spring&lt;/groupId>
+                        &lt;artifactId>okta-spring-boot-starter&lt;/artifactId>
+                    &lt;/dependency>
+                </code></pre>
+                <div class="fragment" data-id="okta-changes">
+                    <code>Okta Developer Edition</code> <em class="fragment">(forever-free)</em>
+                    <span class="fragment"> ⇒&nbsp;<code>Integrator Free Plan</code></span>
+                </div>
+                <aside class="notes">
+                    Okta zmieniła z "forever-free" dev account na integrator free, wysyła teraz spam sprzedażowy, "hej
+                    jak pomóc". "forever" = do maja 2025. A Spring to wywalił z Initializra
+                </aside>
+            </section>
+            <section data-auto-animate>
+                <pre data-id="os-m"><code class="xml" data-trim data-line-numbers="4">
+                    &lt;dependency>
+                        &lt;groupId>com.okta.spring&lt;/groupId>
+                        &lt;artifactId>okta-spring-boot-starter&lt;/artifactId>
+                        &lt;version>${okta.springboot.version}&lt;/version>
+                    &lt;/dependency>
+                </code></pre>
+                <div data-id="okta-changes">
+                    <code>Okta Developer Edition</code> <em>(forever-free)</em>
+                    <span> ⇒&nbsp;<code>Integrator Free Plan</code></span>
+                </div>
+            </section>
+        </section>
+        <section data-background-image data-transition="zoom">
+            <section>
+                <div style="padding-left: 1em; padding-right: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .5em;">
+                    <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;"
+                         class="fragment pulse" data-fragment-index="1" data-autoslide="750">
+                        <img src="img/hp-b.png" class="pure-img">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 3em;">
+                        <img src="img/hp-f.png" class="pure-img fragment fade-out replace" data-fragment-index="2"
+                             style="width: 3em;">
+                        <img src="img/hp4.gif" class="pure-img fragment fade-in replace" style="width: 3em"
+                             data-fragment-index="2">
+                        <img src="img/hp-e.png" class="pure-img" style="width: 3em;">
+                        <img src="img/hp-b.png" class="pure-img">
+                    </div>
+                    <span>
+                        <img src="img/authn.png" class="pure-img fragment tada" style="width: 3em;"
+                             data-fragment-index="3">
+                    </span>
+                </div>
+                <div style="padding-right: 1em; padding-left: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .25em;">
+                    <span><img src="img/ash-battle.png" class="pure-img" style="width: 3.5em;"></span>
+                    <div>
+                        <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;"
+                             class="fragment pulse" data-fragment-index="4" data-autoslide="750">
+                            <img src="img/hp-b.png" class="pure-img">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" style="width: 1em"
+                                 class="pure-img fragment fade-out replace" data-fragment-index="5">
+                            <img src="img/hp5.gif" class="pure-img fragment fade-in replace" style="width: 1em"
+                                 data-fragment-index="5">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-b.png" class="pure-img">
+                        </div>
+                    </div>
+                </div>
+                <div class="pokemon">
+                    <span class="fragment fade-out replace" data-fragment-index="3">
+                        <span>
+                            <span class="fragment fade-out replace" data-fragment-index=1">
+                                mat3e used Okta dependency!
+                            </span>
+                            <span class="fragment fade-in replace" data-fragment-index="1">
+                                It's super effective!<br><br>
+                            </span>
+                        </span>
+                    </span>
+                    <span class="fragment fade-in replace" data-fragment-index="3">
+                        <span class="fragment fade-out replace" data-fragment-index="6">
+                            <span class="fragment fade-out replace" data-fragment-index="4">
+                                AuthN used strange bug<br><br>
+                            </span>
+                            <span class="fragment fade-in replace" data-fragment-index="4">
+                                Critical hit!<br><br>
+                            </span>
+                        </span>
+                        <span class="fragment fade-in replace" data-fragment-index="6">
+                            mat3e used Okta support forums & docs!
+                        </span>
+                    </span>
+                </div>
+                <pre class="fragment fade-in-then-out" data-fragment-index="3"
+                     style="position: absolute; top: 35%; transform: rotate(-15deg)"><code data-trim
+                                                                                           style="width: 100%;font-size: .5em;overflow-x: hidden">
+                    org.springframework.security.oauth2.server.resource.InvalidBearerTokenException:
+                        An error occurred while attempting to decode the Jwt: JOSE header typ (type) application/okta-internal-at+jwt not allowed
+                </code></pre>
+                <aside class="notes">pytanie za Spoinę -> o co cho z tym błędem?</aside>
+            </section>
+        </section>
+        <section data-background-image data-transition="zoom">
+            <section>
+                <img src="img/logs.png" style="width: 45%"/>
+            </section>
+            <section>
+                <blockquote style="text-align: left; font-size: .5em">
+                    <h2>Org authorization server</h2>
+                    <div>
+                        Every Okta org comes equipped with a built-in org authorization server. The org authorization
+                        server issues access tokens for accessing Okta resources in your Okta org domain. <span
+                            class="fragment highlight-blue" data-fragment-index="1">Use the org</span>
+                        authorization <span class="fragment highlight-blue" data-fragment-index="1">server</span> to
+                        perform Single Sign-On (SSO) with Okta for your OIDC apps or <span
+                            class="fragment highlight-blue" data-fragment-index="1">to get an
+                        access token to access Okta APIs</span>.
+                    </div>
+                    <blockquote style="width: 90%" class="fragment highlight-red" data-fragment-index="1">
+                        <strong>Note</strong>: In the org authorization server, Okta is the resource server.
+                    </blockquote>
+                    <p>(...)</p>
+                    <h2 class="fragment highlight-green">Custom authorization server</h2>
+                    <p>(...)</p>
+                    <h3>Default custom authorization server</h3>
+                    <div>(...)</div>
+                </blockquote>
+                <a href="https://developer.okta.com/docs/concepts/auth-servers/#available-authorization-server-types">Okta
+                    docs</a>
+            </section>
+            <section data-auto-animate>
+                <a href="https://devforum.okta.com/t/okta-access-token-type-is-not-jwt/29515/2">
+                    <img src="img/okta-forum.png" data-id="okta-forum">
+                </a>
+            </section>
+            <section data-auto-animate>
+                <a href="https://devforum.okta.com/t/okta-access-token-type-is-not-jwt/29515/2">
+                    <img src="img/okta-forum2.png" data-id="okta-forum">
+                    Forum
+                </a>
+            </section>
+            <section data-auto-animate data-auto-animate-id="fix">
+                <pre data-id="okta-server" style="width: 100%"><code data-trim style="font-size: .8em">
+                    https://{yourOktaDomain}.okta.com/.well-known/openid-configuration
+                </code></pre>
+            </section>
+            <section data-auto-animate data-auto-animate-id="fix">
+                <pre data-id="okta-server" style="width: 100%"><code data-trim style="font-size: .8em">
+                    https://{yourOktaDomain}.okta.com/oauth2/default/.well-known/openid-configuration
+                </code></pre>
+            </section>
+        </section>
+        <section data-background-image data-transition="zoom">
+            <section>
+                <div style="padding-left: 1em; padding-right: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .5em;">
+                    <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;"
+                         class="fragment pulse" data-fragment-index="1" data-autoslide="750">
+                        <img src="img/hp-b.png" class="pure-img">
+                        <img src="img/hp-f.png" class="pure-img fragment fade-out replace" data-fragment-index="2"
+                             style="width: 3em;">
+                        <img src="img/hp6.gif" class="pure-img fragment fade-in replace" style="width: 3em"
+                             data-fragment-index="2">
+                        <img src="img/hp-e.png" class="pure-img" style="width: 3em;">
+                        <img src="img/hp-e.png" class="pure-img" style="width: 3em;">
+                        <img src="img/hp-b.png" class="pure-img">
+                    </div>
+                    <span>
+                        <img src="img/authn.png" class="pure-img fragment zoomOutDown" style="width: 3em;"
+                             data-fragment-index="3">
+                    </span>
+                </div>
+                <div style="padding-right: 1em; padding-left: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .25em;">
+                    <span><img src="img/ash-battle.png" class="pure-img" style="width: 3.5em;"></span>
+                    <div>
+                        <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;">
+                            <img src="img/hp-b.png" class="pure-img">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                            <img src="img/hp-b.png" class="pure-img">
+                        </div>
+                    </div>
+                </div>
+                <div class="pokemon">
+                    <span class="fragment fade-out replace" data-fragment-index="3">
+                        <span class="fragment fade-out replace" data-fragment-index="1">
+                            mat3e used Okta support forums & docs!
+                        </span>
+                        <span class="fragment fade-in replace" data-fragment-index="1">
+                            It's super effective!<br><br>
+                        </span>
+                    </span>
+                    <span class="fragment fade-in replace" data-fragment-index="3">
+                        AuthN fainted!<br/><br/>
+                    </span>
+                </div>
+            </section>
+            <section>
+                <h3 style="font-family: 'pokemon', 'Courier New', Courier, monospace" class="fragment"
+                    data-fragment-index="1">wiele expa</h3>
+                <img src="img/stand1.png" class="pure-img fragment fade-out replace" style="width: 3.5em"
+                     data-fragment-index="1">
+                <img src="img/stand2.png" class="pure-img fragment fade-in replace" style="width: 3.5em"
+                     data-fragment-index="1">
+            </section>
+            <section>
+                <div style="margin: 0 auto; text-align: center">
+                    <img src="img/authn.png" class="pure-img fragment flash" style="width: 3em; margin-top: .25em"
+                         data-fragment-index="2">
+                    <span class="fragment fade-out replace" data-fragment-index="2"
+                          style="position: absolute; margin-left: -4em;">
+                            <img src="img/explosion2.gif" style="width: 5em;" class="pure-img fragment"
+                                 data-fragment-index="1" data-autoslide="1200">
+                        </span>
+                    <img src="img/authn2.png" class="pure-img fragment reverse-flash"
+                         style="width: 3.5em; position: absolute; margin-left: -3.25em;" data-fragment-index="2">
+                </div>
+                <img src="img/explosion3.gif" class="pure-img fragment" data-fragment-index="3"
+                     data-autoslide="300">
+                <img src="img/explosion4.gif" class="pure-img fragment" data-fragment-index="4"
+                     data-autoslide="300">
+                <img src="img/explosion5.gif" class="pure-img fragment" data-fragment-index="5">
+                <img src="img/brain-explosion.gif" class="pure-img fragment" data-fragment-index="6"
+                     style="position: absolute; bottom: 0; right: 0; z-index: 999">
+                <div class="pokemon">
+                    <span class="fragment fade-out replace" data-fragment-index="1">...<br><br></span>
+                    <span class="fragment fade-in replace" data-fragment-index="1">
+                        <span class="fragment fade-out replace" data-fragment-index="3">
+                            What? AuthN is evolving!
+                        </span>
+                        <span class="fragment fade-in replace" data-fragment-index="3">
+                            Into AuthN with new requirements (ANWNR)!
+                        </span>
+                    </span>
+                </div>
+            </section>
+            <section data-autoslide="500">
+                <div style="padding-left: 1em; padding-right: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .5em;"
+                     class="fragment" data-fragment-index="1">
+                    <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;"
+                         class="fragment" data-fragment-index="3" data-autoslide="750">
+                        <img src="img/hp-b.png" class="pure-img">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 4.5em;">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 4.5em;">
+                        <img src="img/hp-b.png" class="pure-img">
+                    </div>
+                    <span class="fragment from-left-fast" data-fragment-index="2" data-autoslide="2000">
+                            <img src="img/authn2.png" class="pure-img fragment tada" style="width: 3.5em;"
+                                 data-fragment-index="5" data-autoslide="0">
+                        </span>
+                </div>
+                <div
+                        style="padding-right: 1em; padding-left: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .25em;">
+                    <span class="fragment shake" data-fragment-index="7">
+                    <img src="img/ash-battle.png" class="pure-img fragment from-right-fast" style="width: 3.5em;"
+                         data-fragment-index="2" data-autoslide="0">
+                    </span>
+                    <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;"
+                         class="fragment" data-fragment-index="3" data-autoslide="0">
+                        <img src="img/hp-b.png" class="pure-img">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                        <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                        <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                        <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                        <img src="img/hp-b.png" class="pure-img">
+                    </div>
+                </div>
+                <div class="pokemon">
+                    <span class="fragment" data-fragment-index="4" data-autoslide="0">
+                        <span class="fragment fade-out replace" data-fragment-index="5" data-autoslide="0">
+                            ...<br><br>
+                        </span>
+                        <span class="fragment fade-out replace" data-fragment-index="6" data-autoslide="0">
+                            <span class="fragment fade-in replace" data-fragment-index="5" data-autoslide="0">
+                                ANWNR used client and password grants!
+                            </span>
+                        </span>
+                        <span class="fragment fade-in replace" data-fragment-index="6" data-autoslide="0">
+                            <span class="fragment fade-out replace" data-fragment-index="7" data-autoslide="0">
+                                It's not very effective...
+                            </span>
+                            <span class="fragment fade-in replace" data-fragment-index="7" data-autoslide="0">
+                                mat3e used Spring Security servers!
+                            </span>
+                        </span>
+                    </span>
+                </div>
+                <aside class="notes">
+                    Przygotowywaliśmy się na to od początku. Po to cywilizowanie użycia, Spring, standardowe nagłówki
+                    HTTP, żeby podmienić na serwery (zależność Okty to Resource Server i tak)
+                </aside>
+            </section>
+        </section>
+        <section data-background-image data-transition="zoom">
+            <section>
+                <h2>
+                    <a href="https://docs.spring.io/spring-authorization-server/reference/overview.html">
+                        Authorization Server
+                    </a>
+                </h2>
+                <ul>
+                    <li class="fragment">Odpytanie Okty i tworzenie wpisu w bazie użytkowników</li>
+                    <li class="fragment">Tworzenie tokena z dodatkowymi danymi</li>
+                    <li class="fragment">Zarządzanie rolami, uprawnieniami, użytkownikami</li>
+                    <li class="fragment">Kilka endpointów</li>
+                    <li class="fragment">Potencjalnie osobna jednostka wdrożeniowa</li>
+                </ul>
+            </section>
+            <section data-background-image>
+                <pre style="width: 100%" class="r-stretch"><code class="java" style="font-size: .75em" data-trim
+                                                                 data-line-numbers="1-4,9-13,17-20|22-30|18">
+                @Bean
+                @Order(0)
+                SecurityFilterChain oidcProtocolEndpointsChain(
+                  HttpSecurity http,
+                  UserDetailsService userDetailsService,
+                  PasswordEncoder passwordEncoder,
+                  OAuth2AuthorizationService authorizationService,
+                  OAuth2TokenGenerator&lt;? extends OAuth2Token> tokenGenerator
+                ) throws Exception {
+                  OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
+                  http
+                    .getConfigurer(OAuth2AuthorizationServerConfigurer.class)
+                    .oidc(withDefaults())
+                    .tokenEndpoint(tokenEndpoint -> tokenEndpoint
+                      .accessTokenRequestConverter(new OAuth2PasswordGrantAuthenticationConverter())
+                      .authenticationProvider(new OAuth2PasswordGrantAuthenticationProvider(userDetailsService, passwordEncoder, authorizationService, tokenGenerator)));
+                  return http.exceptionHandling(exceptions -> exceptions.authenticationEntryPoint(
+                     new LoginUrlAuthenticationEntryPoint("/oauth2/authorization/okta"))
+                  ).build();
+                }
+
+                @Bean
+                @Order(1)
+                SecurityFilterChain oktaLoginChain(HttpSecurity http, UserService userService) throws Exception {
+                  return http
+                      .securityMatcher(anyOf(antMatcher("/oauth2/**"), antMatcher("/login/oauth2/**")))
+                      .authorizeHttpRequests(authorize -> authorize.anyRequest().authenticated())
+                      .oauth2Login(oauth2Login -> oauth2Login.successHandler(new CreateUserHandler(userService, requestCache)))
+                      .build();
+                }
+                </code></pre>
+            </section>
+            <section data-auto-animate>
+                <pre data-id="auth-s" style="width: 100%"><code class="yaml r-stretch"
+                                                                style="font-size: .75em; line-height: 1.1"
+                                                                data-trim
+                                                                data-line-numbers="|5,16,18|7-12,27">
+                    spring.security:
+                      oauth2:
+                        authorizationserver:
+                          client:
+                            frontend:
+                              registration:
+                                client-id: ${app.security.frontend.client-id}
+                                client-secret: "{noop}${app.security.frontend.client-secret}"
+                                client-authentication-methods:
+                                  - client_secret_post
+                                authorization-grant-types:
+                                  - authorization_code
+                                  - refresh_token
+                                  - password
+                                redirect-uris:
+                                  - ${app.frontend.url}/api/auth/callback/backend
+                                post-logout-redirect-uris:
+                                  - ${app.frontend.url}/api/auth/callback/backend
+                                scopes:
+                                  - openid
+                                  - profile
+                                  - email
+                                  - offline_access
+                              token:
+                                access-token-time-to-live: P6D
+                                refresh-token-time-to-live: P6D
+                              require-proof-key: true
+                </code></pre>
+                <aside class="notes">
+                    Uwaga, trzeba dodać wszystko, bo klient walidowany - chcieliśmy lokalnie inny URL i nie poszło w
+                    application-local, bo nie było reszty
+                </aside>
+            </section>
+            <section data-auto-animate>
+                <pre data-id="auth-s" style="width: 100%"><code class="yaml r-stretch"
+                                                                style="font-size: .75em; line-height: 1.1"
+                                                                data-trim
+                                                                data-line-numbers>
+                    spring.security:
+                      oauth2:
+                        authorizationserver:
+                          # how external apps connect this
+                          client:
+                            frontend:
+                              registration:
+                                client-id: ${app.security.frontend.client-id}
+                                client-secret: "{noop}${app.security.frontend.client-secret}"
+                                client-authentication-methods:
+                                  - client_secret_post
+                                authorization-grant-types:
+                                  - authorization_code
+                                  - refresh_token
+                                  - password
+                                redirect-uris:
+                                  - ${app.frontend.url}/api/auth/callback/backend
+                                post-logout-redirect-uris:
+                                  - ${app.frontend.url}/api/auth/callback/backend
+                                scopes:
+                                  - openid
+                                  - profile
+                                  - email
+                                  - offline_access
+                              token:
+                                access-token-time-to-live: P6D
+                                refresh-token-time-to-live: P6D
+                              require-proof-key: true
+                </code></pre>
+            </section>
+            <section>
+                <h2>
+                    <a href="https://docs.spring.io/spring-security/reference/servlet/oauth2/client/index.html">
+                        OAuth Client
+                    </a>
+                </h2>
+                <ul>
+                    <li class="fragment">Wspieranie przepływów OAuth</li>
+                    <li class="fragment">Do łączenia się z drugim serwerem autoryzującym, Oktą (<a
+                            href="https://docs.spring.io/spring-authorization-server/reference/guides/how-to-social-login.html">tutorial</a>)
+                    </li>
+                    <li class="fragment">Jeden serwer autoryzujący i kilka serwerów zasobów</li>
+                </ul>
+                <aside class="notes">Idealnie tutorial w dokumentacji opisywał</aside>
+            </section>
+            <section data-auto-animate>
+                <pre style="width: 100%" data-id="yaml-client"><code class="yaml r-stretch"
+                                                                     style="font-size: .75em; line-height: 1.1"
+                                                                     data-trim
+                                                                     data-line-numbers>
+                    spring.security:
+                      oauth2:
+                        authorizationserver:
+                          # how external apps connect this
+                          client:
+                            frontend:
+                              registration:
+                                client-id: ${app.security.frontend.client-id}
+                                client-secret: "{noop}${app.security.frontend.client-secret}"
+                                client-authentication-methods:
+                                  - client_secret_post
+                                authorization-grant-types:
+                                  - authorization_code
+                                  - refresh_token
+                                  - password
+                                redirect-uris:
+                                  - ${app.frontend.url}/api/auth/callback/backend
+                                post-logout-redirect-uris:
+                                  - ${app.frontend.url}/api/auth/callback/backend
+                                scopes:
+                                  - openid
+                                  - profile
+                                  - email
+                                  - offline_access
+                              token:
+                                access-token-time-to-live: P6D
+                                refresh-token-time-to-live: P6D
+                              require-proof-key: true
+                </code></pre>
+            </section>
+            <section data-background-image data-auto-animate>
+                <pre style="width: 100%" class="r-stretch" data-id="yaml-client"><code class="yaml"
+                                                                                       style="font-size: .75em; line-height: 1.1"
+                                                                                       data-trim
+                                                                                       data-line-numbers="1-21">
+                    spring.security:
+                      oauth2:
+                        # how this connects Okta
+                        client:
+                          registration:
+                            okta:
+                              provider: okta
+                              client-id: ${app.security.okta.client-id}
+                              client-secret: ${app.security.okta.client-secret}
+                              scope:
+                                - openid
+                                - profile
+                                - email
+                                - offline_access
+                          provider:
+                            okta:
+                              authorization-uri: ${okta.oauth2.issuer}/v1/authorize
+                              token-uri: ${okta.oauth2.issuer}/v1/token
+                              user-info-uri: ${okta.oauth2.issuer}/v1/userinfo
+                              jwk-set-uri: ${okta.oauth2.issuer}/v1/keys
+                              user-name-attribute: sub
+                        authorizationserver:
+                          # how external apps connect this
+                          client:
+                            frontend:
+                              registration:
+                                client-id: ${app.security.frontend.client-id}
+                                client-secret: "{noop}${app.security.frontend.client-secret}"
+                                client-authentication-methods:
+                                  - client_secret_post
+                                authorization-grant-types:
+                                  - authorization_code
+                                  - refresh_token
+                                  - password
+                                redirect-uris:
+                                  - ${app.frontend.url}/api/auth/callback/backend
+                                post-logout-redirect-uris:
+                                  - ${app.frontend.url}/api/auth/callback/backend
+                                scopes:
+                                  - openid
+                                  - profile
+                                  - email
+                                  - offline_access
+                              token:
+                                access-token-time-to-live: P6D
+                                refresh-token-time-to-live: P6D
+                              require-proof-key: true
+                </code></pre>
+                <aside class="notes">
+                    <code>"/oauth2/authorization/okta"</code> zawierało nazwę providera
+                    <br>
+                    Brakuje mi .well-known tutaj
+                </aside>
+            </section>
+            <section data-auto-animate>
+                <pre data-id="flow-change" style="width: 71%;overflow: hidden"><code class="r-stretch" data-trim
+                                                                                     style="font-size: .75em; line-height: 1.1">
+                 +----------+
+                 | Resource |
+                 |   Owner  |
+                 +----------+
+                       ^
+                       |
+                       |
+                 +-----|----+          Client Identifier      +---------------+
+                 | .---+---------(1)-- & Redirect URI ------->|               |
+                 | |   |    |                                 |               |
+                 | |   '---------(2)-- User authenticates --->|               |
+                 | | User-  |                                 | Authorization |
+                 | | Agent  |                                 |     Server    |
+                 | |        |                                 |               |
+                 | |    .--------(3)-- Authorization Code ---<|               |
+                 +-|----|---+                                 +---------------+
+                   |    |                                         ^      v
+                   |    |                                         |      |
+                   ^    v                                         |      |
+                 +---------+                                      |      |
+                 |         |>---(4)-- Authorization Code ---------'      |
+                 |  Client |          & Redirect URI                     |
+                 |         |                                             |
+                 |         |<---(5)----- Access Token -------------------'
+                 +---------+       (w/ Optional Refresh Token)
+                </code></pre>
+            </section>
+            <section data-auto-animate>
+                <pre data-id="flow-change" style="width: 96%;overflow: hidden"><code class="r-stretch" data-trim
+                                                                                     style="font-size: .75em; line-height: 1.1">
+                 +----------+
+                 | Resource |
+                 |   Owner  |
+                 +----------+
+                       ^
+                       |
+                       |
+                 +-----|----+          Client Identifier      +---------------+
+                 | .---+---------(1)-- & Redirect URI ------->|               |
+                 | |   |    |                                 |               |
+                 | |   '---------(2)-- User authenticates --->|               |
+                 | | User-  |                                 | Authorization |
+                 | | Agent  |                                 |     Server    |
+                 | |        |                                 |               |
+                 | |    .--------(3)-- Authorization Code ---<|               |
+                 +-|----|---+                                 +---------------+
+                   |    |                                         ^      v
+                   |    |                                         |      |
+                   ^    v                                         |      |
+                 +---------+                                      |      |
+                 |         |>---(4)-- Authorization Code ---------'      |
+                 |  Client |          & Redirect URI                     |
+                 |         |                                             |
+                 |         |<---(5)----- Access Token -------------------'
+                 +---------+       (w/ Optional Refresh Token)
+                </code></pre>
+            </section>
+            <section data-auto-animate>
+                <pre data-id="flow-change" style="width: 96%"><code class="r-stretch" data-trim
+                                                                    style="font-size: .75em; line-height: 1.1">
+                 +----------+                                                        +---------------+
+                 | Resource |                                                        |               |
+                 |   Owner  |                                                        |               |
+                 +----------+                                  .-(2.5)- OAuth flow ->|      Okta     |
+                       ^                                       |                     | Authorization |
+                       |                                       |                     |     Server    |
+                       |                                       ^                     |               |
+                 +-----|----+          Client Identifier      +---------------+      |               |
+                 | .---+---------(1)-- & Redirect URI ------->|               |      +---------------+
+                 | |   |    |                                 |               |                    v
+                 | |   '---------(2)-- User authenticates --->|               |                    |
+                 | | User-  |                                 | Authorization |                    |
+                 | | Agent  |                                 |     Server    |<-(2¾)- OAuth flow -'
+                 | |        |                                 |               |
+                 | |    .--------(3)-- Authorization Code ---<|               |
+                 +-|----|---+                                 +---------------+
+                   |    |                                         ^      v
+                   |    |                                         |      |
+                   ^    v                                         |      |
+                 +---------+                                      |      |
+                 |         |>---(4)-- Authorization Code ---------'      |
+                 |  Client |          & Redirect URI                     |
+                 |         |                                             |
+                 |         |<---(5)----- Access Token -------------------'
+                 +---------+       (w/ Optional Refresh Token)
+                </code></pre>
+            </section>
+            <section>
+                <h2>
+                    <a href="https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/index.html">
+                        Resource Server
+                    </a>
+                </h2>
+                <ul>
+                    <li class="fragment">Dostaje token, sprawdza kluczem publicznym, sprawdza datę ważności</li>
+                    <li class="fragment">Token i dane użytkownika w&nbsp;<code>SecurityContextHolder</code>ze</li>
+                    <li class="fragment">Zależność Okty na tym budowała</li>
+                </ul>
+            </section>
+            <section>
+                <pre style="width: 100%"><code class="java r-stretch" style="font-size: .9em" data-trim
+                                               data-line-numbers="1-4,6-12,14-15">
+                    @Bean
+                    @Order(2)
+                    SecurityFilterChain oauthChain(
+                        HttpSecurity http,
+                        Customizer&lt;AuthorizeHttpRequestsConfigurer&lt;HttpSecurity>.AuthorizationManagerRequestMatcherRegistry> permissionsCustomizer
+                    ) throws Exception {
+                      return http
+                          .oauth2ResourceServer(oauth2 -> oauth2.jwt(withDefaults()))
+                          .csrf(AbstractHttpConfigurer::disable)
+                          .cors(AbstractHttpConfigurer::disable)
+                          .sessionManagement(session ->
+                            session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                          .authorizeHttpRequests(permissionsCustomizer)
+                          .build();
+                    }
+                </code></pre>
+            </section>
+            <section>
+                <h2>Password? Client?</h2>
+                <div class="fragment">
+                    <blockquote style="width: 100%">
+                        features not specified in OAuth 2.0 core, such as PKCE, are required in OAuth 2.1. Additionally,
+                        some features available in OAuth 2.0, such as the Implicit or Resource Owner Credentials grant
+                        types, are not specified in OAuth 2.1
+                    </blockquote>
+                    <a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-07#section-1.8">OAuth 2.1
+                        spec</a>
+                </div>
+                <aside class="notes">
+                    password grant -> jeszcze działało i miało wylecieć w SS7, ale się pospieszyli i wyleciało wcześniej
+                    <br/>
+                    client flow: jak nadawać uprawnienia? -> service account; user będący klientem
+                </aside>
+            </section>
+            <section data-background-image>
+                <pre style="width: 100%" class="r-stretch"><code class="java" style="font-size: .75em" data-trim
+                                                                 data-line-numbers="|15-16">
+                @Bean
+                @Order(0)
+                SecurityFilterChain oidcProtocolEndpointsChain(
+                  HttpSecurity http,
+                  UserDetailsService userDetailsService,
+                  PasswordEncoder passwordEncoder,
+                  OAuth2AuthorizationService authorizationService,
+                  OAuth2TokenGenerator&lt;? extends OAuth2Token> tokenGenerator
+                ) throws Exception {
+                  OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
+                  http
+                    .getConfigurer(OAuth2AuthorizationServerConfigurer.class)
+                    .oidc(withDefaults())
+                    .tokenEndpoint(tokenEndpoint -> tokenEndpoint
+                      .accessTokenRequestConverter(new OAuth2PasswordGrantAuthenticationConverter())
+                      .authenticationProvider(new OAuth2PasswordGrantAuthenticationProvider(userDetailsService, passwordEncoder, authorizationService, tokenGenerator)));
+                  return http.exceptionHandling(exceptions -> exceptions.authenticationEntryPoint(
+                     new LoginUrlAuthenticationEntryPoint("/oauth2/authorization/okta"))
+                  ).build();
+                }
+
+                @Bean
+                @Order(1)
+                SecurityFilterChain oktaLoginChain(HttpSecurity http, UserService userService) throws Exception {
+                  return http
+                      .securityMatcher(anyOf(antMatcher("/oauth2/**"), antMatcher("/login/oauth2/**")))
+                      .authorizeHttpRequests(authorize -> authorize.anyRequest().authenticated())
+                      .oauth2Login(oauth2Login -> oauth2Login.successHandler(new CreateUserHandler(userService, requestCache)))
+                      .build();
+                }
+                </code></pre>
+                <aside class="notes">
+                    new AuthorizationGrantType("password")
+                </aside>
+            </section>
+            <section data-background-image data-auto-animate>
+                <pre style="width: 100%" class="r-stretch" data-id="yaml-client"><code class="yaml"
+                                                                                       style="font-size: .75em; line-height: 1.1"
+                                                                                       data-trim
+                                                                                       data-line-numbers="|22-26,31,34">
+                    spring.security:
+                      oauth2:
+                        # how this connects Okta
+                        client:
+                          registration:
+                            okta:
+                              provider: okta
+                              client-id: ${app.security.okta.client-id}
+                              client-secret: ${app.security.okta.client-secret}
+                              scope:
+                                - openid
+                                - profile
+                                - email
+                                - offline_access
+                          provider:
+                            okta:
+                              authorization-uri: ${okta.oauth2.issuer}/v1/authorize
+                              token-uri: ${okta.oauth2.issuer}/v1/token
+                              user-info-uri: ${okta.oauth2.issuer}/v1/userinfo
+                              jwk-set-uri: ${okta.oauth2.issuer}/v1/keys
+                              user-name-attribute: sub
+                        authorizationserver:
+                          # how external apps connect this
+                          client:
+                            frontend:
+                              registration:
+                                client-id: ${app.security.frontend.client-id}
+                                client-secret: "{noop}${app.security.frontend.client-secret}"
+                                client-authentication-methods:
+                                  - client_secret_post
+                                authorization-grant-types:
+                                  - authorization_code
+                                  - refresh_token
+                                  - password
+                                redirect-uris:
+                                  - ${app.frontend.url}/api/auth/callback/backend
+                                post-logout-redirect-uris:
+                                  - ${app.frontend.url}/api/auth/callback/backend
+                                scopes:
+                                  - openid
+                                  - profile
+                                  - email
+                                  - offline_access
+                              token:
+                                access-token-time-to-live: P6D
+                                refresh-token-time-to-live: P6D
+                              require-proof-key: true
+                </code></pre>
+                <aside class="notes">
+                    new AuthorizationGrantType("password")
+                </aside>
+            </section>
+            <section data-background-image data-auto-animate>
+                <pre style="width: 100%" class="r-stretch" data-id="yaml-client"><code class="yaml"
+                                                                                       style="font-size: .75em; line-height: 1.1"
+                                                                                       data-trim
+                                                                                       data-line-numbers="22-26,29-32">
+                    spring.security:
+                      oauth2:
+                        # how this connects Okta
+                        client:
+                          registration:
+                            okta:
+                              provider: okta
+                              client-id: ${app.security.okta.client-id}
+                              client-secret: ${app.security.okta.client-secret}
+                              scope:
+                                - openid
+                                - profile
+                                - email
+                                - offline_access
+                          provider:
+                            okta:
+                              authorization-uri: ${okta.oauth2.issuer}/v1/authorize
+                              token-uri: ${okta.oauth2.issuer}/v1/token
+                              user-info-uri: ${okta.oauth2.issuer}/v1/userinfo
+                              jwk-set-uri: ${okta.oauth2.issuer}/v1/keys
+                              user-name-attribute: sub
+                        authorizationserver:
+                          # how external apps connect this
+                          client:
+                            reco:
+                              registration:
+                                client-id: ${app.security.reco.client-id}
+                                client-secret: "{noop}${app.security.reco.client-secret}"
+                                client-authentication-methods:
+                                  - client_secret_basic
+                                authorization-grant-types:
+                                  - client_credentials
+                                scopes:
+                                  - openid
+                                  - offline_access
+                            frontend:
+                              registration:
+                                client-id: ${app.security.frontend.client-id}
+                                client-secret: "{noop}${app.security.frontend.client-secret}"
+                                client-authentication-methods:
+                                  - client_secret_post
+                                authorization-grant-types:
+                                  - authorization_code
+                                  - refresh_token
+                                  - password
+                                redirect-uris:
+                                  - ${app.frontend.url}/api/auth/callback/backend
+                                post-logout-redirect-uris:
+                                  - ${app.frontend.url}/api/auth/callback/backend
+                                scopes:
+                                  - openid
+                                  - profile
+                                  - email
+                                  - offline_access
+                              token:
+                                access-token-time-to-live: P6D
+                                refresh-token-time-to-live: P6D
+                              require-proof-key: true
+                </code></pre>
+                <aside class="notes">
+                    new AuthorizationGrantType("password")
+                </aside>
+            </section>
+            <section>
+                <h2>Resource + Authorization w&nbsp;jednym</h2>
+                <ul>
+                    <li class="fragment">Nieczęste
+                        (<a href="https://stackoverflow.com/questions/76931541/authorization-and-resource-server-in-same-application-using-spring-security-and">ref1</a>,
+                        <a href="https://stackoverflow.com/questions/64716820/spring-security-oauth2-login-and-resource-server-in-same-application/64752665#64752665">ref2</a>)
+                    </li>
+                    <li class="fragment">Może klucz symetryczny?</li>
+                    <li class="fragment">Łatwo testować - <code>JwtDecoder</code> i <code>JwtEncoder</code>
+                        <ul>
+                            <li class="fragment">
+                                vs. <a href="https://testcontainers.com/modules/keycloak/">Keycloak Testcontainer</a>
+                                lub inne
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+        </section>
+        <section data-background-image data-transition="zoom">
+            <section>
+                <div style="padding-left: 1em; padding-right: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .5em;">
+                    <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;"
+                         class="fragment pulse" data-fragment-index="1" data-autoslide="750">
+                        <img src="img/hp-b.png" class="pure-img">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 4.5em;">
+                        <img src="img/hp-f.png" class="pure-img fragment fade-out replace" data-fragment-index="2"
+                             style="width: 4.5em;">
+                        <img src="img/hp7.gif" class="pure-img fragment fade-in replace" style="width: 4.5em"
+                             data-fragment-index="2">
+                        <img src="img/hp-b.png" class="pure-img">
+                    </div>
+                    <img src="img/authn2.png" class="pure-img fragment tada" style="width: 3.5em;"
+                         data-fragment-index="5" data-autoslide="0">
+                </div>
+                <div style="padding-right: 1em; padding-left: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .25em;">
+                    <span class="fragment shake" data-fragment-index="8">
+                    <img src="img/ash-battle.png" class="pure-img" style="width: 3.5em;">
+                    </span>
+                    <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;"
+                         class="fragment pulse" data-fragment-index="6" data-autoslide="750">
+                        <img src="img/hp-b.png" class="pure-img">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                        <img src="img/hp-f.png" class="pure-img fragment fade-out replace" data-fragment-index="7"
+                             style="width: 1em">
+                        <img src="img/hp8.gif" class="pure-img fragment fade-in replace" data-fragment-index="7"
+                             style="width: 1em">
+                        <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                        <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                        <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                        <img src="img/hp-b.png" class="pure-img">
+                    </div>
+                </div>
+                <div class="pokemon">
+                    <span class="fragment fade-out replace" data-fragment-index="5">
+                        <span class="fragment fade-out replace" data-fragment-index="1">
+                            mat3e used Spring Security servers!
+                        </span>
+                        <span class="fragment fade-in replace" data-fragment-index="1">
+                            It's super effective!<br><br>
+                        </span>
+                    </span>
+                    <span class="fragment fade-in replace" data-fragment-index="5">
+                        <span class="fragment fade-out replace" data-fragment-index="8">
+                            <span class="fragment fade-out replace" data-fragment-index="6">
+                                ANWNR used refresh token + Swagger combo!
+                            </span>
+                            <span class="fragment fade-in replace" data-fragment-index="6">
+                                Critical hit!<br><br>
+                            </span>
+                        </span>
+                        <span class="fragment fade-in replace" data-fragment-index="8">
+                            mat3e used documentation!
+                        </span>
+                    </span>
+                </div>
+            </section>
+        </section>
+        <section data-background-image data-transition="zoom">
+            <section>
+                <h3><a href="https://docs.spring.io/spring-authorization-server/reference/overview.html">Authorization
+                    Server docs</a></h3>
+                <ul>
+                    <li class="fragments">
+                        <a href="https://docs.spring.io/spring-authorization-server/reference/guides/how-to-jpa.html">
+                            How-to: Implement core services with JPA
+                        </a>
+                        <ul>
+                            <li class="fragment">Przekierowanie może trafić w inną instancję</li>
+                            <li class="fragment">Instancja może się zresetować nim przyjdzie <code>refresh token</code>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="fragment"><code>SessionCreationPolicy.STATELESS</code>
+                        <ul>
+                            <li class="fragment">Okta tworzyła <code>Authentication</code> (a serwery mają wspólny
+                                kontekst 🙈), ignorować!
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="fragment"><code>CookieRequestCache</code>
+                        <ul>
+                            <li class="fragment">Obsługa przekierowania z Okty pomiędzy instancjami</li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <h3>Swagger (<a href="https://springdoc.org/"><code>springdoc-openapi</code></a>)</h3>
+                <pre style="width: 100%" class="fragment"><code data-trim class="java"
+                                                                style="font-size: .8em;line-height: 1.1"
+                                                                data-line-numbers>
+                    @SecurityScheme(
+                        name = "openid-connect",
+                        type = SecuritySchemeType.OPENIDCONNECT,
+                        openIdConnectUrl = "/api/.well-known/openid-configuration")
+                    @SecurityScheme(
+                        name = "bearer-jwt",
+                        type = SecuritySchemeType.HTTP,
+                        description = "Fallback method - paste any access token you obtained",
+                        scheme = "bearer",
+                        bearerFormat = "JWT")
+                    @OpenAPIDefinition(
+                        info = @Info(
+                            title = "${app.title}",
+                            description = "${app.description}",
+                            version = "${app.version}"),
+                        security = {
+                            @SecurityRequirement(name = "openid-connect", scopes = "openid"),
+                            @SecurityRequirement(name = "bearer-jwt")})
+                    @Configuration(proxyBeanMethods = false)
+                    class SecurityOpenAPI {}
+                </code></pre>
+            </section>
+            <section data-background-image data-auto-animate>
+                <pre style="width: 100%" class="r-stretch" data-id="yaml-swagger"><code class="yaml"
+                                                                                        style="font-size: .75em; line-height: 1.1"
+                                                                                        data-trim
+                                                                                        data-line-numbers="36-47">
+                    spring.security:
+                      oauth2:
+                        # how this connects Okta
+                        client:
+                          registration:
+                            okta:
+                              provider: okta
+                              client-id: ${app.security.okta.client-id}
+                              client-secret: ${app.security.okta.client-secret}
+                              scope:
+                                - openid
+                                - profile
+                                - email
+                                - offline_access
+                          provider:
+                            okta:
+                              authorization-uri: ${okta.oauth2.issuer}/v1/authorize
+                              token-uri: ${okta.oauth2.issuer}/v1/token
+                              user-info-uri: ${okta.oauth2.issuer}/v1/userinfo
+                              jwk-set-uri: ${okta.oauth2.issuer}/v1/keys
+                              user-name-attribute: sub
+                        authorizationserver:
+                          # how external apps connect this
+                          client:
+                            reco:
+                              registration:
+                                client-id: ${app.security.reco.client-id}
+                                client-secret: "{noop}${app.security.reco.client-secret}"
+                                client-authentication-methods:
+                                  - client_secret_basic
+                                authorization-grant-types:
+                                  - client_credentials
+                                scopes:
+                                  - openid
+                                  - offline_access
+                            frontend:
+                              registration:
+                                client-id: ${app.security.frontend.client-id}
+                                client-secret: "{noop}${app.security.frontend.client-secret}"
+                                client-authentication-methods:
+                                  - client_secret_post
+                                authorization-grant-types:
+                                  - authorization_code
+                                  - refresh_token
+                                  - password
+                                redirect-uris:
+                                  - ${app.frontend.url}/api/auth/callback/backend
+                                post-logout-redirect-uris:
+                                  - ${app.frontend.url}/api/auth/callback/backend
+                                scopes:
+                                  - openid
+                                  - profile
+                                  - email
+                                  - offline_access
+                              token:
+                                access-token-time-to-live: P6D
+                                refresh-token-time-to-live: P6D
+                              require-proof-key: true
+                </code></pre>
+            </section>
+            <section data-background-image data-auto-animate>
+                <pre style="width: 100%" class="r-stretch" data-id="yaml-swagger"><code class="yaml"
+                                                                                        style="font-size: .75em; line-height: 1.1"
+                                                                                        data-trim
+                                                                                        data-line-numbers="36-49|38-39,41,49">
+                    spring.security:
+                      oauth2:
+                        # how this connects Okta
+                        client:
+                          registration:
+                            okta:
+                              provider: okta
+                              client-id: ${app.security.okta.client-id}
+                              client-secret: ${app.security.okta.client-secret}
+                              scope:
+                                - openid
+                                - profile
+                                - email
+                                - offline_access
+                          provider:
+                            okta:
+                              authorization-uri: ${okta.oauth2.issuer}/v1/authorize
+                              token-uri: ${okta.oauth2.issuer}/v1/token
+                              user-info-uri: ${okta.oauth2.issuer}/v1/userinfo
+                              jwk-set-uri: ${okta.oauth2.issuer}/v1/keys
+                              user-name-attribute: sub
+                        authorizationserver:
+                          # how external apps connect this
+                          client:
+                            reco:
+                              registration:
+                                client-id: ${app.security.reco.client-id}
+                                client-secret: "{noop}${app.security.reco.client-secret}"
+                                client-authentication-methods:
+                                  - client_secret_basic
+                                authorization-grant-types:
+                                  - client_credentials
+                                scopes:
+                                  - openid
+                                  - offline_access
+                            frontend:
+                              registration:
+                                client-id: ${app.security.frontend.client-id}
+                                client-secret: "{noop}${app.security.frontend.client-secret}"
+                                client-authentication-methods:
+                                  - client_secret_basic
+                                  - client_secret_post
+                                authorization-grant-types:
+                                  - authorization_code
+                                  - refresh_token
+                                  - password
+                                redirect-uris:
+                                  - ${app.frontend.url}/api/auth/callback/backend
+                                  - http://localhost:8080/api/swagger-ui/oauth2-redirect.html
+                                post-logout-redirect-uris:
+                                  - ${app.frontend.url}/api/auth/callback/backend
+                                scopes:
+                                  - openid
+                                  - profile
+                                  - email
+                                  - offline_access
+                              token:
+                                access-token-time-to-live: P6D
+                                refresh-token-time-to-live: P6D
+                              require-proof-key: true
+                </code></pre>
+            </section>
+            <section data-background-image="img/swagger-login.png" data-background-size="contain"></section>
+        </section>
+        <section data-background-image data-transition="zoom">
+            <section>
+                <div style="padding-left: 1em; padding-right: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .5em;">
+                    <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;"
+                         class="fragment pulse" data-fragment-index="1" data-autoslide="750">
+                        <img src="img/hp-b.png" class="pure-img">
+                        <img src="img/hp-f.png" class="pure-img fragment fade-out replace" data-fragment-index="2"
+                             style="width: 4.5em;">
+                        <img src="img/hp9.gif" class="pure-img fragment fade-in replace" style="width: 4.5em"
+                             data-fragment-index="2">
+                        <img src="img/hp-e.png" class="pure-img" style="width: 4.5em;">
+                        <img src="img/hp-b.png" class="pure-img">
+                    </div>
+                    <img src="img/authn2.png" class="pure-img fragment zoomOutDown" style="width: 3em;"
+                         data-fragment-index="3">
+                </div>
+                <div style="padding-right: 1em; padding-left: 2em; display: flex; align-items: center; justify-content: space-between; margin-bottom: .25em;">
+                    <img src="img/ash-battle.png" class="pure-img" style="width: 3.5em;">
+                    <div style="width: calc(8em + 4px); height: .5em; display: flex; align-content: stretch;">
+                        <img src="img/hp-b.png" class="pure-img">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                        <img src="img/hp-f.png" class="pure-img" style="width: 1em">
+                        <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                        <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                        <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                        <img src="img/hp-e.png" class="pure-img" style="width: 1em">
+                        <img src="img/hp-b.png" class="pure-img">
+                    </div>
+                </div>
+                <div class="pokemon">
+                    <span class="fragment fade-out replace" data-fragment-index="3">
+                        <span class="fragment fade-out replace" data-fragment-index="1">
+                            mat3e used documentation!
+                        </span>
+                        <span class="fragment fade-in replace" data-fragment-index="1">
+                            It's super effective!<br><br>
+                        </span>
+                    </span>
+                    <span class="fragment fade-in replace" data-fragment-index="3">
+                        AuthN fainted!<br/><br/>
+                    </span>
+                </div>
+            </section>
+            <section data-auto-animate>
+                <h3 style="font-family: 'pokemon', 'Courier New', Courier, monospace" class="fragment"
+                    data-fragment-index="1">wincyj expa</h3>
+                <img src="img/stand1.png" class="pure-img fragment fade-out replace" style="width: 3.5em"
+                     data-fragment-index="1">
+                <img src="img/stand2.png" data-id="ready" class="pure-img fragment fade-in replace" style="width: 3.5em"
+                     data-fragment-index="1">
+            </section>
+            <section data-auto-animate>
+                <h1><code>Auth</code></h1>
+                <table>
+                    <tbody>
+                    <tr>
+                        <td data-id="n" style="width: 50%;text-align: center">
+                            Uwierzytelnianie
+                        </td>
+                        <td data-id="z" style="width: 50%;text-align: center">
+                            Autoryzacja
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div style="position: absolute; left: calc(50% + 3em); top: calc(50% - 1.5em)">
+                    <div class="fragment fade-out replace" data-fragment-index="1">
+                        <img src="img/stand2.png" data-id="ready" style="width: 3.5em"/>
+                    </div>
+                    <div class="fragment fade-in replace" data-fragment-index="1">
+                        <div class="r-stack" style="margin-top: .5em">
+                            <img src="img/to-small2.gif" class="pure-img fragment fade-out replace"
+                                 data-fragment-index="2" style="width: 3.5em" data-autoslide="2500">
+                            <img src="img/enter2.gif" class="pure-img fragment fade-in replace"
+                                 data-fragment-index="2" style="width: 1.5em; margin-left: .75em; margin-top: 2.5em">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+        <section data-background-image data-transition="zoom">
+            <section>
+                <h2 style="margin: 0">JWT <code>scope</code>?</h2>
+                <ul>
+                    <li class="fragment" data-fragment-index="1">Klient deklaruje o jakie <code>scope</code> pyta
+                        (opcjonalnie)
+                        <ul>
+                            <li class="fragment" data-fragment-index="2">Brak? Domyślny (mały) zakres (PoLP)</li>
+                            <li class="fragment" data-fragment-index="3">Klient, nie użytkownik</li>
+                        </ul>
+                    </li>
+                    <li class="fragment" data-fragment-index="4">
+                        <code>scope</code> = co wolno z tym tokenem (gruboziarniste)
+                    </li>
+                </ul>
+                <hr class="fragment" data-fragment-index="5"/>
+                <h2 class="fragment" data-fragment-index="5" style="margin: 0">Grupy AD?</h2>
+                <ul>
+                    <li class="fragment">Mało elastyczne w dużej organizacji</li>
+                    <li class="fragment">Celem jest <em>self-service</em>, kierownicy zespołów</li>
+                </ul>
+                <aside class="notes">
+                    principle of least privilege (PoLP)
+                </aside>
+            </section>
+            <section>
+                <h2>PoC uprawnień</h2>
+                <pre class="fragment"><code class="yaml" data-trim style="font-size: .65em; line-height:1.1"
+                                            data-line-numbers="1-3">
+                    admin.permissions:
+                      resources: asset, promotion, collection
+                      operations: view, modify, publish
+                      metapermissions: role.delete, role.modify, role.view
+                </code></pre>
+                <pre class="fragment"><code class="java" data-trim style="font-size: .7em; line-height:1.1"
+                                            data-line-numbers="1-2,6-9|11-12|8,14,17|17-18">
+                    @ConfigurationProperties("admin.permissions")
+                    class Permissions {
+                      private final Set&lt;String> resources;
+                      private final Set&lt;Operations> operations;
+
+                      void authorize(HttpSecurity http) {
+                        resources.forEach(resource -> operations.forEach(operation ->
+                            () -> http.authorizeHttpRequests(operation.on(resource))));
+                      }
+
+                      enum Operations {
+                        view(GET), modify(POST, PATCH, PUT), publish("/publication/**", PATCH);
+
+                        // E.g. PATCH /promotion/{id}/publication
+                        Customizer&lt;AuthorizeHttpRequestsConfigurer&lt;HttpSecurity>.AuthorizationManagerRequestMatcherRegistry> on(String resource) {
+                          return authorize -> matchingMethods.forEach(httpMethod ->
+                            authorize.requestMatchers(httpMethod, resource + "/**" + additionalPath)
+                              .access(hasAuthority(resource + "." + name())));
+                        }
+
+                        private final Set&lt;HttpMethod> matchingMethods;
+                        private final String additionalPath;
+
+                        Operations(HttpMethod... matchingMethods) {
+                          this("", matchingMethods);
+                        }
+
+                        Operations(String additionalPath, HttpMethod... matchingMethods) {
+                          this.matchingMethods = Set.of(matchingMethods);
+                          this.additionalPath = additionalPath;
+                        }
+                      }
+                    }
+                </code></pre>
+                <aside class="notes">Domyślnie zabezpieczone - trzeba podać propsy, bo inaczej <code>denyAll</code>
+                </aside>
+            </section>
+        </section>
+        <section>
+            <h3 style="margin: 0" class="fragment" data-fragment-index="3">Dziękuję!</h3>
+            <img src="img/2fa.png" style="width: 40%" class="pure-img">
+            <ul>
+                <li class="fragment" data-fragment-index="1">
+                    <a href="https://mat3e.github.io/trendy">
+                        mat3e.github.io/trendy
+                    </a>
+                </li>
+                <li class="fragment" data-fragment-index="2">
+                    <a href="https://mat3e.github.io/talks/spring-security/confitura.html">
+                        mat3e.github.io/talks/spring-security/confitura
+                    </a>
+                </li>
+            </ul>
+            <img src="img/stand2.png" data-id="ready"
+                 style="position: absolute; left: calc(50% + 3em); top: calc(50% - 1.5em); width: 3.5em"
+                 class="fragment"
+                 data-fragment-index="3"/>
+        </section>
+    </div>
+</div>
+
+<script src="dist/reveal.js"></script>
+<script src="plugin/zoom/zoom.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/search/search.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script src="plugin/mermaid/mermaid.min.js"></script>
+<script>
+    mermaid.initialize({startOnLoad: false, theme: 'dark'});
+
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        center: true,
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealZoom, RevealSearch, RevealMarkdown, RevealHighlight, RevealNotes]
+    });
+
+    document.querySelectorAll('.reveal .slides section:not([data-background-image])').forEach(s => {
+        s.setAttribute('data-background-image', 'img/twitter.png');
+        s.setAttribute('data-background-size', '240px');
+        s.setAttribute('data-background-position', '.5em .5em');
+    });
+</script>
+<script>
+    Reveal.on('ready', async event => {
+        await handleMermaid(event);
+    });
+    Reveal.on('slidechanged', async event => {
+        await handleMermaid(event);
+    });
+    Reveal.on('slidetransitionend', async event => {
+        await handleMermaid(event);
+    });
+
+    async function handleMermaid(event) {
+        const nodes = event.currentSlide.querySelectorAll('.mermaid');
+        if (nodes?.length > 0) {
+            await mermaid.run({nodes, suppressErrors: true});
+        }
+    }
+</script>
+</body>
+</html>
