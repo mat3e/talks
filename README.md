@@ -1,6 +1,10 @@
+## 2026
+
+> * Panel Dyskusyjny [12.03]
+
 ## 2025
 
-* Confitura 2025 [19.09] _Serwery (Authorization i Resource), OAuth Client, SecurityFilterChain i ciut więcej ze Spring Security_ [🔗](https://mat3e.github.io/talks/spring-security/confitura.html)
+* Confitura 2025 [19.09] _Serwery (Authorization i Resource), OAuth Client, SecurityFilterChain i ciut więcej ze Spring Security_ [🔗](https://mat3e.github.io/talks/spring-security/confitura.html) [📽️](https://www.youtube.com/watch?v=sqDI1WYRiu4)
 
 ## 2024
 
