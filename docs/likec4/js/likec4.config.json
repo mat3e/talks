@@ -1,0 +1,5 @@
+{
+  "$schema": "https://likec4.dev/schemas/config.json",
+  "name": "fairytales-c4",
+  "title": "Fairy tales C4 model"
+}

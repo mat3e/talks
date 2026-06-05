@@ -1,0 +1,13 @@
+---
+title: "Containers"
+---
+graph TB
+  User@{ icon: "fa:user", shape: rounded, label: "User" }
+  subgraph Ft["`Fairy Tales`"]
+    Ft.Monolith@{ shape: rectangle, label: "Spring App" }
+    Ft.Pigs3@{ shape: rectangle, label: "The Three Little Pigs" }
+    Ft.Redhood@{ shape: rectangle, label: "Little Red Riding Hood" }
+  end
+  User -. "`interacts with`" .-> Ft.Monolith
+  Ft.Monolith -. "`[...]`" .-> Ft.Pigs3
+  Ft.Monolith -.-> Ft.Redhood

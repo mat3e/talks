@@ -1,0 +1,42 @@
+---
+title: "Components (The Three Little Pigs)"
+---
+graph TB
+  subgraph Ft["`Fairy Tales`"]
+    Ft.Monolith@{ shape: rectangle, label: "Spring App" }
+    Ft.InMemBus@{ shape: horizontal-cylinder, label: "In-memory events support" }
+    Ft.Redhood@{ shape: rectangle, label: "Little Red Riding Hood" }
+    subgraph Ft.Pigs3["`The Three Little Pigs`"]
+      Ft.Pigs3.Cli@{ shape: rectangle, label: "Command-Line Runner" }
+      Ft.Pigs3.Rest@{ shape: rectangle, label: "REST Controller" }
+      Ft.Pigs3.Event@{ shape: rectangle, label: "Event Handler" }
+      Ft.Pigs3.Command@{ shape: rectangle, label: "Command Handler" }
+      Ft.Pigs3.Query@{ shape: rectangle, label: "Query Repository" }
+      Ft.Pigs3.Wolf@{ shape: rectangle, label: "Wolf Service" }
+      Ft.Pigs3.Factory@{ shape: rectangle, label: "House Factory" }
+      Ft.Pigs3.Repo@{ shape: rectangle, label: "Repository" }
+      Ft.Pigs3.Blowing@{ shape: rectangle, label: "Blowing Down Specification" }
+      Ft.Pigs3.Building@{ shape: rectangle, label: "Building Policy" }
+      Ft.Pigs3.House@{ shape: rectangle, label: "House Aggregate" }
+    end
+  end
+  Ft.Monolith -.-> Ft.Redhood
+  Ft.Monolith -. "`starts`" .-> Ft.Pigs3.Cli
+  Ft.Monolith -. "`interacts in HTTP mode via`" .-> Ft.Pigs3.Rest
+  Ft.InMemBus -. "`triggers`" .-> Ft.Pigs3.Event
+  Ft.Pigs3.Cli -. "`executes commands in order`" .-> Ft.Pigs3.Command
+  Ft.Pigs3.Rest -. "`creates/deletes houses via`" .-> Ft.Pigs3.Command
+  Ft.Pigs3.Rest -. "`reads houses via`" .-> Ft.Pigs3.Query
+  Ft.Pigs3.Command -. "`destroys with`" .-> Ft.Pigs3.Wolf
+  Ft.Pigs3.Command -. "`creates new via`" .-> Ft.Pigs3.Factory
+  Ft.Pigs3.Command -. "`updates on diff via`" .-> Ft.Pigs3.Repo
+  Ft.Pigs3.Event -. "`calls`" .-> Ft.Pigs3.Command
+  Ft.Pigs3.Event -. "`finds house to escape via`" .-> Ft.Pigs3.Query
+  Ft.Pigs3.Wolf -. "`follows`" .-> Ft.Pigs3.Blowing
+  Ft.Pigs3.Wolf -. "`tries to destroy`" .-> Ft.Pigs3.House
+  Ft.Pigs3.Factory -. "`follows`" .-> Ft.Pigs3.Building
+  Ft.Pigs3.Factory -. "`creates`" .-> Ft.Pigs3.House
+  Ft.Pigs3.Repo -. "`inserts/updates`" .-> Ft.Pigs3.House
+  Ft.Pigs3.Repo -. "`reads`" .-> Ft.Pigs3.House
+  Ft.Pigs3.Wolf -. "`informs when quitting`" .-> Ft.InMemBus
+  Ft.Pigs3.House -. "`informs about refugees`" .-> Ft.InMemBus

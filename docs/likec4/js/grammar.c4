@@ -1,0 +1,56 @@
+specification {
+  element actor {
+    notation "Person"
+    style {
+      shape person
+      color green
+    }
+  }
+
+  element externalSystem {
+    #software-system #external
+    notation "External Software System"
+  }
+  element system {
+    #software-system
+    notation "Software System"
+  }
+  element container {
+    #container
+    notation "Container"
+  }
+  element messaging {
+    #container
+    notation "Messaging System"
+    style {
+      shape queue
+    }
+  }
+  element database {
+    #container
+    notation "Database"
+    style {
+      shape storage
+    }
+  }
+  element bucket {
+    #container
+    notation "Bucket"
+    style {
+      shape bucket
+    }
+  }
+  element component
+
+  relationship async {
+    line dotted
+    head open
+  }
+
+  tag external {
+    color #9e9e9eff
+  }
+  tag software-system
+  tag container
+  tag todo
+}

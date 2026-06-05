@@ -1,0 +1,80 @@
+model {
+  user = actor 'User' 'The one who wants to read fairy tales'
+
+  ft = system 'Fairy Tales' 'System for interacting with The Three Little Pigs or Little Red Riding Hood' {
+    metadata {
+      owner 'mat3e'
+    }
+
+    monolith = container 'Spring App' 'Entry point to the system, when CLI or HTTP mode can be chosen' {
+      link https://github.com/mat3e/3pigs-ddd/ 'Repository'
+      icon tech:spring-icon
+    }
+    container pigs3 {
+      title 'The Three Little Pigs'
+      description 'A fairy tale about pigs building their houses'
+      link https://github.com/mat3e/3pigs-ddd/ 'Repository'
+      icon tech:java
+    }
+    database pigs3db 'The Three Little Pigs H2 Database' 'DB schema - houses' {
+      icon tech:mysql-icon
+    }
+    container redhood 'Little Red Riding Hood' 'A fairy tale about listening to your mom, and not interacting with strangers' {
+      link https://github.com/mat3e/3pigs-ddd/ 'Repository'
+      icon tech:java
+    }
+    database redhoodDb 'Little Red Riding Hood H2 Database' 'DB schema - wolfs' {
+      icon tech:mysql-icon
+    }
+    messaging inMemBus 'In-memory events support' 'Spring way of exchanging events' {
+      icon tech:spring-icon
+    }
+
+    user -> monolith 'interacts with'
+
+    monolith -> redhood
+  }
+
+  extend ft.pigs3 {
+    monolith -> cli 'starts'
+    monolith -> rest 'interacts in HTTP mode via'
+
+    component cli 'Command-Line Runner' 'Runner printing a fairy tale in console' {
+      -> command 'executes commands in order'
+    }
+    component rest 'REST Controller' 'HTTP endpoints for interacting with houses' {
+      -> command 'creates/deletes houses via'
+      -> query 'reads houses via'
+    }
+    component command 'Command Handler' 'App logic for driving domain logic' {
+      -> factory 'creates new via'
+      -> wolf 'destroys with'
+      -> repo 'updates on diff via'
+    }
+    component event 'Event Handler' 'Executes commands based on incomming events' {
+      -> query 'finds house to escape via'
+      -> command 'calls'
+
+      inMemBus -[async]-> event 'triggers'
+    }
+    component query 'Query Repository' 'Allows to find closest houses and read models'
+    component wolf 'Wolf Service' 'Stateless work on house, encapsulating retrying logic' {
+      -> house 'tries to destroy'
+      -> blowing 'follows'
+      -[async]-> inMemBus 'informs when quitting'
+    }
+    component factory 'House Factory' 'Domain factory for creating house aggregate' {
+      -> building 'follows'
+      -> house 'creates'
+    }
+    component repo 'Repository' 'Allows to find by ID and save houses' {
+      -> house 'inserts/updates'
+      -> house 'reads'
+    }
+    component blowing 'Blowing Down Specification' 'Rules on when house can be destroyed by blowing'
+    component building 'Building Policy' 'Rules on how to build house depending on the character of a pig'
+    component house 'House Aggregate' 'DDD aggregate protecting rules about destroying and pig changes' {
+      -[async]-> inMemBus 'informs about refugees'
+    }
+  }
+}

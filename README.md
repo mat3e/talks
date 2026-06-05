@@ -1,6 +1,7 @@
 ## 2026
 
-> * Panel Dyskusyjny [12.03]
+> * WarsawJS 139 [10.06] _Documenting your software architecture with C4 model, LikeC4, and (a bit of) Mermaid_
+* InTalk by InPost [12.03] Panel Dyskusyjny: _Quo vadis - rynek pracy w czasach rewolucji technologicznej i AI_
 
 ## 2025
 

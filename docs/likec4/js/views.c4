@@ -1,0 +1,49 @@
+views {
+  view index {
+    title 'Context'
+
+    include *
+    global predicate solidNonAsyncRel
+  }
+
+  view fairy-tales-index of ft {
+    title 'C4 / Containers'
+
+    include user
+    include ft
+    include * where kind is container
+    global predicate solidNonAsyncRel
+  }
+
+  view pigs3-index of ft.pigs3 {
+    title 'C4 / Components (The Three Little Pigs)'
+
+    include ft
+    include ft.* where kind is container
+    include *
+    include
+      -> house with {
+        multiple true
+      }
+    global predicate solidNonAsyncRel
+    global style mute_all
+    style ft.inMemBus {
+      color secondary
+    }
+    style ft.pigs3, ft.pigs3.** { color primary }
+  }
+}
+
+global {
+  predicateGroup solidNonAsyncRel {
+    include
+      * -> * where kind is not async with {
+        line solid
+      }
+  }
+
+  style mute_all * {
+    color muted
+    opacity 10%
+  }
+}

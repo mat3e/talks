@@ -1,0 +1,39 @@
+{
+  "name": "fairytales-c4",
+  "version": "1.0.0",
+  "description": "C4 model for 3pigs-ddd example",
+  "keywords": [
+    "3pigs",
+    "ddd",
+    "c4",
+    "fairy",
+    "tales",
+    "little",
+    "red",
+    "riding",
+    "hood"
+  ],
+  "homepage": "https://github.com/mat3e/3pigs-ddd#readme",
+  "bugs": {
+    "url": "https://github.com/mat3e/3pigs-ddd/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mat3e/3pigs-ddd.git"
+  },
+  "license": "MIT",
+  "author": "mat3e",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest run",
+    "start": "likec4 serve",
+    "format": "likec4 format",
+    "mm": "likec4 gen mmd",
+    "build": "likec4 codegen webcomponent -o ./likec4-view.js"
+  },
+  "devDependencies": {
+    "likec4": "^1.57.0",
+    "vitest": "^4.1.8"
+  }
+}
