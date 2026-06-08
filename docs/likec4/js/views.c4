@@ -11,7 +11,7 @@ views {
 
     include user
     include ft
-    include * where kind is container
+    include * where tag is #container
     global predicate solidNonAsyncRel
   }
 
@@ -27,10 +27,52 @@ views {
       }
     global predicate solidNonAsyncRel
     global style mute_all
-    style ft.inMemBus {
-      color secondary
-    }
-    style ft.pigs3, ft.pigs3.** { color primary }
+    global predicate pigs3containers
+    style ft.pigs3.** { color primary }
+  }
+
+  view redhood-index of ft.redhood {
+    title 'C4 / Components (Little Red Riding Hood)'
+
+    include ft
+    include ft.* where kind is container
+    include *
+    global predicate solidNonAsyncRel
+    global style mute_all
+    global predicate redhoodContainers
+    style ft.redhood.** { color primary }
+  }
+
+  dynamic view wolf-lifecycle {
+    title 'Dynamic / Wolf lifecycle (Little Red Riding Hood)'
+
+    user
+      -> ft.redhood.rest 'POST /wolfs - tells about people'
+      -> ft.redhood.service 'starts interaction'
+      -> ft.redhood.wolf 'creates Wolf with plan whom to meet'
+    ft.redhood.service
+      -> ft.redhood.repo 'saves Wolf'
+      -> ft.redhoodDb 'inserts'
+
+    user
+      -> ft.redhood.rest 'PUT /wolfs/{id}/meetings/recent - decides who meets Wolf'
+      -> ft.redhood.service 'passes person to meet by Wolf'
+      -> ft.redhood.repo 'looks for Wolf with an identifier'
+      -> ft.redhoodDb 'selects'
+      -> ft.redhood.repo 'provides result'
+      -> ft.redhood.service 'restores Wolf'
+      -> ft.redhood.wolf 'starts a meeting'
+      -> ft.redhood.wolf 'proceeds with plan'
+      -> ft.redhood.meeting 'chooses policy for actual and planned person'
+      -> ft.redhood.wolf 'provides consequences and eaten people'
+      -> ft.redhood.wolf 'potentially dies and records this as event'
+    ft.redhood.service
+      -> ft.redhood.repo 'saves Wolf'
+      -> ft.redhoodDb 'updates'
+    ft.redhood.service
+      -> ft.wolfEvents 'informs about killed wolf'
+      -> ft.redhood.service 'triggers event handling'
+      -> ft.redhood.service 'prints who was rescured'
   }
 }
 
@@ -40,6 +82,20 @@ global {
       * -> * where kind is not async with {
         line solid
       }
+  }
+
+  predicateGroup pigs3containers {
+    include
+      ft.houseEvents with { color secondary },
+      ft.pigs3 with { color secondary },
+      ft.pigs3db with { color secondary }
+  }
+
+  predicateGroup redhoodContainers {
+    include
+      ft.wolfEvents with { color secondary },
+      ft.redhood with { color secondary },
+      ft.redhoodDb with { color secondary }
   }
 
   style mute_all * {

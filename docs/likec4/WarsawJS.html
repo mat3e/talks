@@ -1,0 +1,1190 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>LikeC4</title>
+
+    <meta name="description"
+          content="Documenting your software architecture with C4 model, LikeC4, and (a bit of) Mermaid">
+    <meta name="author" content="mat3e">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/black.css">
+
+    <link rel="stylesheet" href="plugin/highlight/github.css">
+    <link rel="stylesheet" href="plugin/fa/css/fontawesome.min.css">
+    <link rel="stylesheet" href="plugin/fa/css/brands.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .reveal section img.pure-img {
+            background: rgba(255, 255, 255, 0);
+            border: none;
+            box-shadow: none;
+            margin: 0;
+        }
+
+        #perspective a {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            width: 45%;
+            margin: 0 auto;
+        }
+
+        #perspective a img {
+            border: 0;
+            margin: 0;
+            box-shadow: none;
+        }
+
+        #about-me {
+            padding: 1em;
+            background-color: rgba(255, 255, 255, .75);
+            list-style-type: none;
+            margin-left: 0;
+            float: left;
+        }
+
+        #about-me ul {
+            list-style-type: none;
+            float: left;
+            margin-left: 0;
+            padding-left: 0;
+        }
+
+        #about-me a {
+            color: #a23;
+        }
+
+        #about-me a:hover {
+            color: #dd5566;
+        }
+
+        table.comparing td {
+            text-align: center;
+        }
+
+        table.c4 td, table.comparing td {
+            border-bottom: 0;
+        }
+
+        table.c4 tr:first-child td {
+            width: 50%;
+            text-align: center;
+        }
+
+        table.c4 tr:first-child td img {
+            max-height: 30vh;
+            vertical-align: middle;
+            margin: 0;
+        }
+
+        table.c4 tr:first-child td:first-child, table.comparing tr td:not(:last-child) {
+            border-right: 1px dotted;
+        }
+
+        table.c4 tr:first-child, table.c4 tr.visible, table.comparing tr:first-child, table.comparing tr.visible:not(:last-child) {
+            border-bottom: 1px dotted;
+        }
+
+        table.c4 tr td ul {
+            font-size: .8em;
+            line-height: 1.1;
+            margin-left: 2em;
+        }
+
+        table.c4 tr:last-child td {
+            text-align: center;
+        }
+
+        table.comparing tr td {
+            font-size: .85em;
+            line-height: 1.1;
+        }
+
+        .reveal section likec4-view {
+            text-align: initial
+        }
+    </style>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section data-background-image>
+            <section data-background-image="img/landing.jpg"
+                     data-background-size="cover">
+                <div style="text-align:left;border-left: solid .1em white;line-height:.85;padding-left:.25em;">
+                    <h1 style="text-shadow: #000 1px 0 10px;margin: 0; font-size: 1.9em">
+                        Documenting your software architecture
+                    </h1>
+                    <h2 style="text-shadow: #000 1px 0 10px;font-size: 1.05em">with C4 model, LikeC4, and (a bit of)
+                        Mermaid</h2>
+                </div>
+                <div style="width: 320px; height: 64px; background-image: url('img/twitter.png'); background-size: contain; top: -5em; right: 0; position: absolute;"></div>
+            </section>
+            <section id="perspective" data-background-image>
+                <h5>
+                    <span>Perspective...</span>
+                    <span class="fragment" data-fragment-index="1"> matters</span>
+                    <span class="fragment" data-fragment-index="2"> :)</span>
+                </h5>
+                <a href="https://mistrzowie.org/717022">
+                    <img src="img/perspektywa-1.jpg">
+                    <img src="img/perspektywa-2.jpg" class="fragment" data-fragment-index="1">
+                    <img src="img/perspektywa-3.jpg" class="fragment" data-fragment-index="2">
+                </a>
+            </section>
+            <section data-background-image="img/bg-hd.jpg">
+                <ul id="about-me">
+                    <li>
+                        <ul>
+                            <li>
+                                <a href="https://www.linkedin.com/in/mateusz-chrzonstowski/">
+                                    <i class="fa-brands fa-square-linkedin"
+                                       style="color: #0077B5; background-color: #FFF; line-height: .75em"></i>
+                                    /mateusz-chrzonstowski
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://x.com/_mat3e_">
+                                    <i class="fa-brands fa-square-x-twitter"
+                                       style="color: #000; line-height: .75em"></i>
+                                    /_mat3e_
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.reddit.com/user/_mat3e_">
+                                    <i class="fa-brands fa-square-reddit"
+                                       style="color: #FF4500; line-height: .75em"></i>
+                                    /_mat3e_
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/mat3e/">
+                                    <i class="fa-brands fa-square-github"
+                                       style="color: #24292E; background-color: #FFF; line-height: .75em"></i>
+                                    /mat3e
+                                </a>
+                            </li>
+                            <li style="line-height: 1">&nbsp;</li>
+                            <li class="fragment" style="line-height: .75">
+                                <a style="font-size: .75em; font-weight: bold;"
+                                   href="https://mat3e.github.io/talks/likec4/inpost.html">
+                                    mat3e.github.io/talks/likec4/inpost
+                                </a>
+                            </li>
+                            <li style="line-height: 1">&nbsp;</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul class="fragment"
+                            style="padding: .1em; line-height: 1; text-align: center;background: radial-gradient(#fff, rgba(0,0,0,0))">
+                            <li>
+                                <a href="https://inpost.pl/kariera">
+                                    <img src="img/InPost_logo_2024.png" style="height: 1.5em; margin: 0">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://full-stack.engineering/" class="fragment">
+                                    <img src="img/udemy-new.svg" style="height: 1em; margin: 0">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://polskietermopile.pl/projekty/400/" class="fragment">
+                                    <img src="img/400 logo.png" style="height: 1em; margin: 0">
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+        </section>
+        <section data-background-image>
+            <section data-background-image style="height: 72vh">
+                <h2>Draw Your Architecture</h2>
+                <div style="position:absolute;width:75%;top:0;left:0" class="fragment"><img class="pure-img"
+                                                                                            src="img/sketch-1.jpg">
+                </div>
+                <div style="position:absolute;width:75%;top:1em;left:5%" class="fragment"><img class="pure-img"
+                                                                                               src="img/sketch-3.jpg">
+                </div>
+                <div style="position:absolute;width:75%;bottom:0;right:0" class="fragment"><img class="pure-img"
+                                                                                                src="img/sketch-2.jpg">
+                </div>
+                <div style="position:absolute;width:75%;bottom:1em;right:2%" class="fragment"><img class="pure-img"
+                                                                                                   src="img/sketch-4.jpg">
+                </div>
+                <div style="position:absolute;width:50%;bottom:2em;left:25%" class="fragment">
+                    <a href="https://www.youtube.com/watch?v=x2-rSnhpw0g"><img src="img/sbrown.png"></a>
+                </div>
+                <aside class="notes">
+                    <ul>
+                        <li>Started with Simon Brown running workshops on software architecture</li>
+                        <li>Drawing on whiteboards</li>
+                        <li>No common abstraction, level adjustment</li>
+                        <li>More fun within first 5 mins of the video</li>
+                    </ul>
+                </aside>
+            </section>
+            <section data-background-image="img/photos.png" data-background-size="contain">
+                <aside class="notes">Back then he was into photography, so came up with this analogy of different camera
+                    lenses, you use to take a photo with a different attention to detial
+                </aside>
+            </section>
+            <section data-auto-animate>
+                <img src="img/map-context.jpg"/>
+                <img src="img/map-containers.jpg" style="position: absolute;width:10%;bottom:16%;left:30%;opacity:0"/>
+                <aside class="notes">Then he came up with a better analogy which is used till this day at c4model.com -
+                    various map types.
+                    <br/>
+                    CONTEXT
+                </aside>
+            </section>
+            <section data-auto-animate>
+                <img src="img/map-context.jpg" style="position:absolute;opacity:0"/>
+                <img src="img/map-containers.jpg"/>
+                <img src="img/map-components.jpg" style="position: absolute;width:20%;bottom:6%;left:35%;opacity:0"/>
+                <aside class="notes">CONTAINERS</aside>
+            </section>
+            <section data-auto-animate>
+                <img src="img/map-containers.jpg" style="position:absolute;opacity:0"/>
+                <img src="img/map-components.jpg"/>
+                <img src="img/map-code.jpg" style="position: absolute;width:5%;top:37%;right:39%;opacity:0"/>
+                <aside class="notes">CONTAINERS</aside>
+            </section>
+            <section data-auto-animate>
+                <img src="img/map-components.jpg" style="position:absolute;opacity:0"/>
+                <img src="img/map-code.jpg"/>
+                <aside class="notes">CODE</aside>
+            </section>
+            <section>
+                <table class="c4">
+                    <tbody>
+                    <tr>
+                        <td><img src="img/map-context.jpg"/></td>
+                        <td><img src="img/c4-context.png"/></td>
+                    </tr>
+                    <tr class="fragment">
+                        <td colspan="2">
+                            <b>C1: [System] Context Diagram</b>
+                            <ul>
+                                <li class="fragment">Big picture focus (people and systems rather than tech)</li>
+                                <li class="fragment">Shown also for non-tech people</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr class="fragment">
+                        <td colspan="2">
+                            Software system
+                            <ul>
+                                <li class="fragment">Sth delivering value to its users (human or not)</li>
+                                <li class="fragment">Owned and built by a single dev team</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr class="fragment">
+                        <td colspan="2">
+                            ✅ recommended for all dev teams
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <aside class="notes">
+                    Supporting elements: people (e.g. users, actors, roles, or personas) and software systems (external
+                    dependencies) directly connected to the system in scope
+                </aside>
+            </section>
+            <section data-background-image>
+                <table class="c4">
+                    <tbody>
+                    <tr>
+                        <td style="padding-top:0"><img src="img/map-containers.jpg"/></td>
+                        <td style="padding-top:0"><img src="img/c4-containers.png"/></td>
+                    </tr>
+                    <tr class="fragment">
+                        <td colspan="2">
+                            <b style="font-size:.9em">C2: Container Diagram</b>
+                            <ul style="font-size: .65em">
+                                <li class="fragment">Zoom in to the system boundary</li>
+                                <li class="fragment">High-level shape of the arch, distribution of responsibilities</li>
+                                <li class="fragment">Major technology choices, containers communication</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr class="fragment">
+                        <td colspan="2">
+                            <span style="font-size:.9em">Container</span>
+                            <ul style="font-size: .65em">
+                                <li class="fragment">Application or data store<span
+                                        class="fragment">. Not Docker!</span></li>
+                                <li class="fragment">Server-side web app, client-side SPA,
+                                    desktop app, mobile app, database schema, folder on a file system, AWS S3 bucket,
+                                    ...
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr class="fragment">
+                        <td colspan="2" style="font-size:.9em">
+                            ✅ recommended (esp. for devs and operations)
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section data-background-image>
+                <table class="c4">
+                    <tbody>
+                    <tr>
+                        <td style="padding-top:0"><img src="img/map-components.jpg"/></td>
+                        <td style="padding-top:0"><img src="img/c4-components.png"/></td>
+                    </tr>
+                    <tr class="fragment">
+                        <td colspan="2">
+                            <b>C3: Component Diagram</b>
+                            <ul>
+                                <li class="fragment">Decomposes container into components</li>
+                                <li class="fragment">Responsibilities + technology/implementation details</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr class="fragment">
+                        <td colspan="2">
+                            Component
+                            <ul>
+                                <li class="fragment">Groups and encapsulates functionality behind a well-defined
+                                    interface
+                                </li>
+                                <li class="fragment">Container components execute in the same process space</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr class="fragment">
+                        <td colspan="2">
+                            ❌ not recommended, automate the creation
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section>
+                <table class="c4">
+                    <tbody>
+                    <tr>
+                        <td style="padding-top:0"><img src="img/map-code.jpg"/></td>
+                        <td style="padding-top:0"><img src="img/c4-code.png"/></td>
+                    </tr>
+                    <tr class="fragment">
+                        <td colspan="2">
+                            <b>C4: Code Diagram</b>
+                            <ul>
+                                <li class="fragment">Component implemented as code</li>
+                                <li class="fragment">UML class diagrams, entity relationship diagrams, similar</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr class="fragment">
+                        <td colspan="2">
+                            Code
+                            <br/>
+                            <ul>
+                                <li class="fragment">Building blocks of the programming language</li>
+                                <li class="fragment">Classes, interfaces, enums, functions, objects, ...</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr class="fragment">
+                        <td colspan="2">
+                            ❌ not recommended, to generate on-demand
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <aside class="notes">
+                    <ul>
+                        <li>Often available on-demand from tooling such as IDEs</li>
+                        <li>Ideally automatically generated with tooling (IDE or UML modelling tool)</li>
+                        <li>Show only those attributes and methods that allow you to tell the story that you want to
+                            tell
+                        </li>
+                        <li>This level of detail is not recommended for anything but the most important or complex
+                            components
+                        </li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <table class="c4">
+                    <tbody>
+                    <tr>
+                        <td style="width: 100%; border-right: none"><img style="max-height: 40vh"
+                                                                         src="img/c4-landscape.png"/></td>
+                    </tr>
+                    <tr class="fragment">
+                        <td colspan="2">
+                            <b>Supporting: System Landscape Diagram</b>
+                            <ul>
+                                <li class="fragment">Prev focus on a single software system</li>
+                                <li class="fragment">Systems never live in isolation</li>
+                                <li class="fragment">System Context Diagram w/o focusing on a particular system</li>
+                                <li class="fragment">Bridge into the enterprise architecture world</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr class="fragment">
+                        <td colspan="2">
+                            ✅ recommended, esp. for larger organizations
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section>
+                <table class="c4">
+                    <tbody>
+                    <tr>
+                        <td style="padding-left:.2em;padding-right:.2em"><img style="max-height: 40vh"
+                                                                              src="img/c4-dynamic-collab.png"/></td>
+                        <td style="padding-left:.2em;padding-right:.2em"><img style="max-height: 40vh"
+                                                                              src="img/c4-dynamic-seq.png"/></td>
+                    </tr>
+                    <tr class="fragment">
+                        <td colspan="2">
+                            <b>Supporting: Dynamic Diagram</b>
+                            <ul>
+                                <li class="fragment">2 styles: Collaboration or Sequence</li>
+                                <li class="fragment">Runtime collaboration (vs. prev static views)</li>
+                                <li class="fragment">User story, use case, feature, etc.</li>
+                                <li class="fragment">Can show software systems, containers, or components</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr class="fragment">
+                        <td colspan="2">
+                            ❌ not recommended, just interesting/recurring patterns or features
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section data-background-image>
+                <table class="c4">
+                    <tbody>
+                    <tr>
+                        <td><img src="img/c4-deployment-local.png"/></td>
+                        <td><img src="img/c4-deployment-prod.png"/></td>
+                    </tr>
+                    <tr class="fragment">
+                        <td colspan="2">
+                            <b>Supporting: Deployment Diagram</b>
+                            <ul>
+                                <li class="fragment">Deployed systems and/or containers</li>
+                                <li class="fragment">Diagram per env</li>
+                                <li class="fragment">Deployment node = where an instance is running</li>
+                                <li class="fragment">Can contain infrastructure nodes: DNS services, load balancers,
+                                    firewalls
+                                </li>
+                                <li class="fragment">Good idea to use icons (e.g. AWS)</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr class="fragment">
+                        <td colspan="2">
+                            ✅ recommended
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+        </section>
+        <section data-background-image>
+            <section>
+                <h1>Example: Microservices</h1>
+                <a class="fragment" href="https://c4model.com/abstractions/microservices">c4model.com/abstractions/microservices</a>
+            </section>
+            <section data-auto-animate>
+                <h2 data-id="c4t">Context</h2>
+                <img style="max-height: 30vh" src="img/ms/1.png" data-id="c4i"/>
+            </section>
+            <section data-auto-animate>
+                <h2 data-id="c4t">Containers</h2>
+                <img style="max-height: 30vh" src="img/ms/2.png" data-id="c4i"/>
+            </section>
+            <section data-auto-animate>
+                <h2 style="margin: 0" data-id="c4t">Containers</h2>
+                <div style="margin: 0">split to microservices</div>
+                <img style="max-height: 61vh" src="img/ms/3.png" data-id="c4i"/>
+            </section>
+            <section data-auto-animate>
+                <h2 style="margin: 0" data-id="c4t">Containers</h2>
+                <img style="max-height: 65vh" src="img/ms/4.png" data-id="c4i"/>
+            </section>
+            <section data-auto-animate>
+                <h2 data-id="c4t">Context</h2>
+                <img style="max-height: 30vh" src="img/ms/1.png" data-id="c4i"/>
+            </section>
+            <section data-auto-animate>
+                <h2 style="margin: 0" data-id="c4t">Context</h2>
+                <div style="margin: 0">different teams</div>
+                <img style="max-height: 61vh" src="img/ms/5.png" data-id="c4i"/>
+            </section>
+            <section data-auto-animate>
+                <h2 style="margin: 0" data-id="c4t">Containers</h2>
+                <img style="max-height: 61vh" src="img/ms/6.png" data-id="c4i"/>
+            </section>
+        </section>
+        <section data-background-image>
+            <section>
+                <h1>Example: Messaging</h1>
+                <a class="fragment" href="https://c4model.com/abstractions/queues-and-topics">c4model.com/abstractions/queues-and-topics</a>
+            </section>
+            <section data-auto-animate>
+                <h2 data-id="c4t">Suboptimal</h2>
+                <img style="max-height: 50vh" src="img/msg/1.png" data-id="c4i"/>
+            </section>
+            <section data-auto-animate>
+                <h2 data-id="c4t">Nice 👍🏻</h2>
+                <img style="max-height: 50vh" src="img/msg/2.png" data-id="c4i"/>
+                <aside class="notes">
+                    <ul>
+                        <li>Clearly shows the connections</li>
+                        <li>Value from deployment perspective</li>
+                        <li>Easy to add next services listening the same topic</li>
+                    </ul>
+                </aside>
+            </section>
+        </section>
+        <section data-background-image>
+            <section>
+                <h2>Tooling</h2>
+                <table class="comparing">
+                    <tbody>
+                    <tr style="font-weight: bolder; font-size: 1.2em; line-height: 1.2">
+                        <td>Diagramming</td>
+                        <td>Modelling</td>
+                    </tr>
+                    <tr class="fragment">
+                        <td>Low entry barrier, whiteboarding</td>
+                        <td>Building a non-visual model (single element definitions, relationships)</td>
+                    </tr>
+                    <tr class="fragment">
+                        <td>Poor assistance/validation, no querying ("all dependencies of component X")</td>
+                        <td>Can understand the semantics (e.g. help to rename)</td>
+                    </tr>
+                    <tr class="fragment">
+                        <td>Reusing by copy-paste</td>
+                        <td>Structured data rendered as diagrams</td>
+                    </tr>
+                    <tr class="fragment">
+                        <td>E.g. <a href="https://mermaid.js.org/">Mermaid</a></td>
+                        <td>E.g. <a href="https://likec4.dev/">LikeC4</a>, <a href="https://docs.structurizr.com/">Structurizr</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+        </section>
+        <section data-background-image>
+            <section>
+                <h1>LikeC4</h1>
+                <ul>
+                    <li class="fragment"><a href="https://likec4.dev/">likec4.dev</a></li>
+                    <li class="fragment">Broader than C4, allows following C4 though
+                        <ol>
+                            <li class="fragment">Start by defining your grammar/DSL</li>
+                            <li class="fragment">Build model with DSL</li>
+                            <li class="fragment">Visualize model with views</li>
+                        </ol>
+                    </li>
+                    <li class="fragment">Textual: versionable, LLM-friendly</li>
+                </ul>
+            </section>
+            <section>
+                <h3>Demo: <a href="https://github.com/mat3e/3pigs-ddd/"><code>mat3e/3pigs-ddd</code></a></h3>
+                <likec4-view view-id="index"></likec4-view>
+            </section>
+            <section>
+                <h3>DSL</h3>
+                <pre style="width: 100%; margin: 0"><code style="max-height: 23em" data-trim
+                                                          data-line-numbers="1|2-8|14-17|18-21|22-42|43-48">
+                    specification {
+                      element actor {
+                        notation "Person"
+                        style {
+                          shape person
+                          color green
+                        }
+                      }
+
+                      element externalSystem {
+                        #software-system #external
+                        notation "External Software System"
+                      }
+                      element system {
+                        #software-system
+                        notation "Software System"
+                      }
+                      element container {
+                        #container
+                        notation "Container"
+                      }
+                      element messaging {
+                        #container
+                        notation "Messaging System"
+                        style {
+                          shape queue
+                        }
+                      }
+                      element database {
+                        #container
+                        notation "Database"
+                        style {
+                          shape storage
+                        }
+                      }
+                      element bucket {
+                        #container
+                        notation "Bucket"
+                        style {
+                          shape bucket
+                        }
+                      }
+                      element component
+
+                      relationship async {
+                        line dotted
+                        head open
+                      }
+
+                      tag external {
+                        color #9e9e9eff
+                      }
+                      tag software-system
+                      tag container
+                      tag todo
+                    }
+                </code></pre>
+            </section>
+            <section>
+                <h3>Tests</h3>
+                <pre style="width: 100%; margin: 0;line-height: 1.1;font-size: .4em"><code style="max-height: 33em"
+                                                                                           data-trim class="typescript"
+                                                                                           data-line-numbers="1|2|37-38,60,40,42,45|37-38,60,47|62-64|93,66,68,71,73,75,78|98-103">
+                    import { describe, expect, it } from 'vitest'
+                    import { $ElementKind, likec4model } from './likec4-model'
+
+                    describe('view conventions', () => {
+                      const views = [...likec4model.views()]
+
+                      it('view IDs are kebab-case', () => {
+                        const re = /^[a-z][a-z0-9]*(-[a-z0-9]+)*$/
+                        const offenders = views.filter(({ id }) => !re.test(id)).map(({ id }) => id)
+                        failIfExist(offenders, 'views with non-kebab-case IDs')
+                      })
+
+                      it('every view has a description or title', () => {
+                        const offenders = views.filter(({ title, description }) => !title?.trim() && !description).map(({ id }) => id)
+                        failIfExist(offenders, 'views without a title or description')
+                      })
+                    })
+
+                    describe('element conventions', () => {
+                      const elements = [...likec4model.elements()]
+
+                      it('every (non-obvious) element has a description', () => {
+                        const offenders = elements
+                          .filter(e => !isTodo(e))
+                          .filter(e => !hasDescription(e))
+                          .map(({ id }) => id)
+                        failIfExist(offenders, 'elements missing a description')
+                      })
+
+                      it('element name segments are camelCase', () => {
+                        const re = /^[a-z][a-zA-Z0-9]*$/
+                        const offenders = elements.filter(({ name }) => !re.test(name)).map(({ id }) => id)
+                        failIfExist(offenders, 'elements with non-camelCase names')
+                      })
+                    })
+
+                    describe('system conventions', () => {
+                      const activeSystems = ofKind('system').filter(s => !isTodo(s))
+
+                      it('every system owned by concrete folks', () => {
+                        const offenders = activeSystems
+                          .filter(s => !s.getMetadata('owner'))
+                          .map(({ id }) => id)
+                        failIfExist(offenders, 'systems missing metadata.owner')
+                      })
+
+                      it('every system has at least 2 containers (single-container systems are anti-pattern)', () => {
+                        const offenders = activeSystems
+                          .filter(s => [...s.descendants()].filter(d => d.isTagged('container')).length < 2)
+                          .map(({ id }) => id)
+                        failIfExist(offenders, 'systems with fewer than 2 containers — promote to a peer container or merge')
+                      })
+
+                      it('every system has a scoped view (`view ... of &lt;system>`)', () => {
+                        const offenders = activeSystems
+                          .filter(s => s.scopedViews().size === 0)
+                          .map(({ id }) => id)
+                        failIfExist(offenders, 'systems without a scoped view — every system needs a container-level view')
+                      })
+                    })
+
+                    describe('container conventions', () => {
+                      const activeContainers = [...likec4model.elementsWhere({ tag: 'container' })].filter(s => !isTodo(s))
+                      const activeDeployableContainers = ofKind('container').filter(s => !isTodo(s))
+
+                      it('every container has a non-empty `technology`', () => {
+                        const offenders = activeContainers
+                          .filter(({ technology }) => !technology?.trim())
+                          .map(({ id }) => id)
+                        failIfExist(offenders, 'containers without `technology`')
+                      })
+
+                      it('every container has a tech `icon`', () => {
+                        const offenders = activeContainers
+                          .filter(({ icon }) => !icon)
+                          .map(({ id }) => id)
+                        failIfExist(offenders, 'containers without a tech `icon` — use `icon tech:&lt;name>` (e.g. `tech:spring-icon`, `tech:postgresql`)')
+                      })
+
+                      it('every container links to its repository', () => {
+                        const offenders = activeDeployableContainers
+                          .filter(({ links }) => !links.some(({ title }) => title === 'Repository'))
+                          .map(({ id }) => id)
+                        failIfExist(offenders, 'containers not linking to `Repository` — each deployable should point at its Git repo')
+                      })
+
+                      it('every container is a direct child of system', () => {
+                        const offenders = activeContainers
+                          .filter(({ parent }) => parent?.kind !== 'system')
+                          .map(({ id }) => id)
+                        failIfExist(offenders, 'container/database/messaging/bucket must be a direct child of system — not under area/subdomain/domain, and not nested inside another container')
+                      })
+                    })
+
+                    describe('component conventions', () => {
+                      const activeComponents = [...likec4model.elementsWhere({ kind: 'component' })].filter(s => !isTodo(s))
+
+                      it('every component is a direct child of container', () => {
+                        const offenders = activeComponents
+                          .filter(({ parent }) => !parent?.tags.includes('container'))
+                          .map(({ id }) => id)
+                        failIfExist(offenders, 'component must be a direct child of container/database/messaging/bucket')
+                      })
+                    })
+
+                    const ofKind = (kind: $ElementKind) => [...likec4model.elementsWhere({ kind })]
+
+                    const hasDescription = ({ description }: { description?: unknown }) => {
+                      const d = description as { txt?: string; md?: string } | null | undefined
+                      return !!d && (!!d.txt?.trim() || !!d.md?.trim())
+                    }
+
+                    const failIfExist = (offenders: string[], message: string) => {
+                      const detail = offenders.length ? `\n  - ${offenders.join('\n  - ')}` : ''
+                      expect(offenders, `${message}${detail}`).toHaveLength(0)
+                    }
+
+                    // #todo-tagged elements (and any element whose ancestor is #todo) are stubs —
+                    // not yet fully defined. All quality-convention tests skip them.
+                    const isTodo = (e: ReturnType&lt;typeof ofKind>[number]): boolean => {
+                      if (e.isTagged('todo')) return true
+                      let p = e.parent
+                      while (p) {
+                        if (p.isTagged('todo')) return true
+                        p = p.parent
+                      }
+                      return false
+                    }
+                </code></pre>
+            </section>
+            <section>
+                <h3 style="margin: 0">Model</h3>
+                <pre style="width: 100%; margin: 0; line-height: 1.1;font-size: .4em"><code style="max-height: 35em"
+                                                                                            data-trim
+                                                                                            data-line-numbers="1-2|4,36|5-7|9-21,29-31|33,35|38,79|61-65">
+                    model {
+                      user = actor 'User' 'The one who wants to read fairy tales'
+
+                      ft = system 'Fairy Tales' 'System for interacting with The Three Little Pigs or Little Red Riding Hood' {
+                        metadata {
+                          owner 'mat3e'
+                        }
+
+                        monolith = container 'Spring App' 'Entry point to the system, when CLI or HTTP mode can be chosen' {
+                          link https://github.com/mat3e/3pigs-ddd/ 'Repository'
+                          icon tech:spring-icon
+                        }
+                        container pigs3 {
+                          title 'The Three Little Pigs'
+                          description 'A fairy tale about pigs building their houses'
+                          link https://github.com/mat3e/3pigs-ddd/ 'Repository'
+                          icon tech:java
+                        }
+                        database pigs3db 'The Three Little Pigs H2 Database' 'DB schema - houses' {
+                          icon tech:mysql-icon
+                        }
+                        container redhood 'Little Red Riding Hood' 'A fairy tale about listening to your mom, and not interacting with strangers' {
+                          link https://github.com/mat3e/3pigs-ddd/ 'Repository'
+                          icon tech:java
+                        }
+                        database redhoodDb 'Little Red Riding Hood H2 Database' 'DB schema - wolfs' {
+                          icon tech:mysql-icon
+                        }
+                        messaging inMemBus 'In-memory events support' 'Spring way of exchanging events' {
+                          icon tech:spring-icon
+                        }
+
+                        user -> monolith 'interacts with'
+
+                        monolith -> redhood
+                      }
+
+                      extend ft.pigs3 {
+                        monolith -> cli 'starts'
+                        monolith -> rest 'interacts in HTTP mode via'
+
+                        component cli 'Command-Line Runner' 'Runner printing a fairy tale in console' {
+                          -> command 'executes commands in order'
+                        }
+                        component rest 'REST Controller' 'HTTP endpoints for interacting with houses' {
+                          -> command 'creates/deletes houses via'
+                          -> query 'reads houses via'
+                        }
+                        component command 'Command Handler' 'App logic for driving domain logic' {
+                          -> factory 'creates new via'
+                          -> wolf 'destroys with'
+                          -> repo 'updates on diff via'
+                        }
+                        component event 'Event Handler' 'Executes commands based on incomming events' {
+                          -> query 'finds house to escape via'
+                          -> command 'calls'
+
+                          inMemBus -[async]-> event 'triggers'
+                        }
+                        component query 'Query Repository' 'Allows to find closest houses and read models'
+                        component wolf 'Wolf Service' 'Stateless work on house, encapsulating retrying logic' {
+                          -> house 'tries to destroy'
+                          -> blowing 'follows'
+                          -[async]-> inMemBus 'informs when quitting'
+                        }
+                        component factory 'House Factory' 'Domain factory for creating house aggregate' {
+                          -> building 'follows'
+                          -> house 'creates'
+                        }
+                        component repo 'Repository' 'Allows to find by ID and save houses' {
+                          -> house 'inserts/updates'
+                          -> house 'reads'
+                        }
+                        component blowing 'Blowing Down Specification' 'Rules on when house can be destroyed by blowing'
+                        component building 'Building Policy' 'Rules on how to build house depending on the character of a pig'
+                        component house 'House Aggregate' 'DDD aggregate protecting rules about destroying and pig changes' {
+                          -[async]-> inMemBus 'informs about refugees'
+                        }
+                      }
+                    }
+                </code></pre>
+            </section>
+            <section>
+                <h3>Views</h3>
+                <pre style="width: 100%; margin: 0"><code style="max-height: 23em" data-trim
+                                                          data-line-numbers="1-5,7|9-14,16|18,24-27,34|29|37,45-49|30-33">
+                    views {
+                      view index {
+                        title 'Context'
+
+                        include *
+                        global predicate solidNonAsyncRel
+                      }
+
+                      view fairy-tales-index of ft {
+                        title 'C4 / Containers'
+
+                        include user
+                        include ft
+                        include * where tag is #container
+                        global predicate solidNonAsyncRel
+                      }
+
+                      view pigs3-index of ft.pigs3 {
+                        title 'C4 / Components (The Three Little Pigs)'
+
+                        include ft
+                        include ft.* where tag is #container
+                        include *
+                        include
+                          -> house with {
+                            multiple true
+                          }
+                        global predicate solidNonAsyncRel
+                        global style mute_all
+                        style ft.inMemBus {
+                          color secondary
+                        }
+                        style ft.pigs3, ft.pigs3.** { color primary }
+                      }
+                    }
+
+                    global {
+                      predicateGroup solidNonAsyncRel {
+                        include
+                          * -> * where kind is not async with {
+                            line solid
+                          }
+                      }
+
+                      style mute_all * {
+                        color muted
+                        opacity 10%
+                      }
+                    }
+                </code></pre>
+            </section>
+            <section>
+                <h3>Demo (again)</h3>
+                <likec4-view view-id="fairy-tales-index"></likec4-view>
+            </section>
+            <section>
+                <h3 style="margin: 0;">Dynamic View</h3>
+                <pre style="width: 100%; margin: 0; line-height: 1.1;font-size: .4em"><code style="max-height: 35em"
+                                                                                            data-trim
+                                                                                            data-line-numbers="1,31|4,5|5,6|6,7|8,9|9,10">
+                      dynamic view wolf-lifecycle {
+                        title 'Dynamic / Wolf lifecycle (Little Red Riding Hood)'
+
+                        user
+                          -> ft.redhood.rest 'POST /wolfs - tells about people'
+                          -> ft.redhood.service 'starts interaction'
+                          -> ft.redhood.wolf 'creates Wolf with plan whom to meet'
+                        ft.redhood.service
+                          -> ft.redhood.repo 'saves Wolf'
+                          -> ft.redhoodDb 'inserts'
+
+                        user
+                          -> ft.redhood.rest 'PUT /wolfs/{id}/meetings/recent - decides who meets Wolf'
+                          -> ft.redhood.service 'passes person to meet by Wolf'
+                          -> ft.redhood.repo 'looks for Wolf with an identifier'
+                          -> ft.redhoodDb 'selects'
+                          -> ft.redhood.repo 'provides result'
+                          -> ft.redhood.service 'restores Wolf'
+                          -> ft.redhood.wolf 'starts a meeting'
+                          -> ft.redhood.wolf 'proceeds with plan'
+                          -> ft.redhood.meeting 'chooses policy for actual and planned person'
+                          -> ft.redhood.wolf 'provides consequences and eaten people'
+                          -> ft.redhood.wolf 'potentially dies and records this as event'
+                        ft.redhood.service
+                          -> ft.redhood.repo 'saves Wolf'
+                          -> ft.redhoodDb 'updates'
+                        ft.redhood.service
+                          -> ft.wolfEvents 'informs about killed wolf'
+                          -> ft.redhood.service 'triggers event handling'
+                          -> ft.redhood.service 'prints who was rescured'
+                      }
+                </code></pre>
+            </section>
+            <section>
+                <likec4-view view-id="wolf-lifecycle"></likec4-view>
+            </section>
+            <section>
+                <h2>AI friendliness - skill</h2>
+                <pre><code data-trim class="bash">
+                    npx skills add https://likec4.dev/
+                </code></pre>
+                <ul>
+                    <li class="fragment">Agent Skills Discovery Protocol (SDP)</li>
+                    <li class="fragment"><code>/likec4-dsl</code>
+                        <ul>
+                            <li class="fragment">Complete DSL reference</li>
+                            <li class="fragment">Specification, model, views, deployment, predicates, examples</li>
+                            <li class="fragment">On-demand, when working with LikeC4 files</li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <h2 style="margin: 0">AI friendliness - MCP</h2>
+                <img style="margin: 0; max-height: 75vh" src="img/claude.png">
+            </section>
+        </section>
+        <section data-background-image>
+            <section>
+                <h2 style="margin: 0">Mermaid</h2>
+                <ul>
+                    <li class="fragment"><a href="https://mermaid.js.org/">mermaid.js.org</a></li>
+                    <li class="fragment">Diagramming from text</li>
+                    <li class="fragment">Supported in GitLab/GitHub with <code>```mermaid</code></li>
+                    <li class="fragment">LikeC4 can generate it</li>
+                </ul>
+                <pre class="fragment" style="width: 100%;font-size: .5em"><code data-trim>
+                    ---
+                    title: "Containers"
+                    ---
+                    graph TB
+                      User@{ icon: "fa:user", shape: rounded, label: "User" }
+                      subgraph Ft["`Fairy Tales`"]
+                        Ft.Monolith@{ shape: rectangle, label: "Spring App" }
+                        Ft.Pigs3@{ shape: rectangle, label: "The Three Little Pigs" }
+                        Ft.Redhood@{ shape: rectangle, label: "Little Red Riding Hood" }
+                      end
+                      User -. "`interacts with`" .-> Ft.Monolith
+                      Ft.Monolith -. "`[...]`" .-> Ft.Pigs3
+                      Ft.Monolith -.-> Ft.Redhood
+                </code></pre>
+            </section>
+            <section>
+                <code class="mermaid">
+                    ---
+                    title: "Containers"
+                    ---
+                    graph TB
+                    User@{ icon: "fa:user", shape: rounded, label: "User" }
+                    subgraph Ft["`Fairy Tales`"]
+                    Ft.Monolith@{ shape: rectangle, label: "Spring App" }
+                    Ft.Pigs3@{ shape: rectangle, label: "The Three Little Pigs" }
+                    Ft.Redhood@{ shape: rectangle, label: "Little Red Riding Hood" }
+                    end
+                    User -. "`interacts with`" .-> Ft.Monolith
+                    Ft.Monolith -. "`[...]`" .-> Ft.Pigs3
+                    Ft.Monolith -.-> Ft.Redhood
+                </code>
+            </section>
+            <section>
+                <h2 style="margin: 0">(Experimental) C4 syntax</h2>
+                <pre style="width: 100%;font-size: .5em"><code style="max-height: 24em" data-trim>
+                      C4Context
+                      Enterprise_Boundary(b0, "BankBoundary0") {
+                        Person(customerA, "Banking Customer A", "A customer of the bank, with personal bank accounts.")
+                        Person(customerB, "Banking Customer B")
+
+                        System(SystemAA, "Internet Banking System", "Allows customers to view information about their bank accounts, and make payments.")
+
+                        Enterprise_Boundary(b1, "BankBoundary") {
+                          SystemDb_Ext(SystemC, "Mainframe Banking System", "Stores all of the core banking information about customers, accounts, transactions, etc.")
+                          System_Ext(SystemE, "E-mail system", "The internal Microsoft Exchange e-mail system.")
+                          SystemDb(SystemD, "Banking System Database", "A system of the bank, with personal bank accounts.")
+                        }
+                      }
+
+                      BiRel(customerA, SystemAA, "Uses")
+                      BiRel(SystemAA, SystemC, "Uses")
+                      Rel(SystemAA, SystemE, "Sends e-mails", "SMTP")
+                      Rel(SystemE, customerA, "Sends e-mails to")
+
+                      UpdateLayoutConfig($c4ShapeInRow="2", $c4BoundaryInRow="1")
+                </code></pre>
+            </section>
+            <section>
+                <code class="mermaid">
+                    C4Context
+                    Enterprise_Boundary(b0, "BankBoundary0") {
+                    Person(customerA, "Banking Customer A", "A customer of the bank, with personal bank accounts.")
+                    Person(customerB, "Banking Customer B")
+
+                    System(SystemAA, "Internet Banking System", "Allows customers to view information about their bank
+                    accounts, and make payments.")
+
+                    Enterprise_Boundary(b1, "BankBoundary") {
+                    SystemDb_Ext(SystemC, "Mainframe Banking System", "Stores all of the core banking information about
+                    customers, accounts, transactions, etc.")
+                    System_Ext(SystemE, "E-mail system", "The internal Microsoft Exchange e-mail system.")
+                    SystemDb(SystemD, "Banking System Database", "A system of the bank, with personal bank accounts.")
+                    }
+                    }
+
+                    BiRel(customerA, SystemAA, "Uses")
+                    BiRel(SystemAA, SystemC, "Uses")
+                    Rel(SystemAA, SystemE, "Sends e-mails", "SMTP")
+                    Rel(SystemE, customerA, "Sends e-mails to")
+
+                    UpdateLayoutConfig($c4ShapeInRow="2", $c4BoundaryInRow="1")
+                </code>
+            </section>
+        </section>
+        <section>
+            <h3 style="margin: 0" class="fragment">Thanks!</h3>
+            <a href="https://www.linkedin.com/posts/oskar-plukis_warszawski-wilan%C3%B3w-i-wy%C5%9Bcig-indywidualizmu-share-7399022398131318784-T8K1/">
+                <img src="img/guidance-important.png" style="width: 70%" class="pure-img">
+            </a>
+            <ul>
+                <li class="fragment" data-fragment-index="1">
+                    <a href="https://mat3e.github.io/trendy">
+                        mat3e.github.io/trendy
+                    </a>
+                </li>
+                <li class="fragment" data-fragment-index="2">
+                    <a href="https://mat3e.github.io/talks/likec4/inpost.html">
+                        mat3e.github.io/talks/likec4/inpost
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </div>
+</div>
+
+<script src="js/likec4-view.js"></script>
+<script src="dist/reveal.js"></script>
+<script src="plugin/zoom/zoom.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/search/search.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script src="plugin/mermaid/mermaid.min.js"></script>
+<script>
+    mermaid.initialize({startOnLoad: false, theme: 'dark'});
+    mermaid.registerIconPacks([
+        {
+            name: 'fa',
+            loader: () =>
+                fetch('https://unpkg.com/@iconify-json/fa7-solid/icons.json').then((res) => res.json()),
+        },
+    ]);
+
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        center: true,
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealZoom, RevealSearch, RevealMarkdown, RevealHighlight, RevealNotes]
+    });
+
+    document.querySelectorAll('.reveal .slides section:not([data-background-image])').forEach(s => {
+        s.setAttribute('data-background-image', 'img/twitter.png');
+        s.setAttribute('data-background-size', '240px');
+        s.setAttribute('data-background-position', '.5em .5em');
+    });
+</script>
+<script>
+    Reveal.on('ready', async event => {
+        await handleMermaid(event);
+    });
+    Reveal.on('slidechanged', async event => {
+        await handleMermaid(event);
+    });
+    Reveal.on('slidetransitionend', async event => {
+        await handleMermaid(event);
+    });
+
+    async function handleMermaid(event) {
+        const nodes = event.currentSlide.querySelectorAll('.mermaid');
+        if (nodes?.length > 0) {
+            await mermaid.run({nodes, suppressErrors: true});
+        }
+    }
+</script>
+</body>
+</html>

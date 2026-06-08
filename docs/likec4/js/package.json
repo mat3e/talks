@@ -28,7 +28,7 @@
   "scripts": {
     "test": "vitest run",
     "start": "likec4 serve",
-    "format": "likec4 format",
+    "prep": "likec4 format && npm test && npm run build",
     "mm": "likec4 gen mmd",
     "build": "likec4 codegen webcomponent -o ./likec4-view.js"
   },

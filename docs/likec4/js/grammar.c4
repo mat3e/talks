@@ -40,7 +40,11 @@ specification {
       shape bucket
     }
   }
-  element component
+  element component {
+    style {
+      shape component
+    }
+  }
 
   relationship async {
     line dotted

@@ -26,13 +26,14 @@ model {
     database redhoodDb 'Little Red Riding Hood H2 Database' 'DB schema - wolfs' {
       icon tech:mysql-icon
     }
-    messaging inMemBus 'In-memory events support' 'Spring way of exchanging events' {
+    messaging houseEvents 'In-memory house events' 'Spring way of exchanging HouseEvents' {
+      icon tech:spring-icon
+    }
+    messaging wolfEvents 'In-memory wolf events' 'Spring way of exchanging WolfEvents' {
       icon tech:spring-icon
     }
 
     user -> monolith 'interacts with'
-
-    monolith -> redhood
   }
 
   extend ft.pigs3 {
@@ -47,34 +48,65 @@ model {
       -> query 'reads houses via'
     }
     component command 'Command Handler' 'App logic for driving domain logic' {
-      -> factory 'creates new via'
-      -> wolf 'destroys with'
-      -> repo 'updates on diff via'
+      -> factory 'creates new houses via'
+      -> house 'changes pigs in'
+      -> wolf 'destroys houses with'
+      -> repo 'reads and updates on diff via'
     }
-    component event 'Event Handler' 'Executes commands based on incomming events' {
+    component event 'Event Handler' 'Executes commands based on incoming events' {
       -> query 'finds house to escape via'
       -> command 'calls'
 
-      inMemBus -[async]-> event 'triggers'
+      houseEvents -[async]-> event 'triggers'
     }
-    component query 'Query Repository' 'Allows to find closest houses and read models'
+    component query 'Query Repository' 'Allows to find closest houses and read models' {
+      -> pigs3db 'selects from'
+    }
     component wolf 'Wolf Service' 'Stateless work on house, encapsulating retrying logic' {
       -> house 'tries to destroy'
       -> blowing 'follows'
-      -[async]-> inMemBus 'informs when quitting'
+      -[async]-> houseEvents 'informs when quitting'
     }
     component factory 'House Factory' 'Domain factory for creating house aggregate' {
       -> building 'follows'
       -> house 'creates'
     }
     component repo 'Repository' 'Allows to find by ID and save houses' {
-      -> house 'inserts/updates'
+      -> house 'saves'
       -> house 'reads'
+      -> pigs3db 'select, insert, update'
     }
     component blowing 'Blowing Down Specification' 'Rules on when house can be destroyed by blowing'
     component building 'Building Policy' 'Rules on how to build house depending on the character of a pig'
     component house 'House Aggregate' 'DDD aggregate protecting rules about destroying and pig changes' {
-      -[async]-> inMemBus 'informs about refugees'
+      -[async]-> houseEvents 'informs about refugees'
     }
+  }
+
+  extend ft.redhood {
+    monolith -> rest 'interacts in HTTP mode via'
+
+    component rest 'REST Controller' 'HTTP endpoints for meeting and interacting with wolfs' {
+      -> service 'creates and meets wolf via'
+      -> query 'reads wolfs via'
+    }
+    component service 'Service' 'Allows to create wolf, introduce people to wolf, and act on wolf death' {
+      -> repo 'finds, updates, deletes'
+      -> wolf 'orchestrates domain logic in'
+      -[async]-> wolfEvents 'informs when wolf killed'
+
+      wolfEvents -[async]-> service 'triggers'
+    }
+    component query 'Query Repository' 'Allows to get wolf and its eaten people' {
+      -> redhoodDb 'selects from'
+    }
+    component repo 'Repository' 'Allows to find by ID, save, and delete wolfs' {
+      -> wolf 'reads, saves'
+      -> redhoodDb 'select, insert, update, delete'
+    }
+    component wolf 'Wolf' 'Plans whom to meet, meets and eats people, can die from a bad meeitng' {
+      -> meeting 'run meetings according to plan and met person'
+    }
+    component meeting 'Meeting Policy' 'Provides consequences for wolf and person'
   }
 }
