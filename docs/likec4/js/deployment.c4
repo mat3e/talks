@@ -1,0 +1,65 @@
+specification {
+  deploymentNode env
+  deploymentNode server
+  deploymentNode container {
+    style {
+      icon tech:docker
+    }
+  }
+  deploymentNode runtime {
+    // JVM, Node.js
+    notation 'Runtime Environment'
+  }
+  deploymentNode package {
+    // Java JAR, npm package
+    notation 'Hostable Artifact'
+  }
+}
+
+deployment {
+  env local 'Local' {
+    server laptop 'Developer\'s laptop' {
+      link http://localhost:8080
+
+      runtime jvm 'Java Virtual Machine' {
+        package jar1 'Module with Spring Boot app' {
+          instanceOf ft.monolith
+          instanceOf ft.houseEvents
+          instanceOf ft.wolfEvents
+        }
+        package jar2 {
+          instanceOf ft.pigs3
+        }
+        package jar3 {
+          instanceOf ft.redhood
+        }
+      }
+
+      runtime h2 'H2 file' {
+        instanceOf ft.pigs3db
+        instanceOf ft.redhoodDb
+      }
+    }
+  }
+}
+
+views {
+  deployment view env-local {
+    title 'Deployment / Local'
+
+    include laptop, local.**
+
+    style laptop {
+      icon bootstrap:laptop
+    }
+    style local.jvm {
+      icon tech:java
+    }
+    style local.jar1, local.jar2, local.jar3 {
+      icon tech:apache
+    }
+    style local.h2 {
+      icon bootstrap:type-h2
+    }
+  }
+}

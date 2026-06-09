@@ -20,7 +20,11 @@ export type $Specs = SpecAux<
   | "messaging"
   | "system",
   // Deployment kinds
-  never,
+  | "container"
+  | "env"
+  | "package"
+  | "runtime"
+  | "server",
   // Relationship kinds
   | "async",
   // Tags
@@ -62,8 +66,22 @@ export type $Aux = Aux<
   | "ft.redhood.service"
   | "ft.redhood.wolf",
   // Deployments
-  never,
+  | "local"
+  | "local.laptop"
+  | "local.laptop.h2"
+  | "local.laptop.jvm"
+  | "local.laptop.h2.pigs3db"
+  | "local.laptop.h2.redhoodDb"
+  | "local.laptop.jvm.jar1"
+  | "local.laptop.jvm.jar2"
+  | "local.laptop.jvm.jar3"
+  | "local.laptop.jvm.jar1.houseEvents"
+  | "local.laptop.jvm.jar1.monolith"
+  | "local.laptop.jvm.jar1.wolfEvents"
+  | "local.laptop.jvm.jar2.pigs3"
+  | "local.laptop.jvm.jar3.redhood",
   // Views
+  | "env-local"
   | "fairy-tales-index"
   | "index"
   | "pigs3-index"
@@ -179,7 +197,27 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
         },
       },
     },
-    deployments: {},
+    deployments: {
+      env: {
+        style: {},
+      },
+      server: {
+        style: {},
+      },
+      container: {
+        style: {
+          icon: 'tech:docker',
+        },
+      },
+      runtime: {
+        notation: 'Runtime Environment',
+        style: {},
+      },
+      package: {
+        notation: 'Hostable Artifact',
+        style: {},
+      },
+    },
     metadataKeys: [
       'owner',
     ],
@@ -819,6 +857,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
     },
     '10en3so': {
       title: 'orchestrates domain logic in',
+      navigateTo: 'wolf-lifecycle',
       source: {
         model: 'ft.redhood.service',
       },
@@ -1016,6 +1055,927 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
     },
   },
   views: {
+    'env-local': {
+      _type: 'deployment',
+      tags: null,
+      links: null,
+      _stage: 'layouted',
+      sourcePath: 'deployment.c4',
+      description: null,
+      title: 'Deployment / Local',
+      id: 'env-local',
+      autoLayout: {
+        direction: 'TB',
+      },
+      notation: {
+        nodes: [
+          {
+            title: 'Hostable Artifact',
+            shape: 'rectangle',
+            color: 'primary',
+            kinds: [
+              'package',
+            ],
+          },
+          {
+            title: 'Runtime Environment',
+            shape: 'rectangle',
+            color: 'primary',
+            kinds: [
+              'runtime',
+            ],
+          },
+        ],
+      },
+      hash: 'fr85mXdr2C3iCXOTHnShK8jsWLKbvkb3_LxEHgrCwNc',
+      bounds: {
+        x: 0,
+        y: 0,
+        width: 1697,
+        height: 1214,
+      },
+      nodes: [
+        {
+          id: 'local.laptop',
+          parent: null,
+          level: 0,
+          children: [
+            'local.laptop.jvm',
+            'local.laptop.h2',
+          ],
+          inEdges: [],
+          outEdges: [],
+          deploymentRef: 'local.laptop',
+          title: 'Developer\'s laptop',
+          kind: 'server',
+          links: [
+            {
+              url: 'http://localhost:8080',
+            },
+          ],
+          color: 'primary',
+          shape: 'rectangle',
+          tags: [],
+          style: {
+            opacity: 15,
+            size: 'md',
+          },
+          depth: 3,
+          icon: 'bootstrap:laptop',
+          x: 8,
+          y: 8,
+          width: 1681,
+          height: 1198,
+          labelBBox: {
+            x: 6,
+            y: 0,
+            width: 129,
+            height: 15,
+          },
+        },
+        {
+          id: 'local.laptop.jvm',
+          parent: 'local.laptop',
+          level: 1,
+          children: [
+            'local.laptop.jvm.jar1',
+            'local.laptop.jvm.jar2',
+            'local.laptop.jvm.jar3',
+          ],
+          inEdges: [],
+          outEdges: [
+            'tqsino',
+            '1eajt3p',
+          ],
+          deploymentRef: 'local.laptop.jvm',
+          title: 'Java Virtual Machine',
+          kind: 'runtime',
+          notation: 'Runtime Environment',
+          color: 'primary',
+          shape: 'rectangle',
+          tags: [],
+          style: {
+            opacity: 15,
+            size: 'md',
+          },
+          depth: 2,
+          icon: 'tech:java',
+          x: 58,
+          y: 79,
+          width: 1581,
+          height: 737,
+          labelBBox: {
+            x: 6,
+            y: 0,
+            width: 138,
+            height: 15,
+          },
+        },
+        {
+          id: 'local.laptop.jvm.jar1',
+          parent: 'local.laptop.jvm',
+          level: 2,
+          children: [
+            'local.laptop.jvm.jar1.monolith',
+            'local.laptop.jvm.jar1.houseEvents',
+            'local.laptop.jvm.jar1.wolfEvents',
+          ],
+          inEdges: [
+            '1pn4jei',
+            'hry8lo',
+          ],
+          outEdges: [
+            'r9asuz',
+            '1gtava3',
+            'c9i3ui',
+            '1jvjvn0',
+          ],
+          deploymentRef: 'local.laptop.jvm.jar1',
+          title: 'Module with Spring Boot app',
+          kind: 'package',
+          notation: 'Hostable Artifact',
+          color: 'primary',
+          shape: 'rectangle',
+          tags: [],
+          style: {
+            opacity: 15,
+            size: 'md',
+          },
+          depth: 1,
+          icon: 'tech:apache',
+          x: 108,
+          y: 150,
+          width: 1481,
+          height: 302,
+          labelBBox: {
+            x: 6,
+            y: 0,
+            width: 189,
+            height: 15,
+          },
+        },
+        {
+          id: 'local.laptop.jvm.jar1.monolith',
+          parent: 'local.laptop.jvm.jar1',
+          level: 3,
+          children: [],
+          inEdges: [],
+          outEdges: [
+            'r9asuz',
+            '1gtava3',
+          ],
+          kind: 'instance',
+          title: 'Spring App',
+          description: {
+            txt: 'Entry point to the system, when CLI or HTTP mode can be chosen',
+          },
+          technology: 'Spring',
+          tags: [
+            'container',
+          ],
+          links: [
+            {
+              url: 'https://github.com/mat3e/3pigs-ddd/',
+              title: 'Repository',
+            },
+          ],
+          icon: 'tech:spring-icon',
+          color: 'primary',
+          shape: 'rectangle',
+          style: {
+            opacity: 15,
+            size: 'md',
+          },
+          deploymentRef: 'local.laptop.jvm.jar1.monolith',
+          modelRef: 'ft.monolith',
+          x: 653,
+          y: 222,
+          width: 360,
+          height: 180,
+          labelBBox: {
+            x: 46,
+            y: 46,
+            width: 298,
+            height: 84,
+          },
+        },
+        {
+          id: 'local.laptop.jvm.jar1.houseEvents',
+          parent: 'local.laptop.jvm.jar1',
+          level: 3,
+          children: [],
+          inEdges: [
+            '1pn4jei',
+          ],
+          outEdges: [
+            'c9i3ui',
+          ],
+          kind: 'instance',
+          title: 'In-memory house events',
+          description: {
+            txt: 'Spring way of exchanging HouseEvents',
+          },
+          technology: 'Spring',
+          tags: [
+            'container',
+          ],
+          icon: 'tech:spring-icon',
+          color: 'primary',
+          shape: 'queue',
+          style: {
+            opacity: 15,
+            size: 'md',
+          },
+          deploymentRef: 'local.laptop.jvm.jar1.houseEvents',
+          modelRef: 'ft.houseEvents',
+          x: 158,
+          y: 226,
+          width: 364,
+          height: 172,
+          labelBBox: {
+            x: 56,
+            y: 42,
+            width: 292,
+            height: 84,
+          },
+        },
+        {
+          id: 'local.laptop.jvm.jar1.wolfEvents',
+          parent: 'local.laptop.jvm.jar1',
+          level: 3,
+          children: [],
+          inEdges: [
+            'hry8lo',
+          ],
+          outEdges: [
+            '1jvjvn0',
+          ],
+          kind: 'instance',
+          title: 'In-memory wolf events',
+          description: {
+            txt: 'Spring way of exchanging WolfEvents',
+          },
+          technology: 'Spring',
+          tags: [
+            'container',
+          ],
+          icon: 'tech:spring-icon',
+          color: 'primary',
+          shape: 'queue',
+          style: {
+            opacity: 15,
+            size: 'md',
+          },
+          deploymentRef: 'local.laptop.jvm.jar1.wolfEvents',
+          modelRef: 'ft.wolfEvents',
+          x: 1143,
+          y: 226,
+          width: 395,
+          height: 172,
+          labelBBox: {
+            x: 56,
+            y: 51,
+            width: 324,
+            height: 66,
+          },
+        },
+        {
+          id: 'local.laptop.jvm.jar2',
+          parent: 'local.laptop.jvm',
+          level: 2,
+          children: [
+            'local.laptop.jvm.jar2.pigs3',
+          ],
+          inEdges: [
+            'r9asuz',
+            'c9i3ui',
+          ],
+          outEdges: [
+            '1pn4jei',
+            'tqsino',
+          ],
+          deploymentRef: 'local.laptop.jvm.jar2',
+          title: 'jar2',
+          kind: 'package',
+          notation: 'Hostable Artifact',
+          color: 'primary',
+          shape: 'rectangle',
+          modelRef: 'ft.pigs3',
+          tags: [],
+          style: {
+            opacity: 15,
+            size: 'md',
+          },
+          depth: 1,
+          icon: 'tech:apache',
+          navigateTo: 'pigs3-index',
+          x: 348,
+          y: 501,
+          width: 388,
+          height: 265,
+          labelBBox: {
+            x: 6,
+            y: 0,
+            width: 32,
+            height: 15,
+          },
+        },
+        {
+          id: 'local.laptop.jvm.jar3',
+          parent: 'local.laptop.jvm',
+          level: 2,
+          children: [
+            'local.laptop.jvm.jar3.redhood',
+          ],
+          inEdges: [
+            '1gtava3',
+            '1jvjvn0',
+          ],
+          outEdges: [
+            'hry8lo',
+            '1eajt3p',
+          ],
+          deploymentRef: 'local.laptop.jvm.jar3',
+          title: 'jar3',
+          kind: 'package',
+          notation: 'Hostable Artifact',
+          color: 'primary',
+          shape: 'rectangle',
+          modelRef: 'ft.redhood',
+          tags: [],
+          style: {
+            opacity: 15,
+            size: 'md',
+          },
+          depth: 1,
+          icon: 'tech:apache',
+          navigateTo: 'redhood-index',
+          x: 902,
+          y: 501,
+          width: 418,
+          height: 265,
+          labelBBox: {
+            x: 6,
+            y: 0,
+            width: 32,
+            height: 15,
+          },
+        },
+        {
+          id: 'local.laptop.jvm.jar2.pigs3',
+          parent: 'local.laptop.jvm.jar2',
+          level: 3,
+          children: [],
+          inEdges: [
+            'r9asuz',
+            'c9i3ui',
+          ],
+          outEdges: [
+            '1pn4jei',
+            'tqsino',
+          ],
+          kind: 'instance',
+          title: 'The Three Little Pigs',
+          description: {
+            txt: 'A fairy tale about pigs building their houses',
+          },
+          technology: 'Java',
+          tags: [
+            'container',
+          ],
+          links: [
+            {
+              url: 'https://github.com/mat3e/3pigs-ddd/',
+              title: 'Repository',
+            },
+          ],
+          icon: 'tech:java',
+          color: 'primary',
+          shape: 'rectangle',
+          style: {
+            opacity: 15,
+            size: 'md',
+          },
+          deploymentRef: 'local.laptop.jvm.jar2.pigs3',
+          modelRef: 'ft.pigs3',
+          navigateTo: 'pigs3-index',
+          x: 380,
+          y: 554,
+          width: 324,
+          height: 180,
+          labelBBox: {
+            x: 46,
+            y: 47,
+            width: 262,
+            height: 84,
+          },
+        },
+        {
+          id: 'local.laptop.jvm.jar3.redhood',
+          parent: 'local.laptop.jvm.jar3',
+          level: 3,
+          children: [],
+          inEdges: [
+            '1gtava3',
+            '1jvjvn0',
+          ],
+          outEdges: [
+            'hry8lo',
+            '1eajt3p',
+          ],
+          kind: 'instance',
+          title: 'Little Red Riding Hood',
+          description: {
+            txt: 'A fairy tale about listening to your mom, and not interacting with strangers',
+          },
+          technology: 'Java',
+          tags: [
+            'container',
+          ],
+          links: [
+            {
+              url: 'https://github.com/mat3e/3pigs-ddd/',
+              title: 'Repository',
+            },
+          ],
+          icon: 'tech:java',
+          color: 'primary',
+          shape: 'rectangle',
+          style: {
+            opacity: 15,
+            size: 'md',
+          },
+          deploymentRef: 'local.laptop.jvm.jar3.redhood',
+          modelRef: 'ft.redhood',
+          navigateTo: 'redhood-index',
+          x: 934,
+          y: 554,
+          width: 353,
+          height: 180,
+          labelBBox: {
+            x: 46,
+            y: 38,
+            width: 292,
+            height: 102,
+          },
+        },
+        {
+          id: 'local.laptop.h2',
+          parent: 'local.laptop',
+          level: 1,
+          children: [
+            'local.laptop.h2.pigs3db',
+            'local.laptop.h2.redhoodDb',
+          ],
+          inEdges: [
+            'tqsino',
+            '1eajt3p',
+          ],
+          outEdges: [],
+          deploymentRef: 'local.laptop.h2',
+          title: 'H2 file',
+          kind: 'runtime',
+          notation: 'Runtime Environment',
+          color: 'primary',
+          shape: 'rectangle',
+          tags: [],
+          style: {
+            opacity: 15,
+            size: 'md',
+          },
+          depth: 1,
+          icon: 'bootstrap:type-h2',
+          x: 277,
+          y: 855,
+          width: 1107,
+          height: 301,
+          labelBBox: {
+            x: 6,
+            y: 0,
+            width: 45,
+            height: 15,
+          },
+        },
+        {
+          id: 'local.laptop.h2.pigs3db',
+          parent: 'local.laptop.h2',
+          level: 2,
+          children: [],
+          inEdges: [
+            'tqsino',
+          ],
+          outEdges: [],
+          kind: 'instance',
+          title: 'The Three Little Pigs H2 Database',
+          description: {
+            txt: 'DB schema - houses',
+          },
+          technology: 'Mysql',
+          tags: [
+            'container',
+          ],
+          icon: 'tech:mysql-icon',
+          color: 'primary',
+          shape: 'storage',
+          style: {
+            opacity: 15,
+            size: 'md',
+          },
+          deploymentRef: 'local.laptop.h2.pigs3db',
+          modelRef: 'ft.pigs3db',
+          x: 327,
+          y: 926,
+          width: 430,
+          height: 180,
+          labelBBox: {
+            x: 46,
+            y: 56,
+            width: 368,
+            height: 66,
+          },
+        },
+        {
+          id: 'local.laptop.h2.redhoodDb',
+          parent: 'local.laptop.h2',
+          level: 2,
+          children: [],
+          inEdges: [
+            '1eajt3p',
+          ],
+          outEdges: [],
+          kind: 'instance',
+          title: 'Little Red Riding Hood H2 Database',
+          description: {
+            txt: 'DB schema - wolfs',
+          },
+          technology: 'Mysql',
+          tags: [
+            'container',
+          ],
+          icon: 'tech:mysql-icon',
+          color: 'primary',
+          shape: 'storage',
+          style: {
+            opacity: 15,
+            size: 'md',
+          },
+          deploymentRef: 'local.laptop.h2.redhoodDb',
+          modelRef: 'ft.redhoodDb',
+          x: 888,
+          y: 926,
+          width: 446,
+          height: 180,
+          labelBBox: {
+            x: 46,
+            y: 56,
+            width: 384,
+            height: 66,
+          },
+        },
+      ],
+      edges: [
+        {
+          id: 'r9asuz',
+          source: 'local.laptop.jvm.jar1.monolith',
+          target: 'local.laptop.jvm.jar2.pigs3',
+          label: '[...]',
+          points: [
+            [
+              755,
+              401,
+            ],
+            [
+              716,
+              446,
+            ],
+            [
+              668,
+              501,
+            ],
+            [
+              627,
+              547,
+            ],
+          ],
+          labelBBox: {
+            x: 697,
+            y: 465,
+            width: 25,
+            height: 18,
+          },
+          parent: 'local.laptop.jvm',
+          relations: [
+            'sfdtp0',
+            'vlcyf7',
+          ],
+          color: 'gray',
+          line: 'dashed',
+          head: 'normal',
+        },
+        {
+          id: '1gtava3',
+          source: 'local.laptop.jvm.jar1.monolith',
+          target: 'local.laptop.jvm.jar3.redhood',
+          label: 'interacts in HTTP mode via',
+          points: [
+            [
+              863,
+              401,
+            ],
+            [
+              876,
+              431,
+            ],
+            [
+              893,
+              463,
+            ],
+            [
+              913,
+              489,
+            ],
+            [
+              930,
+              510,
+            ],
+            [
+              949,
+              530,
+            ],
+            [
+              970,
+              548,
+            ],
+          ],
+          labelBBox: {
+            x: 914,
+            y: 468,
+            width: 173,
+            height: 18,
+          },
+          parent: 'local.laptop.jvm',
+          relations: [
+            '1l8dxr6',
+          ],
+          color: 'gray',
+          line: 'dashed',
+          head: 'normal',
+        },
+        {
+          id: 'c9i3ui',
+          source: 'local.laptop.jvm.jar1.houseEvents',
+          target: 'local.laptop.jvm.jar2.pigs3',
+          label: 'triggers',
+          points: [
+            [
+              392,
+              397,
+            ],
+            [
+              419,
+              443,
+            ],
+            [
+              454,
+              499,
+            ],
+            [
+              483,
+              546,
+            ],
+          ],
+          labelBBox: {
+            x: 448,
+            y: 468,
+            width: 51,
+            height: 18,
+          },
+          parent: 'local.laptop.jvm',
+          relations: [
+            '1ob520l',
+          ],
+          color: 'gray',
+          line: 'dotted',
+          head: 'open',
+          kind: 'async',
+        },
+        {
+          id: '1pn4jei',
+          source: 'local.laptop.jvm.jar2.pigs3',
+          target: 'local.laptop.jvm.jar1.houseEvents',
+          label: '[...]',
+          points: [
+            [
+              427,
+              555,
+            ],
+            [
+              407,
+              535,
+            ],
+            [
+              389,
+              513,
+            ],
+            [
+              376,
+              489,
+            ],
+            [
+              362,
+              464,
+            ],
+            [
+              353,
+              435,
+            ],
+            [
+              348,
+              407,
+            ],
+          ],
+          labelBBox: {
+            x: 377,
+            y: 465,
+            width: 25,
+            height: 18,
+          },
+          parent: 'local.laptop.jvm',
+          relations: [
+            '8g9weh',
+            't14e15',
+          ],
+          color: 'gray',
+          line: 'dotted',
+          head: 'open',
+          kind: 'async',
+        },
+        {
+          id: '1jvjvn0',
+          source: 'local.laptop.jvm.jar1.wolfEvents',
+          target: 'local.laptop.jvm.jar3.redhood',
+          label: 'triggers',
+          points: [
+            [
+              1191,
+              398,
+            ],
+            [
+              1167,
+              417,
+            ],
+            [
+              1146,
+              440,
+            ],
+            [
+              1130,
+              467,
+            ],
+            [
+              1117,
+              490,
+            ],
+            [
+              1110,
+              518,
+            ],
+            [
+              1108,
+              545,
+            ],
+          ],
+          labelBBox: {
+            x: 1131,
+            y: 468,
+            width: 51,
+            height: 18,
+          },
+          parent: 'local.laptop.jvm',
+          relations: [
+            '1mf6tuc',
+          ],
+          color: 'gray',
+          line: 'dotted',
+          head: 'open',
+          kind: 'async',
+        },
+        {
+          id: 'hry8lo',
+          source: 'local.laptop.jvm.jar3.redhood',
+          target: 'local.laptop.jvm.jar1.wolfEvents',
+          label: 'informs when wolf killed',
+          points: [
+            [
+              1173,
+              555,
+            ],
+            [
+              1205,
+              508,
+            ],
+            [
+              1244,
+              452,
+            ],
+            [
+              1277,
+              405,
+            ],
+          ],
+          labelBBox: {
+            x: 1234,
+            y: 468,
+            width: 152,
+            height: 18,
+          },
+          parent: 'local.laptop.jvm',
+          relations: [
+            'oi9w9h',
+          ],
+          color: 'gray',
+          line: 'dotted',
+          head: 'open',
+          kind: 'async',
+        },
+        {
+          id: 'tqsino',
+          source: 'local.laptop.jvm.jar2.pigs3',
+          target: 'local.laptop.h2.pigs3db',
+          label: '[...]',
+          points: [
+            [
+              542,
+              734,
+            ],
+            [
+              542,
+              789,
+            ],
+            [
+              542,
+              859,
+            ],
+            [
+              542,
+              915,
+            ],
+          ],
+          labelBBox: {
+            x: 543,
+            y: 823,
+            width: 25,
+            height: 18,
+          },
+          parent: 'local.laptop',
+          relations: [
+            '1m16pn5',
+            '1s78fry',
+          ],
+          color: 'gray',
+          line: 'dashed',
+          head: 'normal',
+        },
+        {
+          id: '1eajt3p',
+          source: 'local.laptop.jvm.jar3.redhood',
+          target: 'local.laptop.h2.redhoodDb',
+          label: '[...]',
+          points: [
+            [
+              1111,
+              734,
+            ],
+            [
+              1111,
+              789,
+            ],
+            [
+              1111,
+              859,
+            ],
+            [
+              1111,
+              915,
+            ],
+          ],
+          labelBBox: {
+            x: 1112,
+            y: 823,
+            width: 25,
+            height: 18,
+          },
+          parent: 'local.laptop',
+          relations: [
+            '1mtkvth',
+            '1ytfpzl',
+          ],
+          color: 'gray',
+          line: 'dashed',
+          head: 'normal',
+        },
+      ],
+    },
     index: {
       _type: 'element',
       tags: null,
@@ -4726,6 +5686,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
           color: 'gray',
           line: 'solid',
           head: 'normal',
+          navigateTo: 'wolf-lifecycle',
           isCustomized: true,
         },
         {
@@ -5030,7 +5991,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
               {
                 id: 'step-06_source',
                 cx: 160,
-                cy: 561,
+                cy: 581,
                 height: 40,
                 type: 'source',
                 position: 'right',
@@ -5063,7 +6024,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
               {
                 id: 'step-06_target',
                 cx: 185,
-                cy: 561,
+                cy: 581,
                 height: 24,
                 type: 'target',
                 position: 'left',
@@ -5071,7 +6032,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
               {
                 id: 'step-07_source',
                 cx: 185,
-                cy: 583,
+                cy: 603,
                 height: 40,
                 type: 'source',
                 position: 'right',
@@ -5104,7 +6065,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
               {
                 id: 'step-04_source',
                 cx: 176,
-                cy: 445,
+                cy: 465,
                 height: 40,
                 type: 'source',
                 position: 'right',
@@ -5112,7 +6073,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
               {
                 id: 'step-07_target',
                 cx: 176,
-                cy: 583,
+                cy: 603,
                 height: 24,
                 type: 'target',
                 position: 'left',
@@ -5120,7 +6081,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
               {
                 id: 'step-08_source',
                 cx: 176,
-                cy: 605,
+                cy: 625,
                 height: 40,
                 type: 'source',
                 position: 'right',
@@ -5128,7 +6089,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
               {
                 id: 'step-11_target',
                 cx: 176,
-                cy: 743,
+                cy: 763,
                 height: 24,
                 type: 'target',
                 position: 'right',
@@ -5136,7 +6097,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
               {
                 id: 'step-12_source',
                 cx: 176,
-                cy: 838,
+                cy: 858,
                 height: 40,
                 type: 'source',
                 position: 'right',
@@ -5144,7 +6105,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
               {
                 id: 'step-17_source',
                 cx: 176,
-                cy: 1319,
+                cy: 1339,
                 height: 40,
                 type: 'source',
                 position: 'right',
@@ -5152,7 +6113,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
               {
                 id: 'step-19_source',
                 cx: 176,
-                cy: 1436,
+                cy: 1456,
                 height: 40,
                 type: 'source',
                 position: 'right',
@@ -5160,7 +6121,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
               {
                 id: 'step-20_target',
                 cx: 176,
-                cy: 1531,
+                cy: 1551,
                 height: 24,
                 type: 'target',
                 position: 'right',
@@ -5168,7 +6129,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
               {
                 id: 'step-21_source',
                 cx: 176,
-                cy: 1553,
+                cy: 1573,
                 height: 40,
                 type: 'source',
                 position: 'right',
@@ -5176,7 +6137,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
               {
                 id: 'step-21_target',
                 cx: 176,
-                cy: 1670,
+                cy: 1690,
                 height: 24,
                 type: 'target',
                 position: 'right',
@@ -5201,7 +6162,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
               {
                 id: 'step-12_target',
                 cx: 190,
-                cy: 838,
+                cy: 858,
                 height: 24,
                 type: 'target',
                 position: 'left',
@@ -5209,7 +6170,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
               {
                 id: 'step-13_source',
                 cx: 190,
-                cy: 860,
+                cy: 880,
                 height: 40,
                 type: 'source',
                 position: 'right',
@@ -5217,7 +6178,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
               {
                 id: 'step-13_target',
                 cx: 190,
-                cy: 977,
+                cy: 997,
                 height: 24,
                 type: 'target',
                 position: 'right',
@@ -5225,7 +6186,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
               {
                 id: 'step-14_source',
                 cx: 190,
-                cy: 999,
+                cy: 1019,
                 height: 40,
                 type: 'source',
                 position: 'right',
@@ -5233,7 +6194,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
               {
                 id: 'step-15_target',
                 cx: 190,
-                cy: 1108,
+                cy: 1128,
                 height: 24,
                 type: 'target',
                 position: 'right',
@@ -5241,7 +6202,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
               {
                 id: 'step-16_source',
                 cx: 190,
-                cy: 1130,
+                cy: 1150,
                 height: 40,
                 type: 'source',
                 position: 'right',
@@ -5249,7 +6210,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
               {
                 id: 'step-16_target',
                 cx: 190,
-                cy: 1261,
+                cy: 1281,
                 height: 24,
                 type: 'target',
                 position: 'right',
@@ -5266,7 +6227,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
               {
                 id: 'step-04_target',
                 cx: 182,
-                cy: 445,
+                cy: 465,
                 height: 24,
                 type: 'target',
                 position: 'left',
@@ -5274,7 +6235,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
               {
                 id: 'step-05_source',
                 cx: 182,
-                cy: 467,
+                cy: 487,
                 height: 40,
                 type: 'source',
                 position: 'right',
@@ -5282,7 +6243,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
               {
                 id: 'step-08_target',
                 cx: 182,
-                cy: 605,
+                cy: 625,
                 height: 24,
                 type: 'target',
                 position: 'left',
@@ -5290,7 +6251,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
               {
                 id: 'step-09_source',
                 cx: 182,
-                cy: 627,
+                cy: 647,
                 height: 40,
                 type: 'source',
                 position: 'right',
@@ -5298,7 +6259,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
               {
                 id: 'step-10_target',
                 cx: 182,
-                cy: 721,
+                cy: 741,
                 height: 24,
                 type: 'target',
                 position: 'right',
@@ -5306,7 +6267,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
               {
                 id: 'step-11_source',
                 cx: 182,
-                cy: 743,
+                cy: 763,
                 height: 40,
                 type: 'source',
                 position: 'left',
@@ -5314,7 +6275,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
               {
                 id: 'step-17_target',
                 cx: 182,
-                cy: 1319,
+                cy: 1339,
                 height: 24,
                 type: 'target',
                 position: 'left',
@@ -5322,7 +6283,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
               {
                 id: 'step-18_source',
                 cx: 182,
-                cy: 1341,
+                cy: 1361,
                 height: 40,
                 type: 'source',
                 position: 'right',
@@ -5339,7 +6300,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
               {
                 id: 'step-05_target',
                 cx: 223,
-                cy: 467,
+                cy: 487,
                 height: 24,
                 type: 'target',
                 position: 'left',
@@ -5347,7 +6308,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
               {
                 id: 'step-09_target',
                 cx: 223,
-                cy: 627,
+                cy: 647,
                 height: 24,
                 type: 'target',
                 position: 'left',
@@ -5355,7 +6316,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
               {
                 id: 'step-10_source',
                 cx: 223,
-                cy: 721,
+                cy: 741,
                 height: 40,
                 type: 'source',
                 position: 'left',
@@ -5363,7 +6324,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
               {
                 id: 'step-18_target',
                 cx: 223,
-                cy: 1341,
+                cy: 1361,
                 height: 24,
                 type: 'target',
                 position: 'left',
@@ -5380,7 +6341,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
               {
                 id: 'step-14_target',
                 cx: 186,
-                cy: 999,
+                cy: 1019,
                 height: 24,
                 type: 'target',
                 position: 'left',
@@ -5388,7 +6349,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
               {
                 id: 'step-15_source',
                 cx: 186,
-                cy: 1108,
+                cy: 1128,
                 height: 40,
                 type: 'source',
                 position: 'left',
@@ -5405,7 +6366,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
               {
                 id: 'step-19_target',
                 cx: 198,
-                cy: 1432,
+                cy: 1452,
                 height: 24,
                 type: 'target',
                 position: 'left',
@@ -5413,7 +6374,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
               {
                 id: 'step-20_source',
                 cx: 198,
-                cy: 1527,
+                cy: 1547,
                 height: 40,
                 type: 'source',
                 position: 'left',
@@ -5447,7 +6408,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
             targetHandle: 'step-03_target',
             labelBBox: {
               width: 271,
-              height: 29,
+              height: 49,
             },
           },
           {
@@ -5528,7 +6489,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
             targetHandle: 'step-12_target',
             labelBBox: {
               width: 149,
-              height: 29,
+              height: 49,
             },
           },
           {
@@ -5618,7 +6579,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
           x: 0,
           y: 0,
           width: 3418,
-          height: 1712,
+          height: 1732,
         },
       },
       bounds: {
@@ -6072,6 +7033,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
           head: 'normal',
           tags: [],
           astPath: '/steps@0',
+          navigateTo: 'wolf-lifecycle',
         },
         {
           id: 'step-04',
@@ -6563,6 +7525,7 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
           head: 'normal',
           tags: [],
           astPath: '/steps@2/source/source/source/source',
+          navigateTo: 'wolf-lifecycle',
         },
         {
           id: 'step-13',
@@ -7047,7 +8010,95 @@ export const likec4model: LikeC4Model<$Aux> = new LikeC4Model({
     },
   },
   deployments: {
-    elements: {},
+    elements: {
+      local: {
+        style: {},
+        kind: 'env',
+        title: 'Local',
+        id: 'local',
+      },
+      'local.laptop': {
+        style: {},
+        kind: 'server',
+        links: [
+          {
+            url: 'http://localhost:8080',
+          },
+        ],
+        title: 'Developer\'s laptop',
+        id: 'local.laptop',
+      },
+      'local.laptop.jvm': {
+        notation: 'Runtime Environment',
+        style: {},
+        kind: 'runtime',
+        title: 'Java Virtual Machine',
+        id: 'local.laptop.jvm',
+      },
+      'local.laptop.h2': {
+        notation: 'Runtime Environment',
+        style: {},
+        kind: 'runtime',
+        title: 'H2 file',
+        id: 'local.laptop.h2',
+      },
+      'local.laptop.jvm.jar1': {
+        notation: 'Hostable Artifact',
+        style: {},
+        kind: 'package',
+        title: 'Module with Spring Boot app',
+        id: 'local.laptop.jvm.jar1',
+      },
+      'local.laptop.jvm.jar2': {
+        notation: 'Hostable Artifact',
+        style: {},
+        kind: 'package',
+        title: 'jar2',
+        id: 'local.laptop.jvm.jar2',
+      },
+      'local.laptop.jvm.jar3': {
+        notation: 'Hostable Artifact',
+        style: {},
+        kind: 'package',
+        title: 'jar3',
+        id: 'local.laptop.jvm.jar3',
+      },
+      'local.laptop.h2.pigs3db': {
+        id: 'local.laptop.h2.pigs3db',
+        element: 'ft.pigs3db',
+        style: {},
+      },
+      'local.laptop.h2.redhoodDb': {
+        id: 'local.laptop.h2.redhoodDb',
+        element: 'ft.redhoodDb',
+        style: {},
+      },
+      'local.laptop.jvm.jar1.monolith': {
+        id: 'local.laptop.jvm.jar1.monolith',
+        element: 'ft.monolith',
+        style: {},
+      },
+      'local.laptop.jvm.jar1.houseEvents': {
+        id: 'local.laptop.jvm.jar1.houseEvents',
+        element: 'ft.houseEvents',
+        style: {},
+      },
+      'local.laptop.jvm.jar1.wolfEvents': {
+        id: 'local.laptop.jvm.jar1.wolfEvents',
+        element: 'ft.wolfEvents',
+        style: {},
+      },
+      'local.laptop.jvm.jar2.pigs3': {
+        id: 'local.laptop.jvm.jar2.pigs3',
+        element: 'ft.pigs3',
+        style: {},
+      },
+      'local.laptop.jvm.jar3.redhood': {
+        id: 'local.laptop.jvm.jar3.redhood',
+        element: 'ft.redhood',
+        style: {},
+      },
+    },
     relations: {},
   },
   imports: {},

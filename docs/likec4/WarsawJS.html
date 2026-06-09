@@ -521,11 +521,11 @@
             <section data-auto-animate>
                 <h2 style="margin: 0" data-id="c4t">Containers</h2>
                 <div style="margin: 0">split to microservices</div>
-                <img style="max-height: 61vh" src="img/ms/3.png" data-id="c4i"/>
+                <img style="max-height: 55vh" src="img/ms/3.png" data-id="c4i"/>
             </section>
             <section data-auto-animate>
                 <h2 style="margin: 0" data-id="c4t">Containers</h2>
-                <img style="max-height: 65vh" src="img/ms/4.png" data-id="c4i"/>
+                <img style="max-height: 60vh" src="img/ms/4.png" data-id="c4i"/>
             </section>
             <section data-auto-animate>
                 <h2 data-id="c4t">Context</h2>
@@ -534,11 +534,11 @@
             <section data-auto-animate>
                 <h2 style="margin: 0" data-id="c4t">Context</h2>
                 <div style="margin: 0">different teams</div>
-                <img style="max-height: 61vh" src="img/ms/5.png" data-id="c4i"/>
+                <img style="max-height: 55vh" src="img/ms/5.png" data-id="c4i"/>
             </section>
             <section data-auto-animate>
                 <h2 style="margin: 0" data-id="c4t">Containers</h2>
-                <img style="max-height: 61vh" src="img/ms/6.png" data-id="c4i"/>
+                <img style="max-height: 55vh" src="img/ms/6.png" data-id="c4i"/>
             </section>
         </section>
         <section data-background-image>
@@ -614,7 +614,7 @@
             <section>
                 <h3>DSL</h3>
                 <pre style="width: 100%; margin: 0"><code style="max-height: 23em" data-trim
-                                                          data-line-numbers="1|2-8|14-17|18-21|22-42|43-48">
+                                                          data-line-numbers="1|2-8|14-17|18-21|22-42|43-47|49-52">
                     specification {
                       element actor {
                         notation "Person"
@@ -657,7 +657,11 @@
                           shape bucket
                         }
                       }
-                      element component
+                      element component {
+                        style {
+                          shape component
+                        }
+                      }
 
                       relationship async {
                         line dotted
@@ -812,7 +816,7 @@
                 <h3 style="margin: 0">Model</h3>
                 <pre style="width: 100%; margin: 0; line-height: 1.1;font-size: .4em"><code style="max-height: 35em"
                                                                                             data-trim
-                                                                                            data-line-numbers="1-2|4,36|5-7|9-21,29-31|33,35|38,79|61-65">
+                                                                                            data-line-numbers="1-2|4,36|5-7|9-21,29-31|36|39,84|65-69">
                     model {
                       user = actor 'User' 'The one who wants to read fairy tales'
 
@@ -841,13 +845,14 @@
                         database redhoodDb 'Little Red Riding Hood H2 Database' 'DB schema - wolfs' {
                           icon tech:mysql-icon
                         }
-                        messaging inMemBus 'In-memory events support' 'Spring way of exchanging events' {
+                        messaging houseEvents 'In-memory house events' 'Spring way of exchanging HouseEvents' {
+                          icon tech:spring-icon
+                        }
+                        messaging wolfEvents 'In-memory wolf events' 'Spring way of exchanging WolfEvents' {
                           icon tech:spring-icon
                         }
 
                         user -> monolith 'interacts with'
-
-                        monolith -> redhood
                       }
 
                       extend ft.pigs3 {
@@ -862,35 +867,68 @@
                           -> query 'reads houses via'
                         }
                         component command 'Command Handler' 'App logic for driving domain logic' {
-                          -> factory 'creates new via'
-                          -> wolf 'destroys with'
-                          -> repo 'updates on diff via'
+                          -> factory 'creates new houses via'
+                          -> house 'changes pigs in'
+                          -> wolf 'destroys houses with'
+                          -> repo 'reads and updates on diff via'
                         }
-                        component event 'Event Handler' 'Executes commands based on incomming events' {
+                        component event 'Event Handler' 'Executes commands based on incoming events' {
                           -> query 'finds house to escape via'
                           -> command 'calls'
 
-                          inMemBus -[async]-> event 'triggers'
+                          houseEvents -[async]-> event 'triggers'
                         }
-                        component query 'Query Repository' 'Allows to find closest houses and read models'
+                        component query 'Query Repository' 'Allows to find closest houses and read models' {
+                          -> pigs3db 'selects from'
+                        }
                         component wolf 'Wolf Service' 'Stateless work on house, encapsulating retrying logic' {
                           -> house 'tries to destroy'
                           -> blowing 'follows'
-                          -[async]-> inMemBus 'informs when quitting'
+                          -[async]-> houseEvents 'informs when quitting'
                         }
                         component factory 'House Factory' 'Domain factory for creating house aggregate' {
                           -> building 'follows'
                           -> house 'creates'
                         }
                         component repo 'Repository' 'Allows to find by ID and save houses' {
-                          -> house 'inserts/updates'
+                          -> house 'saves'
                           -> house 'reads'
+                          -> pigs3db 'select, insert, update'
                         }
                         component blowing 'Blowing Down Specification' 'Rules on when house can be destroyed by blowing'
                         component building 'Building Policy' 'Rules on how to build house depending on the character of a pig'
                         component house 'House Aggregate' 'DDD aggregate protecting rules about destroying and pig changes' {
-                          -[async]-> inMemBus 'informs about refugees'
+                          -[async]-> houseEvents 'informs about refugees'
                         }
+                      }
+
+                      extend ft.redhood {
+                        monolith -> rest 'interacts in HTTP mode via'
+
+                        component rest 'REST Controller' 'HTTP endpoints for meeting and interacting with wolfs' {
+                          -> service 'creates and meets wolf via'
+                          -> query 'reads wolfs via'
+                        }
+                        component service 'Service' 'Allows to create wolf, introduce people to wolf, and act on wolf death' {
+                          -> repo 'finds, updates, deletes'
+                          -> wolf 'orchestrates domain logic in' {
+                            navigateTo wolf-lifecycle
+                          }
+                          -[async]-> wolfEvents 'informs when wolf killed'
+
+                          wolfEvents -[async]-> service 'triggers'
+                        }
+                        component query 'Query Repository' 'Allows to get wolf and its eaten people' {
+                          -> redhoodDb 'selects from'
+                        }
+                        component repo 'Repository' 'Allows to find by ID, save, and delete wolfs' {
+                          -> wolf 'reads, saves'
+                          -> redhoodDb 'select, insert, update, delete'
+                        }
+                        component wolf 'Wolf' 'Plans whom to meet, meets and eats people, can die from a bad meeitng' {
+                          -> meeting 'run meetings according to plan and met person'
+                        }
+                        component meeting 'Meeting Policy' 'Provides consequences for wolf and person'
                       }
                     }
                 </code></pre>
@@ -898,7 +936,7 @@
             <section>
                 <h3>Views</h3>
                 <pre style="width: 100%; margin: 0"><code style="max-height: 23em" data-trim
-                                                          data-line-numbers="1-5,7|9-14,16|18,24-27,34|29|37,45-49|30-33">
+                                                          data-line-numbers="1-5,7|9-14,16|24-27|29-31|87-92,101-104">
                     views {
                       view index {
                         title 'Context'
@@ -920,7 +958,7 @@
                         title 'C4 / Components (The Three Little Pigs)'
 
                         include ft
-                        include ft.* where tag is #container
+                        include ft.* where kind is container
                         include *
                         include
                           -> house with {
@@ -928,10 +966,52 @@
                           }
                         global predicate solidNonAsyncRel
                         global style mute_all
-                        style ft.inMemBus {
-                          color secondary
-                        }
-                        style ft.pigs3, ft.pigs3.** { color primary }
+                        global predicate pigs3containers
+                        style ft.pigs3.** { color primary }
+                      }
+
+                      view redhood-index of ft.redhood {
+                        title 'C4 / Components (Little Red Riding Hood)'
+
+                        include ft
+                        include ft.* where kind is container
+                        include *
+                        global predicate solidNonAsyncRel
+                        global style mute_all
+                        global predicate redhoodContainers
+                        style ft.redhood.** { color primary }
+                      }
+
+                      dynamic view wolf-lifecycle {
+                        title 'Dynamic / Wolf lifecycle (Little Red Riding Hood)'
+
+                        user
+                          -> ft.redhood.rest 'POST /wolfs - tells about people'
+                          -> ft.redhood.service 'starts interaction'
+                          -> ft.redhood.wolf 'creates Wolf with plan whom to meet'
+                        ft.redhood.service
+                          -> ft.redhood.repo 'saves Wolf'
+                          -> ft.redhoodDb 'inserts'
+
+                        user
+                          -> ft.redhood.rest 'PUT /wolfs/{id}/meetings/recent - decides who meets Wolf'
+                          -> ft.redhood.service 'passes person to meet by Wolf'
+                          -> ft.redhood.repo 'looks for Wolf with an identifier'
+                          -> ft.redhoodDb 'selects'
+                          -> ft.redhood.repo 'provides result'
+                          -> ft.redhood.service 'restores Wolf'
+                          -> ft.redhood.wolf 'starts a meeting'
+                          -> ft.redhood.wolf 'proceeds with plan'
+                          -> ft.redhood.meeting 'chooses policy for actual and planned person'
+                          -> ft.redhood.wolf 'provides consequences and eaten people'
+                          -> ft.redhood.wolf 'potentially dies and records this as event'
+                        ft.redhood.service
+                          -> ft.redhood.repo 'saves Wolf'
+                          -> ft.redhoodDb 'updates'
+                        ft.redhood.service
+                          -> ft.wolfEvents 'informs about killed wolf'
+                          -> ft.redhood.service 'triggers event handling'
+                          -> ft.redhood.service 'prints who was rescured'
                       }
                     }
 
@@ -941,6 +1021,20 @@
                           * -> * where kind is not async with {
                             line solid
                           }
+                      }
+
+                      predicateGroup pigs3containers {
+                        include
+                          ft.houseEvents with { color secondary },
+                          ft.pigs3 with { color secondary },
+                          ft.pigs3db with { color secondary }
+                      }
+
+                      predicateGroup redhoodContainers {
+                        include
+                          ft.wolfEvents with { color secondary },
+                          ft.redhood with { color secondary },
+                          ft.redhoodDb with { color secondary }
                       }
 
                       style mute_all * {
@@ -994,6 +1088,81 @@
             </section>
             <section>
                 <likec4-view view-id="wolf-lifecycle"></likec4-view>
+            </section>
+            <section>
+                <h3 style="margin: 0;">Deployment View</h3>
+                <pre style="width: 100%; margin: 0; line-height: 1.1;font-size: .4em"><code style="max-height: 35em"
+                                                                                            data-trim
+                                                                                            data-line-numbers="1,17,9-12|19,20,43,44,24,33-36|46-50,65">
+                      specification {
+                        deploymentNode env
+                        deploymentNode server
+                        deploymentNode container {
+                          style {
+                            icon tech:docker
+                          }
+                        }
+                        deploymentNode runtime {
+                          // JVM, Node.js
+                          notation 'Runtime Environment'
+                        }
+                        deploymentNode package {
+                          // Java JAR, npm package
+                          notation 'Hostable Artifact'
+                        }
+                      }
+
+                      deployment {
+                        env local 'Local' {
+                          server laptop 'Developer\'s laptop' {
+                            link http://localhost:8080
+
+                            runtime jvm 'Java Virtual Machine' {
+                              package jar1 'Module with Spring Boot app' {
+                                instanceOf ft.monolith
+                                instanceOf ft.houseEvents
+                                instanceOf ft.wolfEvents
+                              }
+                              package jar2 {
+                                instanceOf ft.pigs3
+                              }
+                              package jar3 {
+                                instanceOf ft.redhood
+                              }
+                            }
+
+                            runtime h2 'H2 file' {
+                              instanceOf ft.pigs3db
+                              instanceOf ft.redhoodDb
+                            }
+                          }
+                        }
+                      }
+
+                      views {
+                        deployment view env-local {
+                          title 'Deployment / Local'
+
+                          include laptop, local.**
+
+                          style laptop {
+                            icon bootstrap:laptop
+                          }
+                          style local.jvm {
+                            icon tech:java
+                          }
+                          style local.jar1, local.jar2, local.jar3 {
+                            icon tech:apache
+                          }
+                          style local.h2 {
+                            icon bootstrap:type-h2
+                          }
+                        }
+                      }
+                </code></pre>
+            </section>
+            <section data-background-image>
+                <likec4-view view-id="env-local"></likec4-view>
             </section>
             <section>
                 <h2>AI friendliness - skill</h2>

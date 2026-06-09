@@ -92,7 +92,9 @@ model {
     }
     component service 'Service' 'Allows to create wolf, introduce people to wolf, and act on wolf death' {
       -> repo 'finds, updates, deletes'
-      -> wolf 'orchestrates domain logic in'
+      -> wolf 'orchestrates domain logic in' {
+        navigateTo wolf-lifecycle
+      }
       -[async]-> wolfEvents 'informs when wolf killed'
 
       wolfEvents -[async]-> service 'triggers'
